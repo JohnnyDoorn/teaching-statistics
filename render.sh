@@ -1,3 +1,3 @@
 quarto render
 quarto preview
-quarto render courses
+quarto render extra-texts
