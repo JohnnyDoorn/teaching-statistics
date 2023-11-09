@@ -1,0 +1,208 @@
+---
+title: "Two-Sided vs. One-Sided Testing"
+author: "JvD"
+date: "`r Sys.Date()`"
+output: html_document
+page-layout: full
+---
+```{r, echo=FALSE}
+rm(list=ls())
+plotFun <- function(thisN = 60, tVal = 2, displayT = FALSE, altHyp = "Yes"){
+  input <- list(alpha = 0.05,
+                decision = "Nothing")
+  thisSD <- 1
+  myNCP <- 0
+  myDF <- thisN - 2
+  xVals <- seq(-5, 5, length.out = 1e3)
+  
+  halfAlpha <- as.numeric(input$alpha)/2
+
+  leftAbLineLoc <- qt(halfAlpha, df = myDF, ncp = 0, lower.tail = TRUE) 
+  rightAbLineLoc <- qt(1-halfAlpha, df = myDF, ncp = 0, lower.tail = TRUE) 
+  leftArea <- round(pt(leftAbLineLoc, myDF, ncp = myNCP), 3)
+  rightArea <- round(pt(rightAbLineLoc, myDF, ncp = myNCP, lower.tail = FALSE), 3)
+  
+  if (altHyp == "Yes") {
+    halfAlpha <- as.numeric(input$alpha)/2
+    lowerTail <- tVal < 0
+    
+    leftAbLineLoc <- qt(halfAlpha, df = myDF, ncp = 0, lower.tail = TRUE) 
+    rightAbLineLoc <- qt(1-halfAlpha, df = myDF, ncp = 0, lower.tail = TRUE) 
+    leftArea <- round(pt(leftAbLineLoc, df = myDF, ncp = myNCP), 3)
+    rightArea <- round(pt(rightAbLineLoc, df = myDF, ncp = myNCP, lower.tail = FALSE), 3)
+  } else if (altHyp == "Negative only"){
+    halfAlpha <- as.numeric(input$alpha)/2
+    
+    leftAbLineLoc <- qt(as.numeric(input$alpha), df = myDF, ncp = 0, lower.tail = TRUE) 
+    rightAbLineLoc <- qt(1, df = myDF, ncp = 0, lower.tail = TRUE) 
+    leftArea <- round(pt(leftAbLineLoc, df = myDF, ncp = myNCP), 3)
+    rightArea <- round(pt(rightAbLineLoc, df = myDF, ncp = myNCP, lower.tail = FALSE), 3)
+    lowerTail <- TRUE
+    
+  } else if (altHyp == "Positive only"){
+    halfAlpha <- as.numeric(input$alpha)/2
+    
+    leftAbLineLoc <- qt(1, df = myDF, ncp = 0, lower.tail = FALSE) 
+    rightAbLineLoc <- qt(as.numeric(input$alpha), df = myDF, ncp = 0, lower.tail = FALSE) 
+    leftArea <- round(pt(leftAbLineLoc, df = myDF, ncp = myNCP), 3)
+    rightArea <- round(pt(rightAbLineLoc, df = myDF, ncp = myNCP, lower.tail = FALSE), 3)
+    lowerTail <- TRUE
+  }
+  
+  twoCols <- c("darkgreen", "purple")
+  if (input$decision == "Nothing") {
+    allCols <- rep("darkgreen", length(xVals))
+  } else if (input$decision == "Reject H0") {
+    allCols <- ifelse(xVals > leftAbLineLoc & xVals < rightAbLineLoc, "darkgreen", "purple")
+  } else {
+    allCols <- ifelse(xVals > leftAbLineLoc & xVals < rightAbLineLoc, "purple", "darkgreen")
+  }
+  
+  par(cex = 1.2, cex.lab = 1.4)
+  densValues <- dt(xVals, df = myDF, ncp = myNCP)
+  
+  plot(xVals, densValues, 
+       col  = allCols, 
+       type = "h",
+       lwd = 2,
+       bty = "n",
+       las = 1,
+       ylab = "Density",
+       xlab = "T-Statistic",
+       ylim = c(0, 0.5),
+       xlim = c(min(xVals), max(xVals)),
+       # yaxt = 'n', 
+       main = paste0('Sampling Distribution\n(df = ', myDF,")")
+  )
+  
+  
+  if (input$decision != "Nothing") {
+    abline(v = leftAbLineLoc, lwd = 2, lty = 2)
+    abline(v = rightAbLineLoc, lwd = 2, lty = 2)
+    
+    text(-4, 0.45, leftArea, col = allCols[1], cex = 2)
+    text(4, 0.45, rightArea, col = allCols[length(allCols)], cex = 2)
+    
+    text(0, 0.45, 1 - rightArea - leftArea, col = allCols[round(length(allCols)/2, 0)], cex = 2)
+  }
+  
+  if (displayT) {
+    twoSided <- altHyp == "Yes"
+    arrows(x0 = tVal, x1 = tVal, y0 = 0, y1 = 0.4, lwd = 4, col = "darkblue")
+    if(twoSided) {
+      lowerTail <- tVal < 0
+      exVals <- xVals[abs(xVals) > abs(tVal)]
+    } else if (altHyp == "Negative only"){
+      lowerTail <- TRUE
+      exVals <- xVals[xVals < tVal]
+    } else {
+      lowerTail <- FALSE
+      exVals <- xVals[xVals > tVal]
+    }
+    thisP <- round(pt(tVal, df = myDF, lower.tail = lowerTail), 3) * (2 - 1 * !twoSided)
+    text(tVal, 0.42, paste0("p = ",thisP), cex = 1.5)
+    lines(exVals, dt(exVals,myDF, ncp = myNCP), type = "h")
+  }
+}
+
+obsT <- -2.23
+```
+
+
+When we conduct a hypothesis test, we generally want to compare two hypotheses against each other. Each hypothesis makes a different statement about the parameter of interest. 
+In order to illustrate how this works for testing a difference in means, we continue below with the example from the lecture about IQ differences for two conditions: Nootropics vs. Placebo. The null hypothesis is usually the same, stating that there is no group difference:
+$$\mathcal{H}_0: \text{difference} = 0$$
+
+The alternative hypothesis can take on several forms: two-sided (A), one-sided negative (+), and one-sided positive (-):
+
+$$\mathcal{H}_A: \text{difference} \neq 0$$
+$$\mathcal{H}_+: \text{difference} > 0$$
+$$\mathcal{H}_-: \text{difference} < 0$$
+
+
+In order to compute the p-value that corresponds to the observed test-statistic, it matters what the alternative hypothesis postulates and how we define "difference". In order to show this, we can do so for each of the three alternative hypotheses. Additionally, we can repeat this for two scenario's:
+
+    - Scenario 1: we define the difference in means as  'Placebo' - 'Nootropics'
+    - Scenario 2: we define the difference in means as 'Nootropics' - 'Placebo'
+    
+## Scenario 1: 'Placebo' - 'Nootropics'
+
+When our test statistic defines the group difference as 'Placebo' - 'Nootropics', a negative test statistic indicates that Nootropics scored higher. In the example, this was the case, and we observed a t-statistic of $-2.23$. In each section below, the sampling distribution is plotted, including the observed t-statistic and its corresponding p-value. 
+
+### Two-sided test
+In a two-sided test, t-values of 2 and -2 will yield identical p-values, since we consider both tails of the sampling distribution as "extreme". Below, both tails are highlighted in black, to indicate that both are counted towards the p-value. 
+```{r, fig.align='center', echo=FALSE}
+tVal <- -2.23
+plotFun(tVal = tVal, displayT = TRUE)
+```
+
+### One-sided test (positive)
+We now have an alternative hypothesis that only posits *positive* differences. 
+We have defined difference as 'Placebo' - 'Nootropics', so this positive hypothesis is as follows:
+$$\mathcal{H}_-: \mu_P - \mu_N > 0,$$
+which means that this hypothesis expects Nootropics to be lower than Placebo. Now, the *right* tail of the distribution is the extreme tail, so we look to the *right* of the observed t-value:
+
+```{r, fig.align='center', echo=FALSE}
+plotFun(tVal = tVal, altHyp = "pos",  displayT = TRUE)
+```
+Since the observed t-statistic is in the opposite direction of what the alternative hypothesis predicts, the p-value is quite high (i.e., close to 1) and we fail to reject the null hypothesis. 
+
+### One-sided test (negative)
+We now have an alternative hypothesis that only posits *negative* differences. 
+We have defined difference as 'Placebo' - 'Nootropics', so this negative hypothesis is as follows:
+$$\mathcal{H}_-: \mu_P - \mu_N < 0,$$
+which means that this hypothesis expects Nootropics to be greater than Placebo. 
+For the negative hypothesis, the *left* tail of the distribution is the extreme tail, so we look to the *left* of the observed t-value:
+
+```{r, fig.align='center', echo=FALSE}
+plotFun(tVal = tVal, altHyp = "Negative only", displayT = TRUE)
+```
+Since the observed t-statistic is in the same direction of what the alternative hypothesis predicts, the p-value is lower than its two-sided version, and we gather more evidence against the null hypothesis. 
+
+
+## Scenario 2: 'Nootropics' - 'Placebo'
+
+When our test statistic defines the group difference as 'Nootropics' - 'Placebo', a positive test statistic now indicates that Nootropics scored higher. In the example, this was the case, and so the t-statistic is now $2.23$. In each section below, the sampling distribution is plotted, including the observed t-statistic and its corresponding p-value. 
+
+### Two-sided test
+In a two-sided test, t-values of 2 and -2 will yield identical p-values, since we consider both tails of the sampling distribution as "extreme". Below, both tails are highlighted in black, to indicate that both are counted towards the p-value. 
+```{r, fig.align='center', echo=FALSE}
+tVal <- 2.23
+plotFun(tVal = tVal, displayT = TRUE)
+```
+
+### One-sided test (positive)
+We now have an alternative hypothesis that only posits *positive* differences. 
+We have defined difference as 'Nootropics' - 'Placebo', so this positive hypothesis is as follows:
+$$\mathcal{H}_-: \mu_N - \mu_P > 0,$$
+which means that this hypothesis expects Nootropics to be greater than Placebo. 
+Now, the *right* tail of the distribution is the extreme tail, so we look to the *right* of the observed t-value:
+
+```{r, fig.align='center', echo=FALSE}
+plotFun(tVal = tVal, altHyp = "pos",  displayT = TRUE)
+```
+
+Since the observed t-statistic is in the same direction of what the alternative hypothesis predicts, the p-value is lower than its two-sided version, and we gather more evidence against the null hypothesis. 
+
+
+### One-sided test (negative)
+We now have an alternative hypothesis that only posits *negative* differences. 
+We have defined difference as 'Nootropics' - 'Placebo', so this negative hypothesis is as follows:
+$$\mathcal{H}_-: \mu_N - \mu_P < 0,$$
+which means that this hypothesis expects Nootropics to be smaller than Placebo. 
+Now, the *left* tail of the distribution is the extreme tail, so we look to the *left* of the observed t-value:
+
+```{r, fig.align='center', echo=FALSE}
+plotFun(tVal = tVal, altHyp = "Negative only", displayT = TRUE)
+```
+
+Since the observed t-statistic is in the opposite direction of what the alternative hypothesis predicts, the p-value is quite high (i.e., close to 1) and we fail to reject the null hypothesis. 
+
+
+
+
+## Conclusion
+
+When we test one-sided, we have to look at how we define the difference: group A - group B, or group B - group A? If the one-sided hypothesis predicts the right direction of the effect, it will yield more evidence against the null hypothesis than the two-sided test, but if it is incorrect about the direction of the effect, we usually do not have enough evidence to reject the null hypothesis. 
+For the interactive version of these plots, you can take a look at [the Shiny app](https://statisticalreasoning-uva.shinyapps.io/NHST_Continuous/). 
+
