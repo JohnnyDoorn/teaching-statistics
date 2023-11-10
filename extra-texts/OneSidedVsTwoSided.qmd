@@ -129,10 +129,10 @@ In order to compute the p-value that corresponds to the observed test-statistic,
     
 ## Scenario 1: 'Placebo' - 'Nootropics'
 
-When our test statistic defines the group difference as 'Placebo' - 'Nootropics', a negative test statistic indicates that Nootropics scored higher. In the example, this was the case, and we observed a t-statistic of $-2.23$. In each section below, the sampling distribution is plotted, including the observed t-statistic and its corresponding p-value. 
+When our test statistic defines the group difference as 'Placebo' - 'Nootropics', a negative test statistic indicates that Nootropics scored higher. In the example, this was the case, and we observed a t-statistic of $-2.23$. In each section below, the sampling distribution is plotted, including the observed t-statistic and its corresponding p-value: the probability of the data, or more extreme, if the null hypothesis is true. What constitutes "more extreme" depends on the alternative hypothesis - in the plots below, the extreme area is marked in darkred. In other words, the p-value equals the proportion of the distribution that is colored in darkred.  
 
 ### Two-sided test
-In a two-sided test, t-values of 2 and -2 will yield identical p-values, since we consider both tails of the sampling distribution as "extreme". Below, both tails are highlighted in black, to indicate that both are counted towards the p-value. 
+In a two-sided test, t-values of 2 and -2 will yield identical p-values, since we consider both tails of the sampling distribution as "extreme". Below, both tails are highlighted in darkred, to indicate that both are counted towards the p-value. 
 ```{r, fig.align='center', echo=FALSE}
 tVal <- -2.23
 plotFun(tVal = tVal, displayT = TRUE)
@@ -167,7 +167,7 @@ Since the observed t-statistic is in the same direction of what the alternative 
 When our test statistic defines the group difference as 'Nootropics' - 'Placebo', a positive test statistic now indicates that Nootropics scored higher. In the example, this was the case, and so the t-statistic is now $2.23$. In each section below, the sampling distribution is plotted, including the observed t-statistic and its corresponding p-value. 
 
 ### Two-sided test
-In a two-sided test, t-values of 2 and -2 will yield identical p-values, since we consider both tails of the sampling distribution as "extreme". Below, both tails are highlighted in black, to indicate that both are counted towards the p-value. 
+In a two-sided test, t-values of 2 and -2 will yield identical p-values, since we consider both tails of the sampling distribution as "extreme". Below, both tails are highlighted in darkred, to indicate that both are counted towards the p-value. 
 ```{r, fig.align='center', echo=FALSE}
 tVal <- 2.23
 plotFun(tVal = tVal, displayT = TRUE)
