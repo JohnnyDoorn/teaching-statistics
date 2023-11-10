@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="JvD">
-<meta name="dcterms.date" content="2023-11-09">
+<meta name="dcterms.date" content="2023-11-10">
 
 <title>Two-Sided vs.&nbsp;One-Sided Testing</title>
 <style>
@@ -66,7 +66,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 9, 2023</p>
+      <p class="date">November 10, 2023</p>
     </div>
   </div>
   
@@ -78,7 +78,7 @@ ul.task-list li input[type="checkbox"] {
 
 <p>When we conduct a hypothesis test, we generally want to compare two hypotheses against each other. Each hypothesis makes a different statement about the parameter of interest. In order to illustrate how this works for testing a difference in means, we continue below with the example from the lecture about IQ differences for two conditions: Nootropics vs.&nbsp;Placebo. The null hypothesis is usually the same, stating that there is no group difference: <span class="math display">\[\mathcal{H}_0: \text{difference} = 0\]</span></p>
 <p>The alternative hypothesis can take on several forms: two-sided (A), one-sided negative (+), and one-sided positive (-):</p>
-<p><span class="math display">\[\mathcal{H}_A: \text{difference} \neq 0\]</span> <span class="math display">\[\mathcal{H}_+: \text{difference} &gt; 0\]</span> <span class="math display">\[\mathcal{H}_-: \text{difference} &lt; 0\]</span></p>
+<p><span class="math display">\[\mathcal{H}_A: \text{difference} \neq 0\]</span> <span class="math display">\[\mathcal{H}_A+: \text{difference} &gt; 0\]</span> <span class="math display">\[\mathcal{H}_A-: \text{difference} &lt; 0\]</span></p>
 <p>In order to compute the p-value that corresponds to the observed test-statistic, it matters what the alternative hypothesis postulates and how we define “difference”. In order to show this, we can do so for each of the three alternative hypotheses. Additionally, we can repeat this for two scenario’s:</p>
 <pre><code>- Scenario 1: we define the difference in means as  'Placebo' - 'Nootropics'
 - Scenario 2: we define the difference in means as 'Nootropics' - 'Placebo'</code></pre>
@@ -100,7 +100,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="one-sided-test-positive" class="level3">
 <h3 class="anchored" data-anchor-id="one-sided-test-positive">One-sided test (positive)</h3>
-<p>We now have an alternative hypothesis that only posits <em>positive</em> differences. We have defined difference as ‘Placebo’ - ‘Nootropics’, so this positive hypothesis is as follows: <span class="math display">\[\mathcal{H}_-: \mu_P - \mu_N &gt; 0,\]</span> which means that this hypothesis expects Nootropics to be lower than Placebo. Now, the <em>right</em> tail of the distribution is the extreme tail, so we look to the <em>right</em> of the observed t-value:</p>
+<p>We now have an alternative hypothesis that only posits <em>positive</em> differences. We have defined difference as ‘Placebo’ - ‘Nootropics’, so this positive hypothesis is as follows: <span class="math display">\[\mathcal{H}_{A+}: \mu_P - \mu_N &gt; 0,\]</span> which means that this hypothesis expects Nootropics to be lower than Placebo. Now, the <em>right</em> tail of the distribution is the extreme tail, so we look to the <em>right</em> of the observed t-value:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -114,7 +114,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="one-sided-test-negative" class="level3">
 <h3 class="anchored" data-anchor-id="one-sided-test-negative">One-sided test (negative)</h3>
-<p>We now have an alternative hypothesis that only posits <em>negative</em> differences. We have defined difference as ‘Placebo’ - ‘Nootropics’, so this negative hypothesis is as follows: <span class="math display">\[\mathcal{H}_-: \mu_P - \mu_N &lt; 0,\]</span> which means that this hypothesis expects Nootropics to be greater than Placebo. For the negative hypothesis, the <em>left</em> tail of the distribution is the extreme tail, so we look to the <em>left</em> of the observed t-value:</p>
+<p>We now have an alternative hypothesis that only posits <em>negative</em> differences. We have defined difference as ‘Placebo’ - ‘Nootropics’, so this negative hypothesis is as follows: <span class="math display">\[\mathcal{H}_{A-}: \mu_P - \mu_N &lt; 0,\]</span> which means that this hypothesis expects Nootropics to be greater than Placebo. For the negative hypothesis, the <em>left</em> tail of the distribution is the extreme tail, so we look to the <em>left</em> of the observed t-value:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -145,7 +145,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="one-sided-test-positive-1" class="level3">
 <h3 class="anchored" data-anchor-id="one-sided-test-positive-1">One-sided test (positive)</h3>
-<p>We now have an alternative hypothesis that only posits <em>positive</em> differences. We have defined difference as ‘Nootropics’ - ‘Placebo’, so this positive hypothesis is as follows: <span class="math display">\[\mathcal{H}_-: \mu_N - \mu_P &gt; 0,\]</span> which means that this hypothesis expects Nootropics to be greater than Placebo. Now, the <em>right</em> tail of the distribution is the extreme tail, so we look to the <em>right</em> of the observed t-value:</p>
+<p>We now have an alternative hypothesis that only posits <em>positive</em> differences. We have defined difference as ‘Nootropics’ - ‘Placebo’, so this positive hypothesis is as follows: <span class="math display">\[\mathcal{H}_{A+}: \mu_N - \mu_P &gt; 0,\]</span> which means that this hypothesis expects Nootropics to be greater than Placebo. Now, the <em>right</em> tail of the distribution is the extreme tail, so we look to the <em>right</em> of the observed t-value:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -159,7 +159,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="one-sided-test-negative-1" class="level3">
 <h3 class="anchored" data-anchor-id="one-sided-test-negative-1">One-sided test (negative)</h3>
-<p>We now have an alternative hypothesis that only posits <em>negative</em> differences. We have defined difference as ‘Nootropics’ - ‘Placebo’, so this negative hypothesis is as follows: <span class="math display">\[\mathcal{H}_-: \mu_N - \mu_P &lt; 0,\]</span> which means that this hypothesis expects Nootropics to be smaller than Placebo. Now, the <em>left</em> tail of the distribution is the extreme tail, so we look to the <em>left</em> of the observed t-value:</p>
+<p>We now have an alternative hypothesis that only posits <em>negative</em> differences. We have defined difference as ‘Nootropics’ - ‘Placebo’, so this negative hypothesis is as follows: <span class="math display">\[\mathcal{H}_{A-}: \mu_N - \mu_P &lt; 0,\]</span> which means that this hypothesis expects Nootropics to be smaller than Placebo. Now, the <em>left</em> tail of the distribution is the extreme tail, so we look to the <em>left</em> of the observed t-value:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">

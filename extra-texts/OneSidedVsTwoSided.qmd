@@ -51,11 +51,11 @@ plotFun <- function(thisN = 60, tVal = 2, displayT = FALSE, altHyp = "Yes"){
   
   twoCols <- c("darkgreen", "purple")
   if (input$decision == "Nothing") {
-    allCols <- rep("darkgreen", length(xVals))
+    allCols <- rep(twoCols[1], length(xVals))
   } else if (input$decision == "Reject H0") {
-    allCols <- ifelse(xVals > leftAbLineLoc & xVals < rightAbLineLoc, "darkgreen", "purple")
+    allCols <- ifelse(xVals > leftAbLineLoc & xVals < rightAbLineLoc, twoCols[1], twoCols[2])
   } else {
-    allCols <- ifelse(xVals > leftAbLineLoc & xVals < rightAbLineLoc, "purple", "darkgreen")
+    allCols <- ifelse(xVals > leftAbLineLoc & xVals < rightAbLineLoc, twoCols[2], twoCols[1])
   }
   
   par(cex = 1.2, cex.lab = 1.4)
@@ -88,7 +88,6 @@ plotFun <- function(thisN = 60, tVal = 2, displayT = FALSE, altHyp = "Yes"){
   
   if (displayT) {
     twoSided <- altHyp == "Yes"
-    arrows(x0 = tVal, x1 = tVal, y0 = 0, y1 = 0.4, lwd = 4, col = "darkblue")
     if(twoSided) {
       lowerTail <- tVal < 0
       exVals <- xVals[abs(xVals) > abs(tVal)]
@@ -101,8 +100,11 @@ plotFun <- function(thisN = 60, tVal = 2, displayT = FALSE, altHyp = "Yes"){
     }
     thisP <- round(pt(tVal, df = myDF, lower.tail = lowerTail), 3) * (2 - 1 * !twoSided)
     text(tVal, 0.42, paste0("p = ",thisP), cex = 1.5)
-    lines(exVals, dt(exVals,myDF, ncp = myNCP), type = "h")
+    lines(exVals, dt(exVals,myDF, ncp = myNCP), type = "h", col="darkred")
+        arrows(x0 = tVal, x1 = tVal, y0 = 0, y1 = 0.4, lwd = 4, col = "black")
+
   }
+  legend(ifelse( tVal < 0 ,"topright", "topleft"), "Extreme area", lwd = 10, col = "darkred", bty = "n")
 }
 
 obsT <- -2.23
@@ -116,8 +118,8 @@ $$\mathcal{H}_0: \text{difference} = 0$$
 The alternative hypothesis can take on several forms: two-sided (A), one-sided negative (+), and one-sided positive (-):
 
 $$\mathcal{H}_A: \text{difference} \neq 0$$
-$$\mathcal{H}_+: \text{difference} > 0$$
-$$\mathcal{H}_-: \text{difference} < 0$$
+$$\mathcal{H}_A+: \text{difference} > 0$$
+$$\mathcal{H}_A-: \text{difference} < 0$$
 
 
 In order to compute the p-value that corresponds to the observed test-statistic, it matters what the alternative hypothesis postulates and how we define "difference". In order to show this, we can do so for each of the three alternative hypotheses. Additionally, we can repeat this for two scenario's:
@@ -139,7 +141,7 @@ plotFun(tVal = tVal, displayT = TRUE)
 ### One-sided test (positive)
 We now have an alternative hypothesis that only posits *positive* differences. 
 We have defined difference as 'Placebo' - 'Nootropics', so this positive hypothesis is as follows:
-$$\mathcal{H}_-: \mu_P - \mu_N > 0,$$
+$$\mathcal{H}_{A+}: \mu_P - \mu_N > 0,$$
 which means that this hypothesis expects Nootropics to be lower than Placebo. Now, the *right* tail of the distribution is the extreme tail, so we look to the *right* of the observed t-value:
 
 ```{r, fig.align='center', echo=FALSE}
@@ -150,7 +152,7 @@ Since the observed t-statistic is in the opposite direction of what the alternat
 ### One-sided test (negative)
 We now have an alternative hypothesis that only posits *negative* differences. 
 We have defined difference as 'Placebo' - 'Nootropics', so this negative hypothesis is as follows:
-$$\mathcal{H}_-: \mu_P - \mu_N < 0,$$
+$$\mathcal{H}_{A-}: \mu_P - \mu_N < 0,$$
 which means that this hypothesis expects Nootropics to be greater than Placebo. 
 For the negative hypothesis, the *left* tail of the distribution is the extreme tail, so we look to the *left* of the observed t-value:
 
@@ -174,7 +176,7 @@ plotFun(tVal = tVal, displayT = TRUE)
 ### One-sided test (positive)
 We now have an alternative hypothesis that only posits *positive* differences. 
 We have defined difference as 'Nootropics' - 'Placebo', so this positive hypothesis is as follows:
-$$\mathcal{H}_-: \mu_N - \mu_P > 0,$$
+$$\mathcal{H}_{A+}: \mu_N - \mu_P > 0,$$
 which means that this hypothesis expects Nootropics to be greater than Placebo. 
 Now, the *right* tail of the distribution is the extreme tail, so we look to the *right* of the observed t-value:
 
@@ -188,7 +190,7 @@ Since the observed t-statistic is in the same direction of what the alternative 
 ### One-sided test (negative)
 We now have an alternative hypothesis that only posits *negative* differences. 
 We have defined difference as 'Nootropics' - 'Placebo', so this negative hypothesis is as follows:
-$$\mathcal{H}_-: \mu_N - \mu_P < 0,$$
+$$\mathcal{H}_{A-}: \mu_N - \mu_P < 0,$$
 which means that this hypothesis expects Nootropics to be smaller than Placebo. 
 Now, the *left* tail of the distribution is the extreme tail, so we look to the *left* of the observed t-value:
 
