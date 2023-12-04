@@ -1,0 +1,106 @@
+---
+title: "gendered-numbers-replication-rms"
+author: "JvD"
+date: "`r Sys.Date()`"
+output:
+  pdf_document: default
+  html_document: default
+  page-layout: full
+toc: true
+toc-float: true
+format: html
+---
+
+```{r, echo = FALSE, warning = FALSE}
+library(summarytools)
+dat <- read.csv("~/Downloads/GenderedNumbers_ReplicationAttemptBinary.csv")[, -(1:2) ]
+colnames(dat) <- c(paste0("Number-", 0:9), "Gender")
+
+printTableFun <- function(thisNum = 0) {
+  Association <- dat[[paste0("Number-", thisNum)]]
+  Gender <- dat$Gender
+  thisTable <- table(Gender, Association)
+  
+  keepThese <- Association != "" & (Gender == "Man" | Gender == "Woman" | Gender == "Non-binary")
+  Gender <- Gender[keepThese]
+  Association <- Association[keepThese]
+  
+  print(ctable(x = Gender, y = Association, prop = "t", warning = FALSE,correct = FALSE,
+               silent = TRUE, chisq = TRUE, OR = FALSE ), method = "render")
+}
+```
+
+
+## Odd vs Even
+```{r, echo = FALSE}
+
+compDat <- dat[apply(dat, 1, function(x){!any(x == "")}), ]
+
+oddAss <- as.vector(unlist((compDat[, seq(2, 10, by = 2)])))
+evenAss <- as.vector(unlist((compDat[, seq(1, 9, by = 2)])))
+Association <- c(oddAss, evenAss)
+NumberType <-  rep(c("Odd", "Even"), each = length(oddAss))
+print(ctable(x = Association, y = NumberType, 
+             prop = "t", warning = FALSE,correct = FALSE,RR= TRUE,  silent = TRUE, 
+             chisq = TRUE, OR = FALSE ), method = "render")
+```
+
+## Number 0
+
+```{r, echo = FALSE, warning = FALSE}
+printTableFun(thisNum = 0)
+```
+
+## Number 1
+
+```{r, echo = FALSE, warning = FALSE}
+printTableFun(thisNum = 1)
+```
+
+## Number 2
+
+```{r, echo = FALSE, warning = FALSE}
+printTableFun(thisNum = 2)
+```
+
+## Number 3
+
+```{r, echo = FALSE, warning = FALSE}
+printTableFun(thisNum = 3)
+```
+
+## Number 4
+
+```{r, echo = FALSE, warning = FALSE}
+printTableFun(thisNum = 4)
+```
+
+## Number 5
+
+```{r, echo = FALSE, warning = FALSE}
+printTableFun(thisNum = 5)
+```
+
+## Number 6
+
+```{r, echo = FALSE, warning = FALSE}
+printTableFun(thisNum = 6)
+```
+
+## Number 7
+
+```{r, echo = FALSE, warning = FALSE}
+printTableFun(thisNum = 7)
+```
+
+## Number 8
+
+```{r, echo = FALSE, warning = FALSE}
+printTableFun(thisNum = 8)
+```
+
+## Number 9
+
+```{r, echo = FALSE, warning = FALSE}
+printTableFun(thisNum = 9)
+```
