@@ -1,0 +1,92 @@
+---
+title: "SSR - Overview"
+author: "Johnny van Doorn"
+date: today
+---
+
+## Applets
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(stringr)
+library("lubridate")
+library("dplyr")
+library('kableExtra')
+setwd("~/GitHubStuff/statistics-lectures/courses/SSR/SSR_2023-2024/MiscFiles_J/")
+allLinks <- c("https://statisticalreasoning-uva.shinyapps.io/NHST_Binomial",
+              "https://statisticalreasoning-uva.shinyapps.io/NHST_Continuous",
+              "https://statisticalreasoning-uva.shinyapps.io/NHST_Fdistribution",
+              "https://statisticalreasoning-uva.shinyapps.io/onewayANOVA",
+              "https://statisticalreasoning-uva.shinyapps.io/ANCOVA",
+              "https://statisticalreasoning-uva-2.shinyapps.io/Multi-ANOVA",
+              "https://statisticalreasoning-uva-2.shinyapps.io/RM_ANOVA",
+              "https://statisticalreasoning-uva-2.shinyapps.io/SimpleRegression",                          "https://statisticalreasoning-uva-2.shinyapps.io/MultiRegression"
+
+)
+
+topics <- gsub("shinyapps.io/", "", gsub("shinyapps.io/", "", str_extract(allLinks, "shinyapps.io/(.*)")))
+
+allLinks <- sprintf('<a href="%s" target="_blank" class="external">link</a>',allLinks) 
+
+knitr::kable(dplyr::arrange(data.frame(Topic = topics, Link = allLinks)), escape = F ) %>%
+  kable_styling(full_width = T)
+```
+
+## Additional Explanations
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+files <- list.files(full.names = FALSE, pattern = "\\qmd", recursive = FALSE)
+
+lectures <- data.frame()
+n <- length(files)
+
+files <- files[order(as.numeric(gsub("\\..*", "", files)))]
+files <- files[files!= "OverviewSSR.qmd"]
+htmlFiles <- gsub(x =files, pattern = ".qmd", replacement = ".html")
+
+allLinks <- sprintf('<a href="https://johnnydoorn.github.io/statistics-lectures/courses/SSR/SSR_2023-2024/MiscFiles_J/%s" target="_blank" class="external">link</a>',htmlFiles) 
+
+titles <- gsub(htmlFiles, pattern = ".html", replacement = "")
+
+linkList <- data.frame(Topic = titles, Links = allLinks)
+
+knitr::kable(dplyr::arrange(linkList), escape = F ) %>%
+  kable_styling(full_width = T)
+
+```
+
+## JASP + Data Files
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+files <- list.files(full.names = FALSE, pattern = "\\jasp", recursive = FALSE, 
+                    path = paste0(getwd(),"/JASP_Files"))
+
+files <- files[order(as.numeric(gsub("\\..*", "", files)))]
+files <- files[files!= "OverviewSSR.qmd"]
+htmlFiles <- gsub(x =files, pattern = ".jasp", replacement = ".html")
+
+htmlFiles <- gsub(x =files, pattern = ".jasp", replacement = ".html")
+htmlFound <- list.files(full.names = FALSE, pattern = "\\html", recursive = FALSE, 
+                    path = paste0(getwd(),"/JASP_Files"))
+csvFound  <- list.files(full.names = FALSE, pattern = "\\csv", recursive = FALSE, 
+                    path = paste0(getwd(),"/JASP_Files"))
+  
+htmlLinks <- sprintf('<a href="https://johnnydoorn.github.io/statistics-lectures/courses/SSR/SSR_2023-2024/MiscFiles_J/JASP_Files/%s" target="_blank" class="external">link</a>',htmlFiles) 
+htmlLinks[!(htmlFiles %in% htmlFound)] <- "-"
+
+jaspLinks <- sprintf('<a href="https://johnnydoorn.github.io/statistics-lectures/courses/SSR/SSR_2023-2024/MiscFiles_J/JASP_Files/%s" target="_blank" class="external">link</a>',files) 
+titles <- gsub(htmlFiles, pattern = ".html", replacement = "")
+
+csvFiles <- gsub(x =files, pattern = ".jasp", replacement = ".csv")
+csvLinks <- sprintf('<a href="https://johnnydoorn.github.io/statistics-lectures/courses/SSR/SSR_2023-2024/MiscFiles_J/JASP_Files/%s" target="_blank" class="external">link</a>',csvFiles) 
+csvLinks[!(csvFiles %in% csvFound)] <- "-"
+
+
+linkList <- data.frame(Topic = titles, Html = htmlLinks, JASP = jaspLinks, Csv = csvLinks)
+
+knitr::kable(dplyr::arrange(linkList), escape = F ) %>%
+  kable_styling(full_width = T)
+
+```
+
+
+## JASP Gifs
+```{r child="JASP_Gifs/JASP_GifOverview.qmd"}
+```
+

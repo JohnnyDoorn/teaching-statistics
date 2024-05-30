@@ -2,12 +2,18 @@
 title: "How to Use JASP - Overview"
 author: "Johnny van Doorn"
 date: today
+output: html_document
 ---
 
 To accommodate the use of JASP in SSR, below are various instructional `.gifs`.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-setwd("~/GitHubStuff/statistics-lectures/courses/SSR/SSR_2023-2024/MiscFiles_J/JASP_Gifs")
+# Load necessary libraries
+library(knitr)
+library(kableExtra)
+library(dplyr)
+
+setwd("~/GitHubStuff/teaching-statistics/jasp-gifs/")
 files <- list.files(full.names = FALSE, pattern = "\\gif", recursive = T)
 
 lectures <- data.frame()
@@ -41,13 +47,12 @@ for (i in 1:n) {
 sorted_indices <- order(match(lectures$analysis, c("Getting-Started", "Descriptives", "ANOVA", "ANCOVA", "ANOVA-Factorial")))
 lectures <- lectures[sorted_indices, ]
 
-baseURL <-  
+lecture.list <-  
   data.frame(Analysis = lectures$analysis,
              Topic = lectures$topic,
              # Comment = lectures$comment,
-             Link  = sprintf('<a href="https://johnnydoorn.github.io/statistics-lectures/courses/SSR/SSR_2023-2024/MiscFiles_J/JASP_Gifs/%s" target="_blank" class="external">link</a>', 
-                             gsub("qmd", "slide.html", lectures$title)) 
-  ) -> lecture.list
+             Link = sprintf('<a href="https://johnnydoorn.github.io/teaching-statistics/jasp-gifs/%s" target="_blank" class="external">link</a>', 
+               gsub("qmd", "slide.html", lectures$title)))  
 
 
 
@@ -61,6 +66,6 @@ library("dplyr")
 library('kableExtra')
 
 # Print table with kable as set in YAML
-knitr::kable(dplyr::arrange(lecture.list), escape = F ) %>%
-  kable_styling(full_width = T)
+knitr::kable(dplyr::arrange(lecture.list), format = "html", escape = FALSE ) %>%
+  kable_styling(full_width = TRUE)
 ```
