@@ -14,7 +14,8 @@ library(kableExtra)
 library(dplyr)
 
 setwd("~/GitHubStuff/teaching-statistics/jasp-gifs/")
-files <- list.files(full.names = FALSE, pattern = "\\gif", recursive = T)
+files <- c(list.files(full.names = FALSE, pattern = "\\.gif", recursive = T),
+           list.files(full.names = FALSE, pattern = "\\.mp4", recursive = T))
 
 lectures <- data.frame()
 n <- length(files)
