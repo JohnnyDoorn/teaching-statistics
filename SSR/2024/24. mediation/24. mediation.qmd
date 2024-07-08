@@ -1,0 +1,19 @@
+---
+title: "24. Mediation"
+author: "Sharon Kinkenberg & Johnny van Doorn"
+date: "10 nov 2023"
+footer: "Scientific & Statistical Reasoning"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+```{r child="../../../../topics/mediation/mediationNames.qmd"}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```
+

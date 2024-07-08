@@ -1,0 +1,478 @@
+# Regression<br>(one predictor) {.section}
+
+```{r, echo=FALSE}
+if(!"DT" %in% installed.packages()) { install.packages("DT") }
+library("DT")
+data <- read.csv("Album Sales.csv")[, -4]
+```
+
+## Regression {.smaller}
+
+$$\LARGE{\text{outcome} = \text{model prediction} + \text{error}}$$
+
+In statistics, linear regression is a linear approach for modeling the relationship between a scalar dependent variable y and one or more explanatory variables denoted X. The case of one explanatory variable is called simple linear regression.
+
+$$\LARGE{Y_i = \beta_0 + \beta_1 X_i + \epsilon_i}$$
+
+In linear regression, the relationships are modeled using linear predictor functions whose unknown model parameters are estimated from the data.
+
+Source: [wikipedia](https://en.wikipedia.org/wiki/Linear_regression)
+
+<!-- ## Outcome vs Model -->
+
+<!-- ```{r, fig.align='center', fig.asp=.5} -->
+<!-- set.seed(123) -->
+<!-- error = c(2, 1, .5, .1) -->
+<!-- n = 10 -->
+
+<!-- layout(matrix(1:4,1,4)) -->
+<!-- for(e in error) { -->
+
+<!--   x = rnorm(n) -->
+<!--   y = x + rnorm(n, 0 , e) -->
+
+<!--   r   = round(cor(x,y), 2) -->
+<!--   r.2 = round(r^2, 2) -->
+
+<!--   plot(x,y, las = 1, ylab = "y", xlab = "x",  -->
+<!--        main = paste("r =", r," r2 = ", r.2), ylim=c(-2,2), xlim=c(-2,2)) -->
+<!--   fit <- lm(y ~ x) -->
+<!--   abline(fit, col = "red") -->
+
+<!-- } -->
+
+<!-- ``` -->
+
+
+## Assumptions
+
+A selection from Field:
+
+* Sensitivity
+* Homoscedasticity
+
+## Sensitivity
+
+Outliers
+
+* Extreme residuals
+* Cook's distance (< 1)
+* Check Q-Q and residuals plots
+
+## Sensitivity
+
+```{r, fig.align='center', fig.width=10, fig.height=5, echo=FALSE}
+n <- 20
+# x = 
+set.seed(124)
+x <- rnorm(n)
+y <- rnorm(n, x)
+x[1] <-  2
+y[1] <- -2
+r   <- round(cor(x,y), 2)
+r.2 <- round(r^2, 2)
+par(mfrow = c(1, 2))
+plot(x,y, 
+     las  = 1, 
+     pch = 21,
+     bg = c("orange", rep("purple", n-1)),
+     cex = 1.2,
+     ylab = "y", 
+     xlab = "x", 
+     main = "Correlation with outlier", 
+     ylim = c(-2,2), 
+     xlim = c(-2,2))
+fit2 <- lm(y ~ x)
+abline(fit2, col = "blue")
+text(0.5, y[1], bquote("r ="~ .(r) ~ "," ~ r^2 ~ " = " ~ .(r.2)), pos = 2, col = "blue")
+
+xr <- x[-1]
+yr <- y[-1]
+r   = round(cor(xr,yr), 2)
+r.2 = round(r^2, 2)
+plot(xr,yr, 
+     cex = 1.2,
+     pch = 21,
+     bg = "purple",
+     las  = 1, 
+     ylab = "y", 
+     xlab = "x", 
+     main = "Correlation without outlier", 
+     ylim = c(-2,2), 
+     xlim = c(-2,2))
+fit2 <- lm(yr ~ xr)
+abline(fit2, col = "blue")
+text(0.5, y[1], bquote("r ="~ .(r) ~ "," ~ r^2 ~ " = " ~ .(r.2)), pos = 2, col = "blue")
+```
+
+## Homoscedasticity
+
+::: {.columns}
+
+::: {.column}
+
+* Variance of residual should be equal across all expected values
+* Look at scatterplot of standardized: predicted values $\times$ residuals. Roughly round shape is needed
+* After the analysis is complete because it's based on the residuals
+:::
+
+::: {.column}
+
+```{r, fig.align='center', fig.width=5, fig.height=5, echo=FALSE}
+fit <- lm(sales ~ airplay, data = data)
+z.pred  = scale(fit$fitted.values) # convert model predictions to z-scores
+z.resid = scale(fit$residuals)     # convert model residuals to z-scores
+
+plot(z.pred, z.resid, xlim = c(-2, 2), ylim = c(-2, 2), xlab = "z-score prediction", ylab = "z-score residual")
+abline(h = 0, v = 0, lwd=2)
+
+#install.packages("plotrix")
+if(!"plotrix" %in% installed.packages()) { install.packages("plotrix") };
+library("plotrix")
+draw.circle(0,0,1.7,col=rgb(1,0,0,.5))
+```
+:::
+
+:::
+
+## The data {.smaller}
+
+```{r, echo=FALSE}
+n <- nrow(data)
+datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+```
+
+## The data {.smaller}
+```{r, fig.align='center', fig.width=8, fig.height=6, echo=FALSE}
+plot(data$airplay, data$sales, las = 1, xlab = "Airplay", ylab = "Sales",
+     xlim=c(0, 65), ylim=c(0,350), cex= 1.2,
+     bty = "n",
+     pch = 21,
+     bg = "purple")
+```
+
+## Calculate regression parameters {.subsection}
+
+$${sales}_i = b_0 + b_1 {airplay}_i + \epsilon_i$$
+
+```{r, eval=TRUE}
+airplay  <- data$airplay
+sales    <- data$sales
+```
+
+## Calculate $b_1$ {.subsection}
+
+$$b_1 = r_{xy} \frac{s_y}{s_x}$$
+
+```{r, echo=TRUE}
+# Calculate b1
+
+cor.sales.airplay <- cor(sales,airplay)
+sd.sales          <- sd(sales)
+sd.airplay        <- sd(airplay)
+
+b1 <- cor.sales.airplay * ( sd.sales / sd.airplay )
+b1
+```
+
+## Calculate $b_0$ {.subsection}
+
+$$b_0 = \bar{y} - b_1 \bar{x}$$
+
+```{r, echo=TRUE}
+mean.sales    <- mean(sales)
+mean.airplay  <- mean(airplay)
+
+b0 <- mean.sales - b1 * mean.airplay
+b0
+```
+
+## The slope
+
+```{r, fig.align='center', fig.width=8, fig.height=6, echo=FALSE}
+# Extra
+
+plot(airplay,sales, las = 1, 
+     xlim=c(0, 65), ylim=c(0,350),
+     bty = "n",  cex= 1.2,
+     pch = 21,
+     bg = "purple")
+abline(lm(sales~airplay), lwd = 2)
+text(60, 350, bquote(beta[1] ~ " = " ~ .(round(b1, 2))))
+```
+
+## The slope
+
+```{r, fig.align='center', fig.width=8, fig.height=6, echo=FALSE}
+# Extra
+
+plot(airplay,sales, las = 1, 
+     xlim=c(0, 65), ylim=c(0,350),
+     bty = "n",  cex= 1.2,
+     pch = 21,
+     bg = "purple")
+abline(lm(sales~airplay))
+abline(v=c(2,3),col='red')
+abline(h=b0 + b1 * c(2, 3),col='red')
+text(60, 350, bquote(beta[1] ~ " = " ~ .(round(b1, 2))))
+
+lines(c(3,3),c(b0 + b1 * 2,b0 + b1 * 3),col='green',lwd=3)
+lines(c(2,3), rep(b0 + b1 * 2, 2),col='blue',lwd=3)
+
+text(2.5, (b0 + b1 * 2),1, pos=1, cex=1)
+text(3  , (b0 + b1 * 2.5),
+     round((b0 + b1 * 3)-(b0 + b1 * 2), 2), 
+     pos=4, 
+     cex=1)
+```
+
+## The slope - zoomed in
+
+```{r, echo=FALSE, fig.align='center', fig.width=8, fig.height=6, echo=FALSE}
+# Extra
+plot(airplay,sales, las = 1, 
+     xlim=c(1, 4), ylim=c(90,100),
+     bty = "n", cex= 1.2,
+     pch = 21,
+     bg = "purple")
+abline(lm(sales~airplay))
+abline(v=c(2,3),col='red')
+abline(h=b0 + b1 * c(2, 3),col='red')
+
+lines(c(3,3),c(b0 + b1 * 2,b0 + b1 * 3),col='green',lwd=3)
+lines(c(2,3), rep(b0 + b1 * 2, 2),col='blue',lwd=3)
+text(2.5, (b0 + b1 * 2),1, pos=1, cex=1)
+text(3  , (b0 + b1 * 2.5),
+     round((b0 + b1 * 3)-(b0 + b1 * 2), 2), 
+     pos=4, 
+     cex=1)
+```
+
+
+## Define regression equationxf
+
+$$\widehat{sales} = {\text{model prediction}} = b_0 + b_1 {airplay}$$
+
+So now we can add the expected sales based on this model
+
+```{r, echo=TRUE}
+prediction <- b0 + b1 * airplay
+data$prediction <- round(prediction, 2)
+```
+
+## Predicted values {.smaller .subsection}
+
+Let's have a look
+
+```{r, echo=FALSE}
+datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 375, paging = F, info = F))
+```
+
+## $y$ vs $\hat{y}$
+
+And lets have a look at this relation between model prediction and observed
+
+```{r, fig.height=5, fig.width=5, fig.align='center', echo=FALSE}
+
+plot(prediction,sales, xlim = c(0,360), ylim = c(0,360),
+     xlab = "Predicted Sales", ylab = "Observed Sales",
+     las = 1, pch = 21, bg = "lightgreen")
+lines(c(0,1000), c(0,1000), col='red')
+```
+
+## Error {.smaller}
+
+The error / residual is the difference between the model predictions and observed values
+
+```{r, echo=TRUE}
+error <- sales - prediction
+data$error <- round(error, 2)
+```
+
+```{r, echo=FALSE}
+datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 300, paging = F, info = F))
+```
+
+## Model fit {.smaller}
+
+- The fit of the model can be viewed in terms of the correlation ($r$) between the predictions and the observed values: if the predictions are perfect, the correlation will be 1. 
+- For simple regression, this is equal to the correlation between airplay and sales. For multiple regression (next lecture), these will differ. 
+
+```{r, echo=TRUE}
+r <- cor(prediction, sales)
+r
+```
+
+## Explained variance {.subsection}
+
+Squaring this correlation gives the proportion of explained variance:
+
+```{r, echo=TRUE}
+r^2
+```
+
+## Explained variance visually ($n = 10$) {.smaller}
+
+```{r, fig.align='center', fig.width=15, fig.height = 7, echo=FALSE}
+par(mfrow = c(1, 3), cex = 1.5)
+plotN <- 10
+# This is all the sales data
+plot(sales[1:plotN],xlab='Albums', ylab = "Sales", las = 1,
+     bty = "n", pch = 21, bg = "turquoise", main = "Total Variance")
+# With the mean
+abline(h = mean(sales[1:plotN]), lwd = 2, col = "purple")
+# The model predicts the sales scores
+points(1:plotN,prediction[1:10], pch =23, bg='darkred')
+# The part of the variation that overlaps is the 'explained' variance. 
+segments(1:plotN, sales[1:plotN], 1:plotN, mean(sales[1:plotN]), col='orange', lwd= 2)
+
+legend("topright", c("Observed", "Predicted"),
+       bty = "n", fill = c("turquoise", "darkred"))
+
+# This is all the sales data
+plot(sales[1:plotN],xlab='Albums', ylab = "Sales", las = 1,
+     bty = "n", pch = 21, bg = "turquoise", main = "Explained Variance")
+# With the mean
+abline(h = mean(sales[1:plotN]), lwd = 2, col = "purple")
+# The blue lines are the total variance, the deviation from the mean.
+segments(1:plotN, prediction[1:plotN], 1:plotN, mean(sales[1:plotN]), col='blue', lwd= 2)
+# The model predicts the sales scores
+points(1:plotN,prediction[1:10], pch =23, bg='darkred')
+# The part of the variation that overlaps is the 'explained' variance. 
+legend("topright", c("Observed", "Predicted"),
+       bty = "n", fill = c("turquoise", "darkred"))
+
+# This is all the sales data
+plot(sales[1:plotN],xlab='Albums', ylab = "Sales", las = 1,
+     bty = "n", pch = 21, bg = "turquoise", main = "Unexplained Variance")
+# With the mean
+# abline(h = mean(sales[1:plotN]), lwd = 2, col = "purple")
+# The blue lines are the total variance, the deviation from the mean.
+segments(1:plotN, prediction[1:plotN], 1:plotN, (sales[1:plotN]), col='red', lwd= 2)
+# The model predicts the sales scores
+points(1:plotN,prediction[1:10], pch =23, bg='darkred')
+# The part of the variation that overlaps is the 'explained' variance. 
+legend("topright", c("Observed", "Predicted"),
+       bty = "n", fill = c("turquoise", "darkred"))
+```
+$r^2$ is the proportion of <span style="color: blue;">blue</span> to <span style="color: orange;">orange</span>, while $1 - r^2$ is the proportion of <span style="color: red;">red</span> to <span style="color: orange;">orange</span> 
+
+## Test model fit
+
+Compare model to mean Y (sales) as model
+
+$$F = \frac{(n-p-1) r^2}{p (1-r^2)}$$
+
+Where ${df}_{model} = n - p - 1 = N - K - 1$.
+
+```{r, echo=TRUE}
+p <- 1
+fStat <- ( (n-p-1)*r^2 ) / ( p*(1-r^2) )
+fStat
+```
+
+## Signal to noise
+
+Given the description of explained variance, F can again be seen as a proportion of explained to unexplained variance. Also known as a signal to noise ratio.
+
+```{r, echo=TRUE}
+df.model <- p # n = rows, p = predictors
+df.error <- n - p - 1
+
+SS_model <- sum((prediction - mean(sales))^2)
+SS_error <- sum((sales - prediction)^2)
+MS_model <- SS_model / df.model
+MS_error <- SS_error / df.error
+fStat <- MS_model / MS_error 
+fStat
+```
+
+
+## Calculate t-values for b's for hypothesis testing
+
+We can also convert each $b$ to a $t$-statistic, since that has a known sampling distribution:
+
+$$\begin{aligned}
+t_{n-p-1} &= \frac{b - \mu_b}{{SE}_b} \\
+df &= n - p - 1 \\
+\end{aligned}$$
+
+Where $b$ is the beta coefficient, ${SE}$ is the standard error of the beta coefficient, $n$ is the number of subjects and $p$ the number of predictors. $\mu_b$ is the null-hypothesized value for $b$ - usually set to 0.
+
+##
+
+```{r, echo=TRUE}
+# Get Standard error's for b (bonus)
+se.b1 <- sqrt(MS_error / (var(airplay) * (n-1))); se.b1
+```
+
+
+
+```{r, echo=TRUE}
+# Calculate t for b1
+mu.b1 <- 0
+t.b1  <- (b1 - mu.b1) / se.b1; t.b1
+
+n     <- nrow(data) # number of rows
+p     <- 1          # number of predictors
+df.b1 <- n - p - 1
+```
+
+
+
+## P-values of $b_1$
+
+```{r, echo=TRUE}
+library("visualize")
+# p-value for b1
+visualize.t(c(-t.b1,t.b1),df.b1,section='tails')
+```
+
+## Visualize
+
+Instead of obtaining the p-value by locating the t in the t-distribution, we can locate the F in the F-distribution
+
+```{r, warning=FALSE, echo=TRUE}
+visualize.f(fStat, df.model, df.error, section='upper')
+```
+
+## It's all the same thing... 
+
+```{r, echo=TRUE}
+fStat
+
+t.b1^2
+```
+
+
+## So how many `@!&#$` ways do we have for assessing an association?! {.smaller}
+
+```{r, echo = TRUE}
+# the correlation between x and y, standardized (between -1, 1)
+cor(sales, airplay) 
+
+# the covariance between x and y, unstandardized 
+cov(sales, airplay)
+
+# regression coefficient in linear regression, standardized (not bounded)
+# generalizes easily to settings with multiple predictors
+b1 
+
+# t-statistic: standardized difference between b1 and 0
+t.b1
+
+# The metrics below are more indicative of an overall model's performance
+
+# the correlation between y and model prediction, standardized (between -1, 1)
+cor(sales, prediction) # can be squared to get proportion explained variance
+
+# F: signal/noise ratio of a model
+fStat 
+
+```
+
+
+
+
+
+

@@ -1,0 +1,25 @@
+# Some Opening Mantra's
+
+## Always plot your data
+![](raincloud.png){width="800px"}
+## Always plot your data
+![](trex.png){width="800px"}
+
+## Predicting the DV {.smaller}
+::: {.incremental}
+- The dependent variable (DV) varies
+- We try to recreate/predict the observed DV values by looking at predictor variables
+    - [Predicting with dummies (one-way)](https://johnnydoorn.github.io/statistics-lectures/courses/SSR/SSR_2023-2024/MiscFiles_J/PredictingWithDummies.html)
+    - [Predicting with dummies (factorial)](https://johnnydoorn.github.io/statistics-lectures/courses/SSR/SSR_2023-2024/MiscFiles_J/PredictingWithDummies_Interaction.html)
+    - [Visual prediction in RM ANOVA](https://statisticalreasoning-uva-2.shinyapps.io/RM_ANOVA/)
+- Accurate approximation/prediction of the DV? -> high explained variance
+- Total variability of DV = explained variance + unexplained variance
+    - $\text{DV} = \text{model prediction} + \text{error}$
+- More explained variance than unexplained variance (e.g., $F >> 1$) -> success!
+:::
+
+
+## Keep your models simple/interpretable
+![](manyvars.png){width="800px"}
+
+

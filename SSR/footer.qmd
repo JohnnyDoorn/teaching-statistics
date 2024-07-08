@@ -1,0 +1,21 @@
+# End
+
+## Contact
+
+<script src="https://use.fontawesome.com/23c1d38eea.js"></script>
+
+<ul class="fa-ul" style="color:black; list-style:none;">
+<li><i class="fa-li fa fa-envelope-o"></i> <a style="unicode-bidi:bidi-override; direction: rtl; color:black" href="javascript:window.location.href = 'mailto:' + ['j.b.vandoorn','uva.nl'].join('@')">ln.AvU@nrooDnav.B.J</a></li>
+<li><i class="fa-li fa fa-github"></i> <a href="https://github.com/JohnnyDoorn" target="_blank" style="color:black; border-bottom:none;">JohnnyDoorn</a></li>
+</ul>
+
+<small style="text-align:left;">
+
+
+[![CC BY-NC-SA 4.0][cc-by-nc-sa-image]][cc-by-nc-sa]
+
+[cc-by-nc-sa]: http://creativecommons.org/licenses/by-nc-sa/4.0/
+[cc-by-nc-sa-image]: https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png
+[cc-by-nc-sa-shield]: https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg
+
+</small>

@@ -1,0 +1,448 @@
+# Independent factorial ANOVA {.section}
+
+Two or more independent variables with two or more categories. One dependent variable.
+
+```{r, echo=FALSE}
+rm(list=ls())
+source("~/GitHubStuff/ShinyApps/ShinyApps/FacANOVA/plotSquaresFunction.R")
+
+data <- read.csv("anova_alcohol_speed_daytime.csv")
+data$speed <- factor(data$speed, levels = c("none", "some", "much"))
+levels(data$speed) <- c("none (S)", "some (S)", "much (S)")
+data$alcohol <- factor(data$alcohol, levels = c("none", "some", "much"))
+levels(data$alcohol) <- c("none (A)", "some (A)", "much (A)")
+if(!"ggplot2" %in% installed.packages()) { install.packages("ggplot2") }
+library("ggplot2")
+
+# set.seed(1976)
+
+if(!"DT" %in% installed.packages()) { install.packages("DT") }
+library("DT")
+```
+
+## Independent factorial ANOVA
+
+The independent factorial ANOVA analyses the variance of multiple independent variables (Factors) with two or more categories.
+
+Effects and interactions:
+
+* 1 dependent/outcome variable
+* 2 or more independent/predictor variables
+    * 2 or more cat./levels
+    
+## Assumptions {.smaller}
+
+* Continuous variable
+* Random sample
+* Normally distributed 
+    * Shapiro-Wilk test
+    * Q-Q plot
+* Equal variance within groups
+    * Levene's test
+    * Ratio of observed sd's
+    
+* **Exam Note** - On the exam we will only ask for assumption *hypothesis* tests. 
+
+## Formulas {.smaller}
+
+| Variance | Sum of squares | df | Mean squares | F-ratio |
+|----------|----------------|----|--------------|---------|
+| Model | $\text{SS}_{\text{model}} = \sum{n_k(\bar{X}_k-\bar{X})^2}$ | $k_{model}-1$ | $\frac{\text{SS}_{\text{model}}}{\text{df}_{\text{model}}}$ | $\frac{\text{MS}_{\text{model}}}{\text{MS}_{\text{error}}}$ |
+| $\hspace{2ex}A$ | $\text{SS}_{\text{A}} = \sum{n_k(\bar{X}_k-\bar{X})^2}$ | $k_A-1$ | $\frac{\text{SS}_{\text{A}}}{\text{df}_{\text{A}}}$ | $\frac{\text{MS}_{\text{A}}}{\text{MS}_{\text{error}}}$ |
+| $\hspace{2ex}B$ | $\text{SS}_{\text{B}} = \sum{n_k(\bar{X}_k-\bar{X})^2}$ | $k_B-1$ | $\frac{\text{SS}_{\text{B}}}{\text{df}_{\text{B}}}$ | $\frac{\text{MS}_{\text{B}}}{\text{MS}_{\text{error}}}$ |
+| $\hspace{2ex}AB$ | $\text{SS}_{A \times B} = \text{SS}_{\text{model}} - \text{SS}_{\text{A}} - \text{SS}_{\text{B}}$ | $df_A \times df_B$ | $\frac{\text{SS}_{\text{AB}}}{\text{df}_{\text{AB}}}$ | $\frac{\text{MS}_{\text{AB}}}{\text{MS}_{\text{error}}}$ |
+| Error  | $\text{SS}_{\text{error}} = \sum{s_k^2(n_k-1)}$ | $N-k_{model}$ | $\frac{\text{SS}_{\text{error}}}{\text{df}_{\text{error}}}$ | |
+| Total | $\text{SS}_{\text{total}} = \text{SS}_{\text{model}} + \text{SS}_{\text{error}}$ | $N-1$ | $\frac{\text{SS}_{\text{total}}}{\text{df}_{\text{total}}}$ | |
+
+## Example {.smaller}
+
+In this example we will look at the amount of accidents in a car driving simulator while subjects where given varying doses of speed and alcohol.
+
+* Dependent variable
+    * Accidents
+* Independent variables
+    * Speed
+        * None
+        * Small
+        * Large
+    * Alcohol
+        * None
+        * Small
+        * Large
+
+##
+
+person | alcohol | speed | accidents
+-------|---------|-------|----------
+1      | 1       | 1     | 0
+2      | 1       | 2     | 2
+3      | 1       | 3     | 4
+4      | 2       | 1     | 6
+5      | 2       | 2     | 8
+6      | 2       | 3     | 10
+7      | 3       | 1     | 12
+8      | 3       | 2     | 14
+9      | 3       | 3     | 16
+      
+## Data {.smaller}
+
+```{r, echo=FALSE}
+datatable(data, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+```
+
+## SS model {.smaller}
+
+| Variance | Sum of squares | df | Mean squares | F-ratio |
+|----------|----------------|----|--------------|---------|
+| Model | $\text{SS}_{\text{model}} = \sum{n_k(\bar{X}_k-\bar{X})^2}$ | $k_{model}-1$ | $\frac{\text{SS}_{\text{model}}}{\text{df}_{\text{model}}}$ | $\frac{\text{MS}_{\text{model}}}{\text{MS}_{\text{error}}}$ |
+
+<br>
+
+```{r, echo=FALSE}
+accidents <- data$accidents
+n         <- length(accidents)
+
+# Descriptives for model
+means.model <- aggregate(accidents ~ speed + alcohol + speed * alcohol, data, mean  )
+n.k.model   <- aggregate(accidents ~ speed + alcohol + speed * alcohol, data, length)
+
+cbind(means.model, n = n.k.model$accidents)
+```
+
+## {.smaller}
+
+```{r, echo=FALSE}
+# Calculate expected accidents
+fit <- lm(accidents ~ speed + alcohol + speed * alcohol, data)
+exp.accidents <- fit$fitted.values
+
+datatable(data.frame(data$speed, 
+                     data$alcohol, 
+                     accidents = round(accidents,2), 
+                     grand.mean = round(mean(accidents),2), 
+                     group.mean = round(exp.accidents,2)), 
+          options = list(searching = FALSE, scrollY = 415, paging = FALSE, info = FALSE))
+```
+
+## Group means
+
+```{r, echo=FALSE}
+SS.model <- sum((exp.accidents - mean(data$accidents))^2)
+```
+
+```{r, echo=TRUE}
+means <- tapply(data$accidents, list(data$speed, data$alcohol), mean)
+means
+ns <- table(list(data$speed, data$alcohol))
+ns
+
+```
+
+##
+
+```{r, echo=TRUE}
+squares <- (means - mean(accidents))^2
+squares 
+
+ss.model <- sum(squares * ns)
+ss.model
+```
+
+## SS model visual
+
+```{r, echo=FALSE}
+input <- list()
+input$whatPred <- "Alcohol + Speed + A:S"
+input$whatDisplay <- "Segments"
+    plotSumSquares(mydat, input = input, sumSq = "Model", myMain = "Full Model SS",
+                   alcColors = palette.colors(n = 3, palette = "Okabe-Ito"),
+                   speedSymbols = c(21, 22, 23)) 
+```
+
+
+## SS error
+
+| Variance | Sum of squares | df | Mean squares | F-ratio |
+|----------|----------------|----|--------------|---------|
+| Error  | $\text{SS}_{\text{error}} = \sum{s_k^2(n_k-1)}$ | $N-k$ | $\frac{\text{SS}_{\text{error}}}{\text{df}_{\text{error}}}$ | |
+
+<br>
+
+```{r, echo=FALSE, eval=FALSE}
+SS.error <- sum((accidents - exp.accidents)^2)
+SS.error
+```
+
+```{r, echo=TRUE}
+vars <- tapply(data$accidents, list(data$speed, data$alcohol), var)
+vars
+```
+
+##
+
+```{r, echo=TRUE}
+ss.error <- sum(vars * (ns - 1))
+ss.error
+```
+
+## SS error visual
+
+```{r, echo=FALSE}
+input <- list()
+input$whatPred <- "Alcohol + Speed + A:S"
+input$whatDisplay <- "Segments"
+    plotSumSquares(mydat, input = input, sumSq = "Error", myMain = "Full Model SS Error",
+                   alcColors = palette.colors(n = 3, palette = "Okabe-Ito"),
+                   speedSymbols = c(21, 22, 23)) 
+```
+
+## SS A Speed {.subsection}
+
+| Variance | Sum of squares | df | Mean squares | F-ratio |
+|----------|----------------|----|--------------|---------|
+| $\hspace{2ex}A$ | $\text{SS}_{\text{A}} = \sum{n_k(\bar{X}_k-\bar{X})^2}$ | $k_A-1$ | $\frac{\text{SS}_{\text{A}}}{\text{df}_{\text{A}}}$ | $\frac{\text{MS}_{\text{A}}}{\text{MS}_{\text{error}}}$ |
+
+<br>
+
+```{r, echo=FALSE}
+# Descriptives for speed
+means.speed <- aggregate(accidents ~ speed, data, mean  )
+n.k.speed   <- aggregate(accidents ~ speed, data, length)
+data$mean.total <- mean(data$accidents)
+names(means.speed)[2] <- "means.speed"
+#means.speed
+
+data <- merge(data, means.speed,  by="speed",  all.x=TRUE)
+data <- data[order(data$subjects),]
+```
+
+```{r, echo = FALSE}
+SS.speed <- sum(with(data, (means.speed - mean.total)^2))
+#SS.speed
+```
+
+```{r, echo=TRUE}
+# m.s1 = mean(subset(data, speed == "none", select = "accidents")$accidents)
+# m.s2 = mean(subset(data, speed == "some", select = "accidents")$accidents)
+# m.s3 = mean(subset(data, speed == "much", select = "accidents")$accidents)
+
+s.means <- tapply(data$accidents, data$speed, mean)
+s.ns <- 60
+
+s.means
+```
+
+-------
+
+```{r, echo=TRUE}
+s.squares <- (s.means - mean(accidents))^2
+s.squares
+
+ss.speed <- sum(60 * s.squares)
+ss.speed
+```
+
+## SS A Speed Visual
+
+```{r, echo=FALSE}
+input <- list()
+input$whatPred <- "Speed"
+input$whatDisplay <- "Segments"
+    plotSumSquares(mydat, input = input, sumSq = "Model", myMain = "Speed Model SS",
+                   alcColors = palette.colors(n = 3, palette = "Okabe-Ito"),
+                   speedSymbols = c(21, 22, 23)) 
+```
+
+## SS A Speed Error Visual
+
+```{r, echo=FALSE}
+input <- list()
+input$whatPred <- "Speed"
+input$whatDisplay <- "Segments"
+    plotSumSquares(mydat, input = input, sumSq = "Error", myMain = "Speed Model SS",
+                   alcColors = palette.colors(n = 3, palette = "Okabe-Ito"),
+                   speedSymbols = c(21, 22, 23), overlayFullPred = FALSE) 
+```
+
+
+## SS B Alcohol {.subsection}
+
+| Variance | Sum of squares | df | Mean squares | F-ratio |
+|----------|----------------|----|--------------|---------|
+| $\hspace{2ex}B$ | $\text{SS}_{\text{B}} = \sum{n_k(\bar{X}_k-\bar{X})^2}$ | $k_B-1$ | $\frac{\text{SS}_{\text{B}}}{\text{df}_{\text{B}}}$ | $\frac{\text{MS}_{\text{B}}}{\text{MS}_{\text{error}}}$ |
+
+```{r, echo=FALSE}
+# Descriptives for alcohol
+means.alcohol <- aggregate(accidents ~ alcohol, data, mean)
+n.k.alcohol   <- aggregate(accidents ~ alcohol, data, length)
+names(means.alcohol)[2] <- "means.alcohol"
+# means.alcohol
+
+data <- merge(data,means.alcohol,by="alcohol", all.x=TRUE)
+data <- data[order(data$subjects),]
+```
+
+```{r, echo=FALSE}
+SS.alcohol <- sum(with(data, (means.alcohol - mean.total)^2))
+# SS.alcohol
+```
+
+```{r}
+a.means <- tapply(data$accidents, data$alcohol, mean)
+a.ns <- 60
+
+a.means
+```
+
+------
+
+```{r, echo=TRUE}
+a.squares <- (a.means - mean(accidents))^2
+a.squares
+
+ss.alcohol <- sum(60 * a.squares)
+ss.alcohol
+```
+
+## SS B Alcohol Visual
+
+```{r, echo=FALSE}
+input <- list()
+input$whatPred <- "Alcohol"
+input$whatDisplay <- "Segments"
+    plotSumSquares(mydat, input = input, sumSq = "Model", myMain = "Alcohol Model SS",
+                   alcColors = palette.colors(n = 3, palette = "Okabe-Ito"),
+                   speedSymbols = c(21, 22, 23)) 
+```
+
+## SS B Alcohol Error Visual
+
+```{r, echo=FALSE}
+input <- list()
+input$whatPred <- "Alcohol"
+input$whatDisplay <- "Segments"
+    plotSumSquares(mydat, input = input, sumSq = "Error", myMain = "Alcohol Model SS",
+                   alcColors = palette.colors(n = 3, palette = "Okabe-Ito"),
+                   speedSymbols = c(21, 22, 23), overlayFullPred = FALSE) 
+```
+
+## SS AB Alcohol x Speed {.smaller}
+
+| Variance | Sum of squares | df | Mean squares | F-ratio |
+|----------|----------------|----|--------------|---------|
+| $\hspace{2ex}AB$ | $\text{SS}_{A \times B} = \text{SS}_{\text{model}} - \text{SS}_{\text{A}} - \text{SS}_{\text{B}}$ | $df_A \times df_B$ | $\frac{\text{SS}_{\text{AB}}}{\text{df}_{\text{AB}}}$ | $\frac{\text{MS}_{\text{AB}}}{\text{MS}_{\text{error}}}$ |
+
+<br>
+
+```{r, echo=TRUE}
+# Sums of squares for the interaction between speed and alcohol
+ss.speed.alcohol <- ss.model - ss.speed - ss.alcohol
+ss.speed.alcohol
+```
+
+## Mean Squares
+
+::: {.columns}
+
+::: {.column}
+
+Mean squares for:
+
+* Speed
+* Alcohol
+* Speed $\times$ Alcohol
+
+:::
+
+::: {.column}
+
+$$\begin{aligned}
+F_{Speed} &= \frac{{MS}_{Speed}}{{MS}_{error}} \\
+F_{Alcohol} &= \frac{{MS}_{Alcohol}}{{MS}_{error}} \\
+F_{Alcohol \times Speed} &= \frac{{MS}_{Alcohol \times Speed}}{{MS}_{error}} \\
+\end{aligned}$$
+
+:::
+
+:::
+
+## Interaction
+
+$$F_{Alcohol \times Speed}$$
+
+```{r, echo=TRUE}
+N          <- length(accidents)
+k.speed    <- 3
+k.alcohol  <- 3
+k.model    <- 9
+df.speed   <- k.speed   - 1
+df.alcohol <- k.alcohol - 1
+df.speed.alcohol <- df.speed * df.alcohol
+
+ms.speed.alcohol <- ss.speed.alcohol / df.speed.alcohol
+
+df.error <- N - k.model
+ms.error <- ss.error / df.error
+```
+
+## $P$-value
+
+```{r, echo=TRUE}
+F.speed.alcohol <- ms.speed.alcohol / ms.error
+F.speed.alcohol
+
+library(visualize)
+visualize.f(F.speed.alcohol, df.speed.alcohol, df.error, section = "upper")
+```
+
+------
+
+```{r, echo=FALSE}
+F.values = seq(0, 10, .01)
+
+plot(F.values, df(F.values, df.speed.alcohol, df.error), type = "l", ylab="density", main = "H0 and HA F-distribution")
+
+critical.value = qf(.95, df.speed.alcohol, df.error)
+
+critical.range = seq(critical.value, 10, .01)
+
+polygon(c(critical.range,rev(critical.range)), 
+        c(critical.range*0, rev(df(critical.range, df.speed.alcohol, df.error, ncp = 5))), col = "green")
+
+lines(F.values, df(F.values, df.speed.alcohol, df.error, ncp = 5))
+
+polygon(c(critical.range,rev(critical.range)), 
+        c(critical.range*0, rev(df(critical.range, df.speed.alcohol, df.error))), col = rgb(1,0,0,1), density = 40, angle = -45)
+
+p.range = seq(F.speed.alcohol, 10, .01)
+
+polygon(c(p.range,rev(p.range)), 
+        c(p.range*0, rev(df(p.range, df.speed.alcohol, df.error))), col = rgb(0,0,1,.6), density = 20)
+```
+
+## Contrast
+
+Planned comparisons
+
+* Exploring differences of theoretical interest
+* Higher precision
+* Higher power
+
+## Post-Hoc
+
+Unplanned comparisons
+
+* Exploring all possible differences
+* Adjust T value for inflated type 1 error
+
+## Effect size
+
+General effect size measures
+
+* Amount of explained variance $R^2$ also called eta squared $\eta^2$.
+* Omega squared $\omega^2$
+
+Effect sizes of contrasts or post-hoc comparisons
+
+* Cohen's $r$ gives the effect size for a specific comparison
+    * $r_{Contrast} = \sqrt{\frac{t^2}{t^2+{df}}}$

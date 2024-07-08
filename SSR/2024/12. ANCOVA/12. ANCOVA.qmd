@@ -1,0 +1,18 @@
+---
+title: "12. ANCOVA"
+author: "Sharon Kinkenberg & Johnny van Doorn"
+date: "06 oct 2023"
+footer: "Scientific & Statistical Reasoning"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+```{r child="../../../../topics/ANCOVA/ANCOVA.qmd"}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```

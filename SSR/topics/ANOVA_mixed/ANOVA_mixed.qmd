@@ -1,0 +1,60 @@
+# Mixed design ANOVA {.section}
+
+```{r, echo=FALSE}
+rm(list=ls())
+if(!"DT" %in% installed.packages()) { install.packages("DT") }
+library("DT")
+```
+
+## Mixed design 
+
+The mixed ANOVA analyses the variance of the model while reducing the error by the within person variance.
+
+* 1 dependent/outcome variable
+* 2 or more independent/predictor variable with different subjects
+    * 2 or more levels
+* 1 or more independent/predictor variable with same subjects
+    * 2 or more levels
+
+## Assumptions
+
+Same as repeated measures ANOVA and same as factorial ANOVA.
+
+## Example {.smaller}
+
+* Dependent variable
+    * Accidents
+* Independent variables
+    * Speed (same subjects)
+        * None
+        * Small
+        * Large
+    * Alcohol (same subjects)
+        * None
+        * Small
+        * Large
+    * Daytime
+        * Morning
+        * Evening
+
+
+## Data {.smaller}
+
+```{r, echo=FALSE}
+data <- read.csv(file = "RM_ANOVA_AlcoholSpeedTime.csv", header = TRUE)
+
+# data[,-1] <- round(data[,-1],2)
+
+datatable(data, 
+          rownames = FALSE, 
+          extensions = 'Buttons',
+          options = list(searching = FALSE, 
+                         scrollY = 415, 
+                         paging = FALSE, 
+                         info = FALSE,
+                         dom = 'Bfrtip',
+                         buttons   = c('csv'))
+        )
+```
+
+

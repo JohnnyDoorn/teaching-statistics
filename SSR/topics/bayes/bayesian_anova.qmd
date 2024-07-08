@@ -1,0 +1,65 @@
+# Bayesian ANOVA {.section}
+
+## Updating belief
+
+[Link to course literature from last year](https://johnnydoorn.github.io/BayesBookQuarto/)
+
+
+## Bayesian Hypothesis Testing
+
+* $H_0$, the null hypothesis.  For instance $\theta = .5$ (people cannot taste the difference between alcoholic and non-alcoholic beer).
+* $H_A$ is the hypothesis that relaxes the restriction imposed by $H_0$, and instead considers multiple values for $\theta$.
+
+## Prior Belief
+
+$$\large \underbrace{\frac{P(H_A \mid data)}{P(H_0 \mid data)}}_\textrm{Posterior belief} = \underbrace{\frac{P(H_A)}{P(H_0)}}_\textrm{Prior belief} \times \underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}$$
+
+## Bayes Factor {.subsection}
+
+$$\underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}$$
+A ratio of the marginal likelihood of the data under the alternative and the null.
+
+A Bayes factor of ${BF}_{10} = 3$, means that the data are 3 times more likely under the alternative model than under the null model.
+
+
+## Heuristics for BF {.subsection}
+
+Heuristics for the Interpretation of the Bayes Factor by [Harold Jeffreys](https://en.wikipedia.org/wiki/Harold_Jeffreys)
+
+BF       | Evidence
+---------|----------
+ 1 – 3   | Anecdotal
+ 3 – 10  | Moderate
+10 – 30  | Strong
+30 – 100 | Very strong
+>100     | Extreme
+
+## Advantages of the Bayes Factor
+
+* Provides a continuous degree of evidence without requiring an all-or-none decision.
+* Allows evidence to be monitored during data collection.
+* Differentiates between “the data support H0” (evidence for absence) and “the data are not informative” (absence of evidence).
+
+## BF pizza
+
+![](../../../../topics/bayes/BF1.png)
+
+-------
+
+![](../../../../topics/bayes/BF3.png)
+
+-------
+
+![](../../../../topics/bayes/BF13.png)
+
+
+
+## Different Models
+
+
+
+## Take home message
+
+* Bayesians quantify uncertainty through distributions.
+* The more peaked the distribution, the lower the uncertainty.
+* Incoming information continually updates our knowledge; today’s posterior is tomorrow’s prior.

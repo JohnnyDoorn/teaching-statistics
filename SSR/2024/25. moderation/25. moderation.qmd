@@ -1,0 +1,21 @@
+---
+title: "25. Moderation"
+author: "Sharon Kinkenberg & Johnny van Doorn"
+date: "14 nov 2023"
+footer: "Scientific & Statistical Reasoning"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+```{r child="../../../../topics/moderation/moderationNames.qmd"}
+```
+
+```{r child="../../../../topics/SR-recruit/SR-recruit.qmd"}
+```
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```
+

@@ -1,0 +1,214 @@
+```{r, echo=FALSE}
+if(!"DT" %in% installed.packages()) { install.packages("DT") }
+library("DT")
+```
+
+# Wilcoxon rank-sum test
+
+Independent 2 samples
+
+## Wilcoxon rank-sum test
+
+<img src="http://upload.wikimedia.org/wikipedia/en/9/9a/FrankWilcoxon.png" style="float: left; margin: 0 20px 0 0; width: 300px;">
+  
+Developed by [Frank Wilcoxon](http://en.wikipedia.org/wiki/Frank_Wilcoxon) the rank-sum test is an [nonparametric](http://en.wikipedia.org/wiki/Nonparametric_statistics) alternative to the independent samples t-test.
+
+By ranking all values and then summing the ranks per group, one would expect under the null hypothesis, that the sum of ranks is approximately equal.
+
+After standardizing the test statistic (summed ranks for one group), we can use the standard normal distribution as the sampling distribution.
+
+## Simulate data
+
+```{r, echo=TRUE}
+set.seed(123)
+n      <- 20
+factor <- rep(c("Ecstasy","Alcohol"),each=n/2)
+dummy  <- ifelse(factor == "Ecstacy", 0, 1)
+b.0    <- 23
+b.1    <- 5
+error  <- rnorm(n, 0, 1.7)
+depres <- b.0 + b.1*dummy + error
+depres <- round(depres)
+
+data <- data.frame(factor, depres)
+
+## add the ranks
+data$R <- rank(data$depres)
+```
+
+## Example
+
+```{r, echo=FALSE}
+datatable(data, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+
+# Write data for use in SPSS
+write.csv(data, "mann-whitney.csv", row.names=FALSE)
+```
+
+## Calculate the sum of ranks per group {.subsection}
+
+```{r, echo=TRUE}
+R <- aggregate(R ~ factor, data, sum)
+R
+```
+
+## So W is the lowest
+
+$$W=min\left(\sum{R_1},\sum{R_2}\right)$$
+  
+```{r, echo=TRUE}
+W <- min(R$R)
+W
+```
+
+## Subtracting the minimum score
+
+Most software (except SPSS) reports the value of W, with its minimum value subtracted:
+
+```{r, echo=TRUE}
+W.min <- sum(1:10); W.min
+
+W # same result as SPSS
+W - W.min # same result as JASP
+```
+
+## Standardise W
+
+To calculate the Z-score we need to standardize the W. To do so we need the mean W and the standard error of W.
+
+For this we need the sample sizes for each group.
+
+```{r, echo=TRUE}
+n <- aggregate(R ~ factor, data, length)
+
+n.1 <- n$R[1]
+n.2 <- n$R[2]
+
+cbind(n.1, n.2)
+```
+
+## Mean W under $H_0$
+
+$$\bar{W}_s=\frac{n_1(n_1+n_2+1)}{2}$$
+  
+```{r, echo=TRUE}
+W.mean <- (n.1 * (n.1 + n.2 + 1)) / 2
+W.mean # this is the middle point between the min and max value of W
+
+W.max <- sum(11:20); W.max
+W.min <- sum(1:10); W.min
+```
+
+## SE W
+
+$${SE}_{\bar{W}_s}=\sqrt{ \frac{n_1 n_2 (n_1+n_2+1)}{12} }$$
+  
+```{r, echo=TRUE}
+W.se <- sqrt((n.1 * n.2 * (n.1 + n.2 + 1)) / 12)
+W.se
+```
+
+## Calculate Z {.subsection}
+
+$$z = \frac{W - \bar{W}}{{SE}_W}$$
+  
+Which looks a lot like
+
+$$\frac{X - \bar{X}}{{SE}_X} \text{or} \frac{b - \mu_{b}}{{SE}_b} $$
+  
+```{r, echo=TRUE}
+z <- (W - W.mean) / W.se
+z
+```
+
+## Test for significance 1 sided
+
+```{r, echo=TRUE, warning=FALSE, fig.align='center'}
+if(!"visualize" %in% installed.packages()){ install.packages("visualize") }
+library("visualize")
+
+visualize.norm(z, section="lower")
+```
+
+## Test for significance 2 sided
+
+```{r, echo=TRUE, warning=FALSE, fig.align='center'}
+visualize.norm(c(z,-z), section="tails")
+```
+
+## Effect size $r$
+
+$$r = \frac{z}{\sqrt{N}}$$
+  
+```{r, echo=TRUE}
+N <- sum(n$R)
+r <- z / sqrt(N)
+r
+```
+
+## Effect size rank-biserial correlation
+
+$$r_{bs} = 1 - \frac{2*W}{n_1*n_2}$$
+  
+```{r, echo=TRUE}
+W <- W - W.min # use modern W
+biserialCor <- 1 - (2*(W)) / (n.1*n.2);
+biserialCor
+```
+
+
+## Robustness under monotonic transformations
+
+```{r, echo = FALSE, message=FALSE }
+set.seed(123)
+n <- 20
+y <- runif(n, 0, 0.5)
+gr <- factor(rep(letters[1:2], each = n /2))
+y[gr == "a"] <- y[gr == "a"] + 0.18
+y <- 1-y
+
+
+
+y1 <- y^2
+y1Stats <- c(t.test(y1 ~ gr)$statistic, wilcox.test(y1 ~ gr)$statistic)
+
+
+y2 <- qnorm(y)
+y2Stats <- c(t.test(y2 ~ gr)$statistic, wilcox.test(y2 ~ gr)$statistic)
+
+
+
+y3 <- log(y, base = 20)
+y3Stats <- c(t.test(y3 ~ gr)$statistic, wilcox.test(y3 ~ gr)$statistic)
+
+
+
+y4 <- qt(y, 1)
+y4Stats <- c(t.test(y4 ~ gr)$statistic, wilcox.test(y4 ~ gr)$statistic)
+
+
+yList <- list(y1, y2, y3, y4)
+```
+```{r, echo= FALSE}
+par(mfrow = c(2, 2), cex = 1)
+plotCex<- 1
+boxplot(y2 ~ gr, xlab = "Condition", ylab = "DV", col = c("darkgreen", "darkorange"),
+        main= "Normal", cex = plotCex)
+mtext(side = 3, paste0("t = ", (round(y2Stats[1], 2)), 
+                       "\nW = ", (round(y2Stats[2], 2))), adj = 1)
+boxplot(y1 ~ gr, xlab = "Condition", ylab = "DV", col = c("darkgreen", "darkorange"),
+        main= "y^2", cex =plotCex )
+mtext(side = 3, paste0("t = ", (round(y1Stats[1], 2)), 
+                       "\nW = ", (round(y1Stats[2], 2))), adj = 1)
+boxplot(y3 ~ gr, xlab = "Condition", ylab = "DV", col = c("darkgreen", "darkorange"),
+        main= "log(y)", cex = plotCex)
+mtext(side = 3, paste0("t = ", (round(y3Stats[1], 2)), 
+                       "\nW = ", (round(y3Stats[2], 2))), adj = 1)
+boxplot(y4 ~ gr, xlab = "Condition", ylab = "DV", col = c("darkgreen", "darkorange"),
+        main= "Cauchy", cex = plotCex)
+mtext(side = 3, paste0("t = ", (round(y4Stats[1], 2)), 
+                       "\nW = ", (round(y4Stats[2], 2))), adj = 1)
+
+
+```
+

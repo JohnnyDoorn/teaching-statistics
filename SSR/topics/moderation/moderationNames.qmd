@@ -1,0 +1,278 @@
+# Moderation {.section}
+
+<!-- Allow color highlighting in mathjax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+</script>
+
+```{r, echo=FALSE}
+rm(list=ls())
+if(!"DT" %in% installed.packages()) { install.packages("DT") }
+library("DT")
+
+if(!"manipulateWidget" %in% installed.packages()) { install.packages("manipulateWidget") }
+library("manipulateWidget")
+```
+
+## Moderation
+
+In statistics and regression analysis, moderation occurs when the relationship between two variables depends on a third variable. The third variable is referred to as the moderator variable or simply the moderator. The effect of a moderating variable is characterized statistically as an interaction.
+
+Source [WIKIPEDIA](https://en.wikipedia.org/wiki/Moderation_(statistics))
+
+## Model {.subsection .flexbox .vcenter}
+
+$\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
+\color{black}Out_i = b_0 + b_1 Pred_i + b_2 Mod_i + \color{red}b_3 Pred_i \times Mod_i \color{black}+ \epsilon_i$
+
+![](moderation.png)
+
+<!-- ## Example {.smaller} -->
+
+<!-- Video games are among the favorite online activities for young people: two-thirds of 5–16-year-olds have their own video games console, and 88% of boys aged 8–15 own at least one games console. Although playing violent video games can enhance visuospatial acuity, visual memory, probabilistic inference, and mental rotation, compared to games such as Tetris, these games have also been linked to increased aggression in youths Another predictor of aggression and conduct problems is callous-unemotional traits such as lack of guilt, lack of empathy, and callous use of others for personal gain.  -->
+
+<!-- Imagine a scientist wanted to look at the relationship between playing violent video games such as Grand Theft Auto, MadWorld and Manhunt and aggression. She gathered data from 442 youths. She measured their aggressive behavior, callous unemotional traits, and the number of hours per week they play video games. -->
+
+<!-- Source: Field 11.3.1 -->
+
+## Simulate data
+
+<!-- # ```{r, echo=TRUE} -->
+<!-- # set.seed(283) ##  -->
+<!-- # predictor <-             rnorm(100, 0, 3) -->
+<!-- # ml.coffee <- predictor + rnorm(100, 0, 3) ## multicollinearity -->
+<!-- # error     <-             rnorm(100, 0, 3) ## error -->
+<!-- # intercept <- 5 -->
+<!-- # wakefulness   <- intercept + .5*predictor +  -->
+<!-- #                         -.4*ml.coffee +  -->
+<!-- #                          .4*predictor*ml.coffee +  -->
+<!-- #                          error -->
+<!-- # ``` -->
+```{r, echo=TRUE}
+set.seed(283) ## 
+n <- 100
+hours.awake <- round(runif(n, 1, 18))
+ml.coffee   <- round(hours.awake + (rnorm(n, 250, 100))) ## multicollinearity
+error       <- rnorm(n, 0, 20) ## error
+intercept   <- 50
+wakefulness <- intercept + -3 * hours.awake + 
+                          0.5 * ml.coffee + 
+                         0.5 * hours.awake * ml.coffee + 
+                         error
+wakefulness <- 50 + scale(wakefulness)*(10)
+```
+
+
+<!-- ## Mean un centring -->
+
+<!-- ```{r, echo=TRUE} -->
+<!-- ml.coffee <- ml.coffee + 7 -->
+
+<!-- head(data)  -->
+<!-- ``` -->
+
+
+
+## View data {.smaller}
+```{r, echo=FALSE}
+data <- data.frame(hours.awake, ml.coffee, wakefulness)
+save(data, file="moderation.rdata")
+DT::datatable(round(data,2), 
+          rownames   = FALSE, 
+          extensions = 'Buttons',
+          options = list(searching = FALSE, 
+                         scrollY   = 350, 
+                         paging    = F, 
+                         info      = F,                          
+                         dom       = 'Bfrtip',
+                         buttons   = c('csv')))
+```
+
+## Correlations
+
+```{r, echo=TRUE}
+cor(data)
+```
+
+## Scatterplots {.subsection}
+
+```{r, echo=FALSE}
+plot(data, pch = 21, bg = palette.colors(n = 9, palette = "Okabe-Ito"))
+attach(data)
+```
+
+## 3D plot
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+## 3d plot package rgl
+## install.packages('rgl')
+library(rgl)
+
+par3d(mouseMode = "trackball")
+
+plot3d(hours.awake, ml.coffee, wakefulness,
+       #col  = rainbow(100),
+       col  = "red",
+       size = 8) -> my.plot
+
+my.plot
+rglwidget()
+```
+
+Take it for a spin (does not work on tablet)
+
+## 1 SD planes
+
+```{r, echo=TRUE}
+sds       <- c(mean(ml.coffee)+(sd(ml.coffee)*c(-1,0,1)))
+quantiles <- as.vector(quantile(ml.coffee,seq(.1,.9,.1)))
+```
+
+##
+
+```{r, eval=TRUE, echo=FALSE, warning=FALSE, message=FALSE, rgl.useNULL=TRUE}
+my.plot
+
+par3d(mouseMode = "zAxis")
+
+planes3d(a = 0,
+         b = 1,
+         c = 0,
+         d = -sds,
+         #d = -quantiles,
+         alpha=0.7,
+         color = c("blue"))
+
+# rglwidget()
+
+M <- r3dDefaults$userMatrix
+fn <- par3dinterp(time = (0:2)*0.75, userMatrix = list(M, rotate3d(M, pi/2, 0, 0, 1),
+                                                          rotate3d(M, pi/2, 0, 0, 1)) )
+
+rglwidget()
+# %>%
+# playwidget(par3dinterpControl(fn, 0, 3, steps=15),
+#        step = 0.01, loop = TRUE, rate = 0.5)
+```
+
+## Fit model {.smaller .subsection}
+
+```{r, echo=TRUE}
+#fit2 <- lm(wakefulness ~ hours.awake + ml.coffee)
+fit <- lm(wakefulness ~ hours.awake + ml.coffee + hours.awake*ml.coffee); summary(fit)
+```
+
+## Regression equation {.smaller}
+
+$\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
+\color{black}\widehat{Out_i} = b_0 + b_1 Pred_i + b_2 Mod_i + \color{red}b_3 Pred_i \times Mod_i \color{black}$
+
+$\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
+\color{black}\widehat{Out_i} = `r round(fit$coefficients[1],2)` + `r round(fit$coefficients[2],2)` \times Pred_i + `r round(fit$coefficients[3],2)` \times Mod_i + \color{red} `r round(fit$coefficients[4],2)` \times Pred_i \times Mod_i \color{black}$
+
+
+```{r, echo=FALSE}
+regeq <- function(model, hours.awake, ml.coffee) { 
+    fit$coefficients[1] + 
+    fit$coefficients[2]*hours.awake + 
+    fit$coefficients[3]*ml.coffee + 
+    fit$coefficients[4]*hours.awake*ml.coffee
+}
+
+x.pre <- seq(0,20,length.out=30)
+y.mod <- seq( 0,450,length.out=30)
+
+z.pre <- outer(x.pre, y.mod, FUN='regeq', model=fit)
+data$prediction <- fit$fitted.values
+data <- round(data, 2)
+datatable(data, rownames = FALSE, 
+          extensions = 'Buttons',
+          options = list(searching = FALSE, 
+                         scrollY   = 300, 
+                         paging    = FALSE, 
+                         info      = FALSE,
+                         dom       = 'Bfrtip',
+                         buttons   = c('csv')
+          ))
+```
+
+```{r, echo=FALSE}
+colnames(z.pre) <- x.pre
+rownames(z.pre) <- y.mod
+save(data, x.pre, y.mod, z.pre, quantiles, sds, file="moderation.rdata")
+```
+
+
+## Expected surface
+
+```{r, eval=TRUE, echo=FALSE, warning=FALSE, message=FALSE, rgl.useNULL=TRUE}
+my.plot
+
+surface3d(x.pre,y.mod,z.pre, color = c("green"))
+
+aspect3d(1,1,1)
+
+subid <- currentSubscene3d()
+rglwidget(elementId="plot3drgl2", reuse = FALSE)
+
+rglwidget()
+```
+
+
+
+## Expected values {.subsection}
+
+
+```{r, fig.align='center', fig.width=15, fig.height = 7, echo=FALSE}
+par(mfrow = c(1, 3), cex = 1.5)
+data$prediction <- prediction <- fit$fitted.values
+
+plotN <- 10
+outcome <- data$wakefulness
+# This is all the sales data
+plot(outcome[1:plotN],xlab='Participant', ylab = "Outcome", las = 1,
+     bty = "n", pch = 21, bg = "turquoise", main = "Total Variance")
+# With the mean
+abline(h = mean(outcome[1:plotN]), lwd = 2, col = "purple")
+# The model predicts the sales scores
+points(1:plotN,prediction[1:plotN], pch =23, bg='darkred')
+# The part of the variation that overlaps is the 'explained' variance. 
+segments(1:plotN, outcome[1:plotN], 1:plotN, mean(outcome[1:plotN]), col='orange', lwd= 2)
+
+legend("topleft", c("Observed", "Predicted"),
+       bty = "n", fill = c("turquoise", "darkred"))
+
+# This is all the sales data
+plot(outcome[1:plotN],xlab='Participant', ylab = "Outcome", las = 1,
+     bty = "n", pch = 21, bg = "turquoise", main = "Explained Variance")
+# With the mean
+abline(h = mean(outcome[1:plotN]), lwd = 2, col = "purple")
+# The blue lines are the total variance, the deviation from the mean.
+segments(1:plotN, prediction[1:plotN], 1:plotN, mean(outcome[1:plotN]), col='blue', lwd= 2)
+# The model predicts the sales scores
+points(1:plotN, prediction[1:plotN], pch =23, bg='darkred')
+# The part of the variation that overlaps is the 'explained' variance. 
+legend("topleft", c("Observed", "Predicted"),
+       bty = "n", fill = c("turquoise", "darkred"))
+
+# This is all the sales data
+plot(outcome[1:plotN],xlab='Participant', ylab = "Outcome", las = 1,
+     bty = "n", pch = 21, bg = "turquoise", main = "Unexplained Variance")
+# With the mean
+# abline(h = mean(sales[1:plotN]), lwd = 2, col = "purple")
+# The blue lines are the total variance, the deviation from the mean.
+segments(1:plotN, prediction[1:plotN], 1:plotN, (outcome[1:plotN]), col='red', lwd= 2)
+# The model predicts the sales scores
+points(1:plotN,prediction[1:plotN], pch =23, bg='darkred')
+# The part of the variation that overlaps is the 'explained' variance. 
+legend("topleft", c("Observed", "Predicted"),
+       bty = "n", fill = c("turquoise", "darkred"))
+```
+$r^2$ is the proportion of <span style="color: blue;">blue</span> to <span style="color: orange;">orange</span>, while $1 - r^2$ is the proportion of <span style="color: red;">red</span> to <span style="color: orange;">orange</span> 
+
+
+
+```{r}
+data$cups.coffee <- data$ml.coffee %/% 150
+write.csv(data, "moderation-coffee.csv", row.names = FALSE)
+```

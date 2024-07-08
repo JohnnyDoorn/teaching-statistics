@@ -1,0 +1,312 @@
+# Experiment {.section}
+
+<!-- [Video registration](https://webcolleges.uva.nl/Mediasite/Play/ed1e63e0cd204dcf9d2a144603ce342b1d?playFrom=3708000) -->
+
+## Test
+
+::: {style="text-align:center;"}
+<img src="proyi.png" style="width:40%;"/>
+
+<p style="font-size: 30px;">https://maglit.me/proyi</p>
+:::
+
+## Emperical Cycle {.section}
+
+-   **Observation** Patient is showing strange behavior
+-   **Induction** Can we diagnose an alien takeover?
+-   **Deduction** $H_0$: P: $\theta = 0.5$ → C: patient is human
+-   **Deduction** $H_A$: P: $\theta > 0.5$ → C: patient is alien
+-   **Deduction** $H_A$: P: data $\neq$ EV → C: patient is alien
+-   **Testing** Choose $\alpha$ and Power
+-   **Evaluation** Make a decision
+
+## Null Distribution {.subsection}
+
+Let's analyse the null distribution of the results.
+
+<iframe style="height:400px; width:100%;" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRcL5O7fPYtEfvqIQcRIFErAejbp8QozEW0Rx7m4p0xqA2-QU8CrMq35kVCD6q3CZH-CPhlJgXLZONc/pubhtml?widget=true&amp;headers=false">
+
+</iframe>
+
+</iframe>
+
+<!-- [Google sheet](https://docs.google.com/spreadsheets/d/150iSLUXqZbsetzDMjYlY5CAcjIzTanTm2tOFfn_ConA/edit?usp=sharing) -->
+
+[Google sheet](https://docs.google.com/spreadsheets/d/1BXVnt8yRDvzzzAsP1RkaTgPrwWkBTAQE16U1nD2nuNg/edit?usp=sharing)
+
+```{=html}
+<!--
+
+
+-->
+```
+## Distributions
+
+What is the difference between
+
+-   Population distribution
+-   Sample distribution
+-   Sampling distribution
+
+```{r, eval=FALSE}
+# install.packages("curl")
+library("curl")
+
+url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRcL5O7fPYtEfvqIQcRIFErAejbp8QozEW0Rx7m4p0xqA2-QU8CrMq35kVCD6q3CZH-CPhlJgXLZONc/pub?output=csv"
+
+data <- read.csv(curl(url))
+```
+
+```{r, echo=FALSE, eval=FALSE}
+
+freq.table <- table(data$Score)
+barplot(freq.table)
+
+barplot(table(factor(data$Score, levels=0:10)))
+```
+
+## Binomial distribution
+
+$$P(k \text{ success out of } n \text{ trials} \mid \text{probability } p) = {n\choose k}p^k(1-p)^{n-k}$$ where $$ {n\choose k} = \frac{n!}{k!(n-k)!} $$
+
+With values:
+
+```{r, echo=TRUE}
+n <- 10   # Sample size
+k <- 0:10 # Discrete probability space (numbers 0, 1, ..., 9, 10)
+p <- .5   # Probability of head
+```
+
+## Probabilities
+
+```{r, echo=FALSE}
+munt = 0:1
+
+# alle_mogelijkheden = expand.grid(munt,munt,munt,munt,munt,munt,munt,munt,munt,munt)
+# 
+# sommen = rowSums(alle_mogelijkheden)
+
+# table(sommen)
+
+permutations = factorial(n) / ( factorial(k) * factorial(n-k) )
+# permutations
+
+p_k  = p^k * (1-p)^(n-k)  # Probability of single event
+p_kp = p_k * permutations # Probability of event times 
+                          # the occurrence of that event
+# sample = 90
+# freq_munt = round(p_kp*sample)
+# cbind(k,permutations,p_k,p_kp,freq_munt)
+
+title = "Binomial Null Distribution"
+
+col=c(rep("red",2),rep("white",7),rep("red",2))
+
+barplot( p_kp, 
+         main=title, 
+         names.arg=0:10, 
+         xlab="# Heads", 
+         ylab="P(%)", 
+         col='darkgreen',
+         las = 1,
+         ylim=c(0,.3) )
+
+text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
+```
+
+## Testing
+
+I had 7 items correct. Can we conclude I am no longer human?
+
+-   As you can see from the distribution of human scores, we cannot conclude that by definition.
+-   What we can do is indicate how rare 7 is in a human population.
+
+## Testing {.smaller}
+
+<small>
+
+> -   Based on the null distribution we can see that the expected value (EV) is 5
+> -   We can now define the $H_0$ hypothesis: $H_0: EV = 5$
+> -   What is the alternative hypothesis?
+> -   The alternative hypothesis describes a situation where the patient is alien
+> -   We could say that the alternative hypothesis is not 5
+>     -   $H_A: EV \ne 5$
+> -   We could also formulate our $H_0$ and $H_A$ more abstract:
+>     -   $H_0:$ the patient is human
+>     -   $H_A:$ the patient is alien
+> -   What criterion should we use to conclude that one would be alien?
+> -   In the social sciences this $\alpha$ criteria is often 5%.
+> -   I scored 7 items correct. That is more frequent than 5%.
+> -   Therefore, we conclude that our patient is probably human but we can never be sure.
+> -   I could still be part of the alien population.
+
+</small>
+
+## Null Distribution
+
+Observations outside the dashed lines are significant for $\alpha = 0.05$
+
+```{r, echo=FALSE}
+barplot( p_kp, 
+         main=title, 
+         names.arg=0:10, 
+         xlab="# Heads", 
+         ylab="P(%)", 
+         col='darkgreen',
+         las = 1,
+         ylim=c(0,.3) )
+
+text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
+abline(v = c(2.5,10.9), col="red", lwd=3, lty="dotted")
+```
+
+## Alternative Distribution {.smaller .build .subsection}
+
+But we have no clue what this distribution could look like.
+
+For now let's assume the probability of answering an item correctly is .75
+
+```{r, echo=FALSE}
+
+# n = 10   # Sample size
+# k = 0:10 # Discrete probability space
+p = .75   # Probability of head
+
+permutations = factorial(n) / ( factorial(k) * factorial(n-k) )
+
+p_k2  = p^k  * (1-p)^(n-k)  # Probability of single event
+p_kp2 = p_k2 * permutations # Probability of event times 
+                            # the occurrence of that event
+
+title = "Binomial Alternative Distribution"
+
+col=c(rep("red",2),rep("white",7),rep("red",2))
+
+barplot( p_kp2, 
+         main=title, 
+         names.arg=0:10, 
+         xlab="# Heads", 
+         ylab="P(%)", 
+         beside=TRUE,
+         col="darkorange",
+         las = 1,
+         ylim=c(0,.3) 
+         )
+
+text(.6:10.6*1.2,p_kp2,round(p_kp2,3),pos=3,cex=.5)
+
+abline(v =  c(2.5,10.9), col="red", lwd=3, lty="dotted")
+```
+
+## $H_0$ and $H_A$ Distribution
+
+```{r, echo=FALSE}
+
+title = "Both Distributions"
+
+colh0 = 'darkgreen'
+colha = 'darkorange'
+
+barplot( rbind(p_kp,p_kp2), 
+         main=title, 
+         names.arg=0:10, 
+         xlab="# Heads", 
+         ylab="P(%)", 
+         ylim = c(0, 0.3),
+         col = rbind(colh0,colha),
+         las = 1,
+         beside=TRUE
+         #legend.text = c("H0", "HA")
+         )
+
+legend("topright", legend=c("H0","HA"), fill=c("darkgreen","darkorange"))
+
+abline(v = c(6.5,27.4), col="red", lwd=3, lty="dotted")
+
+```
+
+````{=html}
+<!--
+
+## Power and more {.section}
+
+```{r, echo=FALSE, eval=FALSE}
+N     = 10  # Sample size
+H0    = .5  # Kop 50/50
+HA    = .75 # Aternatieve verdeling
+alpha = .02 # Gekozen type I fout
+
+# Juiste gebieden in rood weergeven op basis van de gekozen alpha
+lb = qbinom(alpha/2, N, H0, lower.tail = T)
+ub = qbinom(alpha/2, N, H0, lower.tail = F)
+
+col = rep("white", N+1)
+col[0:lb+1] = "red"
+col[ub:N+1] = "red"
+
+
+col2 = rep("red", N+1)
+col2[0:lb+1] = "white"
+col2[ub:N+1] = "white"
+
+
+# Haal onderstaande # voor col weg om geen kleurtjes aan te geven.
+# col = col2  = "white"
+
+layout(matrix(1:9,3,3, byrow=T))
+
+plot.new()
+text(0.5,0.5,"Binomial Distribution",cex=1.5)
+# text(0.5,0.1,paste("N:",N),cex=1.5)
+
+plot.new()
+text(0.5,0.5,"H0 True",cex=2)
+
+plot.new()
+text(0.5,0.5,"H0 False",cex=2)
+
+plot.new()
+text(0.5,0.5,"Reject H0",cex=2)
+
+barplot(dbinom(0:N,N, H0), 
+        col  = col, 
+#        yaxt = 'n', 
+        main = 'Alpha / Type I error', 
+        names.arg = 0:N, 
+        cex.names = 0.7)
+
+abline(v = c(2.5,10.9), col="red", lwd=3, lty="dotted")
+
+barplot(dbinom(0:N,N, HA), 
+        col  = col, 
+        yaxt = 'n', 
+        main = 'Power', 
+        names.arg = 0:N, 
+        cex.names = 0.7)
+
+abline(v = c(2.5,10.9), col="red", lwd=3, lty="dotted")
+
+plot.new()
+text(0.5,0.5,"Accept H0",cex=2)
+
+barplot(dbinom(0:N,N, H0), 
+        col  = col2, 
+#        yaxt = 'n', 
+        main = '1 - alpha', 
+        names.arg = 0:N, 
+        cex.names = 0.7)
+
+abline(v = c(2.5,10.9), col="red", lwd=3, lty="dotted")
+
+barplot(dbinom(0:N,N, HA), 
+        col  = col2, 
+        yaxt = 'n', 
+        main = 'Beta / Type II error', 
+        names.arg = 0:N, 
+        cex.names = 0.7)
+
+abline(v = c(2.5,10.9), col="red", lwd=3, lty="dotted")
+```
+
+-->
+````

@@ -1,0 +1,52 @@
+---
+title: "SSR 2024-2025"
+author: "Sharon Kinkenberg & Johnny van Doorn"
+date: today
+---
+
+On this site you can find the statistics lectures for SSR. These slides were originally created by SH and tweaked by JvD.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+course.path = "SSR/2024/"
+
+files <- list.files(full.names = F, pattern = "\\.qmd", recursive = T)
+
+files <- files[grep("SSR.qmd", files, invert = TRUE)]
+files <- files[!grepl(files, pattern = "MiscFiles")]
+
+lectures = data.frame()
+n = length(files)
+
+files <- files[order(as.numeric(gsub("\\..*", "", files)))]
+
+
+for (i in 1:n) {
+
+  lectures[i ,'url'] <- data.frame(url = paste0(course.path, files[i]))
+  yaml <- rmarkdown::yaml_front_matter(files[i])
+  
+  lectures[i , 'title'] = yaml$title
+  lectures[i , 'date'] = yaml$date
+  lectures[i , 'file_name'] = files[i]
+
+}
+
+data.frame(Date    = lectures$date, 
+           Lecture = lectures$title,
+           Handout = sprintf('<a href="https://JohnnyDoorn.github.io/statistics-lectures/%s" target="_blank" class="external">link</a>', gsub("qmd", "html", lectures$url)),
+           Slides  = sprintf('<a href="https://JohnnyDoorn.github.io/statistics-lectures/%s" target="_blank" class="external">link</a>', gsub("qmd", "slide.html", lectures$url)) 
+          ) -> lecture.list
+
+# Sort on date
+library("lubridate")
+library("dplyr")
+
+# lecture.list$Date <- lubridate::dmy(lecture.list$Date)
+# lubridate::mdy(lecture.list$Date)
+
+library('kableExtra')
+
+# Print table with kable as set in YAML
+knitr::kable(dplyr::arrange(lecture.list), escape = FALSE, format = "html" ) %>%
+  kable_styling(full_width = TRUE)
+```

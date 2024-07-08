@@ -1,0 +1,323 @@
+## Multiple regression {.smaller}
+
+$\LARGE{\text{outcome} = \text{model prediction} + \text{error}}$
+
+In statistics, linear regression is a linear approach for modeling the relationship between a scalar dependent variable y and one or more explanatory variables denoted X.
+
+$\LARGE{Y_i = \beta_0 + \beta_1 X_{1i} + \beta_2 X_{2i} + \dotso + \beta_n X_{ni} + \epsilon_i}$
+
+In linear regression, the relationships are modeled using linear predictor functions whose unknown model parameters $\beta$'s are estimated from the data.
+
+Source: [wikipedia](https://en.wikipedia.org/wiki/Linear_regression)
+
+## Outcome vs Model Prediction
+
+```{r, fig.align='center', fig.asp=.5, echo=FALSE}
+error = c(2, 1, .5, .0001)
+n = 100
+
+layout(matrix(1:4,1,4))
+for(e in error) {
+  
+  x = rnorm(n)
+  y = x + rnorm(n, 0 , e)
+  
+  r   = round(cor(x,y), 2)
+  r.2 = round(r^2, 2)
+  
+  plot(x,y, las = 1, ylab = "Outcome", xlab = "Model Prediction", main =  bquote("r ="~ .(r) ~ "," ~ r^2 ~ " = " ~ .(r.2)), 
+       ylim=c(-2,2), xlim=c(-2,2), pch = 21, bg = "turquoise", bty = "n")
+  fit <- lm(y ~ x)
+  abline(fit, col = "purple", lwd = 2)
+  
+}
+
+```
+
+## Assumptions {.subsection}
+
+A selection from Field (8.3.2.1. Assumptions of the linear model):
+
+For simple regression
+
+* Sensitivity
+* Homoscedasticity
+* Linearity
+
+
+Additionally, for multiple regression
+
+* Multicollinearity
+
+## Multicollinearity {.smaller}
+
+::: {.columns}
+::: {.column width="60%"}
+
+To adhere to the multicollinearity assumption, there must not be a too high linear relation between the predictor variables.
+
+This can be assessed through:
+
+* Correlations
+* Matrix scatterplot 
+* Collinearity diagnostics
+    * VIF: max < 10, mean < 1
+    * Tolerance \> 0.2 -> good
+
+:::
+
+::: {.column  width="40%"}
+![](pinguins.jpg){width="350px"}
+:::
+:::
+
+## Linearity
+
+For the linearity assumption to hold, the predictors must have a linear relation to the outcome variable.
+
+This can be checked through:
+
+* Correlations
+* Matrix scatterplot with predictors and outcome variable
+
+## Example
+
+> Predict album sales (1,000 copies) based on airplay (no. plays) and adverts ($1,000).
+
+## Read data {.smaller}
+
+```{r, echo=FALSE, eval=TRUE, warning=FALSE, message=FALSE}
+set.seed(273645)
+data <- read.csv("Album Sales.csv")
+n <- nrow(data)
+sales <- data$sales
+airplay <- data$airplay
+adverts <- data$adverts
+fit <- lm(sales ~ airplay + adverts, data)
+
+DT::datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+```
+
+
+## Regression model in R 
+
+Predict album sales based on airplay and adverts.
+
+```{r, echo=TRUE}
+fit <- lm(sales ~ airplay + adverts, data = data)
+```
+
+## What is the model? {.subsection .smaller}
+
+```{r, echo=TRUE}
+fit$coefficients
+
+b.0 <- round(fit$coefficients[1], 2) ## Intercept
+b.1 <- round(fit$coefficients[2], 2) ## Beta coefficient for airplay
+b.2 <- round(fit$coefficients[3], 2) ## Beta coefficient for adverts
+```
+
+The beta coefficients are: 
+
+* $b_0$ (intercept) = `r b.0`
+* $b_1$ = `r b.1`
+* $b_2$ = `r b.2`.
+
+## How to visualize??
+
+- When we plot 2 predictors + DV, we plot in 2 dimensions, and we summarize the relationship by a line
+- When we plot 3 predictors + DV, we plot in 3 dimensions, and we summarize the relationship by a plane
+- ... ???
+
+[Cool visualization app for 3 predictors](https://miabellaai.net/regression.html)
+
+## Visual
+
+```{r, echo=FALSE, warning=FALSE, class.source='rglChunk', webgl=TRUE}
+# 3d plot package rgl
+# install.packages('rgl')
+if(!"rgl" %in% installed.packages()) { install.packages("rgl") };
+library("rgl")
+
+library(knitr)
+knit_hooks$set(webgl = hook_webgl)
+
+#1 #D scatter 
+
+plot3d(airplay, adverts, sales,
+       col  = "red",
+       size = 8)
+
+# #2 Add airplay value planes 
+# 
+quantiles <- as.vector(quantile(airplay,seq(.1,.9,.1)))
+sds       <- c(mean(adverts)+(sd(adverts)*c(-1,0,1)))
+sds       <- 1:4
+
+planes3d(a = 0,
+         b = 1,
+         c = 0,
+         #d = c(1,2,3,4),
+         d = -sds,
+         alpha=0.1,
+         color = c("blue"))
+
+#3 Add regression model surface
+
+## Fit model
+fit <- lm(sales ~ airplay + adverts)
+
+## Create xyz coordinates
+regeq <- function(airplay, adverts) { 
+    fit$coefficients[1] + 
+    fit$coefficients[2]*airplay + 
+    fit$coefficients[3]*adverts
+}
+
+b.0 <- unname(b.0)
+b.1 <- unname(b.1)
+b.2 <- unname(b.2)
+x.pre <- seq(0, 100,length.out=30)
+y.mod <- seq( 0,   2000 ,length.out=30)
+
+z.pre <- outer(x.pre, y.mod, FUN='regeq')
+
+# z.pre[z.pre > 4] = 4
+# z.pre[z.pre < 1] = 1
+
+
+## Add 3D regression plane to scatter plot 
+surface3d(x.pre, y.mod, z.pre, color = c("green"))
+
+aspect3d(1,1,1)
+view3d(theta = 5)
+view3d(theta = -10, phi = -90)
+play3d(spin3d(axis = c(0, 0, 1), rpm = 30), duration = 5)
+rglwidget()
+```
+
+## What are the predicted values based on this model
+
+$\widehat{\text{album sales}} = b_0 + b_1 \text{airplay} + b_2 \text{adverts}$
+
+```{r, echo=TRUE}
+predicted.sales <- b.0 + b.1 * airplay + b.2 * adverts
+```
+
+$\text{model prediction} = \widehat{\text{album sales}}$
+
+## Apply regression model {.subsection}
+
+$\widehat{\text{album sales}} = b_0 + b_1 \text{airplay} + b_2 \text{adverts}$
+
+$\widehat{\text{model prediction}} = b_0 + b_1 \text{airplay} + b_2 \text{adverts}$
+
+```{r, echo=TRUE}
+cbind(predicted.sales, b.0, b.1, airplay, b.2, adverts)[1:5,]
+```
+
+$\widehat{\text{model prediction}} = `r b.0` + `r b.1` \times \text{airplay} + `r b.2` \times \text{adverts}$
+
+```{r, echo=TRUE}
+b.0 + b.1 * 43 +  b.2 * 10.256 # for participant 1
+```
+
+## How far are we off?
+
+```{r, echo=TRUE}
+error <- sales - predicted.sales
+
+cbind(predicted.sales, sales, error)[1:5,]
+```
+
+## Outcome = Model Prediction + Error {.subsection}
+
+Is that true?
+
+```{r, echo=TRUE}
+sales == predicted.sales + error
+```
+
+> - Yes!
+
+## Visual (subset of 10 albums) {.smaller .subsection}
+
+```{r, fig.align='center', fig.width=15, fig.height = 7, echo=FALSE}
+par(mfrow = c(1, 3), cex = 1.5)
+plotN <- 10
+# This is all the sales data
+plot(sales[1:plotN],xlab='Albums', ylab = "Sales", las = 1,
+     bty = "n", pch = 21, bg = "turquoise", main = "Total Variance")
+# With the mean
+abline(h = mean(sales[1:plotN]), lwd = 2, col = "purple")
+# The model predicts the sales scores
+points(1:plotN,predicted.sales[1:plotN], pch =23, bg='darkred')
+# The part of the variation that overlaps is the 'explained' variance. 
+segments(1:plotN, sales[1:plotN], 1:plotN, mean(sales[1:plotN]), col='orange', lwd= 2)
+
+legend("topright", c("Observed", "Predicted"),
+       bty = "n", fill = c("turquoise", "darkred"))
+
+# This is all the sales data
+plot(sales[1:plotN],xlab='Albums', ylab = "Sales", las = 1,
+     bty = "n", pch = 21, bg = "turquoise", main = "Explained Variance")
+# With the mean
+abline(h = mean(sales[1:plotN]), lwd = 2, col = "purple")
+# The blue lines are the total variance, the deviation from the mean.
+segments(1:plotN, predicted.sales[1:plotN], 1:plotN, mean(sales[1:plotN]), col='blue', lwd= 2)
+# The model predicts the sales scores
+points(1:plotN,predicted.sales[1:plotN], pch =23, bg='darkred')
+# The part of the variation that overlaps is the 'explained' variance. 
+legend("topright", c("Observed", "Predicted"),
+       bty = "n", fill = c("turquoise", "darkred"))
+
+# This is all the sales data
+plot(sales[1:plotN],xlab='Albums', ylab = "Sales", las = 1,
+     bty = "n", pch = 21, bg = "turquoise", main = "Unexplained Variance")
+# With the mean
+# abline(h = mean(sales[1:plotN]), lwd = 2, col = "purple")
+# The blue lines are the total variance, the deviation from the mean.
+segments(1:plotN, predicted.sales[1:plotN], 1:plotN, (sales[1:plotN]), col='red', lwd= 2)
+# The model predicts the sales scores
+points(1:plotN,predicted.sales[1:plotN], pch =23, bg='darkred')
+# The part of the variation that overlaps is the 'explained' variance. 
+legend("topright", c("Observed", "Predicted"),
+       bty = "n", fill = c("turquoise", "darkred"))
+```
+$r^2$ is the proportion of <span style="color: blue;">blue</span> to <span style="color: orange;">orange</span>, while $1 - r^2$ is the proportion of <span style="color: red;">red</span> to <span style="color: orange;">orange</span> 
+
+
+## Explained variance {.subsection .smaller}
+
+The explained variance is the deviation of the estimated model outcome compared to the grand mean.
+
+To get a percentage of explained variance, it must be compared to the total variance. In terms of squares:
+
+$\frac{{SS}_{model}}{{SS}_{total}}$
+
+We also call this: $r^2$ or $R^2$.
+
+Why?
+
+```{r, echo=TRUE}
+r <- cor(sales, predicted.sales)
+r^2
+```
+
+
+## Explained variance {.subsection .smaller}
+
+```{r, fig.align='center', fig.asp=.5, echo=FALSE}
+r.2 <- round(r^2, 2)
+r <- round(r, 2)
+
+ plot(predicted.sales, sales, las = 1, ylab = "Outcome", xlab = "Model Prediction", main =  bquote("r ="~ .(r) ~ "," ~ r^2 ~ " = " ~ .(r.2)), 
+       ylim=c(0,400), xlim=c(0, 400), pch = 21, bg = "turquoise", bty = "n")
+ abline(lm(sales ~ predicted.sales), lwd = 3, col = "purple")
+
+```
+
+## Demonstration
+
+![](JASP_logo_green.svg){width="400px"}
+

@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.340">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>bias</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="BIAS_files/libs/clipboard/clipboard.min.js"></script>
+<script src="BIAS_files/libs/quarto-html/quarto.js"></script>
+<script src="BIAS_files/libs/quarto-html/popper.min.js"></script>
+<script src="BIAS_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="BIAS_files/libs/quarto-html/anchor.min.js"></script>
+<link href="BIAS_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="BIAS_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="BIAS_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="BIAS_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="BIAS_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="the-beast" class="level1">
+<h1>The BEAST</h1>
+<section id="what-is-bias" class="level2 section">
+<h2 class="section anchored" data-anchor-id="what-is-bias">What is BIAS</h2>
+<p><quote style="font-style:italic;">Things that lead us to the wrong conclusions (Field)</quote></p>
+<p><span class="math display">\[outcome_i = model_i + error_i\]</span> <span class="math display">\[model_i = b_1 X_{1i} + b_2 X_{2i} + \ldots + b_n X_{ni}\]</span></p>
+<ul>
+<li><span class="math inline">\(X\)</span> = predictor variables</li>
+<li><span class="math inline">\(b\)</span> = parameters</li>
+</ul>
+</section>
+<section id="bias" class="level2">
+<h2 class="anchored" data-anchor-id="bias">BIAS</h2>
+<p>Wrong conclusions about:</p>
+<ul>
+<li>Parameters <span class="math inline">\(b_i\)</span></li>
+<li>Standaard error and confidence intervals</li>
+<li>Test statistics and <span class="math inline">\(p\)</span>-values</li>
+</ul>
+<p>means → SE → CI</p>
+<p>SE → test statistics → <span class="math inline">\(p\)</span>-values</p>
+</section>
+<section id="the-beasts" class="level2 flexbox vcenter">
+<h2 class="flexbox vcenter anchored" data-anchor-id="the-beasts">The beasts</h2>
+<p><img src="../../../topics/bias/here-be-dragons.jpg" class="img-fluid"></p>
+<blockquote class="blockquote">
+<ul>
+<li>Outliers</li>
+<li>Violations of assumptions</li>
+</ul>
+</blockquote>
+</section>
+<section id="example" class="level2">
+<h2 class="anchored" data-anchor-id="example">Example</h2>
+<p>IQ estimations of people in the front and in the back. We want to know the differences in the population, not the sample. We therefore want to make an inference about the population, hence the name inferential statistics.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">read.table</span>(<span class="st">"../../topics/t-test_independent/IQ.csv"</span>, <span class="at">sep =</span> <span class="st">' '</span>, <span class="at">header =</span> T)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(data)[<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="st">"front"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>front <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(data<span class="sc">$</span>front <span class="sc">==</span> <span class="st">"front"</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>data[<span class="dv">12</span><span class="sc">:</span><span class="dv">15</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   IQ.next.to.you IQ.you front
+12            120    115     0
+13            125    121     0
+14            130    134     0
+15            116    115     1</code></pre>
+</div>
+</div>
+<hr>
+<p>We can see that back is coded as 0 and front as 1. Such coding can be used in a linear regression equation.</p>
+<p><span class="math display">\[\text{IQ you}_i = b_0 + b_1 front_i + error_i\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(IQ.you <span class="sc">~</span> <span class="fu">factor</span>(front), data, mean); means</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  factor(front)   IQ.you
+1             0 121.6667
+2             1 119.1200</code></pre>
+</div>
+</div>
+<p>We can now calculate the <span class="math inline">\(b\)</span>’s: <span class="math inline">\(b_0 = 121.67\)</span> and <span class="math inline">\(b_1 = -2.55\)</span></p>
+<hr>
+<p><span class="math display">\[\text{IQ you}_i = b_0 + b_1 front_i + error_i\]</span></p>
+<p>If we apply this to the regression model we get:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>     b.0   b.1 front  model IQ.you  error
+1 121.67 -2.55     1 119.12    125   5.88
+2 121.67 -2.55     1 119.12    120   0.88
+3 121.67 -2.55     1 119.12    125   5.88
+4 121.67 -2.55     0 121.67    134  12.33
+5 121.67 -2.55     1 119.12    115  -4.12
+6 121.67 -2.55     0 121.67    130   8.33
+7 121.67 -2.55     0 121.67    110 -11.67
+8 121.67 -2.55     0 121.67    118  -3.67</code></pre>
+</div>
+</div>
+<p>The means indirectly represent the parameters <span class="math inline">\(b\)</span>’s in this regression model. These <span class="math inline">\(b\)</span>’s are the estimates of the population parameters <span class="math inline">\(\beta\)</span>’s.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="BIAS_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>But what if these means are not correct, because of an extreme outlier.</p>
+</section>
+<section id="outliers" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="outliers">Outliers</h2>
+<p>Outliers can have a huge impact on the estimations</p>
+<ul>
+<li><strong>Trim</strong> Delete based on boxplot.</li>
+<li><strong>Trim</strong> Delete based on 3 standard deviations.</li>
+<li><strong>Trim</strong> Trimmed mean: Delete upper and lower percentages.</li>
+<li><strong>Winsorizing</strong> Replace outliers with highest non outlier.</li>
+</ul>
+<hr>
+<p>Without these outliers the results look a bit different.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>  factor(front)   IQ.you
+1             0 121.6667
+2             1 119.9167</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   IQ.you      b.0   b.1 front      error
+12    115 121.6667 -1.75     0 -6.6666667
+13    121 121.6667 -1.75     0 -0.6666667
+14    134 121.6667 -1.75     0 12.3333333
+15    115 121.6667 -1.75     1 -4.9166667
+16    125 121.6667 -1.75     1  5.0833333
+17    136 121.6667 -1.75     1 16.0833333</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="BIAS_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="assumptions" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="assumptions">Assumptions</h2>
+<ul>
+<li>Additivity and linearity</li>
+<li>Normality</li>
+<li>Homoscedasticity/homogenity of variance</li>
+<li>Independence</li>
+</ul>
+</section>
+<section id="additivity-and-linearity" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="additivity-and-linearity">Additivity and linearity</h2>
+<p>The outcome variable is linearly related to the predictors.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../../topics/bias/relationships.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">relations</figcaption>
+</figure>
+</div>
+<p><span class="math display">\[\text{MODEL}_i = b_1 X_{1i} + b_2 X_{2i} + \ldots + b_n X_{ni}\]</span></p>
+</section>
+<section id="additivity-and-linearity-1" class="level2">
+<h2 class="anchored" data-anchor-id="additivity-and-linearity-1">Additivity and linearity</h2>
+<p>We can check this by looking at the scatterplot of the predictors with the outcome variable.</p>
+</section>
+<section id="normality" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="normality">Normality</h2>
+<ul>
+<li>Parameter estimates <span class="math inline">\(b\)</span>’s</li>
+<li>Confidence intervals (SE * <strong>1.196</strong>)</li>
+<li>“Null hypothesis significance testing”</li>
+<li>Errors</li>
+</ul>
+<p>Not the normality of the sample but the normality of the parameter <span class="math inline">\(\beta\)</span> in the population. We will test this assumption based on the data, though with large samples the <a href="https://youtu.be/JNm3M9cqWyc">centrel limit theorem</a> ensures that the parameters are bell shaped.</p>
+</section>
+<section id="centrel-limit-theorem" class="level2">
+<h2 class="anchored" data-anchor-id="centrel-limit-theorem">Centrel limit theorem</h2>
+<iframe style="width:750px; height:480px;" src="https://www.youtube.com/embed/aS8B2yY73g0" frameborder="0" allowfullscreen="">
+</iframe>
+</section>
+<section id="normality-1" class="level2">
+<h2 class="anchored" data-anchor-id="normality-1">Normality</h2>
+<p>You can look at:</p>
+<ul>
+<li>Skewness and Kurtosis</li>
+</ul>
+<p>We can test with:</p>
+<ul>
+<li>Kolmogorov-Smirnof test</li>
+<li>Shapiro-Wilk test</li>
+</ul>
+<p>But, the bigger the sample the smaller the <span class="math inline">\(p\)</span>-value at equal test statistic. So we are losing power at large samples.</p>
+<ul>
+<li>We can also transform the variable</li>
+</ul>
+</section>
+<section id="homoscedasticityhomogenity-of-variance" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="homoscedasticityhomogenity-of-variance">Homoscedasticity/homogenity <br> of variance</h2>
+<p>Influences:</p>
+<ul>
+<li>Parameters <span class="math inline">\(b\)</span>’s</li>
+<li>NHT</li>
+</ul>
+<p>The null hypothesis assumes the null distribution to be true. Therefore, different sampples from that districution should have equal variances. Otherwise the assumption could not hold.</p>
+<p>In general, we can say that on every value of the predictor variable the variances in the outcome variable should be equal.</p>
+<hr>
+<p>We can check this by plotting the standardised error/resiual and the standardised expected outcome/model.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="BIAS_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<hr>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../../topics/bias/linearity_heteroscedasticity_heterogeneity.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Lineairiteit</figcaption>
+</figure>
+</div>
+<hr>
+<iframe style="width:750px; height:480px;" src="http://www.youtube.com/embed/V5BUIy6cThw?rel=0" frameborder="0" allowfullscreen="">
+</iframe>
+</section>
+<section id="independence" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="independence">Independence</h2>
+<p>The observed outcome (rows in SPSS or participants in your research) should be independent from each other. The answer of person B should not depend on the answer of person A.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../../topics/bias/whisper-clipart.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Whisper</figcaption>
+</figure>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

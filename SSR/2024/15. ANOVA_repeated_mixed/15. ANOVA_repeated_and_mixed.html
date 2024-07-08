@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.340">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Sharon Kinkenberg &amp; Johnny van Doorn">
+<meta name="dcterms.date" content="2023-10-13">
+
+<title>15. RM ANOVA</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="15. ANOVA_repeated_and_mixed_files/libs/clipboard/clipboard.min.js"></script>
+<script src="15. ANOVA_repeated_and_mixed_files/libs/quarto-html/quarto.js"></script>
+<script src="15. ANOVA_repeated_and_mixed_files/libs/quarto-html/popper.min.js"></script>
+<script src="15. ANOVA_repeated_and_mixed_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="15. ANOVA_repeated_and_mixed_files/libs/quarto-html/anchor.min.js"></script>
+<link href="15. ANOVA_repeated_and_mixed_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="15. ANOVA_repeated_and_mixed_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="15. ANOVA_repeated_and_mixed_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="15. ANOVA_repeated_and_mixed_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="15. ANOVA_repeated_and_mixed_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+<script src="15. ANOVA_repeated_and_mixed_files/libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="15. ANOVA_repeated_and_mixed_files/libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="15. ANOVA_repeated_and_mixed_files/libs/datatables-binding-0.27/datatables.js"></script>
+<script src="15. ANOVA_repeated_and_mixed_files/libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="15. ANOVA_repeated_and_mixed_files/libs/dt-core-1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="15. ANOVA_repeated_and_mixed_files/libs/dt-core-1.12.1/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="15. ANOVA_repeated_and_mixed_files/libs/dt-core-1.12.1/js/jquery.dataTables.min.js"></script>
+<link href="15. ANOVA_repeated_and_mixed_files/libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="15. ANOVA_repeated_and_mixed_files/libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="15. ANOVA_repeated_and_mixed_files/libs/dt-ext-buttons-1.12.1/css/buttons.dataTables.min.css" rel="stylesheet">
+<script src="15. ANOVA_repeated_and_mixed_files/libs/dt-ext-buttons-1.12.1/js/dataTables.buttons.min.js"></script>
+<script src="15. ANOVA_repeated_and_mixed_files/libs/dt-ext-buttons-1.12.1/js/buttons.html5.min.js"></script>
+<script src="15. ANOVA_repeated_and_mixed_files/libs/dt-ext-buttons-1.12.1/js/buttons.colVis.min.js"></script>
+<script src="15. ANOVA_repeated_and_mixed_files/libs/dt-ext-buttons-1.12.1/js/buttons.print.min.js"></script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#anova-one-way-repeated" id="toc-anova-one-way-repeated" class="nav-link active" data-scroll-target="#anova-one-way-repeated">ANOVA<br>One-way repeated</a>
+  <ul class="collapse">
+  <li><a href="#one-way-repeated-measures-anova" id="toc-one-way-repeated-measures-anova" class="nav-link" data-scroll-target="#one-way-repeated-measures-anova">One-way repeated measures ANOVA</a></li>
+  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions">Assumptions</a></li>
+  <li><a href="#formulas" id="toc-formulas" class="nav-link" data-scroll-target="#formulas">Formulas</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data">The data</a></li>
+  <li><a href="#data-format-in-rm-anova-wide" id="toc-data-format-in-rm-anova-wide" class="nav-link" data-scroll-target="#data-format-in-rm-anova-wide">Data format in RM ANOVA: wide</a></li>
+  <li><a href="#ms-total" id="toc-ms-total" class="nav-link" data-scroll-target="#ms-total">MS total</a></li>
+  <li><a href="#ss-total" id="toc-ss-total" class="nav-link" data-scroll-target="#ss-total">SS total</a></li>
+  <li><a href="#ss-total-visual" id="toc-ss-total-visual" class="nav-link" data-scroll-target="#ss-total-visual">SS total visual</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#ms-within" id="toc-ms-within" class="nav-link" data-scroll-target="#ms-within">MS within</a></li>
+  <li><a href="#ss-within" id="toc-ss-within" class="nav-link" data-scroll-target="#ss-within">SS within</a></li>
+  <li><a href="#ss-within-data" id="toc-ss-within-data" class="nav-link" data-scroll-target="#ss-within-data">SS within data</a></li>
+  <li><a href="#ss-within-visual" id="toc-ss-within-visual" class="nav-link" data-scroll-target="#ss-within-visual">SS within visual</a></li>
+  <li><a href="#ms-between" id="toc-ms-between" class="nav-link" data-scroll-target="#ms-between">MS between</a></li>
+  <li><a href="#ms-model" id="toc-ms-model" class="nav-link" data-scroll-target="#ms-model">MS model</a></li>
+  <li><a href="#ss-model" id="toc-ss-model" class="nav-link" data-scroll-target="#ss-model">SS model</a></li>
+  <li><a href="#ss-model-visual" id="toc-ss-model-visual" class="nav-link" data-scroll-target="#ss-model-visual">SS model visual</a></li>
+  <li><a href="#ms-error" id="toc-ms-error" class="nav-link" data-scroll-target="#ms-error">MS error</a></li>
+  <li><a href="#ss-error" id="toc-ss-error" class="nav-link" data-scroll-target="#ss-error">SS error</a></li>
+  <li><a href="#f-ratio" id="toc-f-ratio" class="nav-link" data-scroll-target="#f-ratio">F ratio</a></li>
+  <li><a href="#visualize" id="toc-visualize" class="nav-link" data-scroll-target="#visualize">Visualize</a></li>
+  <li><a href="#contrast" id="toc-contrast" class="nav-link" data-scroll-target="#contrast">Contrast</a></li>
+  <li><a href="#post-hoc" id="toc-post-hoc" class="nav-link" data-scroll-target="#post-hoc">Post-Hoc</a></li>
+  <li><a href="#effect-size" id="toc-effect-size" class="nav-link" data-scroll-target="#effect-size">Effect size</a></li>
+  </ul></li>
+  <li><a href="#anova-factorial-repeated" id="toc-anova-factorial-repeated" class="nav-link" data-scroll-target="#anova-factorial-repeated">ANOVA factorial repeated</a>
+  <ul class="collapse">
+  <li><a href="#factorial-repeated-measures-anova" id="toc-factorial-repeated-measures-anova" class="nav-link" data-scroll-target="#factorial-repeated-measures-anova">Factorial repeated measures ANOVA</a></li>
+  <li><a href="#assumptions-1" id="toc-assumptions-1" class="nav-link" data-scroll-target="#assumptions-1">Assumptions</a></li>
+  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1">Example</a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  </ul></li>
+  <li><a href="#mixed-design-anova" id="toc-mixed-design-anova" class="nav-link" data-scroll-target="#mixed-design-anova">Mixed design ANOVA</a>
+  <ul class="collapse">
+  <li><a href="#mixed-design" id="toc-mixed-design" class="nav-link" data-scroll-target="#mixed-design">Mixed design</a></li>
+  <li><a href="#assumptions-2" id="toc-assumptions-2" class="nav-link" data-scroll-target="#assumptions-2">Assumptions</a></li>
+  <li><a href="#example-2" id="toc-example-2" class="nav-link" data-scroll-target="#example-2">Example</a></li>
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"></a></li>
+  <li><a href="#data-1" id="toc-data-1" class="nav-link" data-scroll-target="#data-1">Data</a></li>
+  </ul></li>
+  <li><a href="#end" id="toc-end" class="nav-link" data-scroll-target="#end">End</a>
+  <ul class="collapse">
+  <li><a href="#contact" id="toc-contact" class="nav-link" data-scroll-target="#contact">Contact</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="15. ANOVA_repeated_and_mixed.slide.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">15. RM ANOVA</h1>
+<p class="subtitle lead">Repeated &amp; Mixed</p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Sharon Kinkenberg &amp; Johnny van Doorn </p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Amsterdam
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 13, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="anova-one-way-repeated" class="level1">
+<h1>ANOVA<br>One-way repeated</h1>
+<section id="one-way-repeated-measures-anova" class="level2 section">
+<h2 class="section anchored" data-anchor-id="one-way-repeated-measures-anova">One-way repeated measures ANOVA</h2>
+<p>The one-way repeated measures ANOVA analyses the variance of the model while reducing the error by the within person variance.</p>
+<ul>
+<li>1 dependent/outcome variable</li>
+<li>1 independent/predictor variable
+<ul>
+<li>2 or more levels</li>
+</ul></li>
+<li>All with same subjects</li>
+</ul>
+</section>
+<section id="assumptions" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="assumptions">Assumptions</h2>
+<ul>
+<li>Uni- or Multivariate</li>
+<li>Continuous dependent variable</li>
+<li>Normally distributed
+<ul>
+<li>Shapiro-Wilk</li>
+<li>Q-Q plots</li>
+</ul></li>
+<li>Equality of variance of the within-group differences
+<ul>
+<li>Mauchly’s test of Sphericity</li>
+<li>See Field 15.5, table 15.2 (p845), Jane Superbrain boxes 15.3 (p865) and 15.4 (p866)</li>
+<li>Always met when having only 2 groups</li>
+</ul></li>
+</ul>
+</section>
+<section id="formulas" class="level2 smaller subsection">
+<h2 class="smaller subsection anchored" data-anchor-id="formulas">Formulas</h2>
+<table class="table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 30%">
+<col style="width: 7%">
+<col style="width: 26%">
+<col style="width: 17%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variance</th>
+<th>Sum of Squares</th>
+<th>df</th>
+<th>Mean Squares</th>
+<th>F-ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Between</td>
+<td><span class="math inline">\({SS}_{{between}} = {SS}_{{total}} - {SS}_{{within}}\)</span></td>
+<td><span class="math inline">\({DF}_{{total}}-{DF}_{{within}}\)</span></td>
+<td><span class="math inline">\(\frac{{SS}_{{between}}}{{DF}_{{between}}}\)</span></td>
+<td>&nbsp;</td>
+</tr>
+<tr class="even">
+<td>Within</td>
+<td><span class="math inline">\({SS}_{{within}} = \sum{s_i^2(n_i-1)}\)</span></td>
+<td><span class="math inline">\((n_i-1)n\)</span></td>
+<td><span class="math inline">\(\frac{{SS}_{{within}}}{{DF}_{{within}}}\)</span></td>
+<td>&nbsp;</td>
+</tr>
+<tr class="odd">
+<td>• Model</td>
+<td><span class="math inline">\({SS}_{{model}} = \sum{n_k(\bar{X}_k-\bar{X})^2}\)</span></td>
+<td><span class="math inline">\(k-1\)</span></td>
+<td><span class="math inline">\(\frac{{SS}_{{model}}}{{DF}_{{model}}}\)</span></td>
+<td><span class="math inline">\(\frac{{MS}_{{model}}}{{MS}_{{error}}}\)</span></td>
+</tr>
+<tr class="even">
+<td>• Error</td>
+<td><span class="math inline">\({SS}_{{error}} = {SS}_{{within}} - {SS}_{{model}}\)</span></td>
+<td><span class="math inline">\((n-1)(k-1)\)</span></td>
+<td><span class="math inline">\(\frac{{SS}_{{error}}}{{DF}_{{error}}}\)</span></td>
+<td>&nbsp;</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td><span class="math inline">\({SS}_{{total}} = s_{grand}^2(N-1)\)</span></td>
+<td><span class="math inline">\(N-1\)</span></td>
+<td><span class="math inline">\(\frac{{SS}_{{total}}}{{DF}_{{total}}}\)</span></td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p>Where <span class="math inline">\(n_i\)</span> is the number of observations per person and <span class="math inline">\(k\)</span> is the number of conditions. These two are equal for a one-way repeated ANOVA. Furthermore <span class="math inline">\(n\)</span> is the number of subjects per condition and <span class="math inline">\(N\)</span> is the total number of data points <span class="math inline">\(n \times k\)</span>.</p>
+</section>
+<section id="example" class="level2">
+<h2 class="anchored" data-anchor-id="example">Example</h2>
+<p>Measure driving ability in a driving simulator. Test in three consecutive conditions where participants come back to attend the next condition.</p>
+<ul>
+<li>Alcohol none</li>
+<li>Alcohol some</li>
+<li>Alcohol much</li>
+</ul>
+</section>
+<section id="the-data" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="the-data">The data</h2>
+<div class="cell">
+<div class="cell-output-display">
+
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-016bb6fa54a7d86ffee2" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-016bb6fa54a7d86ffee2">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[4.426,4.227,5.278,4.632,5.288,5.025,4.496,5.359,4.492,3.587,5.548,4.759,5.359,4.421,4.229,5.53,4.289,3.43,5.017,5.228],[4.106,5.469,5.557,5.323,5.148,5.158,5.829,6.121,5.264,4.047,4.89,5.23,6.229,4.93,5.432,5.31,4.711,5.057,5.139,6.132],[7.043,5.901,7.045,6.208,6.853,6.492,6.972,6.38,6.12,6.84,6.334,6.624,5.849,6.564,6.382,7.14,6.527,7.101,7.137,7.155]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>none_alc<\/th>\n      <th>some_alc<\/th>\n      <th>much_alc<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="data-format-in-rm-anova-wide" class="level2">
+<h2 class="anchored" data-anchor-id="data-format-in-rm-anova-wide">Data format in RM ANOVA: wide</h2>
+<p><img src="Screenshot_LongWide.png" style="width:40%;"></p>
+</section>
+<section id="ms-total" class="level2">
+<h2 class="anchored" data-anchor-id="ms-total">MS total</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign to individual variables</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>none_alc <span class="ot">&lt;-</span> data<span class="sc">$</span>none_alc</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>some_alc <span class="ot">&lt;-</span> data<span class="sc">$</span>some_alc</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>much_alc <span class="ot">&lt;-</span> data<span class="sc">$</span>much_alc</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>total    <span class="ot">&lt;-</span> <span class="fu">c</span>(none_alc,some_alc,much_alc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><span class="math inline">\({MS}_{total} = \frac{{SS}_{{total}}}{{DF}_{{total}}} = s_{grand}^2\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>MS_total <span class="ot">&lt;-</span> <span class="fu">var</span>(total); MS_total</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9410458</code></pre>
+</div>
+</div>
+</section>
+<section id="ss-total" class="level2">
+<h2 class="anchored" data-anchor-id="ss-total">SS total</h2>
+<p><span class="math inline">\({DF_{total}} = N-1\)</span></p>
+<p><span class="math inline">\({SS}_{{total}} = s_{grand}^2(N-1)\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">length</span>(total)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>DF_total <span class="ot">&lt;-</span> N <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>SS_total <span class="ot">&lt;-</span> MS_total <span class="sc">*</span> DF_total; SS_total</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 55.5217</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((total <span class="sc">-</span> <span class="fu">mean</span>(total))<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 55.5217</code></pre>
+</div>
+</div>
+</section>
+<section id="ss-total-visual" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="ss-total-visual">SS total visual</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="15.-ANOVA_repeated_and_mixed_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section"></h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="15.-ANOVA_repeated_and_mixed_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="ms-within" class="level2">
+<h2 class="anchored" data-anchor-id="ms-within">MS within</h2>
+<p><span class="math inline">\({MS}_{within} = \frac{{SS}_{{within}}}{{DF}_{{within}}} \\ {DF}_{within} = (n_i-1)n\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>n.i <span class="ot">&lt;-</span> <span class="dv">3</span>  <span class="co"># Number of mesurements per individual (none, some, much)</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>n   <span class="ot">&lt;-</span> <span class="dv">20</span> <span class="co"># Number of mesurements per group</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>DF_within <span class="ot">&lt;-</span> (n.i <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> n</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>DF_within</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 40</code></pre>
+</div>
+</div>
+</section>
+<section id="ss-within" class="level2">
+<h2 class="anchored" data-anchor-id="ss-within">SS within</h2>
+<p><span class="math inline">\({SS}_{{within}} = \sum{s_i^2(n_i-1)}\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>var_pp <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">cbind</span>(none_alc, some_alc, much_alc),<span class="dv">1</span>,var)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>ss_pp  <span class="ot">&lt;-</span> var_pp <span class="sc">*</span> (n.i <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>SS_within <span class="ot">&lt;-</span> <span class="fu">sum</span>(ss_pp); SS_within</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 48.45032</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>mean_pp <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">cbind</span>(none_alc, some_alc, much_alc),<span class="dv">1</span>,mean)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">c</span>((none_alc <span class="sc">-</span> mean_pp)<span class="sc">^</span><span class="dv">2</span>, </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>      (some_alc <span class="sc">-</span> mean_pp)<span class="sc">^</span><span class="dv">2</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>      (much_alc <span class="sc">-</span> mean_pp)<span class="sc">^</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 48.45032</code></pre>
+</div>
+</div>
+</section>
+<section id="ss-within-data" class="level2">
+<h2 class="anchored" data-anchor-id="ss-within-data">SS within data</h2>
+<div class="cell">
+<div class="cell-output-display">
+
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-dc29660054ad887e36be" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-dc29660054ad887e36be">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[4.426,4.227,5.278,4.632,5.288,5.025,4.496,5.359,4.492,3.587,5.548,4.759,5.359,4.421,4.229,5.53,4.289,3.43,5.017,5.228],[4.106,5.469,5.557,5.323,5.148,5.158,5.829,6.121,5.264,4.047,4.89,5.23,6.229,4.93,5.432,5.31,4.711,5.057,5.139,6.132],[7.043,5.901,7.045,6.208,6.853,6.492,6.972,6.38,6.12,6.84,6.334,6.624,5.849,6.564,6.382,7.14,6.527,7.101,7.137,7.155],[5.192,5.199,5.96,5.388,5.763,5.558,5.766,5.953,5.292,4.825,5.591,5.538,5.812,5.305,5.348,5.993,5.176,5.196,5.764,6.172],[5.192,1.51,1.805,1.248,1.792,1.316,3.071,0.563,1.326,6.198,1.045,1.881,0.38,2.507,2.328,1.996,2.828,6.767,2.834,1.859]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>none_alc<\/th>\n      <th>some_alc<\/th>\n      <th>much_alc<\/th>\n      <th>mean_pp<\/th>\n      <th>ss_pp<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="ss-within-visual" class="level2">
+<h2 class="anchored" data-anchor-id="ss-within-visual">SS within visual</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="15.-ANOVA_repeated_and_mixed_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="ms-between" class="level2">
+<h2 class="anchored" data-anchor-id="ms-between">MS between</h2>
+<p><span class="math inline">\({MS}_{between} = \frac{{SS}_{{between}}}{{DF}_{{between}}}\)</span></p>
+<p><span class="math inline">\({DF}_{between}-{DF}_{{within}} \\ {SS}_{between} = {SS}_{total} - {SS}_{within}\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>SS_between <span class="ot">&lt;-</span> SS_total <span class="sc">-</span> SS_within</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>SS_between</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7.071382</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>DF_between <span class="ot">&lt;-</span> DF_total <span class="sc">-</span> DF_within</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>DF_between</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 19</code></pre>
+</div>
+</div>
+</section>
+<section id="ms-model" class="level2">
+<h2 class="anchored" data-anchor-id="ms-model">MS model</h2>
+<p><span class="math inline">\({MS}_{model} = \frac{{SS}_{{model}}}{{DF}_{{model}}} \\ {DF}_{model} = k-1\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>DF_model <span class="ot">&lt;-</span> k <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>DF_model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+</div>
+</section>
+<section id="ss-model" class="level2">
+<h2 class="anchored" data-anchor-id="ss-model">SS model</h2>
+<p><span class="math inline">\({SS}_{model} = \sum{n_k(\bar{X}_k-\bar{X})^2}\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># SS model</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>n_k1 <span class="ot">&lt;-</span> <span class="fu">length</span>(none_alc)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>n_k2 <span class="ot">&lt;-</span> <span class="fu">length</span>(some_alc)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>n_k3 <span class="ot">&lt;-</span> <span class="fu">length</span>(much_alc)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate sums of squares for the model</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>SS_k1 <span class="ot">&lt;-</span> n_k1 <span class="sc">*</span> (<span class="fu">mean</span>(none_alc) <span class="sc">-</span> <span class="fu">mean</span>(total))<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>SS_k2 <span class="ot">&lt;-</span> n_k2 <span class="sc">*</span> (<span class="fu">mean</span>(some_alc) <span class="sc">-</span> <span class="fu">mean</span>(total))<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>SS_k3 <span class="ot">&lt;-</span> n_k3 <span class="sc">*</span> (<span class="fu">mean</span>(much_alc) <span class="sc">-</span> <span class="fu">mean</span>(total))<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>SS_model <span class="ot">&lt;-</span> <span class="fu">sum</span>(SS_k1, SS_k2, SS_k3)</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>SS_model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 38.63266</code></pre>
+</div>
+</div>
+</section>
+<section id="ss-model-visual" class="level2">
+<h2 class="anchored" data-anchor-id="ss-model-visual">SS model visual</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="15.-ANOVA_repeated_and_mixed_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="ms-error" class="level2">
+<h2 class="anchored" data-anchor-id="ms-error">MS error</h2>
+<p><span class="math inline">\(\frac{{SS}_{error}}{{DF}_{error}}\)</span></p>
+<p><span class="math inline">\({DF}_{error} = (n-1)(k-1)\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>DF_error <span class="ot">&lt;-</span> DF_within <span class="sc">-</span> DF_model</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>DF_error</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 38</code></pre>
+</div>
+</div>
+</section>
+<section id="ss-error" class="level2">
+<h2 class="anchored" data-anchor-id="ss-error">SS error</h2>
+<p><span class="math inline">\({SS}_{error} = {SS}_{within} - {SS}_{model}\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>SS_error <span class="ot">&lt;-</span> SS_within <span class="sc">-</span> SS_model</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>SS_error</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9.817655</code></pre>
+</div>
+</div>
+</section>
+<section id="f-ratio" class="level2">
+<h2 class="anchored" data-anchor-id="f-ratio">F ratio</h2>
+<p><span class="math inline">\(F = \frac{{MS}_{{model}}}{{MS}_{{error}}}\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate mean squares</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>MS_model <span class="ot">&lt;-</span> SS_model <span class="sc">/</span> DF_model</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>MS_error <span class="ot">&lt;-</span> SS_error <span class="sc">/</span> DF_error</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate F statistic</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>fStat <span class="ot">&lt;-</span> MS_model <span class="sc">/</span> MS_error</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>fStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 74.76537</code></pre>
+</div>
+</div>
+</section>
+<section id="visualize" class="level2">
+<h2 class="anchored" data-anchor-id="visualize">Visualize</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'visualize'</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.f</span>(fStat, DF_model, DF_error, <span class="at">section=</span><span class="st">"upper"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="15.-ANOVA_repeated_and_mixed_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="contrast" class="level2">
+<h2 class="anchored" data-anchor-id="contrast">Contrast</h2>
+<p>Planned comparisons</p>
+<ul>
+<li>Exploring differences of theoretical interest</li>
+<li>Higher precision</li>
+<li>Higher power</li>
+</ul>
+</section>
+<section id="post-hoc" class="level2">
+<h2 class="anchored" data-anchor-id="post-hoc">Post-Hoc</h2>
+<p>Unplanned comparisons</p>
+<ul>
+<li>Exploring all possible differences</li>
+<li>Adjust T value for inflated type 1 error</li>
+</ul>
+</section>
+<section id="effect-size" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="effect-size">Effect size</h2>
+<p>General effect size measures</p>
+<ul>
+<li>Amount of explained variance <span class="math inline">\(R^2\)</span> also called eta squared <span class="math inline">\(\eta^2\)</span>.
+<ul>
+<li>When going for explained variance, partial eta squared (<span class="math inline">\(\eta_p^2\)</span>) is recommended instead of <span class="math inline">\(\eta^2\)</span></li>
+</ul></li>
+<li>Omega squared <span class="math inline">\(\omega^2\)</span></li>
+<li><a href="https://lbecker.uccs.edu/glm_effectsize">Great overview of <span class="math inline">\(\eta^2\)</span> vs <span class="math inline">\(\omega^2\)</span></a></li>
+</ul>
+<p>Effect sizes of contrasts or post-hoc comparisons</p>
+<ul>
+<li>Cohen’s <span class="math inline">\(r\)</span> gives the effect size for a specific comparison
+<ul>
+<li><span class="math inline">\(r_{Contrast} = \sqrt{\frac{t^2}{t^2+{df}}}\)</span></li>
+<li><span class="math inline">\(r_{Contrast} = \sqrt{\frac{F(1,{df}_R)}{F(1,{df}_R)+{df}_R}}\)</span></li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="anova-factorial-repeated" class="level1">
+<h1>ANOVA factorial repeated</h1>
+<section id="factorial-repeated-measures-anova" class="level2 section">
+<h2 class="section anchored" data-anchor-id="factorial-repeated-measures-anova">Factorial repeated measures ANOVA</h2>
+<p>The factorial repeated measures ANOVA analyses the variance of the model while reducing the error by the within person variance.</p>
+<ul>
+<li>1 dependent/outcome variable</li>
+<li>2 or more independent/predictor variable
+<ul>
+<li>2 or more levels</li>
+</ul></li>
+<li>All with same subjects</li>
+</ul>
+</section>
+<section id="assumptions-1" class="level2">
+<h2 class="anchored" data-anchor-id="assumptions-1">Assumptions</h2>
+<p>Same as one-way repeated measures ANOVA</p>
+</section>
+<section id="example-1" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="example-1">Example</h2>
+<p><small></small></p><small>
+<p>In this example we will again look at the amount of accidents in a car driving simulator while subjects where given varying doses of speed and alcohol. But this time we lat participants partake in all conditions. Every week subjects returned for a different experimental condition.</p>
+<ul>
+<li>Dependent variable
+<ul>
+<li>Accidents</li>
+</ul></li>
+<li>Independent variables
+<ul>
+<li>Speed
+<ul>
+<li>None</li>
+<li>Small</li>
+<li>Large</li>
+</ul></li>
+<li>Alcohol
+<ul>
+<li>None</li>
+<li>Small</li>
+<li>Large</li>
+</ul></li>
+</ul></li>
+</ul>
+</small><p><small></small></p>
+</section>
+<section id="section-1" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="section-1"></h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th>person</th>
+<th>1_1</th>
+<th>1_2</th>
+<th>1_3</th>
+<th>2_1</th>
+<th>2_2</th>
+<th>2_3</th>
+<th>3_1</th>
+<th>3_2</th>
+<th>3_3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td></td>
+<td></td>
+<td>3</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td></td>
+<td></td>
+<td></td>
+<td>4</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>5</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>6</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>7</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>8</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>9</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="data" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="data">Data</h2>
+<div class="cell">
+<div class="cell-output-display">
+
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-f6b8302a92e5b31b28f6" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-f6b8302a92e5b31b28f6">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[1.59,2.18,3.23,2.18,1.36,2.18,2.91,4.26,2.96,1.67,2.88,1.24,1.94,3.29,2.77,2.79,2.03,1.33,1.34,1.1],[4.96,4.66,5.58,5.7,6.15,5.83,4.03,5.48,4.92,4.14,6.68,6.74,6.45,4.52,5.53,5.41,3.5,3.73,5.76,6.4],[6.72,5.84,7.01,6.02,8.36,7.07,6.55,6.34,5.6,4.96,7.08,6.3,7.68,5.46,4.38,8.4,7.34,5.23,7.95,8.18],[2.64,4.43,2.12,3,1.78,3.06,5.35,2.89,3.87,2.52,3.74,1.72,3.02,2.53,2.64,1.84,-0.06,2.23,1.54,5.05],[3.74,4.73,7.12,6.66,5.57,5.91,4.93,6.74,5.12,3.64,4.27,6.03,6.44,5.82,5.84,6.16,6.01,5.09,6.28,6.16],[5.93,7.25,7.43,6.32,8.1,6.51,7.22,8.74,6.8,5.98,6.66,7.94,9.22,6.44,7.82,7.93,8.19,7.84,7.6,7.19],[4.68,3.21,4.98,4.72,5.03,2.61,6.06,2.87,3.01,5.37,3.97,3.99,4.76,4.48,5.87,5.04,5.57,5.73,4.65,5.97],[6.93,3.78,6.66,4.52,5.71,6.09,6.27,7.01,6.06,6.01,5.07,6.36,3.67,5.73,3.74,6.82,4.54,6.33,5.64,7.66],[9.51,10.71,9.49,9.38,9.83,10.78,8.59,9.26,9.29,9.14,9.96,9.52,9.12,9.48,9.54,9.56,9.48,9.24,11.12,7.83]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>none_alc_none_speed<\/th>\n      <th>none_alc_some_speed<\/th>\n      <th>none_alc_much_speed<\/th>\n      <th>some_alc_none_speed<\/th>\n      <th>some_alc_some_speed<\/th>\n      <th>some_alc_much_speed<\/th>\n      <th>much_alc_none_speed<\/th>\n      <th>much_alc_some_speed<\/th>\n      <th>much_alc_much_speed<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5,6,7,8,9]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+</section>
+<section id="mixed-design-anova" class="level1 section">
+<h1 class="section">Mixed design ANOVA</h1>
+<section id="mixed-design" class="level2">
+<h2 class="anchored" data-anchor-id="mixed-design">Mixed design</h2>
+<p>The mixed ANOVA analyses the variance of the model while reducing the error by the within person variance.</p>
+<ul>
+<li>1 dependent/outcome variable</li>
+<li>2 or more independent/predictor variable with different subjects
+<ul>
+<li>2 or more levels</li>
+</ul></li>
+<li>1 or more independent/predictor variable with same subjects
+<ul>
+<li>2 or more levels</li>
+</ul></li>
+</ul>
+</section>
+<section id="assumptions-2" class="level2">
+<h2 class="anchored" data-anchor-id="assumptions-2">Assumptions</h2>
+<p>Same as repeated measures ANOVA and same as factorial ANOVA.</p>
+</section>
+<section id="example-2" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="example-2">Example</h2>
+<ul>
+<li>Dependent variable
+<ul>
+<li>Accidents</li>
+</ul></li>
+<li>Independent variables
+<ul>
+<li>Speed (same subjects)
+<ul>
+<li>None</li>
+<li>Small</li>
+<li>Large</li>
+</ul></li>
+<li>Alcohol (same subjects)
+<ul>
+<li>None</li>
+<li>Small</li>
+<li>Large</li>
+</ul></li>
+<li>Gender
+<ul>
+<li>Males</li>
+<li>Females</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="section-2" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="section-2"></h2>
+<p><small></small></p><small>
+<table class="table">
+<thead>
+<tr class="header">
+<th>person</th>
+<th>time</th>
+<th>1_1</th>
+<th>1_2</th>
+<th>1_3</th>
+<th>2_1</th>
+<th>2_2</th>
+<th>2_3</th>
+<th>3_1</th>
+<th>3_2</th>
+<th>3_3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>males</td>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>males</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>males</td>
+<td></td>
+<td></td>
+<td>3</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>males</td>
+<td></td>
+<td></td>
+<td></td>
+<td>4</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>males</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>5</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>males</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>6</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>males</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>7</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>males</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>8</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>males</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>9</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>females</td>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>12</td>
+<td>females</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>13</td>
+<td>females</td>
+<td></td>
+<td></td>
+<td>3</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>14</td>
+<td>females</td>
+<td></td>
+<td></td>
+<td></td>
+<td>4</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>15</td>
+<td>females</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>5</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>16</td>
+<td>females</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>6</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>17</td>
+<td>females</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>7</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>18</td>
+<td>females</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>8</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>females</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>9</td>
+</tr>
+</tbody>
+</table>
+</small><p><small></small></p>
+</section>
+<section id="data-1" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="data-1">Data</h2>
+<div class="cell">
+<div class="cell-output-display">
+
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-0cb1a0a34e0f0cb9da9d" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-0cb1a0a34e0f0cb9da9d">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2],[1.59,2.18,3.23,2.18,1.36,2.18,2.91,4.26,2.96,1.67,2.88,1.24,1.94,3.29,2.77,2.79,2.03,1.33,1.34,1.1],[4.96,4.66,5.58,5.7,6.15,5.83,4.03,5.48,4.92,4.14,6.68,6.74,6.45,4.52,5.53,5.41,3.5,3.73,5.76,6.4],[6.72,5.84,7.01,6.02,8.36,7.07,6.55,6.34,5.6,4.96,7.08,6.3,7.68,5.46,4.38,8.4,7.34,5.23,7.95,8.18],[2.64,4.43,2.12,3,1.78,3.06,5.35,2.89,3.87,2.52,3.74,1.72,3.02,2.53,2.64,1.84,-0.06,2.23,1.54,5.05],[3.74,4.73,7.12,6.66,5.57,5.91,4.93,6.74,5.12,3.64,4.27,6.03,6.44,5.82,5.84,6.16,6.01,5.09,6.28,6.16],[5.93,7.25,7.43,6.32,8.1,6.51,7.22,8.74,6.8,5.98,6.66,7.94,9.22,6.44,7.82,7.93,8.19,7.84,7.6,7.19],[4.68,3.21,4.98,4.72,5.03,2.61,6.06,2.87,3.01,5.37,3.97,3.99,4.76,4.48,5.87,5.04,5.57,5.73,4.65,5.97],[6.93,3.78,6.66,4.52,5.71,6.09,6.27,7.01,6.06,6.01,5.07,6.36,3.67,5.73,3.74,6.82,4.54,6.33,5.64,7.66],[9.51,10.71,9.49,9.38,9.83,10.78,8.59,9.26,9.29,9.14,9.96,9.52,9.12,9.48,9.54,9.56,9.48,9.24,11.12,7.83]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>Daytime<\/th>\n      <th>none_alc_none_speed<\/th>\n      <th>none_alc_some_speed<\/th>\n      <th>none_alc_much_speed<\/th>\n      <th>some_alc_none_speed<\/th>\n      <th>some_alc_some_speed<\/th>\n      <th>some_alc_much_speed<\/th>\n      <th>much_alc_none_speed<\/th>\n      <th>much_alc_some_speed<\/th>\n      <th>much_alc_much_speed<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5,6,7,8,9,10]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<!-- Footer insert below -->
+</section>
+</section>
+<section id="end" class="level1">
+<h1>End</h1>
+<section id="contact" class="level2">
+<h2 class="anchored" data-anchor-id="contact">Contact</h2>
+<script src="https://use.fontawesome.com/23c1d38eea.js"></script>
+<ul class="fa-ul" style="color:black; list-style:none;">
+<li>
+<i class="fa-li fa fa-envelope-o"></i> <a style="unicode-bidi:bidi-override; direction: rtl; color:black" href="javascript:window.location.href = 'mailto:' + ['j.b.vandoorn','uva.nl'].join('@')">ln.AvU@nrooDnav.B.J</a>
+</li>
+<li>
+<i class="fa-li fa fa-github"></i> <a href="https://github.com/JohnnyDoorn" target="_blank" style="color:black; border-bottom:none;">JohnnyDoorn</a>
+</li>
+</ul>
+<p><small style="text-align:left;"></small></p><small style="text-align:left;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" class="img-fluid figure-img"></a></p>
+<figcaption class="figure-caption">CC BY-NC-SA 4.0</figcaption>
+</figure>
+</div>
+</small><p><small style="text-align:left;"></small></p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

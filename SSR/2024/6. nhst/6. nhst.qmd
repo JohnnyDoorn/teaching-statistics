@@ -1,0 +1,18 @@
+---
+title: "6. Null Hypothesis Significance Testing"
+author: "Sharon Kinkenberg & Johnny van Doorn"
+date: "15 sep 2023"
+footer: "Scientific & Statistical Reasoning"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+```{r child="../../../../topics/nhst/NHST_2.qmd", eval=TRUE}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```

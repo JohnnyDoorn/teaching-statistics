@@ -1,0 +1,300 @@
+# $\chi^2$ test {.section}
+
+Relation between categorical variables
+
+## $\chi^2$ test {.smaller}
+
+A "chi-squared test", also written as $\chi^2$ test, is any statistical hypothesis test wherein the sampling distribution of the test statistic is a chi-squared distribution when the null hypothesis is true. Without other qualification, 'chi-squared test' often is used as short for Pearson's chi-squared test.
+
+Chi-squared tests are often constructed from a Lack-of-fit sum of squared errors. A chi-squared test can be used to attempt rejection of the null hypothesis that the data are independent.
+
+Source: [wikipedia](https://en.wikipedia.org/wiki/Chi-squared_test)
+
+## $\chi^2$ test statistic {.subsection}
+
+$\chi^2 = \sum \frac{(\text{observed}_{ij} - \text{model}_{ij})^2}{\text{model}_{ij}}$
+
+### Contingency table {.smalller}
+
+::: {.columns}
+
+::: {.column style="transform: scale(.7);"}
+
+$\text{observed}_{ij} = 
+\begin{pmatrix}
+o_{11} & o_{12} & \cdots & o_{1j} \\
+o_{21} & o_{22} & \cdots & o_{2j} \\
+\vdots & \vdots & \ddots & \vdots \\
+o_{i1} & o_{i2} & \cdots & o_{ij} 
+\end{pmatrix}$
+
+:::
+
+::: {.column style="transform: scale(.7);"}
+
+$\text{model}_{ij} = 
+\begin{pmatrix}
+m_{11}  & m_{12} & \cdots & m_{1j} \\
+m_{21}  & m_{22} & \cdots & m_{2j} \\
+\vdots  & \vdots & \ddots & \vdots \\
+m_{i1}  & m_{i2} & \cdots & m_{ij} 
+\end{pmatrix}$
+
+:::
+
+:::
+
+## $\chi^2$ distribution {.smaller .subsection}
+
+The $\chi^2$ distribution describes the test statistic under the assumption of $H_0$, given the degrees of freedom. 
+
+$df = (r - 1) (c - 1)$ where $r$ is the number of rows and $c$ the amount of columns.
+
+```{r, echo=FALSE,render=TRUE}
+#| output-location: slide
+
+chi <- seq(0,8,.01)
+df  <- c(1,2,3,6,8,10)
+mycols <-  palette.colors(n = 7, palette = "Okabe-Ito")
+
+plot( chi, dchisq(chi, df[1]), lwd = 2, col = mycols[1], type="l",
+      main = "Chi squared distributions",
+      ylab = "Density",
+      ylim = c(0,1),
+      xlab = "Chi squared")
+
+lines(chi, dchisq(chi, df[2]), lwd = 2, col = mycols[2], type="l")
+lines(chi, dchisq(chi, df[3]), lwd = 2, col = mycols[3], type="l")
+lines(chi, dchisq(chi, df[4]), lwd = 2, col = mycols[4], type="l")
+lines(chi, dchisq(chi, df[5]), lwd = 2, col = mycols[5], type="l")
+lines(chi, dchisq(chi, df[6]), lwd = 2, col = mycols[6], type="l")
+
+legend("topright", legend = paste("k =",df), col = mycols, lty = 1, bty = "n")
+```
+
+## Example
+
+<iframe src="https://www.frontiersin.org/articles/10.3389/fpsyg.2015.00810/full" style="height: 450px;" ></iframe>
+
+[The numerology of gender: gendered perceptions of even and odd numbers](https://www.frontiersin.org/articles/10.3389/fpsyg.2015.00810/full)
+
+## Experiment {.flexbox .vcenter}
+
+<a href=""><img src="87jyj.png" alt="QR Code" /></a>
+
+
+## Data {.smaller}
+
+<small>
+
+```{r, message=FALSE, eval=TRUE, echo=FALSE}
+if(!'gsheet' %in% installed.packages()) { install.packages('gsheet') }
+library("gsheet")
+gResults <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1sQMH4ZMN_zJ5FW_gOdVZtppZ3EQAs3ab4xn3PiLjTc4/edit?usp=sharing')
+
+gResults <- as.data.frame(gResults)[-c(1, 49:57) , -c(1, 8:9) ]
+
+# results <- results[grep("2017|2022", results$Timestamp),]
+for (i in 1:ncol(gResults)) {
+  gResults[, i]   <- as.factor(gResults[, i])
+}
+
+# oddEvenResults <- data.frame(odd =  c(results[["3"]], results[["5"]]),
+# even =  c(results[["4"]], results[["6"]]))
+# for (i in 1:nrow(results)) {
+#   results <- rbind(results, NA)
+# }
+
+# results <- cbind(results, oddEvenResults)
+results <- data.frame(Type = rep(c("Even", "Odd")[(c(1:6) %% 2) +1], each = nrow(gResults)),
+                      Association = unlist(gResults),
+                      NumberTested= rep(c(3:6, 1, 2), each = nrow(gResults) ))
+
+
+# install.packages("DT")
+library("DT")
+datatable(results)
+```
+
+</small>
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, eval=TRUE}
+# Write data for use in SPSS
+write.table(results, "genderedNumbersData.csv", row.names=FALSE)
+```
+
+## Calculating $\chi^2$ {.subsection}
+
+```{r, echo=TRUE}
+observed <- table(results[, c("Association", "Type")])
+observed
+```
+
+$\text{observed}_{ij} = 
+\begin{pmatrix}
+`r observed[1,1]` & `r observed[1,2]` \\
+`r observed[2,1]` & `r observed[2,2]` \\
+\end{pmatrix}$
+
+## Calculating the model {.subsection}
+
+$\text{model}_{ij} = E_{ij} = \frac{\text{row total}_i \times \text{column total}_j}{n }$
+
+```{r, echo=TRUE}
+n   <- sum(observed)
+totEven <- colSums(observed)[1]
+totOdd  <- colSums(observed)[2]
+totFem  <- rowSums(observed)[1]
+totMasc <- rowSums(observed)[2]
+
+addmargins(observed)
+```
+
+
+## Calculating the model
+
+$\text{model}_{ij} = E_{ij} = \frac{\text{row total}_i \times \text{column total}_j}{n }$
+
+```{r, echo=TRUE}
+modelPredictions <- matrix( c((totFem  * totEven) / n,
+                              (totFem  * totOdd) / n,
+                              (totMasc  * totEven)  / n,
+                              (totMasc * totOdd)  / n), 2, 2, byrow=T
+)
+modelPredictions
+```
+
+$\text{model}_{ij} = 
+\begin{pmatrix}
+`r modelPredictions[1,1]` & `r modelPredictions[1,2]` \\
+`r modelPredictions[2,1]` & `r modelPredictions[2,2]` \\
+\end{pmatrix}$
+
+
+
+## observed - model {.subsection}
+
+```{r, echo=TRUE}
+observed - modelPredictions
+```
+
+## Calculating $\chi^2$
+
+$\chi^2 = \sum \frac{(\text{observed}_{ij} - \text{model}_{ij})^2}{\text{model}_{ij}}$
+
+```{r, echo=TRUE}
+# Calculate chi squared
+chi.squared <- sum((observed - modelPredictions)^2 / modelPredictions)
+chi.squared
+```
+
+## Testing for significance {.subsection}
+
+$df = (r - 1) (c - 1)$
+
+```{r, echo=TRUE}
+#| output-location: slide
+
+df <- (2 - 1) * ( 2 - 1)
+
+library('visualize')
+visualize.chisq(chi.squared, df, section='upper')
+```
+
+## Fisher's exact test {.subsection}
+
+Calculates exact $\chi^2$ for small samples, when the $\chi^2$-distribution does not yet suffice. 
+
+Calculate all possible permutations.
+
+* Cell size < 5
+
+## Yates's correction {.subsection}
+
+For 2 x 2 contingency tables, Yates's correction is to prevent overestimation of statistical significance for small data (at least one cell of the table has an expected count smaller than 5). Unfortunately, Yates's correction may tend to overcorrect. This can result in an overly conservative result. 
+
+$\chi^2 = \sum \frac{ ( | \text{observed}_{ij} - \text{model}_{ij} | - .5)^2}{\text{model}_{ij}}$
+
+```{r, echo=TRUE}
+#| output-location: slide
+
+# Calculate Yates's corrected chi squared
+chi.squared.yates <- sum((abs(observed - modelPredictions) - .5)^2 / modelPredictions)
+chi.squared.yates
+visualize.chisq(chi.squared.yates, df, section='upper')
+```
+
+## Likelihood ratio {.subsection}
+
+Alternative to Pearson's $\chi^2$. 
+
+$L \chi^2 = 2 \sum \text{observed}_{ij} ln \left( \frac{\text{observed}_{ij}}{\text{model}_{ij}} \right)$
+
+```{r, echo=TRUE}
+#| output-location: slide
+
+# ln is natural logarithm
+ll.ratio <- 2 * sum(observed * log(observed / modelPredictions) ); ll.ratio
+
+visualize.chisq(ll.ratio, df, section='upper')
+```
+
+## Standardized residuals {.subsection}
+
+$\text{standardized residuals} = \frac{ \text{observed}_{ij} - \text{model}_{ij} }{ \sqrt{ \text{model}_{ij} } }$
+
+```{r, echo=TRUE}
+(observed - modelPredictions) / sqrt(modelPredictions)
+```
+
+## Effect size {.subsection}
+
+Odds ratio based on the observed values
+
+```{r, echo=TRUE}
+odds <- round( observed, 2); odds
+```
+
+$\begin{pmatrix}
+a & b \\
+c & d \\
+\end{pmatrix}$
+
+$OR = \frac{a \times d}{b \times c} = \frac{`r odds[1,1]` \times `r odds[2,2]`}{`r odds[1,2]` \times `r odds[2,1]`} = `r (odds[1,1] * odds[2,2]) / (odds[1,2] * odds[2,1])`$
+
+## Odds
+
+```{r, echo =FALSE}
+odds
+```
+
+The odd and even ratio of masculinity and the ratio of femininity
+
+* Feminine $\text{Odds}_{EO} = \frac{ `r odds[1,1]` }{ `r odds[1,2]` }$ = `r odds[1,1] / odds[1,2]`
+* Masculine $\text{Odds}_{EO} = \frac{ `r odds[2,1]` }{ `r odds[2,2]` }$ = `r odds[2,1] / odds[2,2]`
+
+In the feminine responses, there are +- `r round(odds[1,1] / odds[1,2], 2)` times as many even numbers than odd numbers.
+In the masculine responses, there  are +- `r round(odds[2,1] / odds[2,2], 2)` times as many even numbers than odd numbers.
+
+## Odds
+
+```{r, echo =FALSE}
+odds
+```
+
+Alternatively, we can look at the ratio's of masculine vs feminine for even and odd numbers:
+
+* Even $\text{Odds}_{FM} = \frac{ `r odds[1,1]` }{ `r odds[2,1]` }$ = `r odds[1,1] / odds[2,1]`
+* Odd $\text{Odds}_{FM} = \frac{ `r odds[1,2]` }{ `r odds[2,2]` }$ = `r odds[1,2] / odds[2,2]`
+
+For the even numbers, there are +- `r round(odds[1,1] / odds[2,1], 2)` times as many feminine associations than masculine associations.
+For the odd numbers, there are +- `r round(odds[1,2] / odds[2,2], 2)` times as many feminine associations than masculine associations.
+
+## Odds ratio
+
+Is the ratio of these odds.
+
+$OR = \frac{\text{feminine}}{\text{masculine}} = \frac{`r odds[1,1] / odds[1,2]`}{`r odds[2,1] / odds[2,2]`} = \frac{\text{even}}{\text{odd}}  =  \frac{`r odds[1,1] / odds[2,1]`}{`r odds[1,2] / odds[2,2]`} = `r (odds[1,1] / odds[1,2]) / (odds[2,1] / odds[2,2])`$
+
+For this data, even numbers received the feminine association +- `r round((odds[1,1] / odds[1,2]) / (odds[2,1] / odds[2,2]), 2)` times more often than odd numbers received the feminine association. The odds ratio also accounts for the scores in the other condition: we do not only take into account the femininity of the odd numbers, but also the femininity of the even numbers.   

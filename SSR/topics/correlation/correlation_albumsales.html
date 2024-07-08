@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.340">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>correlation_albumsales</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="correlation_albumsales_files/libs/clipboard/clipboard.min.js"></script>
+<script src="correlation_albumsales_files/libs/quarto-html/quarto.js"></script>
+<script src="correlation_albumsales_files/libs/quarto-html/popper.min.js"></script>
+<script src="correlation_albumsales_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="correlation_albumsales_files/libs/quarto-html/anchor.min.js"></script>
+<link href="correlation_albumsales_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="correlation_albumsales_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="correlation_albumsales_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="correlation_albumsales_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="correlation_albumsales_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+<script src="correlation_albumsales_files/libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="correlation_albumsales_files/libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="correlation_albumsales_files/libs/datatables-binding-0.27/datatables.js"></script>
+<script src="correlation_albumsales_files/libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="correlation_albumsales_files/libs/dt-core-1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="correlation_albumsales_files/libs/dt-core-1.12.1/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="correlation_albumsales_files/libs/dt-core-1.12.1/js/jquery.dataTables.min.js"></script>
+<link href="correlation_albumsales_files/libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="correlation_albumsales_files/libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="correlation" class="level1 section">
+<h1 class="section">Correlation</h1>
+<section id="pearson-correlation" class="level2">
+<h2 class="anchored" data-anchor-id="pearson-correlation">Pearson Correlation</h2>
+<p><img style="float:left; width:150px; margin:0 20px 20px 0px;" src="https://upload.wikimedia.org/wikipedia/commons/1/18/Karl_Pearson%2C_1912.jpg"></p>
+<p>In statistics, the Pearson correlation coefficient, also referred to as the Pearson’s r, Pearson product-moment correlation coefficient (PPMCC) or bivariate correlation, is a measure of the linear correlation between two variables X and Y. It has a value between +1 and −1, where 1 is total positive linear correlation, 0 is no linear correlation, and −1 is total negative linear correlation. It is widely used in the sciences. It was developed by Karl Pearson from a related idea introduced by Francis Galton in the 1880s.</p>
+<p>Source: <a href="https://en.wikipedia.org/wiki/Pearson_correlation_coefficient">Wikipedia</a></p>
+</section>
+<section id="pmcc" class="level2">
+<h2 class="anchored" data-anchor-id="pmcc">PMCC</h2>
+<p><span class="math display">\[r_{xy} = \frac{{COV}_{xy}}{S_xS_y}\]</span> Where <span class="math inline">\(S\)</span> is sthe standard deviation and <span class="math inline">\(COV\)</span> is the covariance.</p>
+<p><span class="math display">\[{COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}\]</span></p>
+</section>
+<section id="plot-correlation" class="level2">
+<h2 class="anchored" data-anchor-id="plot-correlation">Plot correlation</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="correlation_albumsales_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-correlation-1" class="level2">
+<h2 class="anchored" data-anchor-id="plot-correlation-1">Plot correlation</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="correlation_albumsales_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-correlation-2" class="level2">
+<h2 class="anchored" data-anchor-id="plot-correlation-2">Plot correlation</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="correlation_albumsales_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span class="math display">\[(x_i - \bar{x})(y_i - \bar{y})\]</span></p>
+</section>
+<section id="guess-the-correlation" class="level2">
+<h2 class="anchored" data-anchor-id="guess-the-correlation">Guess the correlation</h2>
+<p><a href="http://guessthecorrelation.com">Guess the correlation</a></p>
+<p><img src="qrcodeqtc.png"></p>
+</section>
+<section id="load-data" class="level2">
+<h2 class="anchored" data-anchor-id="load-data">Load data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>n     <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"Album Sales.csv"</span>)[, <span class="sc">-</span><span class="dv">4</span>]</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data[<span class="dv">1</span><span class="sc">:</span>n, ] <span class="co"># take the first 50 rows of the album sales data set from Field</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(data, <span class="at">rownames =</span> <span class="cn">FALSE</span>, <span class="at">options =</span> <span class="fu">list</span>(<span class="at">searching =</span> <span class="cn">FALSE</span>, <span class="at">scrollY =</span> <span class="dv">415</span>, <span class="at">paging =</span> F, <span class="at">info =</span> F))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-2d16c451fb8eb535c725" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-2d16c451fb8eb535c725">{"x":{"filter":"none","vertical":false,"data":[[10.256,985.685,1445.563,1188.193,574.513,568.954,471.814,537.352,514.068,174.093,1720.806,611.479,251.192,97.972,406.814,265.398,1323.287,196.65,1326.598,1380.689,792.345,957.167,1789.659,656.137,613.697,313.362,336.51,1544.899,68.954,785.692,125.628,377.925,217.994,759.862,1163.444,842.957,125.179,236.598,669.811,612.234,922.019,50,2000,1054.027,385.045,1507.972,102.568,204.568,1170.918,689.547],[330,120,360,270,220,170,70,210,200,300,290,70,150,190,240,100,250,210,280,230,210,230,320,210,230,250,60,330,150,150,180,80,180,130,320,280,200,130,190,150,230,310,340,240,180,220,40,190,290,340],[43,28,35,33,44,19,20,22,21,40,32,20,24,38,24,25,35,36,27,33,33,28,30,34,49,40,20,42,35,8,49,19,42,6,36,32,28,25,34,21,34,63,31,25,42,37,25,26,39,46]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>adverts<\/th>\n      <th>sales<\/th>\n      <th>airplay<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="explaining-variance" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="explaining-variance">Explaining variance</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="correlation_albumsales_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="standardize" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="standardize">Standardize</h2>
+<p><span class="math display">\[z = \frac{x_i - \bar{x}}{{sd}_x}\]</span></p>
+<div class="cell" data-output-location="slide">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>z.sales      <span class="ot">&lt;-</span> (data<span class="sc">$</span>sales   <span class="sc">-</span> <span class="fu">mean</span>(data<span class="sc">$</span>sales))   <span class="sc">/</span> <span class="fu">sd</span>(data<span class="sc">$</span>sales)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>z.airplay    <span class="ot">&lt;-</span> (data<span class="sc">$</span>airplay <span class="sc">-</span> <span class="fu">mean</span>(data<span class="sc">$</span>airplay)) <span class="sc">/</span> <span class="fu">sd</span>(data<span class="sc">$</span>airplay)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="correlation_albumsales_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="standardize-1" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="standardize-1">Standardize</h2>
+<p><span class="math display">\[z = \frac{x_i - \bar{x}}{{sd}_x}\]</span></p>
+<div class="cell" data-output-location="slide">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>z.sales      <span class="ot">&lt;-</span> (data<span class="sc">$</span>sales   <span class="sc">-</span> <span class="fu">mean</span>(data<span class="sc">$</span>sales))   <span class="sc">/</span> <span class="fu">sd</span>(data<span class="sc">$</span>sales)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>z.airplay    <span class="ot">&lt;-</span> (data<span class="sc">$</span>airplay <span class="sc">-</span> <span class="fu">mean</span>(data<span class="sc">$</span>airplay)) <span class="sc">/</span> <span class="fu">sd</span>(data<span class="sc">$</span>airplay)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="correlation_albumsales_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="covariance" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="covariance">Covariance</h2>
+<p><span class="math display">\[{COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mean.sales      <span class="ot">&lt;-</span> <span class="fu">mean</span>(sales, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>mean.airplay    <span class="ot">&lt;-</span> <span class="fu">mean</span>(airplay, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>delta.sales     <span class="ot">&lt;-</span> sales <span class="sc">-</span> mean.sales</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>delta.airplay   <span class="ot">&lt;-</span> airplay <span class="sc">-</span> mean.airplay</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>prod <span class="ot">&lt;-</span> (sales <span class="sc">-</span> mean.sales) <span class="sc">*</span> (airplay <span class="sc">-</span> mean.airplay)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>covariance <span class="ot">&lt;-</span> <span class="fu">sum</span>(prod) <span class="sc">/</span> (N <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>covariance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 474.1388</code></pre>
+</div>
+</div>
+</section>
+<section id="covariance-1" class="level2">
+<h2 class="anchored" data-anchor-id="covariance-1">Covariance</h2>
+<div class="cell">
+<div class="cell-output-display">
+
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-569adc4d8c32b51d1b16" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-569adc4d8c32b51d1b16">{"x":{"filter":"none","vertical":false,"data":[[330,120,360,270,220,170,70,210,200,300,290,70,150,190,240,100,250,210,280,230,210,230,320,210,230,250,60,330,150,150,180,80,180,130,320,280,200,130,190,150,230,310,340,240,180,220,40,190,290,340],[212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4,212.4],[117.6,-92.4,147.6,57.6,7.6,-42.4,-142.4,-2.4,-12.4,87.6,77.6,-142.4,-62.4,-22.4,27.6,-112.4,37.6,-2.4,67.6,17.6,-2.4,17.6,107.6,-2.4,17.6,37.6,-152.4,117.6,-62.4,-62.4,-32.4,-132.4,-32.4,-82.4,107.6,67.6,-12.4,-82.4,-22.4,-62.4,17.6,97.6,127.6,27.6,-32.4,7.6,-172.4,-22.4,77.6,127.6],[43,28,35,33,44,19,20,22,21,40,32,20,24,38,24,25,35,36,27,33,33,28,30,34,49,40,20,42,35,8,49,19,42,6,36,32,28,25,34,21,34,63,31,25,42,37,25,26,39,46],[31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56,31.56],[11.44,-3.56,3.44,1.44,12.44,-12.56,-11.56,-9.56,-10.56,8.44,0.44,-11.56,-7.56,6.44,-7.56,-6.56,3.44,4.44,-4.56,1.44,1.44,-3.56,-1.56,2.44,17.44,8.44,-11.56,10.44,3.44,-23.56,17.44,-12.56,10.44,-25.56,4.44,0.44,-3.56,-6.56,2.44,-10.56,2.44,31.44,-0.56,-6.56,10.44,5.44,-6.56,-5.56,7.44,14.44],[1345.34,328.94,507.74,82.94,94.54,532.54,1646.14,22.94,130.94,739.34,34.14,1646.14,471.74,-144.26,-208.66,737.34,129.34,-10.66,-308.26,25.34,-3.46,-62.66,-167.86,-5.86,306.94,317.34,1761.74,1227.74,-214.66,1470.14,-565.06,1662.94,-338.26,2106.14,477.74,29.74,44.14,540.54,-54.66,658.94,42.94,3068.54,-71.46,-181.06,-338.26,41.34,1130.94,124.54,577.34,1842.54]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>sales<\/th>\n      <th>meanGr<\/th>\n      <th>deltaGr<\/th>\n      <th>Hrs<\/th>\n      <th>meanHrs<\/th>\n      <th>deltaHrs<\/th>\n      <th>prod<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5,6]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="correlation-1" class="level2">
+<h2 class="anchored" data-anchor-id="correlation-1">Correlation</h2>
+<p><span class="math display">\[r_{xy} = \frac{{COV}_{xy}}{S_xS_y}\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>correlation <span class="ot">&lt;-</span> covariance <span class="sc">/</span> ( <span class="fu">sd</span>(sales) <span class="sc">*</span> <span class="fu">sd</span>(airplay) ); correlation</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5580504</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>correlation</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5580504</code></pre>
+</div>
+</div>
+</section>
+<section id="correlation-2" class="level2">
+<h2 class="anchored" data-anchor-id="correlation-2">Correlation</h2>
+<p><span class="math display">\[r_{xy} = \frac{{COV}_{xy}}{S_xS_y}\]</span> <span class="math display">\[{COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(  sales,   airplay) <span class="co"># correlation</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5580504</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(z.sales, z.airplay) <span class="co"># correlation of z-scores</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5580504</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># covariance of z-scores</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(z.sales <span class="sc">*</span> z.airplay ) <span class="sc">/</span> (N <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5580504</code></pre>
+</div>
+</div>
+</section>
+<section id="plot-correlation-3" class="level2">
+<h2 class="anchored" data-anchor-id="plot-correlation-3">Plot correlation</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="correlation_albumsales_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="significance-of-a-correlation" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="significance-of-a-correlation">Significance of a correlation</h2>
+<p><span class="math display">\[t_r = \frac{r \sqrt{N-2}}{\sqrt{1 - r^2}} \\
+{df} = N - 2\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0 &amp;: t_r = 0 \\
+H_A &amp;: t_r \neq 0 \\
+H_A &amp;: t_r &gt; 0 \\
+H_A &amp;: t_r &lt; 0 \\
+\end{aligned}
+\]</span></p>
+</section>
+<section id="r-to-t" class="level2">
+<h2 class="anchored" data-anchor-id="r-to-t">r to t</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df  <span class="ot">&lt;-</span> N<span class="dv">-2</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>t.r <span class="ot">&lt;-</span> ( correlation<span class="sc">*</span><span class="fu">sqrt</span>(df) ) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">-</span>correlation<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(t.r, df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         t.r df
+[1,] 4.65926 48</code></pre>
+</div>
+</div>
+</section>
+<section id="visualize" class="level2">
+<h2 class="anchored" data-anchor-id="visualize">Visualize</h2>
+<p>One-sample t-test</p>
+<div class="cell" data-output-location="slide">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="st">"visualize"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()) { <span class="fu">install.packages</span>(<span class="st">"visualize"</span>) }</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"visualize"</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.t</span>(<span class="fu">c</span>(<span class="sc">-</span>t.r, t.r),df,<span class="at">section=</span><span class="st">'tails'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="correlation_albumsales_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="partial-correlation" class="level1 section">
+<h1 class="section">Partial correlation</h1>
+<section id="venn-diagram" class="level2">
+<h2 class="anchored" data-anchor-id="venn-diagram">Venn diagram</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="correlation_albumsales_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="partial-correlation-1" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="partial-correlation-1">Partial correlation</h2>
+<p><span class="math display">\[\LARGE{r_{xy \cdot z} = \frac{r_{xy} - r_{xz} r_{yz}}{\sqrt{(1 - r_{xz}^2)(1 - r_{yz}^2)}}}\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>adverts <span class="ot">&lt;-</span> data<span class="sc">$</span>adverts</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>cor.sales.airplay    <span class="ot">&lt;-</span> <span class="fu">cor</span>(sales,airplay)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>cor.sales.adverts    <span class="ot">&lt;-</span> <span class="fu">cor</span>(sales,adverts)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>cor.airplay.adverts  <span class="ot">&lt;-</span> <span class="fu">cor</span>(airplay,adverts)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(cor.sales.airplay, cor.sales.adverts, cor.airplay.adverts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  cor.sales.airplay cor.sales.adverts cor.airplay.adverts
+1         0.5580504          0.504637         -0.05460507</code></pre>
+</div>
+</div>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>numerator   <span class="ot">&lt;-</span> cor.sales.airplay <span class="sc">-</span> (cor.sales.adverts <span class="sc">*</span> cor.airplay.adverts)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>denominator <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( (<span class="dv">1</span><span class="sc">-</span>cor.sales.adverts<span class="sc">^</span><span class="dv">2</span>)<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>cor.airplay.adverts<span class="sc">^</span><span class="dv">2</span>) )</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>partial.correlation <span class="ot">=</span> numerator <span class="sc">/</span> denominator</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>partial.correlation</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6793231</code></pre>
+</div>
+</div>
+</section>
+<section id="significance-of-partial-correlation" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="significance-of-partial-correlation">Significance of partial correlation</h2>
+<p>One-sample t-test</p>
+<div class="cell" data-output-location="slide">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> N <span class="sc">-</span> <span class="dv">3</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>t.pr <span class="ot">&lt;-</span> ( partial.correlation<span class="sc">*</span><span class="fu">sqrt</span>(df) ) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">-</span>partial.correlation<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>t.pr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6.346355</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.t</span>(<span class="fu">c</span>(<span class="sc">-</span>t.pr,t.pr),df,<span class="at">section=</span><span class="st">'tails'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="correlation_albumsales_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

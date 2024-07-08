@@ -1,0 +1,141 @@
+```{r, echo=FALSE}
+if(!"DT" %in% installed.packages()) { install.packages("DT") }
+library("DT")
+
+if(!"visualize" %in% installed.packages()){ install.packages("visualize") }
+library("visualize")
+
+set.seed(87364536)
+```
+
+# Friedman's ANOVA
+
+Paired >2 samples
+
+## Friedman's ANOVA {.section}
+
+<img src="http://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/William-Friedman.jpg/220px-William-Friedman.jpg" style="float: left; margin: 0 20px 0 0; height: 150px;">
+
+Created by [William Frederick Friedman](http://en.wikipedia.org/wiki/William_F._Friedman) the Friedman's ANOVA is a nonparametric alternative to the repeated one-way ANOVA.
+
+Just like the Kruskal-Wallis test, Friedman's ANOVA, subtracts the expected mean ranking from the calculated observed mean ranking, which is also $\chi^2$ distributed.
+
+## Simulate data
+
+```{r, echo=TRUE}
+set.seed(87364536)
+n      <- 30
+factor <- rep(c("ecstasy","alcohol","control"), each=n/3)
+
+dummy.1 <- ifelse(factor == "alcohol", 1, 0)
+dummy.2 <- ifelse(factor == "ecstasy", 1, 0)
+b.0     <- 23  # intercept
+b.1     <- 0.5 # regression weight for alcohol
+b.2     <- 1   # regression weight for ecstasy
+error   <- rnorm(n, 0, 1.7)
+
+# Model
+depres  <- b.0 + b.1*dummy.1 + b.2*dummy.2 + error
+depres  <- round(depres)
+
+data <- data.frame(factor, depres)
+```
+
+## Simulate data
+
+```{r, echo=TRUE}
+ecstasy <- subset(data, factor=="ecstasy")$depres
+alcohol <- subset(data, factor=="alcohol")$depres
+control <- subset(data, factor=="control")$depres
+
+data <- data.frame(ecstasy, alcohol, control)
+```
+
+## The data
+
+```{r, echo=FALSE}
+datatable(data, options = list(iDisplayLength = 7, searching = FALSE, scrollY = 415, paging = F, info = F))
+nTies <- sum(data[, 1] == data[, 2]) +
+  sum(data[, 1] == data[, 3]) +
+  sum(data[, 2] == data[, 3])
+
+```
+
+## Assign ranks
+
+Rank within each participant (i.e., within each row).
+
+```{r, echo=TRUE}
+# Rank for each person
+ranks <- t(apply(data, 1, rank))
+```
+
+## The data with ranks
+
+```{r, echo=FALSE}
+colnames(ranks) <- paste0(colnames(data), "_Rank")
+combDat <- cbind(data, ranks)
+# Write data for use in SPSS
+write.csv(combDat, "Friedman.csv", row.names=FALSE)
+datatable(combDat, options = list(iDisplayLength = 7, searching = FALSE, scrollY = 415, paging = F, info = F))
+```
+
+## Calculate $F_r$ {.subsection}
+
+$$F_r = \left[ \frac{12}{Nk(k+1)} \sum_{i=1}^k R_i^2 \right] - 3N(k+1)$$
+
+- $N$ total number of subjects
+- $k$ number of groups
+- $R_i$ rank sums for each group
+
+--> We sum the ranks for each of the three experimental conditions (and apply some standardizations).
+
+## Calculate $F_r$
+
+Calculate ranks sum per condition and $N$.
+
+```{r, echo=TRUE}
+R.i <- apply(ranks, 2, sum)
+R.i
+
+# N is number of participants
+N <- 10
+```
+
+## Calculate $F_r$ (without adjusting for ties)
+
+$$F_r = \left[ \frac{12}{Nk(k+1)} \sum_{i=1}^k R_i^2 \right] - 3N(k+1)$$
+
+```{r, echo=TRUE}
+k <- 3
+F.r <- ( ( 12/(N*k*(k+1)) ) * sum(R.i^2) ) - ( 3*N*(k+1) )
+F.r
+```
+
+## Adjusting for ties (just for fun)
+
+$$  \frac{(k-1) \sum_i^k (R_i - \frac{b(k+1))}{2})^2}{\sum_i^b \sum_j^k (R_{ij}^2) - \frac{bk(k+1)^2}{4}} $$
+
+```{r, echo=TRUE}
+k <- 3
+b <- 10
+F.r <- (sum ((R.i - ((b*(k+1))/2) )^2) * (k-1)) / (sum((ranks^2)) - (b*k *(k+1)^2) / 4)
+F.r
+```
+
+And the degrees of freedom
+
+```{r, echo=TRUE}
+df <- k - 1
+```
+
+
+## Test for significance
+
+```{r, fig.align='center', warning=FALSE, echo=TRUE}
+visualize.chisq(F.r, df, section="upper")
+```
+
+## Post hoc tests?
+
+Follow up with Wilcoxon signed-rank tests!

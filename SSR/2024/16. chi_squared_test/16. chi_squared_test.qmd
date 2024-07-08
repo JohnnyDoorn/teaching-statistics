@@ -1,0 +1,18 @@
+---
+title: "16. Chi squared test"
+author: "Sharon Kinkenberg & Johnny van Doorn"
+date: "17 oct 2023"
+footer: "Scientific & Statistical Reasoning"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+```{r child="../../../../topics/chi_square/chi_square_test.qmd"}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```
