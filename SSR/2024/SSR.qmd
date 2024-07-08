@@ -33,8 +33,8 @@ for (i in 1:n) {
 
 data.frame(Date    = lectures$date, 
            Lecture = lectures$title,
-           Handout = sprintf('<a href=".../%s" target="_blank" class="external">link</a>', gsub("qmd", "html", lectures$url)),
-           Slides  = sprintf('<a href=".../%s" target="_blank" class="external">link</a>', gsub("qmd", "slide.html", lectures$url)) 
+           Handout = sprintf('<a href="https://JohnnyDoorn.github.io/teaching-statistics/%s" target="_blank" class="external">link</a>', gsub("qmd", "html", lectures$url)),
+           Slides  = sprintf('<a href="https://JohnnyDoorn.github.io/teaching-statistics/%s" target="_blank" class="external">link</a>', gsub("qmd", "slide.html", lectures$url)) 
           ) -> lecture.list
 
 # Sort on date
