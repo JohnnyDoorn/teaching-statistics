@@ -4,20 +4,26 @@ author: "Johnny van Doorn"
 date: today
 ---
 
+This page will be continuously updated to feature extra materials, such as applets, data sets, and additional explanations. 
+
+## Book
+An online version of Discovering Statistics Using JASP is available [here](https://amsuni-my.sharepoint.com/:b:/g/personal/j_b_vandoorn_uva_nl/ESR4n5L9HB5KsKByVbDlsj0BoZLpYD2aWwJstikmEGU25g?e=dKODJR). Individual chapters available [here](https://amsuni-my.sharepoint.com/:f:/g/personal/j_b_vandoorn_uva_nl/EoyhXwuTGZtGvJaobtAr83kBRlGJdZm5_ivGZ9_gpl8yMg?e=RjlR9t).
+
 ## Applets
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library(stringr)
 library("lubridate")
 library("dplyr")
 library('kableExtra')
-allLinks <- c("https://statisticalreasoning-uva.shinyapps.io/NHST_Binomial",
-              "https://statisticalreasoning-uva.shinyapps.io/NHST_Continuous",
-              "https://statisticalreasoning-uva.shinyapps.io/NHST_Fdistribution",
-              "https://statisticalreasoning-uva.shinyapps.io/onewayANOVA",
-              "https://statisticalreasoning-uva.shinyapps.io/ANCOVA",
-              "https://statisticalreasoning-uva-2.shinyapps.io/Multi-ANOVA",
-              "https://statisticalreasoning-uva-2.shinyapps.io/RM_ANOVA",
-              "https://statisticalreasoning-uva-2.shinyapps.io/SimpleRegression",                          "https://statisticalreasoning-uva-2.shinyapps.io/MultiRegression"
+allLinks <- c("https://statisticalreasoning-uva.shinyapps.io/NHST_Binomial"#,
+              # "https://statisticalreasoning-uva.shinyapps.io/NHST_Continuous",
+              # "https://statisticalreasoning-uva.shinyapps.io/NHST_Fdistribution",
+              # "https://statisticalreasoning-uva.shinyapps.io/onewayANOVA",
+              # "https://statisticalreasoning-uva.shinyapps.io/ANCOVA",
+              # "https://statisticalreasoning-uva-2.shinyapps.io/Multi-ANOVA",
+              # "https://statisticalreasoning-uva-2.shinyapps.io/RM_ANOVA",
+              # "https://statisticalreasoning-uva-2.shinyapps.io/SimpleRegression",
+              # "https://statisticalreasoning-uva-2.shinyapps.io/MultiRegression"
 
 )
 

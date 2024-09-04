@@ -1,0 +1,128 @@
+---
+title: "Predicting with Dummies Part 2: Interaction"
+author: "JvD"
+date: "`r Sys.Date()`"
+output: html_document
+page-layout: full
+---
+```{r, echo=FALSE}
+rm(list=ls())
+library(DT)
+```
+
+To illustrate more clearly how we make predictions based on our statistical model with two predictor variables, let's get our ducks in a row. We have our [observed data from the lecture](https://raw.githubusercontent.com/JohnnyDoorn/statistics-lectures/master/topics/ANOVA_independent_factorial/anova_alcohol_speed_daytime.csv), loaded below. We will now expand on the explanation provided in [part one](https://johnnydoorn.github.io/statistics-lectures/courses/SSR/SSR_2023-2024/MiscFiles_J/PredictingWithDummies), where we introduced predicting with dummies for a single predictor. 
+
+```{r}
+data <- read.csv("~/GitHubStuff/statistics-lectures/topics/ANOVA_independent_factorial/anova_alcohol_speed_daytime.csv")[, c(1, 3:5)] # Load data and only include relevant variables for now
+data$alcohol <-  factor(data$alcohol, levels = c("none", "some", "much")) # make sure alchohol is a factor
+levels(data$alcohol) <- c("noneA", "someA", "muchA") # add an A to distinguish from the levels of speed
+data$speed <-  factor(data$speed, levels = c("none", "some", "much")) # make sure speed is a factor
+head(data)
+```
+
+With observed group means for each alcohol group:
+```{r}
+alcMeans <- tapply(data$accidents,  data$alcohol, mean)
+alcMeans
+```
+
+And for the speed group:
+```{r}
+speedMeans <- tapply(data$accidents,  data$speed, mean)
+speedMeans
+```
+
+
+## Individual models
+Just as in the first part, we can predict based on only a single predictor variable (so either alcohol, or speed). This means that we use the group means to predict with (e.g., we predict `r speedMeans[1]` for people that were in the "none" speed group). Another way of formulating this is again by looking at the regression representation, where we use dummy variables to indicate which group we are predicting for:
+$$ \text{Accident prediction} =  b_0 + b_1 * \text{dummy}_{some speed} + b_2 * \text{dummy}_{much speed}.$$
+The regression weights are equal to:
+```{r}
+speedModel <- lm(accidents ~ speed, data = data)
+speedModel$coefficients
+```
+So if someone is in the "none" condition, their dummy variables are 0, so that we predict just the intercept (`r speedModel$coefficients[1]`), but if someone is in the "some" condition, we predict the intercept, plus the second coefficient (`r speedModel$coefficients[1]` + `r speedModel$coefficients[2]` = `r speedMeans[2]`). 
+
+
+Similarly, we could fit a model for alcohol, and make similar predictions, just based on the alcohol condition someone was in:
+```{r}
+speedModel <- lm(accidents ~ alcohol, data = data)
+speedModel$coefficients
+```
+
+### Combining the two main effects
+We can combine the two main effects and look at the group means of each cell in the design (3x3) - the observed group means are:
+```{r}
+groupMeans <- tapply(data$accidents,  list(data$alcohol, data$speed), mean)
+groupMeans
+```
+Next, we can try to see what happens when we fit a model with the two main effects (so still no interaction):
+```{r}
+mainModel <- lm(accidents ~ speed + alcohol, data = data)
+mainModel$coefficients
+```
+
+As you can see, the coefficients are exactly the same as previously for the two individual models. If we now want to predict based on this model, we again need some dummy variables to multiply each regression coefficient with, such that we are only using the relevant regression coefficients. The regression formula now looks as follows:
+$$ \text{Accident prediction} =  b_0 + b_1 * \text{dummy}_{some speed} + b_2 * \text{dummy}_{much speed} + b_3 * \text{dummy}_{some alcohol} + b_4 * \text{dummy}_{much alcohol} .$$
+
+Again, this means that if someone is in the "none" group for speed and alcohol, their dummy variables are all equal to 0. So for a participant in the "none+none" group, we predict the intercept ($b_0$ = `r mainModel$coefficients[1]`). In this way, we are trying to recreate the 9 group means based on only 5 parameters (the 5 $b$'s) which is not a perfect approximation: $b_0 \neq$ `r groupMeans[1,1]`. 
+
+In order to find out what we are predicting for the each of the 9 groups based on the model with the two main effects, we can first make a list (data frame) that contains each of the possible group combinations, and their dummy scores:
+
+```{r}
+speedLevels <- rep(levels(data$speed), 3)
+dummySomeSpeed <- ifelse(speedLevels == "some", 1, 0) # for the some alcohol condition, the dummy is 1, else 0
+dummyMuchSpeed <- ifelse(speedLevels == "much", 1, 0)
+
+alcoholLevels <- rep(levels(data$alcohol), each = 3)
+dummySomeAlc <- ifelse(alcoholLevels == "some (A)", 1, 0)# for the some speed condition, the dummy is 1, else 0
+dummyMuchAlc <- ifelse(alcoholLevels == "much (A)", 1, 0)
+
+dummyStructure <- data.frame(speedLevels, alcoholLevels, dummySomeSpeed, dummyMuchSpeed, dummySomeAlc, dummyMuchAlc)
+
+datatable(dummyStructure, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+```
+
+Then, we use these dummy variables to apply the exact formula that is given above, for predicting accidents:
+```{r}
+# Apply the regression formula:
+dummyStructure[["whatWePredict"]] <- mainModel$coefficients[1] + mainModel$coefficients[2] * dummySomeSpeed +
+                                                                 mainModel$coefficients[3] * dummyMuchSpeed +
+                                                                 mainModel$coefficients[4] * dummySomeAlc +  
+                                                                 mainModel$coefficients[5] * dummyMuchAlc
+dummyStructure[["whatWePredict"]] <- round(dummyStructure[["whatWePredict"]], 3) # round the predictions
+# We add the observed group means:
+dummyStructure[["observedGroupMeans"]] <- as.vector(t(groupMeans))
+
+datatable(dummyStructure)
+```
+
+
+
+
+What you can see from the table above, is that we are not predicting the **exact** group means when we predict with only the two main effects. By trying to use as few parameters ($b$'s/regression coefficients) as possible, we tried to approximate the group means as best we can, but are still falling short a little bit. However, this approximated group level means might still be a very good approximation of the observed data. If there is no interaction effect going on in the population, this might be the model that fits the data the best, while using as few parameters as possible. 
+
+## Enter the interaction
+In order to predict the exact group mean for each group, we need additional parameters ($b$'s). This is why we can also add an interaction to our model:
+```{r}
+fullModel <- lm(accidents ~ speed + alcohol + speed * alcohol, data = data)
+fullModel$coefficients
+```
+
+As you can see, we now have used more parameters in our model! To be specific, we used 9 parameters: an intercept, two parameters for each main effect (i.e., $k - 1$, with $k$ the number of groups), and four parameters for the interaction effect ($(k_S-1) * (k_A-1)$).
+For each coefficient, we need a dummy variable to encode the group that someone belongs to. In the previous section, we needed 4 dummy variables to map the main effects, but now we need 8 dummy variables. I will omit the dummies in this case, because it will become a horrible mess of 1's and 0's. What I will end with, however is show that now we predict *exactly* the group means for each participant. For instance, if we predict for someone who is in the "much" alcohol + "some" speed group, we predict:
+
+```{r}
+
+muchAlc_someSpeed_prediction <- fullModel$coefficients['(Intercept)'] + 
+                                fullModel$coefficients['speedsome'] + fullModel$coefficients['alcoholmuchA'] +
+                                fullModel$coefficients['speedsome:alcoholmuchA']
+unname(muchAlc_someSpeed_prediction)
+```
+which is exactly equal to the group mean of that group. 
+
+
+### What now?
+Now we know how a model predicts that only uses the main effects, and how a model predicts that uses the main effects and interaction effect (i.e., the full model). The difference between the two, is that the full model predicts exactly the group means, while the main effects model tries to approximate the group means by having them be a combination of the *univariate* means (i.e., the means for alcohol, and the means for speed, separately). 
+I will leave it for now, and am curious if anyone has reached this far (if you have, congrats on trying to face this huge dragon!), and how confusing this little journey has been. Please let me know if this needs more fleshing out to be more understandable. 
+

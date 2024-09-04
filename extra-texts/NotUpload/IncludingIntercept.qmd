@@ -1,0 +1,179 @@
+---
+title: "Why include an intercept in linear regression?"
+author: "JvD"
+date: "`r Sys.Date()`"
+output: html_document
+page-layout: full
+---
+```{r, echo=FALSE}
+rm(list=ls())
+library(DT)
+data <- read.csv("JASP_Files/Album Sales.csv")
+```
+
+```{r}
+data <- read.csv("JASP_Files/Album Sales.csv") # Load data 
+head(data) # inspect first 5 rows of the data
+```
+
+In linear regression, we calculate regression coefficients, which we use to predict the data. The difference between prediction and observation then informs us of the accuracy of the model. The interpretation of the various metrics (e.g., $t$-statistic for the regression coefficients, $F$-statistic for the overall model accuracy) depends on various assumptions of the linear model. A core assumption here is that there is no systematic error: our model should be equally accurate/wrong across the whole range of its predictions
+
+
+We can fit a regression model with one predictor (airplay), and include the intercept (done by default)
+```{r}
+mainModel <- lm(sales ~ airplay, data = data)
+mainModel$coefficients
+```
+
+But, we can also choose to omit the intercept, and only estimate a single $b$ (for airplay):
+```{r}
+omitInterceptModel <- lm(sales ~ -1 + airplay, data = data)
+omitInterceptModel$coefficients
+```
+
+<!-- ```{r, fig.align='center', echo=FALSE} -->
+<!-- par(mfrow = c(1, 2)) -->
+<!-- r <- cor(mainModel$fitted.values, data$sales) -->
+<!-- r.2 <- round(r^2, 2) -->
+<!-- r <- round(r, 2) -->
+
+<!-- plot( mainModel$fitted.values, data$sales, las = 1, ylab = "Outcome", xlab = "Model Prediction", main =  bquote("r ="~ .(r) ~ "," ~ r^2 ~ " = " ~ .(r.2)),  -->
+<!--       ylim=c(0,400), xlim=c(0, 400), pch = 21, bg = "turquoise", bty = "n") -->
+<!-- abline(lm(data$sales ~ mainModel$fitted.values), lwd = 3, col = "purple") -->
+
+
+<!-- r <- cor(omitInterceptModel$fitted.values, data$sales) -->
+<!-- r.2 <- round(r^2, 2) -->
+<!-- r <- round(r, 2) -->
+
+<!-- plot(omitInterceptModel$fitted.values, data$sales, las = 1, ylab = "Outcome", xlab = "Model Prediction", main =  bquote("r ="~ .(r) ~ "," ~ r^2 ~ " = " ~ .(r.2)),  -->
+<!--      ylim=c(0,400), xlim=c(0, 400), pch = 21, bg = "turquoise", bty = "n") -->
+<!-- abline(lm(data$sales ~ omitInterceptModel$fitted.values), lwd = 3, col = "purple") -->
+<!-- ``` -->
+
+
+For both models, their regression coefficients dictate what they predict:
+
+${\text{model prediction with intercept}} = `r round(mainModel$coefficients[1], 2)` + `r round(mainModel$coefficients[2], 2)` \times \text{airplay}$
+
+${\text{model prediction without intercept}} = `r round(omitInterceptModel$coefficients[1], 2)` \times \text{airplay}$
+
+
+We can plot sales and airplay, and add the regression lines for both models (the lines show what each model predicts). The slopes of these lines are dictated by the $b_1$ weights, while the overall height of the lines is dictated by the $b_0$ weights. For the model without an intercept, $b_0$ is set to 0, while in the intercept model $b_0$ is allowed to be different from 0. You can see this in the plot below, where the purple line crosses the y-axis at $84.87$ (i.e., for 0 airplay, it predicts $84.87$ sales), while the orange line crosses the y-axis at 0 (i.e., for 0 airplay, it predicts 0 sales). 
+
+```{r, fig.align='center', echo=FALSE}
+
+
+plot(data$airplay, data$sales, las = 1, ylab = "Sales", xlab = "Airplay", main = "", 
+     ylim=c(0,400), xlim=c(0, 65), pch = 21, bg = "turquoise", bty = "n")
+abline(mainModel, lwd = 3, col = "purple")
+abline(omitInterceptModel, lwd = 3, col = "orange")
+legend("bottomright", bty ="n", lty = 1, lwd = 4, col = c("purple", "orange"), c("With intercept", "Without intercept"))
+
+```
+
+
+From this plot, it seems that the model without intercept is still doing a good job of capturing the data. The regression line even has a steeper slope for this model compared to the main model. If we would look at the associated t- and p-values for the regression coefficient of airplay, they would be even more extreme for the model without the intercept. That's good right?
+
+Well, the linear model that we use to assess the effects of the predictor variable has various assumptions. One of the most important assumptions is that there is no systematic error in the model (i.e., [homoscedasiticity of error](https://en.wikipedia.org/wiki/Homoscedasticity_and_heteroscedasticity)). In other words, our model should be equally accurate/wrong across the whole range of its predictions. To assess this assumption, we can look at a scatterplot of the standardized (i.e., z-scores) model predictions and residuals, and hope to see an uncorrelated cloud of points, rather than some other shape (e.g., funnel shape).
+
+
+```{r, fig.align='center', echo=FALSE}
+par(mfrow = c(1, 2))
+plot( scale(mainModel$fitted.values), scale(mainModel$residuals), las = 1, 
+      ylab = "z-score residual", xlab = "z-score prediction", 
+      main = "Z-Prediction vs. Z-Residual\nWith Intercept",
+      ylim=c(-3,3), xlim=c(-3, 3), pch = 21, bg = "turquoise", bty = "n")
+
+
+plot(scale(omitInterceptModel$fitted.values), scale(omitInterceptModel$residuals), las = 1, 
+     ylab = "z-score residual", xlab = "z-score prediction", 
+     main = "Z-Prediction vs. Z-Residual\nWithout Intercept",
+     ylim=c(-3,3), xlim=c(-3, 3), pch = 21, bg = "turquoise", bty = "n")
+
+zresido <- as.vector((omitInterceptModel$residuals))/ sd(omitInterceptModel$residuals)
+zresid <- as.vector((mainModel$residuals))/ sd(mainModel$residuals)
+
+
+```
+
+
+We can see that while the residuals on the left seem uncorrelated with the predicted values (correlation residual vs. prediction = `r round(cor(scale(mainModel$fitted.values), scale(mainModel$residuals)), 3)`), there is some systematic error going on in the model without intercept (correlation residual vs. prediction = `r round(cor(scale(omitInterceptModel$fitted.values), scale(omitInterceptModel$residuals)), 3)`).[^1]
+
+By omitting the intercept, we have introduced systematic error into our model: because the regression line needs to start at 0 (instead of 85), it will systematically *underestimate* low album sales, while it will systematically *overestimate* high album sales. The systematic error due to ignoring the intercept endangers the interpretation of the other regression coefficients: we will either under- or overestimate their influence.
+
+The systematic error introduced by omitting the intercept is also reflected by the Q-Q plots of the standardized residuals. Most of the dots are above the red line that indicates equivalence, which indicates an overall bias of the residuals: in addition to *underestimating* low album sales/*overestimating* high album sales, there is an overall underestimation bias of the model: 
+
+- mean residuals = `r round(mean(zresido), 4)` for the model without intercept
+- mean residuals = `r round(mean(zresid), 4)` for the model with intercept 
+ 
+```{r, fig.align='center', echo=FALSE, fig.width = 10}
+par(mfrow = c(1, 2), pty="s" )
+qqnorm(sort(zresid), las = 1, 
+     ylab = "Standardized Residuals", xlab = "Theoretical Quantiles", 
+     main = "Q-Q Standardized Residuals\nWith Intercept", 
+     xlim=c(-3, 3), ylim = c(-3, 3), pch = 21, bg = "pink", bty = "n")
+abline(0, 1, lwd = 2, col = "darkred")
+
+qqnorm(sort(zresido), las = 1, 
+     ylab = "Standardized Residuals", xlab = "Theoretical Quantiles", 
+     main = "Q-Q Standardized Residuals\nWithout Intercept", 
+     xlim=c(-3, 3), ylim = c(-3, 3), pch = 21, bg = "pink", bty = "n")
+abline(0, 1, lwd = 2, col = "darkred")
+```
+
+
+In conclusion, while the model might still have favorable model metrics, the systematic error indicates that the model is **miss-specified** and fails to capture important characteristics of the data (namely, its mean). Consequently, the various metrics ($b$'s, $t$, $F$) that are computed cannot be safely interpreted.
+
+
+### Why does the model without intercept still predict so well?
+
+**Disclaimer:** this is somewhat of a rabbit hole, so proceed with caution.
+
+> The .jasp file with the analyses can be downloaded [here](https://johnnydoorn.github.io/statistics-lectures/courses/SSR/SSR_2023-2024/MiscFiles_J/JASP_Files/Album%20Sales%20Intercept.jasp), and the results can be previewed [here](https://johnnydoorn.github.io/statistics-lectures/courses/SSR/SSR_2023-2024/MiscFiles_J/JASP_Files/Album%20Sales%20Intercept.html).
+
+Having said that, it can still be interesting to look into **why** these metrics are not to be trusted. The results given by software are still based on some computation, so how can these computations miss their mark? 
+
+The results are fairly counter-intuitive, because the $R^2$ value is even higher for the model without intercept, than the model with intercept:
+
+![](linRegOmitIntercept.png){width="600px"}
+![](linRegWithIntercept.png){width="600px"}
+
+The proportion of explained variance has a general notation:
+$$ R^2  = \frac{SS_M}{SS_T}. $$
+It is the model sum of squares (i.e., squared differences between prediction and the grand mean), divided by the total sum of squares (i.e., squared difference between observation and the grand mean). If we compute this for the model with the intercept, we get the following:
+```{r}
+SS_model <- sum((mainModel$fitted.values - mean(data$sales))^2)
+SS_total <- sum((data$sales - mean(data$sales))^2)
+SS_model / SS_total # R2 for the model with intercept
+```
+There is about 35% explained variance by looking at airplay. 
+What is happening implicitly here, is that we are using the predictions of the null model (i.e., the grand mean):
+- The model sum of squares is the difference between the alternative model and the null model predictions
+- The total sum of squares is the prediction error of the null model
+
+When we include the intercept, the null model also includes the intercept, which allows it to predict the grand mean. This allows us to use "mean(sales)" and "predictions of the null model" interchangeably. 
+
+However, when we exclude the intercept, the null model does not have an intercept, and so it simply predicts $0$. Now, the predictions of the null model are not equal to "mean(sales)" anymore, but to 0. If we want to apply the $R^2$ formula, we have to incorporate that information:
+```{r}
+SS_model <- sum((omitInterceptModel$fitted.values - 0)^2) # difference alternative and null predictions
+SS_total <- sum((data$sales - 0)^2) # error of the null model
+SS_model / SS_total # R2 for the model without intercept
+```
+We have retrieved the $R^2$ reported by JASP! It is much higher than the proportion of explained variance of the model with intercept, so why is that? Model comparison is inherently a relative endeavor: we compare one model's predictions to another model's predictions. When we compute an F-statistic or $R^2$ for a model, we compare it to another (e.g., null) model. When we omit the intercept, it is removed from both models. Without an intercept for the null model, the increase in predictive accuracy is much greater when adding the predictor variable, since it can explain some of the variance that is normally explained by the intercept. 
+
+This case underscores why assumptions matter: we might have found an alternative model (no intercept) that outperforms its null-equivalent by a greater margin than another alternative model (intercept). However, this either indicates the alternative model does fairly well, or the null model does very poorly. In the case of no intercept, the null model is predicting so poorly, that by comparison, the alternative model is awesome. Luckily, we are now equipped with various assumption testing tools that allow us to assess whether the models are miss-specified.   
+
+## Take-aways
+
+- Omitting the intercept can lead to a miss-specified model (i.e., a model with systematic bias/error).
+    - When the model is miss-specified, inference based on its estimates becomes unreliable and we run the risk of over- or under-estimating the population parameters. 
+    - **Exercise:** based on the .jasp file linked above, transform the sales variable by subtracting its mean value ([gif](https://johnnydoorn.github.io/statistics-lectures/courses/SSR/SSR_2023-2024/MiscFiles_J/JASP_Gifs/Getting-Started_CenterVariable.gif)). Then, rerun the linear regressions (with and without intercept) - what do you observe now? 
+- If we omit the intercept from the alternative model, it is also omitted from the null model.
+    - This generally leads to a larger gap between the null and alternative model, because the alternative model still has its continuous predictor to explain variance.
+    - Metrics that compare the alternative to the null model (e.g., F or $R^2$) are especially affected by omitting the intercept.
+
+
+
+
+[^1]: It can also be the case that such correlations between residual and prediction are 0, but there is still systematic error, such as a funnel shape ([example here](https://miro.medium.com/v2/resize:fit:1400/1*a5bBaHsYqBN1A4gYhXvD8w.png)); this is why a scatterplot is much more informative about this assumption than only looking at a correlation value. 

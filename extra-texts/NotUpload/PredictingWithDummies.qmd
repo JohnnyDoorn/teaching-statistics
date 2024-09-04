@@ -1,0 +1,144 @@
+---
+title: "Predicting with Dummies Part 1: Single Predictor"
+author: "JvD"
+date: "`r Sys.Date()`"
+output: html_document
+page-layout: full
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+To illustrate more clearly how we make predictions based on our statistical model, let's get our ducks in a row. We have our [observed data from the lecture](https://johnnydoorn.github.io/statistics-lectures/courses/SSR/SSR_2023-2024/12.%20ANCOVA/12.%20ANCOVA.html#the-data), loaded below. The dummy representation is especially important to see the similarity between ANOVA and linear regression. When we discuss regression in block 3 we will return to this similarity. 
+
+```{r}
+data <- read.csv("ExtraversionNationality.csv")
+data$nationality <-  factor(data$nationality, levels = c("Dutch", "German", "Belgian")) # make sure nationality is a factor
+head(data)
+```
+
+With observed group means:
+
+```{r}
+aggregate(extraversion ~ nationality, data, mean)
+```
+
+```{r, echo = FALSE}
+grMeans <- tapply(data$extraversion, data$nationality, mean)
+dutchMean <- grMeans[1]
+germMean <- grMeans[2]
+belgMean <- grMeans[3]
+b1 <- germMean - dutchMean
+b2 <- belgMean - dutchMean
+```
+
+If we predict only based on nationality, we want to predict three separate values (Dutch/German/Belgian). We can write this as a regression formula with an intercept ($b_0$) and two additional $b$'s that indicate the group differences. The $b_0$ (the intercept) can then be set to the observed Dutch mean ($b_0$ = `r dutchMean`), and the two additional $b$'s encode the difference between Dutch and German ($b_1$ = `r germMean` - `r dutchMean` = `r germMean - dutchMean`), and the difference between Dutch and Belgian ($b_2$ = `r belgMean` - `r dutchMean` = `r belgMean - dutchMean`). In such a way, to get the German mean, we sum $b_0$ and $b_1$: `r dutchMean` + `r b1` = `r germMean`.
+
+```{r}
+myModel <- lm(extraversion ~ nationality, data = data)
+myModel$coefficients # prints the estimated coefficients, these are b0, b1, b2
+```
+
+To complete the regression formula, such that we select the right $b$'s to sum, based on nationality, we can add **dummy variables** (also known as **indicator variables**). These are variables that are binary: 0 or 1, based on whether a participant belongs to certain group. For instance, we can add a dummy variable for Germans, where all Germans in the sample receive a 1, and the rest a 0:
+```{r}
+data[["germanDummy"]] <- ifelse(data$nationality == "German", yes = 1, no = 0)
+data[["belgianDummy"]] <- ifelse(data$nationality == "Belgian", yes = 1, no = 0) # and the same for the Belgians
+```
+
+With the dummies and $b$'s defined, we have a neat regression formula that illustrates how we predict values based on group membership:
+$$ \text{Extraversion prediction} =  b_0 + b_1 * \text{dummy}_{German} + b_2 * \text{dummy}_{Belgian}.$$
+Writing it in this way ensures that if someone is German, we start with the Dutch mean, and then add the difference between German and Dutch means, because we add  $b_1$ for Germans (since they have a 1 for $\text{dummy}_{German}$). We do **not** add $b_2$ for Germans, since they score a 0 on $\text{dummy}_{Belgian}$, and so $b_2 * \text{dummy}_{Belgian} = 0$.
+
+
+### Adding a covariate
+
+We can include a covariate in our model, although then the $b$'s are also adjusted based on the inclusion of the covariate (and are not exactly equal to the group differences anymore). However, the logic of plugging in the relevant variables in the regression formula ($b$'s, dummy values, and now also the covariate values) to get predictions from the model is still exactly the same. The regression formula that we fit now has an additional $b$ which indicates the association between the DV and covariate (extraversion and openness to experience):
+$$ \text{Extraversion prediction} =  b_0 + b_1 * \text{dummy}_{German} + b_2 * \text{dummy}_{Belgian} + b_3 * \text{Openness}.$$ 
+
+
+
+```{r}
+myModel <- lm(extraversion ~ nationality + openness, data = data) # now added openness as predictor
+coefs <- myModel$coefficients # extract model coefficients, these are b0, b1, b2, b3
+coefs # prints the estimated coefficients
+```
+Note how now the intercept is no long equal to the Dutch mean, but has bedome a bit more abstract due to the addition of a covariate. To get predictions for Dutch people, we now take the intercept ($b_0$), and add their openness score, multiplied by `r coefs[4]`. For Dutch people, both dummy variables are equal to 0, so we do not include $b_1$ or $b_2$. 
+For Germans, we take the same things as for Dutch people, but then still add $b_1$ (using the similar logic as with the previous model). 
+
+For instance, for participant 1, we estimate:
+```{r}
+data[1, ] # look at first row
+data[1, "openness"] # their openness score
+```
+
+$$ \text{Extraversion prediction} =  b_0 + b_1 * 0 + b_2 * 0 + b_3 * \text{Openness}.$$ 
+
+`r coefs[1]` + `r data[1, "covar"]` * `r coefs[4]` = `r coefs[1] + data[1, "openness"] * coefs[4]`. 
+
+However, for a German with the same Openness score, we would estimate:
+$$ \text{Extraversion prediction} =  b_0 + b_1 * 1 + b_2 * 0 + b_3 * \text{Openness}.$$ 
+`r coefs[1]` + `r coefs[2]` + `r data[1, "covar"]` * `r coefs[4]` = `r coefs[1] + coefs[2] + data[1, "openness"] * coefs[4]`. 
+
+
+
+### What now?
+Now that we know how to predict values based on a model, we can see how well those predictions match the observed values. This then allows us to partition the observed variance of the dependent variable into **model error** and **model accuracy**. 
+
+In order to get separate F-values for the two predictors, we can then further decompose the model accuracy sum of squares.
+We can fit different models again, look at their predictions, and obtain the sum of squares for each model's accuracy:
+```{r}
+modelGroup <- lm(extraversion ~ nationality, data = data)
+modelCovar <- lm(extraversion ~ openness, data = data)
+modelFull <- lm(extraversion ~ nationality + openness, data = data )
+
+groupPredictions <- round(modelGroup$fitted.values, 2) # predictions of the group model (simply the group means)
+ssGroupModel <- sum((groupPredictions - mean(data$extraversion))^2) # model accuracy for the group model only
+
+
+covarPredictions <-round(modelCovar$fitted.values, 2) # predictions of the covariate model
+ssCovarModel <- sum((covarPredictions - mean(data$extraversion))^2) # model accuracy for the covariate model only
+
+fullPredictions <- round(modelFull$fitted.values, 2) # predictions of the group model (simply the means)
+ssFullModel <- sum((fullPredictions - mean(data$extraversion))^2) # model accuracy for the full model
+
+ssFullModelError <- sum((fullPredictions - data$extraversion)^2) # sum squares of the error of the full model
+```
+
+The sums of squares of those simpler models (the one with only group `modelGroup`, and only covariate `modelCovar`), can be used to partition the model accuracy of the full model. We know that the full model accuracy is `r ssFullModel`, and that this is composed of accuracy from group, and from the covariate. 
+
+In order to get the full model accuracy that we can attribute to the covariate, we take the full model accuracy (`r ssFullModel`), and subtract the model accuracy of the group only model (`r ssGroupModel`): `r ssFullModel` - `r ssGroupModel` = `r ssFullModel - ssGroupModel`. 
+
+In the same way, we can get the accuracy of the full model that we can attribute to the group: `r ssFullModel` - `r ssCovarModel` = `r ssFullModel - ssCovarModel`.
+
+These are the same values we saw on the slides. To go from these sums of squares to the F-value, we first convert them to mean squares by dividing the sums of squares by the degrees of freedom of the effects. For nationality, this is equal to the number of groups - 1, so 2 in this case; for the covariate, this df equals 1. 
+
+To get the error mean square, we take the error sum of squares of the full model, divided by the error df ($N - k -1 = 16$):`r ssFullModelError` / 16 = `r  ssFullModelError / 16`.
+
+Together, the error mean square and the mean square of each predictor can be used to obtain their F-ratio:
+```{r}
+errorDF <- 16
+msFullError <- ssFullModelError / errorDF
+
+# partitioning the sum of squares of the full model, into which parts are explained by which predictor:
+# we base this on the individual models: we look at the accuracy of the group only model, and of the covariate only model
+
+# to divide the accuracy of the full model, we subtract the individual model accuracy from it:
+ssGroup <- (ssFullModel - ssCovarModel) # what is left of the full SS when we subtract the covariate accuracy?
+ssCovar <- (ssFullModel - ssGroupModel) # what is left of the full SS when we subtract the group accuracy?
+
+# converting these sum of squares to mean squares:
+msGroup <- ssGroup / 2
+msCovar <- ssCovar / 1
+
+# Now we have F-ratio's:
+fGroup <- msGroup / msFullError
+fCovar <- msCovar / msFullError
+
+fGroup
+fCovar
+```
+
+
+Based on the F ratio's we could then get p-values for hypothesis testing (or do much more fun stuff, like Bayes factors!)
