@@ -2,7 +2,7 @@
 title: "2. Statistical Reasoning"
 subtitle: "Null Hypothesis Testing"
 author: "Sharon Klinkenberg & Johnny van Doorn"
-date: "07 sep 2024"
+date: "10 sep 2024"
 footer: "Scientific & Statistical Reasoning"
 format: 
   html: default
@@ -22,7 +22,7 @@ format:
 ```{r child="../../topics/empirical_cycle/empirical_cycle.qmd"}
 ```
 
-```{r child="../../topics/alien_experiment/alien_experiment.qmd"}
+```{r child="../../topics/physics_experiment/physics_experiment.qmd"}
 ```
 
 

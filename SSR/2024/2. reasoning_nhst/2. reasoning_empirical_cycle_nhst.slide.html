@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.3.340">
 
   <meta name="author" content="Sharon Klinkenberg &amp; Johnny van Doorn">
-  <meta name="dcterms.date" content="2024-09-07">
+  <meta name="dcterms.date" content="2024-09-10">
   <title>2. Statistical Reasoning</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -402,7 +402,7 @@ Sharon Klinkenberg &amp; Johnny van Doorn
 </div>
 </div>
 
-  <p class="date">2024-09-07</p>
+  <p class="date">2024-09-10</p>
 </section>
 <section id="learning" class="slide level2">
 <h2>Learning</h2>
@@ -514,32 +514,49 @@ Sharon Klinkenberg &amp; Johnny van Doorn
 <section id="experiment" class="title-slide slide level1 section center">
 <h1>Experiment</h1>
 <!-- [Video registration](https://webcolleges.uva.nl/Mediasite/Play/ed1e63e0cd204dcf9d2a144603ce342b1d?playFrom=3708000) -->
+<ul>
+<li>What are some important statistical tools?</li>
+</ul>
 </section>
 <section id="test" class="slide level2">
 <h2>Test</h2>
 <div style="text-align:center;">
-<p><img src="proyi.png" style="width:40%;"></p>
+<p><img src="QR_Physics.png" style="width:40%;"></p>
 <p style="font-size: 30px;">
-https://maglit.me/proyi
+edu.nl/fn3r3
 </p>
 </div>
 </section>
-<section id="emperical-cycle" class="slide level2 section">
-<h2>Emperical Cycle</h2>
+<section id="measurement-tool" class="slide level2 section">
+<h2>Measurement Tool</h2>
 <ul>
-<li><strong>Observation</strong> Patient is showing strange behavior</li>
-<li><strong>Induction</strong> Can we diagnose an alien takeover?</li>
-<li><strong>Deduction</strong> <span class="math inline">\(H_0\)</span>: P: <span class="math inline">\(\theta = 0.5\)</span> → C: patient is human</li>
-<li><strong>Deduction</strong> <span class="math inline">\(H_A\)</span>: P: <span class="math inline">\(\theta &gt; 0.5\)</span> → C: patient is alien</li>
-<li><strong>Deduction</strong> <span class="math inline">\(H_A\)</span>: P: data <span class="math inline">\(\neq\)</span> EV → C: patient is alien</li>
+<li>Multiple choice test true/false
+<ul>
+<li>Q1: The vacuum state in quantum field theory is not actually empty but contains fluctuations of virtual particles.</li>
+</ul></li>
+<li>10 items/questions</li>
+<li>When do we decide someone is an expert?</li>
+</ul>
+</section>
+<section id="empirical-cycle-1" class="slide level2 section">
+<h2>Empirical Cycle</h2>
+<ul>
+<li><strong>Observation</strong> Someone seems to be very knowledgeable on physics</li>
+<li><strong>Induction</strong> They could be an expert in the field</li>
+<li><strong>Deduction</strong> <span class="math inline">\(H_0\)</span>: P: <span class="math inline">\(\theta = 0.5\)</span> → C: I was guessing</li>
+<li><strong>Deduction</strong> <span class="math inline">\(H_A\)</span>: P: <span class="math inline">\(\theta &gt; 0.5\)</span> → C: I have knowledge</li>
+<li><strong>Deduction</strong> <span class="math inline">\(H_A\)</span>: P: data <span class="math inline">\(\neq\)</span> EV → C: candidate is expert</li>
 <li><strong>Testing</strong> Choose <span class="math inline">\(\alpha\)</span> and Power</li>
 <li><strong>Evaluation</strong> Make a decision</li>
 </ul>
 </section>
+<section id="what-happens-if-they-are-guessing" class="slide level2">
+<h2>What happens if they are guessing?</h2>
+</section>
 <section id="null-distribution" class="slide level2 subsection">
 <h2>Null Distribution</h2>
 <p>Let’s analyse the null distribution of the results.</p>
-<iframe style="height:400px; width:100%;" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRcL5O7fPYtEfvqIQcRIFErAejbp8QozEW0Rx7m4p0xqA2-QU8CrMq35kVCD6q3CZH-CPhlJgXLZONc/pubhtml?widget=true&amp;headers=false">
+<iframe style="height:400px; width:100%;" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRQKRokJO9sF_AaCx_4oJhuI7mSzkRpksqTYmlR1UbCYDhejFfUIC4WRnUmywnNrNyv7cEgCHP-Zw9O/pubhtml?gid=1921457865&amp;single=true">
 </iframe>
 
 <!-- [Google sheet](https://docs.google.com/spreadsheets/d/150iSLUXqZbsetzDMjYlY5CAcjIzTanTm2tOFfn_ConA/edit?usp=sharing) -->
@@ -558,6 +575,10 @@ https://maglit.me/proyi
 <li>Sampling distribution</li>
 </ul>
 </section>
+<section id="distributions-1" class="slide level2">
+<h2>Distributions</h2>
+
+<img data-src="2.-reasoning_empirical_cycle_nhst_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
 <section id="binomial-distribution" class="slide level2">
 <h2>Binomial distribution</h2>
 <p><span class="math display">\[P(k \text{ success out of } n \text{ trials} \mid \text{probability } p) = {n\choose k}p^k(1-p)^{n-k}\]</span> where <span class="math display">\[ {n\choose k} = \frac{n!}{k!(n-k)!} \]</span></p>
@@ -565,7 +586,7 @@ https://maglit.me/proyi
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span>   <span class="co"># Sample size</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a>k <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span> <span class="co"># Discrete probability space (numbers 0, 1, ..., 9, 10)</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>p <span class="ot">&lt;-</span> .<span class="dv">5</span>   <span class="co"># Probability of head</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3"></a>p <span class="ot">&lt;-</span> .<span class="dv">5</span>   <span class="co"># Probability of correct guess</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="probabilities" class="slide level2">
@@ -574,10 +595,10 @@ https://maglit.me/proyi
 <img data-src="2.-reasoning_empirical_cycle_nhst_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section>
 <section id="testing" class="slide level2">
 <h2>Testing</h2>
-<p>I had 7 items correct. Can we conclude I am no longer human?</p>
+<p>The candidate had 8 items correct. Can we conclude they are a physics expert?</p>
 <ul>
-<li>As you can see from the distribution of human scores, we cannot conclude that by definition.</li>
-<li>What we can do is indicate how rare 7 is in a human population.</li>
+<li>As you can see from the distribution of novice scores, we cannot conclude that by definition.</li>
+<li>What we can do is indicate how rare 8 is in a novice.</li>
 </ul>
 </section>
 <section id="testing-1" class="slide level2 smaller">
@@ -587,21 +608,20 @@ https://maglit.me/proyi
 <li class="fragment">Based on the null distribution we can see that the expected value (EV) is 5</li>
 <li class="fragment">We can now define the <span class="math inline">\(H_0\)</span> hypothesis: <span class="math inline">\(H_0: EV = 5\)</span></li>
 <li class="fragment">What is the alternative hypothesis?</li>
-<li class="fragment">The alternative hypothesis describes a situation where the patient is alien</li>
+<li class="fragment">The alternative hypothesis describes a situation where the candidate is expert</li>
 <li class="fragment">We could say that the alternative hypothesis is not 5
 <ul>
 <li class="fragment"><span class="math inline">\(H_A: EV \ne 5\)</span></li>
 </ul></li>
 <li class="fragment">We could also formulate our <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_A\)</span> more abstract:
 <ul>
-<li class="fragment"><span class="math inline">\(H_0:\)</span> the patient is human</li>
-<li class="fragment"><span class="math inline">\(H_A:\)</span> the patient is alien</li>
+<li class="fragment"><span class="math inline">\(H_0:\)</span> the candidate is novice</li>
+<li class="fragment"><span class="math inline">\(H_A:\)</span> the candidate is expert</li>
 </ul></li>
-<li class="fragment">What criterion should we use to conclude that one would be alien?</li>
+<li class="fragment">What criterion should we use to conclude that one would be expert?</li>
 <li class="fragment">In the social sciences this <span class="math inline">\(\alpha\)</span> criteria is often 5%.</li>
-<li class="fragment">I scored 7 items correct. That is more frequent than 5%.</li>
-<li class="fragment">Therefore, we conclude that our patient is probably human but we can never be sure.</li>
-<li class="fragment">I could still be part of the alien population.</li>
+<li class="fragment">Candidate scored 8 items correct. That is more frequent than 5%.</li>
+<li class="fragment">Therefore, we conclude that our candidate is probably novice but we can never be sure.</li>
 </ul>
 </small><p><small></small></p>
 </section>

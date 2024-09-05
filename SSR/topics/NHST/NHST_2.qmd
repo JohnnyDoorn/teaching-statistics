@@ -348,11 +348,11 @@ Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Effect_size)
 
 ## Effect size {.flexbox .vcenter}
 
-![](../../../../topics/NHST/effect_size_base.png)
+![](../../topics/NHST/effect_size_base.png)
 
 ## Effect size {.flexbox .vcenter}
 
-![](../../../../topics/NHST/effect_size.png)
+![](../../topics/NHST/effect_size.png)
 
 ## One minus alpha
 
@@ -493,7 +493,7 @@ legend("topright", legend=c("H0","HA"), fill=c(colh0, colha))
 
 Reject $H_0$ when:
 
--   $p$-value $\leq$ $alpha$
+-   $p$-value $\leq$ $\alpha$
 
 ## P-value in $H_{0}$ distribution
 
@@ -545,7 +545,7 @@ Some common test statistics
 
 ## Reasoning Scheme {.subsection .flexbox .vcenter}
 
-![](../../../../topics/NHST/NHST_descision_scheme.png)
+![](../../topics/NHST/NHST_descision_scheme.png)
 
 ## R\<-PSYCHOLOGIST {.smaller}
 
