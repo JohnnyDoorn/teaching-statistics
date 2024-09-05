@@ -352,7 +352,7 @@ Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Effect_size)
 
 ## Effect size {.flexbox .vcenter}
 
-![](../../topics/NHST/effect_size.png)
+![](effect_size.png)
 
 ## One minus alpha
 
@@ -549,7 +549,7 @@ Some common test statistics
 
 ## R\<-PSYCHOLOGIST {.smaller}
 
-<iframe src="http://rpsychologist.com/d3/NHST/" width="1000" height="500" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0">
+<iframe src="http://rpsychologist.com/d3/NHST/" width="1000" height="500" style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0">
 
 </iframe>
 
