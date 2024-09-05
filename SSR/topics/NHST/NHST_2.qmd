@@ -545,7 +545,7 @@ Some common test statistics
 
 ## Reasoning Scheme {.subsection .flexbox .vcenter}
 
-![](../../topics/NHST/NHST_descision_scheme.png)
+![](NHST_decision_scheme.png)
 
 ## R\<-PSYCHOLOGIST {.smaller}
 
