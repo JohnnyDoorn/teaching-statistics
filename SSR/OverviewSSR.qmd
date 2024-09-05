@@ -7,7 +7,7 @@ date: today
 This page will be continuously updated to feature extra materials, such as applets, data sets, and additional explanations. 
 
 ## Book
-An online version of Discovering Statistics Using JASP is available [here](https://amsuni-my.sharepoint.com/:b:/g/personal/j_b_vandoorn_uva_nl/ESR4n5L9HB5KsKByVbDlsj0BoZLpYD2aWwJstikmEGU25g?e=dKODJR). Individual chapters available [here](https://amsuni-my.sharepoint.com/:f:/g/personal/j_b_vandoorn_uva_nl/EoyhXwuTGZtGvJaobtAr83kBRlGJdZm5_ivGZ9_gpl8yMg?e=RjlR9t).
+An online version of Discovering Statistics Using JASP is available [here](https://amsuni-my.sharepoint.com/:b:/g/personal/j_b_vandoorn_uva_nl/ESR4n5L9HB5KsKByVbDlsj0BoZLpYD2aWwJstikmEGU25g?e=dKODJR). Individual chapters available [here](https://amsuni-my.sharepoint.com/:f:/g/personal/j_b_vandoorn_uva_nl/EoyhXwuTGZtGvJaobtAr83kBCA-BWxgKN6-kPvKIhKxaEg?e=k0eNPP).
 
 ## Applets
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
