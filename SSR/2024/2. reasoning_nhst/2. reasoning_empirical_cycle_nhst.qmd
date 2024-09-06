@@ -1,5 +1,5 @@
 ---
-title: "2. Statistical Reasoning"
+title: "4. Statistical Reasoning"
 subtitle: "Null Hypothesis Testing"
 author: "Sharon Klinkenberg & Johnny van Doorn"
 date: "10 sep 2024"
@@ -13,6 +13,19 @@ format:
 ## Learning
 
 <iframe style="height:400px;  width:100%;" src="https://www.youtube.com/embed/JC82Il2cjqA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## About SSR
+
+- Book: Discovering Statistics Using JASP
+- Software: 
+    - JASP - main tool for analyses, data management
+    - R - using it as calculator
+- Practice: 
+    - Tutorials, PA in Ans
+    - [Companion website of book](https://johnnydoorn.github.io/discoverjasp/) 
+        - Smart Alex tasks
+        - Labcoat Leni
+        - Self-tests
 
 <!-- Add the required topics below -->
 
