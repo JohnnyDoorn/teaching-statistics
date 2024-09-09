@@ -6,7 +6,7 @@ date: "10 sep 2024"
 footer: "Scientific & Statistical Reasoning"
 format:
   revealjs:
-    output-ext: slides.html
+    output-ext: slide.html
   html: default
 ---
 
