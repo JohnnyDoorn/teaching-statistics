@@ -4,10 +4,10 @@ subtitle: "Null Hypothesis Testing"
 author: "Sharon Klinkenberg & Johnny van Doorn"
 date: "10 sep 2024"
 footer: "Scientific & Statistical Reasoning"
-format: 
+format:
+  revealjs:
+    output-ext: slides.html
   html: default
-  revealjs: 
-    output-ext: slide.html
 ---
 
 ## Learning
@@ -23,7 +23,7 @@ format:
     - JASP - main tool for analyses, data management
     - R - using it as calculator
 - Practice: 
-    - Tutorials, PA in Ans
+    - Tutorials, WA in Ans
     - [Companion website of book](https://johnnydoorn.github.io/discoverjasp/) 
         - Smart Alex tasks
         - Labcoat Leni
