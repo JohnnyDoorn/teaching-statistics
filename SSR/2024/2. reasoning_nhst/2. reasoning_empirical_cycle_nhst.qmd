@@ -17,6 +17,8 @@ format:
 ## About SSR
 
 - Book: Discovering Statistics Using JASP
+    - For now only available in-browser [here](https://amsuni-my.sharepoint.com/:b:/g/personal/j_b_vandoorn_uva_nl/ESR4n5L9HB5KsKByVbDlsj0BoZLpYD2aWwJstikmEGU25g?e=dKODJR)
+        - Individual chapters available [here](https://amsuni-my.sharepoint.com/:f:/g/personal/j_b_vandoorn_uva_nl/EoyhXwuTGZtGvJaobtAr83kBCA-BWxgKN6-kPvKIhKxaEg?e=k0eNPP).
 - Software: 
     - JASP - main tool for analyses, data management
     - R - using it as calculator
