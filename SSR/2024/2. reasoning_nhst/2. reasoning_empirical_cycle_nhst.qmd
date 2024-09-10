@@ -40,6 +40,12 @@ format:
 ```{r child="../../topics/physics_experiment/physics_experiment.qmd"}
 ```
 
+## Next Time
+
+- More Frequentist statistics
+- [Interactive applet](https://statisticalreasoning-uva.shinyapps.io/NHST_Binomial) 
+
+
 
 ```{r child="../../footer.qmd"}
 ```
