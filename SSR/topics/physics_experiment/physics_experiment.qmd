@@ -74,6 +74,7 @@ data <- read.csv(curl(url))
 scores <- as.numeric(sub(" /.*", "", data$Score))
 freq.table <- table(sort(scores))
 barplot(freq.table)
+write.csv(data.frame(Score = scores), file = "~/Downloads/PhysicsScores.csv", row.names = FALSE)
 ```
 
 ## Binomial distribution

@@ -68,9 +68,9 @@ htmlFiles <- gsub(x =files, pattern = ".jasp", replacement = ".html")
 
 htmlFiles <- gsub(x =files, pattern = ".jasp", replacement = ".html")
 htmlFound <- list.files(full.names = FALSE, pattern = "\\html", recursive = FALSE, 
-                    path = paste0(getwd(),"/JASP_Files"))
+                    path = "../datasets")
 csvFound  <- list.files(full.names = FALSE, pattern = "\\csv", recursive = FALSE, 
-                    path = paste0(getwd(),"/JASP_Files"))
+                    path = "../datasets")
   
 htmlLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistcs/datasets/%s" target="_blank" class="external">link</a>',htmlFiles) 
 htmlLinks[!(htmlFiles %in% htmlFound)] <- "-"
