@@ -103,27 +103,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="population-distribution" class="level2 smaller subsection">
 <h2 class="smaller subsection anchored" data-anchor-id="population-distribution">Population distribution</h2>
 <div class="cell" data-output-location="slide">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">7</span><span class="sc">:</span><span class="dv">8</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">9</span><span class="sc">:</span><span class="dv">13</span>), <span class="dv">4</span>, <span class="dv">4</span>))</span>
-<span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a>n  <span class="ot">=</span> <span class="dv">56</span>    <span class="co"># Sample size</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>df <span class="ot">=</span> n <span class="sc">-</span> <span class="dv">1</span> <span class="co"># Degrees of freedom</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a>mu    <span class="ot">=</span> <span class="dv">100</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a>sigma <span class="ot">=</span> <span class="dv">15</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a>IQ <span class="ot">=</span> <span class="fu">seq</span>(mu<span class="dv">-45</span>, mu<span class="sc">+</span><span class="dv">45</span>, <span class="dv">1</span>)</span>
-<span id="cb1-10"><a href="#cb1-10"></a></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">0</span>))  </span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="fu">plot</span>(IQ, <span class="fu">dnorm</span>(IQ, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma), <span class="at">type=</span><span class="st">'l'</span>, <span class="at">col=</span><span class="st">"red"</span>, <span class="at">main =</span> <span class="st">"Population Distribution"</span>)</span>
-<span id="cb1-13"><a href="#cb1-13"></a></span>
-<span id="cb1-14"><a href="#cb1-14"></a>n.samples <span class="ot">=</span> <span class="dv">12</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a></span>
-<span id="cb1-16"><a href="#cb1-16"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n.samples) {</span>
-<span id="cb1-17"><a href="#cb1-17"></a>  </span>
-<span id="cb1-18"><a href="#cb1-18"></a>  <span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">0</span>))  </span>
-<span id="cb1-19"><a href="#cb1-19"></a>  <span class="fu">hist</span>(<span class="fu">rnorm</span>(n, mu, sigma), <span class="at">main=</span><span class="st">"Sample Distribution"</span>, <span class="at">cex.axis=</span>.<span class="dv">5</span>, <span class="at">col=</span><span class="st">"beige"</span>, <span class="at">cex.main =</span> .<span class="dv">75</span>)</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">7</span><span class="sc">:</span><span class="dv">8</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">9</span><span class="sc">:</span><span class="dv">13</span>), <span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a>n  <span class="ot">&lt;-</span> <span class="dv">50</span>    <span class="co"># Sample size</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>df <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span> <span class="co"># Degrees of freedom</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a>mu    <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>sigma <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a>IQ <span class="ot">&lt;-</span> <span class="fu">seq</span>(mu<span class="dv">-45</span>, mu<span class="sc">+</span><span class="dv">45</span>, <span class="dv">1</span>)</span>
+<span id="cb1-11"><a href="#cb1-11"></a></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">0</span>))  </span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="fu">plot</span>(IQ, <span class="fu">dnorm</span>(IQ, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma), <span class="at">type=</span><span class="st">'l'</span>, <span class="at">col=</span><span class="st">"black"</span>, <span class="at">main =</span> <span class="st">"Population Distribution"</span>, </span>
+<span id="cb1-14"><a href="#cb1-14"></a>     <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">bty=</span> <span class="st">"n"</span>, <span class="at">axes =</span> <span class="cn">FALSE</span>, <span class="at">xlab =</span> <span class="fu">c</span>(<span class="dv">60</span>, <span class="dv">140</span>))</span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="fu">axis</span>(<span class="dv">1</span>)</span>
+<span id="cb1-16"><a href="#cb1-16"></a></span>
+<span id="cb1-17"><a href="#cb1-17"></a>n.samples <span class="ot">&lt;-</span> <span class="dv">12</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a></span>
+<span id="cb1-19"><a href="#cb1-19"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n.samples) {</span>
 <span id="cb1-20"><a href="#cb1-20"></a>  </span>
-<span id="cb1-21"><a href="#cb1-21"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-21"><a href="#cb1-21"></a>  <span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">0</span>))  </span>
+<span id="cb1-22"><a href="#cb1-22"></a>  <span class="fu">hist</span>(<span class="fu">rnorm</span>(n, mu, sigma), <span class="at">main=</span><span class="st">"Sample Distribution"</span>, <span class="at">xlab =</span> <span class="fu">c</span>(<span class="dv">60</span>, <span class="dv">140</span>),</span>
+<span id="cb1-23"><a href="#cb1-23"></a>       <span class="at">cex.axis=</span>.<span class="dv">5</span>, <span class="at">col=</span><span class="fu">rainbow</span>(<span class="dv">12</span>)[i], <span class="at">cex.main =</span> .<span class="dv">75</span>, <span class="at">las =</span> <span class="dv">1</span>, <span class="at">axes =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-24"><a href="#cb1-24"></a><span class="fu">axis</span>(<span class="dv">1</span>)</span>
+<span id="cb1-25"><a href="#cb1-25"></a>  </span>
+<span id="cb1-26"><a href="#cb1-26"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="t-distribution_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -135,19 +140,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma); x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 107.09180  97.25481 100.08244  74.02554 113.79253 101.93258 117.12756
- [8] 103.31973 107.03028  64.28057 107.44072  96.40775 104.36085  98.21513
-[15]  98.84927  87.45974 114.19622  78.82977 103.72061 108.55073  94.06904
-[22]  94.64199 119.95092  99.98130  98.57316 122.29340 125.20188 103.19777
-[29] 100.65556  91.51249  91.37565 102.96458 115.63488 111.47756  97.86305
-[36] 118.50794  87.15078  68.84459 106.13391  63.13558 106.19265 101.46863
-[43] 111.49339  91.43165  87.14183 124.67344 116.59090 102.43376 121.13077
-[50]  85.52442  84.06578  83.75917 109.12030  83.52501 103.75458  89.34376</code></pre>
+<pre><code> [1] 116.11018  99.58980  99.50004  77.25899 111.85578  96.83899  90.14886
+ [8]  78.81961  95.50356  87.26408  94.04454  81.73600 125.31384  99.75996
+[15] 116.12418  60.97450  93.20203  89.86777  81.65611 123.19914  78.77077
+[22] 104.77585 112.69654 102.67285  86.87117 114.11749 102.55882  84.04753
+[29]  79.17926 131.30076  89.82245  72.16643 107.99889 104.65345  79.69248
+[36]  70.85565  98.25546 117.09094 109.54186  92.60594  87.48718 104.06600
+[43] 102.36030 109.44568  94.06303 113.49031  87.53783  95.04183 111.11222
+[50] 114.84957</code></pre>
 </div>
 </div>
 <div class="cell" data-output-location="slide">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x, <span class="at">main =</span> <span class="st">"Sample distribution"</span>, <span class="at">col =</span> <span class="st">"beige"</span>, <span class="at">breaks =</span> <span class="dv">15</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">80</span>, <span class="dv">10</span>, <span class="fu">round</span>(<span class="fu">mean</span>(x),<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x, <span class="at">main =</span> <span class="st">"Sample distribution"</span>, <span class="at">col =</span> <span class="fu">rainbow</span>(<span class="dv">12</span>)[<span class="dv">6</span>], <span class="at">breaks =</span> <span class="dv">15</span>, <span class="at">las =</span><span class="dv">1</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">125</span>, <span class="dv">7</span>, <span class="fu">bquote</span>(<span class="fu">bar</span>(x) <span class="sc">~</span> <span class="st">" = "</span> <span class="sc">~</span> .(<span class="fu">round</span>(<span class="fu">mean</span>(x),<span class="dv">2</span>))), <span class="at">cex =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="t-distribution_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -174,12 +179,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">cbind</span>(mean.x.values, se.x.values))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     mean.x.values se.x.values
-[1,]     102.33399    1.760393
-[2,]      98.15819    1.659842
-[3,]     100.55090    1.983535
-[4,]     102.89419    1.983144
-[5,]      98.63609    2.251872
-[6,]      97.93184    2.046164</code></pre>
+[1,]      97.95275    2.214004
+[2,]     103.18582    2.273371
+[3,]      99.99038    2.000590
+[4,]      99.90585    2.182437
+[5,]     102.90184    2.281151
+[6,]     101.50350    2.200165</code></pre>
 </div>
 </div>
 </section>
@@ -188,9 +193,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Of the mean</p>
 <div class="cell" data-output-location="slide">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(mean.x.values, </span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">col  =</span> <span class="st">"beige"</span>, </span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Sampling distribution"</span>, </span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"all sample means"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">col  =</span> <span class="fu">rainbow</span>(<span class="dv">12</span>),</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Sampling distribution of the mean"</span>, </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"1,000 sample means"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="t-distribution_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -208,7 +213,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>tStat <span class="ot">&lt;-</span> (<span class="fu">mean</span>(x) <span class="sc">-</span> mu) <span class="sc">/</span> (<span class="fu">sd</span>(x) <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>tStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -2.681349</code></pre>
+<pre><code>[1] -1.44089</code></pre>
 </div>
 </div>
 </section>
@@ -221,12 +226,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(<span class="fu">cbind</span>(mean.x.values, mu, se.x.values, t.values))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        mean.x.values  mu se.x.values    t.values
- [995,]      99.69852 100    1.891910 -0.15935238
- [996,]     100.94775 100    2.041001  0.46435596
- [997,]     100.75973 100    1.772873  0.42853209
- [998,]      99.79289 100    2.273755 -0.09108605
- [999,]      97.00431 100    1.932138 -1.55045598
-[1000,]      94.97935 100    1.872436 -2.68134884</code></pre>
+ [995,]     104.50415 100    2.440743  1.84539987
+ [996,]      98.14145 100    1.980949 -0.93821319
+ [997,]      99.79017 100    2.351101 -0.08924917
+ [998,]     101.63763 100    2.070541  0.79091992
+ [999,]     103.63661 100    2.409829  1.50907422
+[1000,]      96.48503 100    2.439441 -1.44089031</code></pre>
 </div>
 </div>
 </section>
@@ -238,10 +243,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">freq =</span> <span class="cn">FALSE</span>, </span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Sampled T-values"</span>, </span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"T-values"</span>,</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">col  =</span> <span class="st">"beige"</span>,</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">4</span>))</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">col  =</span> <span class="fu">rainbow</span>(<span class="dv">12</span>),</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">5</span>))</span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>myTs <span class="ot">=</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>, .<span class="dv">01</span>)</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(myTs, <span class="fu">dt</span>(myTs,df), <span class="at">col =</span> <span class="st">"red"</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(myTs, <span class="fu">dt</span>(myTs,df), <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">"black"</span>)</span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">col=</span><span class="st">"red"</span>, <span class="at">legend =</span> <span class="st">"T-distribution"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="t-distribution_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
@@ -277,6 +282,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><span class="math inline">\(H_A: \bar{x} &gt; \mu\)</span></li>
 <li><span class="math inline">\(H_A: \bar{x} &lt; \mu\)</span></li>
 </ul>
+<p><a href="https://johnnydoorn.github.io/teaching-statistics/extra-texts/OneSidedVsTwoSided.html">Additional text here</a></p>
 </section>
 <section id="section-1" class="level2">
 <h2 class="anchored" data-anchor-id="section-1"></h2>
@@ -286,38 +292,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="effect-size" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="effect-size">Effect-size</h2>
-<p>The effect-size is the standardized difference between the mean and the expected <span class="math inline">\(\mu\)</span>. In the t-test effect-size is expressed as <span class="math inline">\(r\)</span>.</p>
-<p><span class="math display">\[r = \sqrt{\frac{t^2}{t^2 + \text{df}}}\]</span></p>
-<p>Tukey (1969):</p>
+<section id="effect-size-d" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="effect-size-d">Effect-size d</h2>
+<p>The effect-size is the standardized difference between the mean and the expected <span class="math inline">\(\mu\)</span>. In the t-test, effect-size can be expressed as <span class="math inline">\(d\)</span> (Cohen’s d)). <span class="math display">\[d = \frac{\bar{x}}{s} = \frac{t}{\sqrt{n}}\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>cohenD <span class="ot">&lt;-</span> tStat <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>cohenD</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2828427</code></pre>
+</div>
+</div>
+<p>See Tukey (1969) and Section 3.7.4 of Field:</p>
 <blockquote class="blockquote">
 <p>being so disinterested in our variables that we do not care about their units can hardly be desirable.</p>
 </blockquote>
+</section>
+<section id="effect-size-r" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="effect-size-r">Effect-size r</h2>
+<p>Another option is to have the effect size expressed as <span class="math inline">\(r\)</span> (similar to correlation coefficient). <span class="math display">\[r = \sqrt{\frac{t^2}{t^2 + \text{df}}}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(tStat<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> (tStat<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> df))</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(tStat<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> (tStat<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> df))</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2603778</code></pre>
+<pre><code>[1] 0.2747211</code></pre>
 </div>
 </div>
 </section>
 <section id="effect-sizes" class="level2">
 <h2 class="anchored" data-anchor-id="effect-sizes">Effect-sizes</h2>
-<p>We can also calculate effect-sizes for all our calculated t-values. Under the assumption of <span class="math inline">\(H_0\)</span> the effect-size distribution looks like this.</p>
+<p>We can also calculate effect-sizes <span class="math inline">\(r\)</span> for all our calculated t-values. Under the assumption of <span class="math inline">\(H_0\)</span> the effect-size distribution looks like this.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(t.values<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>(t.values<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> df))</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(<span class="fu">cbind</span>(mean.x.values, mu, se.x.values, t.values, r))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(t.values<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>(t.values<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> df))</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(<span class="fu">cbind</span>(mean.x.values, mu, se.x.values, t.values, r))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        mean.x.values  mu se.x.values    t.values          r
- [995,]      99.69852 100    1.891910 -0.15935238 0.02148211
- [996,]     100.94775 100    2.041001  0.46435596 0.06249137
- [997,]     100.75973 100    1.772873  0.42853209 0.05768703
- [998,]      99.79289 100    2.273755 -0.09108605 0.01228111
- [999,]      97.00431 100    1.932138 -1.55045598 0.20463913
-[1000,]      94.97935 100    1.872436 -2.68134884 0.34001206</code></pre>
+ [995,]     104.50415 100    2.440743  1.84539987 0.25491891
+ [996,]      98.14145 100    1.980949 -0.93821319 0.13284256
+ [997,]      99.79017 100    2.351101 -0.08924917 0.01274885
+ [998,]     101.63763 100    2.070541  0.79091992 0.11227416
+ [999,]     103.63661 100    2.409829  1.50907422 0.21074050
+[1000,]      96.48503 100    2.439441 -1.44089031 0.20161451</code></pre>
 </div>
 </div>
 </section>
@@ -325,7 +342,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="effect-size-distribution">Effect-size distribution</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="t-distribution_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+<p><img src="t-distribution_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Cohen (1988)</p>
@@ -348,74 +365,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="alpha-power" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="alpha-power">Alpha Power</h2>
-<div class="cell" data-layout-align="center" data-output-location="slide">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>tValues <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">6</span>,.<span class="dv">01</span>)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">45</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>E <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Set plot</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">0</span>,<span class="dv">0</span>,</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"n"</span>,</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Density"</span>,</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"T"</span>,</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,.<span class="dv">5</span>),</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">6</span>),</span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"T-Distributions under H0 and HA"</span>)</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>critical_t <span class="ot">=</span> <span class="fu">qt</span>(.<span class="dv">05</span>,N<span class="dv">-1</span>,<span class="at">lower.tail=</span><span class="cn">FALSE</span>)</span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Alpha</span></span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>range_x <span class="ot">=</span> <span class="fu">seq</span>(critical_t,<span class="dv">6</span>,.<span class="dv">01</span>)</span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">c</span>(range_x,<span class="fu">rev</span>(range_x)),</span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>        <span class="fu">c</span>(range_x<span class="sc">*</span><span class="dv">0</span>,<span class="fu">rev</span>(<span class="fu">dt</span>(range_x,N<span class="dv">-1</span>,<span class="at">ncp=</span><span class="dv">0</span>))),</span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">col     =</span> <span class="st">"grey"</span>,</span>
-<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">density =</span> <span class="dv">10</span>,</span>
-<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">angle   =</span> <span class="dv">90</span>,</span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">lwd     =</span> <span class="dv">2</span>)</span>
-<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Power</span></span>
-<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>range_x <span class="ot">=</span> <span class="fu">seq</span>(critical_t,<span class="dv">6</span>,.<span class="dv">01</span>)</span>
-<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">c</span>(range_x,<span class="fu">rev</span>(range_x)),</span>
-<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>        <span class="fu">c</span>(range_x<span class="sc">*</span><span class="dv">0</span>,<span class="fu">rev</span>(<span class="fu">dt</span>(range_x,N<span class="dv">-1</span>,<span class="at">ncp=</span>E))),</span>
-<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">col     =</span> <span class="st">"grey"</span>,</span>
-<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">density =</span> <span class="dv">10</span>,</span>
-<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">angle   =</span> <span class="dv">45</span>,</span>
-<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">lwd     =</span> <span class="dv">2</span>)</span>
-<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(tValues,<span class="fu">dt</span>(tValues,N<span class="dv">-1</span>,<span class="at">ncp=</span><span class="dv">0</span>),<span class="at">col=</span><span class="st">"red"</span>, <span class="at">lwd=</span><span class="dv">2</span>) <span class="co"># H0 line</span></span>
-<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(tValues,<span class="fu">dt</span>(tValues,N<span class="dv">-1</span>,<span class="at">ncp=</span>E),<span class="at">col=</span><span class="st">"blue"</span>,<span class="at">lwd=</span><span class="dv">2</span>) <span class="co"># HA line</span></span>
-<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Critical value</span></span>
-<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">rep</span>(critical_t,<span class="dv">2</span>),<span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">dt</span>(critical_t,N<span class="dv">-1</span>,<span class="at">ncp=</span>E)),<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">col=</span><span class="st">"black"</span>)</span>
-<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(critical_t,<span class="fu">dt</span>(critical_t,N<span class="dv">-1</span>,<span class="at">ncp=</span>E),<span class="st">"critical T-value"</span>,<span class="at">pos=</span><span class="dv">2</span>, <span class="at">srt =</span> <span class="dv">90</span>)</span>
-<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a><span class="co"># H0 and HA</span></span>
-<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">0</span>,<span class="fu">dt</span>(<span class="dv">0</span>,N<span class="dv">-1</span>,<span class="at">ncp=</span><span class="dv">0</span>),<span class="fu">expression</span>(H[<span class="dv">0</span>]),<span class="at">pos=</span><span class="dv">3</span>,<span class="at">col=</span><span class="st">"red"</span>, <span class="at">cex=</span><span class="dv">2</span>)</span>
-<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(E,<span class="fu">dt</span>(E,N<span class="dv">-1</span>,<span class="at">ncp=</span>E),<span class="fu">expression</span>(H[A]),<span class="at">pos=</span><span class="dv">3</span>,<span class="at">col=</span><span class="st">"blue"</span>,<span class="at">cex=</span><span class="dv">2</span>)</span>
-<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Mu H0 line</span></span>
-<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>),<span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">dt</span>(<span class="dv">0</span>,N<span class="dv">-1</span>)), <span class="at">col=</span><span class="st">"red"</span>,  <span class="at">lwd=</span><span class="dv">2</span>,<span class="at">lty=</span><span class="dv">2</span>)</span>
-<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">0</span>,<span class="fu">dt</span>(<span class="dv">0</span>,N<span class="dv">-1</span>,<span class="at">ncp=</span><span class="dv">0</span>)<span class="sc">/</span><span class="dv">2</span>,<span class="fu">expression</span>(mu),<span class="at">pos=</span><span class="dv">4</span>,<span class="at">cex=</span><span class="fl">1.2</span>)</span>
-<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Mu HA line</span></span>
-<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">c</span>(E,E),<span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">dt</span>(E,N<span class="dv">-1</span>,<span class="at">ncp=</span>E)),<span class="at">col=</span><span class="st">"blue"</span>,<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">lty=</span><span class="dv">2</span>)</span>
-<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(E,<span class="fu">dt</span>(<span class="dv">0</span>,N<span class="dv">-1</span>,<span class="at">ncp=</span><span class="dv">0</span>)<span class="sc">/</span><span class="dv">2</span>,<span class="fu">expression</span>(<span class="fu">paste</span>(mu)),<span class="at">pos=</span><span class="dv">4</span>,<span class="at">cex=</span><span class="fl">1.2</span>)</span>
-<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a><span class="co"># t-value</span></span>
-<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>( <span class="fu">c</span>(critical_t<span class="fl">+.01</span>,<span class="dv">6</span>),<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>),<span class="at">col=</span><span class="st">"green"</span>,<span class="at">lwd=</span><span class="dv">4</span>)</span>
-<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a><span class="co"># Legend</span></span>
-<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="fu">c</span>(<span class="fu">expression</span>(alpha),<span class="st">'POWER'</span>),<span class="at">density=</span><span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">10</span>),<span class="at">angle=</span><span class="fu">c</span>(<span class="dv">90</span>,<span class="dv">45</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="t-distribution_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="section-2" class="level2">
-<h2 class="anchored" data-anchor-id="section-2"></h2>
 <p><a href="http://rpsychologist.com/d3/NHST/#viz">R-Psychologist</a></p>
 </section>
 </section>

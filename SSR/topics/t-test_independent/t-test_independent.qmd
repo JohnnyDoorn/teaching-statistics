@@ -39,13 +39,13 @@ Specific for independent sample $t$-test.
 
 ## Example
 
-We are going to use the IQ estimates we collected last week again. You had to guess the IQ of the one sitting next to you and your own IQ. But we are going to add class position to the data set. We did not register this so we are going to simulate some positions.
+We are going to use the IQ estimates we collected. You had to guess the IQ of the one sitting next to you and your own IQ. But we are going to add class position to the data set. We did not register this so we are going to simulate some positions.
 
 ```{r, warning=FALSE, echo=FALSE, message=FALSE}
 if(!'gsheet' %in% installed.packages()) { install.packages('gsheet') }
 library("gsheet")
-data <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1LN8j2MgTk1Su-hZCbFjexiUKQx-LmbgGqlpN6YzF2jQ/edit?usp=sharing')[, -1]
-
+data <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1E9tlgFEv8OAyPBe_y2lwn2eUI1JmCg05Wk_wONAK1UM/edit?usp=sharing')[, -1]
+colnames(data) <- c("ownIQ", "nextIQ")
 # data = data[grep("2017", as.character(data$Timestamp)),c("IQ next to you", "Own IQ")]
 
 nextIQ <- data$nextIQ
@@ -148,7 +148,8 @@ Two tailed
 if(!"visualize" %in% installed.packages()) { install.packages("visualize") }
 library("visualize")
 
-if (df == 2) df <- df + 1 # cheat to be able to build slides.. 
+if (df <= 3) df <- df + 5 # cheat to be able to build slides.. 
+if (is.na(tStat)) tStat <- 1 # cheat to be able to build slides.. 
 visualize.t(c(-round(tStat, 2), round(tStat, 2)), df+1, section="tails")
 ```
 
@@ -169,6 +170,7 @@ d
 ## But what about equal variances?!
 
 There exist different hypothesis tests for this - the most used is Levene's test:
+
 ```{r, echo=TRUE, warning=FALSE, message=FALSE}
 
 if(!"car" %in% installed.packages()) { install.packages("car") }
@@ -176,6 +178,12 @@ library("car")
 
 leveneTest(y = ownIQ, group = classPosition)
 ```
+
+## But what about equal variances?!
+
+::: {.callout-warning}
+Levene's test (and other significance tests like it, such as Shapiro for normality) are heavily influenced by sample size, so a significant test result does not necessarily mean that you have a problem. A more pragmatic rule of thumb is to look at the ratio of variances - a ratio greater than 2 is problematic. Additionally, Welch test is a version of the $t$-test that handles unequal variances better. 
+:::
 
 ## The difference only matters when $n_A \neq n_B$!
 

@@ -41,7 +41,8 @@ Let's take a look at the data.
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, eval=TRUE}
 if(!'gsheet' %in% installed.packages()) { install.packages('gsheet') }
 library("gsheet")
-data <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1LN8j2MgTk1Su-hZCbFjexiUKQx-LmbgGqlpN6YzF2jQ/edit?usp=sharing')[, -1]
+data <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1E9tlgFEv8OAyPBe_y2lwn2eUI1JmCg05Wk_wONAK1UM/edit?usp=sharing')[, -1]
+colnames(data) <- c("ownIQ", "nextIQ")
 
 # data = data[grep("2017", as.character(data$Timestamp)),c("IQ next to you", "Own IQ")]
 
@@ -113,7 +114,7 @@ Two tailed
 if(!"visualize" %in% installed.packages()) { install.packages("visualize") }
 library("visualize")
 
-visualize.t(c(-tStat,tStat), df, section="tails")
+visualize.t(c(-tStat,tStat), ifelse(df > 2, df, 5), section="tails")
 ```
 
 ## Effect-size {.subsection}
@@ -127,7 +128,7 @@ r
 
 ## Confidence interval (bonus)
 
-To display correct confidence intervals in SPSS we need to correct the original scores for whithin subject variation.
+To display correct confidence intervals in SPSS we need to correct the original scores for within subject variation.
 
 <code><pre>
 ** SPSS SYNTAX

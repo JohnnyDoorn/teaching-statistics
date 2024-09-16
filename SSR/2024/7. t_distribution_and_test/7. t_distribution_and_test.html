@@ -70,6 +70,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="7. t_distribution_and_test_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="7. t_distribution_and_test_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
+<link href="7. t_distribution_and_test_files/libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="7. t_distribution_and_test_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="7. t_distribution_and_test_files/libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="7. t_distribution_and_test_files/libs/datatables-binding-0.33/datatables.js"></script>
+<script src="7. t_distribution_and_test_files/libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="7. t_distribution_and_test_files/libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="7. t_distribution_and_test_files/libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="7. t_distribution_and_test_files/libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="7. t_distribution_and_test_files/libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="7. t_distribution_and_test_files/libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
@@ -79,7 +90,92 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="7. t_distribution_and_test.slide.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></div>
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#t-distribution" id="toc-t-distribution" class="nav-link active" data-scroll-target="#t-distribution">T-distribution</a>
+  <ul class="collapse">
+  <li><a href="#gosset" id="toc-gosset" class="nav-link" data-scroll-target="#gosset">Gosset</a></li>
+  <li><a href="#population-distribution" id="toc-population-distribution" class="nav-link" data-scroll-target="#population-distribution">Population distribution</a></li>
+  <li><a href="#a-sample" id="toc-a-sample" class="nav-link" data-scroll-target="#a-sample">A sample</a></li>
+  <li><a href="#more-samples" id="toc-more-samples" class="nav-link" data-scroll-target="#more-samples">More samples</a></li>
+  <li><a href="#mean-and-se-for-all-samples" id="toc-mean-and-se-for-all-samples" class="nav-link" data-scroll-target="#mean-and-se-for-all-samples">Mean and SE for all samples</a></li>
+  <li><a href="#sampling-distribution" id="toc-sampling-distribution" class="nav-link" data-scroll-target="#sampling-distribution">Sampling distribution</a></li>
+  <li><a href="#t-statistic" id="toc-t-statistic" class="nav-link" data-scroll-target="#t-statistic">T-statistic</a></li>
+  <li><a href="#t-value" id="toc-t-value" class="nav-link" data-scroll-target="#t-value">t-value</a></li>
+  <li><a href="#calculate-t-values" id="toc-calculate-t-values" class="nav-link" data-scroll-target="#calculate-t-values">Calculate t-values</a></li>
+  <li><a href="#sampled-t-values" id="toc-sampled-t-values" class="nav-link" data-scroll-target="#sampled-t-values">Sampled t-values</a></li>
+  <li><a href="#t-distribution-1" id="toc-t-distribution-1" class="nav-link" data-scroll-target="#t-distribution-1">T-distribution</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#one-or-two-sided" id="toc-one-or-two-sided" class="nav-link" data-scroll-target="#one-or-two-sided">One or two sided</a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
+  <li><a href="#effect-size-d" id="toc-effect-size-d" class="nav-link" data-scroll-target="#effect-size-d">Effect-size d</a></li>
+  <li><a href="#effect-size-r" id="toc-effect-size-r" class="nav-link" data-scroll-target="#effect-size-r">Effect-size r</a></li>
+  <li><a href="#effect-sizes" id="toc-effect-sizes" class="nav-link" data-scroll-target="#effect-sizes">Effect-sizes</a></li>
+  <li><a href="#effect-size-distribution" id="toc-effect-size-distribution" class="nav-link" data-scroll-target="#effect-size-distribution">Effect-size distribution</a></li>
+  <li><a href="#power" id="toc-power" class="nav-link" data-scroll-target="#power">Power</a></li>
+  <li><a href="#alpha-power" id="toc-alpha-power" class="nav-link" data-scroll-target="#alpha-power">Alpha Power</a></li>
+  </ul></li>
+  <li><a href="#one-sample-t-test" id="toc-one-sample-t-test" class="nav-link" data-scroll-target="#one-sample-t-test">One-sample t-test</a>
+  <ul class="collapse">
+  <li><a href="#iq-next-to-you" id="toc-iq-next-to-you" class="nav-link" data-scroll-target="#iq-next-to-you">IQ next to you</a></li>
+  <li><a href="#models" id="toc-models" class="nav-link" data-scroll-target="#models">Models</a></li>
+  <li><a href="#compare-sample-mean" id="toc-compare-sample-mean" class="nav-link" data-scroll-target="#compare-sample-mean">Compare sample mean</a></li>
+  <li><a href="#hypothesis" id="toc-hypothesis" class="nav-link" data-scroll-target="#hypothesis">Hypothesis</a>
+  <ul class="collapse">
+  <li><a href="#null-hypothesis" id="toc-null-hypothesis" class="nav-link" data-scroll-target="#null-hypothesis">Null hypothesis</a></li>
+  <li><a href="#alternative-hypothesis" id="toc-alternative-hypothesis" class="nav-link" data-scroll-target="#alternative-hypothesis">Alternative hypothesis</a></li>
+  </ul></li>
+  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions">Assumptions</a></li>
+  <li><a href="#t-statistic-1" id="toc-t-statistic-1" class="nav-link" data-scroll-target="#t-statistic-1">T-statistic</a></li>
+  <li><a href="#type-i-error" id="toc-type-i-error" class="nav-link" data-scroll-target="#type-i-error">Type I error</a></li>
+  <li><a href="#p-value-one-sided" id="toc-p-value-one-sided" class="nav-link" data-scroll-target="#p-value-one-sided">P-value one sided</a></li>
+  <li><a href="#p-value-two-sided" id="toc-p-value-two-sided" class="nav-link" data-scroll-target="#p-value-two-sided">P-value two sided</a></li>
+  <li><a href="#effect-size" id="toc-effect-size" class="nav-link" data-scroll-target="#effect-size">Effect-size</a></li>
+  <li><a href="#applet" id="toc-applet" class="nav-link" data-scroll-target="#applet">Applet</a></li>
+  </ul></li>
+  <li><a href="#paired-samples-t-test" id="toc-paired-samples-t-test" class="nav-link" data-scroll-target="#paired-samples-t-test">Paired-samples t-test</a>
+  <ul class="collapse">
+  <li><a href="#paired-samples-t-test-1" id="toc-paired-samples-t-test-1" class="nav-link" data-scroll-target="#paired-samples-t-test-1">Paired-samples t-test</a></li>
+  <li><a href="#hypothesis-1" id="toc-hypothesis-1" class="nav-link" data-scroll-target="#hypothesis-1">Hypothesis</a></li>
+  <li><a href="#data-structure" id="toc-data-structure" class="nav-link" data-scroll-target="#data-structure">Data structure</a></li>
+  <li><a href="#data-example" id="toc-data-example" class="nav-link" data-scroll-target="#data-example">Data example</a></li>
+  <li><a href="#iq-estimates" id="toc-iq-estimates" class="nav-link" data-scroll-target="#iq-estimates">IQ estimates</a></li>
+  <li><a href="#calculate-d" id="toc-calculate-d" class="nav-link" data-scroll-target="#calculate-d">Calculate <span class="math inline">\(D\)</span></a></li>
+  <li><a href="#calculate-bard" id="toc-calculate-bard" class="nav-link" data-scroll-target="#calculate-bard">Calculate <span class="math inline">\(\bar{D}\)</span></a></li>
+  <li><a href="#calculate-t-value" id="toc-calculate-t-value" class="nav-link" data-scroll-target="#calculate-t-value">Calculate t-value</a></li>
+  <li><a href="#test-for-significance" id="toc-test-for-significance" class="nav-link" data-scroll-target="#test-for-significance">Test for significance</a></li>
+  <li><a href="#effect-size-1" id="toc-effect-size-1" class="nav-link" data-scroll-target="#effect-size-1">Effect-size</a></li>
+  <li><a href="#confidence-interval-bonus" id="toc-confidence-interval-bonus" class="nav-link" data-scroll-target="#confidence-interval-bonus">Confidence interval (bonus)</a></li>
+  </ul></li>
+  <li><a href="#independent-samples-t-test" id="toc-independent-samples-t-test" class="nav-link" data-scroll-target="#independent-samples-t-test">Independent-samples t-test</a>
+  <ul class="collapse">
+  <li><a href="#independent-samples-t-test-1" id="toc-independent-samples-t-test-1" class="nav-link" data-scroll-target="#independent-samples-t-test-1">Independent-samples t-test</a></li>
+  <li><a href="#hypothesis-2" id="toc-hypothesis-2" class="nav-link" data-scroll-target="#hypothesis-2">Hypothesis</a></li>
+  <li><a href="#data-structure-1" id="toc-data-structure-1" class="nav-link" data-scroll-target="#data-structure-1">Data structure</a></li>
+  <li><a href="#additional-assumption" id="toc-additional-assumption" class="nav-link" data-scroll-target="#additional-assumption">Additional assumption</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data">The data</a></li>
+  <li><a href="#calculate-means" id="toc-calculate-means" class="nav-link" data-scroll-target="#calculate-means">Calculate means</a></li>
+  <li><a href="#calculate-variance" id="toc-calculate-variance" class="nav-link" data-scroll-target="#calculate-variance">Calculate variance</a></li>
+  <li><a href="#calculate-t-value-1" id="toc-calculate-t-value-1" class="nav-link" data-scroll-target="#calculate-t-value-1">Calculate t-value</a></li>
+  <li><a href="#calculate-pooled-variance" id="toc-calculate-pooled-variance" class="nav-link" data-scroll-target="#calculate-pooled-variance">Calculate pooled variance</a></li>
+  <li><a href="#calculate-pooled-se" id="toc-calculate-pooled-se" class="nav-link" data-scroll-target="#calculate-pooled-se">Calculate pooled SE</a></li>
+  <li><a href="#calculate-t-value-2" id="toc-calculate-t-value-2" class="nav-link" data-scroll-target="#calculate-t-value-2">Calculate t-value</a></li>
+  <li><a href="#test-for-significance-1" id="toc-test-for-significance-1" class="nav-link" data-scroll-target="#test-for-significance-1">Test for significance</a></li>
+  <li><a href="#effect-size-2" id="toc-effect-size-2" class="nav-link" data-scroll-target="#effect-size-2">Effect-size</a></li>
+  <li><a href="#but-what-about-equal-variances" id="toc-but-what-about-equal-variances" class="nav-link" data-scroll-target="#but-what-about-equal-variances">But what about equal variances?!</a></li>
+  <li><a href="#but-what-about-equal-variances-1" id="toc-but-what-about-equal-variances-1" class="nav-link" data-scroll-target="#but-what-about-equal-variances-1">But what about equal variances?!</a></li>
+  <li><a href="#the-difference-only-matters-when-n_a-neq-n_b" id="toc-the-difference-only-matters-when-n_a-neq-n_b" class="nav-link" data-scroll-target="#the-difference-only-matters-when-n_a-neq-n_b">The difference only matters when <span class="math inline">\(n_A \neq n_B\)</span>!</a></li>
+  </ul></li>
+  <li><a href="#end" id="toc-end" class="nav-link" data-scroll-target="#end">End</a>
+  <ul class="collapse">
+  <li><a href="#contact" id="toc-contact" class="nav-link" data-scroll-target="#contact">Contact</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="7. t_distribution_and_test.slide.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+</div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -133,29 +229,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="population-distribution" class="level2 smaller subsection">
 <h2 class="smaller subsection anchored" data-anchor-id="population-distribution">Population distribution</h2>
 <div class="cell" data-output-location="slide">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">7</span><span class="sc">:</span><span class="dv">8</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">9</span><span class="sc">:</span><span class="dv">13</span>), <span class="dv">4</span>, <span class="dv">4</span>))</span>
-<span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a>n  <span class="ot">&lt;-</span> <span class="dv">56</span>    <span class="co"># Sample size</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>df <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span> <span class="co"># Degrees of freedom</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a>mu    <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a>sigma <span class="ot">&lt;-</span> <span class="dv">15</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a>IQ <span class="ot">&lt;-</span> <span class="fu">seq</span>(mu<span class="dv">-45</span>, mu<span class="sc">+</span><span class="dv">45</span>, <span class="dv">1</span>)</span>
-<span id="cb1-10"><a href="#cb1-10"></a></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">0</span>))  </span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="fu">plot</span>(IQ, <span class="fu">dnorm</span>(IQ, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma), <span class="at">type=</span><span class="st">'l'</span>, <span class="at">col=</span><span class="st">"red"</span>, <span class="at">main =</span> <span class="st">"Population Distribution"</span>)</span>
-<span id="cb1-13"><a href="#cb1-13"></a></span>
-<span id="cb1-14"><a href="#cb1-14"></a>n.samples <span class="ot">&lt;-</span> <span class="dv">12</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a></span>
-<span id="cb1-16"><a href="#cb1-16"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n.samples) {</span>
-<span id="cb1-17"><a href="#cb1-17"></a>  </span>
-<span id="cb1-18"><a href="#cb1-18"></a>  <span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">0</span>))  </span>
-<span id="cb1-19"><a href="#cb1-19"></a>  <span class="fu">hist</span>(<span class="fu">rnorm</span>(n, mu, sigma), <span class="at">main=</span><span class="st">"Sample Distribution"</span>, <span class="at">cex.axis=</span>.<span class="dv">5</span>, <span class="at">col=</span><span class="st">"beige"</span>, <span class="at">cex.main =</span> .<span class="dv">75</span>)</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">7</span><span class="sc">:</span><span class="dv">8</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">9</span><span class="sc">:</span><span class="dv">13</span>), <span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a>n  <span class="ot">&lt;-</span> <span class="dv">50</span>    <span class="co"># Sample size</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>df <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span> <span class="co"># Degrees of freedom</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a>mu    <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>sigma <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a>IQ <span class="ot">&lt;-</span> <span class="fu">seq</span>(mu<span class="dv">-45</span>, mu<span class="sc">+</span><span class="dv">45</span>, <span class="dv">1</span>)</span>
+<span id="cb1-11"><a href="#cb1-11"></a></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">0</span>))  </span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="fu">plot</span>(IQ, <span class="fu">dnorm</span>(IQ, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma), <span class="at">type=</span><span class="st">'l'</span>, <span class="at">col=</span><span class="st">"black"</span>, <span class="at">main =</span> <span class="st">"Population Distribution"</span>, </span>
+<span id="cb1-14"><a href="#cb1-14"></a>     <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">bty=</span> <span class="st">"n"</span>, <span class="at">axes =</span> <span class="cn">FALSE</span>, <span class="at">xlab =</span> <span class="fu">c</span>(<span class="dv">60</span>, <span class="dv">140</span>))</span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="fu">axis</span>(<span class="dv">1</span>)</span>
+<span id="cb1-16"><a href="#cb1-16"></a></span>
+<span id="cb1-17"><a href="#cb1-17"></a>n.samples <span class="ot">&lt;-</span> <span class="dv">12</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a></span>
+<span id="cb1-19"><a href="#cb1-19"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n.samples) {</span>
 <span id="cb1-20"><a href="#cb1-20"></a>  </span>
-<span id="cb1-21"><a href="#cb1-21"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-21"><a href="#cb1-21"></a>  <span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">0</span>))  </span>
+<span id="cb1-22"><a href="#cb1-22"></a>  <span class="fu">hist</span>(<span class="fu">rnorm</span>(n, mu, sigma), <span class="at">main=</span><span class="st">"Sample Distribution"</span>, <span class="at">xlab =</span> <span class="fu">c</span>(<span class="dv">60</span>, <span class="dv">140</span>),</span>
+<span id="cb1-23"><a href="#cb1-23"></a>       <span class="at">cex.axis=</span>.<span class="dv">5</span>, <span class="at">col=</span><span class="fu">rainbow</span>(<span class="dv">12</span>)[i], <span class="at">cex.main =</span> .<span class="dv">75</span>, <span class="at">las =</span> <span class="dv">1</span>, <span class="at">axes =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-24"><a href="#cb1-24"></a><span class="fu">axis</span>(<span class="dv">1</span>)</span>
+<span id="cb1-25"><a href="#cb1-25"></a>  </span>
+<span id="cb1-26"><a href="#cb1-26"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="7.-t_distribution_and_test_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<p><img src="7.-t_distribution_and_test_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -165,21 +266,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma); x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1]  95.67303 110.71256 104.13759 115.54261 110.95768  84.28337  91.09063
- [8] 102.19621  97.66229 103.13989  66.09433  73.97096 109.52173  76.07734
-[15] 111.67247 103.34393 114.34421  96.82481 120.38298  98.92859  99.27924
-[22] 132.54501  90.65535  78.02674 123.84839 109.11255  97.98176 123.03028
-[29] 108.12775 101.39436  78.23145 116.09520 132.57213 122.58970 117.15568
-[36]  89.32989  92.18331  88.32852  87.06501 107.72202  94.18176  89.65431
-[43]  96.73617 111.07574 105.51885  92.33170  95.01803 123.70993  96.14286
-[50] 108.46288  79.09846 113.05537  87.66199  79.12823  82.86082 102.13971</code></pre>
+<pre><code> [1] 116.11018  99.58980  99.50004  77.25899 111.85578  96.83899  90.14886
+ [8]  78.81961  95.50356  87.26408  94.04454  81.73600 125.31384  99.75996
+[15] 116.12418  60.97450  93.20203  89.86777  81.65611 123.19914  78.77077
+[22] 104.77585 112.69654 102.67285  86.87117 114.11749 102.55882  84.04753
+[29]  79.17926 131.30076  89.82245  72.16643 107.99889 104.65345  79.69248
+[36]  70.85565  98.25546 117.09094 109.54186  92.60594  87.48718 104.06600
+[43] 102.36030 109.44568  94.06303 113.49031  87.53783  95.04183 111.11222
+[50] 114.84957</code></pre>
 </div>
 </div>
 <div class="cell" data-output-location="slide">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x, <span class="at">main =</span> <span class="st">"Sample distribution"</span>, <span class="at">col =</span> <span class="st">"beige"</span>, <span class="at">breaks =</span> <span class="dv">15</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">80</span>, <span class="dv">10</span>, <span class="fu">round</span>(<span class="fu">mean</span>(x),<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x, <span class="at">main =</span> <span class="st">"Sample distribution"</span>, <span class="at">col =</span> <span class="fu">rainbow</span>(<span class="dv">12</span>)[<span class="dv">6</span>], <span class="at">breaks =</span> <span class="dv">15</span>, <span class="at">las =</span><span class="dv">1</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">125</span>, <span class="dv">7</span>, <span class="fu">bquote</span>(<span class="fu">bar</span>(x) <span class="sc">~</span> <span class="st">" = "</span> <span class="sc">~</span> .(<span class="fu">round</span>(<span class="fu">mean</span>(x),<span class="dv">2</span>))), <span class="at">cex =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="7.-t_distribution_and_test_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+<p><img src="7.-t_distribution_and_test_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -204,12 +305,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">cbind</span>(mean.x.values, se.x.values))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     mean.x.values se.x.values
-[1,]      99.85781    2.487462
-[2,]      97.99443    1.997695
-[3,]     100.00858    1.922773
-[4,]     103.26168    1.859625
-[5,]      97.55931    2.353872
-[6,]     102.56683    2.231887</code></pre>
+[1,]      97.95275    2.214004
+[2,]     103.18582    2.273371
+[3,]      99.99038    2.000590
+[4,]      99.90585    2.182437
+[5,]     102.90184    2.281151
+[6,]     101.50350    2.200165</code></pre>
 </div>
 </div>
 </section>
@@ -218,11 +319,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Of the mean</p>
 <div class="cell" data-output-location="slide">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(mean.x.values, </span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">col  =</span> <span class="st">"beige"</span>, </span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Sampling distribution"</span>, </span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"all sample means"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">col  =</span> <span class="fu">rainbow</span>(<span class="dv">12</span>),</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Sampling distribution of the mean"</span>, </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"1,000 sample means"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="7.-t_distribution_and_test_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+<p><img src="7.-t_distribution_and_test_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -238,7 +339,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>tStat <span class="ot">&lt;-</span> (<span class="fu">mean</span>(x) <span class="sc">-</span> mu) <span class="sc">/</span> (<span class="fu">sd</span>(x) <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>tStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.7373673</code></pre>
+<pre><code>[1] -1.44089</code></pre>
 </div>
 </div>
 </section>
@@ -250,13 +351,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(<span class="fu">cbind</span>(mean.x.values, mu, se.x.values, t.values))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>        mean.x.values  mu se.x.values   t.values
- [995,]     102.80440 100    2.201019  1.2741352
- [996,]     102.28083 100    1.721292  1.3250658
- [997,]     101.32977 100    2.033539  0.6539192
- [998,]      99.14284 100    2.120872 -0.4041526
- [999,]      99.70364 100    2.096363 -0.1413663
-[1000,]      98.43589 100    2.121203 -0.7373673</code></pre>
+<pre><code>        mean.x.values  mu se.x.values    t.values
+ [995,]     104.50415 100    2.440743  1.84539987
+ [996,]      98.14145 100    1.980949 -0.93821319
+ [997,]      99.79017 100    2.351101 -0.08924917
+ [998,]     101.63763 100    2.070541  0.79091992
+ [999,]     103.63661 100    2.409829  1.50907422
+[1000,]      96.48503 100    2.439441 -1.44089031</code></pre>
 </div>
 </div>
 </section>
@@ -268,13 +369,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">freq =</span> <span class="cn">FALSE</span>, </span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Sampled T-values"</span>, </span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"T-values"</span>,</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">col  =</span> <span class="st">"beige"</span>,</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">4</span>))</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">col  =</span> <span class="fu">rainbow</span>(<span class="dv">12</span>),</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">5</span>))</span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>myTs <span class="ot">=</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>, .<span class="dv">01</span>)</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(myTs, <span class="fu">dt</span>(myTs,df), <span class="at">col =</span> <span class="st">"red"</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(myTs, <span class="fu">dt</span>(myTs,df), <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">"black"</span>)</span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">col=</span><span class="st">"red"</span>, <span class="at">legend =</span> <span class="st">"T-distribution"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="7.-t_distribution_and_test_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<p><img src="7.-t_distribution_and_test_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -292,7 +393,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="section"></h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="7.-t_distribution_and_test_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+<p><img src="7.-t_distribution_and_test_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -307,12 +408,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><span class="math inline">\(H_A: \bar{x} &gt; \mu\)</span></li>
 <li><span class="math inline">\(H_A: \bar{x} &lt; \mu\)</span></li>
 </ul>
+<p><a href="https://johnnydoorn.github.io/teaching-statistics/extra-texts/OneSidedVsTwoSided.html">Additional text here</a></p>
 </section>
 <section id="section-1" class="level2">
 <h2 class="anchored" data-anchor-id="section-1"></h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="7.-t_distribution_and_test_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+<p><img src="7.-t_distribution_and_test_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -320,11 +422,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="subsection anchored" data-anchor-id="effect-size-d">Effect-size d</h2>
 <p>The effect-size is the standardized difference between the mean and the expected <span class="math inline">\(\mu\)</span>. In the t-test, effect-size can be expressed as <span class="math inline">\(d\)</span> (Cohen’s d)). <span class="math display">\[d = \frac{\bar{x}}{s} = \frac{t}{\sqrt{n}}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>cohenD <span class="ot">&lt;-</span> tStat<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>cohenD <span class="ot">&lt;-</span> tStat <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>cohenD</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5345225</code></pre>
+<pre><code>[1] 0.2828427</code></pre>
 </div>
 </div>
 <p>See Tukey (1969) and Section 3.7.4 of Field:</p>
@@ -340,7 +442,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2603778</code></pre>
+<pre><code>[1] 0.2747211</code></pre>
 </div>
 </div>
 </section>
@@ -352,13 +454,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(<span class="fu">cbind</span>(mean.x.values, mu, se.x.values, t.values, r))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>        mean.x.values  mu se.x.values   t.values          r
- [995,]     102.80440 100    2.201019  1.2741352 0.16932359
- [996,]     102.28083 100    1.721292  1.3250658 0.17588643
- [997,]     101.32977 100    2.033539  0.6539192 0.08783366
- [998,]      99.14284 100    2.120872 -0.4041526 0.05441518
- [999,]      99.70364 100    2.096363 -0.1413663 0.01905837
-[1000,]      98.43589 100    2.121203 -0.7373673 0.09893875</code></pre>
+<pre><code>        mean.x.values  mu se.x.values    t.values          r
+ [995,]     104.50415 100    2.440743  1.84539987 0.25491891
+ [996,]      98.14145 100    1.980949 -0.93821319 0.13284256
+ [997,]      99.79017 100    2.351101 -0.08924917 0.01274885
+ [998,]     101.63763 100    2.070541  0.79091992 0.11227416
+ [999,]     103.63661 100    2.409829  1.50907422 0.21074050
+[1000,]      96.48503 100    2.439441 -1.44089031 0.20161451</code></pre>
 </div>
 </div>
 </section>
@@ -366,7 +468,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="effect-size-distribution">Effect-size distribution</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="7.-t_distribution_and_test_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+<p><img src="7.-t_distribution_and_test_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Cohen (1988)</p>
@@ -390,12 +492,563 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="alpha-power" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="alpha-power">Alpha Power</h2>
 <p><a href="http://rpsychologist.com/d3/NHST/#viz">R-Psychologist</a></p>
-<!-- # ```{r child="../../topics/t-test_one-sample/One-sample_t-test.qmd"} -->
-<!-- # ``` -->
-<!-- ```{r child="../../topics/t-test_paired/t-test_paired.qmd"} -->
-<!-- ``` -->
-<!-- ```{r child="../../topics/t-test_independent/t-test_independent.qmd"} -->
-<!-- ``` -->
+</section>
+</section>
+<section id="one-sample-t-test" class="level1 section">
+<h1 class="section">One-sample t-test</h1>
+<section id="iq-next-to-you" class="level2">
+<h2 class="anchored" data-anchor-id="iq-next-to-you">IQ next to you</h2>
+<div class="r-stack">
+<p><img src="qr_9umub.png" style="width:40%;"></p>
+<p style="font-size: 30px;">
+https://edu.nl/9umub
+</p>
+</div>
+</section>
+<section id="models" class="level2 center">
+<h2 class="center anchored" data-anchor-id="models">Models</h2>
+<div style="font-size:200%; transform: rotate(-11deg);">
+<p><span class="math display">\[\text{outcome} = \text{model} + \text{error}\]</span></p>
+</div>
+</section>
+<section id="compare-sample-mean" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="compare-sample-mean">Compare sample mean</h2>
+<p><small> We use the one-sample t-test to compare the sample mean <span class="math inline">\(\bar{x}\)</span> to the population mean <span class="math inline">\(\mu\)</span>.</small></p><small>
+</small><p><small>Let’s take a different sample and calculate the mean of this sample. </small></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>mu     <span class="ot">&lt;-</span> <span class="dv">120</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>n      <span class="ot">&lt;-</span> <span class="fu">length</span>(IQ.next.to.you)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>x      <span class="ot">&lt;-</span> IQ.next.to.you</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>mean_x <span class="ot">&lt;-</span> <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>sd_x   <span class="ot">&lt;-</span> <span class="fu">sd</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(n, mean_x, sd_x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     n mean_x     sd_x
+[1,] 2  117.5 3.535534</code></pre>
+</div>
+</div>
+<p><small> Does this mean differ significantly from the population mean <span class="math inline">\(\mu = 120\)</span>? </small></p>
+</section>
+<section id="hypothesis" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="hypothesis">Hypothesis</h2>
+<section id="null-hypothesis" class="level3">
+<h3 class="anchored" data-anchor-id="null-hypothesis">Null hypothesis</h3>
+<ul>
+<li><span class="math inline">\(H_0: \bar{x} = \mu\)</span></li>
+</ul>
+</section>
+<section id="alternative-hypothesis" class="level3">
+<h3 class="anchored" data-anchor-id="alternative-hypothesis">Alternative hypothesis</h3>
+<ul>
+<li><span class="math inline">\(H_A: \bar{x} \neq \mu\)</span></li>
+<li><span class="math inline">\(H_A: \bar{x} &gt; \mu\)</span></li>
+<li><span class="math inline">\(H_A: \bar{x} &lt; \mu\)</span></li>
+</ul>
+</section>
+</section>
+<section id="assumptions" class="level2">
+<h2 class="anchored" data-anchor-id="assumptions">Assumptions</h2>
+<ul>
+<li>Normal samples distribution</li>
+<li>Random samples</li>
+<li>Measurement level
+<ul>
+<li>Interval</li>
+<li>Ratio</li>
+</ul></li>
+</ul>
+</section>
+<section id="t-statistic-1" class="level2">
+<h2 class="anchored" data-anchor-id="t-statistic-1">T-statistic</h2>
+<p><span class="math display">\[T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}} = \frac{117.5 - 120 }{3.54 / \sqrt{2}}\]</span></p>
+<p>So the t-statistic represents the deviation of the sample mean <span class="math inline">\(\bar{x}\)</span> from the population mean <span class="math inline">\(\mu\)</span>, considering the sample size.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>tStat <span class="ot">&lt;-</span> (mean_x <span class="sc">-</span> mu) <span class="sc">/</span> (sd_x <span class="sc">/</span> <span class="fu">sqrt</span>(n)); tStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1</code></pre>
+</div>
+</div>
+</section>
+<section id="type-i-error" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="type-i-error">Type I error</h2>
+<p>To determine if this t-value significantly differs from the population mean we have to specify a type I error that we are willing to make.</p>
+<ul>
+<li>Type I error / <span class="math inline">\(\alpha\)</span> = .05</li>
+</ul>
+</section>
+<section id="p-value-one-sided" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="p-value-one-sided">P-value one sided</h2>
+<p>Finally we have to calculate our <em>p</em>-value for which we need the degrees of freedom <span class="math inline">\(df = n - 1\)</span> to determine the shape of the t-distribution.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span>; df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+</div>
+<div class="cell" data-output-location="slide">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="st">"visualize"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()) { <span class="fu">install.packages</span>(<span class="st">"visualize"</span>) }</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"visualize"</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>visualize<span class="sc">::</span><span class="fu">visualize.t</span>(<span class="sc">-</span>tStat, <span class="fu">ifelse</span>(df <span class="sc">&gt;</span> <span class="dv">3</span>, df, <span class="dv">10</span>), <span class="at">section =</span> <span class="st">"upper"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="7.-t_distribution_and_test_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="p-value-two-sided" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="p-value-two-sided">P-value two sided</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.t</span>(<span class="fu">c</span>(<span class="sc">-</span>tStat, tStat), <span class="dv">10</span>, <span class="at">section =</span> <span class="st">"tails"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="7.-t_distribution_and_test_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="effect-size" class="level2">
+<h2 class="anchored" data-anchor-id="effect-size">Effect-size</h2>
+<p><span class="math display">\[r = \sqrt{\frac{t^2}{t^2 + \text{df}}}\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> tStat <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.7071068</code></pre>
+</div>
+</div>
+</section>
+<section id="applet" class="level2">
+<h2 class="anchored" data-anchor-id="applet">Applet</h2>
+<p><a href="https://statisticalreasoning-uva.shinyapps.io/NHST_Continuous/">link</a></p>
+</section>
+</section>
+<section id="paired-samples-t-test" class="level1 section">
+<h1 class="section">Paired-samples t-test</h1>
+<p>Paired 2 samples</p>
+<section id="paired-samples-t-test-1" class="level2">
+<h2 class="anchored" data-anchor-id="paired-samples-t-test-1">Paired-samples t-test</h2>
+<p>In the Paired samples t-test the deviation (<span class="math inline">\(D\)</span>) for each pair is calculated and the mean of these deviations (<span class="math inline">\(\bar{D}\)</span>) is tested against the null hypothesis where <span class="math inline">\(\mu = 0\)</span>.</p>
+<p><span class="math display">\[t_{n-1} = \frac{\bar{D} - \mu}{ {SE}_D }\]</span> Where <span class="math inline">\(n\)</span> (the number of cases) minus <span class="math inline">\(1\)</span>, are the degrees of freedom <span class="math inline">\(df = n - 1\)</span> and <span class="math inline">\(SE_D\)</span> is the standard error of <span class="math inline">\(D\)</span>, defined as <span class="math inline">\(s_D/\sqrt{n}\)</span>.</p>
+</section>
+<section id="hypothesis-1" class="level2">
+<h2 class="anchored" data-anchor-id="hypothesis-1">Hypothesis</h2>
+<p><span class="math display">\[\LARGE{
+  \begin{aligned}
+  H_0 &amp;: \bar{D} = \mu_D \\
+  H_A &amp;: \bar{D} \neq \mu_D \\
+  H_A &amp;: \bar{D} &gt; \mu_D \\
+  H_A &amp;: \bar{D} &lt; \mu_D \\
+  \end{aligned}}\]</span></p>
+</section>
+<section id="data-structure" class="level2">
+<h2 class="anchored" data-anchor-id="data-structure">Data structure</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th>index</th>
+<th>k1</th>
+<th>k2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>x</td>
+<td>x</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>x</td>
+<td>x</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>x</td>
+<td>x</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>x</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<p>Where <span class="math inline">\(k\)</span> is the level of the categorical predictor variable and <span class="math inline">\(x\)</span> is the value of the outcome/dependent variable.</p>
+</section>
+<section id="data-example" class="level2">
+<h2 class="anchored" data-anchor-id="data-example">Data example</h2>
+<p>We are going to use the IQ estimates we collected. You had to guess your neighbor’s IQ and your own IQ.</p>
+<p>Let’s take a look at the data.</p>
+</section>
+<section id="iq-estimates" class="level2">
+<h2 class="anchored" data-anchor-id="iq-estimates">IQ estimates</h2>
+<div class="cell">
+<div class="cell-output-display">
+
+<div class="datatables html-widget html-fill-item" id="htmlwidget-9ef7eb965f17821a55ab" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-9ef7eb965f17821a55ab">{"x":{"filter":"none","vertical":false,"data":[["1","2"],[110,120],[115,120]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ownIQ<\/th>\n      <th>nextIQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ownIQ","targets":1},{"name":"nextIQ","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="calculate-d" class="level2 smaller subsection">
+<h2 class="smaller subsection anchored" data-anchor-id="calculate-d">Calculate <span class="math inline">\(D\)</span></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>diffScores <span class="ot">&lt;-</span> IQ.next.to.you <span class="sc">-</span> IQ.you</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+
+<div class="datatables html-widget html-fill-item" id="htmlwidget-39422029958be89349cb" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-39422029958be89349cb">{"x":{"filter":"none","vertical":false,"data":[["1","2"],[110,120],[115,120],[5,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ownIQ<\/th>\n      <th>nextIQ<\/th>\n      <th>diffScores<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":315,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ownIQ","targets":1},{"name":"nextIQ","targets":2},{"name":"diffScores","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="calculate-bard" class="level2">
+<h2 class="anchored" data-anchor-id="calculate-bard">Calculate <span class="math inline">\(\bar{D}\)</span></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>diffScores      <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(diffScores) <span class="co"># get rid of all missing values</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>diffMean        <span class="ot">&lt;-</span> <span class="fu">mean</span>(diffScores)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>diffMean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.5</code></pre>
+</div>
+</div>
+<p>And we also need n.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(diffScores)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>n</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+</div>
+</section>
+<section id="calculate-t-value" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="calculate-t-value">Calculate t-value</h2>
+<p><span class="math display">\[t_{n-1} = \frac{\bar{D} - \mu}{ {SE}_D }\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">0</span>                <span class="co"># Define mu</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>diffSD <span class="ot">&lt;-</span> <span class="fu">sd</span>(diffScores)          <span class="co"># Calculate standard deviation</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>diffSE <span class="ot">&lt;-</span> diffSD <span class="sc">/</span> <span class="fu">sqrt</span>(n) <span class="co"># Calculate standard error</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>df   <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span>          <span class="co"># Calculate degrees of freedom</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate t</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>tStat <span class="ot">&lt;-</span> ( diffMean <span class="sc">-</span> mu ) <span class="sc">/</span> diffSE</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>tStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+</div>
+</section>
+<section id="test-for-significance" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="test-for-significance">Test for significance</h2>
+<p>Two tailed</p>
+<div class="cell" data-output-location="slide">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="st">"visualize"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()) { <span class="fu">install.packages</span>(<span class="st">"visualize"</span>) }</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"visualize"</span>)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.t</span>(<span class="fu">c</span>(<span class="sc">-</span>tStat,tStat), <span class="fu">ifelse</span>(df <span class="sc">&gt;</span> <span class="dv">2</span>, df, <span class="dv">5</span>), <span class="at">section=</span><span class="st">"tails"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="7.-t_distribution_and_test_files/figure-html/unnamed-chunk-62-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="effect-size-1" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="effect-size-1">Effect-size</h2>
+<p><span class="math display">\[r = \sqrt{\frac{t^2}{t^2 + \text{df}}}\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">=</span> <span class="fu">sqrt</span>(tStat<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>(tStat<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> df))</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7071068</code></pre>
+</div>
+</div>
+</section>
+<section id="confidence-interval-bonus" class="level2">
+<h2 class="anchored" data-anchor-id="confidence-interval-bonus">Confidence interval (bonus)</h2>
+<p>To display correct confidence intervals in SPSS we need to correct the original scores for within subject variation.</p>
+<code>
+<pre>** SPSS SYNTAX
+
+COMPUTE personal_mean = MEAN(nextIQ, ownIQ).
+EXECUTE.
+
+AGGREGATE
+  /OUTFILE=* MODE=ADDVARIABLES
+  /BREAK=
+  /total_mean = MEAN(personal_mean).
+
+COMPUTE adjustment = total_mean - personal_mean.
+EXECUTE.
+
+COMPUTE nextIQ.adj = nextIQ + adjustment.
+COMPUTE ownIQ.adj  = ownIQ + adjustment.
+EXECUTE.
+</pre>
+</code><p><code></code></p>
+</section>
+</section>
+<section id="independent-samples-t-test" class="level1">
+<h1>Independent-samples t-test</h1>
+<p>Compare 2 independent samples</p>
+<section id="independent-samples-t-test-1" class="level2">
+<h2 class="anchored" data-anchor-id="independent-samples-t-test-1">Independent-samples t-test</h2>
+<p>In the independent-samples t-test the mean of both independent samples is calculated and the difference of these <span class="math inline">\((\bar{X}_1 - \bar{X}_2)\)</span> means is tested against the null hypothesis where <span class="math inline">\(\mu = 0\)</span>.</p>
+<p><span class="math display">\[t_{n_1 + n_2 -2} = \frac{(\bar{X}_1 - \bar{X}_2) - \mu}{{SE}_p}\]</span> Where <span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span> are the number of cases in each group and <span class="math inline">\(SE_p\)</span> is the pooled standard error.</p>
+</section>
+<section id="hypothesis-2" class="level2">
+<h2 class="anchored" data-anchor-id="hypothesis-2">Hypothesis</h2>
+<span class="math display">\[\begin{aligned}
+H_0 &amp;: t = 0 = \mu_t \\
+H_A &amp;: t \neq 0 \\
+H_A &amp;: t &gt; 0 \\
+H_A &amp;: t &lt; 0 \\
+\end{aligned}\]</span>
+</section>
+<section id="data-structure-1" class="level2">
+<h2 class="anchored" data-anchor-id="data-structure-1">Data structure</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th>index</th>
+<th>k</th>
+<th>outcome</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>1</td>
+<td>x</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>1</td>
+<td>x</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>2</td>
+<td>x</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>2</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<p>Where <span class="math inline">\(k\)</span> is the level of the categorical predictor variable and <span class="math inline">\(x\)</span> is the value of the outcome/dependent variable.</p>
+</section>
+<section id="additional-assumption" class="level2">
+<h2 class="anchored" data-anchor-id="additional-assumption">Additional assumption</h2>
+<p>Specific for independent sample <span class="math inline">\(t\)</span>-test.</p>
+<ul>
+<li>Equality of variance
+<ul>
+<li><span class="math inline">\(H_0\)</span> : Variance <span class="math inline">\(=\)</span> equal (<span class="math inline">\(p\)</span> &gt; .05)</li>
+<li><span class="math inline">\(H_A\)</span> : Variance <span class="math inline">\(\neq\)</span> equal (<span class="math inline">\(p\)</span> &lt; .05)</li>
+</ul></li>
+</ul>
+</section>
+<section id="example" class="level2">
+<h2 class="anchored" data-anchor-id="example">Example</h2>
+<p>We are going to use the IQ estimates we collected. You had to guess the IQ of the one sitting next to you and your own IQ. But we are going to add class position to the data set. We did not register this so we are going to simulate some positions.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">23</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>classPosition <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"front"</span>, <span class="st">"back"</span>), <span class="fu">dim</span>(data)[<span class="dv">1</span>], <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="the-data" class="level2">
+<h2 class="anchored" data-anchor-id="the-data">The data</h2>
+<div class="cell">
+<div class="cell-output-display">
+
+<div class="datatables html-widget html-fill-item" id="htmlwidget-4586a4c34ec8a352888e" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-4586a4c34ec8a352888e">{"x":{"filter":"none","vertical":false,"data":[["1","2"],["front","back"],[110,120]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>classPosition<\/th>\n      <th>ownIQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"classPosition","targets":1},{"name":"ownIQ","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="calculate-means" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="calculate-means">Calculate means</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>ownIQfront  <span class="ot">&lt;-</span> <span class="fu">subset</span>(data, classPosition <span class="sc">==</span> <span class="st">"front"</span>,   <span class="at">select =</span> ownIQ)<span class="sc">$</span>ownIQ</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>ownIQback <span class="ot">&lt;-</span> <span class="fu">subset</span>(data, classPosition <span class="sc">==</span> <span class="st">"back"</span>, <span class="at">select =</span> ownIQ)<span class="sc">$</span>ownIQ</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>ownIQfront.mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(ownIQfront, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>ownIQback.mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(ownIQback, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(ownIQfront.mean, ownIQback.mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                [,1]
+ownIQfront.mean  110
+ownIQback.mean   120</code></pre>
+</div>
+</div>
+</section>
+<section id="calculate-variance" class="level2 smaller subsection">
+<h2 class="smaller subsection anchored" data-anchor-id="calculate-variance">Calculate variance</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>ownIQfront.var   <span class="ot">&lt;-</span> <span class="fu">var</span>(ownIQfront,   <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>ownIQback.var <span class="ot">&lt;-</span> <span class="fu">var</span>(ownIQback, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">rbind</span>(ownIQfront.var, ownIQback.var))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               [,1]
+ownIQfront.var   NA
+ownIQback.var    NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>ownIQfront.n   <span class="ot">&lt;-</span> <span class="fu">length</span>(ownIQfront)   <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>ownIQback.n <span class="ot">&lt;-</span> <span class="fu">length</span>(ownIQback) <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">rbind</span>(ownIQfront.n, ownIQback.n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             [,1]
+ownIQfront.n    0
+ownIQback.n     0</code></pre>
+</div>
+</div>
+</section>
+<section id="calculate-t-value-1" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="calculate-t-value-1">Calculate t-value</h2>
+<p><span class="math display">\[t_{n_1 + n_2 -2} = \frac{(\bar{X}_1 - \bar{X}_2) - \mu}{{SE}_p}\]</span></p>
+<p>Where <span class="math inline">\({SE}_p\)</span> is the pooled standard error.</p>
+<p><span class="math display">\[{SE}_p = \sqrt{\frac{S^2_p}{n_1}+\frac{S^2_p}{n_2}}\]</span></p>
+<p>And <span class="math inline">\(S^2_p\)</span> is the pooled variance.</p>
+<p><span class="math display">\[S^2_p = \frac{(n_1-1)s^2_1+(n_2-1)s^2_2}{n_1+n_2-2}\]</span></p>
+<p>Where <span class="math inline">\(s^2\)</span> is the variance and <span class="math inline">\(n\)</span> the sample size.</p>
+</section>
+<section id="calculate-pooled-variance" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="calculate-pooled-variance">Calculate pooled variance</h2>
+<p><span class="math display">\[S^2_p = \frac{(n_1-1)s^2_1+(n_2-1)s^2_2}{n_1+n_2-2}\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> ownIQfront.n <span class="sc">+</span> ownIQback.n <span class="sc">-</span> <span class="dv">2</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>pooledVar <span class="ot">&lt;-</span> ( (ownIQfront.n<span class="dv">-1</span>)<span class="sc">*</span>ownIQfront.var <span class="sc">+</span> (ownIQback.n<span class="dv">-1</span>)<span class="sc">*</span>ownIQback.var ) <span class="sc">/</span> df</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>pooledVar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+</div>
+</section>
+<section id="calculate-pooled-se" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="calculate-pooled-se">Calculate pooled SE</h2>
+<p><span class="math display">\[ {SE}_p = \sqrt{\frac{S^2_p}{n_1}+\frac{S^2_p}{n_2}} \]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>sePooled <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( ((pooledVar<span class="sc">/</span>ownIQfront.n) <span class="sc">+</span> (pooledVar<span class="sc">/</span>ownIQback.n)) )</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>sePooled</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+</div>
+</section>
+<section id="calculate-t-value-2" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="calculate-t-value-2">Calculate t-value</h2>
+<p><span class="math display">\[t_{n_1 + n_2 -2} = \frac{(\bar{X}_1 - \bar{X}_2) - \mu}{{SE}_p}\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>tStat <span class="ot">&lt;-</span> ( ownIQfront.mean <span class="sc">-</span> ownIQback.mean ) <span class="sc">/</span> sePooled</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>tStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+</div>
+</section>
+<section id="test-for-significance-1" class="level2">
+<h2 class="anchored" data-anchor-id="test-for-significance-1">Test for significance</h2>
+<p>Two tailed</p>
+<div class="cell" data-output-location="slide">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="st">"visualize"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()) { <span class="fu">install.packages</span>(<span class="st">"visualize"</span>) }</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"visualize"</span>)</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (df <span class="sc">&lt;=</span> <span class="dv">3</span>) df <span class="ot">&lt;-</span> df <span class="sc">+</span> <span class="dv">5</span> <span class="co"># cheat to be able to build slides.. </span></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">is.na</span>(tStat)) tStat <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># cheat to be able to build slides.. </span></span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.t</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="fu">round</span>(tStat, <span class="dv">2</span>), <span class="fu">round</span>(tStat, <span class="dv">2</span>)), df<span class="sc">+</span><span class="dv">1</span>, <span class="at">section=</span><span class="st">"tails"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="7.-t_distribution_and_test_files/figure-html/unnamed-chunk-83-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="effect-size-2" class="level2">
+<h2 class="anchored" data-anchor-id="effect-size-2">Effect-size</h2>
+<p><span class="math display">\[r = \sqrt{\frac{t^2}{t^2 + \text{df}}}\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(tStat<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>(tStat<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> df))</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>tStat <span class="sc">/</span> <span class="fu">sqrt</span>(df)</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.154701</code></pre>
+</div>
+</div>
+</section>
+<section id="but-what-about-equal-variances" class="level2">
+<h2 class="anchored" data-anchor-id="but-what-about-equal-variances">But what about equal variances?!</h2>
+<p>There exist different hypothesis tests for this - the most used is Levene’s test:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="st">"car"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()) { <span class="fu">install.packages</span>(<span class="st">"car"</span>) }</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"car"</span>)</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(<span class="at">y =</span> ownIQ, <span class="at">group =</span> classPosition)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Levene's Test for Homogeneity of Variance (center = median)
+      Df F value Pr(&gt;F)
+group  1     NaN    NaN
+       0               </code></pre>
+</div>
+</div>
+</section>
+<section id="but-what-about-equal-variances-1" class="level2">
+<h2 class="anchored" data-anchor-id="but-what-about-equal-variances-1">But what about equal variances?!</h2>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Levene’s test (and other significance tests like it, such as Shapiro for normality) are heavily influenced by sample size, so a significant test result does not necessarily mean that you have a problem. A more pragmatic rule of thumb is to look at the ratio of variances - a ratio greater than 2 is problematic. Additionally, Welch test is a version of the <span class="math inline">\(t\)</span>-test that handles unequal variances better.</p>
+</div>
+</div>
+</section>
+<section id="the-difference-only-matters-when-n_a-neq-n_b" class="level2">
+<h2 class="anchored" data-anchor-id="the-difference-only-matters-when-n_a-neq-n_b">The difference only matters when <span class="math inline">\(n_A \neq n_B\)</span>!</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>meanA <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>meanB <span class="ot">&lt;-</span> <span class="dv">55</span></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>sdA <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>sdB <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>nA <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>nB <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-10"><a href="#cb62-10" aria-hidden="true" tabindex="-1"></a>seA <span class="ot">&lt;-</span> sdA <span class="sc">/</span> <span class="fu">sqrt</span>(nA)    </span>
+<span id="cb62-11"><a href="#cb62-11" aria-hidden="true" tabindex="-1"></a>seB <span class="ot">&lt;-</span> sdB <span class="sc">/</span> <span class="fu">sqrt</span>(nB)  </span>
+<span id="cb62-12"><a href="#cb62-12" aria-hidden="true" tabindex="-1"></a>tStatWelch <span class="ot">&lt;-</span> (meanA <span class="sc">-</span> meanB) <span class="sc">/</span> <span class="fu">sqrt</span>((sdA<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> nA) <span class="sc">+</span> (sdB<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> nB))</span>
+<span id="cb62-13"><a href="#cb62-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-14"><a href="#cb62-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-15"><a href="#cb62-15" aria-hidden="true" tabindex="-1"></a>pooledS <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(((nA <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> sdA<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (nA <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> sdB<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> (nA <span class="sc">+</span> nB <span class="sc">-</span> <span class="dv">2</span>))</span>
+<span id="cb62-16"><a href="#cb62-16" aria-hidden="true" tabindex="-1"></a>tStatStudent <span class="ot">&lt;-</span> (meanA <span class="sc">-</span> meanB) <span class="sc">/</span> (pooledS <span class="sc">*</span>  <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>nA <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>nA))</span>
+<span id="cb62-17"><a href="#cb62-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-18"><a href="#cb62-18" aria-hidden="true" tabindex="-1"></a>tStatStudent</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>tStatWelch</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -2</code></pre>
+</div>
+</div>
 </section>
 </section>
 <section id="end" class="level1">

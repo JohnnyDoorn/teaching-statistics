@@ -68,15 +68,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="t-test_independent_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="t-test_independent_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
-<script src="t-test_independent_files/libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="t-test_independent_files/libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="t-test_independent_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <link href="t-test_independent_files/libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="t-test_independent_files/libs/datatables-binding-0.27/datatables.js"></script>
+<script src="t-test_independent_files/libs/datatables-binding-0.33/datatables.js"></script>
 <script src="t-test_independent_files/libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<link href="t-test_independent_files/libs/dt-core-1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="t-test_independent_files/libs/dt-core-1.12.1/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="t-test_independent_files/libs/dt-core-1.12.1/js/jquery.dataTables.min.js"></script>
-<link href="t-test_independent_files/libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
-<script src="t-test_independent_files/libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="t-test_independent_files/libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="t-test_independent_files/libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="t-test_independent_files/libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="t-test_independent_files/libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="t-test_independent_files/libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -156,7 +157,7 @@ H_A &amp;: t &lt; 0 \\
 </section>
 <section id="example" class="level2">
 <h2 class="anchored" data-anchor-id="example">Example</h2>
-<p>We are going to use the IQ estimates we collected last week again. You had to guess the IQ of the one sitting next to you and your own IQ. But we are going to add class position to the data set. We did not register this so we are going to simulate some positions.</p>
+<p>We are going to use the IQ estimates we collected. You had to guess the IQ of the one sitting next to you and your own IQ. But we are going to add class position to the data set. We did not register this so we are going to simulate some positions.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">23</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>classPosition <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"front"</span>, <span class="st">"back"</span>), <span class="fu">dim</span>(data)[<span class="dv">1</span>], <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -167,8 +168,8 @@ H_A &amp;: t &lt; 0 \\
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-aa662c21af90f69490a7" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-aa662c21af90f69490a7">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["front","back","back","front","back","front"],[105,95,130,140,120,123]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>classPosition<\/th>\n      <th>ownIQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-f7f2c778aa662c21af90" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-f7f2c778aa662c21af90">{"x":{"filter":"none","vertical":false,"data":[["1","2"],["front","back"],[110,120]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>classPosition<\/th>\n      <th>ownIQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"classPosition","targets":1},{"name":"ownIQ","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -183,9 +184,9 @@ H_A &amp;: t &lt; 0 \\
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(ownIQfront.mean, ownIQback.mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                    [,1]
-ownIQfront.mean 122.6667
-ownIQback.mean  115.0000</code></pre>
+<pre><code>                [,1]
+ownIQfront.mean  110
+ownIQback.mean   120</code></pre>
 </div>
 </div>
 </section>
@@ -196,17 +197,17 @@ ownIQback.mean  115.0000</code></pre>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>ownIQback.var <span class="ot">&lt;-</span> <span class="fu">var</span>(ownIQback, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">rbind</span>(ownIQfront.var, ownIQback.var))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                   [,1]
-ownIQfront.var 306.3333
-ownIQback.var  325.0000</code></pre>
+<pre><code>               [,1]
+ownIQfront.var   NA
+ownIQback.var    NA</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ownIQfront.n   <span class="ot">&lt;-</span> <span class="fu">length</span>(ownIQfront)   <span class="sc">-</span> <span class="dv">1</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>ownIQback.n <span class="ot">&lt;-</span> <span class="fu">length</span>(ownIQback) <span class="sc">-</span> <span class="dv">1</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">rbind</span>(ownIQfront.n, ownIQback.n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             [,1]
-ownIQfront.n    2
-ownIQback.n     2</code></pre>
+ownIQfront.n    0
+ownIQback.n     0</code></pre>
 </div>
 </div>
 </section>
@@ -228,11 +229,11 @@ ownIQback.n     2</code></pre>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
+<pre><code>[1] -2</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pooledVar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 315.6667</code></pre>
+<pre><code>[1] NA</code></pre>
 </div>
 </div>
 </section>
@@ -243,7 +244,7 @@ ownIQback.n     2</code></pre>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>sePooled <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( ((pooledVar<span class="sc">/</span>ownIQfront.n) <span class="sc">+</span> (pooledVar<span class="sc">/</span>ownIQback.n)) )</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>sePooled</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 17.76701</code></pre>
+<pre><code>[1] NA</code></pre>
 </div>
 </div>
 </section>
@@ -255,7 +256,7 @@ ownIQback.n     2</code></pre>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>tStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4315113</code></pre>
+<pre><code>[1] NA</code></pre>
 </div>
 </div>
 </section>
@@ -266,8 +267,9 @@ ownIQback.n     2</code></pre>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="st">"visualize"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()) { <span class="fu">install.packages</span>(<span class="st">"visualize"</span>) }</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"visualize"</span>)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (df <span class="sc">==</span> <span class="dv">2</span>) df <span class="ot">&lt;-</span> df <span class="sc">+</span> <span class="dv">1</span> <span class="co"># cheat to be able to build slides.. </span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.t</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="fu">round</span>(tStat, <span class="dv">2</span>), <span class="fu">round</span>(tStat, <span class="dv">2</span>)), df<span class="sc">+</span><span class="dv">1</span>, <span class="at">section=</span><span class="st">"tails"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (df <span class="sc">&lt;=</span> <span class="dv">3</span>) df <span class="ot">&lt;-</span> df <span class="sc">+</span> <span class="dv">5</span> <span class="co"># cheat to be able to build slides.. </span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">is.na</span>(tStat)) tStat <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># cheat to be able to build slides.. </span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.t</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="fu">round</span>(tStat, <span class="dv">2</span>), <span class="fu">round</span>(tStat, <span class="dv">2</span>)), df<span class="sc">+</span><span class="dv">1</span>, <span class="at">section=</span><span class="st">"tails"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="t-test_independent_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -281,22 +283,12 @@ ownIQback.n     2</code></pre>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2417439</code></pre>
+<pre><code>[1] 0.5</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>tStat <span class="sc">/</span> <span class="fu">sqrt</span>(df<span class="sc">+</span><span class="dv">1</span>)</span>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>tStat <span class="sc">/</span> <span class="fu">sqrt</span>(df)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4315113</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>effsize<span class="sc">::</span><span class="fu">cohen.d</span>(ownIQ, classPosition)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Cohen's d
-
-d estimate: -0.4315113 (small)
-95 percent confidence interval:
-    lower     upper 
--2.724700  1.861677 </code></pre>
+<pre><code>[1] 1.154701</code></pre>
 </div>
 </div>
 </section>
@@ -304,43 +296,59 @@ d estimate: -0.4315113 (small)
 <h2 class="anchored" data-anchor-id="but-what-about-equal-variances">But what about equal variances?!</h2>
 <p>There exist different hypothesis tests for this - the most used is Levene’s test:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="st">"car"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()) { <span class="fu">install.packages</span>(<span class="st">"car"</span>) }</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"car"</span>)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(<span class="at">y =</span> ownIQ, <span class="at">group =</span> classPosition)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="st">"car"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()) { <span class="fu">install.packages</span>(<span class="st">"car"</span>) }</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"car"</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(<span class="at">y =</span> ownIQ, <span class="at">group =</span> classPosition)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Levene's Test for Homogeneity of Variance (center = median)
       Df F value Pr(&gt;F)
-group  1       0      1
-       4               </code></pre>
+group  1     NaN    NaN
+       0               </code></pre>
+</div>
+</div>
+</section>
+<section id="but-what-about-equal-variances-1" class="level2">
+<h2 class="anchored" data-anchor-id="but-what-about-equal-variances-1">But what about equal variances?!</h2>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Levene’s test (and other significance tests like it, such as Shapiro for normality) are heavily influenced by sample size, so a significant test result does not necessarily mean that you have a problem. A more pragmatic rule of thumb is to look at the ratio of variances - a ratio greater than 2 is problematic. Additionally, Welch test is a version of the <span class="math inline">\(t\)</span>-test that handles unequal variances better.</p>
 </div>
 </div>
 </section>
 <section id="the-difference-only-matters-when-n_a-neq-n_b" class="level2">
 <h2 class="anchored" data-anchor-id="the-difference-only-matters-when-n_a-neq-n_b">The difference only matters when <span class="math inline">\(n_A \neq n_B\)</span>!</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>meanA <span class="ot">&lt;-</span> <span class="dv">50</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>meanB <span class="ot">&lt;-</span> <span class="dv">55</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>sdA <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>sdB <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>nA <span class="ot">&lt;-</span> <span class="dv">20</span></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>nB <span class="ot">&lt;-</span> <span class="dv">20</span></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>seA <span class="ot">&lt;-</span> sdA <span class="sc">/</span> <span class="fu">sqrt</span>(nA)    </span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>seB <span class="ot">&lt;-</span> sdB <span class="sc">/</span> <span class="fu">sqrt</span>(nB)  </span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>tStatWelch <span class="ot">&lt;-</span> (meanA <span class="sc">-</span> meanB) <span class="sc">/</span> <span class="fu">sqrt</span>((sdA<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> nA) <span class="sc">+</span> (sdB<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> nB))</span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>pooledS <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(((nA <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> sdA<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (nA <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> sdB<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> (nA <span class="sc">+</span> nB <span class="sc">-</span> <span class="dv">2</span>))</span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>tStatStudent <span class="ot">&lt;-</span> (meanA <span class="sc">-</span> meanB) <span class="sc">/</span> (pooledS <span class="sc">*</span>  <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>nA <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>nA))</span>
-<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>tStatStudent</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>meanA <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>meanB <span class="ot">&lt;-</span> <span class="dv">55</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>sdA <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>sdB <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>nA <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>nB <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>seA <span class="ot">&lt;-</span> sdA <span class="sc">/</span> <span class="fu">sqrt</span>(nA)    </span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>seB <span class="ot">&lt;-</span> sdB <span class="sc">/</span> <span class="fu">sqrt</span>(nB)  </span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>tStatWelch <span class="ot">&lt;-</span> (meanA <span class="sc">-</span> meanB) <span class="sc">/</span> <span class="fu">sqrt</span>((sdA<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> nA) <span class="sc">+</span> (sdB<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> nB))</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>pooledS <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(((nA <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> sdA<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (nA <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> sdB<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> (nA <span class="sc">+</span> nB <span class="sc">-</span> <span class="dv">2</span>))</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>tStatStudent <span class="ot">&lt;-</span> (meanA <span class="sc">-</span> meanB) <span class="sc">/</span> (pooledS <span class="sc">*</span>  <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>nA <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>nA))</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>tStatStudent</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -2</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>tStatWelch</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>tStatWelch</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -2</code></pre>
 </div>

@@ -3,9 +3,9 @@
 ## IQ next to you
 
 ::: {.r-stack}
-<img src="nomaphochs.png" style="width:40%;"/>
+<img src="qr_9umub.png" style="width:40%;"/>
 
-<p style="font-size: 30px;">https://maglit.me/nomaphochs</p>
+<p style="font-size: 30px;"> https://edu.nl/9umub</p>
 
 
 :::
@@ -27,11 +27,10 @@ Let's take a different sample and calculate the mean of this sample.
 ```{r, message=FALSE, eval=TRUE, echo=FALSE}
 if(!'gsheet' %in% installed.packages()) { install.packages('gsheet') }
 library("gsheet")
-data <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1LN8j2MgTk1Su-hZCbFjexiUKQx-LmbgGqlpN6YzF2jQ/edit?usp=sharing')
-
+data <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1E9tlgFEv8OAyPBe_y2lwn2eUI1JmCg05Wk_wONAK1UM/edit?usp=sharing')[, -1]
+colnames(data) <- c("ownIQ", "nextIQ")
 # IQ.next.to.you = data[grep("2017|2020", as.character(data$Timestamp)),"IQ next to you"]
-IQ.next.to.you = data[,"nextIQ"]
-IQ.next.to.you <- as.numeric(IQ.next.to.you$nextIQ)
+IQ.next.to.you <- data$nextIQ
 ```
 
 
@@ -99,7 +98,7 @@ df <- n - 1; df
 if(!"visualize" %in% installed.packages()) { install.packages("visualize") }
 library("visualize")
 
-visualize::visualize.t(-tStat, df, section = "upper")
+visualize::visualize.t(-tStat, ifelse(df > 3, df, 10), section = "upper")
 ```
 
 ## P-value two sided {.subsection}
@@ -113,7 +112,12 @@ visualize.t(c(-tStat, tStat), 10, section = "tails")
 $$r = \sqrt{\frac{t^2}{t^2 + \text{df}}}$$
 
 ```{r, echo=TRUE}
-r <- sqrt(tStat^2/(tStat^2 + df))
+r <- tStat / sqrt(n)
 
 r
 ```
+
+## Applet
+
+
+[link](https://statisticalreasoning-uva.shinyapps.io/NHST_Continuous/)
