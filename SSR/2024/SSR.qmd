@@ -4,10 +4,11 @@ author: "Sharon Kinkenberg & Johnny van Doorn"
 date: today
 ---
 
-On this site you can find the statistics lectures for SSR. These slides were originally created by SH and tweaked by JvD.
+These slides were originally created by SH and tweaked by JvD.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 course.path = "SSR/2024/"
+setwd("~/GitHubStuff/teaching-statistics/SSR/2024/")
 
 files <- list.files(full.names = F, pattern = "\\.qmd", recursive = T)
 

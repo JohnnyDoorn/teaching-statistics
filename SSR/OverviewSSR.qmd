@@ -2,9 +2,18 @@
 title: "SSR - Overview"
 author: "Johnny van Doorn"
 date: today
+format:
+  html:
+    toc: true
+    toc-location: left
 ---
 
-This page will be continuously updated to feature extra materials, such as applets, data sets, and additional explanations. 
+This page will be continuously updated to feature extra materials, such as applets, data sets, and additional explanations.
+
+## Slides
+
+```{r child="../SSR/2024/SSR.qmd"}
+```
 
 ## Book
 An online version of Discovering Statistics Using JASP is available [here](https://amsuni-my.sharepoint.com/:b:/g/personal/j_b_vandoorn_uva_nl/ESR4n5L9HB5KsKByVbDlsj0BoZLpYD2aWwJstikmEGU25g?e=dKODJR). Individual chapters available [here](https://amsuni-my.sharepoint.com/:f:/g/personal/j_b_vandoorn_uva_nl/EoyhXwuTGZtGvJaobtAr83kBCA-BWxgKN6-kPvKIhKxaEg?e=k0eNPP). The supplementary materials (data files, Oliver Twisted, etc.) for the book are available [here](https://johnnydoorn.github.io/discoverjasp/pages/data.html).
