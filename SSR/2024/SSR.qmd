@@ -31,12 +31,18 @@ for (i in 1:n) {
 
 }
 
+handoutLinks <- sprintf('<a href="https://JohnnyDoorn.github.io/teaching-statistics/%s" target="_blank" class="external">link</a>', gsub("qmd", "html", lectures$url))
+slideLinks <- sprintf('<a href="https://JohnnyDoorn.github.io/teaching-statistics/%s" target="_blank" class="external">link</a>', gsub("qmd", "slide.html", lectures$url))
+
+handoutLinks[grepl(lectures$date, pattern = "2023")] <- slideLinks[grepl(lectures$date, pattern = "2023")] <- "-"
+
 data.frame(Date    = lectures$date, 
            Lecture = lectures$title,
-           Handout = sprintf('<a href="https://JohnnyDoorn.github.io/teaching-statistics/%s" target="_blank" class="external">link</a>', gsub("qmd", "html", lectures$url)),
-           Slides  = sprintf('<a href="https://JohnnyDoorn.github.io/teaching-statistics/%s" target="_blank" class="external">link</a>', gsub("qmd", "slide.html", lectures$url)) 
+           Handout = handoutLinks,
+           Slides  = slideLinks
           ) -> lecture.list
 
+lecture.list <- lecture.list[grepl(lectures$date, pattern = "2024"), ]
 # Sort on date
 library("lubridate")
 library("dplyr")
