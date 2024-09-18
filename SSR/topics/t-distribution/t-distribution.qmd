@@ -338,9 +338,9 @@ hist(t.values / sqrt(n),
 
 Cohen (1988)
 
--   Small: $0 \leq .1$
--   Medium: $.1 \leq .3$
--   Large: $.3 \leq .5$
+-   Small: $\approx .3$
+-   Medium: $\approx .5$
+-   Large: $\approx .8$
 
 </small>
 

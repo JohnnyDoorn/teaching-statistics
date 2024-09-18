@@ -1,0 +1,3 @@
+load("/Users/johnny/GitHubStuff/teaching-statistics/SSR/WA_Datasets/WA4/Dependent_t_test.rdata")
+data
+data$timetraining
