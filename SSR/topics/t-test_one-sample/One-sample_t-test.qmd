@@ -16,12 +16,12 @@
 $$\text{outcome} = \text{model} + \text{error}$$
 </div>
 
-## Compare sample mean {.smaller}
+## Compare sample mean to 120 {.smaller}
 
 <small>
-We use the one-sample t-test to compare the sample mean $\bar{x}$ to the population mean $\mu$. 
+We use the one-sample t-test to compare the sample mean $\bar{x}$ to the population mean $\mu = 120$. 
 
-Let's take a different sample and calculate the mean of this sample.
+Let's take a sample and calculate the mean of this sample.
 </small>
 
 ```{r, message=FALSE, eval=TRUE, echo=FALSE}
@@ -45,7 +45,7 @@ cbind(n, mean_x, sd_x)
 ```
 
 <small>
-Does this mean differ significantly from the population mean $\mu = `r mu`$?
+Does this mean differ significantly from the student population mean $\mu = `r mu`$?
 </small>
 
 ## Hypothesis {.subsection}
@@ -120,4 +120,4 @@ r
 ## Applet
 
 
-[link](https://statisticalreasoning-uva.shinyapps.io/NHST_Continuous/)
+[Link](https://statisticalreasoning-uva.shinyapps.io/NHST_Continuous/)

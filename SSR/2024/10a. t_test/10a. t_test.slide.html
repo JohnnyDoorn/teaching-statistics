@@ -414,6 +414,40 @@ Sharon Kinkenberg &amp; Johnny van Doorn
 
   <p class="date">2024-09-24</p>
 </section>
+<section id="block-1" class="title-slide slide level1 center">
+<h1>Block 1</h1>
+<ul>
+<li>General NHST concepts
+<ul>
+<li>Sampling distribution, type I/II error, <span class="math inline">\(p\)</span>-value</li>
+</ul></li>
+<li>Application to <span class="math inline">\(t\)</span>-test
+<ul>
+<li>Sampling distribution</li>
+<li>Effect size</li>
+<li>In JASP</li>
+<li>Assumptions</li>
+</ul></li>
+</ul>
+</section>
+
+<section id="block-1-1" class="title-slide slide level1 center">
+<h1>Block 1</h1>
+<ul>
+<li><del>General NHST concepts</del>
+<ul>
+<li><del>Sampling distribution, type I/II error, <span class="math inline">\(p\)</span>-value</del></li>
+</ul></li>
+<li>Application to <span class="math inline">\(t\)</span>-test
+<ul>
+<li><del>Sampling distribution</del></li>
+<li><del>Effect size</del></li>
+<li>In JASP</li>
+<li>Assumptions</li>
+</ul></li>
+</ul>
+</section>
+
 <section>
 <section id="one-sample-t-test" class="title-slide slide level1 section center">
 <h1>One-sample t-test</h1>
@@ -434,10 +468,10 @@ https://edu.nl/9umub
 <p><span class="math display">\[\text{outcome} = \text{model} + \text{error}\]</span></p>
 </div>
 </section>
-<section id="compare-sample-mean" class="slide level2 smaller">
-<h2>Compare sample mean</h2>
-<p><small> We use the one-sample t-test to compare the sample mean <span class="math inline">\(\bar{x}\)</span> to the population mean <span class="math inline">\(\mu\)</span>.</small></p><small>
-</small><p><small>Let’s take a different sample and calculate the mean of this sample. </small></p>
+<section id="compare-sample-mean-to-120" class="slide level2 smaller">
+<h2>Compare sample mean to 120</h2>
+<p><small> We use the one-sample t-test to compare the sample mean <span class="math inline">\(\bar{x}\)</span> to the population mean <span class="math inline">\(\mu = 120\)</span>.</small></p><small>
+</small><p><small>Let’s take a sample and calculate the mean of this sample. </small></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>mu     <span class="ot">&lt;-</span> <span class="dv">120</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a>n      <span class="ot">&lt;-</span> <span class="fu">length</span>(IQ.next.to.you)</span>
@@ -450,7 +484,7 @@ https://edu.nl/9umub
 [1,] 2  117.5 3.535534</code></pre>
 </div>
 </div>
-<p><small> Does this mean differ significantly from the population mean <span class="math inline">\(\mu = 120\)</span>? </small></p>
+<p><small> Does this mean differ significantly from the student population mean <span class="math inline">\(\mu = 120\)</span>? </small></p>
 </section>
 <section id="hypothesis" class="slide level2 subsection">
 <h2>Hypothesis</h2>
@@ -537,7 +571,7 @@ https://edu.nl/9umub
 </section>
 <section id="applet" class="slide level2">
 <h2>Applet</h2>
-<p><a href="https://statisticalreasoning-uva.shinyapps.io/NHST_Continuous/">link</a></p>
+<p><a href="https://statisticalreasoning-uva.shinyapps.io/NHST_Continuous/">Link</a></p>
 </section></section>
 <section>
 <section id="paired-samples-t-test" class="title-slide slide level1 section center">
@@ -604,8 +638,8 @@ https://edu.nl/9umub
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-f57699fd500829ed3f1e" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-f57699fd500829ed3f1e">{"x":{"filter":"none","vertical":false,"data":[["1","2"],[110,120],[115,120]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ownIQ<\/th>\n      <th>nextIQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ownIQ","targets":1},{"name":"nextIQ","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-f25c8bab570b3a99dbe9" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-f25c8bab570b3a99dbe9">{"x":{"filter":"none","vertical":false,"data":[["1","2"],[110,120],[115,120]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ownIQ<\/th>\n      <th>nextIQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ownIQ","targets":1},{"name":"nextIQ","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -617,8 +651,8 @@ https://edu.nl/9umub
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-88ef75a455b7168a3c96" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-88ef75a455b7168a3c96">{"x":{"filter":"none","vertical":false,"data":[["1","2"],[110,120],[115,120],[5,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ownIQ<\/th>\n      <th>nextIQ<\/th>\n      <th>diffScores<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":315,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ownIQ","targets":1},{"name":"nextIQ","targets":2},{"name":"diffScores","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-54ef4b92672c6f3a0c8e" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-54ef4b92672c6f3a0c8e">{"x":{"filter":"none","vertical":false,"data":[["1","2"],[110,120],[115,120],[5,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ownIQ<\/th>\n      <th>nextIQ<\/th>\n      <th>diffScores<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":315,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ownIQ","targets":1},{"name":"nextIQ","targets":2},{"name":"diffScores","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -787,8 +821,8 @@ H_A &amp;: t &lt; 0 \\
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-fd0e95b134e56b821f04" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-fd0e95b134e56b821f04">{"x":{"filter":"none","vertical":false,"data":[["1","2"],["front","back"],[110,120]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>classPosition<\/th>\n      <th>ownIQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"classPosition","targets":1},{"name":"ownIQ","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-ca65c6892fc808918214" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-ca65c6892fc808918214">{"x":{"filter":"none","vertical":false,"data":[["1","2"],["front","back"],[110,120]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>classPosition<\/th>\n      <th>ownIQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"classPosition","targets":1},{"name":"ownIQ","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -974,6 +1008,49 @@ group  1     NaN    NaN
 <pre><code>[1] -2</code></pre>
 </div>
 </div>
+</section>
+<section id="normality" class="slide level2">
+<h2>Normality?!</h2>
+<ul>
+<li>Test using hypothesis test (Shapiro-Wilk)
+<ul>
+<li><span class="math inline">\(p &lt; \alpha \rightarrow\)</span> assumption violated</li>
+<li>Same caution as Levene’s test (see also Jane Superbrain Box 6.7)</li>
+<li>Plus caution as with any p-value (black-and-white decision making)</li>
+</ul></li>
+<li>Assess using a plot (Q-Q plot)
+<ul>
+<li>Points should be along the diagonal</li>
+<li>Not exact</li>
+</ul></li>
+</ul>
+
+<img src="https://upload.wikimedia.org/wikipedia/en/3/3f/Pok%C3%A9mon_Snorlax_art.png" alt="Snorlax" width="100" class="r-stretch"></section>
+<section id="handling-assumption-violations" class="slide level2">
+<h2>Handling Assumption violations</h2>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>Assumption violations affect the shape of the sampling distribution and mess up the type 1/2 error rates</p>
+</div>
+</div>
+</div>
+<ul>
+<li>Unequal variances?
+<ul>
+<li>Welch <span class="math inline">\(t\)</span>-test</li>
+</ul></li>
+<li>Non-normality?
+<ul>
+<li>Use nonparametric test (Chapter 15/Lecture 17)</li>
+</ul></li>
+</ul>
 </section></section>
 <section>
 <section id="end" class="title-slide slide level1 center">

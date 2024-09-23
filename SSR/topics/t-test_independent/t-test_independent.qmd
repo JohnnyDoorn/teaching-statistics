@@ -209,3 +209,28 @@ tStatStudent <- (meanA - meanB) / (pooledS *  sqrt(1/nA + 1/nA))
 tStatStudent
 tStatWelch
 ```
+
+
+## Normality?!
+
+- Test using hypothesis test (Shapiro-Wilk)
+    - $p < \alpha \rightarrow$ assumption violated 
+    - Same caution as Levene's test (see also Jane Superbrain Box 6.7)
+    - Plus caution as with any p-value (black-and-white decision making)
+- Assess using a plot (Q-Q plot)
+    - Points should be along the diagonal
+    - Not exact 
+
+    
+<img src="https://upload.wikimedia.org/wikipedia/en/3/3f/Pok%C3%A9mon_Snorlax_art.png" alt="Snorlax" width="100"/>
+
+## Handling Assumption violations
+::: {.callout-warning}
+Assumption violations affect the shape of the sampling distribution and mess up the type 1/2 error rates
+:::
+
+- Unequal variances?
+    - Welch $t$-test
+- Non-normality?
+    - Use nonparametric test (Chapter 15/Lecture 17)
+

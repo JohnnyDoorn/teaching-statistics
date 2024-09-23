@@ -354,6 +354,49 @@ Warning
 </div>
 </div>
 </section>
+<section id="normality" class="level2">
+<h2 class="anchored" data-anchor-id="normality">Normality?!</h2>
+<ul>
+<li>Test using hypothesis test (Shapiro-Wilk)
+<ul>
+<li><span class="math inline">\(p &lt; \alpha \rightarrow\)</span> assumption violated</li>
+<li>Same caution as Levene’s test (see also Jane Superbrain Box 6.7)</li>
+<li>Plus caution as with any p-value (black-and-white decision making)</li>
+</ul></li>
+<li>Assess using a plot (Q-Q plot)
+<ul>
+<li>Not exact</li>
+<li>Points should be along the diagonal</li>
+</ul></li>
+</ul>
+<p><img src="https://upload.wikimedia.org/wikipedia/en/3/3f/Pok%C3%A9mon_Snorlax_art.png" alt="Snorlax" width="100"></p>
+</section>
+<section id="handling-assumption-violations" class="level2">
+<h2 class="anchored" data-anchor-id="handling-assumption-violations">Handling Assumption violations</h2>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Assumption violations affect the shape of the sampling distribution and mess up the type 1/2 error rates</p>
+</div>
+</div>
+<ul>
+<li>Unequal variances?
+<ul>
+<li>Welch <span class="math inline">\(t\)</span>-test</li>
+</ul></li>
+<li>Non-normality?
+<ul>
+<li>Use nonparametric test (Chapter 15/Lecture 17)</li>
+</ul></li>
+</ul>
+</section>
 </section>
 
 </main>
