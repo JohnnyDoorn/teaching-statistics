@@ -349,7 +349,7 @@ Cohen (1988)
 -   Strive for 80%
 -   Based on know effect size
 -   Calculate number of subjects needed
--   Use [G\*Power](http://www.gpower.hhu.de), [JASP](www.jasp-stats.org), or SPSS to calculate
+-   Use JASP (Power module), [G\*Power](http://www.gpower.hhu.de), or SPSS to calculate
 
 ![](https://www.psychologie.hhu.de/fileadmin/_processed_/f/d/csm_GPowerIcon_b6bfb17f0c.png)
 

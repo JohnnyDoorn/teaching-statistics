@@ -1,5 +1,5 @@
 ---
-title: "7. T-distribution and t-tests"
+title: "7. T-distribution"
 author: "Sharon Kinkenberg & Johnny van Doorn"
 date: "17 sep 2024"
 footer: "Scientific & Statistical Reasoning"
@@ -15,15 +15,15 @@ format:
 ```{r child="../../topics/t-distribution/t-distribution.qmd"}
 ```
 
-```{r child="../../topics/t-test_one-sample/One-sample_t-test.qmd"}
-```
+<!-- ```{r child="../../topics/t-test_one-sample/One-sample_t-test.qmd"} -->
+<!-- ``` -->
 
 
-```{r child="../../topics/t-test_paired/t-test_paired.qmd"}
-```
+<!-- ```{r child="../../topics/t-test_paired/t-test_paired.qmd"} -->
+<!-- ``` -->
 
-```{r child="../../topics/t-test_independent/t-test_independent.qmd"}
-```
+<!-- ```{r child="../../topics/t-test_independent/t-test_independent.qmd"} -->
+<!-- ``` -->
 
 
 ```{r child="../../footer.qmd"}
