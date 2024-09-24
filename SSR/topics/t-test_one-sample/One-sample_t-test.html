@@ -98,10 +98,10 @@ https://edu.nl/9umub
 <p><span class="math display">\[\text{outcome} = \text{model} + \text{error}\]</span></p>
 </div>
 </section>
-<section id="compare-sample-mean" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="compare-sample-mean">Compare sample mean</h2>
-<p><small> We use the one-sample t-test to compare the sample mean <span class="math inline">\(\bar{x}\)</span> to the population mean <span class="math inline">\(\mu\)</span>.</small></p><small>
-</small><p><small>Let’s take a different sample and calculate the mean of this sample. </small></p>
+<section id="compare-sample-mean-to-120" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="compare-sample-mean-to-120">Compare sample mean to 120</h2>
+<p><small> We use the one-sample t-test to compare the sample mean <span class="math inline">\(\bar{x}\)</span> to the population mean <span class="math inline">\(\mu = 120\)</span>.</small></p><small>
+</small><p><small>Let’s take a sample and calculate the mean of this sample. </small></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mu     <span class="ot">&lt;-</span> <span class="dv">120</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>n      <span class="ot">&lt;-</span> <span class="fu">length</span>(IQ.next.to.you)</span>
@@ -110,11 +110,11 @@ https://edu.nl/9umub
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>sd_x   <span class="ot">&lt;-</span> <span class="fu">sd</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(n, mean_x, sd_x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>     n mean_x     sd_x
-[1,] 2  117.5 3.535534</code></pre>
+<pre><code>      n   mean_x     sd_x
+[1,] 64 117.7344 16.12082</code></pre>
 </div>
 </div>
-<p><small> Does this mean differ significantly from the population mean <span class="math inline">\(\mu = 120\)</span>? </small></p>
+<p><small> Does this mean differ significantly from the student population mean <span class="math inline">\(\mu = 120\)</span>? </small></p>
 </section>
 <section id="hypothesis" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="hypothesis">Hypothesis</h2>
@@ -147,12 +147,12 @@ https://edu.nl/9umub
 </section>
 <section id="t-statistic" class="level2">
 <h2 class="anchored" data-anchor-id="t-statistic">T-statistic</h2>
-<p><span class="math display">\[T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}} = \frac{117.5 - 120 }{3.54 / \sqrt{2}}\]</span></p>
+<p><span class="math display">\[T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}} = \frac{117.73 - 120 }{16.12 / \sqrt{64}}\]</span></p>
 <p>So the t-statistic represents the deviation of the sample mean <span class="math inline">\(\bar{x}\)</span> from the population mean <span class="math inline">\(\mu\)</span>, considering the sample size.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>tStat <span class="ot">&lt;-</span> (mean_x <span class="sc">-</span> mu) <span class="sc">/</span> (sd_x <span class="sc">/</span> <span class="fu">sqrt</span>(n)); tStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -1</code></pre>
+<pre><code>[1] -1.124323</code></pre>
 </div>
 </div>
 </section>
@@ -169,14 +169,14 @@ https://edu.nl/9umub
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span>; df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1</code></pre>
+<pre><code>[1] 63</code></pre>
 </div>
 </div>
 <div class="cell" data-output-location="slide">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="st">"visualize"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()) { <span class="fu">install.packages</span>(<span class="st">"visualize"</span>) }</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"visualize"</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>visualize<span class="sc">::</span><span class="fu">visualize.t</span>(<span class="sc">-</span>tStat, <span class="fu">ifelse</span>(df <span class="sc">&gt;</span> <span class="dv">3</span>, df, <span class="dv">10</span>), <span class="at">section =</span> <span class="st">"upper"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>visualize<span class="sc">::</span><span class="fu">visualize.t</span>(<span class="sc">-</span>tStat, <span class="fu">ifelse</span>(df <span class="sc">&lt;</span> <span class="dv">3</span>, df, <span class="dv">10</span>), <span class="at">section =</span> <span class="st">"upper"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="One-sample_t-test_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -191,21 +191,21 @@ https://edu.nl/9umub
 </div>
 </div>
 </section>
-<section id="effect-size" class="level2">
-<h2 class="anchored" data-anchor-id="effect-size">Effect-size</h2>
-<p><span class="math display">\[r = \sqrt{\frac{t^2}{t^2 + \text{df}}}\]</span></p>
+<section id="effect-size-cohens-d" class="level2">
+<h2 class="anchored" data-anchor-id="effect-size-cohens-d">Effect-size Cohen’s <span class="math inline">\(d\)</span></h2>
+<p><span class="math display">\[d = \frac{t}{\sqrt{n}}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> tStat <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> tStat <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.7071068</code></pre>
+<pre><code>[1] -0.1405403</code></pre>
 </div>
 </div>
 </section>
 <section id="applet" class="level2">
 <h2 class="anchored" data-anchor-id="applet">Applet</h2>
-<p><a href="https://statisticalreasoning-uva.shinyapps.io/NHST_Continuous/">link</a></p>
+<p><a href="https://statisticalreasoning-uva.shinyapps.io/NHST_Continuous/">Link</a></p>
 </section>
 </section>
 

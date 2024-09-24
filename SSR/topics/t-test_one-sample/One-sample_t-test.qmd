@@ -104,17 +104,17 @@ visualize::visualize.t(-tStat, ifelse(df > 3, df, 10), section = "upper")
 ## P-value two sided {.subsection}
 
 ```{r, echo=TRUE}
-visualize.t(c(-tStat, tStat), 10, section = "tails")
+visualize.t(c(-tStat, tStat), ifelse(df > 3, df, 10), section = "tails")
 ```
 
-## Effect-size
+## Effect-size Cohen's $d$
 
-$$r = \sqrt{\frac{t^2}{t^2 + \text{df}}}$$
+$$d = \frac{t}{\sqrt{n}}$$
 
 ```{r, echo=TRUE}
-r <- tStat / sqrt(n)
+d <- tStat / sqrt(n)
 
-r
+d
 ```
 
 ## Applet

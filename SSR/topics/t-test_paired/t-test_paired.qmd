@@ -117,34 +117,20 @@ library("visualize")
 visualize.t(c(-tStat,tStat), ifelse(df > 2, df, 5), section="tails")
 ```
 
-## Effect-size {.subsection}
+## Effect-size $r$  {.subsection}
 
 $$r = \sqrt{\frac{t^2}{t^2 + \text{df}}}$$
 
 ```{r, echo=TRUE}
-r = sqrt(tStat^2/(tStat^2 + df))
+r <- sqrt(tStat^2/(tStat^2 + df))
 r
 ```
 
-## Confidence interval (bonus)
+## Effect-size $d$ {.subsection}
 
-To display correct confidence intervals in SPSS we need to correct the original scores for within subject variation.
+$$d = \frac{t}{\sqrt{n}}$$
 
-<code><pre>
-** SPSS SYNTAX
-
-COMPUTE personal_mean = MEAN(nextIQ, ownIQ).
-EXECUTE.
-
-AGGREGATE
-  /OUTFILE=* MODE=ADDVARIABLES
-  /BREAK=
-  /total_mean = MEAN(personal_mean).
-
-COMPUTE adjustment = total_mean - personal_mean.
-EXECUTE.
-
-COMPUTE nextIQ.adj = nextIQ + adjustment.
-COMPUTE ownIQ.adj  = ownIQ + adjustment.
-EXECUTE.
-</pre></code>
+```{r, echo=TRUE}
+d <- tStat/(sqrt(n))
+d
+```
