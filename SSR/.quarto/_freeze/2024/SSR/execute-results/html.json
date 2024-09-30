@@ -1,0 +1,20 @@
+{
+  "hash": "c9362aa0618d80d9c74f47b1d4ae6e39",
+  "result": {
+    "markdown": "---\ntitle: \"SSR 2024-2025\"\nauthor: \"Sharon Kinkenberg & Johnny van Doorn\"\ndate: today\n---\n\n\nThese slides were originally created by SH and tweaked by JvD.\n\n\n::: {.cell}\n::: {.cell-output-display}\n`````{=html}\n<table class=\"table\" style=\"margin-left: auto; margin-right: auto;\">\n <thead>\n  <tr>\n   <th style=\"text-align:left;\"> Date </th>\n   <th style=\"text-align:left;\"> Lecture </th>\n   <th style=\"text-align:left;\"> Handout </th>\n   <th style=\"text-align:left;\"> Slides </th>\n  </tr>\n </thead>\n<tbody>\n  <tr>\n   <td style=\"text-align:left;\"> 10 sep 2024 </td>\n   <td style=\"text-align:left;\"> 4. Statistical Reasoning </td>\n   <td style=\"text-align:left;\"> <a href=\"https://JohnnyDoorn.github.io/teaching-statistics/SSR/2024/2.%20reasoning_nhst/2.%20reasoning_empirical_cycle_nhst.html\" target=\"_blank\" class=\"external\">link</a> </td>\n   <td style=\"text-align:left;\"> <a href=\"https://JohnnyDoorn.github.io/teaching-statistics/SSR/2024/2.%20reasoning_nhst/2.%20reasoning_empirical_cycle_nhst.slide.html\" target=\"_blank\" class=\"external\">link</a> </td>\n  </tr>\n  <tr>\n   <td style=\"text-align:left;\"> 13 sep 2024 </td>\n   <td style=\"text-align:left;\"> 6. Null Hypothesis Significance Testing </td>\n   <td style=\"text-align:left;\"> <a href=\"https://JohnnyDoorn.github.io/teaching-statistics/SSR/2024/6.%20nhst/6.%20nhst.html\" target=\"_blank\" class=\"external\">link</a> </td>\n   <td style=\"text-align:left;\"> <a href=\"https://JohnnyDoorn.github.io/teaching-statistics/SSR/2024/6.%20nhst/6.%20nhst.slide.html\" target=\"_blank\" class=\"external\">link</a> </td>\n  </tr>\n  <tr>\n   <td style=\"text-align:left;\"> 17 sep 2024 </td>\n   <td style=\"text-align:left;\"> 7. T-distribution </td>\n   <td style=\"text-align:left;\"> <a href=\"https://JohnnyDoorn.github.io/teaching-statistics/SSR/2024/7.%20t_distribution_and_test/7.%20t_distribution_and_test.html\" target=\"_blank\" class=\"external\">link</a> </td>\n   <td style=\"text-align:left;\"> <a href=\"https://JohnnyDoorn.github.io/teaching-statistics/SSR/2024/7.%20t_distribution_and_test/7.%20t_distribution_and_test.slide.html\" target=\"_blank\" class=\"external\">link</a> </td>\n  </tr>\n  <tr>\n   <td style=\"text-align:left;\"> 24 sep 2024 </td>\n   <td style=\"text-align:left;\"> 10. T-tests </td>\n   <td style=\"text-align:left;\"> <a href=\"https://JohnnyDoorn.github.io/teaching-statistics/SSR/2024/10.%20t_test/10.%20t_test.html\" target=\"_blank\" class=\"external\">link</a> </td>\n   <td style=\"text-align:left;\"> <a href=\"https://JohnnyDoorn.github.io/teaching-statistics/SSR/2024/10.%20t_test/10.%20t_test.slide.html\" target=\"_blank\" class=\"external\">link</a> </td>\n  </tr>\n  <tr>\n   <td style=\"text-align:left;\"> 01 oct 2024 </td>\n   <td style=\"text-align:left;\"> 11. ANOVA </td>\n   <td style=\"text-align:left;\"> <a href=\"https://JohnnyDoorn.github.io/teaching-statistics/SSR/2024/11.%20f_distribution_ANOVA_one_way_independent/11.%20f_distribution_ANOVA_one_way_independent.html\" target=\"_blank\" class=\"external\">link</a> </td>\n   <td style=\"text-align:left;\"> <a href=\"https://JohnnyDoorn.github.io/teaching-statistics/SSR/2024/11.%20f_distribution_ANOVA_one_way_independent/11.%20f_distribution_ANOVA_one_way_independent.slide.html\" target=\"_blank\" class=\"external\">link</a> </td>\n  </tr>\n</tbody>\n</table>\n\n`````\n:::\n:::\n",
+    "supporting": [
+      "SSR_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-in-header": [
+        "<script src=\"SSR_files/libs/kePrint-0.0.1/kePrint.js\"></script>\n<link href=\"SSR_files/libs/lightable-0.0.1/lightable.css\" rel=\"stylesheet\" />\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

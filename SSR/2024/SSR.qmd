@@ -47,10 +47,14 @@ lecture.list <- lecture.list[grepl(lectures$date, pattern = "2024"), ]
 # Sort on date
 library("lubridate")
 library("dplyr")
+# Extract the numeric part from the "Lecture" column
+lecture.list$LectureNumber <- as.numeric(sub("^([0-9]+).*", "\\1", lecture.list$Lecture))
 
+# Sort the data frame by the extracted lecture number
+lecture.list <- lecture.list[order(lecture.list$LectureNumber), ]
 # lecture.list$Date <- lubridate::dmy(lecture.list$Date)
 # lubridate::mdy(lecture.list$Date)
-
+lecture.list <- lecture.list[, -(ncol(lecture.list))]
 library('kableExtra')
 
 # Print table with kable as set in YAML
