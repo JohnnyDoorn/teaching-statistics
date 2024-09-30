@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.3.340">
 
   <meta name="author" content="Sharon Kinkenberg &amp; Johnny van Doorn">
-  <meta name="dcterms.date" content="2023-10-03">
+  <meta name="dcterms.date" content="2024-10-01">
   <title>10. ANOVA</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -97,7 +97,6 @@
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="10. f_distribution_ANOVA_one_way_independent_files/libs/revealjs/dist/theme/quarto.css" id="theme">
-  <link rel="stylesheet" href="https://shklinkenberg.github.io/statistics-lectures/courses/uva_reveal.css">
   <link href="10. f_distribution_ANOVA_one_way_independent_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="10. f_distribution_ANOVA_one_way_independent_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="10. f_distribution_ANOVA_one_way_independent_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -391,150 +390,20 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="https://cdn.pixabay.com/photo/2017/08/22/16/46/bike-2669639_960_720.jpg" data-background-position="bottom" data-background-size="contain" class="quarto-title-block center">
+<section id="title-slide" class="quarto-title-block center">
   <h1 class="title">10. ANOVA</h1>
-  <p class="subtitle">F-distribution &amp; One-way independent</p>
+  <p class="subtitle">F-distribution &amp; One-way independent ANOVA</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
 Sharon Kinkenberg &amp; Johnny van Doorn 
 </div>
-        <p class="quarto-title-affiliation">
-            University of Amsterdam
-          </p>
-    </div>
+</div>
 </div>
 
-  <p class="date">2023-10-03</p>
+  <p class="date">2024-10-01</p>
 </section>
-<section>
-<section id="f-distribution" class="title-slide slide level1 section center">
-<h1>F-distribution</h1>
-
-</section>
-<section id="ronald-fisher" class="slide level2 smaller subsection">
-<h2>Ronald Fisher</h2>
-<div class="columns">
-<div class="column" style="width:70%;">
-<p>The F-distribution, also known as Snedecor’s F distribution or the Fisher–Snedecor distribution (after Ronald Fisher and George W. Snedecor) is, in probability theory and statistics, a continuous probability distribution. The F-distribution arises frequently as the null distribution of a test statistic, most notably in the analysis of variance; see F-test.</p>
-<p><a href="https://en.wikipedia.org/wiki/F-distribution">Wikipedia</a></p>
-<p>Sir Ronald Aylmer Fisher FRS (17 February 1890 – 29 July 1962), known as R.A. Fisher, was an English statistician, evolutionary biologist, mathematician, geneticist, and eugenicist. Fisher is known as one of the three principal founders of population genetics, creating a mathematical and statistical basis for biology and uniting natural selection with Mendelian genetics.</p>
-<p><a href="https://en.wikipedia.org/wiki/Ronald_Fisher">Wikipedia</a></p>
-</div><div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="https://upload.wikimedia.org/wikipedia/commons/a/aa/Youngronaldfisher2.JPG" width="291"></p>
-<figcaption>Ronald Fisher</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="analysing-variance" class="slide level2">
-<h2>Analysing variance</h2>
-<p><a href="https://webcolleges.uva.nl/Mediasite/Play/42718d5968df45b29c089fcd02bcb86a1d?playFrom=377000">Decomposing variance example of height for males and females.</a></p>
-</section>
-<section id="population-distribution" class="slide level2 smaller subsection">
-<h2>Population distribution</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">7</span><span class="sc">:</span><span class="dv">8</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">9</span><span class="sc">:</span><span class="dv">13</span>), <span class="dv">4</span>, <span class="dv">4</span>))</span>
-<span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a>n  <span class="ot">&lt;-</span> <span class="dv">56</span>    <span class="co"># Sample size</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>df <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span> <span class="co"># Degrees of freedom</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a>mu    <span class="ot">&lt;-</span> <span class="dv">120</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a>sigma <span class="ot">&lt;-</span> <span class="dv">15</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a>IQ <span class="ot">&lt;-</span> <span class="fu">seq</span>(mu<span class="dv">-45</span>, mu<span class="sc">+</span><span class="dv">45</span>, <span class="dv">1</span>)</span>
-<span id="cb1-10"><a href="#cb1-10"></a></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>))  </span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="fu">plot</span>(IQ, <span class="fu">dnorm</span>(IQ, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma), <span class="at">type=</span><span class="st">'l'</span>, <span class="at">col=</span><span class="st">"red"</span>)</span>
-<span id="cb1-13"><a href="#cb1-13"></a></span>
-<span id="cb1-14"><a href="#cb1-14"></a>n.samples <span class="ot">=</span> <span class="dv">12</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a></span>
-<span id="cb1-16"><a href="#cb1-16"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n.samples) {</span>
-<span id="cb1-17"><a href="#cb1-17"></a>  </span>
-<span id="cb1-18"><a href="#cb1-18"></a>  <span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>))  </span>
-<span id="cb1-19"><a href="#cb1-19"></a>  <span class="fu">hist</span>(<span class="fu">rnorm</span>(n, mu, sigma), <span class="at">main=</span><span class="st">""</span>, <span class="at">cex.axis=</span>.<span class="dv">5</span>, <span class="at">col=</span><span class="st">"red"</span>)</span>
-<span id="cb1-20"><a href="#cb1-20"></a>  </span>
-<span id="cb1-21"><a href="#cb1-21"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-
-</section>
-<section id="population-distribution-output" class="slide level2 smaller subsection output-location-slide"><h2>Population distribution</h2><div class="cell output-location-slide">
-<div class="cell-output-display">
-<p><img data-src="10.-f_distribution_ANOVA_one_way_independent_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></p>
-</div>
-</div></section><section id="f-statistic" class="slide level2">
-<h2>F-statistic</h2>
-<p><span class="math display">\[F = \frac{{MS}_{model}}{{MS}_{error}} = \frac{{SIGNAL}}{{NOISE}}\]</span></p>
-<p>So the <span class="math inline">\(F\)</span>-statistic represents a signal to noise ratio by deviding the model variance component by the error variance component.</p>
-</section>
-<section id="a-samples" class="slide level2">
-<h2>A samples</h2>
-<p>Let’s take two sample from our normal populatiion and calculate the F-value.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>x<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma)</span>
-<span id="cb2-2"><a href="#cb2-2"></a>x<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma)</span>
-<span id="cb2-3"><a href="#cb2-3"></a></span>
-<span id="cb2-4"><a href="#cb2-4"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">group =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"s1"</span>, <span class="st">"s2"</span>), <span class="at">each=</span>n), <span class="at">score =</span> <span class="fu">c</span>(x<span class="fl">.1</span>,x<span class="fl">.2</span>))</span>
-<span id="cb2-5"><a href="#cb2-5"></a>    </span>
-<span id="cb2-6"><a href="#cb2-6"></a>fStat <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">aov</span>(<span class="fu">lm</span>(score <span class="sc">~</span> group, data)))[[<span class="dv">1</span>]]<span class="sc">$</span>F[<span class="dv">1</span>]</span>
-<span id="cb2-7"><a href="#cb2-7"></a>fStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.0524252</code></pre>
-</div>
-</div>
-</section>
-<section id="more-samples" class="slide level2 smaller subsection">
-<h2>More samples</h2>
-<p>let’s take more samples and calculate the F-value every time.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>nSamples <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a></span>
-<span id="cb4-3"><a href="#cb4-3"></a>fValues <span class="ot">=</span> <span class="fu">vector</span>()</span>
-<span id="cb4-4"><a href="#cb4-4"></a></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nSamples) {</span>
-<span id="cb4-6"><a href="#cb4-6"></a>  </span>
-<span id="cb4-7"><a href="#cb4-7"></a>  x1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma); x1</span>
-<span id="cb4-8"><a href="#cb4-8"></a>  x2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma); x2</span>
-<span id="cb4-9"><a href="#cb4-9"></a></span>
-<span id="cb4-10"><a href="#cb4-10"></a>  data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">group =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"s1"</span>, <span class="st">"s2"</span>), <span class="at">each=</span>n), <span class="at">score =</span> <span class="fu">c</span>(x1,x2))</span>
-<span id="cb4-11"><a href="#cb4-11"></a>    </span>
-<span id="cb4-12"><a href="#cb4-12"></a>  fValues[i] <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">aov</span>(<span class="fu">lm</span>(score <span class="sc">~</span> group, data)))[[<span class="dv">1</span>]]<span class="sc">$</span>F[<span class="dv">1</span>]</span>
-<span id="cb4-13"><a href="#cb4-13"></a></span>
-<span id="cb4-14"><a href="#cb4-14"></a>}</span>
-<span id="cb4-15"><a href="#cb4-15"></a></span>
-<span id="cb4-16"><a href="#cb4-16"></a>k <span class="ot">=</span> <span class="dv">2</span></span>
-<span id="cb4-17"><a href="#cb4-17"></a>N <span class="ot">=</span> <span class="dv">2</span><span class="sc">*</span>n</span>
-<span id="cb4-18"><a href="#cb4-18"></a></span>
-<span id="cb4-19"><a href="#cb4-19"></a>dfModel <span class="ot">=</span> k <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb4-20"><a href="#cb4-20"></a>dfError <span class="ot">=</span> N <span class="sc">-</span> k</span>
-<span id="cb4-21"><a href="#cb4-21"></a></span>
-<span id="cb4-22"><a href="#cb4-22"></a><span class="fu">hist</span>(fValues, <span class="at">freq =</span> <span class="cn">FALSE</span>, <span class="at">main=</span><span class="st">"F-values"</span>, <span class="at">breaks=</span><span class="dv">100</span>)</span>
-<span id="cb4-23"><a href="#cb4-23"></a>fVal <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>, .<span class="dv">01</span>)</span>
-<span id="cb4-24"><a href="#cb4-24"></a><span class="fu">lines</span>(fVal, <span class="fu">df</span>(fVal,dfModel, dfError), <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-
-</section>
-<section id="more-samples-output" class="slide level2 smaller subsection output-location-slide"><h2>More samples</h2><div class="cell output-location-slide">
-<div class="cell-output-display">
-<p><img data-src="10.-f_distribution_ANOVA_one_way_independent_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
-</div>
-</div></section><section id="f-distribution-1" class="slide level2 smaller">
-<h2>F-distribution</h2>
-<p>So if the population is normaly distributed (assumption of normality) the f-distribution represents the signal to noise ration given a certain number of samples (<span class="math inline">\({df}_{model} = k - 1\)</span>) and sample size (<span class="math inline">\({df}_{error} = N - k\)</span>).</p>
-<p>The F-distibution therefore is different for different sample sizes and number of groups.</p>
-</section>
-<section id="f-distribution-2" class="slide level2 smaller">
-<h2>F-distribution</h2>
-
-<img data-src="10.-f_distribution_ANOVA_one_way_independent_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
-<section id="f-distribution-3" class="slide level2 flexbox vcenter">
-<h2>F-distribution</h2>
-
-<img data-src="../../../../topics/f_distribution/f_distributions.gif" class="r-stretch quarto-figure-center"><p class="caption">Animated F-distrigutions</p></section></section>
 <section>
 <section id="one-way-independent-anova" class="title-slide slide level1 section center">
 <h1>One-way independent ANOVA</h1>
@@ -565,17 +434,17 @@ Sharon Kinkenberg &amp; Johnny van Doorn
 <li>Eyes (3 hour light in eyes)</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
-<span id="cb5-2"><a href="#cb5-2"></a>x.c <span class="ot">&lt;-</span> <span class="fu">c</span>( .<span class="dv">53</span>, .<span class="dv">36</span>,  .<span class="dv">2</span>,  <span class="sc">-</span>.<span class="dv">37</span>, <span class="sc">-</span>.<span class="dv">6</span>,  <span class="sc">-</span>.<span class="dv">64</span>, <span class="sc">-</span>.<span class="dv">68</span>,<span class="sc">-</span><span class="fl">1.27</span>) <span class="co"># Control </span></span>
-<span id="cb5-3"><a href="#cb5-3"></a>x.k <span class="ot">&lt;-</span> <span class="fu">c</span>( .<span class="dv">73</span>, .<span class="dv">31</span>,  .<span class="dv">03</span>, <span class="sc">-</span>.<span class="dv">29</span>, <span class="sc">-</span>.<span class="dv">56</span>, <span class="sc">-</span>.<span class="dv">96</span>, <span class="sc">-</span><span class="fl">1.61</span>      ) <span class="co"># Knees</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a>x.e <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">78</span>,<span class="sc">-</span>.<span class="dv">86</span>,<span class="sc">-</span><span class="fl">1.35</span>,<span class="sc">-</span><span class="fl">1.48</span>,<span class="sc">-</span><span class="fl">1.52</span>,<span class="sc">-</span><span class="fl">2.04</span>, <span class="sc">-</span><span class="fl">2.83</span>      ) <span class="co"># Eyes</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a>x   <span class="ot">&lt;-</span> <span class="fu">c</span>( x.c, x.k, x.e )                               <span class="co"># Conditions combined</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
+<span id="cb1-2"><a href="#cb1-2"></a>x.c <span class="ot">&lt;-</span> <span class="fu">c</span>( .<span class="dv">53</span>, .<span class="dv">36</span>,  .<span class="dv">2</span>,  <span class="sc">-</span>.<span class="dv">37</span>, <span class="sc">-</span>.<span class="dv">6</span>,  <span class="sc">-</span>.<span class="dv">64</span>, <span class="sc">-</span>.<span class="dv">68</span>,<span class="sc">-</span><span class="fl">1.27</span>) <span class="co"># Control </span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>x.k <span class="ot">&lt;-</span> <span class="fu">c</span>( .<span class="dv">73</span>, .<span class="dv">31</span>,  .<span class="dv">03</span>, <span class="sc">-</span>.<span class="dv">29</span>, <span class="sc">-</span>.<span class="dv">56</span>, <span class="sc">-</span>.<span class="dv">96</span>, <span class="sc">-</span><span class="fl">1.61</span>      ) <span class="co"># Knees</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>x.e <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">78</span>,<span class="sc">-</span>.<span class="dv">86</span>,<span class="sc">-</span><span class="fl">1.35</span>,<span class="sc">-</span><span class="fl">1.48</span>,<span class="sc">-</span><span class="fl">1.52</span>,<span class="sc">-</span><span class="fl">2.04</span>, <span class="sc">-</span><span class="fl">2.83</span>      ) <span class="co"># Eyes</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>x   <span class="ot">&lt;-</span> <span class="fu">c</span>( x.c, x.k, x.e )                               <span class="co"># Conditions combined</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="section" class="slide level2">
 <h2></h2>
 
-<img data-src="10.-f_distribution_ANOVA_one_way_independent_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
+<img data-src="10.-f_distribution_ANOVA_one_way_independent_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
 <section id="variance-components" class="slide level2">
 <h2>Variance components</h2>
 <table>
@@ -625,11 +494,11 @@ Sharon Kinkenberg &amp; Johnny van Doorn
 <h2>Total variance</h2>
 <p><span class="math display">\[{MS}_{total} = s_x^2\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>ms.t <span class="ot">&lt;-</span> <span class="fu">var</span>(x); ms.t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>ms.t <span class="ot">&lt;-</span> <span class="fu">var</span>(x); ms.t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.7923732</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">sum</span>( (x <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span> ) <span class="sc">/</span> (<span class="fu">length</span>(x) <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">sum</span>( (x <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span> ) <span class="sc">/</span> (<span class="fu">length</span>(x) <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.7923732</code></pre>
 </div>
@@ -639,13 +508,13 @@ Sharon Kinkenberg &amp; Johnny van Doorn
 
 <p><span class="math display">\[{SS}_{total} = s_x^2 (N-1)\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>N <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
-<span id="cb10-2"><a href="#cb10-2"></a></span>
-<span id="cb10-3"><a href="#cb10-3"></a>ss.t <span class="ot">&lt;-</span> <span class="fu">var</span>(x) <span class="sc">*</span> (N<span class="dv">-1</span>); ss.t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>N <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a>ss.t <span class="ot">&lt;-</span> <span class="fu">var</span>(x) <span class="sc">*</span> (N<span class="dv">-1</span>); ss.t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 16.63984</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">sum</span>( (x <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">sum</span>( (x <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 16.63984</code></pre>
 </div>
@@ -654,29 +523,29 @@ Sharon Kinkenberg &amp; Johnny van Doorn
 <section id="visual-ss_total" class="slide level2">
 <h2>Visual <span class="math inline">\({SS}_{total}\)</span></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># Assign labels</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a>lab <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Knee"</span>, <span class="st">"Eyes"</span>) </span>
-<span id="cb14-3"><a href="#cb14-3"></a></span>
-<span id="cb14-4"><a href="#cb14-4"></a><span class="co"># Plot all data points</span></span>
-<span id="cb14-5"><a href="#cb14-5"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span>N,x, </span>
-<span id="cb14-6"><a href="#cb14-6"></a>     <span class="at">ylab=</span><span class="st">"Shift in circadian rhythm (h)"</span>,</span>
-<span id="cb14-7"><a href="#cb14-7"></a>     <span class="at">xlab=</span><span class="st">"Light treatment"</span>,</span>
-<span id="cb14-8"><a href="#cb14-8"></a>     <span class="at">main=</span><span class="st">"Total variance"</span>)</span>
-<span id="cb14-9"><a href="#cb14-9"></a></span>
-<span id="cb14-10"><a href="#cb14-10"></a><span class="co"># Add mean line</span></span>
-<span id="cb14-11"><a href="#cb14-11"></a><span class="fu">lines</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">22</span>),<span class="fu">rep</span>(<span class="fu">mean</span>(x),<span class="dv">2</span>),<span class="at">lwd=</span><span class="dv">3</span>)</span>
-<span id="cb14-12"><a href="#cb14-12"></a></span>
-<span id="cb14-13"><a href="#cb14-13"></a><span class="co"># Add delta lines / variance components</span></span>
-<span id="cb14-14"><a href="#cb14-14"></a><span class="fu">segments</span>(<span class="dv">1</span><span class="sc">:</span>N, <span class="fu">mean</span>(x), <span class="dv">1</span><span class="sc">:</span>N, x)</span>
-<span id="cb14-15"><a href="#cb14-15"></a></span>
-<span id="cb14-16"><a href="#cb14-16"></a><span class="co"># Add labels</span></span>
-<span id="cb14-17"><a href="#cb14-17"></a><span class="fu">text</span>(<span class="fu">c</span>(<span class="dv">4</span>,<span class="fl">11.5</span>,<span class="fl">18.5</span>),<span class="fu">rep</span>(.<span class="dv">6</span>,<span class="dv">3</span>),<span class="at">labels=</span>lab)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Assign labels</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>lab <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Knee"</span>, <span class="st">"Eyes"</span>) </span>
+<span id="cb10-3"><a href="#cb10-3"></a></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co"># Plot all data points</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span>N,x, </span>
+<span id="cb10-6"><a href="#cb10-6"></a>     <span class="at">ylab=</span><span class="st">"Shift in circadian rhythm (h)"</span>,</span>
+<span id="cb10-7"><a href="#cb10-7"></a>     <span class="at">xlab=</span><span class="st">"Light treatment"</span>,</span>
+<span id="cb10-8"><a href="#cb10-8"></a>     <span class="at">main=</span><span class="st">"Total variance"</span>)</span>
+<span id="cb10-9"><a href="#cb10-9"></a></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="co"># Add mean line</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="fu">lines</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">22</span>),<span class="fu">rep</span>(<span class="fu">mean</span>(x),<span class="dv">2</span>),<span class="at">lwd=</span><span class="dv">3</span>)</span>
+<span id="cb10-12"><a href="#cb10-12"></a></span>
+<span id="cb10-13"><a href="#cb10-13"></a><span class="co"># Add delta lines / variance components</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a><span class="fu">segments</span>(<span class="dv">1</span><span class="sc">:</span>N, <span class="fu">mean</span>(x), <span class="dv">1</span><span class="sc">:</span>N, x)</span>
+<span id="cb10-15"><a href="#cb10-15"></a></span>
+<span id="cb10-16"><a href="#cb10-16"></a><span class="co"># Add labels</span></span>
+<span id="cb10-17"><a href="#cb10-17"></a><span class="fu">text</span>(<span class="fu">c</span>(<span class="dv">4</span>,<span class="fl">11.5</span>,<span class="fl">18.5</span>),<span class="fu">rep</span>(.<span class="dv">6</span>,<span class="dv">3</span>),<span class="at">labels=</span>lab)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
 <section id="visual-ss_total-output" class="slide level2 output-location-slide"><h2>Visual <span class="math inline">\({SS}_{total}\)</span></h2><div class="cell output-location-slide">
 <div class="cell-output-display">
-<p><img data-src="10.-f_distribution_ANOVA_one_way_independent_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
+<p><img data-src="10.-f_distribution_ANOVA_one_way_independent_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
 </div>
 </div></section><section id="model-variance" class="slide level2">
 <h2>Model variance</h2>
@@ -684,25 +553,25 @@ Sharon Kinkenberg &amp; Johnny van Doorn
 <p>Where <span class="math inline">\(k\)</span> is the number of independent groups and</p>
 <p><span class="math display">\[{SS}_{model} = \sum_{k} n_k (\bar{X}_k - \bar{X})^2\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>k   <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a>n.c <span class="ot">&lt;-</span> <span class="fu">length</span>(x.c)</span>
-<span id="cb15-3"><a href="#cb15-3"></a>n.k <span class="ot">&lt;-</span> <span class="fu">length</span>(x.k)</span>
-<span id="cb15-4"><a href="#cb15-4"></a>n.e <span class="ot">&lt;-</span> <span class="fu">length</span>(x.e)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>k   <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>n.c <span class="ot">&lt;-</span> <span class="fu">length</span>(x.c)</span>
+<span id="cb11-3"><a href="#cb11-3"></a>n.k <span class="ot">&lt;-</span> <span class="fu">length</span>(x.k)</span>
+<span id="cb11-4"><a href="#cb11-4"></a>n.e <span class="ot">&lt;-</span> <span class="fu">length</span>(x.e)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section class="slide level2">
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>ss.m.c <span class="ot">&lt;-</span> n.c <span class="sc">*</span> (<span class="fu">mean</span>(x.c) <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a>ss.m.k <span class="ot">&lt;-</span> n.k <span class="sc">*</span> (<span class="fu">mean</span>(x.k) <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb16-3"><a href="#cb16-3"></a>ss.m.e <span class="ot">&lt;-</span> n.e <span class="sc">*</span> (<span class="fu">mean</span>(x.e) <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb16-4"><a href="#cb16-4"></a></span>
-<span id="cb16-5"><a href="#cb16-5"></a>ss.m <span class="ot">&lt;-</span> <span class="fu">sum</span>(ss.m.c, ss.m.k, ss.m.e); ss.m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>ss.m.c <span class="ot">&lt;-</span> n.c <span class="sc">*</span> (<span class="fu">mean</span>(x.c) <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>ss.m.k <span class="ot">&lt;-</span> n.k <span class="sc">*</span> (<span class="fu">mean</span>(x.k) <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>ss.m.e <span class="ot">&lt;-</span> n.e <span class="sc">*</span> (<span class="fu">mean</span>(x.e) <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a></span>
+<span id="cb12-5"><a href="#cb12-5"></a>ss.m <span class="ot">&lt;-</span> <span class="fu">sum</span>(ss.m.c, ss.m.k, ss.m.e); ss.m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 7.224492</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>df.m <span class="ot">&lt;-</span> (k <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb18-2"><a href="#cb18-2"></a>ms.m <span class="ot">&lt;-</span> ss.m <span class="sc">/</span> df.m; ms.m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>df.m <span class="ot">&lt;-</span> (k <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb14-2"><a href="#cb14-2"></a>ms.m <span class="ot">&lt;-</span> ss.m <span class="sc">/</span> df.m; ms.m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3.612246</code></pre>
 </div>
@@ -711,17 +580,17 @@ Sharon Kinkenberg &amp; Johnny van Doorn
 <section id="visual-ss_model" class="slide level2">
 <h2>Visual <span class="math inline">\({SS}_{model}\)</span></h2>
 
-<img data-src="10.-f_distribution_ANOVA_one_way_independent_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"></section>
+<img data-src="10.-f_distribution_ANOVA_one_way_independent_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
 <section id="error-variance" class="slide level2 smaller">
 <h2>Error variance</h2>
 <p><span class="math display">\[{MS}_{error} = \frac{{SS}_{error}}{{df}_{error}} \\ {df}_{error} = N - k\]</span></p>
 <p>where</p>
 <p><span class="math display">\[{SS}_{error} = \sum_{k} s_k^2 (n_k - 1) = \sum_{k} \frac{\sum (x_{ik} - \bar{x}_k)^2}{(n_k - 1)} (n_k - 1)\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>ss.e.c <span class="ot">&lt;-</span> <span class="fu">var</span>(x.c) <span class="sc">*</span> (n.c <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb20-2"><a href="#cb20-2"></a>ss.e.k <span class="ot">&lt;-</span> <span class="fu">var</span>(x.k) <span class="sc">*</span> (n.k <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb20-3"><a href="#cb20-3"></a>ss.e.e <span class="ot">&lt;-</span> <span class="fu">var</span>(x.e) <span class="sc">*</span> (n.e <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb20-4"><a href="#cb20-4"></a>ss.e   <span class="ot">&lt;-</span> <span class="fu">sum</span>(ss.e.c, ss.e.k, ss.e.e); ss.e</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>ss.e.c <span class="ot">&lt;-</span> <span class="fu">var</span>(x.c) <span class="sc">*</span> (n.c <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb16-2"><a href="#cb16-2"></a>ss.e.k <span class="ot">&lt;-</span> <span class="fu">var</span>(x.k) <span class="sc">*</span> (n.k <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb16-3"><a href="#cb16-3"></a>ss.e.e <span class="ot">&lt;-</span> <span class="fu">var</span>(x.e) <span class="sc">*</span> (n.e <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb16-4"><a href="#cb16-4"></a>ss.e   <span class="ot">&lt;-</span> <span class="fu">sum</span>(ss.e.c, ss.e.k, ss.e.e); ss.e</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 9.415345</code></pre>
 </div>
@@ -731,8 +600,8 @@ Sharon Kinkenberg &amp; Johnny van Doorn
 
 <p><span class="math display">\[{MS}_{error} = \frac{{SS}_{error}}{{df}_{error}} \\ {df}_{error} = N - k\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>df.e <span class="ot">&lt;-</span> (N <span class="sc">-</span> k)</span>
-<span id="cb22-2"><a href="#cb22-2"></a>ms.e <span class="ot">&lt;-</span> ss.e <span class="sc">/</span> df.e; ms.e</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>df.e <span class="ot">&lt;-</span> (N <span class="sc">-</span> k)</span>
+<span id="cb18-2"><a href="#cb18-2"></a>ms.e <span class="ot">&lt;-</span> ss.e <span class="sc">/</span> df.e; ms.e</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.4955445</code></pre>
 </div>
@@ -741,7 +610,7 @@ Sharon Kinkenberg &amp; Johnny van Doorn
 <section id="visual-ss_error" class="slide level2">
 <h2>Visual <span class="math inline">\({SS}_{error}\)</span></h2>
 
-<img data-src="10.-f_distribution_ANOVA_one_way_independent_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch"></section>
+<img data-src="10.-f_distribution_ANOVA_one_way_independent_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"></section>
 <section id="variance-components-1" class="slide level2 subsection">
 <h2>Variance components</h2>
 <p><span class="math display">\[{SS}_{total} = {SS}_{model} + {SS}_{error}\]</span> <span class="math display">\[16.6398364 = 7.2244917 + 9.4153446\]</span></p>
@@ -751,7 +620,7 @@ Sharon Kinkenberg &amp; Johnny van Doorn
 <h2>F-ratio</h2>
 <p><span class="math display">\[F = \frac{{MS}_{model}}{{MS}_{error}} = \frac{{SIGNAL}}{{NOISE}}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>fStat <span class="ot">&lt;-</span> ms.m <span class="sc">/</span> ms.e; fStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>fStat <span class="ot">&lt;-</span> ms.m <span class="sc">/</span> ms.e; fStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 7.289449</code></pre>
 </div>
@@ -760,13 +629,13 @@ Sharon Kinkenberg &amp; Johnny van Doorn
 <section id="reject-h_0" class="slide level2">
 <h2>Reject <span class="math inline">\(H_0\)</span>?</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="st">"visualize"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()) { <span class="fu">install.packages</span>(<span class="st">"visualize"</span>) }</span>
-<span id="cb26-2"><a href="#cb26-2"></a><span class="fu">library</span>(<span class="st">"visualize"</span>)</span>
-<span id="cb26-3"><a href="#cb26-3"></a></span>
-<span id="cb26-4"><a href="#cb26-4"></a><span class="fu">visualize.f</span>(fStat, df.m,df.e,<span class="at">section=</span><span class="st">"upper"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="st">"visualize"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()) { <span class="fu">install.packages</span>(<span class="st">"visualize"</span>) }</span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="fu">library</span>(<span class="st">"visualize"</span>)</span>
+<span id="cb22-3"><a href="#cb22-3"></a></span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="fu">visualize.f</span>(fStat, df.m,df.e,<span class="at">section=</span><span class="st">"upper"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="10.-f_distribution_ANOVA_one_way_independent_files/figure-revealjs/unnamed-chunk-20-1.png" width="960" class="r-stretch"></section>
+<img data-src="10.-f_distribution_ANOVA_one_way_independent_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section>
 <section id="contrasts" class="slide level2">
 <h2>Contrasts</h2>
 <p>Planned comparisons</p>
@@ -781,11 +650,11 @@ Sharon Kinkenberg &amp; Johnny van Doorn
 <ul>
 <li>Values add up to 0</li>
 </ul>
-<p><img src="../../../../topics/ANOVA_one_way_independent/pie2.png" style="height:200px;"> <img src="../../../../topics/ANOVA_one_way_independent/pie1.png" style="height:200px;"></p>
+<p><img src="../../topics/ANOVA_one_way_independent/pie2.png" style="height:200px;"> <img src="../../topics/ANOVA_one_way_independent/pie1.png" style="height:200px;"></p>
 </section>
 <section id="section-1" class="slide level2">
 <h2></h2>
-<p><img src="../../../../topics/ANOVA_one_way_independent/pie3.png" style="height:200px;"></p>
+<p><img src="../../topics/ANOVA_one_way_independent/pie3.png" style="height:200px;"></p>
 <ul>
 <li>AB-CDEF → A-B → CD-EF → C-D → E-F</li>
 <li>A-BCDEF → A-B → A-C</li>
@@ -854,7 +723,7 @@ Sharon Kinkenberg &amp; Johnny van Doorn
 <section id="section-3" class="slide level2">
 <h2></h2>
 
-<img data-src="10.-f_distribution_ANOVA_one_way_independent_files/figure-revealjs/unnamed-chunk-21-1.png" width="960" class="r-stretch"></section>
+<img data-src="10.-f_distribution_ANOVA_one_way_independent_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch"></section>
 <section id="post-hoc" class="slide level2">
 <h2>Post-hoc</h2>
 <p>Unplanned comparisons</p>
@@ -865,7 +734,7 @@ Sharon Kinkenberg &amp; Johnny van Doorn
 <li><a href="https://xkcd.com/882/">Why?</a></li>
 <li>Different procedures exist (e.g., Tukey, Bonferroni)</li>
 </ul></li>
-<li>Same procedure as contrasts, but: <strong>exploratory vs.&nbsp;exploratory research</strong></li>
+<li>Same procedure as contrasts, but: <strong>exploratory vs.&nbsp;confirmatory research</strong></li>
 </ul>
 </section>
 <section id="effect-size-eta2" class="slide level2">
@@ -882,8 +751,135 @@ Sharon Kinkenberg &amp; Johnny van Doorn
 <h2>Effect size <span class="math inline">\(r\)</span></h2>
 <p>A more interpretable effect size measure is <span class="math inline">\(r_{Contrast}\)</span>. Which gives the effect size for a specific contrast.</p>
 <p><span class="math display">\[r_{Contrast} = \sqrt{\frac{t^2}{t^2+{df}}}\]</span></p>
-<!-- Footer insert below -->
 </section></section>
+<section>
+<section id="f-distribution" class="title-slide slide level1 section center">
+<h1>F-distribution</h1>
+
+</section>
+<section id="ronald-fisher" class="slide level2 smaller subsection">
+<h2>Ronald Fisher</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<p>The F-distribution, also known as Snedecor’s F distribution or the Fisher–Snedecor distribution (after Ronald Fisher and George W. Snedecor) is, in probability theory and statistics, a continuous probability distribution. The F-distribution arises frequently as the null distribution of a test statistic, most notably in the analysis of variance; see F-test.</p>
+<p><a href="https://en.wikipedia.org/wiki/F-distribution">Wikipedia</a></p>
+<p>Sir Ronald Aylmer Fisher FRS (17 February 1890 – 29 July 1962), known as R.A. Fisher, was an English statistician, evolutionary biologist, mathematician, geneticist, and eugenicist. Fisher is known as one of the three principal founders of population genetics, creating a mathematical and statistical basis for biology and uniting natural selection with Mendelian genetics.</p>
+<p><a href="https://en.wikipedia.org/wiki/Ronald_Fisher">Wikipedia</a></p>
+</div><div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="https://upload.wikimedia.org/wikipedia/commons/a/aa/Youngronaldfisher2.JPG" width="291"></p>
+<figcaption>Ronald Fisher</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="analysing-variance" class="slide level2">
+<h2>Analysing variance</h2>
+<p><a href="https://webcolleges.uva.nl/Mediasite/Play/42718d5968df45b29c089fcd02bcb86a1d?playFrom=377000">Decomposing variance example of height for males and females (video from last year’s lecture).</a></p>
+</section>
+<section id="population-distribution" class="slide level2 smaller subsection">
+<h2>Population distribution</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">7</span><span class="sc">:</span><span class="dv">8</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">9</span><span class="sc">:</span><span class="dv">13</span>), <span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb23-2"><a href="#cb23-2"></a></span>
+<span id="cb23-3"><a href="#cb23-3"></a>n  <span class="ot">&lt;-</span> <span class="dv">56</span>    <span class="co"># Sample size</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a>df <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span> <span class="co"># Degrees of freedom</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a></span>
+<span id="cb23-6"><a href="#cb23-6"></a>mu    <span class="ot">&lt;-</span> <span class="dv">120</span></span>
+<span id="cb23-7"><a href="#cb23-7"></a>sigma <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb23-8"><a href="#cb23-8"></a></span>
+<span id="cb23-9"><a href="#cb23-9"></a>IQ <span class="ot">&lt;-</span> <span class="fu">seq</span>(mu<span class="dv">-45</span>, mu<span class="sc">+</span><span class="dv">45</span>, <span class="dv">1</span>)</span>
+<span id="cb23-10"><a href="#cb23-10"></a></span>
+<span id="cb23-11"><a href="#cb23-11"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>))  </span>
+<span id="cb23-12"><a href="#cb23-12"></a><span class="fu">plot</span>(IQ, <span class="fu">dnorm</span>(IQ, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma), <span class="at">type=</span><span class="st">'l'</span>, <span class="at">col=</span><span class="st">"red"</span>)</span>
+<span id="cb23-13"><a href="#cb23-13"></a></span>
+<span id="cb23-14"><a href="#cb23-14"></a>n.samples <span class="ot">=</span> <span class="dv">12</span></span>
+<span id="cb23-15"><a href="#cb23-15"></a></span>
+<span id="cb23-16"><a href="#cb23-16"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n.samples) {</span>
+<span id="cb23-17"><a href="#cb23-17"></a>  </span>
+<span id="cb23-18"><a href="#cb23-18"></a>  <span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>))  </span>
+<span id="cb23-19"><a href="#cb23-19"></a>  <span class="fu">hist</span>(<span class="fu">rnorm</span>(n, mu, sigma), <span class="at">main=</span><span class="st">""</span>, <span class="at">cex.axis=</span>.<span class="dv">5</span>, <span class="at">col=</span><span class="st">"red"</span>)</span>
+<span id="cb23-20"><a href="#cb23-20"></a>  </span>
+<span id="cb23-21"><a href="#cb23-21"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="population-distribution-output" class="slide level2 smaller subsection output-location-slide"><h2>Population distribution</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<p><img data-src="10.-f_distribution_ANOVA_one_way_independent_files/figure-revealjs/unnamed-chunk-35-1.png" width="960"></p>
+</div>
+</div></section><section id="f-statistic" class="slide level2">
+<h2>F-statistic</h2>
+<p><span class="math display">\[F = \frac{{MS}_{model}}{{MS}_{error}} = \frac{{SIGNAL}}{{NOISE}}\]</span></p>
+<p>So the <span class="math inline">\(F\)</span>-statistic represents a signal to noise ratio by deviding the model variance component by the error variance component.</p>
+</section>
+<section id="a-samples" class="slide level2">
+<h2>A samples</h2>
+<p>Let’s take two sample from our normal populatiion and calculate the F-value.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>x<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma)</span>
+<span id="cb24-2"><a href="#cb24-2"></a>x<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma)</span>
+<span id="cb24-3"><a href="#cb24-3"></a></span>
+<span id="cb24-4"><a href="#cb24-4"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">group =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"s1"</span>, <span class="st">"s2"</span>), <span class="at">each=</span>n), <span class="at">score =</span> <span class="fu">c</span>(x<span class="fl">.1</span>,x<span class="fl">.2</span>))</span>
+<span id="cb24-5"><a href="#cb24-5"></a>    </span>
+<span id="cb24-6"><a href="#cb24-6"></a>fStat <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">aov</span>(<span class="fu">lm</span>(score <span class="sc">~</span> group, data)))[[<span class="dv">1</span>]]<span class="sc">$</span>F[<span class="dv">1</span>]</span>
+<span id="cb24-7"><a href="#cb24-7"></a>fStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3441866</code></pre>
+</div>
+</div>
+</section>
+<section id="more-samples" class="slide level2 smaller subsection">
+<h2>More samples</h2>
+<p>let’s take more samples and calculate the F-value every time.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>nSamples <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a></span>
+<span id="cb26-3"><a href="#cb26-3"></a>fValues <span class="ot">=</span> <span class="fu">vector</span>()</span>
+<span id="cb26-4"><a href="#cb26-4"></a></span>
+<span id="cb26-5"><a href="#cb26-5"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nSamples) {</span>
+<span id="cb26-6"><a href="#cb26-6"></a>  </span>
+<span id="cb26-7"><a href="#cb26-7"></a>  x1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma); x1</span>
+<span id="cb26-8"><a href="#cb26-8"></a>  x2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma); x2</span>
+<span id="cb26-9"><a href="#cb26-9"></a></span>
+<span id="cb26-10"><a href="#cb26-10"></a>  data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">group =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"s1"</span>, <span class="st">"s2"</span>), <span class="at">each=</span>n), <span class="at">score =</span> <span class="fu">c</span>(x1,x2))</span>
+<span id="cb26-11"><a href="#cb26-11"></a>    </span>
+<span id="cb26-12"><a href="#cb26-12"></a>  fValues[i] <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">aov</span>(<span class="fu">lm</span>(score <span class="sc">~</span> group, data)))[[<span class="dv">1</span>]]<span class="sc">$</span>F[<span class="dv">1</span>]</span>
+<span id="cb26-13"><a href="#cb26-13"></a></span>
+<span id="cb26-14"><a href="#cb26-14"></a>}</span>
+<span id="cb26-15"><a href="#cb26-15"></a></span>
+<span id="cb26-16"><a href="#cb26-16"></a>k <span class="ot">=</span> <span class="dv">2</span></span>
+<span id="cb26-17"><a href="#cb26-17"></a>N <span class="ot">=</span> <span class="dv">2</span><span class="sc">*</span>n</span>
+<span id="cb26-18"><a href="#cb26-18"></a></span>
+<span id="cb26-19"><a href="#cb26-19"></a>dfModel <span class="ot">=</span> k <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb26-20"><a href="#cb26-20"></a>dfError <span class="ot">=</span> N <span class="sc">-</span> k</span>
+<span id="cb26-21"><a href="#cb26-21"></a></span>
+<span id="cb26-22"><a href="#cb26-22"></a><span class="fu">hist</span>(fValues, <span class="at">freq =</span> <span class="cn">FALSE</span>, <span class="at">main=</span><span class="st">"F-values"</span>, <span class="at">breaks=</span><span class="dv">100</span>)</span>
+<span id="cb26-23"><a href="#cb26-23"></a>fVal <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>, .<span class="dv">01</span>)</span>
+<span id="cb26-24"><a href="#cb26-24"></a><span class="fu">lines</span>(fVal, <span class="fu">df</span>(fVal,dfModel, dfError), <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="more-samples-output" class="slide level2 smaller subsection output-location-slide"><h2>More samples</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<p><img data-src="10.-f_distribution_ANOVA_one_way_independent_files/figure-revealjs/unnamed-chunk-37-1.png" width="960"></p>
+</div>
+</div></section><section id="f-distribution-1" class="slide level2 smaller">
+<h2>F-distribution</h2>
+<p>So if the population is normaly distributed (assumption of normality) the f-distribution represents the signal to noise ration given a certain number of samples (<span class="math inline">\({df}_{model} = k - 1\)</span>) and sample size (<span class="math inline">\({df}_{error} = N - k\)</span>).</p>
+<p>The F-distibution therefore is different for different sample sizes and number of groups.</p>
+</section>
+<section id="f-distribution-2" class="slide level2 smaller">
+<h2>F-distribution</h2>
+
+<img data-src="10.-f_distribution_ANOVA_one_way_independent_files/figure-revealjs/unnamed-chunk-38-1.png" width="960" class="r-stretch"></section>
+<section id="f-distribution-3" class="slide level2 flexbox vcenter">
+<h2>F-distribution</h2>
+
+<!-- Footer insert below -->
+<img data-src="../../topics/f_distribution/f_distributions.gif" class="r-stretch quarto-figure-center"><p class="caption">Animated F-distrigutions</p></section></section>
 <section>
 <section id="end" class="title-slide slide level1 center">
 <h1>End</h1>
@@ -908,7 +904,6 @@ Sharon Kinkenberg &amp; Johnny van Doorn
 </figure>
 </div>
 </small><p><small style="text-align:left;"></small></p>
-<p><img src="https://shklinkenberg.github.io/uva_style/images/logo_uva.png" class="slide-logo"></p>
 <div class="footer footer-default">
 <p>Scientific &amp; Statistical Reasoning</p>
 </div>
@@ -965,7 +960,7 @@ Sharon Kinkenberg &amp; Johnny van Doorn
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: 'c/t',
+        slideNumber: false,
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -1070,14 +1065,14 @@ Sharon Kinkenberg &amp; Johnny van Doorn
         previewLinks: false,
 
         // Transition style (none/fade/slide/convex/concave/zoom)
-        transition: 'slide',
+        transition: 'none',
 
         // Transition speed (default/fast/slow)
         transitionSpeed: 'default',
 
         // Transition style for full page slide backgrounds
         // (none/fade/slide/convex/concave/zoom)
-        backgroundTransition: 'fade',
+        backgroundTransition: 'none',
 
         // Number of slides away from the current that are visible
         viewDistance: 3,

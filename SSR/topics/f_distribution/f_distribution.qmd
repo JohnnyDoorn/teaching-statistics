@@ -155,4 +155,4 @@ legend("topright", legend = paste("df model =",dfs[,1], "df error =", dfs[,2]), 
 
 ## F-distribution {.flexbox .vcenter}
 
-![Animated F-distrigutions](../../../../topics/f_distribution/f_distributions.gif)
+![Animated F-distrigutions](../../topics/f_distribution/f_distributions.gif)

@@ -276,12 +276,12 @@ Planned comparisons
 
 * Values add up to 0
 
-<img src="../../../../topics/ANOVA_one_way_independent/pie2.png" style="height:200px;" >
-<img src="../../../../topics/ANOVA_one_way_independent/pie1.png" style="height:200px;" >
+<img src="../../topics/ANOVA_one_way_independent/pie2.png" style="height:200px;" >
+<img src="../../topics/ANOVA_one_way_independent/pie1.png" style="height:200px;" >
 
 ##
 
-<img src="../../../../topics/ANOVA_one_way_independent/pie3.png" style="height:200px;" >
+<img src="../../topics/ANOVA_one_way_independent/pie3.png" style="height:200px;" >
 
 * AB-CDEF &rarr; A-B &rarr; CD-EF &rarr; C-D &rarr; E-F
 * A-BCDEF &rarr; A-B &rarr; A-C
@@ -466,7 +466,7 @@ Unplanned comparisons
 * Adjust T value for inflated type 1 error
     * [Why?](https://xkcd.com/882/)
     * Different procedures exist (e.g., Tukey, Bonferroni)
-* Same procedure as contrasts, but: **exploratory vs. exploratory research**
+* Same procedure as contrasts, but: **exploratory vs. confirmatory research**
 
 
 ## Effect size $\eta^2$

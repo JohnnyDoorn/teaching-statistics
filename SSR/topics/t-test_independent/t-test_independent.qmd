@@ -88,8 +88,9 @@ ownIQfront.var   <- var(ownIQfront,   na.rm = TRUE)
 ownIQback.var <- var(ownIQback, na.rm = TRUE)
 print(rbind(ownIQfront.var, ownIQback.var))
 
-ownIQfront.n   <- length(ownIQfront)   - 1
-ownIQback.n <- length(ownIQback) - 1
+ownIQfront.n   <- length(ownIQfront)
+ownIQback.n <- length(ownIQback)
+n <- ownIQfront.n + ownIQback.n
 print(rbind(ownIQfront.n, ownIQback.n))
 ```
 
@@ -162,7 +163,7 @@ r <- sqrt(tStat^2/(tStat^2 + df))
 
 r
 
-d <- 2*tStat / sqrt(df)
+d <- 2*tStat / sqrt(n)
 d
 ```
 
