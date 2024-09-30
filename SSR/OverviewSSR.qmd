@@ -81,15 +81,15 @@ htmlFound <- list.files(full.names = FALSE, pattern = "\\html", recursive = FALS
 csvFound  <- list.files(full.names = FALSE, pattern = "\\csv", recursive = FALSE, 
                     path = "../datasets")
   
-htmlLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistcs/datasets/%s" target="_blank" class="external">link</a>',htmlFiles) 
+htmlLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistics/datasets/%s" target="_blank" class="external">link</a>',htmlFiles) 
 htmlLinks[!(htmlFiles %in% htmlFound)] <- "-"
 
-jaspLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistcs/datasets/%s" target="_blank" 
+jaspLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistics/datasets/%s" target="_blank" 
                      class="external">link</a>',files) 
 titles <- gsub(htmlFiles, pattern = ".html", replacement = "")
 
 csvFiles <- gsub(x =files, pattern = ".jasp", replacement = ".csv")
-csvLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistcs/datasets/%s" target="_blank" class="external">link</a>',csvFiles) 
+csvLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistics/datasets/%s" target="_blank" class="external">link</a>',csvFiles) 
 csvLinks[!(csvFiles %in% csvFound)] <- "-"
 
 
