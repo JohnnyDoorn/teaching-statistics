@@ -153,8 +153,17 @@ if (df <= 3) df <- df + 5 # cheat to be able to build slides..
 if (is.na(tStat)) tStat <- 1 # cheat to be able to build slides.. 
 visualize.t(c(-round(tStat, 2), round(tStat, 2)), df+1, section="tails")
 ```
+## Effect-size d
 
-## Effect-size
+$$r = \frac{2t}{\sqrt{n_1 + n_2}}$$
+
+```{r, echo=TRUE}
+d <- 2*tStat / sqrt(n)
+
+d
+```
+
+## Effect-size r
 
 $$r = \sqrt{\frac{t^2}{t^2 + \text{df}}}$$
 
@@ -162,9 +171,6 @@ $$r = \sqrt{\frac{t^2}{t^2 + \text{df}}}$$
 r <- sqrt(tStat^2/(tStat^2 + df))
 
 r
-
-d <- 2*tStat / sqrt(n)
-d
 ```
 
 

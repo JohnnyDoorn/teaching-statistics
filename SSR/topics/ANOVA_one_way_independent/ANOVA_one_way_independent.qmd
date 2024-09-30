@@ -483,8 +483,8 @@ Less biased towards just the sample is omega squared $\omega^2$.
 $$\omega^2 = \frac{{SS}_{model} - ({df}_{model}){MS}_{error}}{{SS}_{total}+{MS}_{error}}$$
 But what does it say?
 
-## Effect size $r$
+## Effect size $d$
 
-A more interpretable effect size measure is $r_{Contrast}$. Which gives the effect size for a specific contrast.
+A more interpretable effect size measure is $d_{Contrast}$. Which gives Cohen's $d$ for a specific contrast.
 
-$$r_{Contrast} = \sqrt{\frac{t^2}{t^2+{df}}}$$
+$$d_{Contrast} = \sqrt{\frac{2t}{\sqrt{n_1 + n_2}}}$$
