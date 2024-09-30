@@ -16,5 +16,8 @@
   "2024/10. t_test/10. t_test.qmd": {
     "10. t_test.slide.html": "52b91de4",
     "10. t_test.html": "65cf0bf3"
+  },
+  "topics/ANOVA_one_way_independent/ANOVA_one_way_independent.qmd": {
+    "ANOVA_one_way_independent.html": "819d9efc"
   }
 }

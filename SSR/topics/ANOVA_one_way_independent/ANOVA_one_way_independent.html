@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Sharon Klinkenberg &amp; Johnny van Doorn">
 
 <title>anova_one_way_independent</title>
 <style>
@@ -73,10 +74,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="fullcontent">
+<body>
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#one-way-independent-anova" id="toc-one-way-independent-anova" class="nav-link active" data-scroll-target="#one-way-independent-anova">One-way independent ANOVA</a>
+  <ul class="collapse">
+  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions">Assumptions</a></li>
+  <li><a href="#jet-lag" id="toc-jet-lag" class="nav-link" data-scroll-target="#jet-lag">Jet lag</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#variance-components" id="toc-variance-components" class="nav-link" data-scroll-target="#variance-components">Variance components</a></li>
+  <li><a href="#total-variance" id="toc-total-variance" class="nav-link" data-scroll-target="#total-variance">Total variance</a></li>
+  <li><a href="#visual-ss_total" id="toc-visual-ss_total" class="nav-link" data-scroll-target="#visual-ss_total">Visual <span class="math inline">\({SS}_{total}\)</span></a></li>
+  <li><a href="#model-variance" id="toc-model-variance" class="nav-link" data-scroll-target="#model-variance">Model variance</a></li>
+  <li><a href="#visual-ss_model" id="toc-visual-ss_model" class="nav-link" data-scroll-target="#visual-ss_model">Visual <span class="math inline">\({SS}_{model}\)</span></a></li>
+  <li><a href="#error-variance" id="toc-error-variance" class="nav-link" data-scroll-target="#error-variance">Error variance</a></li>
+  <li><a href="#visual-ss_error" id="toc-visual-ss_error" class="nav-link" data-scroll-target="#visual-ss_error">Visual <span class="math inline">\({SS}_{error}\)</span></a></li>
+  <li><a href="#variance-components-1" id="toc-variance-components-1" class="nav-link" data-scroll-target="#variance-components-1">Variance components</a></li>
+  <li><a href="#f-ratio" id="toc-f-ratio" class="nav-link" data-scroll-target="#f-ratio">F-ratio</a></li>
+  <li><a href="#reject-h_0" id="toc-reject-h_0" class="nav-link" data-scroll-target="#reject-h_0">Reject <span class="math inline">\(H_0\)</span>?</a></li>
+  <li><a href="#contrasts" id="toc-contrasts" class="nav-link" data-scroll-target="#contrasts">Contrasts</a></li>
+  <li><a href="#contrasts-1" id="toc-contrasts-1" class="nav-link" data-scroll-target="#contrasts-1">Contrasts</a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"></a></li>
+  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3"></a></li>
+  <li><a href="#post-hoc" id="toc-post-hoc" class="nav-link" data-scroll-target="#post-hoc">Post-hoc</a></li>
+  <li><a href="#effect-size-eta2" id="toc-effect-size-eta2" class="nav-link" data-scroll-target="#effect-size-eta2">Effect size <span class="math inline">\(\eta^2\)</span></a></li>
+  <li><a href="#effect-size-omega2" id="toc-effect-size-omega2" class="nav-link" data-scroll-target="#effect-size-omega2">Effect size <span class="math inline">\(\omega^2\)</span></a></li>
+  <li><a href="#effect-size-d" id="toc-effect-size-d" class="nav-link" data-scroll-target="#effect-size-d">Effect size <span class="math inline">\(d\)</span></a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="ANOVA_one_way_independent.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</div>
 <main class="content" id="quarto-document-content">
 
 
@@ -110,10 +145,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>x.c <span class="ot">&lt;-</span> <span class="fu">c</span>( .<span class="dv">53</span>, .<span class="dv">36</span>,  .<span class="dv">2</span>,  <span class="sc">-</span>.<span class="dv">37</span>, <span class="sc">-</span>.<span class="dv">6</span>,  <span class="sc">-</span>.<span class="dv">64</span>, <span class="sc">-</span>.<span class="dv">68</span>,<span class="sc">-</span><span class="fl">1.27</span>) <span class="co"># Control </span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>x.k <span class="ot">&lt;-</span> <span class="fu">c</span>( .<span class="dv">73</span>, .<span class="dv">31</span>,  .<span class="dv">03</span>, <span class="sc">-</span>.<span class="dv">29</span>, <span class="sc">-</span>.<span class="dv">56</span>, <span class="sc">-</span>.<span class="dv">96</span>, <span class="sc">-</span><span class="fl">1.61</span>      ) <span class="co"># Knees</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>x.e <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">78</span>,<span class="sc">-</span>.<span class="dv">86</span>,<span class="sc">-</span><span class="fl">1.35</span>,<span class="sc">-</span><span class="fl">1.48</span>,<span class="sc">-</span><span class="fl">1.52</span>,<span class="sc">-</span><span class="fl">2.04</span>, <span class="sc">-</span><span class="fl">2.83</span>      ) <span class="co"># Eyes</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>x   <span class="ot">&lt;-</span> <span class="fu">c</span>( x.c, x.k, x.e )                               <span class="co"># Conditions combined</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>x.c <span class="ot">&lt;-</span> <span class="fu">c</span>( .<span class="dv">53</span>, .<span class="dv">36</span>,  .<span class="dv">2</span>,  <span class="sc">-</span>.<span class="dv">37</span>, <span class="sc">-</span>.<span class="dv">6</span>,  <span class="sc">-</span>.<span class="dv">64</span>, <span class="sc">-</span><span class="fl">1.27</span>) <span class="co"># Control </span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>x.k <span class="ot">&lt;-</span> <span class="fu">c</span>( .<span class="dv">73</span>, .<span class="dv">31</span>,  .<span class="dv">03</span>, <span class="sc">-</span>.<span class="dv">29</span>, <span class="sc">-</span>.<span class="dv">56</span>, <span class="sc">-</span>.<span class="dv">96</span>, <span class="sc">-</span><span class="fl">1.61</span>) <span class="co"># Knees</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>x.e <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">78</span>,<span class="sc">-</span>.<span class="dv">86</span>,<span class="sc">-</span><span class="fl">1.35</span>,<span class="sc">-</span><span class="fl">1.48</span>,<span class="sc">-</span><span class="fl">1.52</span>,<span class="sc">-</span><span class="fl">2.04</span>, <span class="sc">-</span><span class="fl">2.83</span>) <span class="co"># Eyes</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>x   <span class="ot">&lt;-</span> <span class="fu">c</span>( x.c, x.k, x.e )                          <span class="co"># Conditions combined</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="section" class="level2">
@@ -175,11 +210,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ms.t <span class="ot">&lt;-</span> <span class="fu">var</span>(x); ms.t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7923732</code></pre>
+<pre><code>[1] 0.8319357</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>( (x <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span> ) <span class="sc">/</span> (<span class="fu">length</span>(x) <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7923732</code></pre>
+<pre><code>[1] 0.8319357</code></pre>
 </div>
 </div>
 <hr>
@@ -189,11 +224,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>ss.t <span class="ot">&lt;-</span> <span class="fu">var</span>(x) <span class="sc">*</span> (N<span class="dv">-1</span>); ss.t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 16.63984</code></pre>
+<pre><code>[1] 16.63871</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>( (x <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 16.63984</code></pre>
+<pre><code>[1] 16.63871</code></pre>
 </div>
 </div>
 </section>
@@ -241,12 +276,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>ss.m <span class="ot">&lt;-</span> <span class="fu">sum</span>(ss.m.c, ss.m.k, ss.m.e); ss.m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 7.224492</code></pre>
+<pre><code>[1] 7.380886</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df.m <span class="ot">&lt;-</span> (k <span class="sc">-</span> <span class="dv">1</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>ms.m <span class="ot">&lt;-</span> ss.m <span class="sc">/</span> df.m; ms.m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.612246</code></pre>
+<pre><code>[1] 3.690443</code></pre>
 </div>
 </div>
 </section>
@@ -269,7 +304,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>ss.e.e <span class="ot">&lt;-</span> <span class="fu">var</span>(x.e) <span class="sc">*</span> (n.e <span class="sc">-</span> <span class="dv">1</span>)</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>ss.e   <span class="ot">&lt;-</span> <span class="fu">sum</span>(ss.e.c, ss.e.k, ss.e.e); ss.e</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 9.415345</code></pre>
+<pre><code>[1] 9.257829</code></pre>
 </div>
 </div>
 <hr>
@@ -278,7 +313,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df.e <span class="ot">&lt;-</span> (N <span class="sc">-</span> k)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>ms.e <span class="ot">&lt;-</span> ss.e <span class="sc">/</span> df.e; ms.e</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4955445</code></pre>
+<pre><code>[1] 0.5143238</code></pre>
 </div>
 </div>
 </section>
@@ -292,8 +327,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="variance-components-1" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="variance-components-1">Variance components</h2>
-<p><span class="math display">\[{SS}_{total} = {SS}_{model} + {SS}_{error}\]</span> <span class="math display">\[16.6398364 = 7.2244917 + 9.4153446\]</span></p>
-<p><span class="math display">\[{MS}_{total} = \frac{{SS}_{total}}{{df}_{total}}= 0.7923732\]</span> <span class="math display">\[{MS}_{model} = \frac{{SS}_{model}}{{df}_{model}}= 3.6122459\]</span> <span class="math display">\[{MS}_{error} = \frac{{SS}_{error}}{{df}_{error}} = 0.4955445\]</span></p>
+<p><span class="math display">\[{SS}_{total} = {SS}_{model} + {SS}_{error}\]</span> <span class="math display">\[16.6387143 = 7.3808857 + 9.2578286\]</span></p>
+<p><span class="math display">\[{MS}_{total} = \frac{{SS}_{total}}{{df}_{total}}= 0.8319357\]</span> <span class="math display">\[{MS}_{model} = \frac{{SS}_{model}}{{df}_{model}}= 3.6904429\]</span> <span class="math display">\[{MS}_{error} = \frac{{SS}_{error}}{{df}_{error}} = 0.5143238\]</span></p>
 </section>
 <section id="f-ratio" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="f-ratio">F-ratio</h2>
@@ -301,7 +336,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>fStat <span class="ot">&lt;-</span> ms.m <span class="sc">/</span> ms.e; fStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 7.289449</code></pre>
+<pre><code>[1] 7.17533</code></pre>
 </div>
 </div>
 </section>
@@ -432,10 +467,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Less biased towards just the sample is omega squared <span class="math inline">\(\omega^2\)</span>.</p>
 <p><span class="math display">\[\omega^2 = \frac{{SS}_{model} - ({df}_{model}){MS}_{error}}{{SS}_{total}+{MS}_{error}}\]</span> But what does it say?</p>
 </section>
-<section id="effect-size-r" class="level2">
-<h2 class="anchored" data-anchor-id="effect-size-r">Effect size <span class="math inline">\(r\)</span></h2>
-<p>A more interpretable effect size measure is <span class="math inline">\(r_{Contrast}\)</span>. Which gives the effect size for a specific contrast.</p>
-<p><span class="math display">\[r_{Contrast} = \sqrt{\frac{t^2}{t^2+{df}}}\]</span></p>
+<section id="effect-size-d" class="level2">
+<h2 class="anchored" data-anchor-id="effect-size-d">Effect size <span class="math inline">\(d\)</span></h2>
+<p>A more interpretable effect size measure is <span class="math inline">\(d_{Contrast}\)</span>. Which gives Cohen’s <span class="math inline">\(d\)</span> for a specific contrast.</p>
+<p><span class="math display">\[d_{Contrast} = \sqrt{\frac{2t}{\sqrt{n_1 + n_2}}}\]</span></p>
 </section>
 </section>
 
