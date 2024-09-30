@@ -83,7 +83,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul class="collapse">
-  <li><a href="#one-way-independent-anova" id="toc-one-way-independent-anova" class="nav-link active" data-scroll-target="#one-way-independent-anova">One-way independent ANOVA</a>
+  <li><a href="#block-2" id="toc-block-2" class="nav-link active" data-scroll-target="#block-2">Block 2</a></li>
+  <li><a href="#today" id="toc-today" class="nav-link" data-scroll-target="#today">Today</a></li>
+  <li><a href="#one-way-independent-anova" id="toc-one-way-independent-anova" class="nav-link" data-scroll-target="#one-way-independent-anova">One-way independent ANOVA</a>
   <ul class="collapse">
   <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions">Assumptions</a></li>
   <li><a href="#jet-lag" id="toc-jet-lag" class="nav-link" data-scroll-target="#jet-lag">Jet lag</a></li>
@@ -168,6 +170,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
+<section id="block-2" class="level2">
+<h2 class="anchored" data-anchor-id="block-2">Block 2</h2>
+<ul>
+<li>More complex analyses
+<ul>
+<li>All sorts of ANOVA’s</li>
+<li>Regression</li>
+<li>Nonparametric</li>
+</ul></li>
+</ul>
+</section>
+<section id="today" class="level2">
+<h2 class="anchored" data-anchor-id="today">Today</h2>
+<ul>
+<li>Introducing ANOVA</li>
+<li>F-Distribution</li>
+<li>ANOVA in JASP</li>
+</ul>
+</section>
 <section id="one-way-independent-anova" class="level1 section">
 <h1 class="section">One-way independent ANOVA</h1>
 <p>Compare 2 or more independent groups.</p>
@@ -181,9 +202,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Shapiro-Wilk test or Q-Q plots</li>
 </ul></li>
-<li>Equal variance within groups
+<li>Equal variance within groups (i.e., <em>Homogeneity of variances</em>)
 <ul>
-<li>Levene’s test</li>
+<li>Levene’s test or ratio of variances</li>
 </ul></li>
 </ul>
 </section>
@@ -197,10 +218,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>x.c <span class="ot">&lt;-</span> <span class="fu">c</span>( .<span class="dv">53</span>, .<span class="dv">36</span>,  .<span class="dv">2</span>,  <span class="sc">-</span>.<span class="dv">37</span>, <span class="sc">-</span>.<span class="dv">6</span>,  <span class="sc">-</span>.<span class="dv">64</span>, <span class="sc">-</span>.<span class="dv">68</span>,<span class="sc">-</span><span class="fl">1.27</span>) <span class="co"># Control </span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>x.k <span class="ot">&lt;-</span> <span class="fu">c</span>( .<span class="dv">73</span>, .<span class="dv">31</span>,  .<span class="dv">03</span>, <span class="sc">-</span>.<span class="dv">29</span>, <span class="sc">-</span>.<span class="dv">56</span>, <span class="sc">-</span>.<span class="dv">96</span>, <span class="sc">-</span><span class="fl">1.61</span>      ) <span class="co"># Knees</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>x.e <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">78</span>,<span class="sc">-</span>.<span class="dv">86</span>,<span class="sc">-</span><span class="fl">1.35</span>,<span class="sc">-</span><span class="fl">1.48</span>,<span class="sc">-</span><span class="fl">1.52</span>,<span class="sc">-</span><span class="fl">2.04</span>, <span class="sc">-</span><span class="fl">2.83</span>      ) <span class="co"># Eyes</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>x   <span class="ot">&lt;-</span> <span class="fu">c</span>( x.c, x.k, x.e )                               <span class="co"># Conditions combined</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>x.c <span class="ot">&lt;-</span> <span class="fu">c</span>( .<span class="dv">53</span>, .<span class="dv">36</span>,  .<span class="dv">2</span>,  <span class="sc">-</span>.<span class="dv">37</span>, <span class="sc">-</span>.<span class="dv">6</span>,  <span class="sc">-</span>.<span class="dv">64</span>, <span class="sc">-</span><span class="fl">1.27</span>) <span class="co"># Control </span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>x.k <span class="ot">&lt;-</span> <span class="fu">c</span>( .<span class="dv">73</span>, .<span class="dv">31</span>,  .<span class="dv">03</span>, <span class="sc">-</span>.<span class="dv">29</span>, <span class="sc">-</span>.<span class="dv">56</span>, <span class="sc">-</span>.<span class="dv">96</span>, <span class="sc">-</span><span class="fl">1.61</span>) <span class="co"># Knees</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>x.e <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">78</span>,<span class="sc">-</span>.<span class="dv">86</span>,<span class="sc">-</span><span class="fl">1.35</span>,<span class="sc">-</span><span class="fl">1.48</span>,<span class="sc">-</span><span class="fl">1.52</span>,<span class="sc">-</span><span class="fl">2.04</span>, <span class="sc">-</span><span class="fl">2.83</span>) <span class="co"># Eyes</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>x   <span class="ot">&lt;-</span> <span class="fu">c</span>( x.c, x.k, x.e )                          <span class="co"># Conditions combined</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="section" class="level2">
@@ -262,11 +283,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ms.t <span class="ot">&lt;-</span> <span class="fu">var</span>(x); ms.t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7923732</code></pre>
+<pre><code>[1] 0.8319357</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>( (x <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span> ) <span class="sc">/</span> (<span class="fu">length</span>(x) <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7923732</code></pre>
+<pre><code>[1] 0.8319357</code></pre>
 </div>
 </div>
 <hr>
@@ -276,11 +297,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>ss.t <span class="ot">&lt;-</span> <span class="fu">var</span>(x) <span class="sc">*</span> (N<span class="dv">-1</span>); ss.t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 16.63984</code></pre>
+<pre><code>[1] 16.63871</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>( (x <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 16.63984</code></pre>
+<pre><code>[1] 16.63871</code></pre>
 </div>
 </div>
 </section>
@@ -328,12 +349,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>ss.m <span class="ot">&lt;-</span> <span class="fu">sum</span>(ss.m.c, ss.m.k, ss.m.e); ss.m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 7.224492</code></pre>
+<pre><code>[1] 7.380886</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df.m <span class="ot">&lt;-</span> (k <span class="sc">-</span> <span class="dv">1</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>ms.m <span class="ot">&lt;-</span> ss.m <span class="sc">/</span> df.m; ms.m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.612246</code></pre>
+<pre><code>[1] 3.690443</code></pre>
 </div>
 </div>
 </section>
@@ -356,7 +377,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>ss.e.e <span class="ot">&lt;-</span> <span class="fu">var</span>(x.e) <span class="sc">*</span> (n.e <span class="sc">-</span> <span class="dv">1</span>)</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>ss.e   <span class="ot">&lt;-</span> <span class="fu">sum</span>(ss.e.c, ss.e.k, ss.e.e); ss.e</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 9.415345</code></pre>
+<pre><code>[1] 9.257829</code></pre>
 </div>
 </div>
 <hr>
@@ -365,7 +386,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df.e <span class="ot">&lt;-</span> (N <span class="sc">-</span> k)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>ms.e <span class="ot">&lt;-</span> ss.e <span class="sc">/</span> df.e; ms.e</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4955445</code></pre>
+<pre><code>[1] 0.5143238</code></pre>
 </div>
 </div>
 </section>
@@ -379,8 +400,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="variance-components-1" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="variance-components-1">Variance components</h2>
-<p><span class="math display">\[{SS}_{total} = {SS}_{model} + {SS}_{error}\]</span> <span class="math display">\[16.6398364 = 7.2244917 + 9.4153446\]</span></p>
-<p><span class="math display">\[{MS}_{total} = \frac{{SS}_{total}}{{df}_{total}}= 0.7923732\]</span> <span class="math display">\[{MS}_{model} = \frac{{SS}_{model}}{{df}_{model}}= 3.6122459\]</span> <span class="math display">\[{MS}_{error} = \frac{{SS}_{error}}{{df}_{error}} = 0.4955445\]</span></p>
+<p><span class="math display">\[{SS}_{total} = {SS}_{model} + {SS}_{error}\]</span> <span class="math display">\[16.6387143 = 7.3808857 + 9.2578286\]</span></p>
+<p><span class="math display">\[{MS}_{total} = \frac{{SS}_{total}}{{df}_{total}}= 0.8319357\]</span> <span class="math display">\[{MS}_{model} = \frac{{SS}_{model}}{{df}_{model}}= 3.6904429\]</span> <span class="math display">\[{MS}_{error} = \frac{{SS}_{error}}{{df}_{error}} = 0.5143238\]</span></p>
 </section>
 <section id="f-ratio" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="f-ratio">F-ratio</h2>
@@ -388,17 +409,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>fStat <span class="ot">&lt;-</span> ms.m <span class="sc">/</span> ms.e; fStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 7.289449</code></pre>
+<pre><code>[1] 7.17533</code></pre>
 </div>
 </div>
 </section>
 <section id="reject-h_0" class="level2">
 <h2 class="anchored" data-anchor-id="reject-h_0">Reject <span class="math inline">\(H_0\)</span>?</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="st">"visualize"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()) { <span class="fu">install.packages</span>(<span class="st">"visualize"</span>) }</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"visualize"</span>)</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.f</span>(fStat, df.m,df.e,<span class="at">section=</span><span class="st">"upper"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="11.-f_distribution_ANOVA_one_way_independent_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -552,27 +569,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="population-distribution" class="level2 smaller subsection">
 <h2 class="smaller subsection anchored" data-anchor-id="population-distribution">Population distribution</h2>
 <div class="cell" data-output-location="slide">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">7</span><span class="sc">:</span><span class="dv">8</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">9</span><span class="sc">:</span><span class="dv">13</span>), <span class="dv">4</span>, <span class="dv">4</span>))</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>n  <span class="ot">&lt;-</span> <span class="dv">56</span>    <span class="co"># Sample size</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span> <span class="co"># Degrees of freedom</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>mu    <span class="ot">&lt;-</span> <span class="dv">120</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">15</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>IQ <span class="ot">&lt;-</span> <span class="fu">seq</span>(mu<span class="dv">-45</span>, mu<span class="sc">+</span><span class="dv">45</span>, <span class="dv">1</span>)</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>))  </span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(IQ, <span class="fu">dnorm</span>(IQ, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma), <span class="at">type=</span><span class="st">'l'</span>, <span class="at">col=</span><span class="st">"red"</span>)</span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>n.samples <span class="ot">=</span> <span class="dv">12</span></span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n.samples) {</span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>))  </span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(<span class="fu">rnorm</span>(n, mu, sigma), <span class="at">main=</span><span class="st">""</span>, <span class="at">cex.axis=</span>.<span class="dv">5</span>, <span class="at">col=</span><span class="st">"red"</span>)</span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">7</span><span class="sc">:</span><span class="dv">8</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">9</span><span class="sc">:</span><span class="dv">13</span>), <span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>n  <span class="ot">&lt;-</span> <span class="dv">56</span>    <span class="co"># Sample size</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span> <span class="co"># Degrees of freedom</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>mu    <span class="ot">&lt;-</span> <span class="dv">120</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>IQ <span class="ot">&lt;-</span> <span class="fu">seq</span>(mu<span class="dv">-45</span>, mu<span class="sc">+</span><span class="dv">45</span>, <span class="dv">1</span>)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>))  </span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(IQ, <span class="fu">dnorm</span>(IQ, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma), <span class="at">type=</span><span class="st">'l'</span>, <span class="at">col=</span><span class="st">"red"</span>)</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>n.samples <span class="ot">=</span> <span class="dv">12</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n.samples) {</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>))  </span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(<span class="fu">rnorm</span>(n, mu, sigma), <span class="at">main=</span><span class="st">""</span>, <span class="at">cex.axis=</span>.<span class="dv">5</span>, <span class="at">col=</span><span class="st">"red"</span>)</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="11.-f_distribution_ANOVA_one_way_independent_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -587,13 +604,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="a-samples">A samples</h2>
 <p>Let’s take two sample from our normal populatiion and calculate the F-value.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>x<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>x<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma)</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">group =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"s1"</span>, <span class="st">"s2"</span>), <span class="at">each=</span>n), <span class="at">score =</span> <span class="fu">c</span>(x<span class="fl">.1</span>,x<span class="fl">.2</span>))</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>fStat <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">aov</span>(<span class="fu">lm</span>(score <span class="sc">~</span> group, data)))[[<span class="dv">1</span>]]<span class="sc">$</span>F[<span class="dv">1</span>]</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>fStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>x<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>x<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">group =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"s1"</span>, <span class="st">"s2"</span>), <span class="at">each=</span>n), <span class="at">score =</span> <span class="fu">c</span>(x<span class="fl">.1</span>,x<span class="fl">.2</span>))</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>fStat <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">aov</span>(<span class="fu">lm</span>(score <span class="sc">~</span> group, data)))[[<span class="dv">1</span>]]<span class="sc">$</span>F[<span class="dv">1</span>]</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>fStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.3441866</code></pre>
 </div>
@@ -603,30 +620,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="smaller subsection anchored" data-anchor-id="more-samples">More samples</h2>
 <p>let’s take more samples and calculate the F-value every time.</p>
 <div class="cell" data-output-location="slide">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>nSamples <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>fValues <span class="ot">=</span> <span class="fu">vector</span>()</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nSamples) {</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  x1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma); x1</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  x2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma); x2</span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">group =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"s1"</span>, <span class="st">"s2"</span>), <span class="at">each=</span>n), <span class="at">score =</span> <span class="fu">c</span>(x1,x2))</span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  fValues[i] <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">aov</span>(<span class="fu">lm</span>(score <span class="sc">~</span> group, data)))[[<span class="dv">1</span>]]<span class="sc">$</span>F[<span class="dv">1</span>]</span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>k <span class="ot">=</span> <span class="dv">2</span></span>
-<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>N <span class="ot">=</span> <span class="dv">2</span><span class="sc">*</span>n</span>
-<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>dfModel <span class="ot">=</span> k <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>dfError <span class="ot">=</span> N <span class="sc">-</span> k</span>
-<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(fValues, <span class="at">freq =</span> <span class="cn">FALSE</span>, <span class="at">main=</span><span class="st">"F-values"</span>, <span class="at">breaks=</span><span class="dv">100</span>)</span>
-<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>fVal <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>, .<span class="dv">01</span>)</span>
-<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fVal, <span class="fu">df</span>(fVal,dfModel, dfError), <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>nSamples <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>fValues <span class="ot">=</span> <span class="fu">vector</span>()</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nSamples) {</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  x1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma); x1</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  x2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma); x2</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">group =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"s1"</span>, <span class="st">"s2"</span>), <span class="at">each=</span>n), <span class="at">score =</span> <span class="fu">c</span>(x1,x2))</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  fValues[i] <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">aov</span>(<span class="fu">lm</span>(score <span class="sc">~</span> group, data)))[[<span class="dv">1</span>]]<span class="sc">$</span>F[<span class="dv">1</span>]</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>k <span class="ot">=</span> <span class="dv">2</span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>N <span class="ot">=</span> <span class="dv">2</span><span class="sc">*</span>n</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>dfModel <span class="ot">=</span> k <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>dfError <span class="ot">=</span> N <span class="sc">-</span> k</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(fValues, <span class="at">freq =</span> <span class="cn">FALSE</span>, <span class="at">main=</span><span class="st">"F-values"</span>, <span class="at">breaks=</span><span class="dv">100</span>)</span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>fVal <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>, .<span class="dv">01</span>)</span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fVal, <span class="fu">df</span>(fVal,dfModel, dfError), <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="11.-f_distribution_ANOVA_one_way_independent_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -640,37 +657,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="f-distribution-2" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="f-distribution-2">F-distribution</h2>
 <div class="cell" data-output-location="slide">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>multiple.n  <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">30</span>)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>multiple.k  <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>)</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>multiple.df.model <span class="ot">=</span> multiple.k <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>multiple.df.error <span class="ot">=</span> multiple.n <span class="sc">-</span> multiple.k</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>col         <span class="ot">=</span> <span class="fu">rainbow</span>(<span class="fu">length</span>(multiple.df.model) <span class="sc">*</span> <span class="fu">length</span>(multiple.df.error))</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>fVals <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, .<span class="dv">01</span>)</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fVals,  <span class="fu">df</span>(fVals, multiple.df.model[<span class="dv">1</span>], multiple.df.error[<span class="dv">1</span>]), <span class="at">type =</span> <span class="st">"l"</span>, </span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,.<span class="dv">85</span>), </span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"F"</span>, <span class="at">ylab=</span><span class="st">"density"</span>, </span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">col  =</span> col[<span class="dv">1</span>], <span class="at">main=</span><span class="st">"F-distributions"</span> )</span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>dfs <span class="ot">=</span> <span class="fu">expand.grid</span>(multiple.df.model, multiple.df.error)</span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="fu">dim</span>(dfs)[<span class="dv">1</span>]) { </span>
-<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(fVals, <span class="fu">df</span>(fVals, dfs[i,<span class="dv">1</span>], dfs[i,<span class="dv">2</span>]), <span class="at">col=</span>col[i])</span>
-<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>  critical.f <span class="ot">&lt;-</span> <span class="fu">qf</span>(.<span class="dv">95</span>, dfs[i,<span class="dv">1</span>], dfs[i,<span class="dv">2</span>])</span>
-<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>  f.alpha <span class="ot">&lt;-</span> <span class="fu">seq</span>(critical.f, <span class="dv">1000</span>, .<span class="dv">01</span>)</span>
-<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">polygon</span>(<span class="fu">c</span>(f.alpha, <span class="fu">rev</span>(f.alpha)), <span class="fu">c</span>(<span class="fu">df</span>(f.alpha, dfs[i,<span class="dv">1</span>], dfs[i,<span class="dv">2</span>]), f.alpha<span class="sc">*</span><span class="dv">0</span> ), <span class="at">col=</span> <span class="fu">rgb</span>(<span class="dv">1</span>,.<span class="dv">66</span>,<span class="dv">0</span>, .<span class="dv">5</span>), <span class="at">border =</span> col[i])</span>
-<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(<span class="fu">c</span>(critical.f<span class="fl">+.1</span>, <span class="dv">5</span>), <span class="fu">c</span>(.<span class="dv">02</span>, .<span class="dv">2</span>), <span class="at">col=</span>col[i])</span>
-<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">5</span>,.<span class="dv">2</span>, <span class="fu">expression</span>(<span class="fu">paste</span>(alpha, <span class="st">"= 5%"</span>)), <span class="at">pos =</span><span class="dv">3</span>)</span>
-<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">paste</span>(<span class="st">"df model ="</span>,dfs[,<span class="dv">1</span>], <span class="st">"df error ="</span>, dfs[,<span class="dv">2</span>]), <span class="at">lty=</span><span class="dv">1</span>, <span class="at">col =</span> col, <span class="at">cex=</span>.<span class="dv">75</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>multiple.n  <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">30</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>multiple.k  <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>multiple.df.model <span class="ot">=</span> multiple.k <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>multiple.df.error <span class="ot">=</span> multiple.n <span class="sc">-</span> multiple.k</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>col         <span class="ot">=</span> <span class="fu">rainbow</span>(<span class="fu">length</span>(multiple.df.model) <span class="sc">*</span> <span class="fu">length</span>(multiple.df.error))</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>fVals <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, .<span class="dv">01</span>)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fVals,  <span class="fu">df</span>(fVals, multiple.df.model[<span class="dv">1</span>], multiple.df.error[<span class="dv">1</span>]), <span class="at">type =</span> <span class="st">"l"</span>, </span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,.<span class="dv">85</span>), </span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"F"</span>, <span class="at">ylab=</span><span class="st">"density"</span>, </span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">col  =</span> col[<span class="dv">1</span>], <span class="at">main=</span><span class="st">"F-distributions"</span> )</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>dfs <span class="ot">=</span> <span class="fu">expand.grid</span>(multiple.df.model, multiple.df.error)</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="fu">dim</span>(dfs)[<span class="dv">1</span>]) { </span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(fVals, <span class="fu">df</span>(fVals, dfs[i,<span class="dv">1</span>], dfs[i,<span class="dv">2</span>]), <span class="at">col=</span>col[i])</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>  critical.f <span class="ot">&lt;-</span> <span class="fu">qf</span>(.<span class="dv">95</span>, dfs[i,<span class="dv">1</span>], dfs[i,<span class="dv">2</span>])</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>  f.alpha <span class="ot">&lt;-</span> <span class="fu">seq</span>(critical.f, <span class="dv">1000</span>, .<span class="dv">01</span>)</span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">polygon</span>(<span class="fu">c</span>(f.alpha, <span class="fu">rev</span>(f.alpha)), <span class="fu">c</span>(<span class="fu">df</span>(f.alpha, dfs[i,<span class="dv">1</span>], dfs[i,<span class="dv">2</span>]), f.alpha<span class="sc">*</span><span class="dv">0</span> ), <span class="at">col=</span> <span class="fu">rgb</span>(<span class="dv">1</span>,.<span class="dv">66</span>,<span class="dv">0</span>, .<span class="dv">5</span>), <span class="at">border =</span> col[i])</span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(<span class="fu">c</span>(critical.f<span class="fl">+.1</span>, <span class="dv">5</span>), <span class="fu">c</span>(.<span class="dv">02</span>, .<span class="dv">2</span>), <span class="at">col=</span>col[i])</span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">5</span>,.<span class="dv">2</span>, <span class="fu">expression</span>(<span class="fu">paste</span>(alpha, <span class="st">"= 5%"</span>)), <span class="at">pos =</span><span class="dv">3</span>)</span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">paste</span>(<span class="st">"df model ="</span>,dfs[,<span class="dv">1</span>], <span class="st">"df error ="</span>, dfs[,<span class="dv">2</span>]), <span class="at">lty=</span><span class="dv">1</span>, <span class="at">col =</span> col, <span class="at">cex=</span>.<span class="dv">75</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="11.-f_distribution_ANOVA_one_way_independent_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="672"></p>
 </div>

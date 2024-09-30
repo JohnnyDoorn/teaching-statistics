@@ -10,6 +10,16 @@ format:
     output-ext: slide.html
 ---
 
+## Block 2
+- More complex analyses
+    - All sorts of ANOVA's
+    - Regression
+    - Nonparametric
+
+## Today
+- Introducing ANOVA
+- F-Distribution
+- ANOVA in JASP
 
 
 ```{r child="../../topics/ANOVA_one_way_independent/ANOVA_one_way_independent.qmd"}

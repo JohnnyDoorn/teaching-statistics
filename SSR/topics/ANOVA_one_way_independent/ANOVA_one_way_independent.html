@@ -129,9 +129,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Shapiro-Wilk test or Q-Q plots</li>
 </ul></li>
-<li>Equal variance within groups
+<li>Equal variance within groups (i.e., <em>Homogeneity of variances</em>)
 <ul>
-<li>Levene’s test</li>
+<li>Levene’s test or ratio of variances</li>
 </ul></li>
 </ul>
 </section>
@@ -343,10 +343,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="reject-h_0" class="level2">
 <h2 class="anchored" data-anchor-id="reject-h_0">Reject <span class="math inline">\(H_0\)</span>?</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="st">"visualize"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()) { <span class="fu">install.packages</span>(<span class="st">"visualize"</span>) }</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"visualize"</span>)</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.f</span>(fStat, df.m,df.e,<span class="at">section=</span><span class="st">"upper"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="ANOVA_one_way_independent_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
 </div>
