@@ -1,0 +1,25 @@
+---
+title    : "11. ANOVA"
+subtitle : "F-distribution & One-way independent ANOVA"
+author: "Sharon Kinkenberg & Johnny van Doorn"
+date     : "01 oct 2024"
+footer: "Scientific & Statistical Reasoning"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+
+
+```{r child="../../topics/ANOVA_one_way_independent/ANOVA_one_way_independent.qmd"}
+```
+
+
+```{r child="../../topics/f_distribution/f_distribution.qmd"}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../footer.qmd"}
+```
