@@ -12,15 +12,22 @@ format:
 
 ## Block 2
 - More complex analyses
-    - All sorts of ANOVA's
-    - Regression
-    - Nonparametric
+    - All sorts of ANOVA's (Ch11-14)
+    - Nonparametrics (Ch15)
+    - $\chi^2$ (Contingency tables; Ch16)
+
 
 ## Today
 - Introducing ANOVA
 - F-Distribution
 - ANOVA in JASP
 
+
+## Models {.center}
+
+<div style="font-size:200%; transform: rotate(-11deg);">
+$$\text{outcome} = \text{model} + \text{error}$$
+</div>
 
 ```{r child="../../topics/ANOVA_one_way_independent/ANOVA_one_way_independent.qmd"}
 ```
