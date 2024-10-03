@@ -32,14 +32,14 @@ A covariate is a variable that can be a confounding variable biasing your result
 ## Assumptions
 
 * Same as ANOVA
-* Independence of the covariate and treatment effect §13.4.1.
+* Independence of the covariate and treatment effect §12.5.1.
     * No difference on ANOVA with covar and independent variable
     * Matching experimental groups on the covariate
-* Homogeneity of regression slopes §13.4.2.
+* Homogeneity of regression slopes §12.5.2.
     * Visual: scatterplot dep var * covar per condition
     * Testing: interaction indep. var * covar
 
-## Independence of the covariate and treatment effect
+## Independence of the covariate and treatment effect (Fig 12.2)
 
 <img src="FieldCovWarning.png" style="width:40%;"/>
 
@@ -58,6 +58,7 @@ We want to test the difference in national extraversion but want to also account
 
 ```{r, echo=TRUE}
 # Simulate data
+set.seed(123)
 n <- 20
 k <- 3
 nationality       <- round(runif(n,1,k),0)
@@ -120,7 +121,7 @@ data <- data.frame(nationality, openness, extraversion)
 data <- data[order(as.numeric(data$nationality)),]
 data <- cbind(n, data)
 # Write data for use in SPSS
-write.csv(data, "ANCOVA_Shar.csv", row.names=FALSE)
+write.csv(data, "ANCOVA_OpenNationality.csv", row.names=FALSE)
 
 datatable(data, 
           extensions = 'Buttons',
@@ -145,13 +146,19 @@ What are the beta coefficients when we fit a model that only has "nationality" a
 
 ```{r, echo=TRUE}
 fit.group <- lm(extraversion ~ nationality, data); fit.group
-fit.group$coefficients[2:3] + fit.group$coefficients[1]
 ```
 
-${Dutch} = `r  fit.group$coefficients[1]` \> {German} = `r fit.group$coefficients[2] + fit.group$coefficients[1]` \> {Belgian} = `r fit.group$coefficients[3] + fit.group$coefficients[1]`$
+- $\beta_{0} = `r  fit.group$coefficients[1]`$ 
 
+- $\beta_{German} = `r round(fit.group$coefficients[2], 2)`$
 
-## Model fit with only covar {.subsection}
+    - Prediction for German: `r fit.group$coefficients[1]` + `r round(fit.group$coefficients[2], 2)` = `r fit.group$coefficients[1] + round(fit.group$coefficients[2], 2)`
+
+- $\beta_{Belgian} = `r round(fit.group$coefficients[3], 2)`$
+
+    - Prediction for Belgian: `r fit.group$coefficients[1]` + `r round(fit.group$coefficients[3], 2)` = `r fit.group$coefficients[1] + round(fit.group$coefficients[3], 2)`
+
+## Model fit with only covariate {.subsection}
 
 What are the beta coefficients when we fit a model that only has the covariate as predictor variable?
 
@@ -159,6 +166,11 @@ What are the beta coefficients when we fit a model that only has the covariate a
 fit.covar <- lm(extraversion ~ openness, data)
 fit.covar
 ```
+
+$\beta_{0} = `r  round(fit.covar$coefficients[1],2)`$ 
+
+$\beta_{Open} = `r  round(fit.covar$coefficients[2],2)`$ 
+
 
 ## Model fit with all predictor variables (factor + covariate)
 
@@ -171,7 +183,13 @@ fit$coefficients[2:3] + fit$coefficients[1]
 fit$coefficients <- round(fit$coefficients, 2)
 ```
 
-${Dutch} = `r  fit$coefficients[1]` \> {German} = `r fit$coefficients[2] + fit$coefficients[1]` \> {Belgian} = `r fit$coefficients[3] + fit$coefficients[1]`$
+$\beta_{Dutch} = `r  fit$coefficients[1]`$
+
+$\beta_{German} = `r fit$coefficients[2]`$
+
+$\beta_{Belgian} = `r fit$coefficients[3]`$
+
+$\beta_{Open} = `r fit$coefficients[4]`$
 
 ## So what do we predict for each participant??
 
@@ -179,10 +197,14 @@ For a German with a score of 8 on Openness:
 
 ```{r, echo=TRUE}
 fit <- lm(extraversion ~ nationality + openness, data); fit$coefficients
-
-unname(fit$coefficients[1] + 1 * fit$coefficients[2] + 0 * fit$coefficients[3] + 
-  8 * fit$coefficients[4])
 ```
+- $\beta_{0} = `r round(fit$coefficients[1], 2)`$
+- $\beta_{German} = `r round(fit$coefficients[2], 2)`$
+- $\beta_{Open} = `r round(fit$coefficients[4], 2)`$
+
+    - Prediction for German: `r round(fit$coefficients[1],2)` + `r round(fit$coefficients[2], 2)` + 8 * `r round(fit$coefficients[4],2)` = `r round(fit$coefficients[1] + 1 * fit$coefficients[2] + 0 * fit$coefficients[3] + 
+  8 * fit$coefficients[4],2)`
+  
 How about a Belgian with 6 Openness?
 
 ## Total variance {.subsection}

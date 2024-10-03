@@ -19,5 +19,12 @@
   },
   "topics/ANOVA_one_way_independent/ANOVA_one_way_independent.qmd": {
     "ANOVA_one_way_independent.html": "819d9efc"
+  },
+  "2024/13. ANCOVA/12. ANCOVA.qmd": {
+    "12. ANCOVA.html": "5152dc6f",
+    "12. ANCOVA.slide.html": "742123eb"
+  },
+  "topics/ancova/ancova.qmd": {
+    "ancova.html": "357d04d7"
   }
 }
