@@ -193,8 +193,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="simulate-data" class="level2">
 <h2 class="anchored" data-anchor-id="simulate-data">Simulate data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate data</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1976</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate data</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">20</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">3</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>nationality       <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">runif</span>(n,<span class="dv">1</span>,k),<span class="dv">0</span>)</span>
@@ -234,8 +234,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-983315589fed18d622a7" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-983315589fed18d622a7">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"],["German","Belgian","German","Belgian","Belgian","Dutch","German","Belgian","German","German","Belgian","German","German","German","Dutch","Belgian","Dutch","Dutch","German","Belgian"],[15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15],[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],[1,0,1,0,0,0,1,0,1,1,0,1,1,1,0,0,0,0,1,0],[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],[0,1,0,1,1,0,0,1,0,0,1,0,0,0,0,1,0,0,0,1],[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],[9.220000000000001,8.359999999999999,8.4,8.109999999999999,7.44,9.789999999999999,8.5,6.03,8.699999999999999,7.53,6.93,7.78,6.97,7.27,7.37,6.31,8.84,8.15,6.86,9.25],[0.43,-0.3,0.9,0.88,0.82,0.6899999999999999,0.55,-0.06,-0.31,-0.38,-0.6899999999999999,-0.21,-1.27,2.17,1.21,-1.12,-0.4,-0.47,0.78,-0.08],[46.09,43.78,44.1,44.21,42.14,45.06,44.05,37.03,43.79,40.21,39.1,41.13,37.64,41.98,38.32,36.81,41.12,38.98,39.36,46.67]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>nationality<\/th>\n      <th>b.0<\/th>\n      <th>b.1<\/th>\n      <th>dummy.1<\/th>\n      <th>b.2<\/th>\n      <th>dummy.2<\/th>\n      <th>b.3<\/th>\n      <th>openness<\/th>\n      <th>error<\/th>\n      <th>extraversion<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":435,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[2,3,4,5,6,7,8,9,10]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"nationality","targets":1},{"name":"b.0","targets":2},{"name":"b.1","targets":3},{"name":"dummy.1","targets":4},{"name":"b.2","targets":5},{"name":"dummy.2","targets":6},{"name":"b.3","targets":7},{"name":"openness","targets":8},{"name":"error","targets":9},{"name":"extraversion","targets":10}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-27a87ee55979aa7d5bc7" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-27a87ee55979aa7d5bc7">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"],["Belgian","German","Dutch","Belgian","Dutch","Belgian","German","Dutch","German","German","German","Dutch","Dutch","German","German","Belgian","Dutch","German","Belgian","Dutch"],[15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15],[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],[0,1,0,0,0,0,1,0,1,1,1,0,0,1,1,0,0,1,0,0],[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],[1,0,0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0,1,0],[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],[9,9.300000000000001,8.42,8.15,9.380000000000001,8.470000000000001,7.26,6.7,8.33,8.039999999999999,7.7,8.07,7.61,6.72,8.68,7.65,6.14,9.039999999999999,7.78,8.85],[0.89,-1.45,-0.45,1.9,0.71,-0.02,-0.67,1.75,-0.46,0.74,0.63,0.26,-2.17,-0.15,0.27,-1.83,0.36,-0.79,-0.1,-0.28],[46.89,44.45,39.81,45.35,43.85,44.39,39.11,36.85,42.53,42.86,41.73,39.47,35.66,38.01,44.31,40.12,33.78,44.33,42.24,41.27]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>nationality<\/th>\n      <th>b.0<\/th>\n      <th>b.1<\/th>\n      <th>dummy.1<\/th>\n      <th>b.2<\/th>\n      <th>dummy.2<\/th>\n      <th>b.3<\/th>\n      <th>openness<\/th>\n      <th>error<\/th>\n      <th>extraversion<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":435,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[2,3,4,5,6,7,8,9,10]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"nationality","targets":1},{"name":"b.0","targets":2},{"name":"b.1","targets":3},{"name":"dummy.1","targets":4},{"name":"b.2","targets":5},{"name":"dummy.2","targets":6},{"name":"b.3","targets":7},{"name":"openness","targets":8},{"name":"error","targets":9},{"name":"extraversion","targets":10}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -244,8 +244,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-6f1d8b9e786d9d3fe28d" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-6f1d8b9e786d9d3fe28d">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["6","15","17","18","1","3","7","9","10","12","13","14","19","2","4","5","8","11","16","20"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],["Dutch","Dutch","Dutch","Dutch","German","German","German","German","German","German","German","German","German","Belgian","Belgian","Belgian","Belgian","Belgian","Belgian","Belgian"],[9.789999999999999,7.37,8.84,8.15,9.220000000000001,8.4,8.5,8.699999999999999,7.53,7.78,6.97,7.27,6.86,8.359999999999999,8.109999999999999,7.44,6.03,6.93,6.31,9.25],[45.06,38.32,41.12,38.98,46.09,44.1,44.05,43.79,40.21,41.13,37.64,41.98,39.36,43.78,44.21,42.14,37.03,39.1,36.81,46.67]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>n<\/th>\n      <th>nationality<\/th>\n      <th>openness<\/th>\n      <th>extraversion<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":300,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"className":"dt-right","targets":[1,3,4]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"n","targets":1},{"name":"nationality","targets":2},{"name":"openness","targets":3},{"name":"extraversion","targets":4}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-6d85f92aa695103e7f43" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-6d85f92aa695103e7f43">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["3","5","8","12","13","17","20","2","7","9","10","11","14","15","18","1","4","6","16","19"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],["Dutch","Dutch","Dutch","Dutch","Dutch","Dutch","Dutch","German","German","German","German","German","German","German","German","Belgian","Belgian","Belgian","Belgian","Belgian"],[8.42,9.380000000000001,6.7,8.07,7.61,6.14,8.85,9.300000000000001,7.26,8.33,8.039999999999999,7.7,6.72,8.68,9.039999999999999,9,8.15,8.470000000000001,7.65,7.78],[39.81,43.85,36.85,39.47,35.66,33.78,41.27,44.45,39.11,42.53,42.86,41.73,38.01,44.31,44.33,46.89,45.35,44.39,40.12,42.24]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>n<\/th>\n      <th>nationality<\/th>\n      <th>openness<\/th>\n      <th>extraversion<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":300,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"className":"dt-right","targets":[1,3,4]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"n","targets":1},{"name":"nationality","targets":2},{"name":"openness","targets":3},{"name":"extraversion","targets":4}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -255,9 +255,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(extraversion <span class="sc">~</span> nationality, data, mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  nationality extraversion
-1       Dutch     40.87000
-2      German     42.03889
-3     Belgian     41.39143</code></pre>
+1       Dutch     38.67000
+2      German     42.16625
+3     Belgian     43.79800</code></pre>
 </div>
 </div>
 </section>
@@ -273,18 +273,18 @@ lm(formula = extraversion ~ nationality, data = data)
 
 Coefficients:
        (Intercept)   nationalityGerman  nationalityBelgian  
-           40.8700              1.1689              0.5214  </code></pre>
+            38.670               3.496               5.128  </code></pre>
 </div>
 </div>
 <ul>
-<li><p><span class="math inline">\(\beta_{0} = 40.87\)</span></p></li>
-<li><p><span class="math inline">\(\beta_{German} = 1.17\)</span></p>
+<li><p><span class="math inline">\(\beta_{0} = 38.67\)</span></p></li>
+<li><p><span class="math inline">\(\beta_{German} = 3.5\)</span></p>
 <ul>
-<li>Prediction for German: 40.87 + 1.17 = 42.04</li>
+<li>Prediction for German: 38.67 + 3.5 = 42.17</li>
 </ul></li>
-<li><p><span class="math inline">\(\beta_{Belgian} = 0.52\)</span></p>
+<li><p><span class="math inline">\(\beta_{Belgian} = 5.13\)</span></p>
 <ul>
-<li>Prediction for Belgian: 40.87 + 0.52 = 41.39</li>
+<li>Prediction for Belgian: 38.67 + 5.13 = 43.8</li>
 </ul></li>
 </ul>
 </section>
@@ -301,11 +301,11 @@ lm(formula = extraversion ~ openness, data = data)
 
 Coefficients:
 (Intercept)     openness  
-     21.128        2.592  </code></pre>
+     15.667        3.185  </code></pre>
 </div>
 </div>
-<p><span class="math inline">\(\beta_{0} = 21.13\)</span></p>
-<p><span class="math inline">\(\beta_{Open} = 2.59\)</span></p>
+<p><span class="math inline">\(\beta_{0} = 15.67\)</span></p>
+<p><span class="math inline">\(\beta_{Open} = 3.18\)</span></p>
 </section>
 <section id="model-fit-with-all-predictor-variables-factor-covariate" class="level2">
 <h2 class="anchored" data-anchor-id="model-fit-with-all-predictor-variables-factor-covariate">Model fit with all predictor variables (factor + covariate)</h2>
@@ -318,18 +318,18 @@ lm(formula = extraversion ~ nationality + openness, data = data)
 
 Coefficients:
        (Intercept)   nationalityGerman  nationalityBelgian            openness  
-            14.421               3.099               3.767               3.098  </code></pre>
+            15.965               2.769               4.181               2.881  </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fit<span class="sc">$</span>coefficients[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="sc">+</span> fit<span class="sc">$</span>coefficients[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> nationalityGerman nationalityBelgian 
-          17.51968           18.18716 </code></pre>
+          18.73401           20.14609 </code></pre>
 </div>
 </div>
-<p><span class="math inline">\(\beta_{Dutch} = 14.42\)</span></p>
-<p><span class="math inline">\(\beta_{German} = 3.1\)</span></p>
-<p><span class="math inline">\(\beta_{Belgian} = 3.77\)</span></p>
-<p><span class="math inline">\(\beta_{Open} = 3.1\)</span></p>
+<p><span class="math inline">\(\beta_{Dutch} = 15.96\)</span></p>
+<p><span class="math inline">\(\beta_{German} = 2.77\)</span></p>
+<p><span class="math inline">\(\beta_{Belgian} = 4.18\)</span></p>
+<p><span class="math inline">\(\beta_{Open} = 2.88\)</span></p>
 </section>
 <section id="so-what-do-we-predict-for-each-participant" class="level2">
 <h2 class="anchored" data-anchor-id="so-what-do-we-predict-for-each-participant">So what do we predict for each participant??</h2>
@@ -338,15 +338,15 @@ Coefficients:
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(extraversion <span class="sc">~</span> nationality <span class="sc">+</span> openness, data); fit<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       (Intercept)  nationalityGerman nationalityBelgian           openness 
-         14.420540           3.099136           3.766619           3.098033 </code></pre>
+         15.964661           2.769346           4.181430           2.880866 </code></pre>
 </div>
 </div>
 <ul>
-<li><p><span class="math inline">\(\beta_{0} = 14.42\)</span></p></li>
-<li><p><span class="math inline">\(\beta_{German} = 3.1\)</span></p></li>
-<li><p><span class="math inline">\(\beta_{Open} = 3.1\)</span></p>
+<li><p><span class="math inline">\(\beta_{0} = 15.96\)</span></p></li>
+<li><p><span class="math inline">\(\beta_{German} = 2.77\)</span></p></li>
+<li><p><span class="math inline">\(\beta_{Open} = 2.88\)</span></p>
 <ul>
-<li>Prediction for German: 14.42 + 3.1 + 8 * 3.1 = 42.3</li>
+<li>Prediction for German: 15.96 + 2.77 + 8 * 2.88 = 41.78</li>
 </ul></li>
 </ul>
 <p>How about a Belgian with 6 Openness?</p>
@@ -358,11 +358,11 @@ Coefficients:
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>ms.t <span class="ot">&lt;-</span> <span class="fu">var</span>(data<span class="sc">$</span>extraversion); ms.t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 9.350571</code></pre>
+<pre><code>[1] 11.97756</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>ss.t <span class="ot">&lt;-</span> <span class="fu">var</span>(data<span class="sc">$</span>extraversion) <span class="sc">*</span> (<span class="fu">length</span>(data<span class="sc">$</span>extraversion) <span class="sc">-</span> <span class="dv">1</span>); ss.t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 177.6609</code></pre>
+<pre><code>[1] 227.5737</code></pre>
 </div>
 </div>
 </section>
@@ -371,8 +371,8 @@ Coefficients:
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-dcdfc64296f5794e54a4" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-dcdfc64296f5794e54a4">{"x":{"filter":"none","vertical":false,"data":[["6","15","17","18","1","3","7","9","10","12","13","14","19","2","4","5","8","11","16","20"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],["Dutch","Dutch","Dutch","Dutch","German","German","German","German","German","German","German","German","German","Belgian","Belgian","Belgian","Belgian","Belgian","Belgian","Belgian"],[9.789999999999999,7.37,8.84,8.15,9.220000000000001,8.4,8.5,8.699999999999999,7.53,7.78,6.97,7.27,6.86,8.359999999999999,8.109999999999999,7.44,6.03,6.93,6.31,9.25],[45.06,38.32,41.12,38.98,46.09,44.1,44.05,43.79,40.21,41.13,37.64,41.98,39.36,43.78,44.21,42.14,37.03,39.1,36.81,46.67],[41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>n<\/th>\n      <th>nationality<\/th>\n      <th>openness<\/th>\n      <th>extraversion<\/th>\n      <th>grand.mean<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,3,4,5]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"n","targets":1},{"name":"nationality","targets":2},{"name":"openness","targets":3},{"name":"extraversion","targets":4},{"name":"grand.mean","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-12b84c2369c5427c83b5" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-12b84c2369c5427c83b5">{"x":{"filter":"none","vertical":false,"data":[["3","5","8","12","13","17","20","2","7","9","10","11","14","15","18","1","4","6","16","19"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],["Dutch","Dutch","Dutch","Dutch","Dutch","Dutch","Dutch","German","German","German","German","German","German","German","German","Belgian","Belgian","Belgian","Belgian","Belgian"],[8.42,9.380000000000001,6.7,8.07,7.61,6.14,8.85,9.300000000000001,7.26,8.33,8.039999999999999,7.7,6.72,8.68,9.039999999999999,9,8.15,8.470000000000001,7.65,7.78],[39.81,43.85,36.85,39.47,35.66,33.78,41.27,44.45,39.11,42.53,42.86,41.73,38.01,44.31,44.33,46.89,45.35,44.39,40.12,42.24],[41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>n<\/th>\n      <th>nationality<\/th>\n      <th>openness<\/th>\n      <th>extraversion<\/th>\n      <th>grand.mean<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,3,4,5]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"n","targets":1},{"name":"nationality","targets":2},{"name":"openness","targets":3},{"name":"extraversion","targets":4},{"name":"grand.mean","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -390,8 +390,8 @@ Coefficients:
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-873249b169eb6149d57e" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-873249b169eb6149d57e">{"x":{"filter":"none","vertical":false,"data":[["6","15","17","18","1","3","7","9","10","12","13","14","19","2","4","5","8","11","16","20"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],["Dutch","Dutch","Dutch","Dutch","German","German","German","German","German","German","German","German","German","Belgian","Belgian","Belgian","Belgian","Belgian","Belgian","Belgian"],[9.789999999999999,7.37,8.84,8.15,9.220000000000001,8.4,8.5,8.699999999999999,7.53,7.78,6.97,7.27,6.86,8.359999999999999,8.109999999999999,7.44,6.03,6.93,6.31,9.25],[45.06,38.32,41.12,38.98,46.09,44.1,44.05,43.79,40.21,41.13,37.64,41.98,39.36,43.78,44.21,42.14,37.03,39.1,36.81,46.67],[41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785],[40.87,40.87,40.87,40.87,42.04,42.04,42.04,42.04,42.04,42.04,42.04,42.04,42.04,41.39,41.39,41.39,41.39,41.39,41.39,41.39]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>n<\/th>\n      <th>nationality<\/th>\n      <th>openness<\/th>\n      <th>extraversion<\/th>\n      <th>grand.mean<\/th>\n      <th>model.group<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":315,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,3,4,5,6]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"n","targets":1},{"name":"nationality","targets":2},{"name":"openness","targets":3},{"name":"extraversion","targets":4},{"name":"grand.mean","targets":5},{"name":"model.group","targets":6}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-20187b6762e1c8deebaf" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-20187b6762e1c8deebaf">{"x":{"filter":"none","vertical":false,"data":[["3","5","8","12","13","17","20","2","7","9","10","11","14","15","18","1","4","6","16","19"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],["Dutch","Dutch","Dutch","Dutch","Dutch","Dutch","Dutch","German","German","German","German","German","German","German","German","Belgian","Belgian","Belgian","Belgian","Belgian"],[8.42,9.380000000000001,6.7,8.07,7.61,6.14,8.85,9.300000000000001,7.26,8.33,8.039999999999999,7.7,6.72,8.68,9.039999999999999,9,8.15,8.470000000000001,7.65,7.78],[39.81,43.85,36.85,39.47,35.66,33.78,41.27,44.45,39.11,42.53,42.86,41.73,38.01,44.31,44.33,46.89,45.35,44.39,40.12,42.24],[41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505],[38.67,38.67,38.67,38.67,38.67,38.67,38.67,42.17,42.17,42.17,42.17,42.17,42.17,42.17,42.17,43.8,43.8,43.8,43.8,43.8]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>n<\/th>\n      <th>nationality<\/th>\n      <th>openness<\/th>\n      <th>extraversion<\/th>\n      <th>grand.mean<\/th>\n      <th>model.group<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":315,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,3,4,5,6]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"n","targets":1},{"name":"nationality","targets":2},{"name":"openness","targets":3},{"name":"extraversion","targets":4},{"name":"grand.mean","targets":5},{"name":"model.group","targets":6}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -416,8 +416,8 @@ Coefficients:
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-cbd3ad10bd2d35a2e76d" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-cbd3ad10bd2d35a2e76d">{"x":{"filter":"none","vertical":false,"data":[["6","15","17","18","1","3","7","9","10","12","13","14","19","2","4","5","8","11","16","20"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],["Dutch","Dutch","Dutch","Dutch","German","German","German","German","German","German","German","German","German","Belgian","Belgian","Belgian","Belgian","Belgian","Belgian","Belgian"],[9.789999999999999,7.37,8.84,8.15,9.220000000000001,8.4,8.5,8.699999999999999,7.53,7.78,6.97,7.27,6.86,8.359999999999999,8.109999999999999,7.44,6.03,6.93,6.31,9.25],[45.06,38.32,41.12,38.98,46.09,44.1,44.05,43.79,40.21,41.13,37.64,41.98,39.36,43.78,44.21,42.14,37.03,39.1,36.81,46.67],[41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785,41.5785],[40.87,40.87,40.87,40.87,42.04,42.04,42.04,42.04,42.04,42.04,42.04,42.04,42.04,41.39,41.39,41.39,41.39,41.39,41.39,41.39],[46.5,40.23,44.04,42.25,45.02,42.9,43.16,43.68,40.64,41.29,39.19,39.97,38.91,42.8,42.15,40.41,36.76,39.09,37.48,45.1],[44.75,37.25,41.81,39.67,46.08,43.54,43.85,44.47,40.85,41.62,39.11,40.04,38.77,44.09,43.31,41.24,36.87,39.66,37.74,46.84]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>n<\/th>\n      <th>nationality<\/th>\n      <th>openness<\/th>\n      <th>extraversion<\/th>\n      <th>grand.mean<\/th>\n      <th>model.group<\/th>\n      <th>model.covar<\/th>\n      <th>model<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,3,4,5,6,7,8]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"n","targets":1},{"name":"nationality","targets":2},{"name":"openness","targets":3},{"name":"extraversion","targets":4},{"name":"grand.mean","targets":5},{"name":"model.group","targets":6},{"name":"model.covar","targets":7},{"name":"model","targets":8}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-aade037627a6e8e4ba69" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-aade037627a6e8e4ba69">{"x":{"filter":"none","vertical":false,"data":[["3","5","8","12","13","17","20","2","7","9","10","11","14","15","18","1","4","6","16","19"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],["Dutch","Dutch","Dutch","Dutch","Dutch","Dutch","Dutch","German","German","German","German","German","German","German","German","Belgian","Belgian","Belgian","Belgian","Belgian"],[8.42,9.380000000000001,6.7,8.07,7.61,6.14,8.85,9.300000000000001,7.26,8.33,8.039999999999999,7.7,6.72,8.68,9.039999999999999,9,8.15,8.470000000000001,7.65,7.78],[39.81,43.85,36.85,39.47,35.66,33.78,41.27,44.45,39.11,42.53,42.86,41.73,38.01,44.31,44.33,46.89,45.35,44.39,40.12,42.24],[41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505],[38.67,38.67,38.67,38.67,38.67,38.67,38.67,42.17,42.17,42.17,42.17,42.17,42.17,42.17,42.17,43.8,43.8,43.8,43.8,43.8],[42.48,45.54,37,41.37,39.9,35.22,43.85,45.29,38.79,42.2,41.27,40.19,37.07,43.31,44.46,44.33,41.62,42.64,40.03,40.44],[40.22,42.99,35.27,39.21,37.89,33.65,41.46,45.53,39.65,42.73,41.9,40.92,38.09,43.74,44.78,46.07,43.63,44.55,42.18,42.56]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>n<\/th>\n      <th>nationality<\/th>\n      <th>openness<\/th>\n      <th>extraversion<\/th>\n      <th>grand.mean<\/th>\n      <th>model.group<\/th>\n      <th>model.covar<\/th>\n      <th>model<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,3,4,5,6,7,8]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"n","targets":1},{"name":"nationality","targets":2},{"name":"openness","targets":3},{"name":"extraversion","targets":4},{"name":"grand.mean","targets":5},{"name":"model.group","targets":6},{"name":"model.covar","targets":7},{"name":"model","targets":8}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -449,11 +449,11 @@ Coefficients:
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>SS.covar <span class="ot">&lt;-</span> SS.model <span class="sc">-</span> SS.model.group; SS.covar <span class="do">## SS.covar corrected for group</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 160.5173</code></pre>
+<pre><code>[1] 121.8463</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>SS.group <span class="ot">&lt;-</span> SS.model <span class="sc">-</span> SS.model.covar; SS.group <span class="do">## SS.group corrected for covar</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 33.46307</code></pre>
+<pre><code>[1] 54.65778</code></pre>
 </div>
 </div>
 </section>
@@ -472,15 +472,13 @@ Coefficients:
 <span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>fStat <span class="ot">&lt;-</span> MS.model <span class="sc">/</span> MS.error</span>
 <span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>fStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 20.78339</code></pre>
+<pre><code>[1] 21.74406</code></pre>
 </div>
 </div>
 </section>
 <section id="p-value" class="level2">
 <h2 class="anchored" data-anchor-id="p-value"><span class="math inline">\(P\)</span>-value</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"visualize"</span>)</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.f</span>(fStat, df.model, df.error, <span class="at">section =</span> <span class="st">"upper"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="ancova_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -504,30 +502,30 @@ Coefficients:
 <section id="adjustedmarginal-means-1" class="level2">
 <h2 class="anchored" data-anchor-id="adjustedmarginal-means-1">Adjusted/marginal means</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add dummy variables</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>dummy<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(data<span class="sc">$</span>nationality <span class="sc">==</span> <span class="st">"German"</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>dummy<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(data<span class="sc">$</span>nationality <span class="sc">==</span> <span class="st">"Belgian"</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co"># b coefficients</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>b.cov <span class="ot">&lt;-</span> fit<span class="sc">$</span>coefficients[<span class="st">"openness"</span>];          b.int <span class="ot">=</span> fit<span class="sc">$</span>coefficients[<span class="st">"(Intercept)"</span>]</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>b<span class="fl">.2</span>   <span class="ot">&lt;-</span> fit<span class="sc">$</span>coefficients[<span class="st">"nationalityGerman"</span>]; b<span class="fl">.3</span>   <span class="ot">=</span> fit<span class="sc">$</span>coefficients[<span class="st">"nationalityBelgian"</span>]</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjustment factor for the means of the independent variable</span></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>mean.adj <span class="ot">&lt;-</span> <span class="fu">with</span>(data, b.int <span class="sc">+</span> b.cov <span class="sc">*</span> <span class="fu">mean</span>(openness) <span class="sc">+</span> b<span class="fl">.2</span> <span class="sc">*</span> dummy<span class="fl">.1</span> <span class="sc">+</span> b<span class="fl">.3</span> <span class="sc">*</span> dummy<span class="fl">.2</span>)</span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(mean.adj <span class="sc">~</span> nationality, data, mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add dummy variables</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>dummy<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(data<span class="sc">$</span>nationality <span class="sc">==</span> <span class="st">"German"</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>dummy<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(data<span class="sc">$</span>nationality <span class="sc">==</span> <span class="st">"Belgian"</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co"># b coefficients</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>b.cov <span class="ot">&lt;-</span> fit<span class="sc">$</span>coefficients[<span class="st">"openness"</span>];          b.int <span class="ot">=</span> fit<span class="sc">$</span>coefficients[<span class="st">"(Intercept)"</span>]</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>b<span class="fl">.2</span>   <span class="ot">&lt;-</span> fit<span class="sc">$</span>coefficients[<span class="st">"nationalityGerman"</span>]; b<span class="fl">.3</span>   <span class="ot">=</span> fit<span class="sc">$</span>coefficients[<span class="st">"nationalityBelgian"</span>]</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjustment factor for the means of the independent variable</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>mean.adj <span class="ot">&lt;-</span> <span class="fu">with</span>(data, b.int <span class="sc">+</span> b.cov <span class="sc">*</span> <span class="fu">mean</span>(openness) <span class="sc">+</span> b<span class="fl">.2</span> <span class="sc">*</span> dummy<span class="fl">.1</span> <span class="sc">+</span> b<span class="fl">.3</span> <span class="sc">*</span> dummy<span class="fl">.2</span>)</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(mean.adj <span class="sc">~</span> nationality, data, mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  nationality mean.adj
-1       Dutch 38.86557
-2      German 41.96471
-3     Belgian 42.63219</code></pre>
+1       Dutch 39.19740
+2      German 41.96675
+3     Belgian 43.37883</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(extraversion <span class="sc">~</span> nationality, data, mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(extraversion <span class="sc">~</span> nationality, data, mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  nationality extraversion
-1       Dutch     40.87000
-2      German     42.03889
-3     Belgian     41.39143</code></pre>
+1       Dutch     38.67000
+2      German     42.16625
+3     Belgian     43.79800</code></pre>
 </div>
 </div>
 </section>

@@ -7,8 +7,6 @@ rm(list=ls())
 if(!"ggplot2" %in% installed.packages()) { install.packages("ggplot2") }
 library("ggplot2")
 
-set.seed(1976)
-
 if(!"DT" %in% installed.packages()) { install.packages("DT") }
 library("DT")
 ```
@@ -57,8 +55,8 @@ We want to test the difference in national extraversion but want to also account
 ## Simulate data
 
 ```{r, echo=TRUE}
+set.seed(1976)
 # Simulate data
-set.seed(123)
 n <- 20
 k <- 3
 nationality       <- round(runif(n,1,k),0)
@@ -321,10 +319,23 @@ fStat
 ```
 
 ## $P$-value
+```{r, echo=FALSE}
+# Set up the plot for the F-distribution
+curve(df(x, df.model, df.error), from = 0, to = 25, n = 1000, bty = "n", las = 1,
+      xlab = "F-value", ylab = "Density", main = "F-distribution with P-value Region")
 
-```{r, echo=TRUE}
-library("visualize")
-visualize.f(fStat, df.model, df.error, section = "upper") 
+# Shade the upper tail (p-value region) using polygon
+# Define the region to fill (upper tail, greater than fStat)
+x_vals <- seq(fStat, 10, length.out = 100)
+y_vals <- df(x_vals, df.model, df.error)
+
+# Draw the polygon to fill the area under the curve
+polygon(c(fStat, x_vals, 10), c(0, y_vals, 0), col = "lightblue", border = NA)
+
+# Optionally, add a vertical line at the F-statistic
+arrows(x0 = fStat, x1 = fStat, y0 = 0 , y1 = 0.6, col = "darkred", lwd = 2)
+text(x = fStat, y = 0.8, paste("F =", round(fStat, 2)), cex = 1.2)
+text(x = fStat, y = 0.7, paste("p-val < 0.001"), cex = 1.2)
 ```
 
 ## Alpha & Power
