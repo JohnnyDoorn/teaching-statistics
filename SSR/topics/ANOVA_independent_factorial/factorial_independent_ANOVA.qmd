@@ -434,6 +434,9 @@ Unplanned comparisons
 
 * Exploring all possible differences
 * Adjust T value for inflated type 1 error
+    * P(1 type-I error) = $0.05$
+    * P(not 1 type-I error) = $0.95$
+    * P(not 5 type-I errors) = $0.95^5 = `r round(0.950^5, 3)`$
 
 ## Effect size
 

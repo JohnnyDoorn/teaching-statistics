@@ -1,8 +1,8 @@
 ---
-title: "13. ANOVA"
+title: "14. ANOVA"
 subtitle: "Independent factorial"
 author: "Sharon Kinkenberg & Johnny van Doorn"
-date: "10 oct 2023"
+date: "08 oct 2024"
 footer: "Scientific & Statistical Reasoning"
 format: 
   html: default
@@ -10,10 +10,10 @@ format:
     output-ext: slide.html
 ---
 
-```{r child="../../../../topics/ANOVA_independent_factorial/factorial_independent_ANOVA.qmd"}
+```{r child="../../topics/ANOVA_independent_factorial/factorial_independent_ANOVA.qmd"}
 ```
 
 <!-- Footer insert below -->
 
-```{r child="../../../../footer.qmd"}
+```{r child="../../footer.qmd"}
 ```
