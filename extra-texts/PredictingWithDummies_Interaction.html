@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="JvD">
-<meta name="dcterms.date" content="2023-11-03">
+<meta name="dcterms.date" content="2024-10-07">
 
 <title>Predicting with Dummies Part 2: Interaction</title>
 <style>
@@ -70,15 +70,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="PredictingWithDummies_Interaction_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="PredictingWithDummies_Interaction_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
-<script src="PredictingWithDummies_Interaction_files/libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="PredictingWithDummies_Interaction_files/libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="PredictingWithDummies_Interaction_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <link href="PredictingWithDummies_Interaction_files/libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="PredictingWithDummies_Interaction_files/libs/datatables-binding-0.27/datatables.js"></script>
+<script src="PredictingWithDummies_Interaction_files/libs/datatables-binding-0.33/datatables.js"></script>
 <script src="PredictingWithDummies_Interaction_files/libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<link href="PredictingWithDummies_Interaction_files/libs/dt-core-1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="PredictingWithDummies_Interaction_files/libs/dt-core-1.12.1/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="PredictingWithDummies_Interaction_files/libs/dt-core-1.12.1/js/jquery.dataTables.min.js"></script>
-<link href="PredictingWithDummies_Interaction_files/libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
-<script src="PredictingWithDummies_Interaction_files/libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="PredictingWithDummies_Interaction_files/libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="PredictingWithDummies_Interaction_files/libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="PredictingWithDummies_Interaction_files/libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="PredictingWithDummies_Interaction_files/libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="PredictingWithDummies_Interaction_files/libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -87,20 +88,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <body>
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-full toc-left">
-<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
-  <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul class="collapse">
-  <li><a href="#individual-models" id="toc-individual-models" class="nav-link active" data-scroll-target="#individual-models">Individual models</a></li>
-  <li><a href="#enter-the-interaction" id="toc-enter-the-interaction" class="nav-link" data-scroll-target="#enter-the-interaction">Enter the interaction</a></li>
-  </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="PredictingWithDummies_Interaction.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
-</div>
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-</div>
-<main class="content column-page-right" id="quarto-document-content">
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-full">
+
+<main class="content column-page" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -108,27 +98,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
-<div class="quarto-title-meta-author">
-  <div class="quarto-title-meta-heading">Author</div>
-  <div class="quarto-title-meta-heading">Affiliation</div>
-  
-    <div class="quarto-title-meta-contents">
-    <p class="author">JvD </p>
-  </div>
-    <div class="quarto-title-meta-contents">
-        <p class="affiliation">
-            University of Amsterdam
-          </p>
-      </div>
-    </div>
 
 <div class="quarto-title-meta">
 
-      
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>JvD </p>
+          </div>
+  </div>
+    
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 3, 2023</p>
+      <p class="date">October 7, 2024</p>
     </div>
   </div>
   
@@ -233,8 +216,8 @@ muchA 5.2970 6.5125 7.572</code></pre>
 <span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="fu">datatable</span>(dummyStructure, <span class="at">options =</span> <span class="fu">list</span>(<span class="at">searching =</span> <span class="cn">FALSE</span>, <span class="at">scrollY =</span> <span class="dv">415</span>, <span class="at">paging =</span> F, <span class="at">info =</span> F))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-9cc74dd4edfd307ebfe6" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-9cc74dd4edfd307ebfe6">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9"],["none","some","much","none","some","much","none","some","much"],["noneA","noneA","noneA","someA","someA","someA","muchA","muchA","muchA"],[0,1,0,0,1,0,0,1,0],[0,0,1,0,0,1,0,0,1],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>speedLevels<\/th>\n      <th>alcoholLevels<\/th>\n      <th>dummySomeSpeed<\/th>\n      <th>dummyMuchSpeed<\/th>\n      <th>dummySomeAlc<\/th>\n      <th>dummyMuchAlc<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[3,4,5,6]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-261bd7cb65ef5e977fa2" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-261bd7cb65ef5e977fa2">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9"],["none","some","much","none","some","much","none","some","much"],["noneA","noneA","noneA","someA","someA","someA","muchA","muchA","muchA"],[0,1,0,0,1,0,0,1,0],[0,0,1,0,0,1,0,0,1],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>speedLevels<\/th>\n      <th>alcoholLevels<\/th>\n      <th>dummySomeSpeed<\/th>\n      <th>dummyMuchSpeed<\/th>\n      <th>dummySomeAlc<\/th>\n      <th>dummyMuchAlc<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[3,4,5,6]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"speedLevels","targets":1},{"name":"alcoholLevels","targets":2},{"name":"dummySomeSpeed","targets":3},{"name":"dummyMuchSpeed","targets":4},{"name":"dummySomeAlc","targets":5},{"name":"dummyMuchAlc","targets":6}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>Then, we use these dummy variables to apply the exact formula that is given above, for predicting accidents:</p>
@@ -251,8 +234,8 @@ muchA 5.2970 6.5125 7.572</code></pre>
 <span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="fu">datatable</span>(dummyStructure)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-45c7c814f1bc8e2949c9" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-45c7c814f1bc8e2949c9">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9"],["none","some","much","none","some","much","none","some","much"],["noneA","noneA","noneA","someA","someA","someA","muchA","muchA","muchA"],[0,1,0,0,1,0,0,1,0],[0,0,1,0,0,1,0,0,1],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[1.917,3.041,3.981,1.917,3.041,3.981,1.917,3.041,3.981],[2.106,2.9445,3.888,3.4435,4.7625,5.579,5.297,6.5125,7.572]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>speedLevels<\/th>\n      <th>alcoholLevels<\/th>\n      <th>dummySomeSpeed<\/th>\n      <th>dummyMuchSpeed<\/th>\n      <th>dummySomeAlc<\/th>\n      <th>dummyMuchAlc<\/th>\n      <th>whatWePredict<\/th>\n      <th>observedGroupMeans<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[3,4,5,6,7,8]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-144d721e53d3732237b1" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-144d721e53d3732237b1">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9"],["none","some","much","none","some","much","none","some","much"],["noneA","noneA","noneA","someA","someA","someA","muchA","muchA","muchA"],[0,1,0,0,1,0,0,1,0],[0,0,1,0,0,1,0,0,1],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[1.917,3.041,3.981,1.917,3.041,3.981,1.917,3.041,3.981],[2.106,2.9445,3.888,3.4435,4.7625,5.579,5.297,6.5125,7.572]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>speedLevels<\/th>\n      <th>alcoholLevels<\/th>\n      <th>dummySomeSpeed<\/th>\n      <th>dummyMuchSpeed<\/th>\n      <th>dummySomeAlc<\/th>\n      <th>dummyMuchAlc<\/th>\n      <th>whatWePredict<\/th>\n      <th>observedGroupMeans<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[3,4,5,6,7,8]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"speedLevels","targets":1},{"name":"alcoholLevels","targets":2},{"name":"dummySomeSpeed","targets":3},{"name":"dummyMuchSpeed","targets":4},{"name":"dummySomeAlc","targets":5},{"name":"dummyMuchAlc","targets":6},{"name":"whatWePredict","targets":7},{"name":"observedGroupMeans","targets":8}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>What you can see from the table above, is that we are not predicting the <strong>exact</strong> group means when we predict with only the two main effects. By trying to use as few parameters (<span class="math inline">\(b\)</span>’s/regression coefficients) as possible, we tried to approximate the group means as best we can, but are still falling short a little bit. However, this approximated group level means might still be a very good approximation of the observed data. If there is no interaction effect going on in the population, this might be the model that fits the data the best, while using as few parameters as possible.</p>
