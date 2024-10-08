@@ -420,7 +420,7 @@ polygon(c(p.range,rev(p.range)),
         c(p.range*0, rev(df(p.range, df.speed.alcohol, df.error))), col = rgb(0,0,1,.6), density = 20)
 ```
 
-## Partition the explained variance (BONUS)
+## Partition the explained variance (BONUS) {.smaller}
 
 ```{r, echo=FALSE}
 
@@ -444,7 +444,7 @@ barplot(values, names.arg = labels, col = c("blue", "green", "orange", "red"),
 # Add text labels on top of the bars showing exact values
 text(x = .6:14.6*1.2, y = values, labels = round(values, 2), pos = 3)
 ```
-## Partition the explained variance (BONUS)
+## Partition the explained variance (BONUS) {.smaller}
 
 ```{r, echo=FALSE}
 
@@ -470,7 +470,7 @@ text(x = .6:14.6*1.2, y = values, labels = c(rep("?", 3), values[4]), pos = 3)
 ```
 In reality, we do not know exactly how the shared variance is distributed across these three sources (IV1, IV2, shared)
 
-## Partition the explained variance (BONUS)
+## Partition the explained variance (BONUS) {.smaller}
 
 ```{r, echo=FALSE}
 
