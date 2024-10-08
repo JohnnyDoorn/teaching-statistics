@@ -420,6 +420,85 @@ polygon(c(p.range,rev(p.range)),
         c(p.range*0, rev(df(p.range, df.speed.alcohol, df.error))), col = rgb(0,0,1,.6), density = 20)
 ```
 
+## Partition the explained variance (BONUS)
+
+```{r, echo=FALSE}
+
+# Define data points for visualization of sum of squares
+individual_model1 <- 50  # SS for model with IV1
+individual_model2 <- 60  # SS for model with IV2
+shared_variance <- 20     # Overlap between the two IVs
+combined_model <- individual_model1 + individual_model2 + shared_variance  # Hypothetical total for combined model
+
+# Create a vector of the sum of squares values
+values <- c(individual_model1, individual_model2, shared_variance, combined_model)
+
+# Create labels for the plot
+labels <- c("IV1", "IV2", "Shared Variance", "Combined Model")
+
+# Create a bar plot using base R
+barplot(values, names.arg = labels, col = c("blue", "green", "orange", "red"),
+        main = "True Division of Model Sum of Squares for Model with 2 IVs", las =1,
+        ylab = "Sum of Squares", ylim = c(0, 200))
+
+# Add text labels on top of the bars showing exact values
+text(x = .6:14.6*1.2, y = values, labels = round(values, 2), pos = 3)
+```
+## Partition the explained variance (BONUS)
+
+```{r, echo=FALSE}
+
+# Define data points for visualization of sum of squares
+individual_model1 <- 0  # SS for model with IV1
+individual_model2 <- 0  # SS for model with IV2
+shared_variance <- 0     # Overlap between the two IVs
+combined_model <- 130 #individual_model1 + individual_model2 + shared_variance  # Hypothetical total for combined model
+
+# Create a vector of the sum of squares values
+values <- c(individual_model1, individual_model2, shared_variance, combined_model)
+
+# Create labels for the plot
+labels <- c("IV1", "IV2", "Shared Variance", "Combined Model")
+
+# Create a bar plot using base R
+barplot(values, names.arg = labels, col = c("blue", "green", "orange", "red"),
+        main = "Model Sum of Squares in Reality", las = 1,
+        ylab = "Sum of Squares", ylim = c(0, 200))
+
+# Add text labels on top of the bars showing exact values
+text(x = .6:14.6*1.2, y = values, labels = c(rep("?", 3), values[4]), pos = 3)
+```
+In reality, we do not know exactly how the shared variance is distributed across these three sources (IV1, IV2, shared)
+
+## Partition the explained variance (BONUS)
+
+```{r, echo=FALSE}
+
+# Define data points for visualization of sum of squares
+individual_model1 <- 60  # SS for model with IV1
+individual_model2 <- 80  # SS for model with IV2
+shared_variance <- 0     # Overlap between the two IVs
+combined_model <- 130 #individual_model1 + individual_model2 + shared_variance  # Hypothetical total for combined model
+
+# Create a vector of the sum of squares values
+values <- c(individual_model1, individual_model2, shared_variance, combined_model)
+
+# Create labels for the plot
+labels <- c("IV1", "IV2", "Shared Variance", "Combined Model")
+
+# Create a bar plot using base R
+barplot(values, names.arg = labels, col = c("blue", "green", "orange", "red"),
+        main = "Partitioning based on individual models", las = 1,
+        ylab = "Sum of Squares", ylim = c(0, 200))
+
+# Add text labels on top of the bars showing exact values
+text(x = .6:14.6*1.2, y = values, labels = c(values[1:2], rep("?", 1), values[4]), pos = 3)
+```
+
+- Fit a model with only IV1, then use that to compute the explained variance for IV2: $SS_{M1} = 70 \rightarrow SS_{IV2} = 130 - 70 = 60$
+- Fit a model with only IV2, then use that to compute the explained variance for IV1: $SS_{M2} = 50 \rightarrow SS_{IV1} = 130 - 50 = 80$
+- [See also Oliver Twisted from Chapter 13](https://johnnydoorn.github.io/discoverjasp/pages/oliver_twisted.html#please-sir-can-i-customize-my-model)
+
 ## Contrast
 
 Planned comparisons

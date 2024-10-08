@@ -1,5 +1,5 @@
 ---
-title: "14. ANOVA"
+title: "14. Factorial ANOVA"
 subtitle: "Independent factorial"
 author: "Sharon Kinkenberg & Johnny van Doorn"
 date: "08 oct 2024"
