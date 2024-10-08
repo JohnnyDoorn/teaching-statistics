@@ -10,17 +10,17 @@ format:
     output-ext: slide.html
 ---
 
-```{r child="../../../../topics/ANOVA_repeated_one-way/ANOVA_repeated_one-way.qmd"}
+```{r child="../../topics/ANOVA_repeated_one-way/ANOVA_repeated_one-way.qmd"}
 ```
 
-```{r child="../../../../topics/ANOVA_repeated_factorial/ANOVA_repeated_factorial.qmd"}
+```{r child="../../topics/ANOVA_repeated_factorial/ANOVA_repeated_factorial.qmd"}
 ```
 
-```{r child="../../../../topics/ANOVA_mixed/ANOVA_mixed.qmd"}
+```{r child="../../topics/ANOVA_mixed/ANOVA_mixed.qmd"}
 ```
 
 
 <!-- Footer insert below -->
 
-```{r child="../../../../footer.qmd"}
+```{r child="../../footer.qmd"}
 ```
