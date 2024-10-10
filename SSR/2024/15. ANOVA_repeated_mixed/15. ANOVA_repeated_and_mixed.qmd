@@ -2,7 +2,7 @@
 title: "15. RM ANOVA"
 subtitle: "Repeated & Mixed"
 author: "Sharon Kinkenberg & Johnny van Doorn"
-date: "13 oct 2023"
+date: "11 oct 2024"
 footer: "Scientific & Statistical Reasoning"
 format: 
   html: default
