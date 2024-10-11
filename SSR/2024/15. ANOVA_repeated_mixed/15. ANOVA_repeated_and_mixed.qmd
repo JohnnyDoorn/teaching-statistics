@@ -1,5 +1,5 @@
 ---
-title: "15. RM ANOVA"
+title: "16. RM ANOVA"
 subtitle: "Repeated & Mixed"
 author: "Sharon Kinkenberg & Johnny van Doorn"
 date: "11 oct 2024"
