@@ -40,5 +40,11 @@
   },
   "topics/anova_repeated_one-way/anova_repeated_one-way.qmd": {
     "anova_repeated_one-way.html": "a28bef52"
+  },
+  "2024/16. chi_squared_test/16. chi_squared_test.qmd": {
+    "16. chi_squared_test.html": "178f5191"
+  },
+  "topics/ANOVA_mixed/ANOVA_mixed.qmd": {
+    "ANOVA_mixed.html": "b9bdb326"
   }
 }

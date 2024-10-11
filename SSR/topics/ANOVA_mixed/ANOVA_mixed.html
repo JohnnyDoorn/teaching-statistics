@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Sharon Klinkenberg &amp; Johnny van Doorn">
 
 <title>anova_mixed</title>
 <style>
@@ -34,28 +35,45 @@ ul.task-list li input[type="checkbox"] {
 <link href="ANOVA_mixed_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="ANOVA_mixed_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
-<script src="ANOVA_mixed_files/libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="ANOVA_mixed_files/libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="ANOVA_mixed_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <link href="ANOVA_mixed_files/libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="ANOVA_mixed_files/libs/datatables-binding-0.27/datatables.js"></script>
+<script src="ANOVA_mixed_files/libs/datatables-binding-0.33/datatables.js"></script>
 <script src="ANOVA_mixed_files/libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<link href="ANOVA_mixed_files/libs/dt-core-1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="ANOVA_mixed_files/libs/dt-core-1.12.1/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="ANOVA_mixed_files/libs/dt-core-1.12.1/js/jquery.dataTables.min.js"></script>
-<link href="ANOVA_mixed_files/libs/dt-ext-buttons-1.12.1/css/buttons.dataTables.min.css" rel="stylesheet">
-<script src="ANOVA_mixed_files/libs/dt-ext-buttons-1.12.1/js/dataTables.buttons.min.js"></script>
-<script src="ANOVA_mixed_files/libs/dt-ext-buttons-1.12.1/js/buttons.html5.min.js"></script>
-<script src="ANOVA_mixed_files/libs/dt-ext-buttons-1.12.1/js/buttons.colVis.min.js"></script>
-<script src="ANOVA_mixed_files/libs/dt-ext-buttons-1.12.1/js/buttons.print.min.js"></script>
-<link href="ANOVA_mixed_files/libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
-<script src="ANOVA_mixed_files/libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="ANOVA_mixed_files/libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="ANOVA_mixed_files/libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="ANOVA_mixed_files/libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="ANOVA_mixed_files/libs/dt-ext-buttons-1.13.6/css/buttons.dataTables.min.css" rel="stylesheet">
+<script src="ANOVA_mixed_files/libs/dt-ext-buttons-1.13.6/js/dataTables.buttons.min.js"></script>
+<script src="ANOVA_mixed_files/libs/dt-ext-buttons-1.13.6/js/buttons.html5.min.js"></script>
+<script src="ANOVA_mixed_files/libs/dt-ext-buttons-1.13.6/js/buttons.colVis.min.js"></script>
+<script src="ANOVA_mixed_files/libs/dt-ext-buttons-1.13.6/js/buttons.print.min.js"></script>
+<link href="ANOVA_mixed_files/libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="ANOVA_mixed_files/libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
 
 
 </head>
 
-<body class="fullcontent">
+<body>
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#mixed-design-anova" id="toc-mixed-design-anova" class="nav-link active" data-scroll-target="#mixed-design-anova">Mixed design ANOVA</a>
+  <ul class="collapse">
+  <li><a href="#mixed-design" id="toc-mixed-design" class="nav-link" data-scroll-target="#mixed-design">Mixed design</a></li>
+  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions">Assumptions</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="ANOVA_mixed.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</div>
 <main class="content" id="quarto-document-content">
 
 
@@ -67,7 +85,7 @@ ul.task-list li input[type="checkbox"] {
 <p>The mixed ANOVA analyses the variance of the model while reducing the error by the within person variance.</p>
 <ul>
 <li>1 dependent/outcome variable</li>
-<li>2 or more independent/predictor variable with different subjects
+<li>1 or more independent/predictor variable with different subjects
 <ul>
 <li>2 or more levels</li>
 </ul></li>
@@ -115,8 +133,8 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-4f508ad3152a99ab4512" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-4f508ad3152a99ab4512">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2],[1.59,2.18,3.23,2.18,1.36,2.18,2.91,4.26,2.96,1.67,2.88,1.24,1.94,3.29,2.77,2.79,2.03,1.33,1.34,1.1],[4.96,4.66,5.58,5.7,6.15,5.83,4.03,5.48,4.92,4.14,6.68,6.74,6.45,4.52,5.53,5.41,3.5,3.73,5.76,6.4],[6.72,5.84,7.01,6.02,8.36,7.07,6.55,6.34,5.6,4.96,7.08,6.3,7.68,5.46,4.38,8.4,7.34,5.23,7.95,8.18],[2.64,4.43,2.12,3,1.78,3.06,5.35,2.89,3.87,2.52,3.74,1.72,3.02,2.53,2.64,1.84,-0.06,2.23,1.54,5.05],[3.74,4.73,7.12,6.66,5.57,5.91,4.93,6.74,5.12,3.64,4.27,6.03,6.44,5.82,5.84,6.16,6.01,5.09,6.28,6.16],[5.93,7.25,7.43,6.32,8.1,6.51,7.22,8.74,6.8,5.98,6.66,7.94,9.22,6.44,7.82,7.93,8.19,7.84,7.6,7.19],[4.68,3.21,4.98,4.72,5.03,2.61,6.06,2.87,3.01,5.37,3.97,3.99,4.76,4.48,5.87,5.04,5.57,5.73,4.65,5.97],[6.93,3.78,6.66,4.52,5.71,6.09,6.27,7.01,6.06,6.01,5.07,6.36,3.67,5.73,3.74,6.82,4.54,6.33,5.64,7.66],[9.51,10.71,9.49,9.38,9.83,10.78,8.59,9.26,9.29,9.14,9.96,9.52,9.12,9.48,9.54,9.56,9.48,9.24,11.12,7.83]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>Daytime<\/th>\n      <th>none_alc_none_speed<\/th>\n      <th>none_alc_some_speed<\/th>\n      <th>none_alc_much_speed<\/th>\n      <th>some_alc_none_speed<\/th>\n      <th>some_alc_some_speed<\/th>\n      <th>some_alc_much_speed<\/th>\n      <th>much_alc_none_speed<\/th>\n      <th>much_alc_some_speed<\/th>\n      <th>much_alc_much_speed<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5,6,7,8,9,10]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-f401edf9345ee01c6ba9" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-f401edf9345ee01c6ba9">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2],[1.59,2.18,3.23,2.18,1.36,2.18,2.91,4.26,2.96,1.67,2.88,1.24,1.94,3.29,2.77,2.79,2.03,1.33,1.34,1.1],[4.96,4.66,5.58,5.7,6.15,5.83,4.03,5.48,4.92,4.14,6.68,6.74,6.45,4.52,5.53,5.41,3.5,3.73,5.76,6.4],[6.72,5.84,7.01,6.02,8.359999999999999,7.07,6.55,6.34,5.6,4.96,7.08,6.3,7.68,5.46,4.38,8.4,7.34,5.23,7.95,8.18],[2.64,4.43,2.12,3,1.78,3.06,5.35,2.89,3.87,2.52,3.74,1.72,3.02,2.53,2.64,1.84,-0.06,2.23,1.54,5.05],[3.74,4.73,7.12,6.66,5.57,5.91,4.93,6.74,5.12,3.64,4.27,6.03,6.44,5.82,5.84,6.16,6.01,5.09,6.28,6.16],[5.93,7.25,7.43,6.32,8.1,6.51,7.22,8.74,6.8,5.98,6.66,7.94,9.220000000000001,6.44,7.82,7.93,8.19,7.84,7.6,7.19],[4.68,3.21,4.98,4.72,5.03,2.61,6.06,2.87,3.01,5.37,3.97,3.99,4.76,4.48,5.87,5.04,5.57,5.73,4.65,5.97],[6.93,3.78,6.66,4.52,5.71,6.09,6.27,7.01,6.06,6.01,5.07,6.36,3.67,5.73,3.74,6.82,4.54,6.33,5.64,7.66],[9.51,10.71,9.49,9.380000000000001,9.83,10.78,8.59,9.26,9.289999999999999,9.140000000000001,9.960000000000001,9.52,9.119999999999999,9.48,9.539999999999999,9.56,9.48,9.24,11.12,7.83]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>Daytime<\/th>\n      <th>none_alc_none_speed<\/th>\n      <th>none_alc_some_speed<\/th>\n      <th>none_alc_much_speed<\/th>\n      <th>some_alc_none_speed<\/th>\n      <th>some_alc_some_speed<\/th>\n      <th>some_alc_much_speed<\/th>\n      <th>much_alc_none_speed<\/th>\n      <th>much_alc_some_speed<\/th>\n      <th>much_alc_much_speed<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5,6,7,8,9,10]},{"name":"pp","targets":0},{"name":"Daytime","targets":1},{"name":"none_alc_none_speed","targets":2},{"name":"none_alc_some_speed","targets":3},{"name":"none_alc_much_speed","targets":4},{"name":"some_alc_none_speed","targets":5},{"name":"some_alc_some_speed","targets":6},{"name":"some_alc_much_speed","targets":7},{"name":"much_alc_none_speed","targets":8},{"name":"much_alc_some_speed","targets":9},{"name":"much_alc_much_speed","targets":10}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
