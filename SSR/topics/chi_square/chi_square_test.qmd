@@ -48,7 +48,7 @@ m_{i1}  & m_{i2} & \cdots & m_{ij}
 
 The $\chi^2$ distribution describes the test statistic under the assumption of $H_0$, given the degrees of freedom. 
 
-$df = (r - 1) (c - 1)$ where $r$ is the number of rows and $c$ the amount of columns.
+$df = (r - 1) (c - 1)$ where $r$ is the number of rows and $c$ the number of columns.
 
 ```{r, echo=FALSE,render=TRUE}
 #| output-location: slide
@@ -152,11 +152,13 @@ addmargins(observed)
 $\text{model}_{ij} = E_{ij} = \frac{\text{row total}_i \times \text{column total}_j}{n }$
 
 ```{r, echo=TRUE}
-modelPredictions <- matrix( c((totExt  * totDig) / n,
-                              (totExt  * totLiv) / n,
+modelPredictions <- matrix( c((totExt  * totDig)  / n,
+                              (totExt  * totLiv)  / n,
                               (totInt  * totDig)  / n,
-                              (totInt *  totLiv)  / n), 2, 2, byrow=T
+                              (totInt  * totLiv)  / n), 2, 2, 
+                            byrow=FALSE, dimnames = dimnames(observed)
 )
+
 modelPredictions
 ```
 
@@ -171,6 +173,10 @@ $\text{model}_{ij} =
 ## Error = Observed - Model {.subsection}
 
 ```{r, echo=TRUE}
+observed
+
+modelPredictions
+
 observed - modelPredictions
 ```
 

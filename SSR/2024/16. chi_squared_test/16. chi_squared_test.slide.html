@@ -473,7 +473,7 @@ Sharon Kinkenberg &amp; Johnny van Doorn
 <section id="chi2-distribution" class="slide level2 smaller subsection">
 <h2><span class="math inline">\(\chi^2\)</span> distribution</h2>
 <p>The <span class="math inline">\(\chi^2\)</span> distribution describes the test statistic under the assumption of <span class="math inline">\(H_0\)</span>, given the degrees of freedom.</p>
-<p><span class="math inline">\(df = (r - 1) (c - 1)\)</span> where <span class="math inline">\(r\)</span> is the number of rows and <span class="math inline">\(c\)</span> the amount of columns.</p>
+<p><span class="math inline">\(df = (r - 1) (c - 1)\)</span> where <span class="math inline">\(r\)</span> is the number of rows and <span class="math inline">\(c\)</span> the number of columns.</p>
 
 <img data-src="16.-chi_squared_test_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
 <section id="experiment" class="slide level2 flexbox vcenter">
@@ -486,8 +486,8 @@ Sharon Kinkenberg &amp; Johnny van Doorn
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-5a39c135017c01a138fd" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-5a39c135017c01a138fd">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5"],["Dogs","Cats","Other","Dogs","Other"],["Live","Digital","Digital","Live","Digital"],["Introvert","Introvert","Extrovert","Extrovert","Introvert"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Animal<\/th>\n      <th>Lecture<\/th>\n      <th>Personality<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Animal","targets":1},{"name":"Lecture","targets":2},{"name":"Personality","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-256e02cc640651b333cf" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-256e02cc640651b333cf">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5"],["Dogs","Cats","Other","Dogs","Other"],["Live","Digital","Digital","Live","Digital"],["Introvert","Introvert","Extrovert","Extrovert","Introvert"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Animal<\/th>\n      <th>Lecture<\/th>\n      <th>Personality<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Animal","targets":1},{"name":"Lecture","targets":2},{"name":"Personality","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </small><p><small></small></p>
@@ -530,29 +530,46 @@ Lecture   Extrovert Introvert Sum
 <h2>Calculating the model</h2>
 <p><span class="math inline">\(\text{model}_{ij} = E_{ij} = \frac{\text{row total}_i \times \text{column total}_j}{n }\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>modelPredictions <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">c</span>((totExt  <span class="sc">*</span> totDig) <span class="sc">/</span> n,</span>
-<span id="cb5-2"><a href="#cb5-2"></a>                              (totExt  <span class="sc">*</span> totLiv) <span class="sc">/</span> n,</span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>modelPredictions <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">c</span>((totExt  <span class="sc">*</span> totDig)  <span class="sc">/</span> n,</span>
+<span id="cb5-2"><a href="#cb5-2"></a>                              (totExt  <span class="sc">*</span> totLiv)  <span class="sc">/</span> n,</span>
 <span id="cb5-3"><a href="#cb5-3"></a>                              (totInt  <span class="sc">*</span> totDig)  <span class="sc">/</span> n,</span>
-<span id="cb5-4"><a href="#cb5-4"></a>                              (totInt <span class="sc">*</span>  totLiv)  <span class="sc">/</span> n), <span class="dv">2</span>, <span class="dv">2</span>, <span class="at">byrow=</span>T</span>
-<span id="cb5-5"><a href="#cb5-5"></a>)</span>
-<span id="cb5-6"><a href="#cb5-6"></a>modelPredictions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-4"><a href="#cb5-4"></a>                              (totInt  <span class="sc">*</span> totLiv)  <span class="sc">/</span> n), <span class="dv">2</span>, <span class="dv">2</span>, </span>
+<span id="cb5-5"><a href="#cb5-5"></a>                            <span class="at">byrow=</span><span class="cn">FALSE</span>, <span class="at">dimnames =</span> <span class="fu">dimnames</span>(observed)</span>
+<span id="cb5-6"><a href="#cb5-6"></a>)</span>
+<span id="cb5-7"><a href="#cb5-7"></a></span>
+<span id="cb5-8"><a href="#cb5-8"></a>modelPredictions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>     [,1] [,2]
-[1,]  1.2  0.8
-[2,]  1.8  1.2</code></pre>
+<pre><code>         Personality
+Lecture   Extrovert Introvert
+  Digital       1.2       1.8
+  Live          0.8       1.2</code></pre>
 </div>
 </div>
-<p><span class="math inline">\(\text{model}_{ij} = \begin{pmatrix} 1.2 &amp; 0.8 \\ 1.8 &amp; 1.2 \\ \end{pmatrix}\)</span></p>
+<p><span class="math inline">\(\text{model}_{ij} = \begin{pmatrix} 1.2 &amp; 1.8 \\ 0.8 &amp; 1.2 \\ \end{pmatrix}\)</span></p>
 </section>
 <section id="error-observed---model" class="slide level2 subsection">
 <h2>Error = Observed - Model</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>observed <span class="sc">-</span> modelPredictions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>observed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         Personality
 Lecture   Extrovert Introvert
-  Digital      -0.2       1.2
-  Live         -0.8      -0.2</code></pre>
+  Digital         1         2
+  Live            1         1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>modelPredictions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         Personality
+Lecture   Extrovert Introvert
+  Digital       1.2       1.8
+  Live          0.8       1.2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>observed <span class="sc">-</span> modelPredictions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         Personality
+Lecture   Extrovert Introvert
+  Digital      -0.2       0.2
+  Live          0.2      -0.2</code></pre>
 </div>
 </div>
 </section>
@@ -560,11 +577,11 @@ Lecture   Extrovert Introvert
 <h2>Calculating <span class="math inline">\(\chi^2\)</span></h2>
 <p><span class="math inline">\(\chi^2 = \sum \frac{(\text{observed}_{ij} - \text{model}_{ij})^2}{\text{model}_{ij}}\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Calculate chi squared</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>chi.squared <span class="ot">&lt;-</span> <span class="fu">sum</span>((observed <span class="sc">-</span> modelPredictions)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> modelPredictions)</span>
-<span id="cb9-3"><a href="#cb9-3"></a>chi.squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># Calculate chi squared</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>chi.squared <span class="ot">&lt;-</span> <span class="fu">sum</span>((observed <span class="sc">-</span> modelPredictions)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> modelPredictions)</span>
+<span id="cb13-3"><a href="#cb13-3"></a>chi.squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.222222</code></pre>
+<pre><code>[1] 0.1388889</code></pre>
 </div>
 </div>
 </section>
@@ -589,9 +606,9 @@ Lecture   Extrovert Introvert
 <p>For 2 x 2 contingency tables, Yates’s correction is to prevent overestimation of statistical significance for small data (at least one cell of the table has an expected count smaller than 5). Unfortunately, Yates’s correction may tend to overcorrect. This can result in an overly conservative result.</p>
 <p><span class="math inline">\(\chi^2 = \sum \frac{ ( | \text{observed}_{ij} - \text{model}_{ij} | - .5)^2}{\text{model}_{ij}}\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Calculate Yates's corrected chi squared</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>chi.squared.yates <span class="ot">&lt;-</span> <span class="fu">sum</span>((<span class="fu">abs</span>(observed <span class="sc">-</span> modelPredictions) <span class="sc">-</span> .<span class="dv">5</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> modelPredictions)</span>
-<span id="cb11-3"><a href="#cb11-3"></a>chi.squared.yates</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Calculate Yates's corrected chi squared</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>chi.squared.yates <span class="ot">&lt;-</span> <span class="fu">sum</span>((<span class="fu">abs</span>(observed <span class="sc">-</span> modelPredictions) <span class="sc">-</span> .<span class="dv">5</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> modelPredictions)</span>
+<span id="cb15-3"><a href="#cb15-3"></a>chi.squared.yates</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 <!-- ## Likelihood ratio {.subsection} -->
@@ -606,19 +623,19 @@ Lecture   Extrovert Introvert
 </section>
 <section id="yatess-correction-output" class="slide level2 subsection output-location-slide"><h2>Yates’s correction</h2><div class="cell output-location-slide">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.8125</code></pre>
+<pre><code>[1] 0.3125</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># visualize::visualize.chisq(chi.squared.yates, df, section='upper')</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># visualize::visualize.chisq(chi.squared.yates, df, section='upper')</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></section><section id="standardized-residuals" class="slide level2 subsection">
 <h2>Standardized residuals</h2>
 <p><span class="math inline">\(\text{standardized residuals} = \frac{ \text{observed}_{ij} - \text{model}_{ij} }{ \sqrt{ \text{model}_{ij} } }\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>(observed <span class="sc">-</span> modelPredictions) <span class="sc">/</span> <span class="fu">sqrt</span>(modelPredictions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>(observed <span class="sc">-</span> modelPredictions) <span class="sc">/</span> <span class="fu">sqrt</span>(modelPredictions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         Personality
 Lecture    Extrovert  Introvert
-  Digital -0.1825742  1.3416408
-  Live    -0.5962848 -0.1825742</code></pre>
+  Digital -0.1825742  0.1490712
+  Live     0.2236068 -0.1825742</code></pre>
 </div>
 </div>
 </section>
@@ -626,7 +643,7 @@ Lecture    Extrovert  Introvert
 <h2>Effect size</h2>
 <p>Odds ratio based on the observed values</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>odds <span class="ot">&lt;-</span> <span class="fu">round</span>( observed, <span class="dv">2</span>); odds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>odds <span class="ot">&lt;-</span> <span class="fu">round</span>( observed, <span class="dv">2</span>); odds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         Personality
 Lecture   Extrovert Introvert
