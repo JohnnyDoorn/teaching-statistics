@@ -72,15 +72,10 @@ lines(chi, dchisq(chi, df[6]), lwd = 2, col = mycols[6], type="l")
 legend("topright", legend = paste("k =",df), col = mycols, lty = 1, bty = "n")
 ```
 
-## Example
-
-<iframe src="https://www.frontiersin.org/articles/10.3389/fpsyg.2015.00810/full" style="height: 450px;" ></iframe>
-
-[The numerology of gender: gendered perceptions of even and odd numbers](https://www.frontiersin.org/articles/10.3389/fpsyg.2015.00810/full)
 
 ## Experiment {.flexbox .vcenter}
 
-<a href=""><img src="87jyj.png" alt="QR Code" /></a>
+<a href=""><img src="qr_hngxh.png" alt="edu.nl/hngxh" /></a>
 
 
 ## Data {.smaller}
@@ -90,9 +85,9 @@ legend("topright", legend = paste("k =",df), col = mycols, lty = 1, bty = "n")
 ```{r, message=FALSE, eval=TRUE, echo=FALSE}
 if(!'gsheet' %in% installed.packages()) { install.packages('gsheet') }
 library("gsheet")
-gResults <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1sQMH4ZMN_zJ5FW_gOdVZtppZ3EQAs3ab4xn3PiLjTc4/edit?usp=sharing')
+gResults <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1I6p6wVmATt8VM0PvGt4lSbFCcV3WrTFs5FUQlG9Q4nQ/edit?usp=sharing')
 
-gResults <- as.data.frame(gResults)[-c(1, 49:57) , -c(1, 8:9) ]
+gResults <- as.data.frame(gResults)[, -1 ]
 
 # results <- results[grep("2017|2022", results$Timestamp),]
 for (i in 1:ncol(gResults)) {
@@ -106,9 +101,9 @@ for (i in 1:ncol(gResults)) {
 # }
 
 # results <- cbind(results, oddEvenResults)
-results <- data.frame(Type = rep(c("Even", "Odd")[(c(1:6) %% 2) +1], each = nrow(gResults)),
-                      Association = unlist(gResults),
-                      NumberTested= rep(c(3:6, 1, 2), each = nrow(gResults) ))
+results <- data.frame(Animal = gResults$`Cats/dogs/other?`,
+                      Lecture = gResults$`Digital or live lecture?`,
+                      Personality= gResults$`Introvert or extrovert?`)
 
 
 # install.packages("DT")
@@ -121,13 +116,13 @@ datatable(results)
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, eval=TRUE}
 # Write data for use in SPSS
-write.table(results, "genderedNumbersData.csv", row.names=FALSE)
+write.table(results, "chisqrData.csv", row.names=FALSE)
 ```
 
 ## Calculating $\chi^2$ {.subsection}
 
 ```{r, echo=TRUE}
-observed <- table(results[, c("Association", "Type")])
+observed <- table(results[, c("Lecture", "Personality")])
 observed
 ```
 
@@ -143,10 +138,10 @@ $\text{model}_{ij} = E_{ij} = \frac{\text{row total}_i \times \text{column total
 
 ```{r, echo=TRUE}
 n   <- sum(observed)
-totEven <- colSums(observed)[1]
-totOdd  <- colSums(observed)[2]
-totFem  <- rowSums(observed)[1]
-totMasc <- rowSums(observed)[2]
+totExt <- colSums(observed)[1]
+totInt  <- colSums(observed)[2]
+totDig  <- rowSums(observed)[1]
+totLiv <- rowSums(observed)[2]
 
 addmargins(observed)
 ```
@@ -157,10 +152,10 @@ addmargins(observed)
 $\text{model}_{ij} = E_{ij} = \frac{\text{row total}_i \times \text{column total}_j}{n }$
 
 ```{r, echo=TRUE}
-modelPredictions <- matrix( c((totFem  * totEven) / n,
-                              (totFem  * totOdd) / n,
-                              (totMasc  * totEven)  / n,
-                              (totMasc * totOdd)  / n), 2, 2, byrow=T
+modelPredictions <- matrix( c((totExt  * totDig) / n,
+                              (totExt  * totLiv) / n,
+                              (totInt  * totDig)  / n,
+                              (totInt *  totLiv)  / n), 2, 2, byrow=T
 )
 modelPredictions
 ```
@@ -173,7 +168,7 @@ $\text{model}_{ij} =
 
 
 
-## observed - model {.subsection}
+## Error = Observed - Model {.subsection}
 
 ```{r, echo=TRUE}
 observed - modelPredictions
@@ -193,13 +188,25 @@ chi.squared
 
 $df = (r - 1) (c - 1)$
 
-```{r, echo=TRUE}
-#| output-location: slide
+## $P$-value
+```{r, echo=FALSE}
+# Set up the plot for the F-distribution
+df <- 1
+curve(dchisq(x, df), from = 0, to = 20, n = 1000, bty = "n", las = 1,
+      xlab = "Chi-squared", ylab = "Density", main = "Chi-squared distribution with P-value Region")
 
-df <- (2 - 1) * ( 2 - 1)
+# Shade the upper tail (p-value region) using polygon
+# Define the region to fill (upper tail, greater than fStat)
+x_vals <- seq(chi.squared, 10, length.out = 100)
+y_vals <- dchisq(x_vals, df)
 
-library('visualize')
-visualize.chisq(chi.squared, df, section='upper')
+# Draw the polygon to fill the area under the curve
+polygon(c(chi.squared, x_vals, 10), c(0, y_vals, 0), col = "lightblue", border = NA)
+
+# Optionally, add a vertical line at the F-statistic
+arrows(x0 = chi.squared, x1 = chi.squared, y0 = 0 , y1 = 0.6, col = "darkred", lwd = 2)
+text(x = chi.squared, y = 1.2, bquote(Chi^2 ~ " = " ~ .(round(chi.squared, 2))), cex = 1.2)
+text(x = chi.squared, y = 0.9, paste("p-val =", round(pchisq(chi.squared, df), 5)), cex = 1.2)
 ```
 
 ## Fisher's exact test {.subsection}
@@ -222,23 +229,23 @@ $\chi^2 = \sum \frac{ ( | \text{observed}_{ij} - \text{model}_{ij} | - .5)^2}{\t
 # Calculate Yates's corrected chi squared
 chi.squared.yates <- sum((abs(observed - modelPredictions) - .5)^2 / modelPredictions)
 chi.squared.yates
-visualize.chisq(chi.squared.yates, df, section='upper')
+# visualize::visualize.chisq(chi.squared.yates, df, section='upper')
 ```
 
-## Likelihood ratio {.subsection}
+<!-- ## Likelihood ratio {.subsection} -->
 
-Alternative to Pearson's $\chi^2$. 
+<!-- Alternative to Pearson's $\chi^2$.  -->
 
-$L \chi^2 = 2 \sum \text{observed}_{ij} ln \left( \frac{\text{observed}_{ij}}{\text{model}_{ij}} \right)$
+<!-- $L \chi^2 = 2 \sum \text{observed}_{ij} ln \left( \frac{\text{observed}_{ij}}{\text{model}_{ij}} \right)$ -->
 
-```{r, echo=TRUE}
-#| output-location: slide
+<!-- ```{r, echo=TRUE} -->
+<!-- #| output-location: slide -->
 
-# ln is natural logarithm
-ll.ratio <- 2 * sum(observed * log(observed / modelPredictions) ); ll.ratio
+<!-- # ln is natural logarithm -->
+<!-- ll.ratio <- 2 * sum(observed * log(observed / modelPredictions) ); ll.ratio -->
 
-visualize.chisq(ll.ratio, df, section='upper')
-```
+<!-- visualize.chisq(ll.ratio, df, section='upper') -->
+<!-- ``` -->
 
 ## Standardized residuals {.subsection}
 
@@ -269,13 +276,13 @@ $OR = \frac{a \times d}{b \times c} = \frac{`r odds[1,1]` \times `r odds[2,2]`}{
 odds
 ```
 
-The odd and even ratio of masculinity and the ratio of femininity
+The extrovert/introvert ratio for digital and live audiences:
 
-* Feminine $\text{Odds}_{EO} = \frac{ `r odds[1,1]` }{ `r odds[1,2]` }$ = `r odds[1,1] / odds[1,2]`
-* Masculine $\text{Odds}_{EO} = \frac{ `r odds[2,1]` }{ `r odds[2,2]` }$ = `r odds[2,1] / odds[2,2]`
+* Digital $\text{Odds}_{EI} = \frac{ `r odds[1,1]` }{ `r odds[1,2]` }$ = `r odds[1,1] / odds[1,2]`
+* Live $\text{Odds}_{EI} = \frac{ `r odds[2,1]` }{ `r odds[2,2]` }$ = `r odds[2,1] / odds[2,2]`
 
-In the feminine responses, there are +- `r round(odds[1,1] / odds[1,2], 2)` times as many even numbers than odd numbers.
-In the masculine responses, there  are +- `r round(odds[2,1] / odds[2,2], 2)` times as many even numbers than odd numbers.
+In the digital responses, there are +- `r round(odds[1,1] / odds[1,2], 2)` times as many extroverts than introverts.
+In the live responses, there  are +- `r round(odds[2,1] / odds[2,2], 2)` times as many extroverts than introverts.
 
 ## Odds
 
@@ -283,18 +290,18 @@ In the masculine responses, there  are +- `r round(odds[2,1] / odds[2,2], 2)` ti
 odds
 ```
 
-Alternatively, we can look at the ratio's of masculine vs feminine for even and odd numbers:
+Alternatively, we can look at the ratio's of digital/live for extroverts and introverts:
 
-* Even $\text{Odds}_{FM} = \frac{ `r odds[1,1]` }{ `r odds[2,1]` }$ = `r odds[1,1] / odds[2,1]`
-* Odd $\text{Odds}_{FM} = \frac{ `r odds[1,2]` }{ `r odds[2,2]` }$ = `r odds[1,2] / odds[2,2]`
+* Extrovert $\text{Odds}_{DL} = \frac{ `r odds[1,1]` }{ `r odds[2,1]` }$ = `r odds[1,1] / odds[2,1]`
+* Introvert $\text{Odds}_{DL} = \frac{ `r odds[1,2]` }{ `r odds[2,2]` }$ = `r odds[1,2] / odds[2,2]`
 
-For the even numbers, there are +- `r round(odds[1,1] / odds[2,1], 2)` times as many feminine associations than masculine associations.
-For the odd numbers, there are +- `r round(odds[1,2] / odds[2,2], 2)` times as many feminine associations than masculine associations.
+For the extroverts, there are +- `r round(odds[1,1] / odds[2,1], 2)` times as many digital viewers than live viewers.
+For the introverts, there are +- `r round(odds[1,2] / odds[2,2], 2)` times as many digital viewers than live viewers.
 
 ## Odds ratio
 
 Is the ratio of these odds.
 
-$OR = \frac{\text{feminine}}{\text{masculine}} = \frac{`r odds[1,1] / odds[1,2]`}{`r odds[2,1] / odds[2,2]`} = \frac{\text{even}}{\text{odd}}  =  \frac{`r odds[1,1] / odds[2,1]`}{`r odds[1,2] / odds[2,2]`} = `r (odds[1,1] / odds[1,2]) / (odds[2,1] / odds[2,2])`$
+$OR = \frac{\text{digital}}{\text{live}} = \frac{`r odds[1,1] / odds[1,2]`}{`r odds[2,1] / odds[2,2]`} = \frac{\text{extrovert}}{\text{introvert}}  =  \frac{`r odds[1,1] / odds[2,1]`}{`r odds[1,2] / odds[2,2]`} = `r (odds[1,1] / odds[1,2]) / (odds[2,1] / odds[2,2])`$
 
-For this data, even numbers received the feminine association +- `r round((odds[1,1] / odds[1,2]) / (odds[2,1] / odds[2,2]), 2)` times more often than odd numbers received the feminine association. The odds ratio also accounts for the scores in the other condition: we do not only take into account the femininity of the odd numbers, but also the femininity of the even numbers.   
+For this data, extroverts were approximately `r round((odds[1,1] / odds[1,2]) / (odds[2,1] / odds[2,2]), 2)` times more likely to watch digitally, compared to introverts. The odds ratio also accounts for the scores in both conditions—watching digitally and watching live—by comparing the odds of watching digitally to live viewing across both personality types.

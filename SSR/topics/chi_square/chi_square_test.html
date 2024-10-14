@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Sharon Klinkenberg &amp; Johnny van Doorn">
 
 <title>chi_square_test</title>
 <style>
@@ -68,25 +69,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="chi_square_test_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="chi_square_test_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
-<script src="chi_square_test_files/libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="chi_square_test_files/libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="chi_square_test_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <link href="chi_square_test_files/libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="chi_square_test_files/libs/datatables-binding-0.27/datatables.js"></script>
+<script src="chi_square_test_files/libs/datatables-binding-0.33/datatables.js"></script>
 <script src="chi_square_test_files/libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<link href="chi_square_test_files/libs/dt-core-1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="chi_square_test_files/libs/dt-core-1.12.1/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="chi_square_test_files/libs/dt-core-1.12.1/js/jquery.dataTables.min.js"></script>
-<link href="chi_square_test_files/libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
-<script src="chi_square_test_files/libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="chi_square_test_files/libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="chi_square_test_files/libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="chi_square_test_files/libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="chi_square_test_files/libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="chi_square_test_files/libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
-<body class="fullcontent">
+<body>
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#chi2-test" id="toc-chi2-test" class="nav-link active" data-scroll-target="#chi2-test"><span class="math inline">\(\chi^2\)</span> test</a>
+  <ul class="collapse">
+  <li><a href="#chi2-test-1" id="toc-chi2-test-1" class="nav-link" data-scroll-target="#chi2-test-1"><span class="math inline">\(\chi^2\)</span> test</a></li>
+  <li><a href="#chi2-test-statistic" id="toc-chi2-test-statistic" class="nav-link" data-scroll-target="#chi2-test-statistic"><span class="math inline">\(\chi^2\)</span> test statistic</a></li>
+  <li><a href="#chi2-distribution" id="toc-chi2-distribution" class="nav-link" data-scroll-target="#chi2-distribution"><span class="math inline">\(\chi^2\)</span> distribution</a></li>
+  <li><a href="#experiment" id="toc-experiment" class="nav-link" data-scroll-target="#experiment">Experiment</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#calculating-chi2" id="toc-calculating-chi2" class="nav-link" data-scroll-target="#calculating-chi2">Calculating <span class="math inline">\(\chi^2\)</span></a></li>
+  <li><a href="#calculating-the-model" id="toc-calculating-the-model" class="nav-link" data-scroll-target="#calculating-the-model">Calculating the model</a></li>
+  <li><a href="#calculating-the-model-1" id="toc-calculating-the-model-1" class="nav-link" data-scroll-target="#calculating-the-model-1">Calculating the model</a></li>
+  <li><a href="#error-observed---model" id="toc-error-observed---model" class="nav-link" data-scroll-target="#error-observed---model">Error = Observed - Model</a></li>
+  <li><a href="#calculating-chi2-1" id="toc-calculating-chi2-1" class="nav-link" data-scroll-target="#calculating-chi2-1">Calculating <span class="math inline">\(\chi^2\)</span></a></li>
+  <li><a href="#testing-for-significance" id="toc-testing-for-significance" class="nav-link" data-scroll-target="#testing-for-significance">Testing for significance</a></li>
+  <li><a href="#p-value" id="toc-p-value" class="nav-link" data-scroll-target="#p-value"><span class="math inline">\(P\)</span>-value</a></li>
+  <li><a href="#fishers-exact-test" id="toc-fishers-exact-test" class="nav-link" data-scroll-target="#fishers-exact-test">Fisher’s exact test</a></li>
+  <li><a href="#yatess-correction" id="toc-yatess-correction" class="nav-link" data-scroll-target="#yatess-correction">Yates’s correction</a></li>
+  <li><a href="#standardized-residuals" id="toc-standardized-residuals" class="nav-link" data-scroll-target="#standardized-residuals">Standardized residuals</a></li>
+  <li><a href="#effect-size" id="toc-effect-size" class="nav-link" data-scroll-target="#effect-size">Effect size</a></li>
+  <li><a href="#odds" id="toc-odds" class="nav-link" data-scroll-target="#odds">Odds</a></li>
+  <li><a href="#odds-1" id="toc-odds-1" class="nav-link" data-scroll-target="#odds-1">Odds</a></li>
+  <li><a href="#odds-ratio" id="toc-odds-ratio" class="nav-link" data-scroll-target="#odds-ratio">Odds ratio</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="chi_square_test.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</div>
 <main class="content" id="quarto-document-content">
 
 
@@ -124,15 +157,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="example" class="level2">
-<h2 class="anchored" data-anchor-id="example">Example</h2>
-<iframe src="https://www.frontiersin.org/articles/10.3389/fpsyg.2015.00810/full" style="height: 450px;">
-</iframe>
-<p><a href="https://www.frontiersin.org/articles/10.3389/fpsyg.2015.00810/full">The numerology of gender: gendered perceptions of even and odd numbers</a></p>
-</section>
 <section id="experiment" class="level2 flexbox vcenter">
 <h2 class="flexbox vcenter anchored" data-anchor-id="experiment">Experiment</h2>
-<p><a href=""><img src="87jyj.png" alt="QR Code"></a></p>
+<p><a href=""><img src="qr_hngxh.png" alt="edu.nl/hngxh"></a></p>
 </section>
 <section id="data" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="data">Data</h2>
@@ -140,8 +167,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-0836bea27502fa63e00b" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-0836bea27502fa63e00b">{"x":{"filter":"none","vertical":false,"data":[["11","12","13","14","15","16","17","18","19","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","21","22","23","24","25","26","27","28","29","210","211","212","213","214","215","216","217","218","219","220","221","222","223","224","225","226","227","228","229","230","231","232","233","234","235","236","237","238","239","240","241","242","243","244","245","246","247","31","32","33","34","35","36","37","38","39","310","311","312","313","314","315","316","317","318","319","320","321","322","323","324","325","326","327","328","329","330","331","332","333","334","335","336","337","338","339","340","341","342","343","344","345","346","347","41","42","43","44","45","46","47","48","49","410","411","412","413","414","415","416","417","418","419","420","421","422","423","424","425","426","427","428","429","430","431","432","433","434","435","436","437","438","439","440","441","442","443","444","445","446","447","51","52","53","54","55","56","57","58","59","510","511","512","513","514","515","516","517","518","519","520","521","522","523","524","525","526","527","528","529","530","531","532","533","534","535","536","537","538","539","540","541","542","543","544","545","546","547","61","62","63","64","65","66","67","68","69","610","611","612","613","614","615","616","617","618","619","620","621","622","623","624","625","626","627","628","629","630","631","632","633","634","635","636","637","638","639","640","641","642","643","644","645","646","647"],["Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Odd","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even","Even"],["Masculine","Masculine","Masculine","Masculine","Masculine","Masculine","Masculine","Masculine","Masculine","Masculine","Masculine","Masculine","Masculine","Masculine","Masculine","Feminine","Masculine","Masculine","Feminine","Masculine","Feminine","Masculine","Masculine","Masculine","Masculine","Masculine","Masculine","Masculine","Feminine","Feminine","Feminine","Masculine","Masculine","Masculine","Masculine","Masculine","Masculine","Masculine","Masculine","Masculine","Feminine","Masculine","Feminine","Masculine","Masculine","Masculine",null,"Feminine","Masculine","Feminine","Feminine","Feminine","Feminine","Feminine","Feminine","Masculine","Feminine","Masculine","Feminine","Feminine","Feminine","Feminine","Feminine","Feminine","Feminine","Feminine","Feminine","Feminine","Feminine","Masculine","Feminine","Feminine","Feminine","Feminine","Feminine","Feminine","Feminine","Masculine","Masculine","Feminine","Feminine","Feminine","Feminine","Feminine","Feminine","Feminine","Feminine","Masculine","Feminine","Feminine","Feminine","Masculine","Masculine",null,"Masculine","Feminine","Feminine","Feminine","Feminine","Masculine","Masculine","Masculine","Feminine","Feminine","Feminine","Feminine","Feminine","Feminine","Masculine","Feminine","Feminine","Masculine","Feminine","Feminine","Masculine","Feminine","Feminine","Masculine","Feminine","Masculine","Feminine","Masculine","Feminine","Feminine","Masculine","Masculine","Masculine","Feminine","Masculine","Masculine","Masculine","Feminine","Masculine","Feminine","Feminine","Masculine","Masculine","Feminine","Masculine","Masculine","Feminine","Feminine","Feminine","Masculine","Masculine","Feminine","Masculine","Feminine","Feminine","Masculine","Feminine","Masculine","Masculine","Feminine","Masculine","Feminine","Masculine","Masculine","Feminine","Masculine","Masculine","Feminine","Feminine","Masculine","Feminine","Masculine","Feminine","Masculine","Masculine","Feminine","Feminine","Feminine","Masculine","Feminine","Masculine","Feminine","Feminine","Feminine","Feminine","Feminine","Feminine","Masculine","Feminine","Feminine","Feminine","Masculine","Feminine","Masculine","Feminine","Masculine","Feminine","Masculine","Masculine","Feminine","Masculine","Masculine","Masculine","Masculine","Feminine","Masculine","Masculine","Feminine","Feminine","Masculine","Masculine","Masculine","Masculine","Masculine","Masculine","Masculine","Feminine","Masculine","Masculine","Masculine","Masculine","Masculine","Masculine","Feminine","Masculine","Feminine","Masculine","Feminine","Masculine","Feminine","Feminine","Masculine","Feminine","Masculine","Feminine","Masculine","Masculine","Masculine","Masculine","Masculine","Masculine","Feminine","Feminine","Feminine","Feminine","Feminine","Feminine","Feminine","Feminine","Masculine","Feminine","Feminine","Feminine","Feminine","Feminine","Masculine","Feminine","Feminine","Feminine","Feminine","Feminine","Masculine","Masculine","Feminine","Feminine","Feminine","Feminine","Feminine","Feminine","Feminine","Feminine","Feminine","Masculine","Feminine","Feminine","Masculine","Feminine","Feminine","Feminine","Feminine","Feminine","Masculine","Feminine","Feminine","Masculine","Feminine","Feminine","Feminine"],[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Type<\/th>\n      <th>Association<\/th>\n      <th>NumberTested<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":3},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-3f5c124aface0c3b1892" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-3f5c124aface0c3b1892">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5"],["Dogs","Cats","Other","Dogs","Other"],["Live","Digital","Digital","Live","Digital"],["Introvert","Introvert","Extrovert","Extrovert","Introvert"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Animal<\/th>\n      <th>Lecture<\/th>\n      <th>Personality<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Animal","targets":1},{"name":"Lecture","targets":2},{"name":"Personality","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </small><p><small></small></p>
@@ -149,34 +176,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="calculating-chi2" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="calculating-chi2">Calculating <span class="math inline">\(\chi^2\)</span></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>observed <span class="ot">&lt;-</span> <span class="fu">table</span>(results[, <span class="fu">c</span>(<span class="st">"Association"</span>, <span class="st">"Type"</span>)])</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>observed <span class="ot">&lt;-</span> <span class="fu">table</span>(results[, <span class="fu">c</span>(<span class="st">"Lecture"</span>, <span class="st">"Personality"</span>)])</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>observed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>           Type
-Association Even Odd
-  Feminine   103  48
-  Masculine   37  92</code></pre>
+<pre><code>         Personality
+Lecture   Extrovert Introvert
+  Digital         1         2
+  Live            1         1</code></pre>
 </div>
 </div>
-<p><span class="math inline">\(\text{observed}_{ij} = \begin{pmatrix} 103 &amp; 48 \\ 37 &amp; 92 \\ \end{pmatrix}\)</span></p>
+<p><span class="math inline">\(\text{observed}_{ij} = \begin{pmatrix} 1 &amp; 2 \\ 1 &amp; 1 \\ \end{pmatrix}\)</span></p>
 </section>
 <section id="calculating-the-model" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="calculating-the-model">Calculating the model</h2>
 <p><span class="math inline">\(\text{model}_{ij} = E_{ij} = \frac{\text{row total}_i \times \text{column total}_j}{n }\)</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>n   <span class="ot">&lt;-</span> <span class="fu">sum</span>(observed)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>totEven <span class="ot">&lt;-</span> <span class="fu">colSums</span>(observed)[<span class="dv">1</span>]</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>totOdd  <span class="ot">&lt;-</span> <span class="fu">colSums</span>(observed)[<span class="dv">2</span>]</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>totFem  <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(observed)[<span class="dv">1</span>]</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>totMasc <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(observed)[<span class="dv">2</span>]</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>totExt <span class="ot">&lt;-</span> <span class="fu">colSums</span>(observed)[<span class="dv">1</span>]</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>totInt  <span class="ot">&lt;-</span> <span class="fu">colSums</span>(observed)[<span class="dv">2</span>]</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>totDig  <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(observed)[<span class="dv">1</span>]</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>totLiv <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(observed)[<span class="dv">2</span>]</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">addmargins</span>(observed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>           Type
-Association Even Odd Sum
-  Feminine   103  48 151
-  Masculine   37  92 129
-  Sum        140 140 280</code></pre>
+<pre><code>         Personality
+Lecture   Extrovert Introvert Sum
+  Digital         1         2   3
+  Live            1         1   2
+  Sum             2         3   5</code></pre>
 </div>
 </div>
 </section>
@@ -184,29 +211,29 @@ Association Even Odd Sum
 <h2 class="anchored" data-anchor-id="calculating-the-model-1">Calculating the model</h2>
 <p><span class="math inline">\(\text{model}_{ij} = E_{ij} = \frac{\text{row total}_i \times \text{column total}_j}{n }\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>modelPredictions <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">c</span>((totFem  <span class="sc">*</span> totEven) <span class="sc">/</span> n,</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                              (totFem  <span class="sc">*</span> totOdd) <span class="sc">/</span> n,</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                              (totMasc  <span class="sc">*</span> totEven)  <span class="sc">/</span> n,</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                              (totMasc <span class="sc">*</span> totOdd)  <span class="sc">/</span> n), <span class="dv">2</span>, <span class="dv">2</span>, <span class="at">byrow=</span>T</span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>modelPredictions <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">c</span>((totExt  <span class="sc">*</span> totDig) <span class="sc">/</span> n,</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                              (totExt  <span class="sc">*</span> totLiv) <span class="sc">/</span> n,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                              (totInt  <span class="sc">*</span> totDig)  <span class="sc">/</span> n,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                              (totInt <span class="sc">*</span>  totLiv)  <span class="sc">/</span> n), <span class="dv">2</span>, <span class="dv">2</span>, <span class="at">byrow=</span>T</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>modelPredictions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2]
-[1,] 75.5 75.5
-[2,] 64.5 64.5</code></pre>
+[1,]  1.2  0.8
+[2,]  1.8  1.2</code></pre>
 </div>
 </div>
-<p><span class="math inline">\(\text{model}_{ij} = \begin{pmatrix} 75.5 &amp; 75.5 \\ 64.5 &amp; 64.5 \\ \end{pmatrix}\)</span></p>
+<p><span class="math inline">\(\text{model}_{ij} = \begin{pmatrix} 1.2 &amp; 0.8 \\ 1.8 &amp; 1.2 \\ \end{pmatrix}\)</span></p>
 </section>
-<section id="observed---model" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="observed---model">observed - model</h2>
+<section id="error-observed---model" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="error-observed---model">Error = Observed - Model</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>observed <span class="sc">-</span> modelPredictions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>           Type
-Association  Even   Odd
-  Feminine   27.5 -27.5
-  Masculine -27.5  27.5</code></pre>
+<pre><code>         Personality
+Lecture   Extrovert Introvert
+  Digital      -0.2       1.2
+  Live         -0.8      -0.2</code></pre>
 </div>
 </div>
 </section>
@@ -218,18 +245,17 @@ Association  Even   Odd
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>chi.squared <span class="ot">&lt;-</span> <span class="fu">sum</span>((observed <span class="sc">-</span> modelPredictions)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> modelPredictions)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>chi.squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 43.48272</code></pre>
+<pre><code>[1] 2.222222</code></pre>
 </div>
 </div>
 </section>
 <section id="testing-for-significance" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="testing-for-significance">Testing for significance</h2>
 <p><span class="math inline">\(df = (r - 1) (c - 1)\)</span></p>
-<div class="cell" data-output-location="slide">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> (<span class="dv">2</span> <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> ( <span class="dv">2</span> <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'visualize'</span>)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.chisq</span>(chi.squared, df, <span class="at">section=</span><span class="st">'upper'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="p-value" class="level2">
+<h2 class="anchored" data-anchor-id="p-value"><span class="math inline">\(P\)</span>-value</h2>
+<div class="cell">
 <div class="cell-output-display">
 <p><img src="chi_square_test_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -248,44 +274,34 @@ Association  Even   Odd
 <p>For 2 x 2 contingency tables, Yates’s correction is to prevent overestimation of statistical significance for small data (at least one cell of the table has an expected count smaller than 5). Unfortunately, Yates’s correction may tend to overcorrect. This can result in an overly conservative result.</p>
 <p><span class="math inline">\(\chi^2 = \sum \frac{ ( | \text{observed}_{ij} - \text{model}_{ij} | - .5)^2}{\text{model}_{ij}}\)</span></p>
 <div class="cell" data-output-location="slide">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate Yates's corrected chi squared</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>chi.squared.yates <span class="ot">&lt;-</span> <span class="fu">sum</span>((<span class="fu">abs</span>(observed <span class="sc">-</span> modelPredictions) <span class="sc">-</span> .<span class="dv">5</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> modelPredictions)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>chi.squared.yates</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate Yates's corrected chi squared</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>chi.squared.yates <span class="ot">&lt;-</span> <span class="fu">sum</span>((<span class="fu">abs</span>(observed <span class="sc">-</span> modelPredictions) <span class="sc">-</span> .<span class="dv">5</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> modelPredictions)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>chi.squared.yates</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 41.91591</code></pre>
+<pre><code>[1] 0.8125</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.chisq</span>(chi.squared.yates, df, <span class="at">section=</span><span class="st">'upper'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="chi_square_test_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># visualize::visualize.chisq(chi.squared.yates, df, section='upper')</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-</section>
-<section id="likelihood-ratio" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="likelihood-ratio">Likelihood ratio</h2>
-<p>Alternative to Pearson’s <span class="math inline">\(\chi^2\)</span>.</p>
-<p><span class="math inline">\(L \chi^2 = 2 \sum \text{observed}_{ij} ln \left( \frac{\text{observed}_{ij}}{\text{model}_{ij}} \right)\)</span></p>
-<div class="cell" data-output-location="slide">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ln is natural logarithm</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>ll.ratio <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">sum</span>(observed <span class="sc">*</span> <span class="fu">log</span>(observed <span class="sc">/</span> modelPredictions) ); ll.ratio</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 44.7188</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.chisq</span>(ll.ratio, df, <span class="at">section=</span><span class="st">'upper'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="chi_square_test_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
+<!-- ## Likelihood ratio {.subsection} -->
+<!-- Alternative to Pearson's $\chi^2$.  -->
+<!-- $L \chi^2 = 2 \sum \text{observed}_{ij} ln \left( \frac{\text{observed}_{ij}}{\text{model}_{ij}} \right)$ -->
+<!-- ```{r, echo=TRUE} -->
+<!-- #| output-location: slide -->
+<!-- # ln is natural logarithm -->
+<!-- ll.ratio <- 2 * sum(observed * log(observed / modelPredictions) ); ll.ratio -->
+<!-- visualize.chisq(ll.ratio, df, section='upper') -->
+<!-- ``` -->
 </section>
 <section id="standardized-residuals" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="standardized-residuals">Standardized residuals</h2>
 <p><span class="math inline">\(\text{standardized residuals} = \frac{ \text{observed}_{ij} - \text{model}_{ij} }{ \sqrt{ \text{model}_{ij} } }\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>(observed <span class="sc">-</span> modelPredictions) <span class="sc">/</span> <span class="fu">sqrt</span>(modelPredictions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>(observed <span class="sc">-</span> modelPredictions) <span class="sc">/</span> <span class="fu">sqrt</span>(modelPredictions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>           Type
-Association      Even       Odd
-  Feminine   3.164894 -3.164894
-  Masculine -3.424150  3.424150</code></pre>
+<pre><code>         Personality
+Lecture    Extrovert  Introvert
+  Digital -0.1825742  1.3416408
+  Live    -0.5962848 -0.1825742</code></pre>
 </div>
 </div>
 </section>
@@ -293,56 +309,56 @@ Association      Even       Odd
 <h2 class="subsection anchored" data-anchor-id="effect-size">Effect size</h2>
 <p>Odds ratio based on the observed values</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>odds <span class="ot">&lt;-</span> <span class="fu">round</span>( observed, <span class="dv">2</span>); odds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>odds <span class="ot">&lt;-</span> <span class="fu">round</span>( observed, <span class="dv">2</span>); odds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>           Type
-Association Even Odd
-  Feminine   103  48
-  Masculine   37  92</code></pre>
+<pre><code>         Personality
+Lecture   Extrovert Introvert
+  Digital         1         2
+  Live            1         1</code></pre>
 </div>
 </div>
 <p><span class="math inline">\(\begin{pmatrix} a &amp; b \\ c &amp; d \\ \end{pmatrix}\)</span></p>
-<p><span class="math inline">\(OR = \frac{a \times d}{b \times c} = \frac{103 \times 92}{48 \times 37} = 5.3355856\)</span></p>
+<p><span class="math inline">\(OR = \frac{a \times d}{b \times c} = \frac{1 \times 1}{2 \times 1} = 0.5\)</span></p>
 </section>
 <section id="odds" class="level2">
 <h2 class="anchored" data-anchor-id="odds">Odds</h2>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>           Type
-Association Even Odd
-  Feminine   103  48
-  Masculine   37  92</code></pre>
+<pre><code>         Personality
+Lecture   Extrovert Introvert
+  Digital         1         2
+  Live            1         1</code></pre>
 </div>
 </div>
-<p>The odd and even ratio of masculinity and the ratio of femininity</p>
+<p>The extrovert/introvert ratio for digital and live audiences:</p>
 <ul>
-<li>Feminine <span class="math inline">\(\text{Odds}_{EO} = \frac{ 103 }{ 48 }\)</span> = 2.1458333</li>
-<li>Masculine <span class="math inline">\(\text{Odds}_{EO} = \frac{ 37 }{ 92 }\)</span> = 0.4021739</li>
+<li>Digital <span class="math inline">\(\text{Odds}_{EI} = \frac{ 1 }{ 2 }\)</span> = 0.5</li>
+<li>Live <span class="math inline">\(\text{Odds}_{EI} = \frac{ 1 }{ 1 }\)</span> = 1</li>
 </ul>
-<p>In the feminine responses, there are +- 2.15 times as many even numbers than odd numbers. In the masculine responses, there are +- 0.4 times as many even numbers than odd numbers.</p>
+<p>In the digital responses, there are +- 0.5 times as many extroverts than introverts. In the live responses, there are +- 1 times as many extroverts than introverts.</p>
 </section>
 <section id="odds-1" class="level2">
 <h2 class="anchored" data-anchor-id="odds-1">Odds</h2>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>           Type
-Association Even Odd
-  Feminine   103  48
-  Masculine   37  92</code></pre>
+<pre><code>         Personality
+Lecture   Extrovert Introvert
+  Digital         1         2
+  Live            1         1</code></pre>
 </div>
 </div>
-<p>Alternatively, we can look at the ratio’s of masculine vs feminine for even and odd numbers:</p>
+<p>Alternatively, we can look at the ratio’s of digital/live for extroverts and introverts:</p>
 <ul>
-<li>Even <span class="math inline">\(\text{Odds}_{FM} = \frac{ 103 }{ 37 }\)</span> = 2.7837838</li>
-<li>Odd <span class="math inline">\(\text{Odds}_{FM} = \frac{ 48 }{ 92 }\)</span> = 0.5217391</li>
+<li>Extrovert <span class="math inline">\(\text{Odds}_{DL} = \frac{ 1 }{ 1 }\)</span> = 1</li>
+<li>Introvert <span class="math inline">\(\text{Odds}_{DL} = \frac{ 2 }{ 1 }\)</span> = 2</li>
 </ul>
-<p>For the even numbers, there are +- 2.78 times as many feminine associations than masculine associations. For the odd numbers, there are +- 0.52 times as many feminine associations than masculine associations.</p>
+<p>For the extroverts, there are +- 1 times as many digital viewers than live viewers. For the introverts, there are +- 2 times as many digital viewers than live viewers.</p>
 </section>
 <section id="odds-ratio" class="level2">
 <h2 class="anchored" data-anchor-id="odds-ratio">Odds ratio</h2>
 <p>Is the ratio of these odds.</p>
-<p><span class="math inline">\(OR = \frac{\text{feminine}}{\text{masculine}} = \frac{2.1458333}{0.4021739} = \frac{\text{even}}{\text{odd}} = \frac{2.7837838}{0.5217391} = 5.3355856\)</span></p>
-<p>For this data, even numbers received the feminine association +- 5.34 times more often than odd numbers received the feminine association. The odds ratio also accounts for the scores in the other condition: we do not only take into account the femininity of the odd numbers, but also the femininity of the even numbers.</p>
+<p><span class="math inline">\(OR = \frac{\text{digital}}{\text{live}} = \frac{0.5}{1} = \frac{\text{extrovert}}{\text{introvert}} = \frac{1}{2} = 0.5\)</span></p>
+<p>For this data, extroverts were approximately 0.5 times more likely to watch digitally, compared to introverts. The odds ratio also accounts for the scores in both conditions—watching digitally and watching live—by comparing the odds of watching digitally to live viewing across both personality types.</p>
 </section>
 </section>
 

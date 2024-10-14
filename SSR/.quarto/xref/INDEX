@@ -42,9 +42,13 @@
     "anova_repeated_one-way.html": "a28bef52"
   },
   "2024/16. chi_squared_test/16. chi_squared_test.qmd": {
-    "16. chi_squared_test.html": "178f5191"
+    "16. chi_squared_test.html": "178f5191",
+    "16. chi_squared_test.slide.html": "441d116c"
   },
   "topics/ANOVA_mixed/ANOVA_mixed.qmd": {
     "ANOVA_mixed.html": "b9bdb326"
+  },
+  "topics/chi_square/chi_square_test.qmd": {
+    "chi_square_test.html": "4588ee3d"
   }
 }
