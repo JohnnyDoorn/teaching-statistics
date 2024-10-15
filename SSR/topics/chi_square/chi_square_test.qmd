@@ -87,7 +87,7 @@ if(!'gsheet' %in% installed.packages()) { install.packages('gsheet') }
 library("gsheet")
 gResults <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1I6p6wVmATt8VM0PvGt4lSbFCcV3WrTFs5FUQlG9Q4nQ/edit?usp=sharing')
 
-gResults <- as.data.frame(gResults)[, -1 ]
+gResults <- as.data.frame(gResults)[-(1:5), -1 ]
 
 # results <- results[grep("2017|2022", results$Timestamp),]
 for (i in 1:ncol(gResults)) {
