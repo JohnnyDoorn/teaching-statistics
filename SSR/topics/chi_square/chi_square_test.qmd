@@ -235,7 +235,7 @@ $\chi^2 = \sum \frac{ ( | \text{observed}_{ij} - \text{model}_{ij} | - .5)^2}{\t
 # Calculate Yates's corrected chi squared
 chi.squared.yates <- sum((abs(observed - modelPredictions) - .5)^2 / modelPredictions)
 chi.squared.yates
-# visualize::visualize.chisq(chi.squared.yates, df, section='upper')
+visualize::visualize.chisq(chi.squared.yates, df, section='upper')
 ```
 
 <!-- ## Likelihood ratio {.subsection} -->
