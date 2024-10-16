@@ -198,7 +198,7 @@ $df = (r - 1) (c - 1)$
 ```{r, echo=FALSE}
 # Set up the plot for the F-distribution
 df <- 1
-curve(dchisq(x, df), from = 0, to = 20, n = 1000, bty = "n", las = 1,
+curve(dchisq(x, df), from = 0, to = 5, n = 1000, bty = "n", las = 1,
       xlab = "Chi-squared", ylab = "Density", main = "Chi-squared distribution with P-value Region")
 
 # Shade the upper tail (p-value region) using polygon
@@ -210,9 +210,9 @@ y_vals <- dchisq(x_vals, df)
 polygon(c(chi.squared, x_vals, 10), c(0, y_vals, 0), col = "lightblue", border = NA)
 
 # Optionally, add a vertical line at the F-statistic
-arrows(x0 = chi.squared, x1 = chi.squared, y0 = 0 , y1 = 0.6, col = "darkred", lwd = 2)
-text(x = chi.squared, y = 1.2, bquote(Chi^2 ~ " = " ~ .(round(chi.squared, 2))), cex = 1.2)
-text(x = chi.squared, y = 0.9, paste("p-val =", round(pchisq(chi.squared, df), 5)), cex = 1.2)
+arrows(x0 = chi.squared, x1 = chi.squared, y0 = 0 , y1 = 1.6, col = "darkred", lwd = 2)
+text(x = chi.squared, y = 3, bquote(Chi^2 ~ " = " ~ .(round(chi.squared, 2))), cex = 1.2)
+text(x = chi.squared, y = 2, paste("p-val =", round(pchisq(chi.squared, df), 5)), cex = 1.2)
 ```
 
 ## Fisher's exact test {.subsection}

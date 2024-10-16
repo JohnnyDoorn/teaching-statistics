@@ -1,7 +1,7 @@
 ---
-title: "17. Non-parametric tests"
+title: "18. Non-parametric tests"
 author: "Sharon Kinkenberg & Johnny van Doorn"
-date: "19 oct 2023"
+date: "18 oct 2024"
 footer: "Scientific & Statistical Reasoning"
 format: 
   html: default
@@ -9,19 +9,19 @@ format:
     output-ext: slide.html
 ---
 
-```{r child="../../../../topics/non_parametric_concept/non_parametric_concept.qmd", eval=TRUE}
+```{r child="../../topics/non_parametric_concept/non_parametric_concept.qmd", eval=TRUE}
 ```
 
-```{r child="../../../../topics/wilcoxon_rank_sum_test/wilcoxon_rank_sum_test.qmd", eval=TRUE}
+```{r child="../../topics/wilcoxon_rank_sum_test/wilcoxon_rank_sum_test.qmd", eval=TRUE}
 ```
 
-```{r child="../../../../topics/wilcoxon_signed_rank_test/wilcoxon_signed_rank_test.qmd", eval=TRUE}
+```{r child="../../topics/wilcoxon_signed_rank_test/wilcoxon_signed_rank_test.qmd", eval=TRUE}
 ```
 
-```{r child="../../../../topics/kruskal_wallis_test/kruskal_wallis_test.qmd", eval=TRUE}
+```{r child="../../topics/kruskal_wallis_test/kruskal_wallis_test.qmd", eval=TRUE}
 ```
 
-```{r child="../../../../topics/friedman_anova/friedman_anova.qmd", eval=TRUE}
+```{r child="../../topics/friedman_anova/friedman_anova.qmd", eval=TRUE}
 ```
 
 <!-- # ```{r child="../../../../topics/rank_correlation/rank_correlation.qmd", eval=TRUE} -->
@@ -29,6 +29,6 @@ format:
 
 <!-- Footer insert below -->
 
-```{r child="../../../../footer.qmd"}
+```{r child="../../footer.qmd"}
 ```
 

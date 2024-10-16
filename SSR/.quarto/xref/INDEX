@@ -50,5 +50,8 @@
   },
   "topics/chi_square/chi_square_test.qmd": {
     "chi_square_test.html": "4588ee3d"
+  },
+  "2024/17. non_parametric_tests/17. non_parametric_tests.qmd": {
+    "17. non_parametric_tests.html": "445368a8"
   }
 }

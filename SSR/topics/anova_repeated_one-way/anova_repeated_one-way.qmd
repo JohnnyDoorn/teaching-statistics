@@ -24,7 +24,7 @@ The one-way repeated measures ANOVA analyses the variance of the model while red
     * Q-Q plots
 * Equality of variance of the within-group differences
     * Mauchly's test of Sphericity
-    * See Field 15.5, table 15.2 (p845), Jane Superbrain boxes 15.3 (p865) and 15.4 (p866)
+    * See Field 14.5, table 14.2, Jane Superbrain boxes 14.2 and 14.3
     * Always met when having only 2 groups
 
 
