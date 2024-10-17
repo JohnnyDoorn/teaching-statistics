@@ -23,30 +23,32 @@ The Kruskal-Wallis test essentially subtracts the expected mean ranking from the
 
 ## Simulate data
 
-```{r, echo=TRUE}
-set.seed(2348586)
-n      <- 30
-factor <- rep(c("ecstasy","alcohol","control"), each=n/3)
-
-dummy.1 <- ifelse(factor == "alcohol", 1, 0)
-dummy.2 <- ifelse(factor == "ecstasy", 1, 0)
-b.0     <- 23
-b.1     <- 0
-b.2     <- 0
-error   <- rnorm(n, 0, 1.7)
-
-# Model
-depres  <- b.0 + b.1*dummy.1 + b.2*dummy.2 + error
-depres  <- round(depres)
-
-data <- data.frame(factor, depres)
+```{r, echo=FALSE}
+# set.seed(2348586)
+# n      <- 30
+# factor <- rep(c("ecstasy","alcohol","control"), each=n/3)
+# 
+# dummy.1 <- ifelse(factor == "alcohol", 1, 0)
+# dummy.2 <- ifelse(factor == "ecstasy", 1, 0)
+# b.0     <- 23
+# b.1     <- 0
+# b.2     <- 0
+# error   <- rnorm(n, 0, 1.7)
+# 
+# # Model
+# depres  <- b.0 + b.1*dummy.1 + b.2*dummy.2 + error
+# depres  <- round(depres)
+# 
+# data <- data.frame(factor, depres)
+data <- read.csv("soya.csv")[, -1]
+data$Testosterone <- round(data$Testosterone, 2)
 ```
 
 ## Assign ranks {.subsection}
 
 ```{r, echo=TRUE}
 # Assign ranks
-data$ranks <- rank(data$depres)
+data$ranks <- rank(data$Testosterone)
 ```
 
 ## The data {.smaller}
@@ -55,7 +57,7 @@ data$ranks <- rank(data$depres)
 datatable(data, options = list(iDisplayLength = 7, searching = FALSE, scrollY = 415, paging = F, info = F))
 
 # Write data for use in SPSS
-write.csv(data, "kruskal-Wallis.csv", row.names=FALSE)
+# write.csv(data, "kruskal-Wallis.csv", row.names=FALSE)
 ```
 
 ## Calculate H {.subsection}
@@ -71,14 +73,14 @@ $$H = \frac{12}{N(N+1)} \sum_{i=1}^k \frac{R_i^2}{n_i} - 3(N+1)$$
 
 ```{r, echo=TRUE}
 # Now we need the sum of the ranks per group.
-R.i <- aggregate(ranks ~ factor, data = data, sum)$ranks
+R.i <- aggregate(ranks ~ Soya, data = data, sum)$ranks
 R.i
 
 # De total sample size N is:
 N <- nrow(data)
 
 # And the sample size per group is n_i:
-n.i <- aggregate(depres ~ factor, data=data, length)$depres
+n.i <- aggregate(Testosterone ~ Soya, data=data, length)$Testosterone
 n.i
 ```
 
@@ -105,11 +107,8 @@ visualize.chisq(H, df, section="upper")
 ```
 
 
-## Test for significance {.subsection}
-
-```{r, fig.align='center', warning=FALSE, echo=TRUE}
-visualize.chisq(H, df, section="upper")
-```
 
 ## Follow-up?
 
+- Dunn's post hoc test:
+    - Pairwise Mann-Whitney tests with adjusted p-values

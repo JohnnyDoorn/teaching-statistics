@@ -15,7 +15,7 @@ format:
 - Especially vulnerable in low sample sizes
 - Visualize (Q-Q plot, boxplots, descriptives)
 - Sometimes there are cures, sometimes not...
-- Don't trash your data, but investigate: why is this occuring?
+- Don't trash your data, but investigate: why is this occurring?
 
 ## Homogeneity of variances
 - Apply correction when possible (Welch for t-test/one-way ANOVA)

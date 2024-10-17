@@ -19,32 +19,44 @@ The Wilcoxon signed-rank test is a nonparametric alternative to the paired sampl
 
 ## Simulate data
 
-```{r, echo=TRUE}
-set.seed(3562534)
-n      <- 20
-factor <- rep(c("Ecstasy","Alcohol"),each=n/2)
-dummy  <- ifelse(factor == "Ecstacy", 0, 1)
-b.0    <- 23
-b.1    <- 5
-error  <- rnorm(n, 0, 1.7)
-depres <- b.0 + b.1*dummy + error
-depres <- round(depres)
+```{r, echo=FALSE}
+# set.seed(3562534)
+# n      <- 20
+# factor <- rep(c("Ecstasy","Alcohol"),each=n/2)
+# dummy  <- ifelse(factor == "Ecstacy", 0, 1)
+# b.0    <- 23
+# b.1    <- 5
+# error  <- rnorm(n, 0, 1.7)
+# depres <- b.0 + b.1*dummy + error
+# depres <- round(depres)
+# 
+# data <- data.frame(factor, depres)
+data <- read.csv("drug_wide.csv")
+# data$Drug <- ifelse(data$Drug == 1, "Ecstasy", "Alcohol")
+# Ecstasy <- subset(data, Drug=="Ecstasy")$Sunday.BDI
+# Alcohol <- subset(data, Drug=="Alcohol")$Sunday.BDI
+Sunday <- data$Sunday.BDI.Ecstasy
+Wednesday <- data$Wednesday.BDI.Ecstasy
 
-data <- data.frame(factor, depres)
+data <- data.frame(Sunday, Wednesday)
+```
 
-Ecstasy <- subset(data, factor=="Ecstasy")$depres
-Alcohol <- subset(data, factor=="Alcohol")$depres
+## Example
+```{r, echo=FALSE}
+datatable(data, options = list(iDisplayLength = 7, searching = FALSE, scrollY = 415, paging = F, info = F))
 
-data <- data.frame(Ecstasy, Alcohol)
+# Write data for use in SPSS
+# write.csv(data, "mann-whitney-signed-rank.csv", row.names=FALSE)
 ```
 
 ## Example
 
 ```{r, echo=FALSE}
-datatable(data, options = list(iDisplayLength = 7, searching = FALSE, scrollY = 415, paging = F, info = F))
-
+par(pty = "s")
+qqnorm(scale(Sunday), main = "Normal Q-Q Plot", bty = "n", xlim = c(-1.5, 1.5), ylim = c(-1.5, 1.5))
+qqline(scale(Sunday), col = "darkred", lwd = 2)  # Adds a reference line for normality
 # Write data for use in SPSS
-write.csv(data, "mann-whitney-signed-rank.csv", row.names=FALSE)
+# write.csv(data, "mann-whitney-signed-rank.csv", row.names=FALSE)
 ```
 
 ## Calculate T {.smaller .subsection}
@@ -52,19 +64,19 @@ write.csv(data, "mann-whitney-signed-rank.csv", row.names=FALSE)
 
 ```{r, echo=TRUE}
 # Calculate difference in scores between first and second measure
-data$difference = data$Ecstasy - data$Alcohol
+data$diff = data$Sunday - data$Wednesday
 
 # Calculate absolute difference in scores between first and second measure
-data$abs.difference = abs(data$Ecstasy - data$Alcohol)
+data$abs.diff = abs(data$Sunday - data$Wednesday)
 
 # Remove observations where the difference is 0
-data <- data[data$difference != 0, ]
+data <- data[data$diff != 0, ]
 
 # Create rank variable with place holder NA
-data$rank <- rank(data$abs.difference)
+data$rank <- rank(data$abs.diff)
 
 # Assign a '+' or a '-' to those values 
-data$sign <- sign(data$Ecstasy - data$Alcohol)
+data$sign <- sign(data$Sunday - data$Wednesday)
 ```
 
 ## The data {.smaller}
@@ -77,7 +89,7 @@ datatable(data, options = list(iDisplayLength = 7, searching = FALSE, scrollY = 
 
 ```{r, echo=TRUE}
 # Calculate the sum of the positive ranks
-T_pos <- sum(data$rank * (data$difference > 0))
+T_pos <- sum(data$rank * (data$diff > 0))
 T_pos
 
 # Calculate N without 0 (no differences).
@@ -122,14 +134,17 @@ visualize.norm(c(z,-z), section="tails")
 
 ## Effect size
 
-$$r = \frac{z}{\sqrt{N}}$$
+- Matched rank-biserial correlation
 
-Here $N$ is the number of observations.
+$$r = \frac{T_+ - T_- }{T_+ + T_-}$$
+
+Here $T_+$ is the sum of the positive ranks (i.e., where Sunday > Wednesday), which do not exist. $T_-$ is the sum of the negative ranks, which is 36. We have a maximum negative correlation (i.e., everybody scored lower on Wednesday).
 
 ```{r, echo=TRUE}
-N <- 20
-r <- z / sqrt(N)
-r
+T_neg <- sum(data$rank * (data$diff < 0)) # sum negative ranks
+T_neg
+rbis <- (T_pos - T_neg) / (T_pos + T_neg)
+rbis
 ```
 
 

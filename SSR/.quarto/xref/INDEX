@@ -60,5 +60,14 @@
   },
   "topics/nonpar_wilcoxon_rank_sum_test/wilcoxon_rank_sum_test.qmd": {
     "wilcoxon_rank_sum_test.html": "d1b0fa7f"
+  },
+  "topics/nonpar_wilcoxon_signed_rank_test/wilcoxon_signed_rank_test.qmd": {
+    "wilcoxon_signed_rank_test.html": "5a7748bc"
+  },
+  "topics/nonpar_kruskal_wallis_test/kruskal_wallis_test.qmd": {
+    "kruskal_wallis_test.html": "8d2e9aab"
+  },
+  "topics/nonpar_friedman_anova/friedman_anova.qmd": {
+    "friedman_anova.html": "6c9d690a"
   }
 }

@@ -19,9 +19,8 @@ By ranking all values and then summing the ranks per group, one would expect und
 
 After standardizing the test statistic (summed ranks for one group), we can use the standard normal distribution as the sampling distribution.
 
-## Simulate data
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 set.seed(123)
 n      <- 20
 factor <- rep(c("Ecstasy","Alcohol"),each=n/2)
@@ -33,25 +32,23 @@ depres <- b.0 + b.1*dummy + error
 depres <- round(depres)
 
 data <- data.frame(factor, depres)
-
+data <- read.csv("drug_long.csv")[, -3]
+data$Drug <- ifelse(data$Drug == 1, "Ecstasy", "Alcohol")
 ## add the ranks
-data$R <- rank(data$depres)
+data$rankedBDI <- rank(data$Sunday.BDI)
 ```
 
 ## Example
 
 ```{r, echo=FALSE}
 datatable(data, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
-
-# Write data for use in SPSS
-write.csv(data, "mann-whitney.csv", row.names=FALSE)
 ```
 
 ## Calculate the sum of ranks per group {.subsection}
 
 ```{r, echo=TRUE}
-R <- aggregate(R ~ factor, data, sum)
-R
+rankSums <- aggregate(rankedBDI ~ Drug, data, sum)
+rankSums
 ```
 
 ## So W is the lowest
@@ -59,13 +56,13 @@ R
 $$W=min\left(\sum{R_1},\sum{R_2}\right)$$
   
 ```{r, echo=TRUE}
-W <- min(R$R)
+W <- min(rankSums$rankedBDI)
 W
 ```
 
 ## Subtracting the minimum score
 
-Most software reports the value of W, with its minimum value subtracted and calls it U:
+Software reports the value of U, which is W with its minimum value subtracted:
 
 ```{r, echo=TRUE}
 W.min <- sum(1:10); W.min
@@ -74,17 +71,17 @@ U <- W - W.min
 U
 ```
 
-## Standardise W
+## Normal approximation for W
 
 To calculate the Z-score we need to standardize the W. To do so we need the mean W and the standard error of W.
 
 For this we need the sample sizes for each group.
 
 ```{r, echo=TRUE}
-n <- aggregate(R ~ factor, data, length)
+n <- aggregate(rankedBDI ~ factor, data, length)
 
-n.1 <- n$R[1]
-n.2 <- n$R[2]
+n.1 <- n$rankedBDI[1]
+n.2 <- n$rankedBDI[2]
 
 cbind(n.1, n.2)
 ```
@@ -138,15 +135,6 @@ visualize.norm(z, section="lower")
 visualize.norm(c(z,-z), section="tails")
 ```
 
-## Effect size $r$
-
-$$r = \frac{z}{\sqrt{N}}$$
-  
-```{r, echo=TRUE}
-N <- sum(n$R)
-r <- z / sqrt(N)
-r
-```
 
 ## Effect size rank-biserial correlation
 
@@ -192,7 +180,7 @@ y4Stats <- c(t.test(y4 ~ gr)$statistic, wilcox.test(y4 ~ gr)$statistic)
 yList <- list(y1, y2, y3, y4)
 ```
 ```{r, echo= FALSE}
-par(mfrow = c(2, 2), cex = 1)
+par(mfrow = c(2, 2), cex = 1, bty = "n")
 plotCex<- 1
 boxplot(y2 ~ gr, xlab = "Condition", ylab = "DV", col = c("darkgreen", "darkorange"),
         main= "Normal", cex = plotCex)
@@ -207,7 +195,7 @@ boxplot(y3 ~ gr, xlab = "Condition", ylab = "DV", col = c("darkgreen", "darkoran
 mtext(side = 3, paste0("t = ", (round(y3Stats[1], 2)), 
                        "\nW = ", (round(y3Stats[2], 2))), adj = 1)
 boxplot(y4 ~ gr, xlab = "Condition", ylab = "DV", col = c("darkgreen", "darkorange"),
-        main= "Cauchy", cex = plotCex)
+        main= "Cauchy", cex = plotCex, ylim = c(0, 16))
 mtext(side = 3, paste0("t = ", (round(y4Stats[1], 2)), 
                        "\nW = ", (round(y4Stats[2], 2))), adj = 1)
 
