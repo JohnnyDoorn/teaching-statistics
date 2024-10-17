@@ -38,17 +38,17 @@ speed        | fast                  | slow
 
 ## Ranking {.subsection}
 
-```{r, fig.height=3, fig.align='center'}
-x <- c(1, 4, 6, 7, 8, 9)
-y <- c(1, 4, 6, 7, 8, 39)
+```{r, fig.height=3,fig.align='centre', echo = FALSE}
+x1 <- c(1, 4, 6, 7, 8, 9)
+x2 <- c(1, 4, 6, 7, 8, 39)
 
-layout(matrix(1:2, 1, 2))
-boxplot(x, horizontal=T, col='red')
-boxplot(y, horizontal=T, col='red')
+par(bty = "n", mfrow = c(1, 2))
+boxplot(x1, horizontal=T, col='pink', main = "A")
+boxplot(x2, horizontal=T, col='pink', main = "B")
 ```
 
-```{r, fig.height=3}
-kable(rbind(rx = rank(x), ry = rank(y)))
+```{r, fig.height=3, echo=FALSE}
+kable(rbind('A' = x1, 'B' = x2,'-' = " ", 'rank(A)' = rank(x1), 'rank(B)' = rank(x2)))
 ```
 
 ## Ties {.smaller}

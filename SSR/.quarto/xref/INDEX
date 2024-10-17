@@ -52,6 +52,13 @@
     "chi_square_test.html": "4588ee3d"
   },
   "2024/17. non_parametric_tests/17. non_parametric_tests.qmd": {
-    "17. non_parametric_tests.html": "445368a8"
+    "17. non_parametric_tests.html": "445368a8",
+    "17. non_parametric_tests.slide.html": "0e6d53f7"
+  },
+  "topics/non_parametric_concept/non_parametric_concept.qmd": {
+    "non_parametric_concept.html": "962bdc38"
+  },
+  "topics/nonpar_wilcoxon_rank_sum_test/wilcoxon_rank_sum_test.qmd": {
+    "wilcoxon_rank_sum_test.html": "d1b0fa7f"
   }
 }

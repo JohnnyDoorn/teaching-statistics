@@ -7,6 +7,8 @@ library("DT")
 
 Independent 2 samples
 
+Also known as the Mann-Whitney U test
+
 ## Wilcoxon rank-sum test
 
 <img src="http://upload.wikimedia.org/wikipedia/en/9/9a/FrankWilcoxon.png" style="float: left; margin: 0 20px 0 0; width: 300px;">
@@ -63,13 +65,13 @@ W
 
 ## Subtracting the minimum score
 
-Most software (except SPSS) reports the value of W, with its minimum value subtracted:
+Most software reports the value of W, with its minimum value subtracted and calls it U:
 
 ```{r, echo=TRUE}
 W.min <- sum(1:10); W.min
 
-W # same result as SPSS
-W - W.min # same result as JASP
+U <- W - W.min
+U
 ```
 
 ## Standardise W
