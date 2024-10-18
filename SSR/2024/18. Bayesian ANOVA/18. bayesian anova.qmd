@@ -2,7 +2,7 @@
 title: "18. Bayesian ANOVA"
 subtitle: "Parameter estimation & hypothesis testing"
 author: "Johnny van Doorn"
-date: "20 oct 2023"
+date: "22 oct 2024"
 footer: "Scientific & Statistical Reasoning"
 format: 
   html: default
@@ -19,10 +19,10 @@ format:
 <!-- ```{r child="../../../../topics/bayes/bayesian_hypothesis_testing.qmd"} -->
 <!-- ``` -->
 
-```{r child="../../../../topics/bayes/bayesian_anova.qmd"}
+```{r child="../../topics/bayes/bayesian_anova.qmd"}
 ```
 
 <!-- Footer insert below -->
 
-```{r child="../../../../footer.qmd"}
+```{r child="../../footer.qmd"}
 ```

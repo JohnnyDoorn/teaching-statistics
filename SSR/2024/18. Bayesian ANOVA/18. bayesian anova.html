@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Johnny van Doorn">
-<meta name="dcterms.date" content="2023-10-20">
+<meta name="dcterms.date" content="2024-10-22">
 
 <title>18. Bayesian ANOVA</title>
 <style>
@@ -51,15 +51,17 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#bayesian-anova" id="toc-bayesian-anova" class="nav-link active" data-scroll-target="#bayesian-anova">Bayesian ANOVA</a>
   <ul class="collapse">
-  <li><a href="#updating-belief" id="toc-updating-belief" class="nav-link" data-scroll-target="#updating-belief">Updating belief</a></li>
-  <li><a href="#bayesion-hypothesis-testing" id="toc-bayesion-hypothesis-testing" class="nav-link" data-scroll-target="#bayesion-hypothesis-testing">Bayesion Hypothesis Testing</a></li>
-  <li><a href="#prior-belief" id="toc-prior-belief" class="nav-link" data-scroll-target="#prior-belief">Prior Belief</a></li>
-  <li><a href="#bayes-factor" id="toc-bayes-factor" class="nav-link" data-scroll-target="#bayes-factor">Bayes Factor</a></li>
-  <li><a href="#heuristics-for-bf" id="toc-heuristics-for-bf" class="nav-link" data-scroll-target="#heuristics-for-bf">Heuristics for BF</a></li>
-  <li><a href="#advantages-of-the-bayes-factor" id="toc-advantages-of-the-bayes-factor" class="nav-link" data-scroll-target="#advantages-of-the-bayes-factor">Advantages of the Bayes Factor</a></li>
-  <li><a href="#bf-pizza" id="toc-bf-pizza" class="nav-link" data-scroll-target="#bf-pizza">BF pizza</a></li>
-  <li><a href="#different-models" id="toc-different-models" class="nav-link" data-scroll-target="#different-models">Different Models</a></li>
-  <li><a href="#take-home-message" id="toc-take-home-message" class="nav-link" data-scroll-target="#take-home-message">Take home message</a></li>
+  <li><a href="#anova-in-regression-formula" id="toc-anova-in-regression-formula" class="nav-link" data-scroll-target="#anova-in-regression-formula">ANOVA in regression formula</a></li>
+  <li><a href="#two-models-1-predictor-with-2-groups" id="toc-two-models-1-predictor-with-2-groups" class="nav-link" data-scroll-target="#two-models-1-predictor-with-2-groups">Two Models (1 predictor with 2 groups)</a></li>
+  <li><a href="#two-models" id="toc-two-models" class="nav-link" data-scroll-target="#two-models">Two Models</a></li>
+  <li><a href="#model-comparison" id="toc-model-comparison" class="nav-link" data-scroll-target="#model-comparison">Model Comparison</a></li>
+  <li><a href="#marginal-likelihood-of-mathcalm_1" id="toc-marginal-likelihood-of-mathcalm_1" class="nav-link" data-scroll-target="#marginal-likelihood-of-mathcalm_1">Marginal Likelihood of <span class="math inline">\(\mathcal{M}_1\)</span></a></li>
+  <li><a href="#marginal-likelihood-of-mathcalm_0" id="toc-marginal-likelihood-of-mathcalm_0" class="nav-link" data-scroll-target="#marginal-likelihood-of-mathcalm_0">Marginal Likelihood of <span class="math inline">\(\mathcal{M}_0\)</span></a></li>
+  <li><a href="#ratio-of-marginal-likelihoods-bayes-factor" id="toc-ratio-of-marginal-likelihoods-bayes-factor" class="nav-link" data-scroll-target="#ratio-of-marginal-likelihoods-bayes-factor">Ratio of Marginal Likelihoods = Bayes Factor</a></li>
+  <li><a href="#four-models-2-predictors-with-2-groups-each" id="toc-four-models-2-predictors-with-2-groups-each" class="nav-link" data-scroll-target="#four-models-2-predictors-with-2-groups-each">Four Models (2 predictors with 2 groups each)</a></li>
+  <li><a href="#priors-for-mathcalm_a" id="toc-priors-for-mathcalm_a" class="nav-link" data-scroll-target="#priors-for-mathcalm_a">Priors for <span class="math inline">\(\mathcal{M_A}\)</span></a></li>
+  <li><a href="#priors-for-mathcalm_c" id="toc-priors-for-mathcalm_c" class="nav-link" data-scroll-target="#priors-for-mathcalm_c">Priors for <span class="math inline">\(\mathcal{M_C}\)</span></a></li>
+  <li><a href="#priors-for-mathcalm_ac" id="toc-priors-for-mathcalm_ac" class="nav-link" data-scroll-target="#priors-for-mathcalm_ac">Priors for <span class="math inline">\(\mathcal{M_{A+C}}\)</span></a></li>
   </ul></li>
   <li><a href="#end" id="toc-end" class="nav-link" data-scroll-target="#end">End</a>
   <ul class="collapse">
@@ -99,7 +101,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 20, 2023</p>
+      <p class="date">October 22, 2024</p>
     </div>
   </div>
   
@@ -117,86 +119,78 @@ ul.task-list li input[type="checkbox"] {
 <!-- ``` -->
 <section id="bayesian-anova" class="level1 section">
 <h1 class="section">Bayesian ANOVA</h1>
-<section id="updating-belief" class="level2">
-<h2 class="anchored" data-anchor-id="updating-belief">Updating belief</h2>
-<p><a href="https://johnnydoorn.github.io/BayesBookQuarto/">Link to course literature from last year</a></p>
+<section id="anova-in-regression-formula" class="level2">
+<h2 class="anchored" data-anchor-id="anova-in-regression-formula">ANOVA in regression formula</h2>
+<p>Show model predictions using dummy variables:</p>
+<p><span class="math display">\[ y_i = b_0 + b_1 \times x_i. \]</span> where <span class="math inline">\(x_i\)</span> indicates whether we are in group A or group B, then <span class="math inline">\(b_1\)</span> indicates the group difference (if equal to 0, then no group difference)</p>
 </section>
-<section id="bayesion-hypothesis-testing" class="level2">
-<h2 class="anchored" data-anchor-id="bayesion-hypothesis-testing">Bayesion Hypothesis Testing</h2>
+<section id="two-models-1-predictor-with-2-groups" class="level2">
+<h2 class="anchored" data-anchor-id="two-models-1-predictor-with-2-groups">Two Models (1 predictor with 2 groups)</h2>
+<p><span class="math display">\[ y_i = b_0 + b_1 \times x_i \]</span></p>
+<p><span class="math display">\[\mathcal{M_0}: b_1 = 0 \]</span> <span class="math display">\[\mathcal{M_1}: b_1 \sim Cauchy(0.707)\]</span></p>
+</section>
+<section id="two-models" class="level2">
+<h2 class="anchored" data-anchor-id="two-models">Two Models</h2>
+<p><span class="math display">\[\mathcal{M_0}: b_1 = 0 \]</span> <span class="math display">\[\mathcal{M_1}: b_1 \sim Cauchy(0.707)\]</span> ::: {.cell} ::: {.cell-output-display} <img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"> ::: :::</p>
+</section>
+<section id="model-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="model-comparison">Model Comparison</h2>
+<p>How well did each model predict the data?</p>
+<p><span class="math inline">\(\rightarrow\)</span> Marginal likelihood</p>
+</section>
+<section id="marginal-likelihood-of-mathcalm_1" class="level2">
+<h2 class="anchored" data-anchor-id="marginal-likelihood-of-mathcalm_1">Marginal Likelihood of <span class="math inline">\(\mathcal{M}_1\)</span></h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="marginal-likelihood-of-mathcalm_0" class="level2">
+<h2 class="anchored" data-anchor-id="marginal-likelihood-of-mathcalm_0">Marginal Likelihood of <span class="math inline">\(\mathcal{M}_0\)</span></h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="ratio-of-marginal-likelihoods-bayes-factor" class="level2">
+<h2 class="anchored" data-anchor-id="ratio-of-marginal-likelihoods-bayes-factor">Ratio of Marginal Likelihoods = Bayes Factor</h2>
+<p><span class="math display">\[\frac{P(data \mid \mathcal{M}_1)}{P(data \mid \mathcal{M}_0)} \approx 90,000\]</span> The data are 90,000 times more likely under <span class="math inline">\(\mathcal{M}_1\)</span> than under <span class="math inline">\(\mathcal{M}_0\)</span></p>
+</section>
+<section id="four-models-2-predictors-with-2-groups-each" class="level2">
+<h2 class="anchored" data-anchor-id="four-models-2-predictors-with-2-groups-each">Four Models (2 predictors with 2 groups each)</h2>
+<p><span class="math display">\[ tastiness = b_0 + b_1 \times alcoholic + b_2 \times correct\]</span></p>
 <ul>
-<li><span class="math inline">\(H_0\)</span>, the null hypothesis. For instance <span class="math inline">\(\theta = .5\)</span> (people cannot taste the difference between alcoholic and non-alcoholic beer).</li>
-<li><span class="math inline">\(H_A\)</span> is the hypothesis that relaxes the restriction imposed by <span class="math inline">\(H_0\)</span>, and instead considers multiple values for <span class="math inline">\(\theta\)</span>.</li>
+<li><span class="math inline">\(\mathcal{M_0}\)</span>: model with only the intercept <span class="math inline">\(b_0\)</span></li>
+<li><span class="math inline">\(\mathcal{M_A}\)</span>: model with the intercept <span class="math inline">\(b_0\)</span> and the main effect of alcohol <span class="math inline">\(b_1\)</span></li>
+<li><span class="math inline">\(\mathcal{M_C}\)</span>: model with the intercept <span class="math inline">\(b_0\)</span> and the main effect of correct identification <span class="math inline">\(b_2\)</span></li>
+<li><span class="math inline">\(\mathcal{M}_{A+C}\)</span>: model with the intercept <span class="math inline">\(b_0\)</span> and the two main effects</li>
 </ul>
 </section>
-<section id="prior-belief" class="level2">
-<h2 class="anchored" data-anchor-id="prior-belief">Prior Belief</h2>
-<p><span class="math display">\[\large \underbrace{\frac{P(H_A \mid data)}{P(H_0 \mid data)}}_\textrm{Posterior belief} = \underbrace{\frac{P(H_A)}{P(H_0)}}_\textrm{Prior belief} \times \underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}\]</span></p>
+<section id="priors-for-mathcalm_a" class="level2">
+<h2 class="anchored" data-anchor-id="priors-for-mathcalm_a">Priors for <span class="math inline">\(\mathcal{M_A}\)</span></h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 </section>
-<section id="bayes-factor" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="bayes-factor">Bayes Factor</h2>
-<p><span class="math display">\[\underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}\]</span> A ratio of the marginal likelihood of the data under the alternative and the null.</p>
-<p>A Bayes factor of <span class="math inline">\({BF}_{10} = 3\)</span>, means that the data are 3 times more likely under the alternative model than under the null model.</p>
+<section id="priors-for-mathcalm_c" class="level2">
+<h2 class="anchored" data-anchor-id="priors-for-mathcalm_c">Priors for <span class="math inline">\(\mathcal{M_C}\)</span></h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 </section>
-<section id="heuristics-for-bf" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="heuristics-for-bf">Heuristics for BF</h2>
-<p>Heuristics for the Interpretation of the Bayes Factor by <a href="https://en.wikipedia.org/wiki/Harold_Jeffreys">Harold Jeffreys</a></p>
-<table class="table">
-<thead>
-<tr class="header">
-<th>BF</th>
-<th>Evidence</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1 – 3</td>
-<td>Anecdotal</td>
-</tr>
-<tr class="even">
-<td>3 – 10</td>
-<td>Moderate</td>
-</tr>
-<tr class="odd">
-<td>10 – 30</td>
-<td>Strong</td>
-</tr>
-<tr class="even">
-<td>30 – 100</td>
-<td>Very strong</td>
-</tr>
-<tr class="odd">
-<td>&gt;100</td>
-<td>Extreme</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="advantages-of-the-bayes-factor" class="level2">
-<h2 class="anchored" data-anchor-id="advantages-of-the-bayes-factor">Advantages of the Bayes Factor</h2>
-<ul>
-<li>Provides a continuous degree of evidence without requiring an all-or-none decision.</li>
-<li>Allows evidence to be monitored during data collection.</li>
-<li>Differentiates between “the data support H0” (evidence for absence) and “the data are not informative” (absence of evidence).</li>
-</ul>
-</section>
-<section id="bf-pizza" class="level2">
-<h2 class="anchored" data-anchor-id="bf-pizza">BF pizza</h2>
-<p><img src="../../../../topics/bayes/BF1.png" class="img-fluid"></p>
-<hr>
-<p><img src="../../../../topics/bayes/BF3.png" class="img-fluid"></p>
-<hr>
-<p><img src="../../../../topics/bayes/BF13.png" class="img-fluid"></p>
-</section>
-<section id="different-models" class="level2">
-<h2 class="anchored" data-anchor-id="different-models">Different Models</h2>
-</section>
-<section id="take-home-message" class="level2">
-<h2 class="anchored" data-anchor-id="take-home-message">Take home message</h2>
-<ul>
-<li>Bayesians quantify uncertainty through distributions.</li>
-<li>The more peaked the distribution, the lower the uncertainty.</li>
-<li>Incoming information continually updates our knowledge; today’s posterior is tomorrow’s prior.</li>
-</ul>
+<section id="priors-for-mathcalm_ac" class="level2">
+<h2 class="anchored" data-anchor-id="priors-for-mathcalm_ac">Priors for <span class="math inline">\(\mathcal{M_{A+C}}\)</span></h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 <!-- Footer insert below -->
 </section>
 </section>

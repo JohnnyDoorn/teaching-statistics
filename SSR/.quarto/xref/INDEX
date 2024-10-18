@@ -69,5 +69,12 @@
   },
   "topics/nonpar_friedman_anova/friedman_anova.qmd": {
     "friedman_anova.html": "6c9d690a"
+  },
+  "topics/bayes/bayesian_anova.qmd": {
+    "bayesian_anova.html": "12165529"
+  },
+  "2024/18. Bayesian ANOVA/18. bayesian anova.qmd": {
+    "18. bayesian anova.html": "7d1b8192",
+    "18. bayesian anova.slide.html": "b194c933"
   }
 }

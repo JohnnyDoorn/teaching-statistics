@@ -1,65 +1,166 @@
 # Bayesian ANOVA {.section}
 
-## Updating belief
+## ANOVA in regression formula
 
-[Link to course literature from last year](https://johnnydoorn.github.io/BayesBookQuarto/)
+Show model predictions using dummy variables:
 
+$$ y_i = b_0 + b_1 \times x_i. $$
+where $x_i$ indicates whether we are in group A or group B, then $b_1$ indicates the group difference (if equal to 0, then no group difference)
 
-## Bayesian Hypothesis Testing
+## Two Models (1 predictor with 2 groups)
 
-* $H_0$, the null hypothesis.  For instance $\theta = .5$ (people cannot taste the difference between alcoholic and non-alcoholic beer).
-* $H_A$ is the hypothesis that relaxes the restriction imposed by $H_0$, and instead considers multiple values for $\theta$.
+$$ y_i = b_0 + b_1 \times x_i $$
 
-## Prior Belief
+$$\mathcal{M_0}: b_1 = 0 $$
+$$\mathcal{M_1}: b_1 \sim Cauchy(0.707)$$
+ 
+## Two Models
+$$\mathcal{M_0}: b_1 = 0 $$
+$$\mathcal{M_1}: b_1 \sim Cauchy(0.707)$$
+```{r, echo=FALSE}
+myCauchy <- function(x, scale = 1, alt = "twosided") {
+  myDens <- dcauchy(x, scale = scale)
+  if (alt == "greater") {
+    myDens <- ifelse(x < 0, 0, myDens*2)
+  } else if (alt == "less") {
+    myDens <- ifelse(x > 0, 0, myDens*2)
+  }
+  return(myDens)
+}
+par(mfrow = c(1, 2), cex.main = 0.95)
+cols <- viridis::viridis(6)
+par(cex = 1.1, cex.lab = 1.1, mar = c(5.1, 4, 4.1, .5))
+plot(1, 1, type ="n", xlim = c(-3,3), ylim = c(0,4), bty = "n", main = expression("Spike prior for "~ M[0]),
+     las = 1, xlab = expression(b[1]), ylab = "Density")
+arrows(x0 = 0, x1 = 0, y0 = 0, y1 = 4.0, lwd = 4, col = cols[3])
+curve(myCauchy(x, scale = 0.707), from = -3, to = 3, n = 1e3, col = cols[1], lwd = 3, xlab = expression(b[1]),
+      bty = "n", ylab = "Density", las = 1, main = expression("Cauchy prior for "~ M[1]), ylim = c(0,0.5))
 
-$$\large \underbrace{\frac{P(H_A \mid data)}{P(H_0 \mid data)}}_\textrm{Posterior belief} = \underbrace{\frac{P(H_A)}{P(H_0)}}_\textrm{Prior belief} \times \underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}$$
-
-## Bayes Factor {.subsection}
-
-$$\underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}$$
-A ratio of the marginal likelihood of the data under the alternative and the null.
-
-A Bayes factor of ${BF}_{10} = 3$, means that the data are 3 times more likely under the alternative model than under the null model.
-
-
-## Heuristics for BF {.subsection}
-
-Heuristics for the Interpretation of the Bayes Factor by [Harold Jeffreys](https://en.wikipedia.org/wiki/Harold_Jeffreys)
-
-BF       | Evidence
----------|----------
- 1 – 3   | Anecdotal
- 3 – 10  | Moderate
-10 – 30  | Strong
-30 – 100 | Very strong
->100     | Extreme
-
-## Advantages of the Bayes Factor
-
-* Provides a continuous degree of evidence without requiring an all-or-none decision.
-* Allows evidence to be monitored during data collection.
-* Differentiates between “the data support H0” (evidence for absence) and “the data are not informative” (absence of evidence).
-
-## BF pizza
-
-![](../../../../topics/bayes/BF1.png)
-
--------
-
-![](../../../../topics/bayes/BF3.png)
-
--------
-
-![](../../../../topics/bayes/BF13.png)
+```
 
 
+## Model Comparison
 
-## Different Models
+How well did each model predict the data? 
+
+$\rightarrow$ Marginal likelihood
+
+## Marginal Likelihood of $\mathcal{M}_1$
+
+```{r, echo=FALSE}
+dat <- read.csv("beerTastingData.csv")
+x <- dat$AlcRating
+y <- dat$NonAlcRating
+grandM <- mean(c(x,y))
+x <- (x - grandM)  / sd(x)
+y <- (y - grandM) / sd(y)
+diffs <- x - y
+
+delta <- seq(-3, 3, length.out = 1e4)
+mvDens <- numeric(length(delta))
+for(i in 1:length(delta)) {
+  mvDens[i] <- sum(dnorm(diffs, mean = (delta[i]*(sd(diffs))), log = TRUE))
+}
+
+par(cex = 1.3, cex.lab = 1.3, mar = c(5.1, 4.5, 4.1, 2.1))
+plot(delta, exp(mvDens), type = "l", bty = "n", las = 1, ylab = bquote("P(Data |" ~ b[1] * ")"), 
+     xlab = bquote(b[1]),
+     main = bquote("Likelihood of the observed data, for each value of" ~ b[1]), axes = FALSE, xlim = c(-2,2),
+     lwd = 3, col = "darkgreen")
+axis(1)
+axis(2, labels = NA, at = c(0,max(exp(mvDens))))
+abline(h =  3.178571e-46, lwd = 3, col = "purple")
+
+# include function for manual computation
+alternative_likelihood <- function(delta, data, sigma) {
+  exp(sum(dnorm(data, mean = delta, sd = sigma, log = TRUE)) + 
+        dcauchy(delta, location = 0, scale = 1/sqrt(2), log=TRUE))
+}
+marglikM1 <- integrate(function(delta) alternative_likelihood(delta, diffs, sd(diffs)), 
+                       lower = -3, upper = 3)$value
+```
+
+
+## Marginal Likelihood of $\mathcal{M}_0$
+
+```{r, echo=FALSE}
+delta <- seq(-3, 3, length.out = 1e4)
+mvDens <- numeric(length(delta))
+for(i in 1:length(delta)) {
+  mvDens[i] <- sum(dnorm(diffs, mean = (delta[i]*(sd(diffs))), log = TRUE))
+}
+
+par(cex = 1.3, cex.lab = 1.3, mar = c(5.1, 4.5, 4.1, 2.1))
+plot(delta, exp(mvDens), type = "l", bty = "n", las = 1, ylab = bquote("P(Data |" ~ b[1] * ")"), 
+     xlab = bquote(b[1]),
+     main = bquote("Likelihood of the observed data, for each value of" ~ b[1]), axes = FALSE, xlim = c(-2,2),
+     lwd = 3, col = "darkgreen")
+axis(1)
+axis(2, labels = NA, at = c(0,max(exp(mvDens))))
+abline(h =  exp(sum(dnorm(diffs, mean = (0*(sd(diffs))), log = TRUE))), lwd = 3, col = "purple")
+```
 
 
 
-## Take home message
+## Ratio of Marginal Likelihoods = Bayes Factor
 
-* Bayesians quantify uncertainty through distributions.
-* The more peaked the distribution, the lower the uncertainty.
-* Incoming information continually updates our knowledge; today’s posterior is tomorrow’s prior.
+$$\frac{P(data \mid \mathcal{M}_1)}{P(data \mid \mathcal{M}_0)} \approx 90,000$$
+The data are 90,000 times more likely under $\mathcal{M}_1$ than under $\mathcal{M}_0$
+
+## Four Models (2 predictors with 2 groups each)
+
+$$ tastiness = b_0 + b_1 \times alcoholic + b_2 \times correct$$
+
+-   $\mathcal{M_0}$: model with only the intercept $b_0$
+-   $\mathcal{M_A}$: model with the intercept $b_0$ and the main effect of alcohol $b_1$
+-   $\mathcal{M_C}$: model with the intercept $b_0$ and the main effect of correct identification $b_2$
+-   $\mathcal{M}_{A+C}$: model with the intercept $b_0$ and the two main effects
+
+## Priors for $\mathcal{M_A}$ 
+```{r echo = FALSE}
+myCauchy <- function(x, scale = 1, alt = "twosided") {
+  myDens <- dcauchy(x, scale = scale)
+  if (alt == "greater") {
+    myDens <- ifelse(x < 0, 0, myDens*2)
+  } else if (alt == "less") {
+    myDens <- ifelse(x > 0, 0, myDens*2)
+  }
+  return(myDens)
+}
+par(mfrow = c(1, 2), cex.main = 0.95)
+cols <- viridis::viridis(6)
+par(cex = 1.1, cex.lab = 1.1, mar = c(5.1, 4, 4.1, .5))
+curve(myCauchy(x, scale = 0.707), from = -3, to = 3, n = 1e3, col = cols[1], lwd = 3, xlab = expression(b[1]),
+      bty = "n", ylab = "Density", las = 1, main = expression("Cauchy prior for "~ b[1]))
+plot(1, 1, type ="n", xlim = c(-3,3), ylim = c(0,4), bty = "n", main = expression("Spike prior for "~ b[2]),
+     las = 1, xlab = expression(b[2]), ylab = "Density")
+arrows(x0 = 0, x1 = 0, y0 = 0, y1 = 4.0, lwd = 4, col = cols[3])
+```
+
+## Priors for $\mathcal{M_C}$ 
+```{r echo = FALSE}
+
+par(mfrow = c(1, 2), cex.main = 0.95)
+cols <- viridis::viridis(6)
+par(cex = 1.1, cex.lab = 1.1, mar = c(5.1, 4, 4.1, .5))
+plot(1, 1, type ="n", xlim = c(-3,3), ylim = c(0,4), bty = "n", main = expression("Spike prior for "~ b[1]),
+     las = 1, xlab = expression(b[1]), ylab = "Density")
+arrows(x0 = 0, x1 = 0, y0 = 0, y1 = 4.0, lwd = 4, col = cols[1])
+curve(myCauchy(x, scale = 0.707), from = -3, to = 3, n = 1e3, col = cols[3], lwd = 3, xlab = expression(b[2]),
+      bty = "n", ylab = "Density", las = 1, main = expression("Cauchy prior for "~ b[2]))
+```
+
+
+## Priors for $\mathcal{M_{A+C}}$ 
+```{r echo = FALSE}
+
+par(mfrow = c(1, 2), cex.main = 0.95)
+cols <- viridis::viridis(6)
+par(cex = 1.1, cex.lab = 1.1, mar = c(5.1, 4, 4.1, .5))
+curve(myCauchy(x, scale = 0.707), from = -3, to = 3, n = 1e3, col = cols[1], lwd = 3, xlab = expression(b[1]),
+      bty = "n", ylab = "Density", las = 1, main = expression("Cauchy prior for "~ b[1]))
+curve(myCauchy(x, scale = 0.707), from = -3, to = 3, n = 1e3, col = cols[3], lwd = 3, xlab = expression(b[2]),
+      bty = "n", ylab = "Density", las = 1, main = expression("Cauchy prior for "~ b[2]))
+```
+
+
