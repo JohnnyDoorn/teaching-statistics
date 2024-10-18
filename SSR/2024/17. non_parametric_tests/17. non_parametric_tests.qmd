@@ -12,7 +12,7 @@ format:
 ## Assumptions
 - Not an all-or-nothing case
 - Assess the degree of the violation
-- Especially vulnerable in low sample sizes
+- Especially vulnerable with low sample sizes
 - Visualize (Q-Q plot, boxplots, descriptives)
 - Sometimes there are cures, sometimes not...
 - Don't trash your data, but investigate: why is this occurring?
@@ -27,8 +27,10 @@ format:
 - Adjusts df $\rightarrow p$-value & CI
 - Jane Superbrain 14.3 (pointless p)
 
+<!-- ## Overlap (association) between predictors -->
+
 ## Normality
-- Shape of distribution
+- Shape of distribution (and no CLT)
     - [Illustration of consequences](https://johnnydoorn.github.io/teaching-statistics/extra-texts/ViolatingNormalityANOVA.html)
 - Outliers
 
