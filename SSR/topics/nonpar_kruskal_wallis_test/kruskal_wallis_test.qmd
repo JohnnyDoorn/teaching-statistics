@@ -21,7 +21,7 @@ Created by [William Henry Kruskal](http://en.wikipedia.org/wiki/William_Kruskal)
 
 The Kruskal-Wallis test essentially subtracts the expected mean ranking from the calculated oberved mean ranking, which is $\chi^2$ distributed.
 
-## Simulate data
+<!-- ## Simulate data -->
 
 ```{r, echo=FALSE}
 # set.seed(2348586)
@@ -42,6 +42,7 @@ The Kruskal-Wallis test essentially subtracts the expected mean ranking from the
 # data <- data.frame(factor, depres)
 data <- read.csv("soya.csv")[, -1]
 data$Testosterone <- round(data$Testosterone, 2)
+datatable(data, options = list(iDisplayLength = 7, searching = FALSE, scrollY = 415, paging = F, info = F))
 ```
 
 ## Assign ranks {.subsection}

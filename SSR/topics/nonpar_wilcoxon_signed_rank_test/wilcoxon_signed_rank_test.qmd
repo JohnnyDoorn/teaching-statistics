@@ -17,7 +17,7 @@ Paired 2 samples
 
 The Wilcoxon signed-rank test is a nonparametric alternative to the paired samples t-test. It assigns + or - signs to the difference between two repeated measures. By ranking the *absolute* differences and summing these ranks for the positive group, the null hypothesis is tested that both positive and negative differences are equal.
 
-## Simulate data
+<!-- ## Simulate data -->
 
 ```{r, echo=FALSE}
 # set.seed(3562534)

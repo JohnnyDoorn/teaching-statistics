@@ -20,7 +20,7 @@ Created by [William Frederick Friedman](http://en.wikipedia.org/wiki/William_F._
 
 Just like the Kruskal-Wallis test, Friedman's ANOVA, subtracts the expected mean ranking from the calculated observed mean ranking, which is also $\chi^2$ distributed.
 
-## Simulate data
+<!-- ## Simulate data -->
 
 ```{r, echo=FALSE}
 # set.seed(87364536)
