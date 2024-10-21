@@ -13,11 +13,17 @@ format:
 <!-- ```{r child="../../../../topics/bayes/bayes_theorem.qmd"} -->
 <!-- ``` -->
 
-<!-- ```{r child="../../../../topics/bayes/bayesian_parameter_estimation.qmd"} -->
-<!-- ``` -->
+## Course literature
 
-<!-- ```{r child="../../../../topics/bayes/bayesian_hypothesis_testing.qmd"} -->
-<!-- ``` -->
+- [Repitition from RMS](https://johnnydoorn.github.io/IntroductionBayesianInference/)
+- [Addition: chapter 7 on ANOVA](https://johnnydoorn.github.io/IntroductionBayesianInference/07-anova.html)
+
+
+```{r child="../../topics/bayes/bayesian_parameter_estimation.qmd"}
+```
+
+```{r child="../../topics/bayes/bayesian_hypothesis_testing.qmd"}
+```
 
 ```{r child="../../topics/bayes/bayesian_anova.qmd"}
 ```

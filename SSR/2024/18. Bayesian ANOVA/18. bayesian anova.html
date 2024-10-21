@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -49,7 +83,39 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul class="collapse">
-  <li><a href="#bayesian-anova" id="toc-bayesian-anova" class="nav-link active" data-scroll-target="#bayesian-anova">Bayesian ANOVA</a>
+  <li><a href="#course-literature" id="toc-course-literature" class="nav-link active" data-scroll-target="#course-literature">Course literature</a></li>
+  <li><a href="#bayesian-parameter-estimation" id="toc-bayesian-parameter-estimation" class="nav-link" data-scroll-target="#bayesian-parameter-estimation">Bayesian parameter estimation</a>
+  <ul class="collapse">
+  <li><a href="#what-is-a-model" id="toc-what-is-a-model" class="nav-link" data-scroll-target="#what-is-a-model">What is a model?</a></li>
+  <li><a href="#what-does-a-model-predict" id="toc-what-does-a-model-predict" class="nav-link" data-scroll-target="#what-does-a-model-predict">What does a model predict?</a></li>
+  <li><a href="#model-with-multiple-values" id="toc-model-with-multiple-values" class="nav-link" data-scroll-target="#model-with-multiple-values">Model with multiple values</a></li>
+  <li><a href="#one-sided-model" id="toc-one-sided-model" class="nav-link" data-scroll-target="#one-sided-model">One-sided model</a></li>
+  <li><a href="#prior-distribution" id="toc-prior-distribution" class="nav-link" data-scroll-target="#prior-distribution">Prior distribution</a></li>
+  <li><a href="#priors" id="toc-priors" class="nav-link" data-scroll-target="#priors">Priors</a></li>
+  <li><a href="#choose-prior" id="toc-choose-prior" class="nav-link" data-scroll-target="#choose-prior">Choose prior</a></li>
+  <li><a href="#now-what-is-the-data-saying" id="toc-now-what-is-the-data-saying" class="nav-link" data-scroll-target="#now-what-is-the-data-saying">Now what is the data saying</a></li>
+  <li><a href="#likelihood" id="toc-likelihood" class="nav-link" data-scroll-target="#likelihood">Likelihood</a></li>
+  <li><a href="#likelihood-function" id="toc-likelihood-function" class="nav-link" data-scroll-target="#likelihood-function">Likelihood function</a></li>
+  <li><a href="#posterior" id="toc-posterior" class="nav-link" data-scroll-target="#posterior">Posterior</a></li>
+  <li><a href="#visual" id="toc-visual" class="nav-link" data-scroll-target="#visual">Visual</a></li>
+  <li><a href="#theta-all-mighty" id="toc-theta-all-mighty" class="nav-link" data-scroll-target="#theta-all-mighty">Theta all mighty</a></li>
+  <li><a href="#animation-code" id="toc-animation-code" class="nav-link" data-scroll-target="#animation-code">Animation code</a></li>
+  <li><a href="#animation" id="toc-animation" class="nav-link" data-scroll-target="#animation">Animation</a></li>
+  <li><a href="#take-home-message" id="toc-take-home-message" class="nav-link" data-scroll-target="#take-home-message">Take home message</a></li>
+  </ul></li>
+  <li><a href="#bayesian-hypothesis-testing" id="toc-bayesian-hypothesis-testing" class="nav-link" data-scroll-target="#bayesian-hypothesis-testing">Bayesian hypothesis testing</a>
+  <ul class="collapse">
+  <li><a href="#updating-belief" id="toc-updating-belief" class="nav-link" data-scroll-target="#updating-belief">Updating belief</a></li>
+  <li><a href="#bayesian-hypothesis-testing-1" id="toc-bayesian-hypothesis-testing-1" class="nav-link" data-scroll-target="#bayesian-hypothesis-testing-1">Bayesian Hypothesis Testing</a></li>
+  <li><a href="#prior-belief" id="toc-prior-belief" class="nav-link" data-scroll-target="#prior-belief">Prior Belief</a></li>
+  <li><a href="#bayes-factor" id="toc-bayes-factor" class="nav-link" data-scroll-target="#bayes-factor">Bayes Factor</a></li>
+  <li><a href="#heuristics-for-bf" id="toc-heuristics-for-bf" class="nav-link" data-scroll-target="#heuristics-for-bf">Heuristics for BF</a></li>
+  <li><a href="#advantages-of-the-bayes-factor" id="toc-advantages-of-the-bayes-factor" class="nav-link" data-scroll-target="#advantages-of-the-bayes-factor">Advantages of the Bayes Factor</a></li>
+  <li><a href="#bf-pizza" id="toc-bf-pizza" class="nav-link" data-scroll-target="#bf-pizza">BF pizza</a></li>
+  <li><a href="#different-models" id="toc-different-models" class="nav-link" data-scroll-target="#different-models">Different Models</a></li>
+  <li><a href="#take-home-message-1" id="toc-take-home-message-1" class="nav-link" data-scroll-target="#take-home-message-1">Take home message</a></li>
+  </ul></li>
+  <li><a href="#bayesian-anova" id="toc-bayesian-anova" class="nav-link" data-scroll-target="#bayesian-anova">Bayesian ANOVA</a>
   <ul class="collapse">
   <li><a href="#anova-in-regression-formula" id="toc-anova-in-regression-formula" class="nav-link" data-scroll-target="#anova-in-regression-formula">ANOVA in regression formula</a></li>
   <li><a href="#two-models-1-predictor-with-2-groups" id="toc-two-models-1-predictor-with-2-groups" class="nav-link" data-scroll-target="#two-models-1-predictor-with-2-groups">Two Models (1 predictor with 2 groups)</a></li>
@@ -113,10 +179,289 @@ ul.task-list li input[type="checkbox"] {
 
 <!-- ```{r child="../../../../topics/bayes/bayes_theorem.qmd"} -->
 <!-- ``` -->
-<!-- ```{r child="../../../../topics/bayes/bayesian_parameter_estimation.qmd"} -->
-<!-- ``` -->
-<!-- ```{r child="../../../../topics/bayes/bayesian_hypothesis_testing.qmd"} -->
-<!-- ``` -->
+<section id="course-literature" class="level2">
+<h2 class="anchored" data-anchor-id="course-literature">Course literature</h2>
+<ul>
+<li><a href="https://johnnydoorn.github.io/IntroductionBayesianInference/">Repitition from RMS</a></li>
+<li><a href="https://johnnydoorn.github.io/IntroductionBayesianInference/07-anova.html">Addition: chapter 7 on ANOVA</a></li>
+</ul>
+</section>
+<section id="bayesian-parameter-estimation" class="level1 section">
+<h1 class="section">Bayesian parameter estimation</h1>
+<!-- ## Updating belief -->
+<!-- > Posterior $\propto$ Likelihood $\times$ Prior -->
+<section id="what-is-a-model" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-a-model">What is a model?</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="what-does-a-model-predict" class="level2">
+<h2 class="anchored" data-anchor-id="what-does-a-model-predict">What does a model predict?</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="model-with-multiple-values" class="level2">
+<h2 class="anchored" data-anchor-id="model-with-multiple-values">Model with multiple values</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="one-sided-model" class="level2">
+<h2 class="anchored" data-anchor-id="one-sided-model">One-sided model</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="prior-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="prior-distribution">Prior distribution</h2>
+<p>You have assigned a prior probability distribution to the parameter <span class="math inline">\(\theta\)</span>.</p>
+<blockquote class="blockquote">
+<p>This is your prior</p>
+</blockquote>
+<p>Now we normally do not draw our priors, but we could.</p>
+</section>
+<section id="priors" class="level2">
+<h2 class="anchored" data-anchor-id="priors">Priors</h2>
+<p>We can choose a flat prior, or a beta distributed prior with different parameter values <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>.</p>
+<div class="cell" data-output-location="slide">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>theta <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>, .<span class="dv">001</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(theta, <span class="fu">dunif</span>(theta),           <span class="at">type=</span><span class="st">"l"</span>, <span class="at">ylab =</span> <span class="st">"likelihood"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(theta, <span class="fu">dbeta</span>(theta, <span class="dv">3</span>, <span class="dv">5</span>),     <span class="at">type=</span><span class="st">"l"</span>, <span class="at">ylab =</span> <span class="st">"likelihood"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(theta, <span class="fu">dbinom</span>(<span class="dv">25</span>, <span class="dv">100</span>, theta), <span class="at">type=</span><span class="st">"l"</span>, <span class="at">ylab =</span> <span class="st">"likelihood"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(theta, <span class="fu">dbeta</span>(theta, <span class="dv">2</span>, <span class="dv">2</span>),     <span class="at">type=</span><span class="st">"l"</span>, <span class="at">ylab =</span> <span class="st">"likelihood"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="choose-prior" class="level2">
+<h2 class="anchored" data-anchor-id="choose-prior">Choose prior</h2>
+<p>Binomial distribution</p>
+<p><span class="math inline">\(\theta^k (1-\theta)^{n-k} \\ \theta^{25} (1-\theta)^{100-25}\)</span></p>
+</section>
+<section id="now-what-is-the-data-saying" class="level2">
+<h2 class="anchored" data-anchor-id="now-what-is-the-data-saying">Now what is the data saying</h2>
+<section id="my-ten-tosses" class="level3">
+<h3 class="anchored" data-anchor-id="my-ten-tosses">My ten tosses</h3>
+<p><span class="math inline">\(\begin{aligned}  k &amp;= 2 \\  n &amp;= 10  \end{aligned}\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">=</span> <span class="dv">2</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="likelihood" class="level2">
+<h2 class="anchored" data-anchor-id="likelihood">Likelihood</h2>
+<p>What is the most likely parameter value <span class="math inline">\(\theta\)</span> assuming the data to be true:</p>
+<p><span class="math inline">\(\theta = \frac{2}{10} = 0.2\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>theta.given.data <span class="ot">=</span> k<span class="sc">/</span>n</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>theta.given.data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2</code></pre>
+</div>
+</div>
+</section>
+<section id="likelihood-function" class="level2">
+<h2 class="anchored" data-anchor-id="likelihood-function">Likelihood function</h2>
+<p>How likely is 2 out of 10 for all possible <span class="math inline">\(\theta\)</span> values?</p>
+<p><span class="math inline">\(\theta^k (1-\theta)^{n-k}\)</span></p>
+<div class="cell" data-output-location="slide">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>thetas <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, .<span class="dv">01</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>likelihood <span class="ot">=</span>  <span class="fu">dbinom</span>(k, n, thetas)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(thetas, <span class="fu">dbinom</span>(k, n, thetas),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Likelihood function"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">type=</span><span class="st">'l'</span>, </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Likelihood"</span>, </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">las =</span> <span class="dv">1</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span>theta.given.data, <span class="at">lty=</span><span class="st">'dashed'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<hr>
+<p><img src="../../../../topics/bayes/likelihood_function.gif" class="img-fluid"></p>
+</section>
+<section id="posterior" class="level2">
+<h2 class="anchored" data-anchor-id="posterior">Posterior</h2>
+<p>Now we can update our belief about the possible values of theta based on the data (the likelihood function) we found. For this we use Bayes rule.</p>
+<p><span class="math inline">\(\begin{aligned}  {Posterior} &amp;\propto {Likelihood} \times {Prior} \\  \theta^{27}(1-\theta)^{83} &amp;= \theta^{2} (1-\theta)^{10-2} \times \theta^{25} (1-\theta)^{100-25}  \end{aligned}\)</span></p>
+</section>
+<section id="visual" class="level2">
+<h2 class="anchored" data-anchor-id="visual">Visual</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="theta-all-mighty" class="level2">
+<h2 class="anchored" data-anchor-id="theta-all-mighty">Theta all mighty</h2>
+<p>The true value of <span class="math inline">\(theta\)</span> for our binomial distribution.</p>
+<p><span class="math inline">\(\Huge \theta = .68\)</span></p>
+<p>The data driver!</p>
+</section>
+<section id="animation-code" class="level2">
+<h2 class="anchored" data-anchor-id="animation-code">Animation code</h2>
+<div class="cell" data-ffmpeg.format="gif" data-animation.hook="gifski">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">25</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Run multiple samples with our real theta of .68 as our driving force.</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>real.theta <span class="ot">=</span> .<span class="dv">68</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>old.k <span class="ot">=</span> <span class="dv">27</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>old.n <span class="ot">=</span> <span class="dv">83</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>) {</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Choose a random sample size between 10 and 100</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  sample.size.n <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">30</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">1</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Sample number of heads based on sample size and fixed real parameter value</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  number.of.heads.k <span class="ot">=</span> <span class="fu">rbinom</span>(<span class="dv">1</span>, sample.size.n, real.theta)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># sample.size.n</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># number.of.heads.k</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  new.k <span class="ot">=</span> old.k <span class="sc">+</span> number.of.heads.k</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  new.n <span class="ot">=</span> old.n <span class="sc">+</span> sample.size.n</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(theta, <span class="fu">dbinom</span>(new.k, new.n,  theta), <span class="at">type=</span><span class="st">"l"</span>, <span class="at">ylab =</span> <span class="st">"likelihood"</span>, <span class="at">main =</span> <span class="st">"Posterior"</span>)</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(theta, <span class="fu">dbinom</span>(number.of.heads.k, sample.size.n,   theta), <span class="at">type=</span><span class="st">"l"</span>, <span class="at">ylab =</span> <span class="st">"likelihood"</span>, <span class="at">main =</span> <span class="st">"Likelihood"</span>)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(theta, <span class="fu">dbinom</span>(old.k, old.n, theta), <span class="at">type=</span><span class="st">"l"</span>, <span class="at">ylab =</span> <span class="st">"likelihood"</span>, <span class="at">main =</span> <span class="st">"Prior"</span>)</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  old.k <span class="ot">=</span> new.k</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  old.n <span class="ot">=</span> new.n</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="animation" class="level2">
+<h2 class="anchored" data-anchor-id="animation">Animation</h2>
+<p><img src="../../../../topics/bayes/bayes_in_action.gif" class="img-fluid"></p>
+</section>
+<section id="take-home-message" class="level2">
+<h2 class="anchored" data-anchor-id="take-home-message">Take home message</h2>
+<ul>
+<li>Bayesians quantify uncertainty through distributions.</li>
+<li>The more peaked the distribution, the lower the uncertainty.</li>
+<li>Incoming information continually updates our knowledge; today’s posterior is tomorrow’s prior.</li>
+</ul>
+</section>
+</section>
+<section id="bayesian-hypothesis-testing" class="level1 section">
+<h1 class="section">Bayesian hypothesis testing</h1>
+<section id="updating-belief" class="level2">
+<h2 class="anchored" data-anchor-id="updating-belief">Updating belief</h2>
+<p><a href="https://johnnydoorn.github.io/IntroductionBayesianInference/">Link to course literature from last year</a></p>
+</section>
+<section id="bayesian-hypothesis-testing-1" class="level2">
+<h2 class="anchored" data-anchor-id="bayesian-hypothesis-testing-1">Bayesian Hypothesis Testing</h2>
+<ul>
+<li><span class="math inline">\(H_0\)</span>, the null hypothesis. For instance <span class="math inline">\(\theta = .5\)</span> (people cannot taste the difference between alcoholic and non-alcoholic beer).</li>
+<li><span class="math inline">\(H_A\)</span> is the hypothesis that relaxes the restriction imposed by <span class="math inline">\(H_0\)</span>, and instead considers multiple values for <span class="math inline">\(\theta\)</span>.</li>
+</ul>
+</section>
+<section id="prior-belief" class="level2">
+<h2 class="anchored" data-anchor-id="prior-belief">Prior Belief</h2>
+<p><span class="math display">\[\large \underbrace{\frac{P(H_A \mid data)}{P(H_0 \mid data)}}_\textrm{Posterior belief} = \underbrace{\frac{P(H_A)}{P(H_0)}}_\textrm{Prior belief} \times \underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}\]</span></p>
+</section>
+<section id="bayes-factor" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="bayes-factor">Bayes Factor</h2>
+<p><span class="math display">\[\underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}\]</span> A ratio of the marginal likelihood of the data under the alternative and the null.</p>
+<p>A Bayes factor of <span class="math inline">\({BF}_{10} = 3\)</span>, means that the data are 3 times more likely under the alternative model than under the null model.</p>
+</section>
+<section id="heuristics-for-bf" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="heuristics-for-bf">Heuristics for BF</h2>
+<p>Heuristics for the Interpretation of the Bayes Factor by <a href="https://en.wikipedia.org/wiki/Harold_Jeffreys">Harold Jeffreys</a></p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>BF</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1 – 3</td>
+<td>Anecdotal</td>
+</tr>
+<tr class="even">
+<td>3 – 10</td>
+<td>Moderate</td>
+</tr>
+<tr class="odd">
+<td>10 – 30</td>
+<td>Strong</td>
+</tr>
+<tr class="even">
+<td>30 – 100</td>
+<td>Very strong</td>
+</tr>
+<tr class="odd">
+<td>&gt;100</td>
+<td>Extreme</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="advantages-of-the-bayes-factor" class="level2">
+<h2 class="anchored" data-anchor-id="advantages-of-the-bayes-factor">Advantages of the Bayes Factor</h2>
+<ul>
+<li>Provides a continuous degree of evidence without requiring an all-or-none decision.</li>
+<li>Allows evidence to be monitored during data collection.</li>
+<li>Differentiates between “the data support H0” (evidence for absence) and “the data are not informative” (absence of evidence).</li>
+</ul>
+</section>
+<section id="bf-pizza" class="level2">
+<h2 class="anchored" data-anchor-id="bf-pizza">BF pizza</h2>
+<p><img src="../../topics/bayes/BF1.png" class="img-fluid"></p>
+<hr>
+<p><img src="../../topics/bayes/BF3.png" class="img-fluid"></p>
+<hr>
+<p><img src="../../../../topics/bayes/BF13.png" class="img-fluid"></p>
+</section>
+<section id="different-models" class="level2">
+<h2 class="anchored" data-anchor-id="different-models">Different Models</h2>
+</section>
+<section id="take-home-message-1" class="level2">
+<h2 class="anchored" data-anchor-id="take-home-message-1">Take home message</h2>
+<ul>
+<li>Bayesians quantify uncertainty through distributions.</li>
+<li>The more peaked the distribution, the lower the uncertainty.</li>
+<li>Incoming information continually updates our knowledge; today’s posterior is tomorrow’s prior.</li>
+</ul>
+</section>
+</section>
 <section id="bayesian-anova" class="level1 section">
 <h1 class="section">Bayesian ANOVA</h1>
 <section id="anova-in-regression-formula" class="level2">
@@ -131,7 +476,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="two-models" class="level2">
 <h2 class="anchored" data-anchor-id="two-models">Two Models</h2>
-<p><span class="math display">\[\mathcal{M_0}: b_1 = 0 \]</span> <span class="math display">\[\mathcal{M_1}: b_1 \sim Cauchy(0.707)\]</span> ::: {.cell} ::: {.cell-output-display} <img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"> ::: :::</p>
+<p><span class="math display">\[\mathcal{M_0}: b_1 = 0 \]</span> <span class="math display">\[\mathcal{M_1}: b_1 \sim Cauchy(0.707)\]</span> ::: {.cell} ::: {.cell-output-display} <img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"> ::: :::</p>
 </section>
 <section id="model-comparison" class="level2">
 <h2 class="anchored" data-anchor-id="model-comparison">Model Comparison</h2>
@@ -142,7 +487,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="marginal-likelihood-of-mathcalm_1">Marginal Likelihood of <span class="math inline">\(\mathcal{M}_1\)</span></h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -150,7 +495,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="marginal-likelihood-of-mathcalm_0">Marginal Likelihood of <span class="math inline">\(\mathcal{M}_0\)</span></h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -172,7 +517,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="priors-for-mathcalm_a">Priors for <span class="math inline">\(\mathcal{M_A}\)</span></h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -180,7 +525,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="priors-for-mathcalm_c">Priors for <span class="math inline">\(\mathcal{M_C}\)</span></h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -188,7 +533,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="priors-for-mathcalm_ac">Priors for <span class="math inline">\(\mathcal{M_{A+C}}\)</span></h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <!-- Footer insert below -->

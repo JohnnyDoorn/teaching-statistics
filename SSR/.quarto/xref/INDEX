@@ -76,5 +76,8 @@
   "2024/18. Bayesian ANOVA/18. bayesian anova.qmd": {
     "18. bayesian anova.html": "7d1b8192",
     "18. bayesian anova.slide.html": "b194c933"
+  },
+  "topics/bayes/bayesian_parameter_estimation.qmd": {
+    "bayesian_parameter_estimation.html": "96463cba"
   }
 }
