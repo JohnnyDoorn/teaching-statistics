@@ -1,10 +1,5 @@
 # Bayesian hypothesis testing {.section}
 
-
-## Updating belief
-
-[Link to course literature from last year](https://johnnydoorn.github.io/IntroductionBayesianInference/)
-
 ## Bayesian Hypothesis Testing
 
 -   $H_0$, the null hypothesis. For instance $\theta = .5$ (people cannot taste the difference between alcoholic and non-alcoholic beer).
@@ -12,13 +7,31 @@
 
 ## Prior Belief
 
-$$\large \underbrace{\frac{P(H_A \mid data)}{P(H_0 \mid data)}}_\textrm{Posterior belief} = \underbrace{\frac{P(H_A)}{P(H_0)}}_\textrm{Prior belief} \times \underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}$$
+$$\large \underbrace{\frac{P(H_A \mid data)}{P(H_0 \mid data)}}_\textrm{Posterior odds} = \underbrace{\frac{P(H_A)}{P(H_0)}}_\textrm{Prior odds} \times \underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}$$
 
 ## Bayes Factor {.subsection}
 
-$$\underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}$$ A ratio of the marginal likelihood of the data under the alternative and the null.
+$$\underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}$$ A ratio of the **marginal likelihood** of the data for the alternative and the null models.
 
 A Bayes factor of ${BF}_{10} = 3$, means that the data are 3 times more likely under the alternative model than under the null model.
+
+## Bayes Factor {.smaller}
+```{r fig.align='center', out.width='90%', echo = FALSE}
+par(mfrow = c(1, 2), cex.main = 0.95)
+cols <- viridis::viridis(6)
+barplot(dbinom(0:10, 10, 0.5), names.arg = 0:10, xlab = "Number of heads", ylab = "Likelihood",
+        main = "Likely Outcomes under Sarah's Model", col = cols[1], ylim = c(0,0.32))
+barplot(c(rep(0, 8), dbinom(8, 10, 0.5)), add = TRUE, col = cols[6])
+
+barplot(rep(1/11, 11), names.arg = 0:10, xlab = "Number of heads", ylab = "Likelihood",
+        main = "Likely Outcomes under Alex's Model", col = cols[4], ylim = c(0,0.32))
+barplot(c(rep(0, 8), 1/11), add = TRUE, col = cols[6])
+```
+- Sarah's model has a marginal likelihood of `r round(dbinom(8, 10, 0.5), 2)` for 8 heads
+- Alex's model has a marginal likelihood of `r round((1/11), 2)` for 8 heads
+- $\text{BF}_{SA} =$  `r round(dbinom(8, 10, 0.5), 2)` / `r round(1/11, 2)` =  `r round(round(dbinom(8, 10, 0.5), 2) / round(1/11, 2), 2)`
+- The data are `r round(round(dbinom(8, 10, 0.5), 2) / round(1/11, 2), 2)` times more likely under Sarah's model than under Alex's model
+- The data are `r round( round(1/11, 2) / round(dbinom(8, 10, 0.5), 2), 2)` times more likely under Alex's model than under Sarah's model
 
 ## Heuristics for BF {.subsection}
 
@@ -32,28 +45,29 @@ Heuristics for the Interpretation of the Bayes Factor by [Harold Jeffreys](https
 | 30 – 100 | Very strong |
 | \>100    | Extreme     |
 
+## BF pizza
+<div style="text-align: center;">
+<img src="../../topics/bayes/BF_TableInterpretation.png" alt="Pizza plots" width="900"/>
+</div>
+
+
+## BF pizza
+<div style="text-align: center;">
+<img src="../../topics/bayes/BF1.png" alt="Pizza plot for BF10 = 1" width="350"/>
+</div>
+
+## BF pizza
+<div style="text-align: center;">
+<img src="../../topics/bayes/BF3.png" alt="Pizza plot for BF10 = 3" width="350"/>
+</div>
+
+## BF pizza
+<div style="text-align: center;">
+<img src="../../topics/bayes/BF13.png" alt="Pizza plot for BF01 = 3" width="350"/>
+</div>
+
 ## Advantages of the Bayes Factor
 
 -   Provides a continuous degree of evidence without requiring an all-or-none decision.
 -   Allows evidence to be monitored during data collection.
 -   Differentiates between “the data support H0” (evidence for absence) and “the data are not informative” (absence of evidence).
-
-## BF pizza
-
-![](../../topics/bayes/BF1.png)
-
-------------------------------------------------------------------------
-
-![](../../topics/bayes/BF3.png)
-
-------------------------------------------------------------------------
-
-![](../../../../topics/bayes/BF13.png)
-
-## Different Models
-
-## Take home message
-
--   Bayesians quantify uncertainty through distributions.
--   The more peaked the distribution, the lower the uncertainty.
--   Incoming information continually updates our knowledge; today’s posterior is tomorrow’s prior.

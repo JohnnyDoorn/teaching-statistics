@@ -79,5 +79,8 @@
   },
   "topics/bayes/bayesian_parameter_estimation.qmd": {
     "bayesian_parameter_estimation.html": "96463cba"
+  },
+  "topics/bayes/bayesian_hypothesis_testing.qmd": {
+    "bayesian_hypothesis_testing.html": "a2065bc2"
   }
 }

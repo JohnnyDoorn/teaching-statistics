@@ -61,6 +61,13 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#priors-for-mathcalm_a" id="toc-priors-for-mathcalm_a" class="nav-link" data-scroll-target="#priors-for-mathcalm_a">Priors for <span class="math inline">\(\mathcal{M_A}\)</span></a></li>
   <li><a href="#priors-for-mathcalm_c" id="toc-priors-for-mathcalm_c" class="nav-link" data-scroll-target="#priors-for-mathcalm_c">Priors for <span class="math inline">\(\mathcal{M_C}\)</span></a></li>
   <li><a href="#priors-for-mathcalm_ac" id="toc-priors-for-mathcalm_ac" class="nav-link" data-scroll-target="#priors-for-mathcalm_ac">Priors for <span class="math inline">\(\mathcal{M_{A+C}}\)</span></a></li>
+  <li><a href="#model-comparison-results" id="toc-model-comparison-results" class="nav-link" data-scroll-target="#model-comparison-results">Model comparison results</a></li>
+  <li><a href="#looking-at-the-individual-effects" id="toc-looking-at-the-individual-effects" class="nav-link" data-scroll-target="#looking-at-the-individual-effects">Looking at the individual effects</a></li>
+  <li><a href="#single-model-inference" id="toc-single-model-inference" class="nav-link" data-scroll-target="#single-model-inference">Single model inference</a></li>
+  <li><a href="#single-model-inference-posterior-for-beertype" id="toc-single-model-inference-posterior-for-beertype" class="nav-link" data-scroll-target="#single-model-inference-posterior-for-beertype">Single model inference: Posterior for BeerType</a></li>
+  <li><a href="#single-model-inference-posteriors-for-correctidentify" id="toc-single-model-inference-posteriors-for-correctidentify" class="nav-link" data-scroll-target="#single-model-inference-posteriors-for-correctidentify">Single model inference: Posteriors for CorrectIdentify</a></li>
+  <li><a href="#lost" id="toc-lost" class="nav-link" data-scroll-target="#lost">Lost?</a></li>
+  <li><a href="#jasp" id="toc-jasp" class="nav-link" data-scroll-target="#jasp">JASP</a></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="bayesian_anova.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
@@ -86,9 +93,13 @@ ul.task-list li input[type="checkbox"] {
 <section id="two-models" class="level2">
 <h2 class="anchored" data-anchor-id="two-models">Two Models</h2>
 <p><span class="math display">\[\mathcal{M_0}: b_1 = 0 \]</span> <span class="math display">\[\mathcal{M_1}: b_1 \sim Cauchy(0.707)\]</span></p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="bayesian_anova_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="bayesian_anova_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -107,15 +118,19 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="marginal-likelihood-of-mathcalm_0" class="level2">
 <h2 class="anchored" data-anchor-id="marginal-likelihood-of-mathcalm_0">Marginal Likelihood of <span class="math inline">\(\mathcal{M}_0\)</span></h2>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="bayesian_anova_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="bayesian_anova_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
 <section id="ratio-of-marginal-likelihoods-bayes-factor" class="level2">
 <h2 class="anchored" data-anchor-id="ratio-of-marginal-likelihoods-bayes-factor">Ratio of Marginal Likelihoods = Bayes Factor</h2>
-<p><span class="math display">\[\frac{P(data \mid \mathcal{M}_1)}{P(data \mid \mathcal{M}_0)} \approx 90,000\]</span> The data are 90,000 times more likely under <span class="math inline">\(\mathcal{M}_1\)</span> than under <span class="math inline">\(\mathcal{M}_0\)</span></p>
+<p><span class="math display">\[\frac{P(data \mid \mathcal{M}_1)}{P(data \mid \mathcal{M}_0)} \approx 10,000\]</span> The data are 10,000 times more likely under <span class="math inline">\(\mathcal{M}_1\)</span> than under <span class="math inline">\(\mathcal{M}_0\)</span></p>
 </section>
 <section id="four-models-2-predictors-with-2-groups-each" class="level2">
 <h2 class="anchored" data-anchor-id="four-models-2-predictors-with-2-groups-each">Four Models (2 predictors with 2 groups each)</h2>
@@ -129,26 +144,80 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="priors-for-mathcalm_a" class="level2">
 <h2 class="anchored" data-anchor-id="priors-for-mathcalm_a">Priors for <span class="math inline">\(\mathcal{M_A}\)</span></h2>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="bayesian_anova_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="bayesian_anova_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
 <section id="priors-for-mathcalm_c" class="level2">
 <h2 class="anchored" data-anchor-id="priors-for-mathcalm_c">Priors for <span class="math inline">\(\mathcal{M_C}\)</span></h2>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="bayesian_anova_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="bayesian_anova_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
 <section id="priors-for-mathcalm_ac" class="level2">
 <h2 class="anchored" data-anchor-id="priors-for-mathcalm_ac">Priors for <span class="math inline">\(\mathcal{M_{A+C}}\)</span></h2>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="bayesian_anova_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="bayesian_anova_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
+</div>
+</div>
+</section>
+<section id="model-comparison-results" class="level2">
+<h2 class="anchored" data-anchor-id="model-comparison-results">Model comparison results</h2>
+<div style="text-align: center;">
+<p><img src="../../topics/bayes/ANOVA_ModelComparison.png" alt="Bayes factor table" width="900"></p>
+</div>
+</section>
+<section id="looking-at-the-individual-effects" class="level2">
+<h2 class="anchored" data-anchor-id="looking-at-the-individual-effects">Looking at the individual effects</h2>
+<div style="text-align: center;">
+<p><img src="../../topics/bayes/ANOVA_AnalysisEffects.png" alt="Bayes factor table" width="900"></p>
+</div>
+</section>
+<section id="single-model-inference" class="level2">
+<h2 class="anchored" data-anchor-id="single-model-inference">Single model inference</h2>
+<div style="text-align: center;">
+<p><img src="../../topics/bayes/ANOVA_SingleModelInferenceMainEffects.png" alt="Bayes factor table" width="900"></p>
+</div>
+</section>
+<section id="single-model-inference-posterior-for-beertype" class="level2">
+<h2 class="anchored" data-anchor-id="single-model-inference-posterior-for-beertype">Single model inference: Posterior for BeerType</h2>
+<div style="text-align: center;">
+<p><img src="../../topics/bayes/ANOVA_BeerType.png" alt="Bayes factor table" width="550"></p>
+</div>
+</section>
+<section id="single-model-inference-posteriors-for-correctidentify" class="level2">
+<h2 class="anchored" data-anchor-id="single-model-inference-posteriors-for-correctidentify">Single model inference: Posteriors for CorrectIdentify</h2>
+<div style="text-align: center;">
+<p><img src="../../topics/bayes/ANOVA_CorrectIdentify.png" alt="Bayes factor table" width="450"></p>
+</div>
+</section>
+<section id="lost" class="level2">
+<h2 class="anchored" data-anchor-id="lost">Lost?</h2>
+<div style="text-align: center;">
+<p><img src="../../topics/bayes/info.png" alt="Info button in JASP" width="200"></p>
+</div>
+</section>
+<section id="jasp" class="level2">
+<h2 class="anchored" data-anchor-id="jasp">JASP</h2>
+<div style="text-align: center;">
+<p><img src="../../topics/bayes/JASP_logo_green.svg" alt="JASP" width="200"></p>
 </div>
 </section>
 </section>

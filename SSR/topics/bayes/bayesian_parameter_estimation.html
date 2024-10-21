@@ -84,22 +84,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#bayesian-parameter-estimation" id="toc-bayesian-parameter-estimation" class="nav-link active" data-scroll-target="#bayesian-parameter-estimation">Bayesian parameter estimation</a>
   <ul class="collapse">
-  <li><a href="#updating-belief" id="toc-updating-belief" class="nav-link" data-scroll-target="#updating-belief">Updating belief</a></li>
   <li><a href="#what-is-a-model" id="toc-what-is-a-model" class="nav-link" data-scroll-target="#what-is-a-model">What is a model?</a></li>
   <li><a href="#what-does-a-model-predict" id="toc-what-does-a-model-predict" class="nav-link" data-scroll-target="#what-does-a-model-predict">What does a model predict?</a></li>
   <li><a href="#model-with-multiple-values" id="toc-model-with-multiple-values" class="nav-link" data-scroll-target="#model-with-multiple-values">Model with multiple values</a></li>
   <li><a href="#one-sided-model" id="toc-one-sided-model" class="nav-link" data-scroll-target="#one-sided-model">One-sided model</a></li>
-  <li><a href="#prior-distribution" id="toc-prior-distribution" class="nav-link" data-scroll-target="#prior-distribution">Prior distribution</a></li>
-  <li><a href="#priors" id="toc-priors" class="nav-link" data-scroll-target="#priors">Priors</a></li>
-  <li><a href="#choose-prior" id="toc-choose-prior" class="nav-link" data-scroll-target="#choose-prior">Choose prior</a></li>
+  <li><a href="#prior-distribution---ptheta" id="toc-prior-distribution---ptheta" class="nav-link" data-scroll-target="#prior-distribution---ptheta">Prior distribution - (<span class="math inline">\(P(\theta)\)</span>)</a></li>
   <li><a href="#now-what-is-the-data-saying" id="toc-now-what-is-the-data-saying" class="nav-link" data-scroll-target="#now-what-is-the-data-saying">Now what is the data saying</a></li>
-  <li><a href="#likelihood" id="toc-likelihood" class="nav-link" data-scroll-target="#likelihood">Likelihood</a></li>
-  <li><a href="#likelihood-function" id="toc-likelihood-function" class="nav-link" data-scroll-target="#likelihood-function">Likelihood function</a></li>
+  <li><a href="#likelihood-function---pdata-theta" id="toc-likelihood-function---pdata-theta" class="nav-link" data-scroll-target="#likelihood-function---pdata-theta">Likelihood function - <span class="math inline">\(P(data | \theta)\)</span></a></li>
+  <li><a href="#marginal-likelihood---pdata" id="toc-marginal-likelihood---pdata" class="nav-link" data-scroll-target="#marginal-likelihood---pdata">Marginal likelihood - <span class="math inline">\(P(data)\)</span></a></li>
   <li><a href="#posterior" id="toc-posterior" class="nav-link" data-scroll-target="#posterior">Posterior</a></li>
-  <li><a href="#visual" id="toc-visual" class="nav-link" data-scroll-target="#visual">Visual</a></li>
-  <li><a href="#theta-all-mighty" id="toc-theta-all-mighty" class="nav-link" data-scroll-target="#theta-all-mighty">Theta all mighty</a></li>
-  <li><a href="#animation-code" id="toc-animation-code" class="nav-link" data-scroll-target="#animation-code">Animation code</a></li>
-  <li><a href="#animation" id="toc-animation" class="nav-link" data-scroll-target="#animation">Animation</a></li>
+  <li><a href="#updating-beliefs" id="toc-updating-beliefs" class="nav-link" data-scroll-target="#updating-beliefs">Updating beliefs</a></li>
+  <li><a href="#posterior-distribution---ptheta-data" id="toc-posterior-distribution---ptheta-data" class="nav-link" data-scroll-target="#posterior-distribution---ptheta-data">Posterior distribution - <span class="math inline">\(P(\theta | data)\)</span></a></li>
+  <li><a href="#bayesian-estimation" id="toc-bayesian-estimation" class="nav-link" data-scroll-target="#bayesian-estimation">Bayesian estimation</a></li>
   <li><a href="#take-home-message" id="toc-take-home-message" class="nav-link" data-scroll-target="#take-home-message">Take home message</a></li>
   </ul></li>
   </ul>
@@ -113,12 +109,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="bayesian-parameter-estimation" class="level1 section">
 <h1 class="section">Bayesian parameter estimation</h1>
-<section id="updating-belief" class="level2">
-<h2 class="anchored" data-anchor-id="updating-belief">Updating belief</h2>
-<blockquote class="blockquote">
-<p>Posterior <span class="math inline">\(\propto\)</span> Likelihood <span class="math inline">\(\times\)</span> Prior</p>
-</blockquote>
-</section>
+<!-- ## Updating belief -->
+<!-- > Posterior $\propto$ Likelihood $\times$ Prior -->
 <section id="what-is-a-model" class="level2">
 <h2 class="anchored" data-anchor-id="what-is-a-model">What is a model?</h2>
 <div class="cell" data-layout-align="center">
@@ -159,145 +151,92 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="one-sided-model">One-sided model</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-two-models-binomial-onesided-predictions" class="quarto-figure quarto-figure-center anchored">
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="bayesian_parameter_estimation_files/figure-html/fig-two-models-binomial-onesided-predictions-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;1: <strong>?(caption)</strong></figcaption>
+<p><img src="bayesian_parameter_estimation_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="prior-distribution" class="level2">
-<h2 class="anchored" data-anchor-id="prior-distribution">Prior distribution</h2>
-<p>You have assigned a prior probability distribution to the parameter <span class="math inline">\(\theta\)</span>.</p>
-<blockquote class="blockquote">
-<p>This is your prior</p>
-</blockquote>
-<p>Now we normally do not draw our priors, but we could.</p>
-</section>
-<section id="priors" class="level2">
-<h2 class="anchored" data-anchor-id="priors">Priors</h2>
-<p>We can choose a flat prior, or a beta distributed prior with different parameter values <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>.</p>
-<div class="cell" data-output-location="slide">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>theta <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>, .<span class="dv">001</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(theta, <span class="fu">dunif</span>(theta),           <span class="at">type=</span><span class="st">"l"</span>, <span class="at">ylab =</span> <span class="st">"likelihood"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(theta, <span class="fu">dbeta</span>(theta, <span class="dv">3</span>, <span class="dv">5</span>),     <span class="at">type=</span><span class="st">"l"</span>, <span class="at">ylab =</span> <span class="st">"likelihood"</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(theta, <span class="fu">dbinom</span>(<span class="dv">25</span>, <span class="dv">100</span>, theta), <span class="at">type=</span><span class="st">"l"</span>, <span class="at">ylab =</span> <span class="st">"likelihood"</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(theta, <span class="fu">dbeta</span>(theta, <span class="dv">2</span>, <span class="dv">2</span>),     <span class="at">type=</span><span class="st">"l"</span>, <span class="at">ylab =</span> <span class="st">"likelihood"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="bayesian_parameter_estimation_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="choose-prior" class="level2">
-<h2 class="anchored" data-anchor-id="choose-prior">Choose prior</h2>
-<p>Binomial distribution</p>
-<p><span class="math inline">\(\theta^k (1-\theta)^{n-k} \\ \theta^{25} (1-\theta)^{100-25}\)</span></p>
+<section id="prior-distribution---ptheta" class="level2">
+<h2 class="anchored" data-anchor-id="prior-distribution---ptheta">Prior distribution - (<span class="math inline">\(P(\theta)\)</span>)</h2>
+<p>Each model has assigned a prior probability distribution to the parameter <span class="math inline">\(\theta\)</span> by means of a probability distribution. In the case of a proportion, a convenient distribution is the Beta distribution because it also has a domain of [0,1].</p>
 </section>
 <section id="now-what-is-the-data-saying" class="level2">
 <h2 class="anchored" data-anchor-id="now-what-is-the-data-saying">Now what is the data saying</h2>
-<section id="my-ten-tosses" class="level3">
-<h3 class="anchored" data-anchor-id="my-ten-tosses">My ten tosses</h3>
-<p><span class="math inline">\(\begin{aligned}  k &amp;= 2 \\  n &amp;= 10  \end{aligned}\)</span></p>
+<section id="ten-coin-tosses" class="level3">
+<h3 class="anchored" data-anchor-id="ten-coin-tosses">Ten coin tosses</h3>
+<p><span class="math inline">\(\begin{aligned}  k &amp;= 8 \\  n &amp;= 10  \end{aligned}\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">=</span> <span class="dv">2</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">=</span> <span class="dv">8</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
-<section id="likelihood" class="level2">
-<h2 class="anchored" data-anchor-id="likelihood">Likelihood</h2>
-<p>What is the most likely parameter value <span class="math inline">\(\theta\)</span> assuming the data to be true:</p>
-<p><span class="math inline">\(\theta = \frac{2}{10} = 0.2\)</span></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>theta.given.data <span class="ot">=</span> k<span class="sc">/</span>n</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>theta.given.data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2</code></pre>
-</div>
-</div>
-</section>
-<section id="likelihood-function" class="level2">
-<h2 class="anchored" data-anchor-id="likelihood-function">Likelihood function</h2>
-<p>How likely is 2 out of 10 for all possible <span class="math inline">\(\theta\)</span> values?</p>
-<p><span class="math inline">\(\theta^k (1-\theta)^{n-k}\)</span></p>
-<div class="cell" data-output-location="slide">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>thetas <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, .<span class="dv">01</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>likelihood <span class="ot">=</span>  <span class="fu">dbinom</span>(k, n, thetas)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(thetas, <span class="fu">dbinom</span>(k, n, thetas),</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Likelihood function"</span>,</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">type=</span><span class="st">'l'</span>, </span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Likelihood"</span>, </span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">las =</span> <span class="dv">1</span>)</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span>theta.given.data, <span class="at">lty=</span><span class="st">'dashed'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="likelihood-function---pdata-theta" class="level2">
+<h2 class="anchored" data-anchor-id="likelihood-function---pdata-theta">Likelihood function - <span class="math inline">\(P(data | \theta)\)</span></h2>
+<p>How likely is 8 out of 10 for all possible <span class="math inline">\(\theta\)</span> values?</p>
+<p><span class="math display">\[\binom{n}{k} \theta^k (1-\theta)^{n-k}\]</span></p>
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="bayesian_parameter_estimation_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="bayesian_parameter_estimation_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+</figure>
 </div>
 </div>
-<hr>
-<p><img src="../../../../topics/bayes/likelihood_function.gif" class="img-fluid"></p>
+</div>
+</section>
+<section id="marginal-likelihood---pdata" class="level2">
+<h2 class="anchored" data-anchor-id="marginal-likelihood---pdata">Marginal likelihood - <span class="math inline">\(P(data)\)</span></h2>
+<p>How likely is 8 out of 10 for all <span class="math inline">\(\theta\)</span> values <strong>in the model, on average</strong>?</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="bayesian_parameter_estimation_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<!-- ----- -->
+<!-- ![](../../topics/bayes/likelihood_function.gif) -->
 </section>
 <section id="posterior" class="level2">
 <h2 class="anchored" data-anchor-id="posterior">Posterior</h2>
-<p>Now we can update our belief about the possible values of theta based on the data (the likelihood function) we found. For this we use Bayes rule.</p>
-<p><span class="math inline">\(\begin{aligned}  {Posterior} &amp;\propto {Likelihood} \times {Prior} \\  \theta^{27}(1-\theta)^{83} &amp;= \theta^{2} (1-\theta)^{10-2} \times \theta^{25} (1-\theta)^{100-25}  \end{aligned}\)</span></p>
+<p>Now we can update Alex’ belief about the possible values of theta based on the data (the likelihood function) we found. Values with a likelihood higher than the average likelihood receive a boost, and others receive a penalty, in plausibility.</p>
 </section>
-<section id="visual" class="level2">
-<h2 class="anchored" data-anchor-id="visual">Visual</h2>
-<div class="cell">
+<section id="updating-beliefs" class="level2">
+<h2 class="anchored" data-anchor-id="updating-beliefs">Updating beliefs</h2>
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="bayesian_parameter_estimation_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="bayesian_parameter_estimation_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+</figure>
 </div>
 </div>
-</section>
-<section id="theta-all-mighty" class="level2">
-<h2 class="anchored" data-anchor-id="theta-all-mighty">Theta all mighty</h2>
-<p>The true value of <span class="math inline">\(theta\)</span> for our binomial distribution.</p>
-<p><span class="math inline">\(\Huge \theta = .68\)</span></p>
-<p>The data driver!</p>
-</section>
-<section id="animation-code" class="level2">
-<h2 class="anchored" data-anchor-id="animation-code">Animation code</h2>
-<div class="cell" data-ffmpeg.format="gif" data-animation.hook="gifski">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">25</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Run multiple samples with our real theta of .68 as our driving force.</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>real.theta <span class="ot">=</span> .<span class="dv">68</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>old.k <span class="ot">=</span> <span class="dv">27</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>old.n <span class="ot">=</span> <span class="dv">83</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>) {</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Choose a random sample size between 10 and 100</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  sample.size.n <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">30</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">1</span>)</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Sample number of heads based on sample size and fixed real parameter value</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  number.of.heads.k <span class="ot">=</span> <span class="fu">rbinom</span>(<span class="dv">1</span>, sample.size.n, real.theta)</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># sample.size.n</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># number.of.heads.k</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  new.k <span class="ot">=</span> old.k <span class="sc">+</span> number.of.heads.k</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  new.n <span class="ot">=</span> old.n <span class="sc">+</span> sample.size.n</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">3</span>))</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(theta, <span class="fu">dbinom</span>(new.k, new.n,  theta), <span class="at">type=</span><span class="st">"l"</span>, <span class="at">ylab =</span> <span class="st">"likelihood"</span>, <span class="at">main =</span> <span class="st">"Posterior"</span>)</span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(theta, <span class="fu">dbinom</span>(number.of.heads.k, sample.size.n,   theta), <span class="at">type=</span><span class="st">"l"</span>, <span class="at">ylab =</span> <span class="st">"likelihood"</span>, <span class="at">main =</span> <span class="st">"Likelihood"</span>)</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(theta, <span class="fu">dbinom</span>(old.k, old.n, theta), <span class="at">type=</span><span class="st">"l"</span>, <span class="at">ylab =</span> <span class="st">"likelihood"</span>, <span class="at">main =</span> <span class="st">"Prior"</span>)</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  old.k <span class="ot">=</span> new.k</span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  old.n <span class="ot">=</span> new.n</span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="animation" class="level2">
-<h2 class="anchored" data-anchor-id="animation">Animation</h2>
-<p><img src="../../../../topics/bayes/bayes_in_action.gif" class="img-fluid"></p>
+<section id="posterior-distribution---ptheta-data" class="level2">
+<h2 class="anchored" data-anchor-id="posterior-distribution---ptheta-data">Posterior distribution - <span class="math inline">\(P(\theta | data)\)</span></h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="bayesian_parameter_estimation_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="bayesian-estimation" class="level2">
+<h2 class="anchored" data-anchor-id="bayesian-estimation">Bayesian estimation</h2>
+<p>The posterior distribution is a probability distribution, so we can make probabilistic statements based on it:</p>
+<blockquote class="blockquote">
+<p>In the Bayesian framework, this is known as the <strong>credible interval</strong>. This interval entails taking the middle <span class="math inline">\(x\)</span>% of the posterior distribution. For instance, we can take a 95% credible interval, which ranges from <span class="math inline">\(0.482\)</span> to <span class="math inline">\(0.940\)</span> in this case. This means that under Alex’s model, there is a 95% probability that the true value of <span class="math inline">\(\theta\)</span> is between <span class="math inline">\(0.482\)</span> and <span class="math inline">\(0.940\)</span>.</p>
+</blockquote>
 </section>
 <section id="take-home-message" class="level2">
 <h2 class="anchored" data-anchor-id="take-home-message">Take home message</h2>

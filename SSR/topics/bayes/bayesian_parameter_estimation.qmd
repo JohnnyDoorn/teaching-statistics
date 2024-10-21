@@ -73,156 +73,121 @@ sampsU <- c(0:5, rbinom(1e5, 10, runif(1e5, 0.5, 1)))
 barplot(table(sampsU)/1e5, names.arg = 0:10, xlab = "Number of heads", ylab = "Likelihood",
         main = "Likely Outcomes under Betty's Model", col = cols[2], ylim = c(0,0.32))
 barplot(c(rep(0, 8), (table(sampsU)/1e5)[9]), add = TRUE, col = cols[6])
-
-
+theta <- seq(0,1,length.out = 1e3)
 ```
 
-## Prior distribution
+## Prior distribution - ($P(\theta)$)
 
-You have assigned a prior probability distribution to the parameter $\theta$.
+Each model has assigned a prior probability distribution to the parameter $\theta$ by means of a probability distribution. In the case of a proportion, a convenient distribution is the Beta distribution because it also has a domain of [0,1]. 
 
-> This is your prior
-
-Now we normally do not draw our priors, but we could. 
-
-## Priors
-
-We can choose a flat prior, or a beta distributed prior with different parameter values $a$ and $b$.
-
-```{r, echo=TRUE}
-#| output-location: slide
-
-theta = seq(0,1, .001)
-layout(matrix(1:4,2,2))
-plot(theta, dunif(theta),           type="l", ylab = "likelihood")
-plot(theta, dbeta(theta, 3, 5),     type="l", ylab = "likelihood")
-plot(theta, dbinom(25, 100, theta), type="l", ylab = "likelihood")
-plot(theta, dbeta(theta, 2, 2),     type="l", ylab = "likelihood")
-```
-
-## Choose prior
-
-Binomial distribution
-
-$\theta^k (1-\theta)^{n-k} \\
-\theta^{25} (1-\theta)^{100-25}$
 
 ## Now what is the data saying
 
-### My ten tosses
+### Ten coin tosses
 
 $\begin{aligned}
-  k &= 2 \\
+  k &= 8 \\
   n &= 10
   \end{aligned}$
 
 ```{r, echo=TRUE}
-k = 2
+k = 8
 n = 10
 ```
 
-## Likelihood
 
-What is the most likely parameter value $\theta$ assuming the data to be true:
+## Likelihood function - $P(data | \theta)$
 
-$\theta = \frac{2}{10} = `r k/n`$
+How likely is 8 out of 10 for all possible $\theta$ values?
 
-```{r, echo=TRUE}
-theta.given.data = k/n
+$$\binom{n}{k} \theta^k (1-\theta)^{n-k}$$
 
-theta.given.data
+```{r fig.align='center', out.width='90%', echo = FALSE}
+par(cex = 1.4, cex.lab = 1.4, mar = c(5.1, 4.5, 4.1, 2.1), cex.main = 0.95)
+ss <- seq(0, 1, length.out = 1e4)
+dd <- dbinom(x = 8, size = 10, ss)
+plot(ss, dd, type = "l", bty = "n", las = 1, ylab = bquote("P(Data |" ~ theta * ")"), xlab = bquote(theta),
+     main = bquote("Likelihood of the observed data, for each value of" ~theta),
+     lwd = 3, col = "darkgreen")
 ```
 
-## Likelihood function
+## Marginal likelihood - $P(data)$
+How likely is 8 out of 10 for all $\theta$ values  **in the model, on average**?
 
-How likely is 2 out of 10 for all possible $\theta$ values?
-
-$\theta^k (1-\theta)^{n-k}$
-
-```{r, echo=TRUE}
-#| output-location: slide
-
-thetas = seq(0, 1, .01)
-
-likelihood =  dbinom(k, n, thetas)
-
-plot(thetas, dbinom(k, n, thetas),
-     main = "Likelihood function",
-     type='l', 
-     ylab = "Likelihood", 
-     las = 1)
-abline(v=theta.given.data, lty='dashed')
+```{r fig.align='center', out.width='90%', echo = FALSE}
+par(cex = 1.4, cex.lab = 1.4, mar = c(5.1, 4.5, 4.1, 2.1), cex.main = 0.95)
+pCol <- palette.colors(NULL, "Okabe-Ito")
+margLik <- round(1/11, 2)
+bords <- round(ss[round(dd, 3) == margLik], 2)
+ll <- unique(bords)[1]
+uu <- unique(bords)[length(unique(bords))]
+plot(ss, dd, type = "l", bty = "n", las = 1, ylab = bquote("P(Data |" ~ theta * ")"), xlab = bquote(theta),
+     main = bquote("Likelihood of the observed data, for each value of" ~theta),
+     lwd = 3, col = "darkgreen")
+abline(h = margLik, lwd = 4, col = "purple")
 ```
 
------
+<!-- ----- -->
 
-![](../../../../topics/bayes/likelihood_function.gif)
+<!-- ![](../../topics/bayes/likelihood_function.gif) -->
 
 ## Posterior
 
-Now we can update our belief about the possible values of theta based on the data (the likelihood function) we found. For this we use Bayes rule.
+Now we can update Alex' belief about the possible values of theta based on the data (the likelihood function) we found. Values with a likelihood higher than the average likelihood receive a boost, and others receive a penalty, in plausibility.
 
-$\begin{aligned}
-  {Posterior} &\propto {Likelihood} \times {Prior} \\
-  \theta^{27}(1-\theta)^{83} &= \theta^{2} (1-\theta)^{10-2} \times \theta^{25} (1-\theta)^{100-25}
-  \end{aligned}$
+## Updating beliefs
+```{r fig.align='center', out.width='90%', echo = FALSE}
+par(cex = 1.4, cex.lab = 1.4, mar = c(5.1, 4.5, 4.1, 2.1), cex.main = 0.95)
+pCol <- palette.colors(NULL, "Okabe-Ito")
+margLik <- round(1/11, 2)
+bords <- round(ss[round(dd, 3) == margLik], 2)
+ll <- unique(bords)[1]
+uu <- unique(bords)[length(unique(bords))]
+plot(ss, dd, type = "l", bty = "n", las = 1, ylab = bquote("P(Data |" ~ theta * ")"), xlab = bquote(theta),
+     main = bquote("Likelihood of the observed data, for each value of" ~theta),
+     lwd = 3, col = "darkgreen")
+ll <- unique(bords)[1]
+uu <- unique(bords)[length(unique(bords))]
+abline(v = uu)
+abline(v = ll)
+arrows(ll, 0, uu, 0,  lwd = 4, length = 0.1, code = 3, col = pCol[3])
+abline(h = margLik, lwd = 4, col = "purple")
 
-## Visual
+ll <- 0
+uu <- unique(bords)[1]
+arrows(ll, 0, uu, 0,  lwd = 4, length = 0.1, code = 3, col = pCol[7])
+ll <- unique(bords)[length(unique(bords))]
+uu <- 1
 
-```{r, echo=FALSE}
-layout(matrix(1:3,1,3))
-plot(theta, dbinom(27, 83,  theta), type="l", ylab = "likelihood", main = "Posterior")
-plot(theta, dbinom(2, 10,   theta), type="l", ylab = "likelihood", main = "Likelihood")
-plot(theta, dbinom(25, 100, theta), type="l", ylab = "likelihood", main = "Prior")
+sq <- seq(ll, uu, length.out = 1e3) #+0.001
+arrows(ll, 0, uu, 0,  lwd = 4, length = 0.1, code = 3, col =  pCol[7])
+abline(h = margLik, lwd = 4, col = "purple")
+```
+
+## Posterior distribution - $P(\theta | data)$
+```{r fig.align='center', out.width='90%', echo = FALSE}
+prior <- dbeta(ss, 1, 1)
+posterior <- prior * dd / margLik
+par(cex = 1.4, cex.lab = 1.4, mar = c(5.1, 4.5, 4.1, 2.1))
+plot(ss, posterior, type = "l", bty = "n", las = 1, ylab = "Density", xlab = bquote(theta),
+     main = bquote("Alex's Prior and Posterior Distribution of" ~theta),
+     lwd = 3, col = "darkorange")
+ll <- unique(bords)[1]
+uu <- unique(bords)[length(unique(bords))]
+abline(v = uu)
+abline(v = ll)
+curve(dbeta(x, 1, 1), from = 0, to = 1, lwd = 3, col ="blue", add = TRUE)
+legend("topleft", legend = c("Prior", "Posterior"), col = c("blue", "darkorange"), lty = 1, lwd = 4, bty = "n")
 ```
 
 
-## Theta all mighty
+## Bayesian estimation
+The posterior distribution is a probability distribution, so we can make probabilistic statements based on it:
 
-The true value of $theta$ for our binomial distribution.
 
-$\Huge \theta = .68$
+>In the Bayesian framework, this is known as the **credible interval**. This interval entails taking the middle $x$% of the posterior distribution. For instance, we can take a 95% credible interval, which ranges from $0.482$ to $0.940$ in this case. This means that under Alex's model, there is a 95% probability that the true value of $\theta$ is between $0.482$ and $0.940$.
 
-The data driver!
 
-## Animation code
-
-```{r, fig.show='animate', ffmpeg.format='gif', dev='jpeg', interval=.1, eval=FALSE, echo=TRUE}
-
-set.seed(25)
-## Run multiple samples with our real theta of .68 as our driving force.
-real.theta = .68
-
-old.k = 27
-old.n = 83
-
-for(i in 1:20) {
-  
-  # Choose a random sample size between 10 and 100
-  sample.size.n = sample(30:100, 1)
-  # Sample number of heads based on sample size and fixed real parameter value
-  number.of.heads.k = rbinom(1, sample.size.n, real.theta)
-  
-  # sample.size.n
-  # number.of.heads.k
-  
-  new.k = old.k + number.of.heads.k
-  new.n = old.n + sample.size.n
-  
-  layout(matrix(1:3,1,3))
-  plot(theta, dbinom(new.k, new.n,  theta), type="l", ylab = "likelihood", main = "Posterior")
-  plot(theta, dbinom(number.of.heads.k, sample.size.n,   theta), type="l", ylab = "likelihood", main = "Likelihood")
-  plot(theta, dbinom(old.k, old.n, theta), type="l", ylab = "likelihood", main = "Prior")
-  
-  old.k = new.k
-  old.n = new.n
-  
-}
-```
-
-## Animation
-
-![](../../../../topics/bayes/bayes_in_action.gif)
 
 ## Take home message
 
