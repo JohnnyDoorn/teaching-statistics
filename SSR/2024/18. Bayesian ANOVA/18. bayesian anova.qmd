@@ -18,6 +18,7 @@ format:
 - [Repitition from RMS](https://johnnydoorn.github.io/IntroductionBayesianInference/)
 - [Addition: chapter 7 on ANOVA](https://johnnydoorn.github.io/IntroductionBayesianInference/07-anova.html)
 
+- [All data sets in Field](https://johnnydoorn.github.io/discoverjasp/repository/dsuj_sav_files.zip)
 
 ```{r child="../../topics/bayes/bayesian_parameter_estimation.qmd"}
 ```
