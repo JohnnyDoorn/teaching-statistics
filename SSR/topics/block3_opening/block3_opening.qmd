@@ -2,6 +2,7 @@
 
 ## Always plot your data
 ![](raincloud.png){width="800px"}
+
 ## Always plot your data
 ![](trex.png){width="800px"}
 

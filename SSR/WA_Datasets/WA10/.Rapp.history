@@ -1,0 +1,8 @@
+load("/Users/johnny/GitHubStuff/teaching-statistics/SSR/WA_Datasets/WA10/Cheating.rdata")
+data
+alcohol = subset(data,select='alcohol')$alcohol
+alcohol
+232.496 + (1.8331 * 19.443)
+232.496 - (1.8331 * 19.443)
+239.8 - (1.8331 * 19.443)
+239.8 + (1.8331 * 19.443)

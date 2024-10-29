@@ -82,5 +82,9 @@
   },
   "topics/bayes/bayesian_hypothesis_testing.qmd": {
     "bayesian_hypothesis_testing.html": "a2065bc2"
+  },
+  "2024/20. correlation_and_simple_regression/20. correlation_simple_regression.qmd": {
+    "20. correlation_simple_regression.html": "2b2d5a0f",
+    "20. correlation_simple_regression.slide.html": "cab9e1a8"
   }
 }

@@ -1,7 +1,7 @@
 ---
-title: "20. Correlation and Simple regression"
+title: "21. Correlation and Simple regression"
 author: "Sharon Kinkenberg & Johnny van Doorn"
-date: "02 nov 2023"
+date: "31 oct 2024"
 footer: "Scientific & Statistical Reasoning"
 format: 
   html: default
@@ -9,19 +9,19 @@ format:
     output-ext: slide.html
 ---
 
-```{r child="../../../../topics/block3_opening/block3_opening.qmd"}
+```{r child="../../topics/block3_opening/block3_opening.qmd"}
 ```
 
 
-```{r child="../../../../topics/correlation/correlation_albumsales.qmd"}
+```{r child="../../topics/correlation/correlation_albumsales.qmd"}
 ```
 
-```{r child="../../../../topics/regression_one_predictor/regression_one_predictor.qmd", eval=TRUE}
+```{r child="../../topics/regression_one_predictor/regression_one_predictor.qmd", eval=TRUE}
 ```
 
 
 <!-- Footer insert below -->
 
-```{r child="../../../../footer.qmd"}
+```{r child="../../footer.qmd"}
 ```
 
