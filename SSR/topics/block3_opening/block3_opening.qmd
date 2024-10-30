@@ -24,3 +24,9 @@
 ![](manyvars.png){width="800px"}
 
 
+## Statistics in block 3 
+
+- Simple regression (single predictor)
+- Multiple regression (two predictors)
+- Mediation analysis (i.e., modeling dependence)
+- Moderation analysis (i.e., modeling interactions)

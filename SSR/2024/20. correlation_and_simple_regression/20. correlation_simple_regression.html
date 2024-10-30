@@ -94,7 +94,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul class="collapse">
-  <li><a href="#some-opening-mantras" id="toc-some-opening-mantras" class="nav-link active" data-scroll-target="#some-opening-mantras">Some Opening Mantra’s</a>
+  <li><a href="#fishing-expedition" id="toc-fishing-expedition" class="nav-link active" data-scroll-target="#fishing-expedition">Fishing Expedition!</a></li>
+  <li><a href="#some-opening-mantras" id="toc-some-opening-mantras" class="nav-link" data-scroll-target="#some-opening-mantras">Some Opening Mantra’s</a>
   <ul class="collapse">
   <li><a href="#always-plot-your-data" id="toc-always-plot-your-data" class="nav-link" data-scroll-target="#always-plot-your-data">Always plot your data</a></li>
   <li><a href="#always-plot-your-data-1" id="toc-always-plot-your-data-1" class="nav-link" data-scroll-target="#always-plot-your-data-1">Always plot your data</a></li>
@@ -128,7 +129,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#venn-diagram-of-variance" id="toc-venn-diagram-of-variance" class="nav-link" data-scroll-target="#venn-diagram-of-variance">Venn diagram of Variance</a></li>
   <li><a href="#partial-correlation-1" id="toc-partial-correlation-1" class="nav-link" data-scroll-target="#partial-correlation-1">Partial correlation</a></li>
   <li><a href="#significance-of-partial-correlation" id="toc-significance-of-partial-correlation" class="nav-link" data-scroll-target="#significance-of-partial-correlation">Significance of partial correlation</a></li>
+  </ul></li>
+  <li><a href="#regression-one-predictor" id="toc-regression-one-predictor" class="nav-link" data-scroll-target="#regression-one-predictor">Regression<br>(one predictor)</a>
+  <ul class="collapse">
+  <li><a href="#regression" id="toc-regression" class="nav-link" data-scroll-target="#regression">Regression</a></li>
+  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions">Assumptions</a></li>
+  <li><a href="#sensitivity" id="toc-sensitivity" class="nav-link" data-scroll-target="#sensitivity">Sensitivity</a></li>
+  <li><a href="#sensitivity-1" id="toc-sensitivity-1" class="nav-link" data-scroll-target="#sensitivity-1">Sensitivity</a></li>
+  <li><a href="#homoscedasticity" id="toc-homoscedasticity" class="nav-link" data-scroll-target="#homoscedasticity">Homoscedasticity</a></li>
   <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data">The data</a></li>
+  <li><a href="#the-data-1" id="toc-the-data-1" class="nav-link" data-scroll-target="#the-data-1">The data</a></li>
   <li><a href="#calculate-regression-parameters" id="toc-calculate-regression-parameters" class="nav-link" data-scroll-target="#calculate-regression-parameters">Calculate regression parameters</a></li>
   <li><a href="#calculate-b_1" id="toc-calculate-b_1" class="nav-link" data-scroll-target="#calculate-b_1">Calculate <span class="math inline">\(b_1\)</span></a></li>
   <li><a href="#calculate-b_0" id="toc-calculate-b_0" class="nav-link" data-scroll-target="#calculate-b_0">Calculate <span class="math inline">\(b_0\)</span></a></li>
@@ -198,6 +208,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
+<section id="fishing-expedition" class="level2">
+<h2 class="anchored" data-anchor-id="fishing-expedition">Fishing Expedition!</h2>
+<p><img src="qr_kkd7n.png"></p>
+<p>Thank you Julia, Kim, Barnaba, Lioba, Joaquin, Tadeja, and Ewa!</p>
+<!-- Nikolas and Zeynep for error-spotting -->
+</section>
 <section id="some-opening-mantras" class="level1">
 <h1>Some Opening Mantra’s</h1>
 <section id="always-plot-your-data" class="level2">
@@ -488,113 +504,106 @@ H_A &amp;: t_r &lt; 0 \\
 <p><img src="20.-correlation_simple_regression_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<pre><code>
-
-# Regression&lt;br&gt;(one predictor) {.section}
-
-::: {.cell}
-
-:::
-
-## Regression {.smaller}
-
-$$\LARGE{\text{outcome} = \text{model prediction} + \text{error}}$$
-
-In statistics, linear regression is a linear approach for modeling the relationship between a scalar dependent variable y and one or more explanatory variables denoted X. The case of one explanatory variable is called simple linear regression.
-
-$$\LARGE{Y_i = \beta_0 + \beta_1 X_i + \epsilon_i}$$
-
-In linear regression, the relationships are modeled using linear predictor functions whose unknown model parameters are estimated from the data.
-
-Source: [wikipedia](https://en.wikipedia.org/wiki/Linear_regression)
-
-&lt;!-- ## Outcome vs Model --&gt;
-
-&lt;!-- ```{r, fig.align='center', fig.asp=.5} --&gt;
-&lt;!-- set.seed(123) --&gt;
-&lt;!-- error = c(2, 1, .5, .1) --&gt;
-&lt;!-- n = 10 --&gt;
-
-&lt;!-- layout(matrix(1:4,1,4)) --&gt;
-&lt;!-- for(e in error) { --&gt;
-
-&lt;!--   x = rnorm(n) --&gt;
-&lt;!--   y = x + rnorm(n, 0 , e) --&gt;
-
-&lt;!--   r   = round(cor(x,y), 2) --&gt;
-&lt;!--   r.2 = round(r^2, 2) --&gt;
-
-&lt;!--   plot(x,y, las = 1, ylab = "y", xlab = "x",  --&gt;
-&lt;!--        main = paste("r =", r," r2 = ", r.2), ylim=c(-2,2), xlim=c(-2,2)) --&gt;
-&lt;!--   fit &lt;- lm(y ~ x) --&gt;
-&lt;!--   abline(fit, col = "red") --&gt;
-
-&lt;!-- } --&gt;
-
-&lt;!-- ``` --&gt;
-
-
-## Assumptions
-
-A selection from Field:
-
-* Sensitivity
-* Homoscedasticity
-
-## Sensitivity
-
-Outliers
-
-* Extreme residuals
-* Cook's distance (&lt; 1)
-* Check Q-Q and residuals plots
-
-## Sensitivity
-
-::: {.cell layout-align="center"}
-::: {.cell-output-display}
-![](20.-correlation_simple_regression_files/figure-html/unnamed-chunk-55-1.png){fig-align='center' width=960}
-:::
-:::
-
-## Homoscedasticity
-
-::: {.columns}
-
-::: {.column}
-
-* Variance of residual should be equal across all expected values
-* Look at scatterplot of standardized: predicted values $\times$ residuals. Roughly round shape is needed
-* After the analysis is complete because it's based on the residuals
-:::
-
-::: {.column}
-
-::: {.cell layout-align="center"}
-::: {.cell-output-display}
-![](20.-correlation_simple_regression_files/figure-html/unnamed-chunk-56-1.png){fig-align='center' width=480}
-:::
-:::
-:::
-
-:::
-
-## The data {.smaller}
-
-::: {.cell}
-::: {.cell-output-display}
-```{=html}
-&lt;div class="datatables html-widget html-fill-item" id="htmlwidget-e83a29e26584200139f7" style="width:100%;height:auto;"&gt;&lt;/div&gt;
-&lt;script type="application/json" data-for="htmlwidget-e83a29e26584200139f7"&gt;{"x":{"filter":"none","vertical":false,"data":[[10.256,985.6849999999999,1445.563,1188.193,574.513,568.954,471.814,537.352,514.068,174.093,1720.806,611.479,251.192,97.97199999999999,406.814,265.398,1323.287,196.65,1326.598,1380.689,792.345,957.167,1789.659,656.1369999999999,613.697,313.362,336.51,1544.899,68.95399999999999,785.692,125.628,377.925,217.994,759.862,1163.444,842.957,125.179,236.598,669.811,612.234,922.019,50,2000,1054.027,385.045,1507.972,102.568,204.568,1170.918,689.547,784.22,405.913,179.778,607.258,1542.329,1112.47,856.985,836.331,236.908,1077.855,579.321,1500,731.364,25.689,391.749,233.999,275.7,56.895,255.117,566.501,102.568,250.568,68.59399999999999,642.7859999999999,1500,102.563,756.984,51.229,644.151,15.313,243.237,256.894,22.464,45.689,724.938,1126.461,1985.119,1837.516,135.986,237.703,976.641,1452.689,1600,268.598,900.889,982.063,201.356,746.024,1132.877,1000,75.896,1351.254,202.705,365.985,305.268,263.268,513.694,152.609,35.987,102.568,215.368,426.784,507.772,233.291,1035.433,102.642,526.1420000000001,624.538,912.349,215.994,561.963,474.76,231.523,678.596,70.922,1567.548,263.598,1423.568,715.678,777.237,509.43,964.11,583.627,923.373,344.392,1095.578,100.025,30.425,1080.342,799.899,1071.752,893.355,283.161,917.0170000000001,234.568,456.897,206.973,1294.099,826.859,564.158,192.607,10.652,45.689,42.568,20.456,635.192,1002.273,1177.047,507.638,215.689,526.48,26.895,883.877,9.103999999999999,103.568,169.583,429.504,223.639,145.585,985.968,500.922,226.652,1051.168,68.093,1547.159,393.774,804.282,801.577,450.562,26.598,179.061,345.687,295.84,2271.86,1134.575,601.434,45.298,759.518,832.869,56.894,709.399,56.895,767.134,503.172,700.929,910.851,888.569,800.615,1500,785.694],[330,120,360,270,220,170,70,210,200,300,290,70,150,190,240,100,250,210,280,230,210,230,320,210,230,250,60,330,150,150,180,80,180,130,320,280,200,130,190,150,230,310,340,240,180,220,40,190,290,340,250,190,120,230,190,210,170,310,90,140,300,340,170,100,200,80,100,70,50,240,160,290,140,210,300,230,280,160,200,110,110,70,100,190,70,360,360,300,120,150,220,280,300,140,290,180,140,210,250,250,120,290,60,140,290,160,100,160,150,140,230,230,30,80,190,90,120,150,230,150,210,180,140,360,10,240,270,290,220,230,220,240,260,170,130,270,140,60,210,210,240,210,200,140,90,120,100,360,180,150,110,90,160,230,40,60,230,230,120,150,120,60,280,120,230,230,40,140,360,210,260,250,200,150,250,100,260,210,290,220,70,110,250,320,300,180,180,200,320,140,100,120,230,150,250,190,240,250,230,110],[43,28,35,33,44,19,20,22,21,40,32,20,24,38,24,25,35,36,27,33,33,28,30,34,49,40,20,42,35,8,49,19,42,6,36,32,28,25,34,21,34,63,31,25,42,37,25,26,39,46,36,12,2,29,33,28,10,38,19,13,30,38,22,23,22,20,18,37,16,32,26,53,28,32,24,37,30,19,47,22,10,1,1,39,8,38,35,40,22,27,31,19,24,1,38,26,11,34,55,5,34,37,13,23,54,18,2,11,30,22,36,37,9,2,12,5,14,20,57,19,35,22,16,53,4,29,43,26,28,37,32,34,30,15,23,31,21,28,18,28,37,26,30,10,21,18,14,38,36,32,9,39,24,45,13,17,32,23,0,35,26,19,26,53,29,28,17,26,42,17,36,45,20,15,28,27,17,32,46,47,19,22,55,31,39,21,36,21,44,27,16,33,33,21,35,26,14,34,11,20]],"container":"&lt;table class=\"display\"&gt;\n  &lt;thead&gt;\n    &lt;tr&gt;\n      &lt;th&gt;adverts&lt;\/th&gt;\n      &lt;th&gt;sales&lt;\/th&gt;\n      &lt;th&gt;airplay&lt;\/th&gt;\n    &lt;\/tr&gt;\n  &lt;\/thead&gt;\n&lt;\/table&gt;","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2]},{"name":"adverts","targets":0},{"name":"sales","targets":1},{"name":"airplay","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}&lt;/script&gt;</code></pre>
-<p>::: :::</p>
 </section>
-<section id="the-data" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="the-data">The data</h2>
+</section>
+<section id="regression-one-predictor" class="level1 section">
+<h1 class="section">Regression<br>(one predictor)</h1>
+<section id="regression" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="regression">Regression</h2>
+<p><span class="math display">\[\LARGE{\text{outcome} = \text{model prediction} + \text{error}}\]</span></p>
+<p>In statistics, linear regression is a linear approach for modeling the relationship between a scalar dependent variable y and one or more explanatory variables denoted X. The case of one explanatory variable is called simple linear regression.</p>
+<p><span class="math display">\[\LARGE{Y_i = \beta_0 + \beta_1 X_i + \epsilon_i}\]</span></p>
+<p>In linear regression, the relationships are modeled using linear predictor functions whose unknown model parameters are estimated from the data.</p>
+<p>Source: <a href="https://en.wikipedia.org/wiki/Linear_regression">wikipedia</a></p>
+<!-- ## Outcome vs Model -->
+<!-- ```{r, fig.align='center', fig.asp=.5} -->
+<!-- set.seed(123) -->
+<!-- error = c(2, 1, .5, .1) -->
+<!-- n = 10 -->
+<!-- layout(matrix(1:4,1,4)) -->
+<!-- for(e in error) { -->
+<!--   x = rnorm(n) -->
+<!--   y = x + rnorm(n, 0 , e) -->
+<!--   r   = round(cor(x,y), 2) -->
+<!--   r.2 = round(r^2, 2) -->
+<!--   plot(x,y, las = 1, ylab = "y", xlab = "x",  -->
+<!--        main = paste("r =", r," r2 = ", r.2), ylim=c(-2,2), xlim=c(-2,2)) -->
+<!--   fit <- lm(y ~ x) -->
+<!--   abline(fit, col = "red") -->
+<!-- } -->
+<!-- ``` -->
+</section>
+<section id="assumptions" class="level2">
+<h2 class="anchored" data-anchor-id="assumptions">Assumptions</h2>
+<p>A selection from Field:</p>
+<ul>
+<li>Sensitivity</li>
+<li>Homoscedasticity</li>
+</ul>
+</section>
+<section id="sensitivity" class="level2">
+<h2 class="anchored" data-anchor-id="sensitivity">Sensitivity</h2>
+<p>Outliers</p>
+<ul>
+<li>Extreme residuals</li>
+<li>Cook’s distance (&lt; 1)</li>
+<li>Check Q-Q and residuals plots</li>
+</ul>
+</section>
+<section id="sensitivity-1" class="level2">
+<h2 class="anchored" data-anchor-id="sensitivity-1">Sensitivity</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="20.-correlation_simple_regression_files/figure-html/unnamed-chunk-58-1.png" class="img-fluid figure-img" width="768"></p>
+<p><img src="20.-correlation_simple_regression_files/figure-html/unnamed-chunk-54-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="homoscedasticity" class="level2">
+<h2 class="anchored" data-anchor-id="homoscedasticity">Homoscedasticity</h2>
+<div class="columns">
+<div class="column">
+<ul>
+<li>Variance of residual should be equal across all expected values</li>
+<li>Look at scatterplot of standardized: predicted values <span class="math inline">\(\times\)</span> residuals. Roughly round shape is needed</li>
+<li>After the analysis is complete because it’s based on the residuals</li>
+</ul>
+</div><div class="column">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="20.-correlation_simple_regression_files/figure-html/unnamed-chunk-55-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-data" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="the-data">The data</h2>
+<blockquote class="blockquote">
+<p>Predict album sales (x 1,000 copies) based on airplay (no. plays).</p>
+</blockquote>
+<div class="cell">
+<div class="cell-output-display">
+
+<div class="datatables html-widget html-fill-item" id="htmlwidget-e83a29e26584200139f7" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-e83a29e26584200139f7">{"x":{"filter":"none","vertical":false,"data":[[10.256,985.6849999999999,1445.563,1188.193,574.513,568.954,471.814,537.352,514.068,174.093,1720.806,611.479,251.192,97.97199999999999,406.814,265.398,1323.287,196.65,1326.598,1380.689,792.345,957.167,1789.659,656.1369999999999,613.697,313.362,336.51,1544.899,68.95399999999999,785.692,125.628,377.925,217.994,759.862,1163.444,842.957,125.179,236.598,669.811,612.234,922.019,50,2000,1054.027,385.045,1507.972,102.568,204.568,1170.918,689.547,784.22,405.913,179.778,607.258,1542.329,1112.47,856.985,836.331,236.908,1077.855,579.321,1500,731.364,25.689,391.749,233.999,275.7,56.895,255.117,566.501,102.568,250.568,68.59399999999999,642.7859999999999,1500,102.563,756.984,51.229,644.151,15.313,243.237,256.894,22.464,45.689,724.938,1126.461,1985.119,1837.516,135.986,237.703,976.641,1452.689,1600,268.598,900.889,982.063,201.356,746.024,1132.877,1000,75.896,1351.254,202.705,365.985,305.268,263.268,513.694,152.609,35.987,102.568,215.368,426.784,507.772,233.291,1035.433,102.642,526.1420000000001,624.538,912.349,215.994,561.963,474.76,231.523,678.596,70.922,1567.548,263.598,1423.568,715.678,777.237,509.43,964.11,583.627,923.373,344.392,1095.578,100.025,30.425,1080.342,799.899,1071.752,893.355,283.161,917.0170000000001,234.568,456.897,206.973,1294.099,826.859,564.158,192.607,10.652,45.689,42.568,20.456,635.192,1002.273,1177.047,507.638,215.689,526.48,26.895,883.877,9.103999999999999,103.568,169.583,429.504,223.639,145.585,985.968,500.922,226.652,1051.168,68.093,1547.159,393.774,804.282,801.577,450.562,26.598,179.061,345.687,295.84,2271.86,1134.575,601.434,45.298,759.518,832.869,56.894,709.399,56.895,767.134,503.172,700.929,910.851,888.569,800.615,1500,785.694],[330,120,360,270,220,170,70,210,200,300,290,70,150,190,240,100,250,210,280,230,210,230,320,210,230,250,60,330,150,150,180,80,180,130,320,280,200,130,190,150,230,310,340,240,180,220,40,190,290,340,250,190,120,230,190,210,170,310,90,140,300,340,170,100,200,80,100,70,50,240,160,290,140,210,300,230,280,160,200,110,110,70,100,190,70,360,360,300,120,150,220,280,300,140,290,180,140,210,250,250,120,290,60,140,290,160,100,160,150,140,230,230,30,80,190,90,120,150,230,150,210,180,140,360,10,240,270,290,220,230,220,240,260,170,130,270,140,60,210,210,240,210,200,140,90,120,100,360,180,150,110,90,160,230,40,60,230,230,120,150,120,60,280,120,230,230,40,140,360,210,260,250,200,150,250,100,260,210,290,220,70,110,250,320,300,180,180,200,320,140,100,120,230,150,250,190,240,250,230,110],[43,28,35,33,44,19,20,22,21,40,32,20,24,38,24,25,35,36,27,33,33,28,30,34,49,40,20,42,35,8,49,19,42,6,36,32,28,25,34,21,34,63,31,25,42,37,25,26,39,46,36,12,2,29,33,28,10,38,19,13,30,38,22,23,22,20,18,37,16,32,26,53,28,32,24,37,30,19,47,22,10,1,1,39,8,38,35,40,22,27,31,19,24,1,38,26,11,34,55,5,34,37,13,23,54,18,2,11,30,22,36,37,9,2,12,5,14,20,57,19,35,22,16,53,4,29,43,26,28,37,32,34,30,15,23,31,21,28,18,28,37,26,30,10,21,18,14,38,36,32,9,39,24,45,13,17,32,23,0,35,26,19,26,53,29,28,17,26,42,17,36,45,20,15,28,27,17,32,46,47,19,22,55,31,39,21,36,21,44,27,16,33,33,21,35,26,14,34,11,20]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>adverts<\/th>\n      <th>sales<\/th>\n      <th>airplay<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2]},{"name":"adverts","targets":0},{"name":"sales","targets":1},{"name":"airplay","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="the-data-1" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="the-data-1">The data</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="20.-correlation_simple_regression_files/figure-html/unnamed-chunk-57-1.png" class="img-fluid figure-img" width="768"></p>
 </figure>
 </div>
 </div>
@@ -604,22 +613,22 @@ Outliers
 <h2 class="subsection anchored" data-anchor-id="calculate-regression-parameters">Calculate regression parameters</h2>
 <p><span class="math display">\[{sales}_i = b_0 + b_1 {airplay}_i + \epsilon_i\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>airplay  <span class="ot">&lt;-</span> data<span class="sc">$</span>airplay</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>sales    <span class="ot">&lt;-</span> data<span class="sc">$</span>sales</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>airplay  <span class="ot">&lt;-</span> data<span class="sc">$</span>airplay</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>sales    <span class="ot">&lt;-</span> data<span class="sc">$</span>sales</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="calculate-b_1" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="calculate-b_1">Calculate <span class="math inline">\(b_1\)</span></h2>
 <p><span class="math display">\[b_1 = r_{xy} \frac{s_y}{s_x}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate b1</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>cor.sales.airplay <span class="ot">&lt;-</span> <span class="fu">cor</span>(sales,airplay)</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>sd.sales          <span class="ot">&lt;-</span> <span class="fu">sd</span>(sales)</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>sd.airplay        <span class="ot">&lt;-</span> <span class="fu">sd</span>(airplay)</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> cor.sales.airplay <span class="sc">*</span> ( sd.sales <span class="sc">/</span> sd.airplay )</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>b1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate b1</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>cor.sales.airplay <span class="ot">&lt;-</span> <span class="fu">cor</span>(sales,airplay)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>sd.sales          <span class="ot">&lt;-</span> <span class="fu">sd</span>(sales)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>sd.airplay        <span class="ot">&lt;-</span> <span class="fu">sd</span>(airplay)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> cor.sales.airplay <span class="sc">*</span> ( sd.sales <span class="sc">/</span> sd.airplay )</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>b1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3.939182</code></pre>
 </div>
@@ -629,11 +638,11 @@ Outliers
 <h2 class="subsection anchored" data-anchor-id="calculate-b_0">Calculate <span class="math inline">\(b_0\)</span></h2>
 <p><span class="math display">\[b_0 = \bar{y} - b_1 \bar{x}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>mean.sales    <span class="ot">&lt;-</span> <span class="fu">mean</span>(sales)</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>mean.airplay  <span class="ot">&lt;-</span> <span class="fu">mean</span>(airplay)</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>b0 <span class="ot">&lt;-</span> mean.sales <span class="sc">-</span> b1 <span class="sc">*</span> mean.airplay</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>b0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>mean.sales    <span class="ot">&lt;-</span> <span class="fu">mean</span>(sales)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>mean.airplay  <span class="ot">&lt;-</span> <span class="fu">mean</span>(airplay)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>b0 <span class="ot">&lt;-</span> mean.sales <span class="sc">-</span> b1 <span class="sc">*</span> mean.airplay</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>b0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 84.87251</code></pre>
 </div>
@@ -645,7 +654,7 @@ Outliers
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="20.-correlation_simple_regression_files/figure-html/unnamed-chunk-62-1.png" class="img-fluid figure-img" width="768"></p>
+<p><img src="20.-correlation_simple_regression_files/figure-html/unnamed-chunk-61-1.png" class="img-fluid figure-img" width="768"></p>
 </figure>
 </div>
 </div>
@@ -657,7 +666,7 @@ Outliers
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="20.-correlation_simple_regression_files/figure-html/unnamed-chunk-63-1.png" class="img-fluid figure-img" width="768"></p>
+<p><img src="20.-correlation_simple_regression_files/figure-html/unnamed-chunk-62-1.png" class="img-fluid figure-img" width="768"></p>
 </figure>
 </div>
 </div>
@@ -669,7 +678,7 @@ Outliers
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="20.-correlation_simple_regression_files/figure-html/unnamed-chunk-64-1.png" class="img-fluid figure-img" width="768"></p>
+<p><img src="20.-correlation_simple_regression_files/figure-html/unnamed-chunk-63-1.png" class="img-fluid figure-img" width="768"></p>
 </figure>
 </div>
 </div>
@@ -681,8 +690,8 @@ Outliers
 <p><span class="math display">\[\widehat{sales} = {\text{model prediction}} = b_0 + b_1 {airplay}\]</span></p>
 <p>So now we can add the expected sales based on this model</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>prediction <span class="ot">&lt;-</span> b0 <span class="sc">+</span> b1 <span class="sc">*</span> airplay</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>prediction <span class="ot">&lt;-</span> <span class="fu">round</span>(prediction, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>prediction <span class="ot">&lt;-</span> b0 <span class="sc">+</span> b1 <span class="sc">*</span> airplay</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>prediction <span class="ot">&lt;-</span> <span class="fu">round</span>(prediction, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="predicted-values" class="level2 smaller subsection">
@@ -703,7 +712,7 @@ Outliers
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="20.-correlation_simple_regression_files/figure-html/unnamed-chunk-67-1.png" class="img-fluid figure-img" width="480"></p>
+<p><img src="20.-correlation_simple_regression_files/figure-html/unnamed-chunk-66-1.png" class="img-fluid figure-img" width="480"></p>
 </figure>
 </div>
 </div>
@@ -713,8 +722,8 @@ Outliers
 <h2 class="smaller anchored" data-anchor-id="error">Error</h2>
 <p>The error / residual is the difference between the model predictions and observed values</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>error <span class="ot">&lt;-</span> sales <span class="sc">-</span> prediction</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>error <span class="ot">&lt;-</span> <span class="fu">round</span>(error, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>error <span class="ot">&lt;-</span> sales <span class="sc">-</span> prediction</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>error <span class="ot">&lt;-</span> <span class="fu">round</span>(error, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
@@ -731,8 +740,8 @@ Outliers
 <li>For simple regression, this is equal to the correlation between airplay and sales. For multiple regression (next lecture), these will differ.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">cor</span>(prediction, sales)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">cor</span>(prediction, sales)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.5989188</code></pre>
 </div>
@@ -742,7 +751,7 @@ Outliers
 <h2 class="subsection anchored" data-anchor-id="explained-variance">Explained variance</h2>
 <p>Squaring this correlation gives the proportion of variance in sales that is explained by airplay:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>r<span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>r<span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.3587037</code></pre>
 </div>
@@ -754,7 +763,7 @@ Outliers
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="20.-correlation_simple_regression_files/figure-html/unnamed-chunk-72-1.png" class="img-fluid figure-img" width="1440"></p>
+<p><img src="20.-correlation_simple_regression_files/figure-html/unnamed-chunk-71-1.png" class="img-fluid figure-img" width="1440"></p>
 </figure>
 </div>
 </div>
@@ -767,9 +776,9 @@ Outliers
 <p><span class="math display">\[F = \frac{(n-p-1) r^2}{p (1-r^2)}\]</span></p>
 <p>Where <span class="math inline">\({df}_{model} = n - p - 1 = N - K - 1\)</span>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>fStat <span class="ot">&lt;-</span> ( (n<span class="sc">-</span>p<span class="dv">-1</span>)<span class="sc">*</span>r<span class="sc">^</span><span class="dv">2</span> ) <span class="sc">/</span> ( p<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>r<span class="sc">^</span><span class="dv">2</span>) )</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>fStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>fStat <span class="ot">&lt;-</span> ( (n<span class="sc">-</span>p<span class="dv">-1</span>)<span class="sc">*</span>r<span class="sc">^</span><span class="dv">2</span> ) <span class="sc">/</span> ( p<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>r<span class="sc">^</span><span class="dv">2</span>) )</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>fStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 110.7496</code></pre>
 </div>
@@ -779,15 +788,15 @@ Outliers
 <h2 class="anchored" data-anchor-id="signal-to-noise">Signal to noise</h2>
 <p>Given the description of explained variance, F can again be seen as a proportion of explained to unexplained variance. Also known as a signal to noise ratio.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>df.model <span class="ot">&lt;-</span> p <span class="co"># n = rows, p = predictors</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>df.error <span class="ot">&lt;-</span> n <span class="sc">-</span> p <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>SS_model <span class="ot">&lt;-</span> <span class="fu">sum</span>((prediction <span class="sc">-</span> <span class="fu">mean</span>(sales))<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>SS_error <span class="ot">&lt;-</span> <span class="fu">sum</span>((sales <span class="sc">-</span> prediction)<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>MS_model <span class="ot">&lt;-</span> SS_model <span class="sc">/</span> df.model</span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>MS_error <span class="ot">&lt;-</span> SS_error <span class="sc">/</span> df.error</span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>fStat <span class="ot">&lt;-</span> MS_model <span class="sc">/</span> MS_error </span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>fStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>df.model <span class="ot">&lt;-</span> p <span class="co"># n = rows, p = predictors</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>df.error <span class="ot">&lt;-</span> n <span class="sc">-</span> p <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>SS_model <span class="ot">&lt;-</span> <span class="fu">sum</span>((prediction <span class="sc">-</span> <span class="fu">mean</span>(sales))<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>SS_error <span class="ot">&lt;-</span> <span class="fu">sum</span>((sales <span class="sc">-</span> prediction)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>MS_model <span class="ot">&lt;-</span> SS_model <span class="sc">/</span> df.model</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>MS_error <span class="ot">&lt;-</span> SS_error <span class="sc">/</span> df.error</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>fStat <span class="ot">&lt;-</span> MS_model <span class="sc">/</span> MS_error </span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>fStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 110.7496</code></pre>
 </div>
@@ -805,29 +814,29 @@ df &amp;= n - p - 1 \\
 <section id="section" class="level2">
 <h2 class="anchored" data-anchor-id="section"></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get Standard error's for b (bonus)</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>se.b1 <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(MS_error <span class="sc">/</span> (<span class="fu">var</span>(airplay) <span class="sc">*</span> (n<span class="dv">-1</span>))); se.b1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get Standard error's for b (bonus)</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>se.b1 <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(MS_error <span class="sc">/</span> (<span class="fu">var</span>(airplay) <span class="sc">*</span> (n<span class="dv">-1</span>))); se.b1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.3743129</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate t for b1</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>mu.b1 <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>t.b1  <span class="ot">&lt;-</span> (b1 <span class="sc">-</span> mu.b1) <span class="sc">/</span> se.b1; t.b1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate t for b1</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>mu.b1 <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>t.b1  <span class="ot">&lt;-</span> (b1 <span class="sc">-</span> mu.b1) <span class="sc">/</span> se.b1; t.b1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10.52377</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>n     <span class="ot">&lt;-</span> <span class="fu">nrow</span>(data) <span class="co"># number of rows</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>p     <span class="ot">&lt;-</span> <span class="dv">1</span>          <span class="co"># number of predictors</span></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>df.b1 <span class="ot">&lt;-</span> n <span class="sc">-</span> p <span class="sc">-</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>n     <span class="ot">&lt;-</span> <span class="fu">nrow</span>(data) <span class="co"># number of rows</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>p     <span class="ot">&lt;-</span> <span class="dv">1</span>          <span class="co"># number of predictors</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>df.b1 <span class="ot">&lt;-</span> n <span class="sc">-</span> p <span class="sc">-</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="p-values-of-b_1" class="level2">
 <h2 class="anchored" data-anchor-id="p-values-of-b_1">P-values of <span class="math inline">\(b_1\)</span></h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="20.-correlation_simple_regression_files/figure-html/unnamed-chunk-77-1.png" class="img-fluid" width="672"></p>
+<p><img src="20.-correlation_simple_regression_files/figure-html/unnamed-chunk-76-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -836,18 +845,18 @@ df &amp;= n - p - 1 \\
 <p>Instead of obtaining the p-value by locating the t in the t-distribution, we can locate the F in the F-distribution</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="20.-correlation_simple_regression_files/figure-html/unnamed-chunk-78-1.png" class="img-fluid" width="672"></p>
+<p><img src="20.-correlation_simple_regression_files/figure-html/unnamed-chunk-77-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
 <section id="its-all-the-same-thing" class="level2">
 <h2 class="anchored" data-anchor-id="its-all-the-same-thing">It’s all the same thing…</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>fStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>fStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 110.7496</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>t.b1<span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>t.b1<span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 110.7496</code></pre>
 </div>
@@ -856,36 +865,36 @@ df &amp;= n - p - 1 \\
 <section id="so-how-many-ways-do-we-have-for-assessing-an-association" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="so-how-many-ways-do-we-have-for-assessing-an-association">So how many <code>@!&amp;#$</code> ways do we have for assessing an association?!</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the correlation between x and y, standardized (between -1, 1)</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(sales, airplay) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the correlation between x and y, standardized (between -1, 1)</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(sales, airplay) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.5989188</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the covariance between x and y, unstandardized </span></span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cov</span>(sales, airplay)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the covariance between x and y, unstandardized </span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cov</span>(sales, airplay)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 593.0151</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># regression coefficient in linear regression, standardized (not bounded)</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="co"># generalizes easily to settings with multiple predictors</span></span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>b1 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># regression coefficient in linear regression, standardized (not bounded)</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="co"># generalizes easily to settings with multiple predictors</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>b1 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3.939182</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># t-statistic: standardized difference between b1 and 0</span></span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>t.b1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># t-statistic: standardized difference between b1 and 0</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>t.b1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10.52377</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The metrics below are more indicative of an overall model's performance</span></span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="co"># the correlation between y and model prediction, standardized (between -1, 1)</span></span>
-<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(sales, prediction) <span class="co"># can be squared to get proportion explained variance</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The metrics below are more indicative of an overall model's performance</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="co"># the correlation between y and model prediction, standardized (between -1, 1)</span></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(sales, prediction) <span class="co"># can be squared to get proportion explained variance</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.5989188</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># F: signal/noise ratio of a model</span></span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>fStat </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># F: signal/noise ratio of a model</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>fStat </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 110.7496</code></pre>
 </div>

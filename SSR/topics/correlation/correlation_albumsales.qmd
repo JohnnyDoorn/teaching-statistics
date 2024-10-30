@@ -387,4 +387,3 @@ arrows(x0 = t.pr, x1 = t.pr, y0 = 0 , y1 = 0.25, col = "darkred", lwd = 2)
 text(x = t.pr, y = 0.3, paste("t =", round(t.pr, 2)), cex = 1.2)
 text(x = t.pr, y = 0.35, paste("p-val < 0.001"), cex = 1.2)
 ```
-```

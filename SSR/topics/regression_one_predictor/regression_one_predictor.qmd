@@ -18,38 +18,14 @@ In linear regression, the relationships are modeled using linear predictor funct
 
 Source: [wikipedia](https://en.wikipedia.org/wiki/Linear_regression)
 
-<!-- ## Outcome vs Model -->
-
-<!-- ```{r, fig.align='center', fig.asp=.5} -->
-<!-- set.seed(123) -->
-<!-- error = c(2, 1, .5, .1) -->
-<!-- n = 10 -->
-
-<!-- layout(matrix(1:4,1,4)) -->
-<!-- for(e in error) { -->
-
-<!--   x = rnorm(n) -->
-<!--   y = x + rnorm(n, 0 , e) -->
-
-<!--   r   = round(cor(x,y), 2) -->
-<!--   r.2 = round(r^2, 2) -->
-
-<!--   plot(x,y, las = 1, ylab = "y", xlab = "x",  -->
-<!--        main = paste("r =", r," r2 = ", r.2), ylim=c(-2,2), xlim=c(-2,2)) -->
-<!--   fit <- lm(y ~ x) -->
-<!--   abline(fit, col = "red") -->
-
-<!-- } -->
-
-<!-- ``` -->
-
 
 ## Assumptions
 
-A selection from Field:
+A selection from Field (Section 8.4):
 
-* Sensitivity
-* Homoscedasticity
+* Sensitivity (Section 6.4)
+* Homoscedasticity (Section 6.7)
+* Normality (Section 6.7)
 
 ## Sensitivity
 
@@ -57,7 +33,7 @@ Outliers
 
 * Extreme residuals
 * Cook's distance (< 1)
-* Check Q-Q and residuals plots
+* Check Q-Q, residuals plots, casewise diagnostics
 
 ## Sensitivity
 
@@ -111,8 +87,8 @@ text(0.5, y[1], bquote("r ="~ .(r) ~ "," ~ r^2 ~ " = " ~ .(r.2)), pos = 2, col =
 
 ::: {.column}
 
-* Variance of residual should be equal across all expected values
-* Look at scatterplot of standardized: predicted values $\times$ residuals. Roughly round shape is needed
+* Variance of residuals should be equal across all expected values
+* Look at scatterplot of standardized: predicted values vs. residuals. Roughly round shape is needed
 * After the analysis is complete because it's based on the residuals
 :::
 
@@ -294,6 +270,19 @@ data$error <- round(error, 2)
 
 ```{r, echo=FALSE}
 datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 300, paging = F, info = F))
+```
+
+## Homoscedasticity
+
+>Is there any systematic error? 
+
+```{r, fig.height=5, fig.width=5, fig.align='center', echo=FALSE}
+plot(prediction, error, xlim = c(0,360), ylim = c(-200,200), main = "Predictions vs. Residuals",
+     xlab = "Predicted Sales", ylab = "Model Error (Residuals)",
+     las = 1, pch = 21, bg = "lightgreen")
+abline(lm(error ~ prediction), 
+       col='darkred')
+text(50, -150, bquote("cor = " ~.(round(cor(prediction, error), 5))))
 ```
 
 ## Model fit {.smaller}

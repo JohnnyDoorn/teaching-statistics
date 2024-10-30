@@ -112,6 +112,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#predicted-values" id="toc-predicted-values" class="nav-link" data-scroll-target="#predicted-values">Predicted values</a></li>
   <li><a href="#y-vs-haty" id="toc-y-vs-haty" class="nav-link" data-scroll-target="#y-vs-haty"><span class="math inline">\(y\)</span> vs <span class="math inline">\(\hat{y}\)</span></a></li>
   <li><a href="#error" id="toc-error" class="nav-link" data-scroll-target="#error">Error</a></li>
+  <li><a href="#homoscedasticity-1" id="toc-homoscedasticity-1" class="nav-link" data-scroll-target="#homoscedasticity-1">Homoscedasticity</a></li>
   <li><a href="#model-fit" id="toc-model-fit" class="nav-link" data-scroll-target="#model-fit">Model fit</a></li>
   <li><a href="#explained-variance" id="toc-explained-variance" class="nav-link" data-scroll-target="#explained-variance">Explained variance</a></li>
   <li><a href="#explained-variance-visually-n-10" id="toc-explained-variance-visually-n-10" class="nav-link" data-scroll-target="#explained-variance-visually-n-10">Explained variance visually (<span class="math inline">\(n = 10\)</span>)</a></li>
@@ -142,30 +143,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><span class="math display">\[\LARGE{Y_i = \beta_0 + \beta_1 X_i + \epsilon_i}\]</span></p>
 <p>In linear regression, the relationships are modeled using linear predictor functions whose unknown model parameters are estimated from the data.</p>
 <p>Source: <a href="https://en.wikipedia.org/wiki/Linear_regression">wikipedia</a></p>
-<!-- ## Outcome vs Model -->
-<!-- ```{r, fig.align='center', fig.asp=.5} -->
-<!-- set.seed(123) -->
-<!-- error = c(2, 1, .5, .1) -->
-<!-- n = 10 -->
-<!-- layout(matrix(1:4,1,4)) -->
-<!-- for(e in error) { -->
-<!--   x = rnorm(n) -->
-<!--   y = x + rnorm(n, 0 , e) -->
-<!--   r   = round(cor(x,y), 2) -->
-<!--   r.2 = round(r^2, 2) -->
-<!--   plot(x,y, las = 1, ylab = "y", xlab = "x",  -->
-<!--        main = paste("r =", r," r2 = ", r.2), ylim=c(-2,2), xlim=c(-2,2)) -->
-<!--   fit <- lm(y ~ x) -->
-<!--   abline(fit, col = "red") -->
-<!-- } -->
-<!-- ``` -->
 </section>
 <section id="assumptions" class="level2">
 <h2 class="anchored" data-anchor-id="assumptions">Assumptions</h2>
-<p>A selection from Field:</p>
+<p>A selection from Field (Section 8.4):</p>
 <ul>
-<li>Sensitivity</li>
-<li>Homoscedasticity</li>
+<li>Sensitivity (Section 6.4)</li>
+<li>Homoscedasticity (Section 6.7)</li>
+<li>Normality (Section 6.7)</li>
 </ul>
 </section>
 <section id="sensitivity" class="level2">
@@ -174,7 +159,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Extreme residuals</li>
 <li>Cook’s distance (&lt; 1)</li>
-<li>Check Q-Q and residuals plots</li>
+<li>Check Q-Q, residuals plots, casewise diagnostics</li>
 </ul>
 </section>
 <section id="sensitivity-1" class="level2">
@@ -194,8 +179,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="columns">
 <div class="column">
 <ul>
-<li>Variance of residual should be equal across all expected values</li>
-<li>Look at scatterplot of standardized: predicted values <span class="math inline">\(\times\)</span> residuals. Roughly round shape is needed</li>
+<li>Variance of residuals should be equal across all expected values</li>
+<li>Look at scatterplot of standardized: predicted values vs.&nbsp;residuals. Roughly round shape is needed</li>
 <li>After the analysis is complete because it’s based on the residuals</li>
 </ul>
 </div><div class="column">
@@ -213,6 +198,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="the-data" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="the-data">The data</h2>
+<blockquote class="blockquote">
+<p>Predict album sales (x 1,000 copies) based on airplay (no. plays).</p>
+</blockquote>
 <div class="cell">
 <div class="cell-output-display">
 
@@ -357,6 +345,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
+<section id="homoscedasticity-1" class="level2">
+<h2 class="anchored" data-anchor-id="homoscedasticity-1">Homoscedasticity</h2>
+<blockquote class="blockquote">
+<p>Is there any systematic error?</p>
+</blockquote>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="regression_one_predictor_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
 <section id="model-fit" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="model-fit">Model fit</h2>
 <ul>
@@ -387,7 +390,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="regression_one_predictor_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="1440"></p>
+<p><img src="regression_one_predictor_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="1440"></p>
 </figure>
 </div>
 </div>
@@ -460,7 +463,7 @@ df &amp;= n - p - 1 \\
 <h2 class="anchored" data-anchor-id="p-values-of-b_1">P-values of <span class="math inline">\(b_1\)</span></h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="regression_one_predictor_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+<p><img src="regression_one_predictor_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -469,7 +472,7 @@ df &amp;= n - p - 1 \\
 <p>Instead of obtaining the p-value by locating the t in the t-distribution, we can locate the F in the F-distribution</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="regression_one_predictor_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+<p><img src="regression_one_predictor_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
