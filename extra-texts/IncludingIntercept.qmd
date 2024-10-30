@@ -130,7 +130,7 @@ In conclusion, while the model might still have favorable model metrics, the sys
 
 **Disclaimer:** this is somewhat of a rabbit hole, so proceed with caution.
 
-> The .jasp file with the analyses can be downloaded [here](https://johnnydoorn.github.io/statistics-lectures/courses/SSR/SSR_2023-2024/MiscFiles_J/JASP_Files/Album%20Sales%20Intercept.jasp), and the results can be previewed [here](https://johnnydoorn.github.io/statistics-lectures/courses/SSR/SSR_2023-2024/MiscFiles_J/JASP_Files/Album%20Sales%20Intercept.html).
+> The .jasp file with the analyses can be downloaded [here](https://johnnydoorn.github.io/teaching-statistics/datasets/Album%20Sales%20Intercept.jasp), and the results can be previewed [here](https://johnnydoorn.github.io/teaching-statistics/datasets/Album%20Sales%20Intercept.html).
 
 Having said that, it can still be interesting to look into **why** these metrics are not to be trusted. The results given by software are still based on some computation, so how can these computations miss their mark? 
 
