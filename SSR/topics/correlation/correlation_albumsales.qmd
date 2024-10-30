@@ -126,7 +126,7 @@ N             <- length(sales)
 plot(data$sales, 
      bg='orange', pch = 21, bty = "n", ylim = c(0, 420),
      ylab="Variables",las = 1,
-     xlab="Participant")
+     xlab="Album nr.")
 points(data$airplay, bg='blue', pch = 21)
 legend("topright", legend = c("Airplay", "Sales"), fill = c("blue", "orange"), bty = "n")
 lines(rep(mean.sales, N), col='orange')
@@ -151,7 +151,7 @@ mean.z.airplay <- mean(z.airplay)
 
 plot(z.sales, 
      bg  = 'orange', pch = 21, bty = "n",ylim = c(-2.5, 3.5),
-     ylab = "z-scores", xlab="Participants")
+     ylab = "z-scores", xlab="Album nr.")
 
 points(z.airplay,  pch = 21, bg='blue')
 legend("topright", legend = c("z-airplay", "z-sales"), fill = c("blue", "orange"), bty = "n")
@@ -170,7 +170,7 @@ mean.z.airplay <- mean(z.airplay)
 
 plot(z.sales, 
      bg  = 'orange', pch = 21, bty = "n",ylim = c(-2.5, 3.5),
-     ylab = "z-scores", xlab="Participants")
+     ylab = "z-scores", xlab="Album nr.")
 
 points(z.airplay,  pch = 21, bg='blue')
 legend("topright", legend = c("z-airplay", "z-sales"), fill = c("blue", "orange"), bty = "n")
@@ -290,20 +290,30 @@ cbind(t.r, df)
 
 One-sample t-test
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 #| output-location: slide
 
-if(!"visualize" %in% installed.packages()) { install.packages("visualize") }
-library("visualize")
+# Set up the plot for the F-distribution
+curve(dt(x, df), from = -8, to = 8, n = 1000, bty = "n", las = 1,
+      xlab = "t-value", ylab = "Density", main = "t-distribution with P-value Region")
 
-visualize.t(c(-t.r, t.r),df,section='tails')
+# Shade the upper tail (p-value region) using polygon
+# Define the region to fill (upper tail, greater than fStat)
+x_vals <- seq(t.r, 10, length.out = 100)
+y_vals <- dt(x_vals, df)
+
+# Draw the polygon to fill the area under the curve
+polygon(c(t.r, x_vals, 10), c(0, y_vals, 0), col = "lightblue", border = NA)
+
+# Optionally, add a vertical line at the F-statistic
+arrows(x0 = t.r, x1 = t.r, y0 = 0 , y1 = 0.25, col = "darkred", lwd = 2)
+text(x = t.r, y = 0.3, paste("t =", round(t.r, 2)), cex = 1.2)
+text(x = t.r, y = 0.35, paste("p-val < 0.001"), cex = 1.2)
 ```
 
 # Partial correlation {.section}
 
-## Venn diagram
-
-
+## Venn diagram of Variance
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, prompt=FALSE}
 if(!"VennDiagram" %in% installed.packages()) { install.packages("VennDiagram") };
 library("VennDiagram")
@@ -351,13 +361,30 @@ partial.correlation
 
 One-sample t-test
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 #| output-location: slide
 
 df <- N - 3
 
 t.pr <- ( partial.correlation*sqrt(df) ) / sqrt(1-partial.correlation^2)
-t.pr
+# t.pr
 
-visualize.t(c(-t.pr,t.pr),df,section='tails')
+
+# Set up the plot for the F-distribution
+curve(dt(x, df), from = -8, to = 8, n = 1000, bty = "n", las = 1,
+      xlab = "t-value", ylab = "Density", main = "t-distribution with P-value Region")
+
+# Shade the upper tail (p-value region) using polygon
+# Define the region to fill (upper tail, greater than fStat)
+x_vals <- seq(t.pr, 10, length.out = 100)
+y_vals <- dt(x_vals, df)
+
+# Draw the polygon to fill the area under the curve
+polygon(c(t.pr, x_vals, 10), c(0, y_vals, 0), col = "lightblue", border = NA)
+
+# Optionally, add a vertical line at the F-statistic
+arrows(x0 = t.pr, x1 = t.pr, y0 = 0 , y1 = 0.25, col = "darkred", lwd = 2)
+text(x = t.pr, y = 0.3, paste("t =", round(t.pr, 2)), cex = 1.2)
+text(x = t.pr, y = 0.35, paste("p-val < 0.001"), cex = 1.2)
+```
 ```

@@ -86,5 +86,11 @@
   "2024/20. correlation_and_simple_regression/20. correlation_simple_regression.qmd": {
     "20. correlation_simple_regression.html": "2b2d5a0f",
     "20. correlation_simple_regression.slide.html": "cab9e1a8"
+  },
+  "topics/correlation/correlation_albumsales.qmd": {
+    "correlation_albumsales.html": "f877f492"
+  },
+  "topics/regression_one_predictor/regression_one_predictor.qmd": {
+    "regression_one_predictor.html": "02db832c"
   }
 }

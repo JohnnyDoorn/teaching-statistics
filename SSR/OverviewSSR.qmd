@@ -30,8 +30,8 @@ allLinks <- c("https://statisticalreasoning-uva.shinyapps.io/NHST_Binomial",
               "https://statisticalreasoning-uva.shinyapps.io/onewayANOVA",
               "https://statisticalreasoning-uva.shinyapps.io/ANCOVA",
               "https://statisticalreasoning-uva-2.shinyapps.io/Multi-ANOVA",
-              "https://statisticalreasoning-uva-2.shinyapps.io/RM_ANOVA"#,
-              # "https://statisticalreasoning-uva-2.shinyapps.io/SimpleRegression",
+              "https://statisticalreasoning-uva-2.shinyapps.io/RM_ANOVA",
+              "https://statisticalreasoning-uva-2.shinyapps.io/SimpleRegression"#,
               # "https://statisticalreasoning-uva-2.shinyapps.io/MultiRegression"
 
 )
