@@ -8,11 +8,11 @@ page-layout: full
 ```{r, echo=FALSE}
 rm(list=ls())
 library(DT)
-data <- read.csv("JASP_Files/Album Sales.csv")
+data <- read.csv("../datasets/Album Sales.csv")
 ```
 
 ```{r}
-data <- read.csv("JASP_Files/Album Sales.csv") # Load data 
+data <- read.csv("../datasets/Album Sales.csv") # Load data 
 head(data) # inspect first 5 rows of the data
 ```
 

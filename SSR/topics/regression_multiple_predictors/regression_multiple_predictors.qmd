@@ -88,7 +88,7 @@ This can be checked through:
 
 ```{r, echo=FALSE, eval=TRUE, warning=FALSE, message=FALSE}
 set.seed(273645)
-data <- read.csv("Album Sales.csv")
+data <- read.csv("Album Sales.csv")[, -4]
 n <- nrow(data)
 sales <- data$sales
 airplay <- data$airplay
@@ -102,6 +102,9 @@ DT::datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY 
 ## Regression model in R 
 
 Predict album sales based on airplay and adverts.
+
+$${sales}_i = b_0 + b_1 {airplay}_i + b_2 {adverts}_i +  \epsilon_i$$
+
 
 ```{r, echo=TRUE}
 fit <- lm(sales ~ airplay + adverts, data = data)

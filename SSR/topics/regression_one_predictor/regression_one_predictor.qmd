@@ -137,6 +137,8 @@ draw.circle(0,0,1.7,col=rgb(1,0,0,.5))
 
 ## The data {.smaller}
 
+> Predict album sales (x 1,000 copies) based on airplay (no. plays).
+
 ```{r, echo=FALSE}
 n <- nrow(data)
 datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))

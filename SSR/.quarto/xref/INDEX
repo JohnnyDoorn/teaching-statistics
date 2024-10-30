@@ -92,5 +92,12 @@
   },
   "topics/regression_one_predictor/regression_one_predictor.qmd": {
     "regression_one_predictor.html": "02db832c"
+  },
+  "topics/regression_multiple_predictors/regression_multiple_predictors.qmd": {
+    "regression_multiple_predictors.html": "92ab03e0"
+  },
+  "2024/21. multiple_regression/21. multiple_regresson.qmd": {
+    "21. multiple_regresson.html": "58ddcc28",
+    "21. multiple_regresson.slide.html": "0cf5212e"
   }
 }

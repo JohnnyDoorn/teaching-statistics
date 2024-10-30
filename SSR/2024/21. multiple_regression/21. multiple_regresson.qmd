@@ -1,7 +1,7 @@
 ---
-title: "21. Multiple regression"
+title: "22. Multiple regression"
 author: "Sharon Kinkenberg & Johnny van Doorn"
-date: "03 nov 2023"
+date: "01 nov 2024"
 footer: "Scientific & Statistical Reasoning"
 format: 
   html: default
@@ -11,11 +11,11 @@ format:
 
 <!-- Add the required topics below -->
 
-```{r child="../../../../topics/regression_multiple_predictors/regression_multiple_predictors.qmd"}
+```{r child="../../topics/regression_multiple_predictors/regression_multiple_predictors.qmd"}
 ```
 
 <!-- Footer insert below -->
 
-```{r child="../../../../footer.qmd"}
+```{r child="../../footer.qmd"}
 ```
 
