@@ -36,7 +36,7 @@ for(e in error) {
 
 ## Assumptions {.subsection}
 
-A selection from Field (8.3.2.1. Assumptions of the linear model):
+A selection from Field (8.3 Bias in linear models):
 
 For simple regression
 
@@ -47,7 +47,7 @@ For simple regression
 
 Additionally, for multiple regression
 
-* Multicollinearity
+* Multicollinearity (Section 8.9)
 
 ## Multicollinearity {.smaller}
 

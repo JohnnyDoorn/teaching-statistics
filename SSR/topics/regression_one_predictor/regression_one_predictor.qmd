@@ -314,12 +314,12 @@ plot(sales[1:plotN],xlab='Albums', ylab = "Sales", las = 1,
 # With the mean
 abline(h = mean(sales[1:plotN]), lwd = 2, col = "purple")
 # The model predicts the sales scores
-points(1:plotN,prediction[1:10], pch =23, bg='darkred')
+# points(1:plotN,prediction[1:10], pch =23, bg='darkred')
 # The part of the variation that overlaps is the 'explained' variance. 
 segments(1:plotN, sales[1:plotN], 1:plotN, mean(sales[1:plotN]), col='orange', lwd= 2)
 
-legend("topright", c("Observed", "Predicted"),
-       bty = "n", fill = c("turquoise", "darkred"))
+legend("topright", c("Observed"),
+       bty = "n", fill = c("turquoise"))
 
 # This is all the sales data
 plot(sales[1:plotN],xlab='Albums', ylab = "Sales", las = 1,
