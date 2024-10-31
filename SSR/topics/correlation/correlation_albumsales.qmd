@@ -361,15 +361,15 @@ partial.correlation
 
 One-sample t-test
 
-```{r, echo=FALSE}
-#| output-location: slide
-
+```{r, echo=TRUE}
 df <- N - 3
 
 t.pr <- ( partial.correlation*sqrt(df) ) / sqrt(1-partial.correlation^2)
-# t.pr
+t.pr
+```
 
-
+## p-value
+```{r, echo=FALSE}
 # Set up the plot for the F-distribution
 curve(dt(x, df), from = -8, to = 8, n = 1000, bty = "n", las = 1,
       xlab = "t-value", ylab = "Density", main = "t-distribution with P-value Region")

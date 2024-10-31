@@ -9,6 +9,26 @@ format:
     output-ext: slide.html
 ---
 
+## Correlation {.small}
+
+$$
+\tiny
+f(\mathbf{x}) = \frac{1}{\sqrt{(2 \pi)^k \det \left( \begin{bmatrix} 
+\sigma_1^2 & \rho_{12} \sigma_1 \sigma_2 & \cdots & \rho_{1k} \sigma_1 \sigma_k \\ 
+\rho_{21} \sigma_2 \sigma_1 & \sigma_2^2 & \cdots & \rho_{2k} \sigma_2 \sigma_k \\ 
+\vdots & \vdots & \ddots & \vdots \\ 
+\rho_{k1} \sigma_k \sigma_1 & \rho_{k2} \sigma_k \sigma_2 & \cdots & \sigma_k^2 
+\end{bmatrix} \right)}} 
+\exp \left( -\frac{1}{2} (\mathbf{x} - \boldsymbol{\mu})^T \left( \begin{bmatrix} 
+\sigma_1^2 & \rho_{12} \sigma_1 \sigma_2 & \cdots & \rho_{1k} \sigma_1 \sigma_k \\ 
+\rho_{21} \sigma_2 \sigma_1 & \sigma_2^2 & \cdots & \rho_{2k} \sigma_2 \sigma_k \\ 
+\vdots & \vdots & \ddots & \vdots \\ 
+\rho_{k1} \sigma_k \sigma_1 & \rho_{k2} \sigma_k \sigma_2 & \cdots & \sigma_k^2 
+\end{bmatrix} \right)^{-1} (\mathbf{x} - \boldsymbol{\mu}) \right)$$
+
+
+
+
 ## Fishing Expedition!
 <img src="qr_kkd7n.png">
 
