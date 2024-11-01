@@ -10,6 +10,25 @@ format:
 ---
 
 <!-- Add the required topics below -->
+## Questionnaire variables {.smaller}
+- Nationality
+- Bachelor specialization
+- Ratings
+    - Confidence you chose right bachelors
+    - Confidence you chose right specialization
+    - Confidence in your stats skills
+    - Love of stats
+    - Mario skills
+    - Playfulness
+- Number of SSR hours
+- Number of friends talked to, in person, in the past week
+- Preferred temperature
+
+
+## WA 10 Data
+
+- [Salary (partial correlation)](https://johnnydoorn.github.io/teaching-statistics/datasets/Salary.jasp)
+- [Health (regression)](https://johnnydoorn.github.io/teaching-statistics/datasets/Health.jasp)
 
 ```{r child="../../topics/regression_multiple_predictors/regression_multiple_predictors.qmd"}
 ```
