@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="JvD &amp; RvB">
+<meta name="author" content="JvD">
 <meta name="dcterms.date" content="2024-11-04">
 
-<title>Two-Sided vs.&nbsp;One-Sided Testing</title>
+<title>Some examples of heteroscedasticity?</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,16 +25,16 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="OneSidedVsTwoSided_files/libs/clipboard/clipboard.min.js"></script>
-<script src="OneSidedVsTwoSided_files/libs/quarto-html/quarto.js"></script>
-<script src="OneSidedVsTwoSided_files/libs/quarto-html/popper.min.js"></script>
-<script src="OneSidedVsTwoSided_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="OneSidedVsTwoSided_files/libs/quarto-html/anchor.min.js"></script>
-<link href="OneSidedVsTwoSided_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="OneSidedVsTwoSided_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="OneSidedVsTwoSided_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="OneSidedVsTwoSided_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="OneSidedVsTwoSided_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="Heteroscedasticity_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Heteroscedasticity_files/libs/quarto-html/quarto.js"></script>
+<script src="Heteroscedasticity_files/libs/quarto-html/popper.min.js"></script>
+<script src="Heteroscedasticity_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Heteroscedasticity_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Heteroscedasticity_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Heteroscedasticity_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Heteroscedasticity_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Heteroscedasticity_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Heteroscedasticity_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -49,7 +49,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Two-Sided vs.&nbsp;One-Sided Testing</h1>
+<h1 class="title">Some examples of heteroscedasticity?</h1>
 </div>
 
 
@@ -59,7 +59,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>JvD &amp; RvB </p>
+             <p>JvD </p>
           </div>
   </div>
     
@@ -76,106 +76,58 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>When we conduct a hypothesis test, we generally want to compare two hypotheses against each other. Each hypothesis makes a different statement about the parameter of interest. In order to illustrate how this works for testing a difference in means, we continue below with the example from the lecture about IQ differences for two conditions: Nootropics vs.&nbsp;Placebo. The null hypothesis is usually the same, stating that there is no group difference: <span class="math display">\[\mathcal{H}_0: \text{difference} = 0\]</span></p>
-<p>The alternative hypothesis can take on several forms: two-sided (A), one-sided negative (+), and one-sided positive (-):</p>
-<p><span class="math display">\[\mathcal{H}_A: \text{difference} \neq 0\]</span> <span class="math display">\[\mathcal{H}_A+: \text{difference} &gt; 0\]</span> <span class="math display">\[\mathcal{H}_A-: \text{difference} &lt; 0\]</span></p>
-<p>In order to compute the p-value that corresponds to the observed test-statistic, it matters what the alternative hypothesis postulates and how we define “difference”. In order to show this, we can do so for each of the three alternative hypotheses. Additionally, we can repeat this for two scenario’s:</p>
-<pre><code>- Scenario 1: we define the difference in means as  'Placebo' - 'Nootropics'
-- Scenario 2: we define the difference in means as 'Nootropics' - 'Placebo'</code></pre>
-<section id="scenario-1-placebo---nootropics" class="level2">
-<h2 class="anchored" data-anchor-id="scenario-1-placebo---nootropics">Scenario 1: ‘Placebo’ - ‘Nootropics’</h2>
-<p>When our test statistic defines the group difference as ‘Placebo’ - ‘Nootropics’, a negative test statistic indicates that Nootropics scored higher. In the example, this was the case, and we observed a t-statistic of <span class="math inline">\(-2.23\)</span>. In each section below, the sampling distribution is plotted, including the observed t-statistic and its corresponding p-value: the probability of the data, or more extreme, if the null hypothesis is true. What constitutes “more extreme” depends on the alternative hypothesis - in the plots below, the extreme area is marked in darkred. In other words, the p-value equals the proportion of the distribution that is colored in darkred.</p>
-<section id="two-sided-test" class="level3">
-<h3 class="anchored" data-anchor-id="two-sided-test">Two-sided test</h3>
-<p>In a two-sided test, t-values of 2 and -2 will yield identical p-values, since we consider both tails of the sampling distribution as “extreme”. Below, both tails are highlighted in darkred, to indicate that both are counted towards the p-value.</p>
+<p>In linear regression, a core assumption is that there is no systematic error: our model should be equally accurate/wrong across the whole range of its predictions (i.e., <a href="https://en.wikipedia.org/wiki/Homoscedasticity_and_heteroscedasticity">homoscedasiticity of error</a>). To assess this assumption, we can look at a scatterplot of the standardized (i.e., z-scores) model predictions and residuals, and hope to see an uncorrelated cloud of points, rather than some other shape (e.g., funnel shape or correlation).</p>
+<p>While we want as little error in the model as possible, all models will have some error and that is OK as long as this error is reliable. Unsystematic error is desirable, because it allows us to get a grip on the error of the model and reliably quantify our uncertainty across the whole range of the dependent variable.</p>
+<p>For example, let’s say we want to predict people’s cognitive performance based on their age. While age is not a perfect predictor, it might help us explain some variability in cognitive performance. Homoscedasticity in this case means that our prediction error will be constant across the whole range of predicted performance scores. Because we base our predictions on age, that means that we want our model to be equally accurate for young people as for old people.</p>
+<p>Below are some cases of the predicted vs.&nbsp;residual plot. The definition of error here is <code>observed - predicted</code>, so when a residual is greater than 0, that means the observed value was greater than the predicted value (i.e., <em>underestimation</em>).</p>
+<p>First we have an example of a “healthy” plot, where there is no systematic error:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="OneSidedVsTwoSided_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Heteroscedasticity_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="one-sided-test-positive" class="level3">
-<h3 class="anchored" data-anchor-id="one-sided-test-positive">One-sided test (positive)</h3>
-<p>We now have an alternative hypothesis that only posits <em>positive</em> differences. We have defined difference as ‘Placebo’ - ‘Nootropics’, so this positive hypothesis is as follows: <span class="math display">\[\mathcal{H}_{A+}: \mu_P - \mu_N &gt; 0,\]</span> which means that this hypothesis expects Nootropics to be lower than Placebo. Now, the <em>right</em> tail of the distribution is the extreme tail, so we look to the <em>right</em> of the observed t-value:</p>
+<p>Next, two cases where the error and the predictions are correlated. In the plot below, the error and predictions are <strong>negatively</strong> correlated:</p>
+<ul>
+<li>for low predicted values (i.e., z-pred <span class="math inline">\(&lt; 0\)</span>), the residual is generally greater than 0 (i.e., we are <em>underestimating</em>)</li>
+<li>for high predicted values (i.e., z-pred <span class="math inline">\(&gt; 0\)</span>), the residual is generally lower than 0 (i.e., we are <em>overestimating</em>)</li>
+</ul>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="OneSidedVsTwoSided_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Heteroscedasticity_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Since the observed t-statistic is in the opposite direction of what the alternative hypothesis predicts, the p-value is quite high (i.e., close to 1) and we fail to reject the null hypothesis.</p>
-</section>
-<section id="one-sided-test-negative" class="level3">
-<h3 class="anchored" data-anchor-id="one-sided-test-negative">One-sided test (negative)</h3>
-<p>We now have an alternative hypothesis that only posits <em>negative</em> differences. We have defined difference as ‘Placebo’ - ‘Nootropics’, so this negative hypothesis is as follows: <span class="math display">\[\mathcal{H}_{A-}: \mu_P - \mu_N &lt; 0,\]</span> which means that this hypothesis expects Nootropics to be greater than Placebo. For the negative hypothesis, the <em>left</em> tail of the distribution is the extreme tail, so we look to the <em>left</em> of the observed t-value:</p>
+<p>In the plot below, the error and predictions are <strong>positively</strong> correlated:</p>
+<ul>
+<li>for low predicted values (i.e., z-pred <span class="math inline">\(&lt; 0\)</span>), the residual is generally lower than 0 (i.e., we are <em>overestimating</em>)</li>
+<li>for high predicted values (i.e., z-pred <span class="math inline">\(&gt; 0\)</span>), the residual is generally greater than 0 (i.e., we are <em>underestimating</em>)</li>
+</ul>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="OneSidedVsTwoSided_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Heteroscedasticity_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Since the observed t-statistic is in the same direction of what the alternative hypothesis predicts, the p-value is lower than its two-sided version, and we gather more evidence against the null hypothesis.</p>
-</section>
-</section>
-<section id="scenario-2-nootropics---placebo" class="level2">
-<h2 class="anchored" data-anchor-id="scenario-2-nootropics---placebo">Scenario 2: ‘Nootropics’ - ‘Placebo’</h2>
-<p>When our test statistic defines the group difference as ‘Nootropics’ - ‘Placebo’, a positive test statistic now indicates that Nootropics scored higher. In the example, this was the case, and so the t-statistic is now <span class="math inline">\(2.23\)</span>. In each section below, the sampling distribution is plotted, including the observed t-statistic and its corresponding p-value.</p>
-<section id="two-sided-test-1" class="level3">
-<h3 class="anchored" data-anchor-id="two-sided-test-1">Two-sided test</h3>
-<p>In a two-sided test, t-values of 2 and -2 will yield identical p-values, since we consider both tails of the sampling distribution as “extreme”. Below, both tails are highlighted in darkred, to indicate that both are counted towards the p-value.</p>
+<p>Finally, systematic error can look like in the plot below, like a funnel. Here, the model is very accurate when it is predicting low values for the dependent variable: the residuals are very close to 0 when z-pred is low. When the mode predicts high values, it is very error-prone, as demonstrated by the residuals being much further away as z-pred increases. To relate it to the example of age and cognitive performance: our model is very good for predicting performance of young people (low age, resulting in low z-pred)</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="OneSidedVsTwoSided_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Heteroscedasticity_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="one-sided-test-positive-1" class="level3">
-<h3 class="anchored" data-anchor-id="one-sided-test-positive-1">One-sided test (positive)</h3>
-<p>We now have an alternative hypothesis that only posits <em>positive</em> differences. We have defined difference as ‘Nootropics’ - ‘Placebo’, so this positive hypothesis is as follows: <span class="math display">\[\mathcal{H}_{A+}: \mu_N - \mu_P &gt; 0,\]</span> which means that this hypothesis expects Nootropics to be greater than Placebo. Now, the <em>right</em> tail of the distribution is the extreme tail, so we look to the <em>right</em> of the observed t-value:</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="OneSidedVsTwoSided_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Since the observed t-statistic is in the same direction of what the alternative hypothesis predicts, the p-value is lower than its two-sided version, and we gather more evidence against the null hypothesis.</p>
-</section>
-<section id="one-sided-test-negative-1" class="level3">
-<h3 class="anchored" data-anchor-id="one-sided-test-negative-1">One-sided test (negative)</h3>
-<p>We now have an alternative hypothesis that only posits <em>negative</em> differences. We have defined difference as ‘Nootropics’ - ‘Placebo’, so this negative hypothesis is as follows: <span class="math display">\[\mathcal{H}_{A-}: \mu_N - \mu_P &lt; 0,\]</span> which means that this hypothesis expects Nootropics to be smaller than Placebo. Now, the <em>left</em> tail of the distribution is the extreme tail, so we look to the <em>left</em> of the observed t-value:</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="OneSidedVsTwoSided_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Since the observed t-statistic is in the opposite direction of what the alternative hypothesis predicts, the p-value is quite high (i.e., close to 1) and we fail to reject the null hypothesis.</p>
-</section>
-</section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>When we test one-sided, we have to look at how we define the difference: group A - group B, or group B - group A? If the one-sided hypothesis predicts the right direction of the effect, it will yield more evidence against the null hypothesis than the two-sided test, but if it is incorrect about the direction of the effect, we usually do not have enough evidence to reject the null hypothesis. For the interactive version of these plots, you can take a look at <a href="https://statisticalreasoning-uva.shinyapps.io/NHST_Continuous/">the Shiny app</a>.</p>
-</section>
 
 </main>
 <!-- /main column -->
