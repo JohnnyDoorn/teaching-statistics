@@ -128,11 +128,11 @@ The beta coefficients are:
 
 ## How to visualize??
 
-- When we plot 2 predictors + DV, we plot in 2 dimensions, and we summarize the relationship by a line
-- When we plot 3 predictors + DV, we plot in 3 dimensions, and we summarize the relationship by a plane
+- When we plot 1 predictors + DV, we plot in 2 dimensions, and we summarize the relationship by a line
+- When we plot 2 predictors + DV, we plot in 3 dimensions, and we summarize the relationship by a plane
 - ... ???
 
-[Cool visualization app for 3 predictors](https://miabellaai.net/regression.html)
+[Cool visualization app for 2 predictors](https://miabellaai.net/regression.html)
 
 ## Visual
 
