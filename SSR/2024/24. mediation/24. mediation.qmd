@@ -1,7 +1,7 @@
 ---
-title: "24. Mediation"
+title: "25. Mediation"
 author: "Sharon Kinkenberg & Johnny van Doorn"
-date: "10 nov 2023"
+date: "8 nov 2023"
 footer: "Scientific & Statistical Reasoning"
 format: 
   html: default
