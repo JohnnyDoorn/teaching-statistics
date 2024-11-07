@@ -1,13 +1,32 @@
 ---
 title: "25. Mediation"
 author: "Sharon Kinkenberg & Johnny van Doorn"
-date: "8 nov 2023"
+date: "8 nov 2024"
 footer: "Scientific & Statistical Reasoning"
 format: 
   html: default
   revealjs: 
     output-ext: slide.html
 ---
+
+## Some notes on the exam
+
+- The Friedman question
+- The open question: interaction in ANOVA
+![](interaction.png)
+
+## WA10 notes
+
+- Model predictions
+    - Check casewise diagnostics table in JASP (can set to view "all" participants)
+    - [Construct regression equation, and plug in values](https://johnnydoorn.github.io/teaching-statistics/SSR/2024/21.%20multiple_regression/21.%20multiple_regresson.html#apply-regression-model)
+
+- Multicollinearity threshold unclear
+    - largest VIF is greater than 10
+    - average VIF is substantially greater than 1
+    - On the exam: important to know how to obtain VIF and assess yes/no
+
+- [Extra examples heteroscedasticity](https://johnnydoorn.github.io/teaching-statistics/extra-texts/Heteroscedasticity.html)
 
 ```{r child="../../topics/mediation/mediationNames.qmd"}
 ```
