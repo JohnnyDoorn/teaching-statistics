@@ -15,7 +15,7 @@ format:
 - The open question: interaction in ANOVA
 ![](interaction.png)
 
-## WA10 notes
+## WA10 notes {.smaller}
 
 - Model predictions
     - Check casewise diagnostics table in JASP (can set to view "all" participants)

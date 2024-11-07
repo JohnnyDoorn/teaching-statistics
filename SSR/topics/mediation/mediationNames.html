@@ -157,8 +157,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </section>
-<section id="total-effect" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="total-effect">Total effect</h2>
+<section id="total-effect" class="level2">
+<h2 class="anchored" data-anchor-id="total-effect">Total effect</h2>
 <ol type="1">
 <li>Total effect:
 <ul>
@@ -171,6 +171,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="mediation-paths" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="mediation-paths">Mediation paths</h2>
+<div class="columns">
+<div class="column">
 <ol type="1">
 <li>Total effect:
 <ul>
@@ -185,8 +187,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><span class="math inline">\(\widehat{\text{Outcome}} = b_0 + b_{c} \text{Predictor}_i + b_b \text{Mediator}_i\)</span></li>
 </ul></li>
 </ol>
-<div style="text-align: center;">
-<p><img src="mediation.png" class="img-fluid" width="400"></p>
+</div><div class="column">
+<div style="display: flex; justify-content: center; align-items: center; flex-direction: column; text-align: center;">
+<p><img src="mediation.png" alt="Mediation Diagram" style="width: 300px; max-width: 80%; margin-top: 10px;"></p>
+</div>
+</div>
 </div>
 </section>
 <section id="simulate-data" class="level2 subsection">
@@ -207,7 +212,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Create mediator</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>b0    <span class="ot">&lt;-</span> <span class="dv">2</span>             <span class="co"># intercept of lifestyle</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>b1    <span class="ot">&lt;-</span> <span class="fl">1.5</span>           <span class="co"># association homeopathy and lifestyle</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>b1    <span class="ot">&lt;-</span> <span class="fl">1.5</span>           <span class="co"># association homeopathy and lifestyle, b.a</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>error <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n,<span class="dv">0</span>,.<span class="dv">7</span>)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>healthy.lifestyle <span class="ot">&lt;-</span> b0 <span class="sc">+</span> b1 <span class="sc">*</span> use.homeopathic.remedies <span class="sc">+</span> error</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -217,8 +222,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Create outcome variable</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>b0    <span class="ot">&lt;-</span> <span class="dv">6</span> <span class="co"># intercept of healing</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>b1    <span class="ot">&lt;-</span> <span class="fl">0.5</span> <span class="co"># association homeopathy and healing</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>b2    <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># association lifestyle and healing</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>b1    <span class="ot">&lt;-</span> <span class="fl">0.5</span> <span class="co"># association homeopathy and healing, b.c</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>b2    <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># association lifestyle and healing, b.b</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>error <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="fl">1.4</span>)</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>speed.of.healing <span class="ot">&lt;-</span> b0 <span class="sc">+</span> </span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                    b1 <span class="sc">*</span> use.homeopathic.remedies <span class="sc">+</span> </span>

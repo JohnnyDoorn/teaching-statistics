@@ -430,7 +430,7 @@ Sharon Kinkenberg &amp; Johnny van Doorn
 <li>The open question: interaction in ANOVA <img data-src="interaction.png"></li>
 </ul>
 </section>
-<section id="wa10-notes" class="slide level2">
+<section id="wa10-notes" class="slide level2 smaller">
 <h2>WA10 notes</h2>
 <ul>
 <li>Model predictions
@@ -456,12 +456,7 @@ Sharon Kinkenberg &amp; Johnny van Doorn
 <h2>Mediation</h2>
 <div class="columns">
 <div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Mediation.jpg"></p>
-<figcaption>Mediation</figcaption>
-</figure>
-</div>
+<p><img data-src="mediation.png"></p>
 </div><div class="column">
 <p>In statistics, a mediation model is one that seeks to identify and explain the mechanism or process that underlies an observed relationship between an independent variable and a dependent variable via the inclusion of a third hypothetical variable, known as a mediator variable (also a mediating variable, intermediary variable, or intervening variable).</p>
 <p>Source: <a href="https://en.wikipedia.org/wiki/Mediation_(statistics)">WIKIPEDIA</a></p>
@@ -473,7 +468,7 @@ Sharon Kinkenberg &amp; Johnny van Doorn
 <p>Does the speed of recovery after sickness improve with the use of alternative medicine or is this effect mediated by a healthy lifestyle?</p>
 
 <img data-src="green-purple-flower-163186.jpg" class="r-stretch quarto-figure-center"><p class="caption"><a style="font-size:50%;" href="https://www.pexels.com/photo/green-purple-flower-163186/" target="_blank">Photo from Pixabay</a></p></section>
-<section id="total-effect" class="slide level2 smaller">
+<section id="total-effect" class="slide level2">
 <h2>Total effect</h2>
 <ol type="1">
 <li>Total effect:
@@ -487,22 +482,26 @@ Sharon Kinkenberg &amp; Johnny van Doorn
 </section>
 <section id="mediation-paths" class="slide level2 smaller">
 <h2>Mediation paths</h2>
+<div class="columns">
+<div class="column">
+<p><span style="color: white;">You found my sneaky text to create space! You are awesome. Muahahahahahahahahahahahahahahahahahahahahahahahaha haha…hah.. uhhhh </span></p>
 <ol type="1">
 <li>Total effect:
 <ul>
 <li><span class="math inline">\(\widehat{\text{Outcome}} = b_0 + b_t \text{Predictor}_i\)</span></li>
 </ul></li>
-<li>Mediator effect:
+<li>Mediator effect (a):
 <ul>
 <li><span class="math inline">\(\widehat{\text{Mediator}} = b_0 + b_a \text{Predictor}_i\)</span></li>
 </ul></li>
-<li>Combined effect:
+<li>Combined effect (b + c):
 <ul>
 <li><span class="math inline">\(\widehat{\text{Outcome}} = b_0 + b_{c} \text{Predictor}_i + b_b \text{Mediator}_i\)</span></li>
 </ul></li>
 </ol>
-<div style="text-align: center;">
-<p><img data-src="mediation.png" width="400"></p>
+</div><div class="column">
+<p><img data-src="mediation.png" width="500"></p>
+</div>
 </div>
 </section>
 <section id="simulate-data" class="slide level2 subsection">
@@ -523,7 +522,7 @@ Sharon Kinkenberg &amp; Johnny van Doorn
 <p>Create mediator</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>b0    <span class="ot">&lt;-</span> <span class="dv">2</span>             <span class="co"># intercept of lifestyle</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>b1    <span class="ot">&lt;-</span> <span class="fl">1.5</span>           <span class="co"># association homeopathy and lifestyle</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>b1    <span class="ot">&lt;-</span> <span class="fl">1.5</span>           <span class="co"># association homeopathy and lifestyle, b.a</span></span>
 <span id="cb2-3"><a href="#cb2-3"></a>error <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n,<span class="dv">0</span>,.<span class="dv">7</span>)</span>
 <span id="cb2-4"><a href="#cb2-4"></a>healthy.lifestyle <span class="ot">&lt;-</span> b0 <span class="sc">+</span> b1 <span class="sc">*</span> use.homeopathic.remedies <span class="sc">+</span> error</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -533,8 +532,8 @@ Sharon Kinkenberg &amp; Johnny van Doorn
 <p>Create outcome variable</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>b0    <span class="ot">&lt;-</span> <span class="dv">6</span> <span class="co"># intercept of healing</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>b1    <span class="ot">&lt;-</span> <span class="fl">0.5</span> <span class="co"># association homeopathy and healing</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>b2    <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># association lifestyle and healing</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>b1    <span class="ot">&lt;-</span> <span class="fl">0.5</span> <span class="co"># association homeopathy and healing, b.c</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>b2    <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># association lifestyle and healing, b.b</span></span>
 <span id="cb3-4"><a href="#cb3-4"></a>error <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="fl">1.4</span>)</span>
 <span id="cb3-5"><a href="#cb3-5"></a>speed.of.healing <span class="ot">&lt;-</span> b0 <span class="sc">+</span> </span>
 <span id="cb3-6"><a href="#cb3-6"></a>                    b1 <span class="sc">*</span> use.homeopathic.remedies <span class="sc">+</span> </span>
@@ -723,6 +722,14 @@ blockquote {
 <blockquote>
 <p>When we test such hypotheses with the help of path models applied to observational data, we are in the business of causal inference on the basis of observational data</p>
 </blockquote>
+</section>
+<section id="more-examples" class="slide level2">
+<h2>More examples</h2>
+<p><a href="https://jasp-stats.github.io/jasp-data-library/myChapters/chapter_20.html#presumed-media-influence">JASP Data Library</a></p>
+<ul>
+<li><a href="https://htmlpreview.github.io/?https://github.com/jasp-stats/jasp-data-library/blob/main/Presumed%20Media%20Influence/Presumed_Media_Influence.html">Basic mediation - Presumed Media Influence</a></li>
+<li><a href="https://htmlpreview.github.io/?https://github.com/jasp-stats/jasp-data-library/blob/main/Age%20and%20Fatigue/Age_and_Fatigue.html">Crazier example - Age and Fatigue</a></li>
+</ul>
 <!-- Footer insert below -->
 </section></section>
 <section>
