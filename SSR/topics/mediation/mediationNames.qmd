@@ -266,7 +266,7 @@ b.mediator.predictor*b.combined.mediator /
 
 ## Calculate $P_M$ {.small}
 
-$\frac{ab}{c} = \frac{b_a b_b}{b_c}$
+$\frac{ab}{total} = \frac{b_a b_b}{b_t} = \frac{b_a b_b}{b_a b_b + b_c}$
 
 ```{r, echo=TRUE}
 (b.mediator.predictor*b.combined.mediator) /
