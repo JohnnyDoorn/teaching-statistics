@@ -119,6 +119,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#venn-diagrams---effect" id="toc-venn-diagrams---effect" class="nav-link" data-scroll-target="#venn-diagrams---effect">Venn diagrams - effect</a></li>
   <li><a href="#venn-diagrams---mediator" id="toc-venn-diagrams---mediator" class="nav-link" data-scroll-target="#venn-diagrams---mediator">Venn diagrams - mediator</a></li>
   <li><a href="#caution-with-process" id="toc-caution-with-process" class="nav-link" data-scroll-target="#caution-with-process">Caution with PROCESS</a></li>
+  <li><a href="#more-examples" id="toc-more-examples" class="nav-link" data-scroll-target="#more-examples">More examples</a></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="mediationNames.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
@@ -135,12 +136,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="smaller anchored" data-anchor-id="mediation-1">Mediation</h2>
 <div class="columns">
 <div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Mediation.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Mediation</figcaption>
-</figure>
-</div>
+<p><img src="mediation.png" class="img-fluid"></p>
 </div><div class="column">
 <p>In statistics, a mediation model is one that seeks to identify and explain the mechanism or process that underlies an observed relationship between an independent variable and a dependent variable via the inclusion of a third hypothetical variable, known as a mediator variable (also a mediating variable, intermediary variable, or intervening variable).</p>
 <p>Source: <a href="https://en.wikipedia.org/wiki/Mediation_(statistics)">WIKIPEDIA</a></p>
@@ -173,24 +169,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="smaller anchored" data-anchor-id="mediation-paths">Mediation paths</h2>
 <div class="columns">
 <div class="column">
+<p><span style="color: white;">You found my sneaky text to create space! You are awesome. Muahahahahahahahahahahahahahahahahahahahahahahahaha haha…hah.. uhhhh </span></p>
 <ol type="1">
 <li>Total effect:
 <ul>
 <li><span class="math inline">\(\widehat{\text{Outcome}} = b_0 + b_t \text{Predictor}_i\)</span></li>
 </ul></li>
-<li>Mediator effect:
+<li>Mediator effect (a):
 <ul>
 <li><span class="math inline">\(\widehat{\text{Mediator}} = b_0 + b_a \text{Predictor}_i\)</span></li>
 </ul></li>
-<li>Combined effect:
+<li>Combined effect (b + c):
 <ul>
 <li><span class="math inline">\(\widehat{\text{Outcome}} = b_0 + b_{c} \text{Predictor}_i + b_b \text{Mediator}_i\)</span></li>
 </ul></li>
 </ol>
 </div><div class="column">
-<div style="display: flex; justify-content: center; align-items: center; flex-direction: column; text-align: center;">
-<p><img src="mediation.png" alt="Mediation Diagram" style="width: 300px; max-width: 80%; margin-top: 10px;"></p>
-</div>
+<p><img src="mediation.png" class="img-fluid" width="500"></p>
 </div>
 </div>
 </section>
@@ -428,6 +423,15 @@ blockquote {
 <blockquote class="blockquote">
 <p>When we test such hypotheses with the help of path models applied to observational data, we are in the business of causal inference on the basis of observational data</p>
 </blockquote>
+</section>
+<section id="more-examples" class="level2">
+<h2 class="anchored" data-anchor-id="more-examples">More examples</h2>
+<p><a href="https://jasp-stats.github.io/jasp-data-library/myChapters/chapter_20.html#presumed-media-influence">JASP Data Library</a></p>
+<ul>
+<li><a href="https://htmlpreview.github.io/?https://github.com/jasp-stats/jasp-data-library/blob/main/Presumed%20Media%20Influence/Presumed_Media_Influence.html">Basic mediation - Presumed Media Influence</a></li>
+<li><a href="https://htmlpreview.github.io/?https://github.com/jasp-stats/jasp-data-library/blob/main/Age%20and%20Fatigue/Age_and_Fatigue.html">Crazier example - Age and Fatigue</a></li>
+<li>For the exam, max 1 mediator (but see Section 10.4.7)</li>
+</ul>
 </section>
 </section>
 

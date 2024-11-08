@@ -328,3 +328,5 @@ draw.triple.venn(area1 = 100, area2 = 100, area3 = 100,
 
 - [Basic mediation - Presumed Media Influence](https://htmlpreview.github.io/?https://github.com/jasp-stats/jasp-data-library/blob/main/Presumed%20Media%20Influence/Presumed_Media_Influence.html)
 - [Crazier example - Age and Fatigue](https://htmlpreview.github.io/?https://github.com/jasp-stats/jasp-data-library/blob/main/Age%20and%20Fatigue/Age_and_Fatigue.html)
+- For the exam, max 1 mediator (but see Section 10.4.7)
+
