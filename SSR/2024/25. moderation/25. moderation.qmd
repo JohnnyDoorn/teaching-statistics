@@ -1,7 +1,7 @@
 ---
-title: "25. Moderation"
+title: "26. Moderation"
 author: "Sharon Kinkenberg & Johnny van Doorn"
-date: "14 nov 2023"
+date: "12 nov 2024"
 footer: "Scientific & Statistical Reasoning"
 format: 
   html: default
@@ -9,13 +9,13 @@ format:
     output-ext: slide.html
 ---
 
-```{r child="../../../../topics/moderation/moderationNames.qmd"}
+```{r child="../../topics/moderation/moderationNames.qmd"}
 ```
 
-```{r child="../../../../topics/SR-recruit/SR-recruit.qmd"}
-```
+<!-- ```{r child="../../topics/SR-recruit/SR-recruit.qmd"} -->
+<!-- ``` -->
 <!-- Footer insert below -->
 
-```{r child="../../../../footer.qmd"}
+```{r child="../../footer.qmd"}
 ```
 

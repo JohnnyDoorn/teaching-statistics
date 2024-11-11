@@ -27,6 +27,10 @@ $\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
 
 ![](moderation.png)
 
+## Model {.subsection .flexbox .vcenter}
+
+![](moderationplane.png)
+
 <!-- ## Example {.smaller} -->
 
 <!-- Video games are among the favorite online activities for young people: two-thirds of 5–16-year-olds have their own video games console, and 88% of boys aged 8–15 own at least one games console. Although playing violent video games can enhance visuospatial acuity, visual memory, probabilistic inference, and mental rotation, compared to games such as Tetris, these games have also been linked to increased aggression in youths Another predictor of aggression and conduct problems is callous-unemotional traits such as lack of guilt, lack of empathy, and callous use of others for personal gain.  -->
@@ -52,14 +56,14 @@ $\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
 set.seed(283) ## 
 n <- 100
 hours.awake <- round(runif(n, 1, 18))
-ml.coffee   <- round(hours.awake + (rnorm(n, 250, 100))) ## multicollinearity
+ml.coffee   <- round(rnorm(n, 250, 90))
 error       <- rnorm(n, 0, 20) ## error
 intercept   <- 50
 wakefulness <- intercept + -3 * hours.awake + 
-                          0.5 * ml.coffee + 
-                         0.5 * hours.awake * ml.coffee + 
+                          0.3 * ml.coffee + 
+                         0.1 * hours.awake * ml.coffee + 
                          error
-wakefulness <- 50 + scale(wakefulness)*(10)
+# wakefulness <- 50 + scale(wakefulness)*(10)
 ```
 
 
@@ -96,7 +100,7 @@ cor(data)
 
 ## Scatterplots {.subsection}
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, warning=FALSE, message=FALSE, prompt=FALSE, results='hide'}
 plot(data, pch = 21, bg = palette.colors(n = 9, palette = "Okabe-Ito"))
 attach(data)
 ```
@@ -235,12 +239,12 @@ plot(outcome[1:plotN],xlab='Participant', ylab = "Outcome", las = 1,
 # With the mean
 abline(h = mean(outcome[1:plotN]), lwd = 2, col = "purple")
 # The model predicts the sales scores
-points(1:plotN,prediction[1:plotN], pch =23, bg='darkred')
+# points(1:plotN,prediction[1:plotN], pch =23, bg='darkred')
 # The part of the variation that overlaps is the 'explained' variance. 
 segments(1:plotN, outcome[1:plotN], 1:plotN, mean(outcome[1:plotN]), col='orange', lwd= 2)
 
-legend("topleft", c("Observed", "Predicted"),
-       bty = "n", fill = c("turquoise", "darkred"))
+legend("topleft", c("Observed"),
+       bty = "n", fill = c("turquoise"))
 
 # This is all the sales data
 plot(outcome[1:plotN],xlab='Participant', ylab = "Outcome", las = 1,
@@ -270,9 +274,30 @@ legend("topleft", c("Observed", "Predicted"),
 ```
 $r^2$ is the proportion of <span style="color: blue;">blue</span> to <span style="color: orange;">orange</span>, while $1 - r^2$ is the proportion of <span style="color: red;">red</span> to <span style="color: orange;">orange</span> 
 
+## Expected vs. observed {.subsection}
 
+```{r, fig.align='center', echo=FALSE}
+ plot(prediction, outcome, las = 1, ylab = "Outcome", xlab = "Model Prediction", 
+      main =  bquote("r ="~ .(round(cor(prediction, outcome), 3)) ~ "," ~ r^2 ~ " = " ~ .(round(cor(prediction, outcome)^2, 3))), 
+       pch = 21, bg = "turquoise", bty = "n")
+  fit <- lm(outcome ~ prediction)
+  abline(fit, col = "purple", lwd = 2)
+
+```
+  
+## Turn quantitative into categorical?!
 
 ```{r}
+## Round to number of cups of coffee, always rounding down
 data$cups.coffee <- data$ml.coffee %/% 150
+```
+
+```{r, echo=FALSE}
 write.csv(data, "moderation-coffee.csv", row.names = FALSE)
+DT::datatable(round(data,2)[, c(2, 5)], 
+          rownames   = FALSE, 
+          options = list(searching = FALSE, 
+                         scrollY   = 350, 
+                         paging    = F, 
+                         info      = F))
 ```

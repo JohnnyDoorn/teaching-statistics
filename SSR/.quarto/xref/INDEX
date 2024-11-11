@@ -109,5 +109,12 @@
   "2024/24. mediation/24. mediation.qmd": {
     "24. mediation.html": "5ace9f06",
     "24. mediation.slide.html": "e9e1d43d"
+  },
+  "topics/moderation/moderationNames.qmd": {
+    "moderationNames.html": "9f5f5bfc"
+  },
+  "2024/25. moderation/25. moderation.qmd": {
+    "25. moderation.html": "9a955073",
+    "25. moderation.slide.html": "0e870350"
   }
 }
