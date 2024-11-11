@@ -162,8 +162,7 @@ rglwidget()
 ## Fit model {.smaller .subsection}
 
 ```{r, echo=TRUE}
-#fit2 <- lm(wakefulness ~ hours.awake + ml.coffee)
-fit <- lm(wakefulness ~ hours.awake + ml.coffee + hours.awake*ml.coffee); summary(fit)
+fit <- lm(wakefulness ~ hours.awake + ml.coffee + hours.awake*ml.coffee); summary(fit)$coefficients
 ```
 
 ## Regression equation {.smaller}
@@ -174,6 +173,8 @@ $\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
 $\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
 \color{black}\widehat{Out_i} = `r round(fit$coefficients[1],2)` + `r round(fit$coefficients[2],2)` \times Pred_i + `r round(fit$coefficients[3],2)` \times Mod_i + \color{red} `r round(fit$coefficients[4],2)` \times Pred_i \times Mod_i \color{black}$
 
+$\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
+\color{black}\widehat{Out_i} = `r round(fit$coefficients[1],2)` + `r round(fit$coefficients[2],2)` \times `r hours.awake[1]` + `r round(fit$coefficients[3],2)` \times `r ml.coffee[1]` + \color{red} `r round(fit$coefficients[4],2)` \times `r hours.awake[1]` \times `r ml.coffee[1]` \color{black} \approx `r round(fit$fitted.values[1], 2)`$
 
 ```{r, echo=FALSE}
 regeq <- function(model, hours.awake, ml.coffee) { 

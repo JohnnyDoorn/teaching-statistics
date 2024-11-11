@@ -16,6 +16,24 @@ format:
 <!-- ``` -->
 <!-- Footer insert below -->
 
+
+## Demonstration
+:::: {.columns}
+
+::: {.column}
+- Moderation in Process module
+- Moderation in regression module
+- Equivalences in regression
+:::
+
+::: {.column}
+![](../../JASP_logo_green.svg){width="300px"}
+:::
+::::
+## 
+
+![](FishingResearcherClean2.jpg){width="500px"}
+
 ```{r child="../../footer.qmd"}
 ```
 
