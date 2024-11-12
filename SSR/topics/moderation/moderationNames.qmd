@@ -159,7 +159,7 @@ rglwidget()
 #        step = 0.01, loop = TRUE, rate = 0.5)
 ```
 
-## Fit model {.smaller .subsection}
+## Fit model { .subsection}
 
 ```{r, echo=TRUE}
 fit <- lm(wakefulness ~ hours.awake + ml.coffee + hours.awake*ml.coffee); summary(fit)$coefficients
@@ -220,7 +220,7 @@ aspect3d(1,1,1)
 subid <- currentSubscene3d()
 rglwidget(elementId="plot3drgl2", reuse = FALSE)
 
-rglwidget()
+# rglwidget()
 ```
 
 
