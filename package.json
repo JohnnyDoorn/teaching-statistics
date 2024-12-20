@@ -1,0 +1,22 @@
+{
+  "name": "teaching-statistics",
+  "version": "1.0.0",
+  "description": "various educational materials",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JohnnyDoorn/teaching-statistics.git"
+  },
+  "keywords": [
+    "teaching"
+  ],
+  "author": "JvD",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JohnnyDoorn/teaching-statistics/issues"
+  },
+  "homepage": "https://github.com/JohnnyDoorn/teaching-statistics#readme"
+}
