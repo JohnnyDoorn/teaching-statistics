@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # Adjust this to the branch you want to deploy from
+      - main  # Adjust if using a different branch
 
 jobs:
   build:
@@ -23,7 +23,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: github-pages
-          path: build/  # Adjust this to your output directory
+          path: docs/  
 
   deploy:
     runs-on: ubuntu-latest
@@ -37,10 +37,10 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: github-pages
-          path: ./build
+          path: ./docs 
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build  # Adjust this to the directory with your built files
+          publish_dir: ./docs  
