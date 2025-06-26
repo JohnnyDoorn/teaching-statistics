@@ -13,18 +13,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'  # Adjust this to the version of Node.js you need
+      - name: Setup Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
 
-      - name: Install dependencies
-        run: |
-          npm install  # Adjust this if you use a different package manager
-
-      - name: Build the site
-        run: |
-          npm run build  # Adjust this to your build script
+      - name: Render site
+        run: quarto render
 
       - name: Upload build files
         uses: actions/upload-artifact@v4
