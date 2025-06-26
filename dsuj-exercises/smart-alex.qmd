@@ -1,0 +1,226 @@
+---
+title: "DSUJ Workshop 2025 - Select Smart Alex Tasks"
+bibliography: references.yaml
+csl: apa.csl
+toc-depth: 2  # Optional: controls how many heading levels to include
+number-sections: false  # Optional: adds section numbering
+css: custom.css  # Replace with your actual CSS filename
+format: 
+  pdf: 
+    toc: false
+  html:
+    toc: false
+---
+
+```{r setup, include=FALSE}
+source("dsur_themes.R")
+source("useful_functions.R")
+
+use_packages("datawizard", "ggplot2", "gt", "here", "tibble", "knitr", "kableExtra", "haven", "forcats", "dplyr", "datawizard", "tidyr", "WRS2")
+
+```
+
+![](alex_banner.png){width="500px"}
+
+Here you can find a selection of Smart Alex Tasks from [Discovering Statistics Using JASP](https://profandyfield.com/discoverse/dsuj/), to practice your new found statistics knowledge during the 2025 workshop. [The companion website](https://discoverjasp.com/) contains  [all data sets](https://discoverjasp.com/pages/data) and  [solutions to the exercises](https://discoverjasp.com/pages/alex). 
+
+
+::: callout-note
+## Who is Smart Alex?
+
+Alex was aptly named because she's, like, super smart. She likes teaching people, and her hobby is posing people questions so that she can explain the answers to them. Alex appears at the end of each chapter of [Discovering Statistics Using JASP](https://profandyfield.com/discoverse/dsuj/) to pose you some questions and give you tasks to help you to practice your data analysis skills.
+:::
+
+
+\tableofcontents
+
+# Chapter 5 (Visualization)
+
+## Task 5.1
+
+> The file `students.jasp` contains data relating to groups of students and lecturers. Using these data plot and interpret a raincloud plot showing the mean number of friends that students and lecturers have.
+
+
+
+
+## Task 5.5
+
+> Using the same data, plot and interpret a scatterplot with regression lines of alcohol consumption and neuroticism grouped by lecturer/student.
+
+
+# Chapter 6 (Bias) {#06-gen}
+
+
+## Task 6.2
+
+> The file `jasp_exam.jasp` contains data on students' performance on an JASP exam. Four variables were measured: `exam` (first-year JASP exam scores as a percentage), `computer` (measure of computer literacy as a percentage), `lecture` (percentage of JASP lectures attended) and `numeracy` (a measure of numerical ability out of 15). There is a variable called `uni` indicating whether the student attended Sussex University (where I work) or Duncetown University. Compute and interpret descriptive statistics for `exam`, `computer`, `lecture` and `numeracy` for the sample as a whole.
+
+
+
+## Task 6.5
+
+> Look at and interpret the descriptive statistics for `numeracy` and `exam`, separate for each university.
+
+
+
+## Task 6.9
+
+> Transform the `numeracy` scores (which are positively skewed) using one of the transformations described in this chapter. Do the data become normal?
+
+
+
+
+
+# Chapter 7 (Correlation)
+## Task 7.1
+
+> A student was interested in whether there was a positive relationship between the time spent doing an essay and the mark received. He got 45 of his friends and timed how long they spent writing an essay (hours) and the percentage they got in the essay (`essay`). He also translated these grades into their degree classifications (`grade`): in the UK, a student can get a first-class mark (the best), an upper-second-class mark, a lower second, a third, a pass or a fail (the worst). Using the data in the file `essay_marks.jasp` find out what the relationship was between the time spent doing an essay and the eventual mark in terms of percentage and degree class (draw a scatterplot too).
+
+## Task 7.9
+
+> The research in the previous task was replicated but in a larger sample (*N* = 716), which is the same as the sample size in Feng et al.'s research (`tea_716.jasp`). Conduct a correlation between tea drinking and cognitive functioning. Compare the correlation coefficient and significance in this large sample, with the previous task. What statistical point do the results illustrate?
+
+
+
+## Task 7.10
+
+> In Chapter 6 we looked at hygiene scores over three days of a rock music festival (`download.jasp`). Using Spearman's correlation, were hygiene scores on day 1 of the festival significantly correlated with those on day 3?
+
+## Task 7.12
+
+> What effect does accounting for the participant's sex have on the relationship between the time spent shopping and the distance covered?
+
+
+# Chapter 8 (Regression)
+
+
+## Task 8.4
+
+> A fashion student was interested in factors that predicted the salaries of catwalk models. She collected data from 231 models (`supermodel.jasp`). For each model she asked them their salary per day (`salary`), their age (`age`), their length of experience as models (`years`), and their industry status as a model as reflected in their percentile position rated by a panel of experts (`status`). Use a linear model to see which variables predict a model's salary. How valid is the model?
+
+
+
+## Task 8.5
+
+> A study was carried out to explore the relationship between aggression and several potential predicting factors in 666 children who had an older sibling. Variables measured were `parenting_style` (high score = bad parenting practices), `computer_games` (high score = more time spent playing computer games), `television` (high score = more time spent watching television), `diet` (high score = the child has a good diet low in harmful additives), and `sibling_aggression` (high score = more aggression seen in their older sibling). Past research indicated that parenting style and sibling aggression were good predictors of the level of aggression in the younger child. All other variables were treated in an exploratory fashion. Analyse them with a linear model (`child_aggression.jasp`).
+
+## Task 8.7
+
+> @coldwell2006 investigated whether household chaos predicted children's problem behaviour over and above parenting. From 118 families they recorded the age and gender of the youngest child (`child_age` and `child_gender`). They measured dimensions of the child's perceived relationship with their mum: (1) warmth/enjoyment (`child_warmth`), and (2) anger/hostility (`child_anger`). Higher scores indicate more warmth/enjoyment and anger/hostility respectively. They measured the mum's perceived relationship with her child, resulting in dimensions of positivity (`mum_pos`) and negativity (`mum_neg`). Household chaos (`chaos`) was assessed. The outcome variable was the child's adjustment (`sdq`): the higher the score, the more problem behaviour the child was reported to be displaying. Conduct a hierarchical linear model in three steps: (1) enter child age and gender; (2) add the variables measuring parent–child positivity, parent–child negativity, parent–child warmth, parent–child anger; (3) add chaos. Is household chaos predictive of children's problem behaviour over and above parenting? (`coldwell_2006.jasp`).
+
+
+# Chapter 9 ($T$-test)
+## Task 9.1
+
+> Is arachnophobia (fear of spiders) specific to real spiders or will pictures of spiders evoke similar levels of anxiety? Twelve arachnophobes were asked to play with a big hairy tarantula with big fangs and an evil look in its eight eyes and at a different point in time were shown only pictures of the same spider. The participants' anxiety was measured in each case. Do a *t*-test to see whether anxiety is higher for real spiders than pictures (`big_hairy_spider.jasp`).
+
+## Task 9.2
+
+> Plot an error bar plot of the data in Task 1.
+
+## Task 9.9
+
+> Both Ozzy Osbourne and Judas Priest have been accused of putting backward masked messages on their albums that subliminally influence poor unsuspecting teenagers into doing Very Bad things. A psychologist was interested in whether backward masked messages could have an effect. He created a version of Taylor Swift’s ‘Shake it Off’ that contained the masked message ‘deliver your soul to the dark lord’ repeated in the chorus. He took this version, and the original, and played one version (randomly) to a group of 32 veterinary students. Six months later he played them whatever version they hadn’t heard the time before. So each student heard both the original and the version with the masked message, but at different points in time. The psychologist measured the number of goats that the students sacrificed in the week after listening to each version. Analyse the data (whether the type of music you hear influences goat sacrificing) in `dark_lord.jasp`, using a paired-samples *t*-test.
+
+
+
+# Chapter 10 (Moderation \& Mediation)
+
+
+## Task 10.1
+
+> @mcnulty2008 found a relationship between a person's attractiveness and how much `support` they give their partner among newlywed heterosexual couples. The data are in `mcnulty_2008.jasp`, Is this relationship moderated by `spouse` (i.e., whether the data were from the husband or wife)?
+
+
+## Task 10.2
+
+> Produce the simple slopes plots for Task 1. Hint, there are two ways of doing this using the Descriptives module.
+
+
+## Task 10.5
+
+> Tablets like the iPad are very popular. A company owner was interested in how to make his brand of tablets more desirable. He collected data on how cool people perceived a product's advertising to be (`advert_cool`), how cool they thought the product was (`product_cool`), and how desirable they found the product (`desirability`). Test his theory that the relationship between cool advertising and product desirability is mediated by how cool people think the product is (`tablets.jasp`). Am I showing my age by using the word 'cool'?
+
+# Chapter 11 (ANOVA)
+## Task 11.1
+
+> To test how different teaching methods affected students' knowledge I took three statistics modules (`group`) where I taught the same material. For one module I wandered around with a large cane and beat anyone who asked daft questions or got questions wrong (punish). In the second I encouraged students to discuss things that they found difficult and gave anyone working hard a nice sweet (reward). In the final course I neither punished nor rewarded students' efforts (indifferent). I measured the students' exam marks (`exam`). The data are in the file `teaching.jasp`. Fit a model with planned contrasts to test the hypotheses that: (1) reward results in better exam results than either punishment or indifference; and (2) indifference will lead to significantly better exam results than punishment.
+
+
+
+
+## Task 11.2
+
+> Children wearing superhero costumes are more likely to injure themselves because of the unrealistic impression of invincibility that these costumes could create. For example, children have reported to hospital with severe injuries because of trying 'to initiate flight without having planned for landing strategies' [@davies2007]. I can relate to the imagined power that a costume bestows upon you; indeed, I have been known to dress up as Fisher by donning a beard and glasses and trailing a goat around on a lead in the hope that it might make me more knowledgeable about statistics. Imagine we had data (`superhero.jasp`) about the severity of `injury` (on a scale from 0, no injury, to 100, death) for children reporting to the accident and emergency department at hospitals, and information on which superhero costume they were wearing (`hero`): Spiderman, Superman, the Hulk or a teenage mutant ninja turtle. Fit a model with planned contrasts to test the hypothesis that those wearing costumes of flying superheroes (Superman and Spiderman) have more severe injuries.
+
+
+
+
+
+# Chapter 12 (ANCOVA)
+## Task 12.5
+
+> In Chapter 4 (Task 6) we looked at data from people who had fish or cats as pets and measured their life satisfaction and, also, how much they like animals (`pets.jasp`). Fit a model predicting life satisfaction from the type of pet a person had and their animal liking score (covariate).
+
+## Task 12.6
+
+> Fit a linear model predicting life satisfaction from the type of pet and the effect of love of animals using what you learnt in Chapter 9. Compare this model to your results for Task 5. What differences do you notice and why?
+
+## Task 12.7
+
+> In Chapter 10 we compared the number of mischievous acts in people who had invisibility cloaks to those without (cloak). Imagine we replicated that study, but changed the design so that we recorded the number of mischievous acts in these participants before the study began (`mischief_pre`) as well as during the study (`mischief`). Fit a model to see whether people with invisibility cloaks get up to more mischief than those without when factoring in their baseline level of mischief (`invisibility_base.jasp`).
+
+# Chapter 13 (Factorial ANOVA) {#13-gen}
+
+## Task 13.6
+
+> At the start of this Chapter I described a way of empirically researching whether I wrote better songs than my old bandmate Malcolm, and whether this depended on the type of song (a symphony or song about flies). The outcome variable was the number of screams elicited by audience members during the songs. Plot the data and fit a model to test my hypothesis that the type of song moderates which songwriter is preferred (`escape.jasp`).
+
+## Task 13.8
+
+> There are reports of increases in injuries related to playing games consoles. These injuries were attributed mainly to muscle and tendon strains. A researcher hypothesized that a stretching warm-up before playing would help lower injuries, and that athletes would be less susceptible to injuries because their regular activity makes them more flexible. She took 60 athletes and 60 non-athletes (`athlete`); half of them played on a Nintendo Switch and half watched others playing as a control (`switch`), and within these groups half did a 5-minute stretch routine before playing/watching whereas the other half did not (`stretch`). The outcome was a pain score out of 10 (where 0 is no pain, and 10 is severe pain) after playing for 4 hours (`injury`). Fit a model to test whether athletes are less prone to injury, and whether the prevention programme worked (`switch.jasp`)
+
+
+
+# Chapter 14 (RM ANOVA) {#14-gen}
+## Task 14.4
+
+
+> In the previous chapter we came across the beer-goggles effect. In that chapter, we saw that the beer-goggles effect was stronger for unattractive faces. We took a follow-up sample of 26 people and gave them doses of alcohol (0 pints, 2 pints, 4 pints and 6 pints of lager) over four different weeks. We asked them to rate a bunch of photos of unattractive faces in either dim or bright lighting. The outcome measure was the mean attractiveness rating (out of 100) of the faces and the predictors were the dose of alcohol and the lighting conditions (`goggles_lighting.jasp`). Do alcohol dose and lighting interact to magnify the beer goggles effect? 
+
+
+## Task 14.5
+
+> Interpret the simple effect of effect of alcohol at different levels of lighting. 
+
+
+
+## Task 14.6
+
+> Early in my career I looked at the effect of giving children information about entities. In one study [@field2006], I used three novel entities (the quoll, quokka and cuscus) and children were told negative things about one of the entities, positive things about another, and given no information about the third (our control). After the information I asked the children to place their hands in three wooden boxes each of which they believed contained one of the aforementioned entities (`field_2006.jasp`). Draw an error bar graph of the means (raincloud plot or descriptives plot) and interpret a Q-Q plot of the residuals.
+
+
+
+## Task 14.7
+
+> Log-transform the scores in Task 6, make a Q-Q plot of the transformed scores and interpret it.
+
+# Chapter 16 (Contingency Tables) {#gen16}
+
+
+## Task 16.1
+
+> Research suggests that people who can switch off from work (`detachment`) during off-hours are more satisfied with life and have fewer symptoms of psychological strain [@sonnentag_psychological_2012]. Factors at work, such as time pressure, affect your ability to detach when away from work. A study of 1709 employees measured their time pressure (`time_pressure`) at work (no time pressure, low, medium, high and very high time pressure). Data generated to approximate Figure 1 in @sonnentag_psychological_2012 are in the file `sonnentag_2012.jasp`. Carry out a chi-square test to see if time pressure is associated with the ability to detach from work.
+
+
+
+## Task 16.6
+
+> I wrote much of the third edition of this book in the Netherlands (I have a soft spot for it). The Dutch travel by bike much more than the English. I noticed that many more Dutch people cycle while steering with only one hand. I pointed this out to one of my friends, Birgit Mayer, and she said that I was a crazy English fool and that Dutch people did not cycle one-handed. Several weeks of me pointing at one-handed cyclists and her pointing at two-handed cyclists ensued. To put it to the test I counted the number of Dutch and English cyclists who ride with one or two hands on the handlebars (`handlebars.jasp`). Can you work out which one of us is correct?
+
+## Task 16.7
+
+> Compute and interpret the odds ratio for Task 6.
+
+
+# References

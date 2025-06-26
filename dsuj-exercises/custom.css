@@ -1,0 +1,57 @@
+/* JASP-inspired wave header/footer with transparency and scrolling */
+body::before,
+body::after {
+  content: "";
+  display: block;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  pointer-events: none;    /* Prevent any accidental hover/click issues */
+}
+
+/* Top wave banner */
+body::before {
+  background-image: url("wave_blue_up.jpg");
+  height: 200px;
+  opacity: 0.75;           /* Slight transparency */
+  margin-bottom: 1em;
+}
+
+/* Bottom wave banner */
+body::after {
+  background-image: url("wave_green_down.jpg");
+  height: 200px;
+  opacity: 0.75;           /* Slight transparency */
+  margin-top: 2em;
+}
+
+
+
+/* Strong override to change the sidebar background */
+nav.sidebar, 
+nav#quarto-sidebar, 
+.sidebar, 
+.quarto-sidebar {
+  background-color: #f0fafe !important;
+}
+
+/* Optional: make sidebar links more readable */
+.sidebar a,
+.sidebar-navigation a,
+.quarto-sidebar a {
+  color: #3a506b !important;
+}
+
+.sidebar a:hover {
+  color: #1c2541 !important;
+}
+
+/* Typography similar to JASP */
+h1, h2, h3 {
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  color: #3a506b;
+}
+
+
