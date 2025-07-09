@@ -13,10 +13,10 @@ In statistics, the Pearson correlation coefficient, also referred to as the Pear
 
 Source: [Wikipedia](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient)
 
-## PMCC
+## Pearson Correlation
 
 $$r_{xy} = \frac{{COV}_{xy}}{S_xS_y}$$
-Where $S$ is sthe standard deviation and $COV$ is the covariance.
+Where $S$ is the standard deviation and $COV$ is the covariance.
 
 $${COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}$$
 
@@ -24,35 +24,38 @@ $${COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}$$
 
 ```{r,echo=FALSE, fig.width=5, fig.height=5, fig.align='center'}
 set.seed(565433)
-corners <- par("usr")
-x <- rnorm(5, 5)
-y <- rnorm(5, 5)
-plot(x, y, las = 1)
+data <- read.csv("../../../datasets/Album Sales.csv")[, -4]
+tinydat <- data[1:5, ]
+x <- tinydat$airplay
+y <- tinydat$sales
+plot(x, y, las = 1, xlab = "Airplay", ylab = "Album Sales")
 
 m.x <- mean(x)
 m.y <- mean(y)
 
 
 points(x,y, pch = 21, bg = "turquoise", col = "black", lwd = 2, cex = 1.5)
+corners <- par("usr")
 
 
 ```
 ## Plot correlation
 
 ```{r,echo=FALSE, fig.width=5, fig.height=5, fig.align='center'}
-set.seed(565433)
-x <- rnorm(5, 5)
-y <- rnorm(5, 5)
-plot(x, y, las = 1)
+plot(x, y, las = 1, xlab = "Airplay", ylab = "Album Sales")
 
 m.x <- mean(x)
 m.y <- mean(y)
 
-polygon(c(m.x,8,8,m.x),c(m.y,m.y,8,8), col = rgb(0,0.8,0,.2))
-polygon(c(m.x,0,0,m.x),c(m.y,m.y,0,0), col = rgb(0,0.8,0,.2))
+xTop <- corners[2]
+xBot <- corners[1]
+yTop <- corners[4]
+yBot <- corners[3]
+polygon(c(m.x,xTop,xTop,m.x),c(m.y,m.y,yTop,yTop), col = rgb(0,0.8,0,.2))
+polygon(c(m.x,xBot,xBot,m.x),c(m.y,m.y,yBot,yBot), col = rgb(0,0.8,0,.2))
 
-polygon(c(m.x,0,0,m.x),c(m.y,m.y,8,8), col = rgb(0.8,0,0,alpha = 0.2))
-polygon(c(m.x,8,8,m.x),c(m.y,m.y,0,0), col = rgb(0.8,0,0,alpha= 0.2))
+polygon(c(m.x,xBot,xBot,m.x),c(m.y,m.y,yTop,yTop), col = rgb(0.8,0,0,alpha = 0.2))
+polygon(c(m.x,xTop,xTop,m.x),c(m.y,m.y,yBot,yBot), col = rgb(0.8,0,0,alpha= 0.2))
 
 points(x,y, pch = 21, bg = "turquoise", col = "black", lwd = 2, cex = 1.5)
 
@@ -62,8 +65,8 @@ abline(v = m.x, lwd = 3)
 # segments(x, m.y, x, y, col = "darkorange",    lwd = 2)
 # segments(x, y, m.x, y, col = "purple", lwd = 2)
 
-mtext(side = 3, bquote(bar(x) ~ "= 5.11"), cex = 1.5)
-mtext(side = 4, bquote(bar(y) ~ "= 4.92"), cex = 1.5, padj = 0.5, srt=180)
+mtext(side = 3, bquote(bar(x) ~ "= 840"), cex = 1.5)
+mtext(side = 4, bquote(bar(y) ~ "= 260"), cex = 1.5, padj = 0.5, srt=180)
 # mtext("Text to the Right", side = 4, line = 1, las = 3)
 
 ```
@@ -71,73 +74,63 @@ mtext(side = 4, bquote(bar(y) ~ "= 4.92"), cex = 1.5, padj = 0.5, srt=180)
 ## Plot correlation
 
 ```{r,echo=FALSE, fig.width=5, fig.height=5, fig.align='center'}
-plot(x, y, las = 1)
+plot(x, y, las = 1, xlab = "Airplay", ylab = "Album Sales")
 
 m.x <- mean(x)
 m.y <- mean(y)
 
-polygon(c(m.x,8,8,m.x),c(m.y,m.y,8,8), col = rgb(0,0.8,0,.2))
-polygon(c(m.x,0,0,m.x),c(m.y,m.y,0,0), col = rgb(0,0.8,0,.2))
+polygon(c(m.x,xTop,xTop,m.x),c(m.y,m.y,yTop,yTop), col = rgb(0,0.8,0,.2))
+polygon(c(m.x,xBot,xBot,m.x),c(m.y,m.y,yBot,yBot), col = rgb(0,0.8,0,.2))
 
-polygon(c(m.x,0,0,m.x),c(m.y,m.y,8,8), col = rgb(0.8,0,0,alpha = 0.2))
-polygon(c(m.x,8,8,m.x),c(m.y,m.y,0,0), col = rgb(0.8,0,0,alpha= 0.2))
+polygon(c(m.x,xBot,xBot,m.x),c(m.y,m.y,yTop,yTop), col = rgb(0.8,0,0,alpha = 0.2))
+polygon(c(m.x,xTop,xTop,m.x),c(m.y,m.y,yBot,yBot), col = rgb(0.8,0,0,alpha= 0.2))
 
 points(x,y, pch = 21, bg = "turquoise", col = "black", lwd = 2, cex = 1.5)
 
 abline(h = m.y, lwd = 3)
 abline(v = m.x, lwd = 3)
-mtext(side = 3, bquote(bar(x) ~ "= 5.11"), cex = 1.5)
-mtext(side = 4, bquote(bar(y) ~ "= 4.92"), cex = 1.5, padj = 0.5, srt=180)
 segments(x, m.y, x, y, col = "darkorange",    lwd = 2)
 segments(x, y, m.x, y, col = "purple", lwd = 2)
+
+mtext(side = 3, bquote(bar(x) ~ "= 36.6"), cex = 1.5)
+mtext(side = 4, bquote(bar(y) ~ "= 260"), cex = 1.5, padj = 0.5, srt=180)
 ```
 
 $$(x_i - \bar{x})(y_i - \bar{y})$$
 
-## Guess the correlation
+<!-- ## Guess the correlation -->
 
-[Guess the correlation](http://guessthecorrelation.com)
+<!-- [Guess the correlation](http://guessthecorrelation.com) -->
 
-<img src="qrcodeqtc.png">
+<!-- <img src="qrcodeqtc.png"> -->
 
-## Simulate data
+## Load data
 
 ```{r, eval=TRUE, echo=TRUE}
-set.seed(123)
-n     <- 50
-studyHours <- round(abs(rnorm(n, 20, 7)))
-b.0   <- 60
-b.1   <- .5
-error <- rnorm(n, 0, 3)
-
-grade <- b.0 + b.1 * studyHours + error
-
-error <- rnorm(n, 0, 0.3)
-motivation <- 3.2 + .2 * grade + error
+n     <- 30
+data <- read.csv("../../../datasets/Album Sales.csv")[, -4]
+data <- data[1:n, ] # take the first 30 rows of the album sales data set from Field
+DT::datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
 ```
 
-```{r, echo=FALSE}
-data <- data.frame(grade, studyHours, motivation)
-data <- round(data, 2)
-# Write data for use in SPSS
-write.table(data, "gradeStudyHours.csv", row.names=FALSE, col.names=TRUE, dec='.')
-```
 
-## Explaining variance {.subsection}
+## Variance {.subsection}
 
 ```{r, echo = FALSE}
-grade             <- data$grade
-studyHours        <- data$studyHours
-mean.grade        <- mean(grade)
-mean.studyHours   <- mean(studyHours)
-N                 <- length(grade)
+sales         <- data$sales
+airplay       <- data$airplay
+mean.sales    <- mean(sales)
+mean.airplay  <- mean(airplay)
+N             <- length(sales)
 
-plot(data$grade, 
-     bg='orange', pch = 21, bty = "n", ylim = c(0, 120),
+plot(data$sales, 
+     bg='orange', pch = 21, bty = "n", ylim = c(0, 420),
      ylab="Variables",las = 1,
-     xlab="Participant")
-points(data$studyHours, bg='blue', pch = 21)
-legend("topright", legend = c("studyHours", "grade"), fill = c("blue", "orange"), bty = "n")
+     xlab="Album nr.")
+points(data$airplay, bg='blue', pch = 21)
+legend("topright", legend = c("Airplay", "Sales"), fill = c("blue", "orange"), bty = "n")
+lines(rep(mean.sales, N), col='orange')
+lines(rep(mean.airplay,    N), col='blue', lt=1)
 ```
 
 ## Standardize {.smaller}
@@ -146,57 +139,78 @@ $$z = \frac{x_i - \bar{x}}{{sd}_x}$$
 
 ```{r, echo=TRUE}
 #| output-location: slide
-z.grade      <- (data$grade - mean(data$grade)) / sd(data$grade)
-z.studyHours <- (data$studyHours - mean(data$studyHours)) / sd(data$studyHours)
+z.sales      <- (data$sales   - mean(data$sales))   / sd(data$sales)
+z.airplay    <- (data$airplay - mean(data$airplay)) / sd(data$airplay)
 ```
 
+## Standardize {.smaller}
+
 ```{r, echo= FALSE}
-mean.z.grade      <- mean(z.grade)
-mean.z.studyHours <- mean(z.studyHours)
+mean.z.sales      <- mean(z.sales)
+mean.z.airplay <- mean(z.airplay)
 
-plot(z.grade, 
+plot(z.sales, 
      bg  = 'orange', pch = 21, bty = "n",ylim = c(-2.5, 3.5),
-     ylab = "z-scores", xlab="Participants")
+     ylab = "z-scores", xlab="Album nr.")
 
-points(z.studyHours,  pch = 21, bg='blue')
-legend("topright", legend = c("z-studyHours", "z-grade"), fill = c("blue", "orange"), bty = "n")
+points(z.airplay,  pch = 21, bg='blue')
+legend("topright", legend = c("z-airplay", "z-sales"), fill = c("blue", "orange"), bty = "n")
 
 # # Add mean lines
-lines(rep(mean.z.grade, N), col='orange')
-lines(rep(mean.z.studyHours,    N), col='blue', lt=2)
+lines(rep(mean.z.sales, N), col='orange')
+lines(rep(mean.z.airplay,    N), col='blue', lt=2)
+# 
+```
+
+## Standardize {.smaller}
+
+```{r, echo= FALSE}
+mean.z.sales      <- mean(z.sales)
+mean.z.airplay <- mean(z.airplay)
+
+plot(z.sales, 
+     bg  = 'orange', pch = 21, bty = "n",ylim = c(-2.5, 3.5),
+     ylab = "z-scores", xlab="Album nr.")
+
+points(z.airplay,  pch = 21, bg='blue')
+legend("topright", legend = c("z-airplay", "z-sales"), fill = c("blue", "orange"), bty = "n")
+
+# # Add mean lines
+lines(rep(mean.z.sales, N), col='orange')
+lines(rep(mean.z.airplay,    N), col='blue', lt=2)
 # 
 # # Add vertical variance lines
-# segments(1:N, z.studyHours, 1:N, z.grade, col='red')
-segments(1:N, mean.z.grade, 1:N, z.grade, col='orange')
-segments(1:N, mean.z.studyHours, 1:N, z.studyHours, col='blue', lty = 2)
+# segments(1:N, z.airplay, 1:N, z.sales, col='red')
+segments(1:N, mean.z.sales, 1:N, z.sales, col='orange')
+segments(1:N, mean.z.airplay, 1:N, z.airplay, col='blue', lty = 2)
 ```
 ## Covariance {.subsection}
 
 $${COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}$$
 
 ```{r, echo=TRUE}
-mean.grade         <- mean(grade, na.rm=TRUE)
-mean.studyHours    <- mean(studyHours, na.rm=TRUE)
+mean.sales      <- mean(sales, na.rm=TRUE)
+mean.airplay    <- mean(airplay, na.rm=TRUE)
 
-delta.grade         <- grade - mean.grade
-delta.studyHours    <- studyHours - mean.studyHours
+delta.sales     <- sales - mean.sales
+delta.airplay   <- airplay - mean.airplay
 
-prod <- (grade - mean.grade) * (studyHours - mean.studyHours)
+prod <- (sales - mean.sales) * (airplay - mean.airplay)
 
 covariance <- sum(prod) / (N - 1)
 covariance
 ```
 
-## Covariance 
+## Covariance {.smaller}
 
 ```{r, echo=FALSE}
-mydf <- round(data.frame(grade, 
-                         meanGr = mean.grade, 
-                         deltaGr = delta.grade,  
-                         Hrs = studyHours, 
-                         meanHrs = mean.studyHours, 
-                         deltaHrs = delta.studyHours, 
-                         prod), 2)
+mydf <- round(data.frame(sales, 
+                         meanSales = mean.sales, 
+                         deltaSales = delta.sales,  
+                         airplay = airplay, 
+                         meanAir = mean.airplay, 
+                         deltaAir = delta.airplay, 
+                         deltaProduct = prod), 2)
 DT::datatable(mydf, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
 ```
 
@@ -205,7 +219,7 @@ DT::datatable(mydf, rownames = FALSE, options = list(searching = FALSE, scrollY 
 $$r_{xy} = \frac{{COV}_{xy}}{S_xS_y}$$
 
 ```{r, echo=TRUE}
-correlation <- covariance / ( sd(grade) * sd(studyHours) ); correlation
+correlation <- covariance / ( sd(sales) * sd(airplay) ); correlation
 correlation
 ```
 
@@ -215,30 +229,39 @@ $${COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}$$
 
 
 ```{r, echo=TRUE}
-cor(  grade,   studyHours) # correlation
+cor(  sales,   airplay) # correlation
 
-cor(z.grade, z.studyHours) # correlation of z-scores
+cor(z.sales, z.airplay) # correlation of z-scores
 ```
 
 ```{r, echo=TRUE}
 # covariance of z-scores
-sum(z.grade * z.studyHours ) / (N - 1)
+sum(z.sales * z.airplay ) / (N - 1)
 ```
 
 
 ## Plot correlation
 
 ```{r, echo=FALSE}
-plot(grade,studyHours, las = 1, pch = 21, bg = "gray")
-lines(c(mean.grade, mean.grade), c(-80,120), col="red")
-lines(c(-100,100), c(mean.studyHours, mean.studyHours), col="red")
+plot(airplay, sales, las = 1, pch = 21, bg = "turquoise", ylab = "Album Sales", xlab ="Airplay")
+abline(h = mean.sales,   col = "black", lwd = 2)
+abline(v = mean.airplay, col = "black", lwd = 2)
+corners <- par("usr")
+xTop <- corners[2]
+xBot <- corners[1]
+yTop <- corners[4]
+yBot <- corners[3]
+polygon(c(mean.airplay,xTop,xTop,mean.airplay),c(mean.sales,mean.sales,yTop,yTop), col = rgb(0,0.8,0,.2))
+polygon(c(mean.airplay,xBot,xBot,mean.airplay),c(mean.sales,mean.sales,yBot,yBot), col = rgb(0,0.8,0,.2))
 
-xMargin <- 7
-yMargin <- 10
-text(mean.grade+xMargin, mean.studyHours+yMargin, "+ * +", cex = 2, col = "red")
-text(mean.grade-xMargin, mean.studyHours-yMargin, "- * -", cex = 2, col = "red")
-text(mean.grade+xMargin, mean.studyHours-yMargin, "+ * -", cex = 2, col = "red")
-text(mean.grade-xMargin, mean.studyHours+yMargin, "- * +", cex = 2, col = "red")
+polygon(c(mean.airplay,xBot,xBot,mean.airplay),c(mean.sales,mean.sales,yTop,yTop), col = rgb(0.8,0,0,alpha = 0.2))
+polygon(c(mean.airplay,xTop,xTop,mean.airplay),c(mean.sales,mean.sales,yBot,yBot), col = rgb(0.8,0,0,alpha= 0.2))
+xMargin <- 20
+yMargin <- 100
+text(mean.sales+xMargin, mean.airplay+yMargin, "+ * +", cex = 2, col = "red")
+text(mean.sales-xMargin, mean.airplay-yMargin, "- * -", cex = 2, col = "red")
+text(mean.sales+xMargin, mean.airplay-yMargin, "+ * -", cex = 2, col = "red")
+text(mean.sales-xMargin, mean.airplay+yMargin, "- * +", cex = 2, col = "red")
 ```
 
 ## Significance of a correlation {.subsection}
@@ -258,29 +281,39 @@ $$
 ## r to t
 
 ```{r, echo=TRUE}
-df = N-2
-t.r = ( correlation*sqrt(df) ) / sqrt(1-correlation^2)
+df  <- N-2
+t.r <- ( correlation*sqrt(df) ) / sqrt(1-correlation^2)
 cbind(t.r, df)
 ```
 
 ## Visualize
 
-One-sample t-test
+Locate in t-distribution
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 #| output-location: slide
 
-if(!"visualize" %in% installed.packages()) { install.packages("visualize") }
-library("visualize")
+# Set up the plot for the F-distribution
+curve(dt(x, df), from = -8, to = 8, n = 1000, bty = "n", las = 1,
+      xlab = "t-value", ylab = "Density", main = "t-distribution with P-value Region")
 
-visualize.t(c(-t.r, t.r),df,section='tails')
+# Shade the upper tail (p-value region) using polygon
+# Define the region to fill (upper tail, greater than fStat)
+x_vals <- seq(t.r, 10, length.out = 100)
+y_vals <- dt(x_vals, df)
+
+# Draw the polygon to fill the area under the curve
+polygon(c(t.r, x_vals, 10), c(0, y_vals, 0), col = "lightblue", border = NA)
+
+# Optionally, add a vertical line at the F-statistic
+arrows(x0 = t.r, x1 = t.r, y0 = 0 , y1 = 0.25, col = "darkred", lwd = 2)
+text(x = t.r, y = 0.3, paste("t =", round(t.r, 2)), cex = 1.2)
+text(x = t.r, y = 0.35, paste("p-val < 0.001"), cex = 1.2)
 ```
 
 # Partial correlation {.section}
 
-## Venn diagram
-
-
+## Venn diagram of Variance
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, prompt=FALSE}
 if(!"VennDiagram" %in% installed.packages()) { install.packages("VennDiagram") };
 library("VennDiagram")
@@ -304,37 +337,53 @@ draw.triple.venn(area1 = 100, area2 = 100, area3 = 100,
 $$\LARGE{r_{xy \cdot z} = \frac{r_{xy} - r_{xz} r_{yz}}{\sqrt{(1 - r_{xz}^2)(1 - r_{yz}^2)}}}$$
 
 ```{r, echo=TRUE}
-motivation = data$motivation
+adverts <- data$adverts
 
-cor.grade.studyHours       = cor(grade,studyHours)
-cor.grade.motivation       = cor(grade,motivation)
-cor.studyHours.motivation  = cor(studyHours,motivation)
+cor.sales.airplay    <- cor(sales,airplay)
+cor.sales.adverts    <- cor(sales,adverts)
+cor.airplay.adverts  <- cor(airplay,adverts)
 
-data.frame(cor.grade.studyHours, cor.grade.motivation, cor.studyHours.motivation)
+data.frame(cor.sales.airplay, cor.sales.adverts, cor.airplay.adverts)
 ```
 
 ------
 
 ```{r, echo=TRUE}
-numerator   = cor.grade.studyHours - (cor.grade.motivation * cor.studyHours.motivation)
-denominator = sqrt( (1-cor.grade.motivation^2)*(1-cor.studyHours.motivation^2) )
+numerator   <- cor.sales.airplay - (cor.sales.adverts * cor.airplay.adverts)
+denominator <- sqrt( (1-cor.sales.adverts^2)*(1-cor.airplay.adverts^2) )
 
-partial.correlation = numerator / denominator
+partial.correlation <- numerator / denominator
 
 partial.correlation
 ```
 
 ## Significance of partial correlation {.subsection}
 
-One-sample t-test
+Locate in t-distribution
 
 ```{r, echo=TRUE}
-#| output-location: slide
+df <- N - 3
 
-df = N - 3
-
-t.pr = ( partial.correlation*sqrt(df) ) / sqrt(1-partial.correlation^2)
+t.pr <- ( partial.correlation*sqrt(df) ) / sqrt(1-partial.correlation^2)
 t.pr
+```
 
-visualize.t(c(-t.pr,t.pr),df,section='tails')
+## p-value
+```{r, echo=FALSE}
+# Set up the plot for the F-distribution
+curve(dt(x, df), from = -8, to = 8, n = 1000, bty = "n", las = 1,
+      xlab = "t-value", ylab = "Density", main = "t-distribution with P-value Region")
+
+# Shade the upper tail (p-value region) using polygon
+# Define the region to fill (upper tail, greater than fStat)
+x_vals <- seq(t.pr, 10, length.out = 100)
+y_vals <- dt(x_vals, df)
+
+# Draw the polygon to fill the area under the curve
+polygon(c(t.pr, x_vals, 10), c(0, y_vals, 0), col = "lightblue", border = NA)
+
+# Optionally, add a vertical line at the F-statistic
+arrows(x0 = t.pr, x1 = t.pr, y0 = 0 , y1 = 0.25, col = "darkred", lwd = 2)
+text(x = t.pr, y = 0.3, paste("t =", round(t.pr, 2)), cex = 1.2)
+text(x = t.pr, y = 0.35, paste("p-val < 0.001"), cex = 1.2)
 ```

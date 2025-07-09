@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Sharon Klinkenberg &amp; Johnny van Doorn">
 
 <title>correlation</title>
 <style>
@@ -68,25 +69,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="correlation_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="correlation_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
-<script src="correlation_files/libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="correlation_files/libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="correlation_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <link href="correlation_files/libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="correlation_files/libs/datatables-binding-0.27/datatables.js"></script>
+<script src="correlation_files/libs/datatables-binding-0.33/datatables.js"></script>
 <script src="correlation_files/libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<link href="correlation_files/libs/dt-core-1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="correlation_files/libs/dt-core-1.12.1/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="correlation_files/libs/dt-core-1.12.1/js/jquery.dataTables.min.js"></script>
-<link href="correlation_files/libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
-<script src="correlation_files/libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="correlation_files/libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="correlation_files/libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="correlation_files/libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="correlation_files/libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="correlation_files/libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
-<body class="fullcontent">
+<body>
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#correlation" id="toc-correlation" class="nav-link active" data-scroll-target="#correlation">Correlation</a>
+  <ul class="collapse">
+  <li><a href="#pearson-correlation" id="toc-pearson-correlation" class="nav-link" data-scroll-target="#pearson-correlation">Pearson Correlation</a></li>
+  <li><a href="#pearson-correlation-1" id="toc-pearson-correlation-1" class="nav-link" data-scroll-target="#pearson-correlation-1">Pearson Correlation</a></li>
+  <li><a href="#plot-correlation" id="toc-plot-correlation" class="nav-link" data-scroll-target="#plot-correlation">Plot correlation</a></li>
+  <li><a href="#plot-correlation-1" id="toc-plot-correlation-1" class="nav-link" data-scroll-target="#plot-correlation-1">Plot correlation</a></li>
+  <li><a href="#plot-correlation-2" id="toc-plot-correlation-2" class="nav-link" data-scroll-target="#plot-correlation-2">Plot correlation</a></li>
+  <li><a href="#load-data" id="toc-load-data" class="nav-link" data-scroll-target="#load-data">Load data</a></li>
+  <li><a href="#variance" id="toc-variance" class="nav-link" data-scroll-target="#variance">Variance</a></li>
+  <li><a href="#standardize" id="toc-standardize" class="nav-link" data-scroll-target="#standardize">Standardize</a></li>
+  <li><a href="#standardize-1" id="toc-standardize-1" class="nav-link" data-scroll-target="#standardize-1">Standardize</a></li>
+  <li><a href="#standardize-2" id="toc-standardize-2" class="nav-link" data-scroll-target="#standardize-2">Standardize</a></li>
+  <li><a href="#covariance" id="toc-covariance" class="nav-link" data-scroll-target="#covariance">Covariance</a></li>
+  <li><a href="#covariance-1" id="toc-covariance-1" class="nav-link" data-scroll-target="#covariance-1">Covariance</a></li>
+  <li><a href="#correlation-1" id="toc-correlation-1" class="nav-link" data-scroll-target="#correlation-1">Correlation</a></li>
+  <li><a href="#correlation-2" id="toc-correlation-2" class="nav-link" data-scroll-target="#correlation-2">Correlation</a></li>
+  <li><a href="#plot-correlation-3" id="toc-plot-correlation-3" class="nav-link" data-scroll-target="#plot-correlation-3">Plot correlation</a></li>
+  <li><a href="#significance-of-a-correlation" id="toc-significance-of-a-correlation" class="nav-link" data-scroll-target="#significance-of-a-correlation">Significance of a correlation</a></li>
+  <li><a href="#r-to-t" id="toc-r-to-t" class="nav-link" data-scroll-target="#r-to-t">r to t</a></li>
+  <li><a href="#visualize" id="toc-visualize" class="nav-link" data-scroll-target="#visualize">Visualize</a></li>
+  </ul></li>
+  <li><a href="#partial-correlation" id="toc-partial-correlation" class="nav-link" data-scroll-target="#partial-correlation">Partial correlation</a>
+  <ul class="collapse">
+  <li><a href="#venn-diagram-of-variance" id="toc-venn-diagram-of-variance" class="nav-link" data-scroll-target="#venn-diagram-of-variance">Venn diagram of Variance</a></li>
+  <li><a href="#partial-correlation-1" id="toc-partial-correlation-1" class="nav-link" data-scroll-target="#partial-correlation-1">Partial correlation</a></li>
+  <li><a href="#significance-of-partial-correlation" id="toc-significance-of-partial-correlation" class="nav-link" data-scroll-target="#significance-of-partial-correlation">Significance of partial correlation</a></li>
+  <li><a href="#p-value" id="toc-p-value" class="nav-link" data-scroll-target="#p-value">p-value</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="correlation.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</div>
 <main class="content" id="quarto-document-content">
 
 
@@ -99,9 +138,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In statistics, the Pearson correlation coefficient, also referred to as the Pearson’s r, Pearson product-moment correlation coefficient (PPMCC) or bivariate correlation, is a measure of the linear correlation between two variables X and Y. It has a value between +1 and −1, where 1 is total positive linear correlation, 0 is no linear correlation, and −1 is total negative linear correlation. It is widely used in the sciences. It was developed by Karl Pearson from a related idea introduced by Francis Galton in the 1880s.</p>
 <p>Source: <a href="https://en.wikipedia.org/wiki/Pearson_correlation_coefficient">Wikipedia</a></p>
 </section>
-<section id="pmcc" class="level2">
-<h2 class="anchored" data-anchor-id="pmcc">PMCC</h2>
-<p><span class="math display">\[r_{xy} = \frac{{COV}_{xy}}{S_xS_y}\]</span> Where <span class="math inline">\(S\)</span> is sthe standard deviation and <span class="math inline">\(COV\)</span> is the covariance.</p>
+<section id="pearson-correlation-1" class="level2">
+<h2 class="anchored" data-anchor-id="pearson-correlation-1">Pearson Correlation</h2>
+<p><span class="math display">\[r_{xy} = \frac{{COV}_{xy}}{S_xS_y}\]</span> Where <span class="math inline">\(S\)</span> is the standard deviation and <span class="math inline">\(COV\)</span> is the covariance.</p>
 <p><span class="math display">\[{COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}\]</span></p>
 </section>
 <section id="plot-correlation" class="level2">
@@ -140,33 +179,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><span class="math display">\[(x_i - \bar{x})(y_i - \bar{y})\]</span></p>
+<!-- ## Guess the correlation -->
+<!-- [Guess the correlation](http://guessthecorrelation.com) -->
+<!-- <img src="qrcodeqtc.png"> -->
 </section>
-<section id="guess-the-correlation" class="level2">
-<h2 class="anchored" data-anchor-id="guess-the-correlation">Guess the correlation</h2>
-<p><a href="http://guessthecorrelation.com">Guess the correlation</a></p>
-<p><img src="qrcodeqtc.png"></p>
-</section>
-<section id="simulate-data" class="level2">
-<h2 class="anchored" data-anchor-id="simulate-data">Simulate data</h2>
+<section id="load-data" class="level2">
+<h2 class="anchored" data-anchor-id="load-data">Load data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>n     <span class="ot">&lt;-</span> <span class="dv">50</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>studyHours <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">abs</span>(<span class="fu">rnorm</span>(n, <span class="dv">20</span>, <span class="dv">7</span>)))</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>b<span class="fl">.0</span>   <span class="ot">&lt;-</span> <span class="dv">60</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>b<span class="fl">.1</span>   <span class="ot">&lt;-</span> .<span class="dv">5</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>error <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">3</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>grade <span class="ot">&lt;-</span> b<span class="fl">.0</span> <span class="sc">+</span> b<span class="fl">.1</span> <span class="sc">*</span> studyHours <span class="sc">+</span> error</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>error <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="fl">0.3</span>)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>motivation <span class="ot">&lt;-</span> <span class="fl">3.2</span> <span class="sc">+</span> .<span class="dv">2</span> <span class="sc">*</span> grade <span class="sc">+</span> error</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>n     <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../../../datasets/Album Sales.csv"</span>)[, <span class="sc">-</span><span class="dv">4</span>]</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data[<span class="dv">1</span><span class="sc">:</span>n, ] <span class="co"># take the first 30 rows of the album sales data set from Field</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(data, <span class="at">rownames =</span> <span class="cn">FALSE</span>, <span class="at">options =</span> <span class="fu">list</span>(<span class="at">searching =</span> <span class="cn">FALSE</span>, <span class="at">scrollY =</span> <span class="dv">415</span>, <span class="at">paging =</span> F, <span class="at">info =</span> F))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div class="datatables html-widget html-fill-item" id="htmlwidget-2d16c451fb8eb535c725" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-2d16c451fb8eb535c725">{"x":{"filter":"none","vertical":false,"data":[[10.256,985.6849999999999,1445.563,1188.193,574.513,568.954,471.814,537.352,514.068,174.093,1720.806,611.479,251.192,97.97199999999999,406.814,265.398,1323.287,196.65,1326.598,1380.689,792.345,957.167,1789.659,656.1369999999999,613.697,313.362,336.51,1544.899,68.95399999999999,785.692],[330,120,360,270,220,170,70,210,200,300,290,70,150,190,240,100,250,210,280,230,210,230,320,210,230,250,60,330,150,150],[43,28,35,33,44,19,20,22,21,40,32,20,24,38,24,25,35,36,27,33,33,28,30,34,49,40,20,42,35,8]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>adverts<\/th>\n      <th>sales<\/th>\n      <th>airplay<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2]},{"name":"adverts","targets":0},{"name":"sales","targets":1},{"name":"airplay","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
 </div>
 </section>
-<section id="explaining-variance" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="explaining-variance">Explaining variance</h2>
+<section id="variance" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="variance">Variance</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="correlation_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+<p><img src="correlation_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -174,9 +209,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="smaller anchored" data-anchor-id="standardize">Standardize</h2>
 <p><span class="math display">\[z = \frac{x_i - \bar{x}}{{sd}_x}\]</span></p>
 <div class="cell" data-output-location="slide">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>z.grade      <span class="ot">&lt;-</span> (data<span class="sc">$</span>grade <span class="sc">-</span> <span class="fu">mean</span>(data<span class="sc">$</span>grade)) <span class="sc">/</span> <span class="fu">sd</span>(data<span class="sc">$</span>grade)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>z.studyHours <span class="ot">&lt;-</span> (data<span class="sc">$</span>studyHours <span class="sc">-</span> <span class="fu">mean</span>(data<span class="sc">$</span>studyHours)) <span class="sc">/</span> <span class="fu">sd</span>(data<span class="sc">$</span>studyHours)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>z.sales      <span class="ot">&lt;-</span> (data<span class="sc">$</span>sales   <span class="sc">-</span> <span class="fu">mean</span>(data<span class="sc">$</span>sales))   <span class="sc">/</span> <span class="fu">sd</span>(data<span class="sc">$</span>sales)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>z.airplay    <span class="ot">&lt;-</span> (data<span class="sc">$</span>airplay <span class="sc">-</span> <span class="fu">mean</span>(data<span class="sc">$</span>airplay)) <span class="sc">/</span> <span class="fu">sd</span>(data<span class="sc">$</span>airplay)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="standardize-1" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="standardize-1">Standardize</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="correlation_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="standardize-2" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="standardize-2">Standardize</h2>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="correlation_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
@@ -187,28 +233,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="subsection anchored" data-anchor-id="covariance">Covariance</h2>
 <p><span class="math display">\[{COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mean.grade         <span class="ot">&lt;-</span> <span class="fu">mean</span>(grade, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>mean.studyHours    <span class="ot">&lt;-</span> <span class="fu">mean</span>(studyHours, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mean.sales      <span class="ot">&lt;-</span> <span class="fu">mean</span>(sales, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>mean.airplay    <span class="ot">&lt;-</span> <span class="fu">mean</span>(airplay, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>delta.grade         <span class="ot">&lt;-</span> grade <span class="sc">-</span> mean.grade</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>delta.studyHours    <span class="ot">&lt;-</span> studyHours <span class="sc">-</span> mean.studyHours</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>delta.sales     <span class="ot">&lt;-</span> sales <span class="sc">-</span> mean.sales</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>delta.airplay   <span class="ot">&lt;-</span> airplay <span class="sc">-</span> mean.airplay</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>prod <span class="ot">&lt;-</span> (grade <span class="sc">-</span> mean.grade) <span class="sc">*</span> (studyHours <span class="sc">-</span> mean.studyHours)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>prod <span class="ot">&lt;-</span> (sales <span class="sc">-</span> mean.sales) <span class="sc">*</span> (airplay <span class="sc">-</span> mean.airplay)</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>covariance <span class="ot">&lt;-</span> <span class="fu">sum</span>(prod) <span class="sc">/</span> (N <span class="sc">-</span> <span class="dv">1</span>)</span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>covariance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 20.62015</code></pre>
+<pre><code>[1] 429.6552</code></pre>
 </div>
 </div>
 </section>
-<section id="covariance-1" class="level2">
-<h2 class="anchored" data-anchor-id="covariance-1">Covariance</h2>
+<section id="covariance-1" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="covariance-1">Covariance</h2>
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-d96970b9501c191ad406" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-d96970b9501c191ad406">{"x":{"filter":"none","vertical":false,"data":[[68.76,68.91,75.37,74.11,69.82,80.55,66.85,67.25,67.87,69.15,75.64,69.99,70.5,67.44,64.78,77.41,72.84,63.16,75.27,74.65,65.03,62.07,69.52,65.37,65.94,67.08,72.15,66.84,66.54,74.08,71.52,70.16,71.89,74.93,72.34,73.5,75.29,71.31,68.02,71.95,70.48,71.15,66.22,75.62,78.08,64.2,75.06,73.1,71.79,66.42],[70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56,70.56],[-1.8,-1.65,4.81,3.55,-0.74,9.99,-3.71,-3.31,-2.69,-1.41,5.08,-0.57,-0.06,-3.12,-5.78,6.85,2.28,-7.4,4.71,4.09,-5.53,-8.49,-1.04,-5.19,-4.62,-3.48,1.59,-3.72,-4.02,3.52,0.96,-0.4,1.33,4.37,1.78,2.94,4.73,0.75,-2.54,1.39,-0.08,0.59,-4.34,5.06,7.52,-6.36,4.5,2.54,1.23,-4.14],[16,18,31,20,21,32,23,11,15,17,29,23,23,21,16,33,23,6,25,17,13,18,13,15,16,8,26,21,12,29,23,18,26,26,26,25,24,20,18,17,15,19,11,35,28,12,17,17,25,19],[20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24,20.24],[-4.24,-2.24,10.76,-0.24,0.76,11.76,2.76,-9.24,-5.24,-3.24,8.76,2.76,2.76,0.76,-4.24,12.76,2.76,-14.24,4.76,-3.24,-7.24,-2.24,-7.24,-5.24,-4.24,-12.24,5.76,0.76,-8.24,8.76,2.76,-2.24,5.76,5.76,5.76,4.76,3.76,-0.24,-2.24,-3.24,-5.24,-1.24,-9.24,14.76,7.76,-8.24,-3.24,-3.24,4.76,-1.24],[7.63,3.69,51.76,-0.85,-0.56,117.49,-10.24,30.58,14.09,4.57,44.51,-1.57,-0.16,-2.37,24.5,87.41,6.29,105.37,22.42,-13.25,40.03,19.02,7.53,27.19,19.59,42.59,9.16,-2.83,33.12,30.84,2.65,0.89,7.66,25.17,10.26,14,17.79,-0.18,5.69,-4.51,0.42,-0.73,40.1,74.69,58.36,52.4,-14.58,-8.23,5.86,5.13]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>grade<\/th>\n      <th>meanGr<\/th>\n      <th>deltaGr<\/th>\n      <th>Hrs<\/th>\n      <th>meanHrs<\/th>\n      <th>deltaHrs<\/th>\n      <th>prod<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5,6]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-569adc4d8c32b51d1b16" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-569adc4d8c32b51d1b16">{"x":{"filter":"none","vertical":false,"data":[[330,120,360,270,220,170,70,210,200,300,290,70,150,190,240,100,250,210,280,230,210,230,320,210,230,250,60,330,150,150],[213.33,213.33,213.33,213.33,213.33,213.33,213.33,213.33,213.33,213.33,213.33,213.33,213.33,213.33,213.33,213.33,213.33,213.33,213.33,213.33,213.33,213.33,213.33,213.33,213.33,213.33,213.33,213.33,213.33,213.33],[116.67,-93.33,146.67,56.67,6.67,-43.33,-143.33,-3.33,-13.33,86.67,76.67,-143.33,-63.33,-23.33,26.67,-113.33,36.67,-3.33,66.67,16.67,-3.33,16.67,106.67,-3.33,16.67,36.67,-153.33,116.67,-63.33,-63.33],[43,28,35,33,44,19,20,22,21,40,32,20,24,38,24,25,35,36,27,33,33,28,30,34,49,40,20,42,35,8],[30.6,30.6,30.6,30.6,30.6,30.6,30.6,30.6,30.6,30.6,30.6,30.6,30.6,30.6,30.6,30.6,30.6,30.6,30.6,30.6,30.6,30.6,30.6,30.6,30.6,30.6,30.6,30.6,30.6,30.6],[12.4,-2.6,4.4,2.4,13.4,-11.6,-10.6,-8.6,-9.6,9.4,1.4,-10.6,-6.6,7.4,-6.6,-5.6,4.4,5.4,-3.6,2.4,2.4,-2.6,-0.6,3.4,18.4,9.4,-10.6,11.4,4.4,-22.6],[1446.67,242.67,645.33,136,89.33,502.67,1519.33,28.67,128,814.67,107.33,1519.33,418,-172.67,-176,634.67,161.33,-18,-240,40,-8,-43.33,-64,-11.33,306.67,344.67,1625.33,1330,-278.67,1431.33]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>sales<\/th>\n      <th>meanSales<\/th>\n      <th>deltaSales<\/th>\n      <th>airplay<\/th>\n      <th>meanAir<\/th>\n      <th>deltaAir<\/th>\n      <th>deltaProduct<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5,6]},{"name":"sales","targets":0},{"name":"meanSales","targets":1},{"name":"deltaSales","targets":2},{"name":"airplay","targets":3},{"name":"meanAir","targets":4},{"name":"deltaAir","targets":5},{"name":"deltaProduct","targets":6}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -216,13 +262,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="correlation-1">Correlation</h2>
 <p><span class="math display">\[r_{xy} = \frac{{COV}_{xy}}{S_xS_y}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>correlation <span class="ot">&lt;-</span> covariance <span class="sc">/</span> ( <span class="fu">sd</span>(grade) <span class="sc">*</span> <span class="fu">sd</span>(studyHours) ); correlation</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>correlation <span class="ot">&lt;-</span> covariance <span class="sc">/</span> ( <span class="fu">sd</span>(sales) <span class="sc">*</span> <span class="fu">sd</span>(airplay) ); correlation</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7589993</code></pre>
+<pre><code>[1] 0.5838392</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>correlation</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7589993</code></pre>
+<pre><code>[1] 0.5838392</code></pre>
 </div>
 </div>
 </section>
@@ -230,20 +276,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="correlation-2">Correlation</h2>
 <p><span class="math display">\[r_{xy} = \frac{{COV}_{xy}}{S_xS_y}\]</span> <span class="math display">\[{COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(  grade,   studyHours) <span class="co"># correlation</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(  sales,   airplay) <span class="co"># correlation</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7589993</code></pre>
+<pre><code>[1] 0.5838392</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(z.grade, z.studyHours) <span class="co"># correlation of z-scores</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(z.sales, z.airplay) <span class="co"># correlation of z-scores</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7589993</code></pre>
+<pre><code>[1] 0.5838392</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># covariance of z-scores</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(z.grade <span class="sc">*</span> z.studyHours ) <span class="sc">/</span> (N <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(z.sales <span class="sc">*</span> z.airplay ) <span class="sc">/</span> (N <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7589993</code></pre>
+<pre><code>[1] 0.5838392</code></pre>
 </div>
 </div>
 </section>
@@ -271,23 +317,19 @@ H_A &amp;: t_r &lt; 0 \\
 <section id="r-to-t" class="level2">
 <h2 class="anchored" data-anchor-id="r-to-t">r to t</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> N<span class="dv">-2</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>t.r <span class="ot">=</span> ( correlation<span class="sc">*</span><span class="fu">sqrt</span>(df) ) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">-</span>correlation<span class="sc">^</span><span class="dv">2</span>)</span>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df  <span class="ot">&lt;-</span> N<span class="dv">-2</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>t.r <span class="ot">&lt;-</span> ( correlation<span class="sc">*</span><span class="fu">sqrt</span>(df) ) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">-</span>correlation<span class="sc">^</span><span class="dv">2</span>)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(t.r, df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          t.r df
-[1,] 8.076439 48</code></pre>
+[1,] 3.805276 28</code></pre>
 </div>
 </div>
 </section>
 <section id="visualize" class="level2">
 <h2 class="anchored" data-anchor-id="visualize">Visualize</h2>
-<p>One-sample t-test</p>
+<p>Locate in t-distribution</p>
 <div class="cell" data-output-location="slide">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="st">"visualize"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()) { <span class="fu">install.packages</span>(<span class="st">"visualize"</span>) }</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"visualize"</span>)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.t</span>(<span class="fu">c</span>(<span class="sc">-</span>t.r, t.r),df,<span class="at">section=</span><span class="st">'tails'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="correlation_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -296,8 +338,8 @@ H_A &amp;: t_r &lt; 0 \\
 </section>
 <section id="partial-correlation" class="level1 section">
 <h1 class="section">Partial correlation</h1>
-<section id="venn-diagram" class="level2">
-<h2 class="anchored" data-anchor-id="venn-diagram">Venn diagram</h2>
+<section id="venn-diagram-of-variance" class="level2">
+<h2 class="anchored" data-anchor-id="venn-diagram-of-variance">Venn diagram of Variance</h2>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="correlation_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
@@ -308,45 +350,49 @@ H_A &amp;: t_r &lt; 0 \\
 <h2 class="smaller anchored" data-anchor-id="partial-correlation-1">Partial correlation</h2>
 <p><span class="math display">\[\LARGE{r_{xy \cdot z} = \frac{r_{xy} - r_{xz} r_{yz}}{\sqrt{(1 - r_{xz}^2)(1 - r_{yz}^2)}}}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>motivation <span class="ot">=</span> data<span class="sc">$</span>motivation</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>cor.grade.studyHours       <span class="ot">=</span> <span class="fu">cor</span>(grade,studyHours)</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>cor.grade.motivation       <span class="ot">=</span> <span class="fu">cor</span>(grade,motivation)</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>cor.studyHours.motivation  <span class="ot">=</span> <span class="fu">cor</span>(studyHours,motivation)</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(cor.grade.studyHours, cor.grade.motivation, cor.studyHours.motivation)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>adverts <span class="ot">&lt;-</span> data<span class="sc">$</span>adverts</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>cor.sales.airplay    <span class="ot">&lt;-</span> <span class="fu">cor</span>(sales,airplay)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>cor.sales.adverts    <span class="ot">&lt;-</span> <span class="fu">cor</span>(sales,adverts)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>cor.airplay.adverts  <span class="ot">&lt;-</span> <span class="fu">cor</span>(airplay,adverts)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(cor.sales.airplay, cor.sales.adverts, cor.airplay.adverts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  cor.grade.studyHours cor.grade.motivation cor.studyHours.motivation
-1            0.7589993            0.9395244                 0.7450336</code></pre>
+<pre><code>  cor.sales.airplay cor.sales.adverts cor.airplay.adverts
+1         0.5838392         0.4735266           0.0188131</code></pre>
 </div>
 </div>
 <hr>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>numerator   <span class="ot">=</span> cor.grade.studyHours <span class="sc">-</span> (cor.grade.motivation <span class="sc">*</span> cor.studyHours.motivation)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>denominator <span class="ot">=</span> <span class="fu">sqrt</span>( (<span class="dv">1</span><span class="sc">-</span>cor.grade.motivation<span class="sc">^</span><span class="dv">2</span>)<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>cor.studyHours.motivation<span class="sc">^</span><span class="dv">2</span>) )</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>partial.correlation <span class="ot">=</span> numerator <span class="sc">/</span> denominator</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>partial.correlation</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>numerator   <span class="ot">&lt;-</span> cor.sales.airplay <span class="sc">-</span> (cor.sales.adverts <span class="sc">*</span> cor.airplay.adverts)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>denominator <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( (<span class="dv">1</span><span class="sc">-</span>cor.sales.adverts<span class="sc">^</span><span class="dv">2</span>)<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>cor.airplay.adverts<span class="sc">^</span><span class="dv">2</span>) )</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>partial.correlation <span class="ot">&lt;-</span> numerator <span class="sc">/</span> denominator</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>partial.correlation</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2583645</code></pre>
+<pre><code>[1] 0.6528677</code></pre>
 </div>
 </div>
 </section>
 <section id="significance-of-partial-correlation" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="significance-of-partial-correlation">Significance of partial correlation</h2>
-<p>One-sample t-test</p>
-<div class="cell" data-output-location="slide">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> N <span class="sc">-</span> <span class="dv">3</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>t.pr <span class="ot">=</span> ( partial.correlation<span class="sc">*</span><span class="fu">sqrt</span>(df) ) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">-</span>partial.correlation<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>t.pr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Locate in t-distribution</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> N <span class="sc">-</span> <span class="dv">3</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>t.pr <span class="ot">&lt;-</span> ( partial.correlation<span class="sc">*</span><span class="fu">sqrt</span>(df) ) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">-</span>partial.correlation<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>t.pr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.83351</code></pre>
+<pre><code>[1] 4.478582</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.t</span>(<span class="fu">c</span>(<span class="sc">-</span>t.pr,t.pr),df,<span class="at">section=</span><span class="st">'tails'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="p-value" class="level2">
+<h2 class="anchored" data-anchor-id="p-value">p-value</h2>
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="correlation_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+<p><img src="correlation_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>

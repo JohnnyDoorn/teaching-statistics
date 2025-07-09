@@ -120,6 +120,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#venn-diagram-of-variance" id="toc-venn-diagram-of-variance" class="nav-link" data-scroll-target="#venn-diagram-of-variance">Venn diagram of Variance</a></li>
   <li><a href="#partial-correlation-1" id="toc-partial-correlation-1" class="nav-link" data-scroll-target="#partial-correlation-1">Partial correlation</a></li>
   <li><a href="#significance-of-partial-correlation" id="toc-significance-of-partial-correlation" class="nav-link" data-scroll-target="#significance-of-partial-correlation">Significance of partial correlation</a></li>
+  <li><a href="#p-value" id="toc-p-value" class="nav-link" data-scroll-target="#p-value">p-value</a></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="correlation_albumsales.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
@@ -380,9 +381,21 @@ H_A &amp;: t_r &lt; 0 \\
 <section id="significance-of-partial-correlation" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="significance-of-partial-correlation">Significance of partial correlation</h2>
 <p>One-sample t-test</p>
-<div class="cell" data-output-location="slide">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> N <span class="sc">-</span> <span class="dv">3</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>t.pr <span class="ot">&lt;-</span> ( partial.correlation<span class="sc">*</span><span class="fu">sqrt</span>(df) ) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">-</span>partial.correlation<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>t.pr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6.346355</code></pre>
+</div>
+</div>
+</section>
+<section id="p-value" class="level2">
+<h2 class="anchored" data-anchor-id="p-value">p-value</h2>
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="correlation_albumsales_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+<p><img src="correlation_albumsales_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>

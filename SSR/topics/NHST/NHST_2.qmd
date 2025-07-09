@@ -49,7 +49,7 @@ $$SE = \frac{\text{Standard deviation}}{\text{Square root of sample size}} = \fr
 
 ## Standard Error {.flexbox .vcenter}
 
-```{r, child="ci.html"}
+```{r, child="../../images/ci.html"}
 ```
 
 ## 
@@ -215,7 +215,7 @@ for(p in prob) {
 :::
 
 ::: {#dectable .r-stack .r-stretch}
-```{r child="decision_table.svg"}
+```{r child="../../images/decision_table.svg"}
 ```
 :::
 
@@ -237,7 +237,7 @@ for(p in prob) {
 #alpha > svg { transform: scale(.8);}
 </style>
 ```
-```{r child="decision_table.svg"}
+```{r child="../../images/decision_table.svg"}
 ```
 :::
 :::
@@ -293,7 +293,7 @@ text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 #power > svg { transform: scale(.8);}
 </style>
 ```
-```{r child="decision_table.svg"}
+```{r child="../../images/decision_table.svg"}
 ```
 :::
 :::
@@ -330,31 +330,6 @@ abline(v = c(2.5,10.9), lty=2, col='red')
 text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 ```
 
-## Post-Hoc Power
-
--   Also known as: observed, retrospective, achieved, prospective and a priori power
--   Specificly meaning:
-
-> The power of a test assuming a population effect size equal to the observed effect size in the current sample.
-
-Source: [O'Keefe (2007)](http://www.dokeefe.net/pub/okeefe07cmm-posthoc.pdf)
-
-## Effect size
-
-In statistics, an effect size is a quantitative measure of the strength of a phenomenon. Examples of effect sizes are the correlation between two variables, the regression coefficient in a regression, and standardised differences.
-
-For each type of effect size, a larger absolute value always indicates a stronger effect. Effect sizes complement statistical hypothesis testing, and play an important role in power analyses, sample size planning, and in meta-analyses.
-
-Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Effect_size)
-
-## Effect size {.flexbox .vcenter}
-
-![](../../topics/NHST/effect_size_base.png)
-
-## Effect size {.flexbox .vcenter}
-
-![](effect_size.png)
-
 ## One minus alpha
 
 ::: columns
@@ -370,7 +345,7 @@ Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Effect_size)
 #oneminalpha > svg { transform: scale(.8);}
 </style>
 ```
-```{r child="decision_table.svg"}
+```{r child="../../images/decision_table.svg"}
 ```
 :::
 :::
@@ -425,7 +400,7 @@ text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 #beta > svg { transform: scale(.8);}
 </style>
 ```
-```{r child="decision_table.svg"}
+```{r child="../../images/decision_table.svg"}
 ```
 :::
 :::
@@ -546,9 +521,9 @@ Some common test statistics
 
 ## Reasoning Scheme {.subsection .flexbox .vcenter}
 
-![](NHST_decision_scheme.png)
+![](../../images/NHST_decision_scheme.png)
 
-## R\<-PSYCHOLOGIST {.smaller}
+<!-- ## R\<-PSYCHOLOGIST {.smaller} -->
 
 
-[Interactive distributions app by Kristoffer Magnusson](http://rpsychologist.com/d3/NHST/){preview-link="false"}
+<!-- [Interactive distributions app by Kristoffer Magnusson](http://rpsychologist.com/d3/NHST/){preview-link="false"} -->

@@ -134,5 +134,12 @@
   "2025/6. nhst/6. nhst.qmd": {
     "6. nhst.slide.html": "186ba142",
     "6. nhst.html": "0e8584f7"
+  },
+  "topics/correlation/correlation.qmd": {
+    "correlation.html": "eba935f0"
+  },
+  "2025/6. visualization_correlation/6. visualization_correlation.qmd": {
+    "6. visualization_correlation.slide.html": "045f8c01",
+    "6. visualization_correlation.html": "da2938b7"
   }
 }

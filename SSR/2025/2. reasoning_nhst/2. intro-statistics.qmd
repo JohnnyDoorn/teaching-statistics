@@ -17,7 +17,11 @@ In this lecture we aim to:
 
 * Introduce the S in SSR
 * Repeat some stats concepts from RMS
-* Introduce JASP
+    * "Logic" behind common hypothesis testing
+    * Four scenario's in statistical decision making
+    
+<strong>Reading:</strong>
+Chapters 1, 2, 3
 </div>
 
 ## Learning
@@ -42,6 +46,7 @@ In this lecture we aim to:
   - Confused? 
       - Read the chapter first
       - Rewatch lecture
+      - Ask questions (during lecture, on discussion board)
   
 ## 
 - Practice: 
@@ -57,7 +62,7 @@ In this lecture we aim to:
 - R: very flexible, very optional
     - Freely available at [https://cran.r-project.org/](https://cran.r-project.org/)
     - Want a nicer environment for coding? Try [Rstudio](https://posit.co/download/rstudio-desktop/)
-    - Will be available during exam, but no required to use (can also use Ans calculator)
+    - Will be available during exam, but not required to use (can also use Ans calculator)
     
 <!-- <div class="note"> -->
 <!-- Open science starts with accessible tools -->
@@ -65,17 +70,23 @@ In this lecture we aim to:
 
 ## The Research Process
 
-![](research_process.png){}
+![](../../images/research_process.png){}
 
 
 ## Sampling Variability
-![](sampling_variability.png){}
+![](../../images/sampling_variability.png){}
 
+
+
+```{r child="../../topics/NHST/NHST_2.qmd", eval=TRUE}
+```
 
 ## Next Time
 
-- More Frequentist statistics
-- [Interactive applet](https://statisticalreasoning-uva.shinyapps.io/NHST_Binomial) 
+- Visualization in JASP
+- Correlation
+  - Hypothesis testing using p-values
+  - Estimation using confidence intervals
 
 
 
