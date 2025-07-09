@@ -22,7 +22,7 @@ use_packages("datawizard", "ggplot2", "gt", "here", "tibble", "knitr", "kableExt
 
 ![](alex_banner.png){width="500px"}
 
-Here you can find a selection of Smart Alex Tasks from [Discovering Statistics Using JASP](https://profandyfield.com/discoverse/dsuj/), to practice your new found statistics knowledge during the 2025 workshop. [The companion website](https://discoverjasp.com/) contains  [all data sets](https://discoverjasp.com/pages/data) and  [solutions to the exercises](https://discoverjasp.com/pages/alex). 
+Here you can find a selection of Smart Alex Tasks from [Discovering Statistics Using JASP](https://profandyfield.com/discoverse/dsuj/), to practice your new found statistics knowledge during the 2025 workshop. [The companion website](https://discoverjasp.com/) contains [all data sets](https://discoverjasp.com/pages/data) and  [solutions to the exercises](https://discoverjasp.com/pages/smart_alex). 
 
 
 ::: callout-note

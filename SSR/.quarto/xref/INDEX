@@ -116,5 +116,23 @@
   "2024/25. moderation/25. moderation.qmd": {
     "25. moderation.html": "9a955073",
     "25. moderation.slide.html": "0e870350"
+  },
+  "2025/SSR.qmd": {
+    "SSR.html": "a6c58296"
+  },
+  "2025/2. reasoning_nhst/2. reasoning_empirical_cycle_nhst.qmd": {
+    "2. reasoning_empirical_cycle_nhst.slide.html": "b9d44863",
+    "2. reasoning_empirical_cycle_nhst.html": "5d9101da"
+  },
+  "2025/2. reasoning_nhst/2. intro-statistics.qmd": {
+    "2. intro-statistics.html": "07e75690",
+    "2. intro-statistics.slide.html": "139868a2"
+  },
+  "topics/NHST/NHST_2.qmd": {
+    "NHST_2.html": "35a79c02"
+  },
+  "2025/6. nhst/6. nhst.qmd": {
+    "6. nhst.slide.html": "186ba142",
+    "6. nhst.html": "0e8584f7"
   }
 }

@@ -1,0 +1,20 @@
+---
+title: "6. Null Hypothesis Significance Testing"
+author: "Johnny van Doorn"
+date: "13 sep 2024"
+footer: "Scientific & Statistical Reasoning"
+format:
+  revealjs:
+    output-ext: slide.html
+    css: ../../ajohnson.css
+  html: default
+css: ../../ajohnson.css
+---
+
+```{r child="../../topics/NHST/NHST_2.qmd", eval=TRUE}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../footer.qmd"}
+```

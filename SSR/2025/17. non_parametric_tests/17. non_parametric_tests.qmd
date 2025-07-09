@@ -1,0 +1,60 @@
+---
+title: "18. Assumptions & Non-parametric tests"
+author: "Sharon Kinkenberg & Johnny van Doorn"
+date: "18 oct 2024"
+footer: "Scientific & Statistical Reasoning"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+## Assumptions
+- Not an all-or-nothing case
+- Assess the degree of the violation
+- Especially vulnerable with low sample sizes
+- Visualize (Q-Q plot, boxplots, descriptives)
+- Sometimes there are cures, sometimes not...
+- Don't trash your data, but investigate: why is this occurring?
+
+## Homogeneity of variances
+- Apply correction when possible (Welch for t-test/one-way ANOVA)
+- Adjusts df $\rightarrow p$-value & CI
+- Jane Superbrain 14.3 (pointless p)
+
+## Sphericity
+- Apply correction when possible (Greenhouse-Geisser)
+- Adjusts df $\rightarrow p$-value & CI
+- Jane Superbrain 14.3 (pointless p)
+
+<!-- ## Overlap (association) between predictors -->
+
+## Normality
+- Shape of distribution (and no CLT)
+    - [Illustration of consequences](https://johnnydoorn.github.io/teaching-statistics/extra-texts/ViolatingNormalityANOVA.html)
+- Outliers
+
+
+```{r child="../../topics/non_parametric_concept/non_parametric_concept.qmd", eval=TRUE}
+```
+
+```{r child="../../topics/nonpar_wilcoxon_rank_sum_test/wilcoxon_rank_sum_test.qmd", eval=TRUE}
+```
+
+```{r child="../../topics/nonpar_wilcoxon_signed_rank_test/wilcoxon_signed_rank_test.qmd", eval=TRUE}
+```
+
+```{r child="../../topics/nonpar_kruskal_wallis_test/kruskal_wallis_test.qmd", eval=TRUE}
+```
+
+```{r child="../../topics/nonpar_friedman_anova/friedman_anova.qmd", eval=TRUE}
+```
+
+<!-- # ```{r child="../../../../topics/rank_correlation/rank_correlation.qmd", eval=TRUE} -->
+<!-- # ``` -->
+
+<!-- Footer insert below -->
+
+```{r child="../../footer.qmd"}
+```
+

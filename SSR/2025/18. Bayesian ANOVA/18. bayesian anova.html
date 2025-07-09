@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.340">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Johnny van Doorn">
+<meta name="dcterms.date" content="2024-10-22">
+
+<title>19. Bayesian ANOVA</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="18. bayesian anova_files/libs/clipboard/clipboard.min.js"></script>
+<script src="18. bayesian anova_files/libs/quarto-html/quarto.js"></script>
+<script src="18. bayesian anova_files/libs/quarto-html/popper.min.js"></script>
+<script src="18. bayesian anova_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="18. bayesian anova_files/libs/quarto-html/anchor.min.js"></script>
+<link href="18. bayesian anova_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="18. bayesian anova_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="18. bayesian anova_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="18. bayesian anova_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="18. bayesian anova_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#course-literature" id="toc-course-literature" class="nav-link active" data-scroll-target="#course-literature">Course literature</a></li>
+  <li><a href="#bayesian-parameter-estimation" id="toc-bayesian-parameter-estimation" class="nav-link" data-scroll-target="#bayesian-parameter-estimation">Bayesian parameter estimation</a>
+  <ul class="collapse">
+  <li><a href="#what-is-a-model" id="toc-what-is-a-model" class="nav-link" data-scroll-target="#what-is-a-model">What is a model?</a></li>
+  <li><a href="#what-does-a-model-predict" id="toc-what-does-a-model-predict" class="nav-link" data-scroll-target="#what-does-a-model-predict">What does a model predict?</a></li>
+  <li><a href="#model-with-multiple-values" id="toc-model-with-multiple-values" class="nav-link" data-scroll-target="#model-with-multiple-values">Model with multiple values</a></li>
+  <li><a href="#one-sided-model" id="toc-one-sided-model" class="nav-link" data-scroll-target="#one-sided-model">One-sided model</a></li>
+  <li><a href="#prior-distribution---ptheta" id="toc-prior-distribution---ptheta" class="nav-link" data-scroll-target="#prior-distribution---ptheta">Prior distribution - (<span class="math inline">\(P(\theta)\)</span>)</a></li>
+  <li><a href="#now-what-is-the-data-saying" id="toc-now-what-is-the-data-saying" class="nav-link" data-scroll-target="#now-what-is-the-data-saying">Now what is the data saying</a></li>
+  <li><a href="#likelihood-function---pdata-theta" id="toc-likelihood-function---pdata-theta" class="nav-link" data-scroll-target="#likelihood-function---pdata-theta">Likelihood function - <span class="math inline">\(P(data | \theta)\)</span></a></li>
+  <li><a href="#marginal-likelihood---pdata" id="toc-marginal-likelihood---pdata" class="nav-link" data-scroll-target="#marginal-likelihood---pdata">Marginal likelihood - <span class="math inline">\(P(data)\)</span></a></li>
+  <li><a href="#posterior" id="toc-posterior" class="nav-link" data-scroll-target="#posterior">Posterior</a></li>
+  <li><a href="#updating-beliefs" id="toc-updating-beliefs" class="nav-link" data-scroll-target="#updating-beliefs">Updating beliefs</a></li>
+  <li><a href="#posterior-distribution---ptheta-data" id="toc-posterior-distribution---ptheta-data" class="nav-link" data-scroll-target="#posterior-distribution---ptheta-data">Posterior distribution - <span class="math inline">\(P(\theta | data)\)</span></a></li>
+  <li><a href="#bayesian-estimation" id="toc-bayesian-estimation" class="nav-link" data-scroll-target="#bayesian-estimation">Bayesian estimation</a></li>
+  <li><a href="#take-home-message" id="toc-take-home-message" class="nav-link" data-scroll-target="#take-home-message">Take home message</a></li>
+  </ul></li>
+  <li><a href="#bayesian-hypothesis-testing" id="toc-bayesian-hypothesis-testing" class="nav-link" data-scroll-target="#bayesian-hypothesis-testing">Bayesian hypothesis testing</a>
+  <ul class="collapse">
+  <li><a href="#bayesian-hypothesis-testing-1" id="toc-bayesian-hypothesis-testing-1" class="nav-link" data-scroll-target="#bayesian-hypothesis-testing-1">Bayesian Hypothesis Testing</a></li>
+  <li><a href="#prior-belief" id="toc-prior-belief" class="nav-link" data-scroll-target="#prior-belief">Prior Belief</a></li>
+  <li><a href="#bayes-factor" id="toc-bayes-factor" class="nav-link" data-scroll-target="#bayes-factor">Bayes Factor</a></li>
+  <li><a href="#bayes-factor-1" id="toc-bayes-factor-1" class="nav-link" data-scroll-target="#bayes-factor-1">Bayes Factor</a></li>
+  <li><a href="#heuristics-for-bf" id="toc-heuristics-for-bf" class="nav-link" data-scroll-target="#heuristics-for-bf">Heuristics for BF</a></li>
+  <li><a href="#bf-pizza" id="toc-bf-pizza" class="nav-link" data-scroll-target="#bf-pizza">BF pizza</a></li>
+  <li><a href="#bf-pizza-1" id="toc-bf-pizza-1" class="nav-link" data-scroll-target="#bf-pizza-1">BF pizza</a></li>
+  <li><a href="#bf-pizza-2" id="toc-bf-pizza-2" class="nav-link" data-scroll-target="#bf-pizza-2">BF pizza</a></li>
+  <li><a href="#bf-pizza-3" id="toc-bf-pizza-3" class="nav-link" data-scroll-target="#bf-pizza-3">BF pizza</a></li>
+  <li><a href="#advantages-of-the-bayes-factor" id="toc-advantages-of-the-bayes-factor" class="nav-link" data-scroll-target="#advantages-of-the-bayes-factor">Advantages of the Bayes Factor</a></li>
+  </ul></li>
+  <li><a href="#bayesian-anova" id="toc-bayesian-anova" class="nav-link" data-scroll-target="#bayesian-anova">Bayesian ANOVA</a>
+  <ul class="collapse">
+  <li><a href="#anova-in-regression-formula" id="toc-anova-in-regression-formula" class="nav-link" data-scroll-target="#anova-in-regression-formula">ANOVA in regression formula</a></li>
+  <li><a href="#two-models-1-predictor-with-2-groups" id="toc-two-models-1-predictor-with-2-groups" class="nav-link" data-scroll-target="#two-models-1-predictor-with-2-groups">Two Models (1 predictor with 2 groups)</a></li>
+  <li><a href="#two-models" id="toc-two-models" class="nav-link" data-scroll-target="#two-models">Two Models</a></li>
+  <li><a href="#model-comparison" id="toc-model-comparison" class="nav-link" data-scroll-target="#model-comparison">Model Comparison</a></li>
+  <li><a href="#marginal-likelihood-of-mathcalm_1" id="toc-marginal-likelihood-of-mathcalm_1" class="nav-link" data-scroll-target="#marginal-likelihood-of-mathcalm_1">Marginal Likelihood of <span class="math inline">\(\mathcal{M}_1\)</span></a></li>
+  <li><a href="#marginal-likelihood-of-mathcalm_0" id="toc-marginal-likelihood-of-mathcalm_0" class="nav-link" data-scroll-target="#marginal-likelihood-of-mathcalm_0">Marginal Likelihood of <span class="math inline">\(\mathcal{M}_0\)</span></a></li>
+  <li><a href="#ratio-of-marginal-likelihoods-bayes-factor" id="toc-ratio-of-marginal-likelihoods-bayes-factor" class="nav-link" data-scroll-target="#ratio-of-marginal-likelihoods-bayes-factor">Ratio of Marginal Likelihoods = Bayes Factor</a></li>
+  <li><a href="#four-models-2-predictors-with-2-groups-each" id="toc-four-models-2-predictors-with-2-groups-each" class="nav-link" data-scroll-target="#four-models-2-predictors-with-2-groups-each">Four Models (2 predictors with 2 groups each)</a></li>
+  <li><a href="#priors-for-mathcalm_a" id="toc-priors-for-mathcalm_a" class="nav-link" data-scroll-target="#priors-for-mathcalm_a">Priors for <span class="math inline">\(\mathcal{M_A}\)</span></a></li>
+  <li><a href="#priors-for-mathcalm_c" id="toc-priors-for-mathcalm_c" class="nav-link" data-scroll-target="#priors-for-mathcalm_c">Priors for <span class="math inline">\(\mathcal{M_C}\)</span></a></li>
+  <li><a href="#priors-for-mathcalm_ac" id="toc-priors-for-mathcalm_ac" class="nav-link" data-scroll-target="#priors-for-mathcalm_ac">Priors for <span class="math inline">\(\mathcal{M_{A+C}}\)</span></a></li>
+  <li><a href="#model-comparison-results" id="toc-model-comparison-results" class="nav-link" data-scroll-target="#model-comparison-results">Model comparison results</a></li>
+  <li><a href="#looking-at-the-individual-effects" id="toc-looking-at-the-individual-effects" class="nav-link" data-scroll-target="#looking-at-the-individual-effects">Looking at the individual effects</a></li>
+  <li><a href="#single-model-inference" id="toc-single-model-inference" class="nav-link" data-scroll-target="#single-model-inference">Single model inference</a></li>
+  <li><a href="#single-model-inference-posterior-for-beertype" id="toc-single-model-inference-posterior-for-beertype" class="nav-link" data-scroll-target="#single-model-inference-posterior-for-beertype">Single model inference: Posterior for BeerType</a></li>
+  <li><a href="#single-model-inference-posteriors-for-correctidentify" id="toc-single-model-inference-posteriors-for-correctidentify" class="nav-link" data-scroll-target="#single-model-inference-posteriors-for-correctidentify">Single model inference: Posteriors for CorrectIdentify</a></li>
+  <li><a href="#lost" id="toc-lost" class="nav-link" data-scroll-target="#lost">Lost?</a></li>
+  <li><a href="#jasp" id="toc-jasp" class="nav-link" data-scroll-target="#jasp">JASP</a></li>
+  </ul></li>
+  <li><a href="#end" id="toc-end" class="nav-link" data-scroll-target="#end">End</a>
+  <ul class="collapse">
+  <li><a href="#contact" id="toc-contact" class="nav-link" data-scroll-target="#contact">Contact</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="18. bayesian anova.slide.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">19. Bayesian ANOVA</h1>
+<p class="subtitle lead">Parameter estimation &amp; hypothesis testing</p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Johnny van Doorn </p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Amsterdam
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 22, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<!-- ```{r child="../../../../topics/bayes/bayes_theorem.qmd"} -->
+<!-- ``` -->
+<section id="course-literature" class="level2">
+<h2 class="anchored" data-anchor-id="course-literature">Course literature</h2>
+<ul>
+<li><p><a href="https://johnnydoorn.github.io/IntroductionBayesianInference/">Repitition from RMS</a></p></li>
+<li><p><a href="https://johnnydoorn.github.io/IntroductionBayesianInference/07-anova.html">Addition: chapter 7 on ANOVA</a></p></li>
+<li><p><a href="https://johnnydoorn.github.io/discoverjasp/repository/dsuj_sav_files.zip">All data sets in Field</a></p></li>
+<li><p>JASP version in IWO</p></li>
+</ul>
+</section>
+<section id="bayesian-parameter-estimation" class="level1 section">
+<h1 class="section">Bayesian parameter estimation</h1>
+<!-- ## Updating belief -->
+<!-- > Posterior $\propto$ Likelihood $\times$ Prior -->
+<section id="what-is-a-model" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-a-model">What is a model?</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="what-does-a-model-predict" class="level2">
+<h2 class="anchored" data-anchor-id="what-does-a-model-predict">What does a model predict?</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="model-with-multiple-values" class="level2">
+<h2 class="anchored" data-anchor-id="model-with-multiple-values">Model with multiple values</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="one-sided-model" class="level2">
+<h2 class="anchored" data-anchor-id="one-sided-model">One-sided model</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="prior-distribution---ptheta" class="level2">
+<h2 class="anchored" data-anchor-id="prior-distribution---ptheta">Prior distribution - (<span class="math inline">\(P(\theta)\)</span>)</h2>
+<p>Each model has assigned a prior probability distribution to the parameter <span class="math inline">\(\theta\)</span> by means of a probability distribution. In the case of a proportion, a convenient distribution is the Beta distribution because it also has a domain of [0,1].</p>
+</section>
+<section id="now-what-is-the-data-saying" class="level2">
+<h2 class="anchored" data-anchor-id="now-what-is-the-data-saying">Now what is the data saying</h2>
+<section id="ten-coin-tosses" class="level3">
+<h3 class="anchored" data-anchor-id="ten-coin-tosses">Ten coin tosses</h3>
+<p><span class="math inline">\(\begin{aligned}  k &amp;= 8 \\  n &amp;= 10  \end{aligned}\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">=</span> <span class="dv">8</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="likelihood-function---pdata-theta" class="level2">
+<h2 class="anchored" data-anchor-id="likelihood-function---pdata-theta">Likelihood function - <span class="math inline">\(P(data | \theta)\)</span></h2>
+<p>How likely is 8 out of 10 for all possible <span class="math inline">\(\theta\)</span> values?</p>
+<p><span class="math display">\[\binom{n}{k} \theta^k (1-\theta)^{n-k}\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="marginal-likelihood---pdata" class="level2">
+<h2 class="anchored" data-anchor-id="marginal-likelihood---pdata">Marginal likelihood - <span class="math inline">\(P(data)\)</span></h2>
+<p>How likely is 8 out of 10 for all <span class="math inline">\(\theta\)</span> values <strong>in the model, on average</strong>?</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<!-- ----- -->
+<!-- ![](../../topics/bayes/likelihood_function.gif) -->
+</section>
+<section id="posterior" class="level2">
+<h2 class="anchored" data-anchor-id="posterior">Posterior</h2>
+<p>Now we can update Alex’ belief about the possible values of theta based on the data (the likelihood function) we found. Values with a likelihood higher than the average likelihood receive a boost, and others receive a penalty, in plausibility.</p>
+</section>
+<section id="updating-beliefs" class="level2">
+<h2 class="anchored" data-anchor-id="updating-beliefs">Updating beliefs</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="posterior-distribution---ptheta-data" class="level2">
+<h2 class="anchored" data-anchor-id="posterior-distribution---ptheta-data">Posterior distribution - <span class="math inline">\(P(\theta | data)\)</span></h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="bayesian-estimation" class="level2">
+<h2 class="anchored" data-anchor-id="bayesian-estimation">Bayesian estimation</h2>
+<p>The posterior distribution is a probability distribution, so we can make probabilistic statements based on it:</p>
+<blockquote class="blockquote">
+<p>In the Bayesian framework, this is known as the <strong>credible interval</strong>. This interval entails taking the middle <span class="math inline">\(x\)</span>% of the posterior distribution. For instance, we can take a 95% credible interval, which ranges from <span class="math inline">\(0.482\)</span> to <span class="math inline">\(0.940\)</span> in this case. This means that under Alex’s model, there is a 95% probability that the true value of <span class="math inline">\(\theta\)</span> is between <span class="math inline">\(0.482\)</span> and <span class="math inline">\(0.940\)</span>.</p>
+</blockquote>
+</section>
+<section id="take-home-message" class="level2">
+<h2 class="anchored" data-anchor-id="take-home-message">Take home message</h2>
+<ul>
+<li>Bayesians quantify uncertainty through distributions.</li>
+<li>The more peaked the distribution, the lower the uncertainty.</li>
+<li>Incoming information continually updates our knowledge; today’s posterior is tomorrow’s prior.</li>
+</ul>
+</section>
+</section>
+<section id="bayesian-hypothesis-testing" class="level1 section">
+<h1 class="section">Bayesian hypothesis testing</h1>
+<section id="bayesian-hypothesis-testing-1" class="level2">
+<h2 class="anchored" data-anchor-id="bayesian-hypothesis-testing-1">Bayesian Hypothesis Testing</h2>
+<ul>
+<li><span class="math inline">\(H_0\)</span>, the null hypothesis. For instance <span class="math inline">\(\theta = .5\)</span> (people cannot taste the difference between alcoholic and non-alcoholic beer).</li>
+<li><span class="math inline">\(H_A\)</span> is the hypothesis that relaxes the restriction imposed by <span class="math inline">\(H_0\)</span>, and instead considers multiple values for <span class="math inline">\(\theta\)</span>.</li>
+</ul>
+</section>
+<section id="prior-belief" class="level2">
+<h2 class="anchored" data-anchor-id="prior-belief">Prior Belief</h2>
+<p><span class="math display">\[\large \underbrace{\frac{P(H_A \mid data)}{P(H_0 \mid data)}}_\textrm{Posterior odds} = \underbrace{\frac{P(H_A)}{P(H_0)}}_\textrm{Prior odds} \times \underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}\]</span></p>
+</section>
+<section id="bayes-factor" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="bayes-factor">Bayes Factor</h2>
+<p><span class="math display">\[\underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}\]</span> A ratio of the <strong>marginal likelihood</strong> of the data for the alternative and the null models.</p>
+<p>A Bayes factor of <span class="math inline">\({BF}_{10} = 3\)</span>, means that the data are 3 times more likely under the alternative model than under the null model.</p>
+</section>
+<section id="bayes-factor-1" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="bayes-factor-1">Bayes Factor</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Sarah’s model has a marginal likelihood of 0.04 for 8 heads</li>
+<li>Alex’s model has a marginal likelihood of 0.09 for 8 heads</li>
+<li><span class="math inline">\(\text{BF}_{SA} =\)</span> 0.04 / 0.09 = 0.44</li>
+<li>The data are 0.44 times more likely under Sarah’s model than under Alex’s model</li>
+<li>The data are 2.25 times more likely under Alex’s model than under Sarah’s model</li>
+</ul>
+</section>
+<section id="heuristics-for-bf" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="heuristics-for-bf">Heuristics for BF</h2>
+<p>Heuristics for the Interpretation of the Bayes Factor by <a href="https://en.wikipedia.org/wiki/Harold_Jeffreys">Harold Jeffreys</a></p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>BF</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1 – 3</td>
+<td>Anecdotal</td>
+</tr>
+<tr class="even">
+<td>3 – 10</td>
+<td>Moderate</td>
+</tr>
+<tr class="odd">
+<td>10 – 30</td>
+<td>Strong</td>
+</tr>
+<tr class="even">
+<td>30 – 100</td>
+<td>Very strong</td>
+</tr>
+<tr class="odd">
+<td>&gt;100</td>
+<td>Extreme</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="bf-pizza" class="level2">
+<h2 class="anchored" data-anchor-id="bf-pizza">BF pizza</h2>
+<div style="text-align: center;">
+<p><img src="../../topics/bayes/BF_TableInterpretation.png" alt="Pizza plots" width="900"></p>
+</div>
+</section>
+<section id="bf-pizza-1" class="level2">
+<h2 class="anchored" data-anchor-id="bf-pizza-1">BF pizza</h2>
+<div style="text-align: center;">
+<p><img src="../../topics/bayes/BF1.png" alt="Pizza plot for BF10 = 1" width="350"></p>
+</div>
+</section>
+<section id="bf-pizza-2" class="level2">
+<h2 class="anchored" data-anchor-id="bf-pizza-2">BF pizza</h2>
+<div style="text-align: center;">
+<p><img src="../../topics/bayes/BF3.png" alt="Pizza plot for BF10 = 3" width="350"></p>
+</div>
+</section>
+<section id="bf-pizza-3" class="level2">
+<h2 class="anchored" data-anchor-id="bf-pizza-3">BF pizza</h2>
+<div style="text-align: center;">
+<p><img src="../../topics/bayes/BF13.png" alt="Pizza plot for BF01 = 3" width="350"></p>
+</div>
+</section>
+<section id="advantages-of-the-bayes-factor" class="level2">
+<h2 class="anchored" data-anchor-id="advantages-of-the-bayes-factor">Advantages of the Bayes Factor</h2>
+<ul>
+<li>Provides a continuous degree of evidence without requiring an all-or-none decision.</li>
+<li>Allows evidence to be monitored during data collection.</li>
+<li>Differentiates between “the data support H0” (evidence for absence) and “the data are not informative” (absence of evidence).</li>
+</ul>
+</section>
+</section>
+<section id="bayesian-anova" class="level1 section">
+<h1 class="section">Bayesian ANOVA</h1>
+<section id="anova-in-regression-formula" class="level2">
+<h2 class="anchored" data-anchor-id="anova-in-regression-formula">ANOVA in regression formula</h2>
+<p>Show model predictions using dummy variables:</p>
+<p><span class="math display">\[ y_i = b_0 + b_1 \times x_i. \]</span> where <span class="math inline">\(x_i\)</span> indicates whether we are in group A or group B, then <span class="math inline">\(b_1\)</span> indicates the group difference (if equal to 0, then no group difference)</p>
+</section>
+<section id="two-models-1-predictor-with-2-groups" class="level2">
+<h2 class="anchored" data-anchor-id="two-models-1-predictor-with-2-groups">Two Models (1 predictor with 2 groups)</h2>
+<p><span class="math display">\[ y_i = b_0 + b_1 \times x_i \]</span></p>
+<p><span class="math display">\[\mathcal{M_0}: b_1 = 0 \]</span> <span class="math display">\[\mathcal{M_1}: b_1 \sim Cauchy(0.707)\]</span></p>
+</section>
+<section id="two-models" class="level2">
+<h2 class="anchored" data-anchor-id="two-models">Two Models</h2>
+<p><span class="math display">\[\mathcal{M_0}: b_1 = 0 \]</span> <span class="math display">\[\mathcal{M_1}: b_1 \sim Cauchy(0.707)\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="model-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="model-comparison">Model Comparison</h2>
+<p>How well did each model predict the data?</p>
+<p><span class="math inline">\(\rightarrow\)</span> Marginal likelihood</p>
+</section>
+<section id="marginal-likelihood-of-mathcalm_1" class="level2">
+<h2 class="anchored" data-anchor-id="marginal-likelihood-of-mathcalm_1">Marginal Likelihood of <span class="math inline">\(\mathcal{M}_1\)</span></h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="marginal-likelihood-of-mathcalm_0" class="level2">
+<h2 class="anchored" data-anchor-id="marginal-likelihood-of-mathcalm_0">Marginal Likelihood of <span class="math inline">\(\mathcal{M}_0\)</span></h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="ratio-of-marginal-likelihoods-bayes-factor" class="level2">
+<h2 class="anchored" data-anchor-id="ratio-of-marginal-likelihoods-bayes-factor">Ratio of Marginal Likelihoods = Bayes Factor</h2>
+<p><span class="math display">\[\frac{P(data \mid \mathcal{M}_1)}{P(data \mid \mathcal{M}_0)} \approx 10,000\]</span> The data are 10,000 times more likely under <span class="math inline">\(\mathcal{M}_1\)</span> than under <span class="math inline">\(\mathcal{M}_0\)</span></p>
+</section>
+<section id="four-models-2-predictors-with-2-groups-each" class="level2">
+<h2 class="anchored" data-anchor-id="four-models-2-predictors-with-2-groups-each">Four Models (2 predictors with 2 groups each)</h2>
+<p><span class="math display">\[ tastiness = b_0 + b_1 \times alcoholic + b_2 \times correct\]</span></p>
+<ul>
+<li><span class="math inline">\(\mathcal{M_0}\)</span>: model with only the intercept <span class="math inline">\(b_0\)</span></li>
+<li><span class="math inline">\(\mathcal{M_A}\)</span>: model with the intercept <span class="math inline">\(b_0\)</span> and the main effect of alcohol <span class="math inline">\(b_1\)</span></li>
+<li><span class="math inline">\(\mathcal{M_C}\)</span>: model with the intercept <span class="math inline">\(b_0\)</span> and the main effect of correct identification <span class="math inline">\(b_2\)</span></li>
+<li><span class="math inline">\(\mathcal{M}_{A+C}\)</span>: model with the intercept <span class="math inline">\(b_0\)</span> and the two main effects</li>
+</ul>
+</section>
+<section id="priors-for-mathcalm_a" class="level2">
+<h2 class="anchored" data-anchor-id="priors-for-mathcalm_a">Priors for <span class="math inline">\(\mathcal{M_A}\)</span></h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="priors-for-mathcalm_c" class="level2">
+<h2 class="anchored" data-anchor-id="priors-for-mathcalm_c">Priors for <span class="math inline">\(\mathcal{M_C}\)</span></h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="priors-for-mathcalm_ac" class="level2">
+<h2 class="anchored" data-anchor-id="priors-for-mathcalm_ac">Priors for <span class="math inline">\(\mathcal{M_{A+C}}\)</span></h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="18.-bayesian-anova_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="model-comparison-results" class="level2">
+<h2 class="anchored" data-anchor-id="model-comparison-results">Model comparison results</h2>
+<div style="text-align: center;">
+<p><img src="../../topics/bayes/ANOVA_ModelComparison.png" alt="Bayes factor table" width="900"></p>
+</div>
+</section>
+<section id="looking-at-the-individual-effects" class="level2">
+<h2 class="anchored" data-anchor-id="looking-at-the-individual-effects">Looking at the individual effects</h2>
+<div style="text-align: center;">
+<p><img src="../../topics/bayes/ANOVA_AnalysisEffects.png" alt="Bayes factor table" width="900"></p>
+</div>
+</section>
+<section id="single-model-inference" class="level2">
+<h2 class="anchored" data-anchor-id="single-model-inference">Single model inference</h2>
+<div style="text-align: center;">
+<p><img src="../../topics/bayes/ANOVA_SingleModelInferenceMainEffects.png" alt="Bayes factor table" width="900"></p>
+</div>
+</section>
+<section id="single-model-inference-posterior-for-beertype" class="level2">
+<h2 class="anchored" data-anchor-id="single-model-inference-posterior-for-beertype">Single model inference: Posterior for BeerType</h2>
+<div style="text-align: center;">
+<p><img src="../../topics/bayes/ANOVA_BeerType.png" alt="Bayes factor table" width="550"></p>
+</div>
+</section>
+<section id="single-model-inference-posteriors-for-correctidentify" class="level2">
+<h2 class="anchored" data-anchor-id="single-model-inference-posteriors-for-correctidentify">Single model inference: Posteriors for CorrectIdentify</h2>
+<div style="text-align: center;">
+<p><img src="../../topics/bayes/ANOVA_CorrectIdentify.png" alt="Bayes factor table" width="450"></p>
+</div>
+</section>
+<section id="lost" class="level2">
+<h2 class="anchored" data-anchor-id="lost">Lost?</h2>
+<div style="text-align: center;">
+<p><img src="../../topics/bayes/info.png" alt="Info button in JASP" width="200"></p>
+</div>
+</section>
+<section id="jasp" class="level2">
+<h2 class="anchored" data-anchor-id="jasp">JASP</h2>
+<div style="text-align: center;">
+<p><img src="../../topics/bayes/JASP_logo_green.svg" alt="JASP" width="200"></p>
+</div>
+<!-- Footer insert below -->
+</section>
+</section>
+<section id="end" class="level1">
+<h1>End</h1>
+<section id="contact" class="level2">
+<h2 class="anchored" data-anchor-id="contact">Contact</h2>
+<script src="https://use.fontawesome.com/23c1d38eea.js"></script>
+<ul class="fa-ul" style="color:black; list-style:none;">
+<li>
+<i class="fa-li fa fa-envelope-o"></i> <a style="unicode-bidi:bidi-override; direction: rtl; color:black" href="javascript:window.location.href = 'mailto:' + ['j.b.vandoorn','uva.nl'].join('@')">ln.AvU@nrooDnav.B.J</a>
+</li>
+<li>
+<i class="fa-li fa fa-github"></i> <a href="https://github.com/JohnnyDoorn" target="_blank" style="color:black; border-bottom:none;">JohnnyDoorn</a>
+</li>
+</ul>
+<p><small style="text-align:left;"></small></p><small style="text-align:left;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" class="img-fluid figure-img"></a></p>
+<figcaption class="figure-caption">CC BY-NC-SA 4.0</figcaption>
+</figure>
+</div>
+</small><p><small style="text-align:left;"></small></p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

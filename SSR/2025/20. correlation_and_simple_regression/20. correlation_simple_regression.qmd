@@ -1,0 +1,37 @@
+---
+title: "21. Correlation and Simple regression"
+author: "Sharon Kinkenberg & Johnny van Doorn"
+date: "31 oct 2024"
+footer: "Scientific & Statistical Reasoning"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+
+## Fishing Expedition!
+[link](https://edu.nl/kkd7n)
+
+<img src="qr_kkd7n.png">
+
+Thank you Julia, Kim, Barnaba, Lioba, Joaquin, Tadeja, and Ewa!
+
+<!-- Nikolas and Zeynep for error-spotting -->
+
+```{r child="../../topics/block3_opening/block3_opening.qmd"}
+```
+
+```{r child="../../topics/correlation/correlation_albumsales.qmd"}
+```
+
+
+```{r child="../../topics/regression_one_predictor/regression_one_predictor.qmd", eval=TRUE}
+```
+
+
+<!-- Footer insert below -->
+
+```{r child="../../footer.qmd"}
+```
+

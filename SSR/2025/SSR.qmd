@@ -1,0 +1,61 @@
+---
+title: "SSR 2025-2026"
+author: "Johnny van Doorn"
+date: today
+---
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+course.path = "SSR/2025/"
+setwd("~/GitHubStuff/teaching-statistics/SSR/2025/")
+
+files <- list.files(full.names = F, pattern = "\\.qmd", recursive = T)
+
+files <- files[grep("SSR.qmd", files, invert = TRUE)]
+files <- files[!grepl(files, pattern = "MiscFiles")]
+
+lectures = data.frame()
+n = length(files)
+
+files <- files[order(as.numeric(gsub("\\..*", "", files)))]
+
+
+for (i in 1:n) {
+
+  lectures[i ,'url'] <- data.frame(url = paste0(course.path, files[i]))
+  yaml <- rmarkdown::yaml_front_matter(files[i])
+  
+  lectures[i , 'title'] = yaml$title
+  lectures[i , 'date'] = yaml$date
+  lectures[i , 'file_name'] = files[i]
+
+}
+
+handoutLinks <- sprintf('<a href="https://JohnnyDoorn.github.io/teaching-statistics/%s" target="_blank" class="external">link</a>', gsub("qmd", "html", lectures$url))
+slideLinks <- sprintf('<a href="https://JohnnyDoorn.github.io/teaching-statistics/%s" target="_blank" class="external">link</a>', gsub("qmd", "slide.html", lectures$url))
+
+# handoutLinks[grepl(lectures$date, pattern = "2025")] <- slideLinks[grepl(lectures$date, pattern = "2025")] <- "-"
+
+data.frame(Date    = lectures$date, 
+           Lecture = lectures$title,
+           Handout = handoutLinks,
+           Slides  = slideLinks
+          ) -> lecture.list
+
+lecture.list <- lecture.list[grepl(lectures$date, pattern = "2025"), ]
+# Sort on date
+library("lubridate")
+library("dplyr")
+# Extract the numeric part from the "Lecture" column
+lecture.list$LectureNumber <- as.numeric(sub("^([0-9]+).*", "\\1", lecture.list$Lecture))
+
+# Sort the data frame by the extracted lecture number
+lecture.list <- lecture.list[order(lecture.list$LectureNumber), ]
+# lecture.list$Date <- lubridate::dmy(lecture.list$Date)
+# lubridate::mdy(lecture.list$Date)
+lecture.list <- lecture.list[, -(ncol(lecture.list))]
+library('kableExtra')
+
+# Print table with kable as set in YAML
+knitr::kable(dplyr::arrange(lecture.list), escape = FALSE, format = "html" ) %>%
+  kable_styling(full_width = TRUE)
+```

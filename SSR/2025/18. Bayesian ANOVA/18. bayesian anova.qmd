@@ -1,0 +1,37 @@
+---
+title: "19. Bayesian ANOVA"
+subtitle: "Parameter estimation & hypothesis testing"
+author: "Johnny van Doorn"
+date: "22 oct 2024"
+footer: "Scientific & Statistical Reasoning"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+<!-- ```{r child="../../../../topics/bayes/bayes_theorem.qmd"} -->
+<!-- ``` -->
+
+## Course literature
+
+- [Repitition from RMS](https://johnnydoorn.github.io/IntroductionBayesianInference/)
+- [Addition: chapter 7 on ANOVA](https://johnnydoorn.github.io/IntroductionBayesianInference/07-anova.html)
+
+- [All data sets in Field](https://johnnydoorn.github.io/discoverjasp/repository/dsuj_sav_files.zip)
+- JASP version 0.18 in IWO
+    - No conditional posthoc tests
+
+```{r child="../../topics/bayes/bayesian_parameter_estimation.qmd"}
+```
+
+```{r child="../../topics/bayes/bayesian_hypothesis_testing.qmd"}
+```
+
+```{r child="../../topics/bayes/bayesian_anova.qmd"}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../footer.qmd"}
+```

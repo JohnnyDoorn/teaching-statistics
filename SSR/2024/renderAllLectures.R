@@ -1,5 +1,4 @@
-getwd()
-setwd("/Users/johnny/GitHubStuff/statistics-lectures/courses/SSR/SSR_2023-2024/")
+setwd("/Users/johnny/GitHubStuff/teaching-statistics/SSR/2025/")
 
 files <- list.files(full.names = TRUE, pattern = "\\.qmd", recursive = TRUE)
 files <- files[-length(files)]
@@ -10,4 +9,3 @@ for (thisFile in files) {
 }
 
 
-# quarto::quarto_render(files[10])

@@ -12,11 +12,9 @@ This page will be continuously updated to feature extra materials, such as apple
 
 ## Slides
 
-```{r child="../SSR/2024/SSR.qmd"}
+```{r child="../SSR/2025/SSR.qmd"}
 ```
 
-## Book
-An online version of Discovering Statistics Using JASP is available [here](https://amsuni-my.sharepoint.com/:b:/g/personal/j_b_vandoorn_uva_nl/ES6W_FVNbzZPv4hBGm0TWGwBauDyP5d-TKq7T4WQeOYbfQ?e=G5Ig3V). Individual chapters available [here](https://amsuni-my.sharepoint.com/:f:/g/personal/j_b_vandoorn_uva_nl/EoyhXwuTGZtGvJaobtAr83kBCA-BWxgKN6-kPvKIhKxaEg?e=9CgidC). The supplementary materials (data files, Oliver Twisted, etc.) for the book are available [here](https://johnnydoorn.github.io/discoverjasp/pages/data.html). [Google drive backup link](https://drive.google.com/file/d/1r8ecMLp9svxzmeQptduweaZb4r_W-D-b/view?usp=sharing).
 
 ## Applets
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
@@ -25,14 +23,14 @@ library("lubridate")
 library("dplyr")
 library('kableExtra')
 allLinks <- c("https://statisticalreasoning-uva.shinyapps.io/NHST_Binomial",
-              "https://statisticalreasoning-uva.shinyapps.io/NHST_Continuous",
-              "https://statisticalreasoning-uva.shinyapps.io/NHST_Fdistribution",
-              "https://statisticalreasoning-uva.shinyapps.io/onewayANOVA",
-              "https://statisticalreasoning-uva.shinyapps.io/ANCOVA",
-              "https://statisticalreasoning-uva-2.shinyapps.io/Multi-ANOVA",
-              "https://statisticalreasoning-uva-2.shinyapps.io/RM_ANOVA",
-              "https://statisticalreasoning-uva-2.shinyapps.io/SimpleRegression",
-              "https://statisticalreasoning-uva-2.shinyapps.io/MultiRegression"
+              "https://statisticalreasoning-uva.shinyapps.io/NHST_Continuous"
+              # "https://statisticalreasoning-uva.shinyapps.io/NHST_Fdistribution",
+              # "https://statisticalreasoning-uva.shinyapps.io/onewayANOVA",
+              # "https://statisticalreasoning-uva.shinyapps.io/ANCOVA",
+              # "https://statisticalreasoning-uva-2.shinyapps.io/Multi-ANOVA",
+              # "https://statisticalreasoning-uva-2.shinyapps.io/RM_ANOVA",
+              # "https://statisticalreasoning-uva-2.shinyapps.io/SimpleRegression",
+              # "https://statisticalreasoning-uva-2.shinyapps.io/MultiRegression"
 
 )
 
@@ -44,8 +42,8 @@ knitr::kable(dplyr::arrange(data.frame(Topic = topics, Link = allLinks)), escape
   kable_styling(full_width = TRUE)
 ```
 
-## Additional Explanations
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+<!-- ## Additional Explanations -->
+```{r, echo=FALSE, warning=FALSE, message=FALSE, eval=FALSE}
 files <- list.files(full.names = FALSE, pattern = "\\qmd", recursive = FALSE, path = "../extra-texts")
 
 lectures <- data.frame()
@@ -66,8 +64,8 @@ knitr::kable(dplyr::arrange(linkList), escape = FALSE, format = "html"  ) %>%
 
 ```
 
-## JASP + Data Files
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+<!-- ## JASP + Data Files -->
+```{r, echo=FALSE, warning=FALSE, message=FALSE, eval=FALSE}
 files <- list.files(full.names = FALSE, pattern = "\\jasp", recursive = FALSE, 
                     path = "../datasets")
 
@@ -101,7 +99,10 @@ knitr::kable(dplyr::arrange(linkList), escape = FALSE, format = "html"  ) %>%
 ```
 
 
-## JASP Gifs
-```{r child="../jasp-gifs/jasp-gifs-overview.qmd"}
-```
+## JASP Help
+
+The [JASP Video Library](https://jasp-stats.github.io/jasp-video-library/) offers screen-recordings that demonstrate all sorts of cool analyses and features in JASP.
+
+<!-- ```{r child="../jasp-gifs/jasp-gifs-overview.qmd"} -->
+<!-- ``` -->
 

@@ -1,0 +1,84 @@
+---
+title: "4. Statistical Reasoning"
+subtitle: "Null Hypothesis Testing"
+author: "Johnny van Doorn"
+date: "9 sep 2025"
+footer: "Scientific & Statistical Reasoning"
+format:
+  revealjs:
+    output-ext: slide.html
+    css: ../../ajohnson.css
+  html: default
+css: ../../ajohnson.css
+---
+
+<div class="goals">
+In this lecture we aim to:
+
+* Introduce the S in SSR
+* Repeat some stats concepts from RMS
+* Introduce JASP
+</div>
+
+## Learning
+
+<iframe style="height:400px;  width:100%;" src="https://www.youtube.com/embed/JC82Il2cjqA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## About SSR
+
+- Book: Discovering Statistics Using JASP
+    - Many pages, but light content
+    - Difficulty indications in each section (A/B/C/D)
+    - Theory in first half, application in JASP in second half
+- [Companion website of book](https://discoverjasp.com) 
+        - Data sets
+
+
+## 
+- Lectures
+  - Slightly erratic
+  - Starts with conceptual understanding
+  - Ends with JASP demonstration
+  - Confused? 
+      - Read the chapter first
+      - Rewatch lecture
+  
+## 
+- Practice: 
+    - Tutorials, WA in Ans
+    - Smart Alex tasks
+    - Labcoat Leni examples
+    - Self-test 
+
+
+## Software
+- JASP: main tool for analyses, data management
+    - Freely available at [www.jasp-stats.org](www.jasp-stats.org)
+- R: very flexible, very optional
+    - Freely available at [https://cran.r-project.org/](https://cran.r-project.org/)
+    - Want a nicer environment for coding? Try [Rstudio](https://posit.co/download/rstudio-desktop/)
+    - Will be available during exam, but no required to use (can also use Ans calculator)
+    
+<!-- <div class="note"> -->
+<!-- Open science starts with accessible tools -->
+<!-- </div> -->
+
+## The Research Process
+
+![](research_process.png){}
+
+
+## Sampling Variability
+![](sampling_variability.png){}
+
+
+## Next Time
+
+- More Frequentist statistics
+- [Interactive applet](https://statisticalreasoning-uva.shinyapps.io/NHST_Binomial) 
+
+
+
+```{r child="../../footer.qmd"}
+```
+

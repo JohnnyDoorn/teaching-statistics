@@ -6,6 +6,7 @@
 
 ![](https://upload.wikimedia.org/wikipedia/en/a/a2/Egon_Pearson.jpg){.absolute top="150" left="200" height="300"}
 
+
 [Neyman](https://en.wikipedia.org/wiki/Jerzy_Neyman) - [Pearson](https://en.wikipedia.org/wiki/Egon_Pearson)
 
 ## Two hypotheses
@@ -549,8 +550,5 @@ Some common test statistics
 
 ## R\<-PSYCHOLOGIST {.smaller}
 
-<iframe src="http://rpsychologist.com/d3/NHST/" width="1000" height="500" style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0">
-
-</iframe>
 
 [Interactive distributions app by Kristoffer Magnusson](http://rpsychologist.com/d3/NHST/){preview-link="false"}

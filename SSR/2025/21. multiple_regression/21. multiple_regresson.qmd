@@ -1,0 +1,40 @@
+---
+title: "22. Multiple regression"
+author: "Sharon Kinkenberg & Johnny van Doorn"
+date: "01 nov 2024"
+footer: "Scientific & Statistical Reasoning"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+<!-- Add the required topics below -->
+## Questionnaire variables {.smaller}
+- Nationality
+- Bachelor specialization
+- Ratings
+    - Confidence you chose right bachelors
+    - Confidence you chose right specialization
+    - Confidence in your stats skills
+    - Love of stats
+    - Mario skills
+    - Playfulness
+- Number of SSR hours
+- Number of friends talked to, in person, in the past week
+- Preferred temperature
+
+
+## WA 10 Data
+
+- [Salary (partial correlation)](https://johnnydoorn.github.io/teaching-statistics/datasets/Salary.jasp)
+- [Health (regression)](https://johnnydoorn.github.io/teaching-statistics/datasets/Health.jasp)
+
+```{r child="../../topics/regression_multiple_predictors/regression_multiple_predictors.qmd"}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../footer.qmd"}
+```
+
