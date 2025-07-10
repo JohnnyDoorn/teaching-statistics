@@ -88,7 +88,15 @@ Chapters 1, 2, 3
   - Hypothesis testing using p-values
   - Estimation using confidence intervals
 
+## Bored? 
+::: {}
+- [Exercise 1.1](https://discoverjasp.com/pages/smart_alex#task-1.1)
 
+- [Exercise 2.2](https://discoverjasp.com/pages/smart_alex#task-2.2), [Exercise 2.6](https://discoverjasp.com/pages/smart_alex#task-2.6), [Exercise 2.7](https://discoverjasp.com/pages/smart_alex#task-2.7)   
+
+- [Exercise 3.1](https://discoverjasp.com/pages/smart_alex#task-3.1), [Exercise 3.4](https://discoverjasp.com/pages/smart_alex#task-3.4)   
+
+:::
 
 ```{r child="../../footer.qmd"}
 ```
