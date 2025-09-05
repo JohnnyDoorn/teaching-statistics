@@ -97,21 +97,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
   <li><a href="#power" id="toc-power" class="nav-link" data-scroll-target="#power">Power</a></li>
   <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"></a></li>
-  <li><a href="#post-hoc-power" id="toc-post-hoc-power" class="nav-link" data-scroll-target="#post-hoc-power">Post-Hoc Power</a></li>
-  <li><a href="#effect-size" id="toc-effect-size" class="nav-link" data-scroll-target="#effect-size">Effect size</a></li>
-  <li><a href="#effect-size-1" id="toc-effect-size-1" class="nav-link" data-scroll-target="#effect-size-1">Effect size</a></li>
-  <li><a href="#effect-size-2" id="toc-effect-size-2" class="nav-link" data-scroll-target="#effect-size-2">Effect size</a></li>
   <li><a href="#one-minus-alpha" id="toc-one-minus-alpha" class="nav-link" data-scroll-target="#one-minus-alpha">One minus alpha</a></li>
   <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3"></a></li>
   <li><a href="#beta" id="toc-beta" class="nav-link" data-scroll-target="#beta">Beta</a></li>
   <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4"></a></li>
   <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5"></a></li>
   <li><a href="#p-value" id="toc-p-value" class="nav-link" data-scroll-target="#p-value">P-value</a></li>
-  <li><a href="#p-value-in-h_0-distribution" id="toc-p-value-in-h_0-distribution" class="nav-link" data-scroll-target="#p-value-in-h_0-distribution">P-value in <span class="math inline">\(H_{0}\)</span> distribution</a></li>
   <li><a href="#test-statistics" id="toc-test-statistics" class="nav-link" data-scroll-target="#test-statistics">Test statistics</a></li>
+  <li><a href="#p-value-in-h_0-distribution" id="toc-p-value-in-h_0-distribution" class="nav-link" data-scroll-target="#p-value-in-h_0-distribution">P-value in <span class="math inline">\(H_{0}\)</span> distribution</a></li>
+  <li><a href="#p-value-and-alpha" id="toc-p-value-and-alpha" class="nav-link" data-scroll-target="#p-value-and-alpha">P-value and <span class="math inline">\(\alpha\)</span></a></li>
+  <li><a href="#misconceptions-about-the-p-value" id="toc-misconceptions-about-the-p-value" class="nav-link" data-scroll-target="#misconceptions-about-the-p-value">Misconceptions about the p-value</a></li>
   <li><a href="#decision-table-1" id="toc-decision-table-1" class="nav-link" data-scroll-target="#decision-table-1">Decision Table</a></li>
-  <li><a href="#reasoning-scheme" id="toc-reasoning-scheme" class="nav-link" data-scroll-target="#reasoning-scheme">Reasoning Scheme</a></li>
-  <li><a href="#r-psychologist" id="toc-r-psychologist" class="nav-link" data-scroll-target="#r-psychologist">R&lt;-PSYCHOLOGIST</a></li>
+  <li><a href="#nhst-reasoning-scheme" id="toc-nhst-reasoning-scheme" class="nav-link" data-scroll-target="#nhst-reasoning-scheme">NHST Reasoning Scheme</a></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="NHST_2.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
@@ -127,7 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="neyman-pearson-paradigm" class="level2">
 <h2 class="anchored" data-anchor-id="neyman-pearson-paradigm">Neyman-Pearson Paradigm</h2>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Jerzy_Neyman2.jpg" class="absolute" data-top="150" data-left="0" height="300"></p>
-<p><img src="https://upload.wikimedia.org/wikipedia/en/a/a2/Egon_Pearson.jpg" class="absolute" data-top="150" data-left="200" height="300"></p>
+<p><img src="https://upload.wikimedia.org/wikipedia/en/a/a2/Egon_Pearson.jpg" class="absolute" data-top="150" data-left="300" height="300"></p>
 <p><a href="https://en.wikipedia.org/wiki/Jerzy_Neyman">Neyman</a> - <a href="https://en.wikipedia.org/wiki/Egon_Pearson">Pearson</a></p>
 </section>
 <section id="two-hypotheses" class="level2">
@@ -376,8 +373,8 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <li>Incorrectly reject <span class="math inline">\(H_0\)</span></li>
 <li>Type I error</li>
 <li>False Positive</li>
-<li>Criteria often 5%</li>
-<li>Distribution depends on sample size</li>
+<li>Threshold for “significance”</li>
+<li>Criteria often 5% but heavily criticized</li>
 </ul>
 </div><div id="alpha" class="column" style="width:60%;">
 <style>
@@ -428,31 +425,6 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <p><img src="NHST_2_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-</section>
-<section id="post-hoc-power" class="level2">
-<h2 class="anchored" data-anchor-id="post-hoc-power">Post-Hoc Power</h2>
-<ul>
-<li>Also known as: observed, retrospective, achieved, prospective and a priori power</li>
-<li>Specificly meaning:</li>
-</ul>
-<blockquote class="blockquote">
-<p>The power of a test assuming a population effect size equal to the observed effect size in the current sample.</p>
-</blockquote>
-<p>Source: <a href="http://www.dokeefe.net/pub/okeefe07cmm-posthoc.pdf">O’Keefe (2007)</a></p>
-</section>
-<section id="effect-size" class="level2">
-<h2 class="anchored" data-anchor-id="effect-size">Effect size</h2>
-<p>In statistics, an effect size is a quantitative measure of the strength of a phenomenon. Examples of effect sizes are the correlation between two variables, the regression coefficient in a regression, and standardised differences.</p>
-<p>For each type of effect size, a larger absolute value always indicates a stronger effect. Effect sizes complement statistical hypothesis testing, and play an important role in power analyses, sample size planning, and in meta-analyses.</p>
-<p>Source: <a href="https://en.wikipedia.org/wiki/Effect_size">WIKIPEDIA</a></p>
-</section>
-<section id="effect-size-1" class="level2 flexbox vcenter">
-<h2 class="flexbox vcenter anchored" data-anchor-id="effect-size-1">Effect size</h2>
-<p><img src="../../images/effect_size_base.png" class="img-fluid"></p>
-</section>
-<section id="effect-size-2" class="level2 flexbox vcenter">
-<h2 class="flexbox vcenter anchored" data-anchor-id="effect-size-2">Effect size</h2>
-<p><img src="../../images/effect_size.png" class="img-fluid"></p>
 </section>
 <section id="one-minus-alpha" class="level2">
 <h2 class="anchored" data-anchor-id="one-minus-alpha">One minus alpha</h2>
@@ -522,11 +494,26 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <section id="p-value" class="level2">
 <h2 class="anchored" data-anchor-id="p-value">P-value</h2>
 <blockquote class="blockquote">
-<p>Conditional probability of the found test statistic or more extreme assuming the null hypothesis is true.</p>
+<p>Conditional probability of the observed test statistic or more extreme assuming the null hypothesis is true.</p>
 </blockquote>
 <p>Reject <span class="math inline">\(H_0\)</span> when:</p>
 <ul>
 <li><span class="math inline">\(p\)</span>-value <span class="math inline">\(\leq\)</span> <span class="math inline">\(\alpha\)</span></li>
+</ul>
+</section>
+<section id="test-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="test-statistics">Test statistics</h2>
+<blockquote class="blockquote">
+<p>A statistic that summarizes the data and is used for hypothesis testing, because we know how it’s distributed under different hypotheses</p>
+</blockquote>
+<p>Common test statistics:</p>
+<ul>
+<li>Number of heads</li>
+<li>Sum of dice</li>
+<li><span class="math inline">\(t\)</span>-statistic</li>
+<li><span class="math inline">\(F\)</span>-statistic</li>
+<li><span class="math inline">\(\chi^2\)</span>-statistic</li>
+<li>etc…</li>
 </ul>
 </section>
 <section id="p-value-in-h_0-distribution" class="level2">
@@ -537,30 +524,41 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 </div>
 </div>
 </section>
-<section id="test-statistics" class="level2">
-<h2 class="anchored" data-anchor-id="test-statistics">Test statistics</h2>
-<p>Some common test statistics</p>
+<section id="p-value-and-alpha" class="level2">
+<h2 class="anchored" data-anchor-id="p-value-and-alpha">P-value and <span class="math inline">\(\alpha\)</span></h2>
+<p>Alpha determines how willingly we reject the null hypothesis:</p>
 <ul>
-<li>Number of heads</li>
-<li>Sum of dice</li>
-<li>Difference</li>
-<li><span class="math inline">\(t\)</span>-statistic</li>
-<li><span class="math inline">\(F\)</span>-statistic</li>
-<li><span class="math inline">\(\chi^2\)</span>-statistic</li>
-<li>etc…</li>
+<li>Increase <span class="math inline">\(\alpha\)</span> = reject null hypothesis more often
+<ul>
+<li>Increases Type I error rate</li>
+<li>Decreases Type II error rate</li>
+</ul></li>
+<li>Historically set to 0.05, but widely criticized (see Jane Superbrain 3.1)</li>
+</ul>
+<blockquote class="blockquote">
+<p>No scientific worker has a fixed level of significance at which from year to year, and in all circumstances, he rejects hypotheses; he rather gives his mind to each particular case in the light of his evidence and his ideas. (Fisher, 1956)</p>
+</blockquote>
+</section>
+<section id="misconceptions-about-the-p-value" class="level2">
+<h2 class="anchored" data-anchor-id="misconceptions-about-the-p-value">Misconceptions about the p-value</h2>
+<ul>
+<li>A significant result means that the effect is important
+<ul>
+<li>Significance = effect size + sample size</li>
+</ul></li>
+<li>A non-significant result means that the null hypothesis is true</li>
+<li>A significant result means that the null hypothesis is false</li>
 </ul>
 </section>
 <section id="decision-table-1" class="level2 flexbox vcenter smaller">
 <h2 class="flexbox vcenter smaller anchored" data-anchor-id="decision-table-1">Decision Table</h2>
 <p><a href="https://statisticalreasoning-uva.shinyapps.io/NHST_Binomial/">Play around with this app to get an idea of the probabilities</a></p>
 </section>
-<section id="reasoning-scheme" class="level2 subsection flexbox vcenter">
-<h2 class="subsection flexbox vcenter anchored" data-anchor-id="reasoning-scheme">Reasoning Scheme</h2>
+<section id="nhst-reasoning-scheme" class="level2 subsection flexbox vcenter">
+<h2 class="subsection flexbox vcenter anchored" data-anchor-id="nhst-reasoning-scheme">NHST Reasoning Scheme</h2>
 <p><img src="../../images/NHST_decision_scheme.png" class="img-fluid"></p>
-</section>
-<section id="r-psychologist" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="r-psychologist">R&lt;-PSYCHOLOGIST</h2>
-<p><a href="http://rpsychologist.com/d3/NHST/" data-preview-link="false">Interactive distributions app by Kristoffer Magnusson</a></p>
+<!-- ## R\<-PSYCHOLOGIST {.smaller} -->
+<!-- [Interactive distributions app by Kristoffer Magnusson](http://rpsychologist.com/d3/NHST/){preview-link="false"} -->
 </section>
 </section>
 

@@ -15,23 +15,34 @@ css: ../../ajohnson.css
 <div class="goals">
 In this lecture we aim to:
 
-* Introduce the S in SSR
-* Repeat some stats concepts from RMS
-    * "Logic" behind common hypothesis testing
-    * Four scenario's in statistical decision making
+* Introduce JASP
+  * Descriptive Statistics
+  * Data Visualizations
+* Correlation
     
 <strong>Reading:</strong>
 Chapters 4, 5, 7
 
-</div>
 
-<div class="note">
-<strong>Reading:</strong>
-Chapters 1/2/3
-</div>
+```{r child="../../topics/JASP/JASP.qmd", eval=TRUE}
+```
+
+
+```{r child="../../topics/graphs/graphs.qmd", eval=TRUE}
+```
 
 ```{r child="../../topics/correlation/correlation.qmd", eval=TRUE}
 ```
+
+## Bored? 
+::: {}
+- [Exercise 1.1](https://discoverjasp.com/pages/smart_alex#task-1.1)
+
+- [Exercise 2.2](https://discoverjasp.com/pages/smart_alex#task-2.2), [Exercise 2.6](https://discoverjasp.com/pages/smart_alex#task-2.6), [Exercise 2.7](https://discoverjasp.com/pages/smart_alex#task-2.7)   
+
+- [Exercise 3.1](https://discoverjasp.com/pages/smart_alex#task-3.1), [Exercise 3.4](https://discoverjasp.com/pages/smart_alex#task-3.4)   
+
+:::
 
 <!-- Footer insert below -->
 

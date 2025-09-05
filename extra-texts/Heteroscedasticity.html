@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="JvD">
-<meta name="dcterms.date" content="2024-11-04">
+<meta name="dcterms.date" content="2025-09-04">
 
-<title>Some examples of heteroscedasticity?</title>
+<title>Some examples of heteroscedasticity</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -49,7 +49,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Some examples of heteroscedasticity?</h1>
+<h1 class="title">Some examples of heteroscedasticity</h1>
 </div>
 
 
@@ -66,7 +66,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 4, 2024</p>
+      <p class="date">September 4, 2025</p>
     </div>
   </div>
   
@@ -92,8 +92,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <p>Next, two cases where the error and the predictions are correlated. In the plot below, the error and predictions are <strong>negatively</strong> correlated:</p>
 <ul>
-<li>for low predicted values (i.e., z-pred <span class="math inline">\(&lt; 0\)</span>), the residual is generally greater than 0 (i.e., we are <em>underestimating</em>)</li>
-<li>for high predicted values (i.e., z-pred <span class="math inline">\(&gt; 0\)</span>), the residual is generally lower than 0 (i.e., we are <em>overestimating</em>)</li>
+<li>for low predicted values (i.e., z-pred <span class="math inline">\(&lt; 0\)</span>), the residual is generally greater than 0 (i.e., we are <em>underestimating</em> cognitive ability in young participants)</li>
+<li>for high predicted values (i.e., z-pred <span class="math inline">\(&gt; 0\)</span>), the residual is generally lower than 0 (i.e., we are <em>overestimating</em> cognitive ability in old participants)</li>
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -106,8 +106,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <p>In the plot below, the error and predictions are <strong>positively</strong> correlated:</p>
 <ul>
-<li>for low predicted values (i.e., z-pred <span class="math inline">\(&lt; 0\)</span>), the residual is generally lower than 0 (i.e., we are <em>overestimating</em>)</li>
-<li>for high predicted values (i.e., z-pred <span class="math inline">\(&gt; 0\)</span>), the residual is generally greater than 0 (i.e., we are <em>underestimating</em>)</li>
+<li>for low predicted values (i.e., z-pred <span class="math inline">\(&lt; 0\)</span>), the residual is generally lower than 0 (i.e., we are <em>overestimating</em> cognitive ability in old participants)</li>
+<li>for high predicted values (i.e., z-pred <span class="math inline">\(&gt; 0\)</span>), the residual is generally greater than 0 (i.e., we are <em>underestimating</em> cognitive ability in young participants)</li>
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -118,7 +118,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<p>Finally, systematic error can look like in the plot below, like a funnel. Here, the model is very accurate when it is predicting low values for the dependent variable: the residuals are very close to 0 when z-pred is low. When the mode predicts high values, it is very error-prone, as demonstrated by the residuals being much further away as z-pred increases. To relate it to the example of age and cognitive performance: our model is very good for predicting performance of young people (low age, resulting in low z-pred)</p>
+<p>Finally, systematic error can look like in the plot below, like a funnel. Here, the model is very accurate when it is predicting low values for the dependent variable: the residuals are very close to 0 when z-pred is low. When the mode predicts high values, it is very error-prone, as demonstrated by the residuals being much further away as z-pred increases. To relate it to the example of age and cognitive performance: our model is very good for predicting performance of young people (low age, resulting in low z-pred) but struggles significantly when predicting the performance of older individuals (high age, resulting in high z-pred). This systematic error indicates that the model’s accuracy diminishes as the predicted values increase, suggesting potential issues with how the model handles higher ranges of the dependent variable. This pattern might be due to unaccounted variables or non-linear relationships that the model fails to capture adequately.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">

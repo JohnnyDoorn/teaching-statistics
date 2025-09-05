@@ -4,7 +4,7 @@
 
 ![](https://upload.wikimedia.org/wikipedia/commons/8/8e/Jerzy_Neyman2.jpg){.absolute top="150" left="0" height="300"}
 
-![](https://upload.wikimedia.org/wikipedia/en/a/a2/Egon_Pearson.jpg){.absolute top="150" left="200" height="300"}
+![](https://upload.wikimedia.org/wikipedia/en/a/a2/Egon_Pearson.jpg){.absolute top="150" left="300" height="300"}
 
 
 [Neyman](https://en.wikipedia.org/wiki/Jerzy_Neyman) - [Pearson](https://en.wikipedia.org/wiki/Egon_Pearson)
@@ -226,8 +226,8 @@ for(p in prob) {
 -   Incorrectly reject $H_0$
 -   Type I error
 -   False Positive
--   Criteria often 5%
--   Distribution depends on sample size
+-   Threshold for "significance"
+-   Criteria often 5% but heavily criticized
 :::
 
 ::: {#alpha .column width="60%"}
@@ -320,7 +320,7 @@ col <- c(rep("red",2),rep("beige",7),rep("red",2))
 barplot( p_kp, 
          main=title, 
          names.arg=0:10, 
-         xlab="number of head", 
+         xlab="number of heads", 
          ylab="P(%)", 
          col=col,
          ylim=c(0,.3) )
@@ -427,7 +427,7 @@ col <- c(rep("beige",2),rep("red",7),rep("beige",2))
 barplot( p_kp, 
          main=title, 
          names.arg=0:10, 
-         xlab="number of head", 
+         xlab="number of heads", 
          ylab="P(%)", 
          col=col,
          ylim=c(0,.3) )
@@ -450,7 +450,7 @@ barplot( rbind(dbinom(0:10, 10, .5),
                dbinom(0:10, 10, .2)), 
          main=title, 
          names.arg=0:10, 
-         xlab="number of head", 
+         xlab="number of heads", 
          ylab="P(%)", 
          col = rbind(colh0,colha),
          beside=TRUE
@@ -465,11 +465,25 @@ legend("topright", legend=c("H0","HA"), fill=c(colh0, colha))
 
 ## P-value
 
-> Conditional probability of the found test statistic or more extreme assuming the null hypothesis is true.
+> Conditional probability of the observed test statistic or more extreme assuming the null hypothesis is true.
 
 Reject $H_0$ when:
 
 -   $p$-value $\leq$ $\alpha$
+
+
+## Test statistics
+
+> A statistic that summarizes the data and is used for hypothesis testing, because we know how it's distributed under different hypotheses
+
+Common test statistics:
+
+-   Number of heads
+-   Sum of dice
+-   $t$-statistic
+-   $F$-statistic
+-   $\chi^2$-statistic
+-   etc...
 
 ## P-value in $H_{0}$ distribution
 
@@ -493,7 +507,7 @@ col <- c(rep("blue",3),rep("beige",5),rep("blue",2))
 barplot( p_kp, 
          main=title, 
          names.arg=0:10, 
-         xlab="number of head", 
+         xlab="number of heads", 
          ylab="P(%)", 
          col=col,
          ylim=c(0,.3) )
@@ -503,23 +517,32 @@ abline(v = c(2.5,10.9), lty=2, col='red')
 text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 ```
 
-## Test statistics
+## P-value and $\alpha$
 
-Some common test statistics
+Alpha determines how willingly we reject the null hypothesis:
 
--   Number of heads
--   Sum of dice
--   Difference
--   $t$-statistic
--   $F$-statistic
--   $\chi^2$-statistic
--   etc...
+- Increase $\alpha$ = reject null hypothesis more often
+  - Increases Type I error rate
+  - Decreases Type II error rate
+- Historically set to 0.05, but widely criticized (see Jane Superbrain 3.1)
+
+> No scientific worker has a fixed level of significance at which from year to year, and in all
+circumstances, he rejects hypotheses; he rather gives his mind to each particular case in the
+light of his evidence and his ideas. (Fisher, 1956)
+
+## Misconceptions about the p-value
+
+- A significant result means that the effect is important
+  - Significance = effect size + sample size
+- A non-significant result means that the null hypothesis is true 
+- A significant result means that the null hypothesis is false
+
 
 ## Decision Table {.flexbox .vcenter .smaller}
 
 [Play around with this app to get an idea of the probabilities](https://statisticalreasoning-uva.shinyapps.io/NHST_Binomial/)
 
-## Reasoning Scheme {.subsection .flexbox .vcenter}
+## NHST Reasoning Scheme {.subsection .flexbox .vcenter}
 
 ![](../../images/NHST_decision_scheme.png)
 

@@ -33,8 +33,8 @@ plot( scale(myMod$fitted.values), scale(myMod$residuals), las = 1,
 
 Next, two cases where the error and the predictions are correlated. In the plot below, the error and predictions are **negatively** correlated: 
 
-- for low predicted values (i.e., z-pred $< 0$), the residual is generally greater than 0 (i.e., we are *underestimating*) 
-- for high predicted values (i.e., z-pred $> 0$), the residual is generally lower than 0 (i.e., we are *overestimating*)
+- for low predicted values (i.e., z-pred $< 0$), the residual is generally greater than 0 (i.e., we are *underestimating* cognitive ability in young participants) 
+- for high predicted values (i.e., z-pred $> 0$), the residual is generally lower than 0 (i.e., we are *overestimating* cognitive ability in old participants)
 
 ```{r, fig.align='center', echo=FALSE}
 x <- rnorm(n, mean = 50, sd = 10)
@@ -51,8 +51,8 @@ plot( scale(myMod$fitted.values), scale(myMod$residuals), las = 1,
 
 In the plot below, the error and predictions are **positively** correlated: 
 
-- for low predicted values (i.e., z-pred $< 0$), the residual is generally lower than 0 (i.e., we are *overestimating*) 
-- for high predicted values (i.e., z-pred $> 0$), the residual is generally greater than 0 (i.e., we are *underestimating*)
+- for low predicted values (i.e., z-pred $< 0$), the residual is generally lower than 0 (i.e., we are *overestimating* cognitive ability in old participants) 
+- for high predicted values (i.e., z-pred $> 0$), the residual is generally greater than 0 (i.e., we are *underestimating* cognitive ability in young participants)
 
 ```{r, fig.align='center', echo=FALSE}
 
@@ -70,7 +70,7 @@ plot( scale(myMod$fitted.values), scale(myMod$residuals), las = 1,
 
 
 
-Finally, systematic error can look like in the plot below, like a funnel. Here, the model is very accurate when it is predicting low values for the dependent variable: the residuals are very close to 0 when z-pred is low. When the mode predicts high values, it is very error-prone, as demonstrated by the residuals being much further away as z-pred increases. To relate it to the example of age and cognitive performance: our model is very good for predicting performance of young people (low age, resulting in low z-pred)
+Finally, systematic error can look like in the plot below, like a funnel. Here, the model is very accurate when it is predicting low values for the dependent variable: the residuals are very close to 0 when z-pred is low. When the mode predicts high values, it is very error-prone, as demonstrated by the residuals being much further away as z-pred increases. To relate it to the example of age and cognitive performance: our model is very good for predicting performance of young people (low age, resulting in low z-pred) but struggles significantly when predicting the performance of older individuals (high age, resulting in high z-pred). This systematic error indicates that the model's accuracy diminishes as the predicted values increase, suggesting potential issues with how the model handles higher ranges of the dependent variable. This pattern might be due to unaccounted variables or non-linear relationships that the model fails to capture adequately.
 
 ```{r, fig.align='center', echo=FALSE}
 

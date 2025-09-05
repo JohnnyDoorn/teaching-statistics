@@ -26,7 +26,7 @@ Chapters 1, 2, 3
 
 ## Learning
 
-<iframe style="height:400px;  width:100%;" src="https://www.youtube.com/embed/JC82Il2cjqA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe style="height:500px;  width:100%;" src="https://www.youtube.com/embed/JC82Il2cjqA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## About SSR
 
@@ -38,8 +38,8 @@ Chapters 1, 2, 3
         - Data sets
 
 
-## 
-- Lectures
+## About SSR
+- Lectures:
   - Slightly erratic
   - Starts with conceptual understanding
   - Ends with JASP demonstration
@@ -48,17 +48,18 @@ Chapters 1, 2, 3
       - Rewatch lecture
       - Ask questions (during lecture, on discussion board)
   
-## 
+## About SSR
 - Practice: 
     - Tutorials, WA in Ans
     - Smart Alex tasks
     - Labcoat Leni examples
-    - Self-test 
+    - Self-tests 
 
 
 ## Software
 - JASP: main tool for analyses, data management
     - Freely available at [www.jasp-stats.org](www.jasp-stats.org)
+    - Also available at libraries, [apps.uva.nl](apps.uva.nl)
 - R: very flexible, very optional
     - Freely available at [https://cran.r-project.org/](https://cran.r-project.org/)
     - Want a nicer environment for coding? Try [Rstudio](https://posit.co/download/rstudio-desktop/)

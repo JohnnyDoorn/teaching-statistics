@@ -1,0 +1,11 @@
+# JASP {.section}
+
+```{r, eval=FALSE, echo=FALSE}
+# Remove all objects from workspace
+rm(list=ls())
+```
+
+
+
+
+![](../../images/NHST_decision_scheme.png)
