@@ -394,7 +394,7 @@
 
 <section id="title-slide" data-background-image="https://cdn.pixabay.com/photo/2017/08/22/16/46/bike-2669639_960_720.jpg" data-background-position="bottom" data-background-size="contain" class="quarto-title-block center">
   <h1 class="title">4. Statistical Reasoning</h1>
-  <p class="subtitle">Null Hypothesis Testing</p>
+  <p class="subtitle">Introduction and NHST</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -441,8 +441,9 @@ Johnny van Doorn
 <li><a href="https://discoverjasp.com">Companion website of book</a> - Data sets</li>
 </ul>
 </section>
-<section id="about-ssr-1" class="slide level2">
-<h2>About SSR</h2>
+<section class="slide level2">
+
+<h3 id="about-ssr-1">About SSR</h3>
 <ul>
 <li>Lectures:
 <ul>
@@ -458,8 +459,9 @@ Johnny van Doorn
 </ul></li>
 </ul>
 </section>
-<section id="about-ssr-2" class="slide level2">
-<h2>About SSR</h2>
+<section class="slide level2">
+
+<h3 id="about-ssr-2">About SSR</h3>
 <ul>
 <li>Practice:
 <ul>
@@ -476,12 +478,14 @@ Johnny van Doorn
 <li>JASP: main tool for analyses, data management
 <ul>
 <li>Freely available at <a href="www.jasp-stats.org">www.jasp-stats.org</a></li>
+<li>Also available at libraries, <a href="apps.uva.nl">apps.uva.nl</a></li>
 </ul></li>
-<li>R: very flexible, very optional
+<li>R: very flexible, 100% optional
 <ul>
 <li>Freely available at <a href="https://cran.r-project.org/">https://cran.r-project.org/</a></li>
 <li>Want a nicer environment for coding? Try <a href="https://posit.co/download/rstudio-desktop/">Rstudio</a></li>
 <li>Will be available during exam, but not required to use (can also use Ans calculator)</li>
+<li><a href="https://intro2r.com/">Free intro course</a></li>
 </ul></li>
 </ul>
 <!-- <div class="note"> -->
@@ -496,6 +500,9 @@ Johnny van Doorn
 <h2>Sampling Variability</h2>
 
 <img data-src="../../images/sampling_variability.png" class="r-stretch"></section>
+<section id="putting-it-to-practice" class="slide level2">
+<h2>Putting it to Practice</h2>
+</section>
 <section>
 <section id="null-hypothesis-significance-testing" class="title-slide slide level1 section center">
 <h1>Null Hypothesis<br>Significance Testing</h1>
@@ -503,9 +510,14 @@ Johnny van Doorn
 </section>
 <section id="neyman-pearson-paradigm" class="slide level2">
 <h2>Neyman-Pearson Paradigm</h2>
-<p><img data-src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Jerzy_Neyman2.jpg" class="absolute" style="top: 150px; left: 0px; height: 300px; "></p>
-<p><img data-src="https://upload.wikimedia.org/wikipedia/en/a/a2/Egon_Pearson.jpg" class="absolute" style="top: 150px; left: 300px; height: 300px; "></p>
-<p><a href="https://en.wikipedia.org/wiki/Jerzy_Neyman">Neyman</a> - <a href="https://en.wikipedia.org/wiki/Egon_Pearson">Pearson</a></p>
+<div style="display: flex; justify-content: center; gap: 2em;">
+<div>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Jerzy_Neyman2.jpg" height="300"> <a href="https://en.wikipedia.org/wiki/Jerzy_Neyman">Neyman</a></p>
+</div>
+<div>
+<p><img src="https://upload.wikimedia.org/wikipedia/en/a/a2/Egon_Pearson.jpg" height="300"> <a href="https://en.wikipedia.org/wiki/Egon_Pearson">Pearson</a></p>
+</div>
+</div>
 </section>
 <section id="two-hypotheses" class="slide level2">
 <h2>Two hypotheses</h2>
@@ -516,7 +528,7 @@ Johnny van Doorn
 <li>Skeptical point of view</li>
 <li>No effect</li>
 <li>No preference</li>
-<li>No Correlation</li>
+<li>No correlation</li>
 <li>No difference</li>
 </ul>
 </div><div class="column">
@@ -863,6 +875,21 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <li><span class="math inline">\(p\)</span>-value <span class="math inline">\(\leq\)</span> <span class="math inline">\(\alpha\)</span></li>
 </ul>
 </section>
+<section id="test-statistics" class="slide level2">
+<h2>Test statistics</h2>
+<blockquote>
+<p>A statistic that summarizes the data and is used for hypothesis testing, because we know how it’s distributed under different hypotheses</p>
+</blockquote>
+<p>Common test statistics:</p>
+<ul>
+<li>Number of heads</li>
+<li>Sum of dice</li>
+<li><span class="math inline">\(t\)</span>-statistic</li>
+<li><span class="math inline">\(F\)</span>-statistic</li>
+<li><span class="math inline">\(\chi^2\)</span>-statistic</li>
+<li>etc…</li>
+</ul>
+</section>
 <section id="p-value-in-h_0-distribution" class="slide level2">
 <h2>P-value in <span class="math inline">\(H_{0}\)</span> distribution</h2>
 
@@ -884,18 +911,13 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 </section>
 <section id="misconceptions-about-the-p-value" class="slide level2">
 <h2>Misconceptions about the p-value</h2>
-</section>
-<section id="test-statistics" class="slide level2">
-<h2>Test statistics</h2>
-<p>Some common test statistics</p>
 <ul>
-<li>Number of heads</li>
-<li>Sum of dice</li>
-<li>Difference</li>
-<li><span class="math inline">\(t\)</span>-statistic</li>
-<li><span class="math inline">\(F\)</span>-statistic</li>
-<li><span class="math inline">\(\chi^2\)</span>-statistic</li>
-<li>etc…</li>
+<li>A significant result means that the effect is important
+<ul>
+<li>Significance = effect size + sample size</li>
+</ul></li>
+<li>A non-significant result means that the null hypothesis is true</li>
+<li>A significant result means that the null hypothesis is false</li>
 </ul>
 </section>
 <section id="decision-table-1" class="slide level2 flexbox vcenter smaller">

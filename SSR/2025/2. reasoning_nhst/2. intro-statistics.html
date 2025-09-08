@@ -86,11 +86,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#learning" id="toc-learning" class="nav-link active" data-scroll-target="#learning">Learning</a></li>
   <li><a href="#about-ssr" id="toc-about-ssr" class="nav-link" data-scroll-target="#about-ssr">About SSR</a></li>
-  <li><a href="#about-ssr-1" id="toc-about-ssr-1" class="nav-link" data-scroll-target="#about-ssr-1">About SSR</a></li>
-  <li><a href="#about-ssr-2" id="toc-about-ssr-2" class="nav-link" data-scroll-target="#about-ssr-2">About SSR</a></li>
   <li><a href="#software" id="toc-software" class="nav-link" data-scroll-target="#software">Software</a></li>
   <li><a href="#the-research-process" id="toc-the-research-process" class="nav-link" data-scroll-target="#the-research-process">The Research Process</a></li>
   <li><a href="#sampling-variability" id="toc-sampling-variability" class="nav-link" data-scroll-target="#sampling-variability">Sampling Variability</a></li>
+  <li><a href="#putting-it-to-practice" id="toc-putting-it-to-practice" class="nav-link" data-scroll-target="#putting-it-to-practice">Putting it to Practice</a></li>
   <li><a href="#null-hypothesis-significance-testing" id="toc-null-hypothesis-significance-testing" class="nav-link" data-scroll-target="#null-hypothesis-significance-testing">Null Hypothesis<br>Significance Testing</a>
   <ul class="collapse">
   <li><a href="#neyman-pearson-paradigm" id="toc-neyman-pearson-paradigm" class="nav-link" data-scroll-target="#neyman-pearson-paradigm">Neyman-Pearson Paradigm</a></li>
@@ -112,10 +111,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4"></a></li>
   <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5"></a></li>
   <li><a href="#p-value" id="toc-p-value" class="nav-link" data-scroll-target="#p-value">P-value</a></li>
+  <li><a href="#test-statistics" id="toc-test-statistics" class="nav-link" data-scroll-target="#test-statistics">Test statistics</a></li>
   <li><a href="#p-value-in-h_0-distribution" id="toc-p-value-in-h_0-distribution" class="nav-link" data-scroll-target="#p-value-in-h_0-distribution">P-value in <span class="math inline">\(H_{0}\)</span> distribution</a></li>
   <li><a href="#p-value-and-alpha" id="toc-p-value-and-alpha" class="nav-link" data-scroll-target="#p-value-and-alpha">P-value and <span class="math inline">\(\alpha\)</span></a></li>
   <li><a href="#misconceptions-about-the-p-value" id="toc-misconceptions-about-the-p-value" class="nav-link" data-scroll-target="#misconceptions-about-the-p-value">Misconceptions about the p-value</a></li>
-  <li><a href="#test-statistics" id="toc-test-statistics" class="nav-link" data-scroll-target="#test-statistics">Test statistics</a></li>
   <li><a href="#decision-table-1" id="toc-decision-table-1" class="nav-link" data-scroll-target="#decision-table-1">Decision Table</a></li>
   <li><a href="#nhst-reasoning-scheme" id="toc-nhst-reasoning-scheme" class="nav-link" data-scroll-target="#nhst-reasoning-scheme">NHST Reasoning Scheme</a></li>
   <li><a href="#next-time" id="toc-next-time" class="nav-link" data-scroll-target="#next-time">Next Time</a></li>
@@ -135,7 +134,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">4. Statistical Reasoning</h1>
-<p class="subtitle lead">Null Hypothesis Testing</p>
+<p class="subtitle lead">Introduction and NHST</p>
 </div>
 
 
@@ -197,9 +196,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 <li><a href="https://discoverjasp.com">Companion website of book</a> - Data sets</li>
 </ul>
-</section>
-<section id="about-ssr-1" class="level2">
-<h2 class="anchored" data-anchor-id="about-ssr-1">About SSR</h2>
+<hr>
+<section id="about-ssr-1" class="level3">
+<h3 class="anchored" data-anchor-id="about-ssr-1">About SSR</h3>
 <ul>
 <li>Lectures:
 <ul>
@@ -214,9 +213,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 </ul></li>
 </ul>
+<hr>
 </section>
-<section id="about-ssr-2" class="level2">
-<h2 class="anchored" data-anchor-id="about-ssr-2">About SSR</h2>
+<section id="about-ssr-2" class="level3">
+<h3 class="anchored" data-anchor-id="about-ssr-2">About SSR</h3>
 <ul>
 <li>Practice:
 <ul>
@@ -227,18 +227,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 </ul>
 </section>
+</section>
 <section id="software" class="level2">
 <h2 class="anchored" data-anchor-id="software">Software</h2>
 <ul>
 <li>JASP: main tool for analyses, data management
 <ul>
 <li>Freely available at <a href="www.jasp-stats.org">www.jasp-stats.org</a></li>
+<li>Also available at libraries, <a href="apps.uva.nl">apps.uva.nl</a></li>
 </ul></li>
-<li>R: very flexible, very optional
+<li>R: very flexible, 100% optional
 <ul>
 <li>Freely available at <a href="https://cran.r-project.org/">https://cran.r-project.org/</a></li>
 <li>Want a nicer environment for coding? Try <a href="https://posit.co/download/rstudio-desktop/">Rstudio</a></li>
 <li>Will be available during exam, but not required to use (can also use Ans calculator)</li>
+<li><a href="https://intro2r.com/">Free intro course</a></li>
 </ul></li>
 </ul>
 <!-- <div class="note"> -->
@@ -253,13 +256,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="sampling-variability">Sampling Variability</h2>
 <p><img src="../../images/sampling_variability.png" class="img-fluid"></p>
 </section>
+<section id="putting-it-to-practice" class="level2">
+<h2 class="anchored" data-anchor-id="putting-it-to-practice">Putting it to Practice</h2>
+</section>
 <section id="null-hypothesis-significance-testing" class="level1 section">
 <h1 class="section">Null Hypothesis<br>Significance Testing</h1>
 <section id="neyman-pearson-paradigm" class="level2">
 <h2 class="anchored" data-anchor-id="neyman-pearson-paradigm">Neyman-Pearson Paradigm</h2>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Jerzy_Neyman2.jpg" class="absolute" data-top="150" data-left="0" height="300"></p>
-<p><img src="https://upload.wikimedia.org/wikipedia/en/a/a2/Egon_Pearson.jpg" class="absolute" data-top="150" data-left="300" height="300"></p>
-<p><a href="https://en.wikipedia.org/wiki/Jerzy_Neyman">Neyman</a> - <a href="https://en.wikipedia.org/wiki/Egon_Pearson">Pearson</a></p>
+<div style="display: flex; justify-content: center; gap: 2em;">
+<div>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Jerzy_Neyman2.jpg" height="300"> <a href="https://en.wikipedia.org/wiki/Jerzy_Neyman">Neyman</a></p>
+</div>
+<div>
+<p><img src="https://upload.wikimedia.org/wikipedia/en/a/a2/Egon_Pearson.jpg" height="300"> <a href="https://en.wikipedia.org/wiki/Egon_Pearson">Pearson</a></p>
+</div>
+</div>
 </section>
 <section id="two-hypotheses" class="level2">
 <h2 class="anchored" data-anchor-id="two-hypotheses">Two hypotheses</h2>
@@ -270,7 +281,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Skeptical point of view</li>
 <li>No effect</li>
 <li>No preference</li>
-<li>No Correlation</li>
+<li>No correlation</li>
 <li>No difference</li>
 </ul>
 </div><div class="column">
@@ -635,6 +646,21 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <li><span class="math inline">\(p\)</span>-value <span class="math inline">\(\leq\)</span> <span class="math inline">\(\alpha\)</span></li>
 </ul>
 </section>
+<section id="test-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="test-statistics">Test statistics</h2>
+<blockquote class="blockquote">
+<p>A statistic that summarizes the data and is used for hypothesis testing, because we know how it’s distributed under different hypotheses</p>
+</blockquote>
+<p>Common test statistics:</p>
+<ul>
+<li>Number of heads</li>
+<li>Sum of dice</li>
+<li><span class="math inline">\(t\)</span>-statistic</li>
+<li><span class="math inline">\(F\)</span>-statistic</li>
+<li><span class="math inline">\(\chi^2\)</span>-statistic</li>
+<li>etc…</li>
+</ul>
+</section>
 <section id="p-value-in-h_0-distribution" class="level2">
 <h2 class="anchored" data-anchor-id="p-value-in-h_0-distribution">P-value in <span class="math inline">\(H_{0}\)</span> distribution</h2>
 <div class="cell">
@@ -660,18 +686,13 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 </section>
 <section id="misconceptions-about-the-p-value" class="level2">
 <h2 class="anchored" data-anchor-id="misconceptions-about-the-p-value">Misconceptions about the p-value</h2>
-</section>
-<section id="test-statistics" class="level2">
-<h2 class="anchored" data-anchor-id="test-statistics">Test statistics</h2>
-<p>Some common test statistics</p>
 <ul>
-<li>Number of heads</li>
-<li>Sum of dice</li>
-<li>Difference</li>
-<li><span class="math inline">\(t\)</span>-statistic</li>
-<li><span class="math inline">\(F\)</span>-statistic</li>
-<li><span class="math inline">\(\chi^2\)</span>-statistic</li>
-<li>etc…</li>
+<li>A significant result means that the effect is important
+<ul>
+<li>Significance = effect size + sample size</li>
+</ul></li>
+<li>A non-significant result means that the null hypothesis is true</li>
+<li>A significant result means that the null hypothesis is false</li>
 </ul>
 </section>
 <section id="decision-table-1" class="level2 flexbox vcenter smaller">

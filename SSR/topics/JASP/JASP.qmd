@@ -8,4 +8,77 @@ rm(list=ls())
 
 
 
-![](../../images/NHST_decision_scheme.png)
+## Why JASP?
+
+
+- User-friendly, intuitive interface
+- Open-source (free)
+- Reproducible analyses (easy to share)
+- Better than IBM's SPSS for transparency and workflow
+- Integrates with R for advanced users
+
+<div style="text-align: center;">
+![](../../images/JASP_logo_green.svg){height="100"}
+</div>
+
+
+---
+
+
+
+
+## Getting Started with JASP
+
+
+1. Download from [jasp-stats.org](https://jasp-stats.org)
+2. Open JASP, load your dataset (.jasp, .csv, .sav, etc.)
+3. Familiarize with the interface: Data view, Analysis panel, Output panel
+
+![Figure 4.3](../../images/chapter4/Figure 4.3.png){height="300"}
+
+---
+
+
+## Loading Data in JASP
+
+
+- Click **Open** > select your file
+- Data appears in spreadsheet view
+
+![Figure 4.4](../../images/chapter4/Figure 4.4.png){height="300"}
+
+
+
+---
+
+
+## Descriptive Statistics in JASP
+
+
+- Go to **Descriptives** > select variables
+- Options: mean, median, SD, min, max, quartiles
+- Output updates instantly
+
+![Figure 4.10](../../images/chapter4/Figure 4.10.png){height="300"}
+
+
+
+## Some special operations
+
+- Filtering data
+  - [For scale data](https://jasp-stats.github.io/jasp-video-library/assets/videos/Getting-Started/Getting_Started_07_Filter-Drag-and-Drop-Scale.mp4)
+  - [For categorical data](https://jasp-stats.github.io/jasp-video-library/assets/videos/Getting-Started/Getting_Started_07_Filter-Drag-and-Drop-Categorical.mp4)
+  - [Using variable settings](https://jasp-stats.github.io/jasp-video-library/assets/videos/Getting-Started/Getting_Started_06_Filter-by-Group.mp4)
+- Split variable in Descriptives
+
+
+
+## Getting help
+
+- [JASP Video Library](https://jasp-stats.github.io/jasp-video-library/)
+- The book
+- ![Help files in JASP](../../images/Chapter4/Icons/info-button.png){height="30"}
+
+
+
+---

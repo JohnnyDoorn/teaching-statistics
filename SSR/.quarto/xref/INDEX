@@ -142,5 +142,11 @@
   "2025/6. visualization_correlation/6. visualization_correlation.qmd": {
     "6. visualization_correlation.slide.html": "045f8c01",
     "6. visualization_correlation.html": "da2938b7"
+  },
+  "topics/JASP/JASP.qmd": {
+    "JASP.html": "cacae6a1"
+  },
+  "topics/visualization/visualization.qmd": {
+    "visualization.html": "b12f2991"
   }
 }

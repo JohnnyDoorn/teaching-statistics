@@ -1,5 +1,5 @@
 ---
-title: "6. Visualization and Correlation"
+title: "5. JASP: Visualization and Correlation"
 author: "Johnny van Doorn"
 date: "10 sep 2025"
 footer: "Scientific & Statistical Reasoning"
@@ -11,24 +11,26 @@ format:
 css: ../../ajohnson.css
 ---
 
-
 <div class="goals">
 In this lecture we aim to:
 
 * Introduce JASP
-  * Descriptive Statistics
-  * Data Visualizations
+  * Descriptive statistics
+  * Data visualizations
 * Correlation
+  * How it works
+  * Controlling for a third variable
     
 <strong>Reading:</strong>
 Chapters 4, 5, 7
+</div>
 
 
 ```{r child="../../topics/JASP/JASP.qmd", eval=TRUE}
 ```
 
 
-```{r child="../../topics/graphs/graphs.qmd", eval=TRUE}
+```{r child="../../topics/visualization/visualization.qmd", eval=TRUE}
 ```
 
 ```{r child="../../topics/correlation/correlation.qmd", eval=TRUE}
@@ -36,11 +38,10 @@ Chapters 4, 5, 7
 
 ## Bored? 
 ::: {}
-- [Exercise 1.1](https://discoverjasp.com/pages/smart_alex#task-1.1)
+- [Exercise 5.1](https://discoverjasp.com/pages/smart_alex#task-5.1), [Exercise 5.5](https://discoverjasp.com/pages/smart_alex#task-5.5)
 
-- [Exercise 2.2](https://discoverjasp.com/pages/smart_alex#task-2.2), [Exercise 2.6](https://discoverjasp.com/pages/smart_alex#task-2.6), [Exercise 2.7](https://discoverjasp.com/pages/smart_alex#task-2.7)   
-
-- [Exercise 3.1](https://discoverjasp.com/pages/smart_alex#task-3.1), [Exercise 3.4](https://discoverjasp.com/pages/smart_alex#task-3.4)   
+- [Exercise 7.1](https://discoverjasp.com/pages/smart_alex#task-7.1), [Exercise 7.6](https://discoverjasp.com/pages/smart_alex#task-7.6), [Exercise 7.7](https://discoverjasp.com/pages/smart_alex#task-7.7)
+    - Note: `pets.jasp` can also be downloaded from the [Data page](https://discoverjasp.com/pages/data)
 
 :::
 

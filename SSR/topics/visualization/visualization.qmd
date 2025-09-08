@@ -1,4 +1,4 @@
-# JASP {.section}
+# Visualization {.section}
 
 ```{r, eval=FALSE, echo=FALSE}
 # Remove all objects from workspace
@@ -6,6 +6,149 @@ rm(list=ls())
 ```
 
 
+## Data visualization
+
+![](../../images/nightingale.jpg){height="300"}
+
+[Florence Nightingale](https://en.wikipedia.org/wiki/Florence_Nightingale)
 
 
-![](../../images/NHST_decision_scheme.png)
+## Why Visualize Data?
+
+- Quick overview of the data
+- Spot patterns, outliers, or errors
+- Invite the reader
+
+---
+
+
+## Types of Data and Suitable Graphs
+
+- **Categorical data:** Bar charts, pie charts
+- **Continuous data:** Histograms, boxplots, raincloud plots
+- **Relationships:** Scatterplots
+
+
+---
+
+## Distribution plots in JASP
+
+- Used for categorical variables
+- Shows frequency or proportion
+- Example: Number of students by major
+
+**How to in JASP:**  
+1. Go to `Descriptives` > `Descriptive Plots`
+2. Select your categorical variable
+3. Choose "Bar Plot"
+
+---
+
+## Histograms in JASP
+
+- Used for continuous variables
+- Shows distribution shape (normal, skewed, bimodal)
+- Example: Distribution of exam scores
+
+**How to in JASP:**  
+1. Go to `Descriptives` > `Descriptive Plots`
+2. Select your continuous variable
+3. Choose "Histogram"
+
+---
+
+## Boxplots: Visualizing Spread and Outliers
+
+- Shows median, quartiles, and outliers
+- Useful for comparing groups
+
+**How to in JASP:**  
+1. Go to `Descriptives` > `Descriptive Plots`
+2. Select variable(s)
+3. Choose "Boxplot"
+
+---
+
+## Scatterplots: Relationships Between Variables
+
+- Visualizes association between two continuous variables
+- Example: Age vs. cognitive performance
+
+**How to in JASP:**  
+1. Go to `Descriptives` > `Descriptive Plots`
+2. Select two continuous variables
+3. Choose "Scatterplot"
+
+---
+
+## Best Practices in Data Visualization
+
+- Use clear labels and titles
+- Avoid unnecessary 3D effects
+- Choose appropriate scales
+- Check for misleading representations
+
+**Discussion:**  
+What makes a graph misleading?
+
+
+---
+
+
+## Critically Assess Graphs
+
+- Are axes labelled (variable, units)?
+- Are axes broken/equally spaced?
+- Are error bars (e.g., confidence intervals) included where relevant?
+
+## Critically Assess Graphs
+```{r, echo=FALSE}
+set.seed(123)
+
+A <- rnorm(10, mean = 5, sd = 3)
+B <- rnorm(10, mean = 7, sd = 3)
+means <- c(mean(A), mean(B))
+ses   <- c(sd(A)/sqrt(length(A)), sd(B)/sqrt(length(B)))
+tcrit <- qt(0.975, df = c(length(A)-1, length(B)-1))
+
+# Bad: no axis labels
+bp <- barplot(means, names.arg = c("SPSS", "JASP"),
+              ylab = "Exam performance",
+              col = c("skyblue", "orange"), ylim = c(0, 10), axes = FALSE)
+```
+
+
+## Scale Matters
+```{r, echo=FALSE}
+
+# Bad: no axis labels
+par(mfrow = c(1, 2))
+bp <- barplot(means, names.arg = c("SPSS", "JASP"),
+              ylab = "Grade (0-10)",
+              col = c("skyblue", "orange"), ylim = c(0, 10), axes = FALSE)
+axis(2)
+
+bp <- barplot(means, names.arg = c("SPSS", "JASP"),
+              ylab = "Grade (0-100)",
+              col = c("skyblue", "orange"), ylim = c(0, 10), axes = FALSE)
+# Add error bars
+# arrows(x0 = bp, y0 = means - ses, x1 = bp, y1 = means + ses,
+#        angle = 90, code = 3, length = 0.06, lwd = 1.5)
+axis(2, labels = seq(90, 100, 2), at = seq(0, 10, by =2))
+```
+
+
+## Error Bars!
+```{r, echo=FALSE}
+
+# Bad: no axis labels
+bp <- barplot(means, names.arg = c("SPSS", "JASP"),
+              ylab = "Grade (0-10)",
+              col = c("skyblue", "orange"), ylim = c(0, 10), axes = FALSE)
+axis(2)
+arrows(x0 = bp, y0 = means - ses*tcrit, x1 = bp, y1 = means + ses*tcrit,
+        angle = 90, code = 3, length = 0.06, lwd = 1.5)
+
+```
+
+

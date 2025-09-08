@@ -9,7 +9,7 @@
 <meta name="author" content="Johnny van Doorn">
 <meta name="dcterms.date" content="2025-09-10">
 
-<title>6. Visualization and Correlation</title>
+<title>5. JASP: Visualization and Correlation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -95,7 +95,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul class="collapse">
-  <li><a href="#correlation" id="toc-correlation" class="nav-link active" data-scroll-target="#correlation">Correlation</a>
+  <li><a href="#jasp" id="toc-jasp" class="nav-link active" data-scroll-target="#jasp">JASP</a>
+  <ul class="collapse">
+  <li><a href="#why-jasp" id="toc-why-jasp" class="nav-link" data-scroll-target="#why-jasp">Why JASP?</a></li>
+  <li><a href="#getting-started-with-jasp" id="toc-getting-started-with-jasp" class="nav-link" data-scroll-target="#getting-started-with-jasp">Getting Started with JASP</a></li>
+  <li><a href="#loading-data-in-jasp" id="toc-loading-data-in-jasp" class="nav-link" data-scroll-target="#loading-data-in-jasp">Loading Data in JASP</a></li>
+  <li><a href="#descriptive-statistics-in-jasp" id="toc-descriptive-statistics-in-jasp" class="nav-link" data-scroll-target="#descriptive-statistics-in-jasp">Descriptive Statistics in JASP</a></li>
+  <li><a href="#some-special-operations" id="toc-some-special-operations" class="nav-link" data-scroll-target="#some-special-operations">Some special operations</a></li>
+  <li><a href="#getting-help" id="toc-getting-help" class="nav-link" data-scroll-target="#getting-help">Getting help</a></li>
+  </ul></li>
+  <li><a href="#visualization" id="toc-visualization" class="nav-link" data-scroll-target="#visualization">Visualization</a>
+  <ul class="collapse">
+  <li><a href="#data-visualization" id="toc-data-visualization" class="nav-link" data-scroll-target="#data-visualization">Data visualization</a></li>
+  <li><a href="#why-visualize-data" id="toc-why-visualize-data" class="nav-link" data-scroll-target="#why-visualize-data">Why Visualize Data?</a></li>
+  <li><a href="#types-of-data-and-suitable-graphs" id="toc-types-of-data-and-suitable-graphs" class="nav-link" data-scroll-target="#types-of-data-and-suitable-graphs">Types of Data and Suitable Graphs</a></li>
+  <li><a href="#distribution-plots-in-jasp" id="toc-distribution-plots-in-jasp" class="nav-link" data-scroll-target="#distribution-plots-in-jasp">Distribution plots in JASP</a></li>
+  <li><a href="#histograms-in-jasp" id="toc-histograms-in-jasp" class="nav-link" data-scroll-target="#histograms-in-jasp">Histograms in JASP</a></li>
+  <li><a href="#boxplots-visualizing-spread-and-outliers" id="toc-boxplots-visualizing-spread-and-outliers" class="nav-link" data-scroll-target="#boxplots-visualizing-spread-and-outliers">Boxplots: Visualizing Spread and Outliers</a></li>
+  <li><a href="#scatterplots-relationships-between-variables" id="toc-scatterplots-relationships-between-variables" class="nav-link" data-scroll-target="#scatterplots-relationships-between-variables">Scatterplots: Relationships Between Variables</a></li>
+  <li><a href="#best-practices-in-data-visualization" id="toc-best-practices-in-data-visualization" class="nav-link" data-scroll-target="#best-practices-in-data-visualization">Best Practices in Data Visualization</a></li>
+  <li><a href="#critically-assess-graphs" id="toc-critically-assess-graphs" class="nav-link" data-scroll-target="#critically-assess-graphs">Critically Assess Graphs</a></li>
+  <li><a href="#critically-assess-graphs-1" id="toc-critically-assess-graphs-1" class="nav-link" data-scroll-target="#critically-assess-graphs-1">Critically Assess Graphs</a></li>
+  <li><a href="#scale-matters" id="toc-scale-matters" class="nav-link" data-scroll-target="#scale-matters">Scale Matters</a></li>
+  <li><a href="#error-bars" id="toc-error-bars" class="nav-link" data-scroll-target="#error-bars">Error Bars!</a></li>
+  </ul></li>
+  <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation">Correlation</a>
   <ul class="collapse">
   <li><a href="#pearson-correlation" id="toc-pearson-correlation" class="nav-link" data-scroll-target="#pearson-correlation">Pearson Correlation</a></li>
   <li><a href="#pearson-correlation-1" id="toc-pearson-correlation-1" class="nav-link" data-scroll-target="#pearson-correlation-1">Pearson Correlation</a></li>
@@ -137,7 +161,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">6. Visualization and Correlation</h1>
+<h1 class="title">5. JASP: Visualization and Correlation</h1>
 </div>
 
 
@@ -176,16 +200,210 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Introduce JASP
 <ul>
-<li>Descriptive Statistics</li>
-<li>Data Visualizations</li>
+<li>Descriptive statistics</li>
+<li>Data visualizations</li>
 </ul></li>
-<li>Correlation</li>
+<li>Correlation
+<ul>
+<li>How it works</li>
+<li>Controlling for a third variable</li>
+</ul></li>
 </ul>
 <p><strong>Reading:</strong> Chapters 4, 5, 7</p>
 </div>
-<div class="note">
-<p><strong>Reading:</strong> Chapters 4, 5, 7</p>
+<section id="jasp" class="level1 section">
+<h1 class="section">JASP</h1>
+<section id="why-jasp" class="level2">
+<h2 class="anchored" data-anchor-id="why-jasp">Why JASP?</h2>
+<ul>
+<li>User-friendly, intuitive interface</li>
+<li>Open-source (free)</li>
+<li>Reproducible analyses (easy to share)</li>
+<li>Better than IBM’s SPSS for transparency and workflow</li>
+<li>Integrates with R for advanced users</li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../../images/JASP_logo_green.svg" height="100"></p>
 </div>
+<hr>
+</section>
+<section id="getting-started-with-jasp" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started-with-jasp">Getting Started with JASP</h2>
+<ol type="1">
+<li>Download from <a href="https://jasp-stats.org">jasp-stats.org</a></li>
+<li>Open JASP, load your dataset (.jasp, .csv, .sav, etc.)</li>
+<li>Familiarize with the interface: Data view, Analysis panel, Output panel</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/chapter4/Figure%204.3.png" height="300" class="figure-img"></p>
+<figcaption class="figure-caption">Figure 4.3</figcaption>
+</figure>
+</div>
+<hr>
+</section>
+<section id="loading-data-in-jasp" class="level2">
+<h2 class="anchored" data-anchor-id="loading-data-in-jasp">Loading Data in JASP</h2>
+<ul>
+<li>Click <strong>Open</strong> &gt; select your file</li>
+<li>Data appears in spreadsheet view</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/chapter4/Figure%204.4.png" height="300" class="figure-img"></p>
+<figcaption class="figure-caption">Figure 4.4</figcaption>
+</figure>
+</div>
+<hr>
+</section>
+<section id="descriptive-statistics-in-jasp" class="level2">
+<h2 class="anchored" data-anchor-id="descriptive-statistics-in-jasp">Descriptive Statistics in JASP</h2>
+<ul>
+<li>Go to <strong>Descriptives</strong> &gt; select variables</li>
+<li>Options: mean, median, SD, min, max, quartiles</li>
+<li>Output updates instantly</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/chapter4/Figure%204.10.png" height="300" class="figure-img"></p>
+<figcaption class="figure-caption">Figure 4.10</figcaption>
+</figure>
+</div>
+</section>
+<section id="some-special-operations" class="level2">
+<h2 class="anchored" data-anchor-id="some-special-operations">Some special operations</h2>
+<ul>
+<li>Filtering data
+<ul>
+<li><a href="https://jasp-stats.github.io/jasp-video-library/assets/videos/Getting-Started/Getting_Started_07_Filter-Drag-and-Drop-Scale.mp4">For scale data</a></li>
+<li><a href="https://jasp-stats.github.io/jasp-video-library/assets/videos/Getting-Started/Getting_Started_07_Filter-Drag-and-Drop-Categorical.mp4">For categorical data</a></li>
+<li><a href="https://jasp-stats.github.io/jasp-video-library/assets/videos/Getting-Started/Getting_Started_06_Filter-by-Group.mp4">Using variable settings</a></li>
+</ul></li>
+<li>Split variable in Descriptives</li>
+</ul>
+</section>
+<section id="getting-help" class="level2">
+<h2 class="anchored" data-anchor-id="getting-help">Getting help</h2>
+<ul>
+<li><a href="https://jasp-stats.github.io/jasp-video-library/">JASP Video Library</a></li>
+<li>The book</li>
+<li><img src="../../images/Chapter4/Icons/info-button.png" height="30" alt="Help files in JASP"></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="visualization" class="level1 section">
+<h1 class="section">Visualization</h1>
+<section id="data-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="data-visualization">Data visualization</h2>
+<p><img src="../../images/nightingale.jpg" height="300"></p>
+<p><a href="https://en.wikipedia.org/wiki/Florence_Nightingale">Florence Nightingale</a></p>
+</section>
+<section id="why-visualize-data" class="level2">
+<h2 class="anchored" data-anchor-id="why-visualize-data">Why Visualize Data?</h2>
+<ul>
+<li>Quick overview of the data</li>
+<li>Spot patterns, outliers, or errors</li>
+<li>Invite the reader</li>
+</ul>
+<hr>
+</section>
+<section id="types-of-data-and-suitable-graphs" class="level2">
+<h2 class="anchored" data-anchor-id="types-of-data-and-suitable-graphs">Types of Data and Suitable Graphs</h2>
+<ul>
+<li><strong>Categorical data:</strong> Bar charts, pie charts</li>
+<li><strong>Continuous data:</strong> Histograms, boxplots, raincloud plots</li>
+<li><strong>Relationships:</strong> Scatterplots</li>
+</ul>
+<hr>
+</section>
+<section id="distribution-plots-in-jasp" class="level2">
+<h2 class="anchored" data-anchor-id="distribution-plots-in-jasp">Distribution plots in JASP</h2>
+<ul>
+<li>Used for categorical variables</li>
+<li>Shows frequency or proportion</li>
+<li>Example: Number of students by major</li>
+</ul>
+<p><strong>How to in JASP:</strong><br>
+1. Go to <code>Descriptives</code> &gt; <code>Descriptive Plots</code> 2. Select your categorical variable 3. Choose “Bar Plot”</p>
+<hr>
+</section>
+<section id="histograms-in-jasp" class="level2">
+<h2 class="anchored" data-anchor-id="histograms-in-jasp">Histograms in JASP</h2>
+<ul>
+<li>Used for continuous variables</li>
+<li>Shows distribution shape (normal, skewed, bimodal)</li>
+<li>Example: Distribution of exam scores</li>
+</ul>
+<p><strong>How to in JASP:</strong><br>
+1. Go to <code>Descriptives</code> &gt; <code>Descriptive Plots</code> 2. Select your continuous variable 3. Choose “Histogram”</p>
+<hr>
+</section>
+<section id="boxplots-visualizing-spread-and-outliers" class="level2">
+<h2 class="anchored" data-anchor-id="boxplots-visualizing-spread-and-outliers">Boxplots: Visualizing Spread and Outliers</h2>
+<ul>
+<li>Shows median, quartiles, and outliers</li>
+<li>Useful for comparing groups</li>
+</ul>
+<p><strong>How to in JASP:</strong><br>
+1. Go to <code>Descriptives</code> &gt; <code>Descriptive Plots</code> 2. Select variable(s) 3. Choose “Boxplot”</p>
+<hr>
+</section>
+<section id="scatterplots-relationships-between-variables" class="level2">
+<h2 class="anchored" data-anchor-id="scatterplots-relationships-between-variables">Scatterplots: Relationships Between Variables</h2>
+<ul>
+<li>Visualizes association between two continuous variables</li>
+<li>Example: Age vs.&nbsp;cognitive performance</li>
+</ul>
+<p><strong>How to in JASP:</strong><br>
+1. Go to <code>Descriptives</code> &gt; <code>Descriptive Plots</code> 2. Select two continuous variables 3. Choose “Scatterplot”</p>
+<hr>
+</section>
+<section id="best-practices-in-data-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="best-practices-in-data-visualization">Best Practices in Data Visualization</h2>
+<ul>
+<li>Use clear labels and titles</li>
+<li>Avoid unnecessary 3D effects</li>
+<li>Choose appropriate scales</li>
+<li>Check for misleading representations</li>
+</ul>
+<p><strong>Discussion:</strong><br>
+What makes a graph misleading?</p>
+<hr>
+</section>
+<section id="critically-assess-graphs" class="level2">
+<h2 class="anchored" data-anchor-id="critically-assess-graphs">Critically Assess Graphs</h2>
+<ul>
+<li>Are axes labelled (variable, units)?</li>
+<li>Are axes broken/equally spaced?</li>
+<li>Are error bars (e.g., confidence intervals) included where relevant?</li>
+</ul>
+</section>
+<section id="critically-assess-graphs-1" class="level2">
+<h2 class="anchored" data-anchor-id="critically-assess-graphs-1">Critically Assess Graphs</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="6.-visualization_correlation_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="scale-matters" class="level2">
+<h2 class="anchored" data-anchor-id="scale-matters">Scale Matters</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="6.-visualization_correlation_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="error-bars" class="level2">
+<h2 class="anchored" data-anchor-id="error-bars">Error Bars!</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="6.-visualization_correlation_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
 <section id="correlation" class="level1 section">
 <h1 class="section">Correlation</h1>
 <section id="pearson-correlation" class="level2">
@@ -205,7 +423,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="6.-visualization_correlation_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="480"></p>
+<p><img src="6.-visualization_correlation_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="480"></p>
 </figure>
 </div>
 </div>
@@ -217,7 +435,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="6.-visualization_correlation_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="480"></p>
+<p><img src="6.-visualization_correlation_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="480"></p>
 </figure>
 </div>
 </div>
@@ -229,7 +447,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="6.-visualization_correlation_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="480"></p>
+<p><img src="6.-visualization_correlation_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="480"></p>
 </figure>
 </div>
 </div>
@@ -257,7 +475,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="subsection anchored" data-anchor-id="variance">Variance</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="6.-visualization_correlation_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+<p><img src="6.-visualization_correlation_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -273,7 +491,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="smaller anchored" data-anchor-id="standardize-1">Standardize</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="6.-visualization_correlation_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+<p><img src="6.-visualization_correlation_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -281,7 +499,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="smaller anchored" data-anchor-id="standardize-2">Standardize</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="6.-visualization_correlation_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<p><img src="6.-visualization_correlation_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -353,7 +571,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="plot-correlation-3">Plot correlation</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="6.-visualization_correlation_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+<p><img src="6.-visualization_correlation_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -387,7 +605,7 @@ H_A &amp;: t_r &lt; 0 \\
 <p>Locate in t-distribution</p>
 <div class="cell" data-output-location="slide">
 <div class="cell-output-display">
-<p><img src="6.-visualization_correlation_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+<p><img src="6.-visualization_correlation_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -398,7 +616,7 @@ H_A &amp;: t_r &lt; 0 \\
 <h2 class="anchored" data-anchor-id="venn-diagram-of-variance">Venn diagram of Variance</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="6.-visualization_correlation_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+<p><img src="6.-visualization_correlation_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -448,7 +666,7 @@ H_A &amp;: t_r &lt; 0 \\
 <h2 class="anchored" data-anchor-id="p-value">p-value</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="6.-visualization_correlation_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
+<p><img src="6.-visualization_correlation_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -456,9 +674,11 @@ H_A &amp;: t_r &lt; 0 \\
 <h2 class="anchored" data-anchor-id="bored">Bored?</h2>
 <div>
 <ul>
-<li><p><a href="https://discoverjasp.com/pages/smart_alex#task-1.1">Exercise 1.1</a></p></li>
-<li><p><a href="https://discoverjasp.com/pages/smart_alex#task-2.2">Exercise 2.2</a>, <a href="https://discoverjasp.com/pages/smart_alex#task-2.6">Exercise 2.6</a>, <a href="https://discoverjasp.com/pages/smart_alex#task-2.7">Exercise 2.7</a></p></li>
-<li><p><a href="https://discoverjasp.com/pages/smart_alex#task-3.1">Exercise 3.1</a>, <a href="https://discoverjasp.com/pages/smart_alex#task-3.4">Exercise 3.4</a></p></li>
+<li><p><a href="https://discoverjasp.com/pages/smart_alex#task-5.1">Exercise 5.1</a>, <a href="https://discoverjasp.com/pages/smart_alex#task-5.5">Exercise 5.5</a></p></li>
+<li><p><a href="https://discoverjasp.com/pages/smart_alex#task-7.1">Exercise 7.1</a>, <a href="https://discoverjasp.com/pages/smart_alex#task-7.6">Exercise 7.6</a>, <a href="https://discoverjasp.com/pages/smart_alex#task-7.7">Exercise 7.7</a></p>
+<ul>
+<li>Note: <code>pets.jasp</code> can also be downloaded from the <a href="https://discoverjasp.com/pages/data">Data page</a></li>
+</ul></li>
 </ul>
 </div>
 <!-- Footer insert below -->

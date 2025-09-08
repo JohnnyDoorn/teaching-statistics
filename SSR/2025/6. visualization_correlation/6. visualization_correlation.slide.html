@@ -12,7 +12,7 @@
 
   <meta name="author" content="Johnny van Doorn">
   <meta name="dcterms.date" content="2025-09-10">
-  <title>6. Visualization and Correlation</title>
+  <title>5. JASP: Visualization and Correlation</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -404,7 +404,7 @@
     <div class="slides">
 
 <section id="title-slide" data-background-image="https://cdn.pixabay.com/photo/2017/08/22/16/46/bike-2669639_960_720.jpg" data-background-position="bottom" data-background-size="contain" class="quarto-title-block center">
-  <h1 class="title">6. Visualization and Correlation</h1>
+  <h1 class="title">5. JASP: Visualization and Correlation</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -426,17 +426,195 @@ Johnny van Doorn
 <ul>
 <li>Introduce JASP
 <ul>
-<li>Descriptive Statistics</li>
-<li>Data Visualizations</li>
+<li>Descriptive statistics</li>
+<li>Data visualizations</li>
 </ul></li>
-<li>Correlation</li>
+<li>Correlation
+<ul>
+<li>How it works</li>
+<li>Controlling for a third variable</li>
+</ul></li>
 </ul>
 <p><strong>Reading:</strong> Chapters 4, 5, 7</p>
 </div>
-<div class="note">
-<p><strong>Reading:</strong> Chapters 4, 5, 7</p>
+</section>
+<section>
+<section id="jasp" class="title-slide slide level1 section center">
+<h1>JASP</h1>
+
+</section>
+<section id="why-jasp" class="slide level2">
+<h2>Why JASP?</h2>
+<ul>
+<li>User-friendly, intuitive interface</li>
+<li>Open-source (free)</li>
+<li>Reproducible analyses (easy to share)</li>
+<li>Better than IBM’s SPSS for transparency and workflow</li>
+<li>Integrates with R for advanced users</li>
+</ul>
+<div style="text-align: center;">
+<p><img data-src="../../images/JASP_logo_green.svg" height="100"></p>
 </div>
 </section>
+<section id="getting-started-with-jasp" class="slide level2">
+<h2>Getting Started with JASP</h2>
+<ol type="1">
+<li>Download from <a href="https://jasp-stats.org">jasp-stats.org</a></li>
+<li>Open JASP, load your dataset (.jasp, .csv, .sav, etc.)</li>
+<li>Familiarize with the interface: Data view, Analysis panel, Output panel</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../images/chapter4/Figure%204.3.png" height="300"></p>
+<figcaption>Figure 4.3</figcaption>
+</figure>
+</div>
+</section>
+<section id="loading-data-in-jasp" class="slide level2">
+<h2>Loading Data in JASP</h2>
+<ul>
+<li>Click <strong>Open</strong> &gt; select your file</li>
+<li>Data appears in spreadsheet view</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../images/chapter4/Figure%204.4.png" height="300"></p>
+<figcaption>Figure 4.4</figcaption>
+</figure>
+</div>
+</section>
+<section id="descriptive-statistics-in-jasp" class="slide level2">
+<h2>Descriptive Statistics in JASP</h2>
+<ul>
+<li>Go to <strong>Descriptives</strong> &gt; select variables</li>
+<li>Options: mean, median, SD, min, max, quartiles</li>
+<li>Output updates instantly</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../images/chapter4/Figure%204.10.png" height="300"></p>
+<figcaption>Figure 4.10</figcaption>
+</figure>
+</div>
+</section>
+<section id="some-special-operations" class="slide level2">
+<h2>Some special operations</h2>
+<ul>
+<li>Filtering data
+<ul>
+<li><a href="https://jasp-stats.github.io/jasp-video-library/assets/videos/Getting-Started/Getting_Started_07_Filter-Drag-and-Drop-Scale.mp4">For scale data</a></li>
+<li><a href="https://jasp-stats.github.io/jasp-video-library/assets/videos/Getting-Started/Getting_Started_07_Filter-Drag-and-Drop-Categorical.mp4">For categorical data</a></li>
+<li><a href="https://jasp-stats.github.io/jasp-video-library/assets/videos/Getting-Started/Getting_Started_06_Filter-by-Group.mp4">Using variable settings</a></li>
+</ul></li>
+<li>Split variable in Descriptives</li>
+</ul>
+</section>
+<section id="getting-help" class="slide level2">
+<h2>Getting help</h2>
+<ul>
+<li><a href="https://jasp-stats.github.io/jasp-video-library/">JASP Video Library</a></li>
+<li>The book</li>
+<li><img data-src="../../images/Chapter4/Icons/info-button.png" height="30" alt="Help files in JASP"></li>
+</ul>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="visualization" class="title-slide slide level1 section center">
+<h1>Visualization</h1>
+
+</section>
+<section id="data-visualization" class="slide level2">
+<h2>Data visualization</h2>
+<p><img data-src="../../images/nightingale.jpg" height="300"></p>
+<p><a href="https://en.wikipedia.org/wiki/Florence_Nightingale">Florence Nightingale</a></p>
+</section>
+<section id="why-visualize-data" class="slide level2">
+<h2>Why Visualize Data?</h2>
+<ul>
+<li>Quick overview of the data</li>
+<li>Spot patterns, outliers, or errors</li>
+<li>Invite the reader</li>
+</ul>
+</section>
+<section id="types-of-data-and-suitable-graphs" class="slide level2">
+<h2>Types of Data and Suitable Graphs</h2>
+<ul>
+<li><strong>Categorical data:</strong> Bar charts, pie charts</li>
+<li><strong>Continuous data:</strong> Histograms, boxplots, raincloud plots</li>
+<li><strong>Relationships:</strong> Scatterplots</li>
+</ul>
+</section>
+<section id="distribution-plots-in-jasp" class="slide level2">
+<h2>Distribution plots in JASP</h2>
+<ul>
+<li>Used for categorical variables</li>
+<li>Shows frequency or proportion</li>
+<li>Example: Number of students by major</li>
+</ul>
+<p><strong>How to in JASP:</strong><br>
+1. Go to <code>Descriptives</code> &gt; <code>Descriptive Plots</code> 2. Select your categorical variable 3. Choose “Bar Plot”</p>
+</section>
+<section id="histograms-in-jasp" class="slide level2">
+<h2>Histograms in JASP</h2>
+<ul>
+<li>Used for continuous variables</li>
+<li>Shows distribution shape (normal, skewed, bimodal)</li>
+<li>Example: Distribution of exam scores</li>
+</ul>
+<p><strong>How to in JASP:</strong><br>
+1. Go to <code>Descriptives</code> &gt; <code>Descriptive Plots</code> 2. Select your continuous variable 3. Choose “Histogram”</p>
+</section>
+<section id="boxplots-visualizing-spread-and-outliers" class="slide level2">
+<h2>Boxplots: Visualizing Spread and Outliers</h2>
+<ul>
+<li>Shows median, quartiles, and outliers</li>
+<li>Useful for comparing groups</li>
+</ul>
+<p><strong>How to in JASP:</strong><br>
+1. Go to <code>Descriptives</code> &gt; <code>Descriptive Plots</code> 2. Select variable(s) 3. Choose “Boxplot”</p>
+</section>
+<section id="scatterplots-relationships-between-variables" class="slide level2">
+<h2>Scatterplots: Relationships Between Variables</h2>
+<ul>
+<li>Visualizes association between two continuous variables</li>
+<li>Example: Age vs.&nbsp;cognitive performance</li>
+</ul>
+<p><strong>How to in JASP:</strong><br>
+1. Go to <code>Descriptives</code> &gt; <code>Descriptive Plots</code> 2. Select two continuous variables 3. Choose “Scatterplot”</p>
+</section>
+<section id="best-practices-in-data-visualization" class="slide level2">
+<h2>Best Practices in Data Visualization</h2>
+<ul>
+<li>Use clear labels and titles</li>
+<li>Avoid unnecessary 3D effects</li>
+<li>Choose appropriate scales</li>
+<li>Check for misleading representations</li>
+</ul>
+<p><strong>Discussion:</strong><br>
+What makes a graph misleading?</p>
+</section>
+<section id="critically-assess-graphs" class="slide level2">
+<h2>Critically Assess Graphs</h2>
+<ul>
+<li>Are axes labelled (variable, units)?</li>
+<li>Are axes broken/equally spaced?</li>
+<li>Are error bars (e.g., confidence intervals) included where relevant?</li>
+</ul>
+</section>
+<section id="critically-assess-graphs-1" class="slide level2">
+<h2>Critically Assess Graphs</h2>
+
+<img data-src="6.-visualization_correlation_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<section id="scale-matters" class="slide level2">
+<h2>Scale Matters</h2>
+
+<img data-src="6.-visualization_correlation_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
+<section id="error-bars" class="slide level2">
+<h2>Error Bars!</h2>
+
+<img data-src="6.-visualization_correlation_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section></section>
 <section>
 <section id="correlation" class="title-slide slide level1 section center">
 <h1>Correlation</h1>
@@ -456,15 +634,15 @@ Johnny van Doorn
 <section id="plot-correlation" class="slide level2">
 <h2>Plot correlation</h2>
 
-<img data-src="6.-visualization_correlation_files/figure-revealjs/unnamed-chunk-5-1.png" width="480" class="r-stretch quarto-figure-center"></section>
+<img data-src="6.-visualization_correlation_files/figure-revealjs/unnamed-chunk-21-1.png" width="480" class="r-stretch quarto-figure-center"></section>
 <section id="plot-correlation-1" class="slide level2">
 <h2>Plot correlation</h2>
 
-<img data-src="6.-visualization_correlation_files/figure-revealjs/unnamed-chunk-6-1.png" width="480" class="r-stretch quarto-figure-center"></section>
+<img data-src="6.-visualization_correlation_files/figure-revealjs/unnamed-chunk-22-1.png" width="480" class="r-stretch quarto-figure-center"></section>
 <section id="plot-correlation-2" class="slide level2">
 <h2>Plot correlation</h2>
 
-<img data-src="6.-visualization_correlation_files/figure-revealjs/unnamed-chunk-7-1.png" width="480" class="r-stretch quarto-figure-center"><p><span class="math display">\[(x_i - \bar{x})(y_i - \bar{y})\]</span></p>
+<img data-src="6.-visualization_correlation_files/figure-revealjs/unnamed-chunk-23-1.png" width="480" class="r-stretch quarto-figure-center"><p><span class="math display">\[(x_i - \bar{x})(y_i - \bar{y})\]</span></p>
 <!-- ## Guess the correlation -->
 <!-- [Guess the correlation](http://guessthecorrelation.com) -->
 <!-- <img src="qrcodeqtc.png"> -->
@@ -486,7 +664,7 @@ Johnny van Doorn
 <section id="variance" class="slide level2 subsection">
 <h2>Variance</h2>
 
-<img data-src="6.-visualization_correlation_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
+<img data-src="6.-visualization_correlation_files/figure-revealjs/unnamed-chunk-25-1.png" width="960" class="r-stretch"></section>
 <section id="standardize" class="slide level2 smaller">
 <h2>Standardize</h2>
 <p><span class="math display">\[z = \frac{x_i - \bar{x}}{{sd}_x}\]</span></p>
@@ -501,11 +679,11 @@ Johnny van Doorn
 </div></section><section id="standardize-1" class="slide level2 smaller">
 <h2>Standardize</h2>
 
-<img data-src="6.-visualization_correlation_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<img data-src="6.-visualization_correlation_files/figure-revealjs/unnamed-chunk-27-1.png" width="960" class="r-stretch"></section>
 <section id="standardize-2" class="slide level2 smaller">
 <h2>Standardize</h2>
 
-<img data-src="6.-visualization_correlation_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
+<img data-src="6.-visualization_correlation_files/figure-revealjs/unnamed-chunk-28-1.png" width="960" class="r-stretch"></section>
 <section id="covariance" class="slide level2 subsection">
 <h2>Covariance</h2>
 <p><span class="math display">\[{COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}\]</span></p>
@@ -573,7 +751,7 @@ Johnny van Doorn
 <section id="plot-correlation-3" class="slide level2">
 <h2>Plot correlation</h2>
 
-<img data-src="6.-visualization_correlation_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch"></section>
+<img data-src="6.-visualization_correlation_files/figure-revealjs/unnamed-chunk-34-1.png" width="960" class="r-stretch"></section>
 <section id="significance-of-a-correlation" class="slide level2 subsection">
 <h2>Significance of a correlation</h2>
 <p><span class="math display">\[t_r = \frac{r \sqrt{N-2}}{\sqrt{1 - r^2}} \\
@@ -603,7 +781,7 @@ H_A &amp;: t_r &lt; 0 \\
 <h2>Visualize</h2>
 <p>Locate in t-distribution</p>
 
-<img data-src="6.-visualization_correlation_files/figure-revealjs/unnamed-chunk-20-1.png" width="960" class="r-stretch"></section></section>
+<img data-src="6.-visualization_correlation_files/figure-revealjs/unnamed-chunk-36-1.png" width="960" class="r-stretch"></section></section>
 <section>
 <section id="partial-correlation" class="title-slide slide level1 section center">
 <h1>Partial correlation</h1>
@@ -612,7 +790,7 @@ H_A &amp;: t_r &lt; 0 \\
 <section id="venn-diagram-of-variance" class="slide level2">
 <h2>Venn diagram of Variance</h2>
 
-<img data-src="6.-visualization_correlation_files/figure-revealjs/unnamed-chunk-22-1.png" width="960" class="r-stretch"></section>
+<img data-src="6.-visualization_correlation_files/figure-revealjs/unnamed-chunk-38-1.png" width="960" class="r-stretch"></section>
 <section id="partial-correlation-1" class="slide level2 smaller">
 <h2>Partial correlation</h2>
 <p><span class="math display">\[\LARGE{r_{xy \cdot z} = \frac{r_{xy} - r_{xz} r_{yz}}{\sqrt{(1 - r_{xz}^2)(1 - r_{yz}^2)}}}\]</span></p>
@@ -660,14 +838,16 @@ H_A &amp;: t_r &lt; 0 \\
 <section id="p-value" class="slide level2">
 <h2>p-value</h2>
 
-<img data-src="6.-visualization_correlation_files/figure-revealjs/unnamed-chunk-26-1.png" width="960" class="r-stretch"></section>
+<img data-src="6.-visualization_correlation_files/figure-revealjs/unnamed-chunk-42-1.png" width="960" class="r-stretch"></section>
 <section id="bored" class="slide level2">
 <h2>Bored?</h2>
 <div>
 <ul>
-<li><p><a href="https://discoverjasp.com/pages/smart_alex#task-1.1">Exercise 1.1</a></p></li>
-<li><p><a href="https://discoverjasp.com/pages/smart_alex#task-2.2">Exercise 2.2</a>, <a href="https://discoverjasp.com/pages/smart_alex#task-2.6">Exercise 2.6</a>, <a href="https://discoverjasp.com/pages/smart_alex#task-2.7">Exercise 2.7</a></p></li>
-<li><p><a href="https://discoverjasp.com/pages/smart_alex#task-3.1">Exercise 3.1</a>, <a href="https://discoverjasp.com/pages/smart_alex#task-3.4">Exercise 3.4</a></p></li>
+<li><p><a href="https://discoverjasp.com/pages/smart_alex#task-5.1">Exercise 5.1</a>, <a href="https://discoverjasp.com/pages/smart_alex#task-5.5">Exercise 5.5</a></p></li>
+<li><p><a href="https://discoverjasp.com/pages/smart_alex#task-7.1">Exercise 7.1</a>, <a href="https://discoverjasp.com/pages/smart_alex#task-7.6">Exercise 7.6</a>, <a href="https://discoverjasp.com/pages/smart_alex#task-7.7">Exercise 7.7</a></p>
+<ul>
+<li>Note: <code>pets.jasp</code> can also be downloaded from the <a href="https://discoverjasp.com/pages/data">Data page</a></li>
+</ul></li>
 </ul>
 </div>
 <!-- Footer insert below -->

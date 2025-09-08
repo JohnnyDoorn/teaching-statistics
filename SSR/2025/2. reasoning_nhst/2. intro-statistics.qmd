@@ -1,6 +1,6 @@
 ---
 title: "4. Statistical Reasoning"
-subtitle: "Null Hypothesis Testing"
+subtitle: "Introduction and NHST"
 author: "Johnny van Doorn"
 date: "9 sep 2025"
 footer: "Scientific & Statistical Reasoning"
@@ -37,8 +37,9 @@ Chapters 1, 2, 3
 - [Companion website of book](https://discoverjasp.com) 
         - Data sets
 
+---
 
-## About SSR
+### About SSR
 - Lectures:
   - Slightly erratic
   - Starts with conceptual understanding
@@ -47,8 +48,9 @@ Chapters 1, 2, 3
       - Read the chapter first
       - Rewatch lecture
       - Ask questions (during lecture, on discussion board)
-  
-## About SSR
+---
+
+### About SSR
 - Practice: 
     - Tutorials, WA in Ans
     - Smart Alex tasks
@@ -60,10 +62,11 @@ Chapters 1, 2, 3
 - JASP: main tool for analyses, data management
     - Freely available at [www.jasp-stats.org](www.jasp-stats.org)
     - Also available at libraries, [apps.uva.nl](apps.uva.nl)
-- R: very flexible, very optional
+- R: very flexible, 100% optional
     - Freely available at [https://cran.r-project.org/](https://cran.r-project.org/)
     - Want a nicer environment for coding? Try [Rstudio](https://posit.co/download/rstudio-desktop/)
     - Will be available during exam, but not required to use (can also use Ans calculator)
+    - [Free intro course](https://intro2r.com/)
     
 <!-- <div class="note"> -->
 <!-- Open science starts with accessible tools -->
@@ -76,6 +79,8 @@ Chapters 1, 2, 3
 
 ## Sampling Variability
 ![](../../images/sampling_variability.png){}
+
+## Putting it to Practice
 
 
 
