@@ -34,7 +34,7 @@ rm(list=ls())
 2. Open JASP, load your dataset (.jasp, .csv, .sav, etc.)
 3. Familiarize with the interface: Data view, Analysis panel, Output panel
 
-![Figure 4.3](../../images/chapter4/figure-4-3.png){height="300"}
+![Figure 4.3](../../images/figure-4-3.png){height="300"}
 
 ---
 
@@ -45,7 +45,7 @@ rm(list=ls())
 - Click **Open** > select your file
 - Data appears in spreadsheet view
 
-![Figure 4.4](../../images/chapter4/figure-4-4.png){height="300"}
+![Figure 4.4](../../images/figure-4-4.png){height="300"}
 
 
 
@@ -59,7 +59,7 @@ rm(list=ls())
 - Options: mean, median, SD, min, max, quartiles
 - Output updates instantly
 
-![Figure 4.10](../../images/chapter4/figure-4-10.png){height="300"}
+![Figure 4.10](../../images/figure-4-10.png){height="300"}
 
 
 
@@ -77,7 +77,7 @@ rm(list=ls())
 
 - [JASP Video Library](https://jasp-stats.github.io/jasp-video-library/)
 - The book
-- ![Help files in JASP](../../images/chapter4/info-button.png){height="30"}
+- ![Help files in JASP](../../images/info-button.png){height="30"}
 
 
 
