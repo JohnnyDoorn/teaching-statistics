@@ -80,10 +80,8 @@ Chapters 1, 2, 3
 ## Sampling Variability
 ![](../../images/sampling_variability.png){}
 
-## Putting it to Practice
-![](../../images/see-future.jpg){}
-
-
+<!-- ## Putting it to Practice -->
+<!-- ![](../../images/see-future.jpg){} -->
 
 ```{r child="../../topics/NHST/NHST_2.qmd", eval=TRUE}
 ```
