@@ -50,14 +50,10 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#data-visualization" id="toc-data-visualization" class="nav-link" data-scroll-target="#data-visualization">Data visualization</a></li>
   <li><a href="#why-visualize-data" id="toc-why-visualize-data" class="nav-link" data-scroll-target="#why-visualize-data">Why Visualize Data?</a></li>
-  <li><a href="#types-of-data-and-suitable-graphs" id="toc-types-of-data-and-suitable-graphs" class="nav-link" data-scroll-target="#types-of-data-and-suitable-graphs">Types of Data and Suitable Graphs</a></li>
-  <li><a href="#distribution-plots-in-jasp" id="toc-distribution-plots-in-jasp" class="nav-link" data-scroll-target="#distribution-plots-in-jasp">Distribution plots in JASP</a></li>
-  <li><a href="#histograms-in-jasp" id="toc-histograms-in-jasp" class="nav-link" data-scroll-target="#histograms-in-jasp">Histograms in JASP</a></li>
+  <li><a href="#different-types-of-graphs-in-jasp" id="toc-different-types-of-graphs-in-jasp" class="nav-link" data-scroll-target="#different-types-of-graphs-in-jasp">Different types of graphs in JASP</a></li>
   <li><a href="#boxplots-visualizing-spread-and-outliers" id="toc-boxplots-visualizing-spread-and-outliers" class="nav-link" data-scroll-target="#boxplots-visualizing-spread-and-outliers">Boxplots: Visualizing Spread and Outliers</a></li>
-  <li><a href="#scatterplots-relationships-between-variables" id="toc-scatterplots-relationships-between-variables" class="nav-link" data-scroll-target="#scatterplots-relationships-between-variables">Scatterplots: Relationships Between Variables</a></li>
   <li><a href="#best-practices-in-data-visualization" id="toc-best-practices-in-data-visualization" class="nav-link" data-scroll-target="#best-practices-in-data-visualization">Best Practices in Data Visualization</a></li>
   <li><a href="#critically-assess-graphs" id="toc-critically-assess-graphs" class="nav-link" data-scroll-target="#critically-assess-graphs">Critically Assess Graphs</a></li>
-  <li><a href="#critically-assess-graphs-1" id="toc-critically-assess-graphs-1" class="nav-link" data-scroll-target="#critically-assess-graphs-1">Critically Assess Graphs</a></li>
   <li><a href="#scale-matters" id="toc-scale-matters" class="nav-link" data-scroll-target="#scale-matters">Scale Matters</a></li>
   <li><a href="#error-bars" id="toc-error-bars" class="nav-link" data-scroll-target="#error-bars">Error Bars!</a></li>
   </ul></li>
@@ -85,36 +81,29 @@ ul.task-list li input[type="checkbox"] {
 <li>Invite the reader</li>
 </ul>
 <hr>
-</section>
-<section id="types-of-data-and-suitable-graphs" class="level2">
-<h2 class="anchored" data-anchor-id="types-of-data-and-suitable-graphs">Types of Data and Suitable Graphs</h2>
-<ul>
-<li><strong>Categorical data:</strong> Bar charts, pie charts</li>
-<li><strong>Continuous data:</strong> Histograms, boxplots, raincloud plots</li>
-<li><strong>Relationships:</strong> Scatterplots</li>
-</ul>
+<section id="why-visualize-data-1" class="level3">
+<h3 class="anchored" data-anchor-id="why-visualize-data-1">Why Visualize Data?</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/catterplot.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure 5.15 Catterplot</figcaption>
+</figure>
+</div>
 <hr>
 </section>
-<section id="distribution-plots-in-jasp" class="level2">
-<h2 class="anchored" data-anchor-id="distribution-plots-in-jasp">Distribution plots in JASP</h2>
-<ul>
-<li>Used for categorical variables</li>
-<li>Shows frequency or proportion</li>
-<li>Example: Number of students by major</li>
-</ul>
-<p><strong>How to in JASP:</strong><br>
-1. Go to <code>Descriptives</code> &gt; <code>Descriptive Plots</code> 2. Select your categorical variable 3. Choose “Bar Plot”</p>
-<hr>
 </section>
-<section id="histograms-in-jasp" class="level2">
-<h2 class="anchored" data-anchor-id="histograms-in-jasp">Histograms in JASP</h2>
+<section id="different-types-of-graphs-in-jasp" class="level2">
+<h2 class="anchored" data-anchor-id="different-types-of-graphs-in-jasp">Different types of graphs in JASP</h2>
 <ul>
-<li>Used for continuous variables</li>
-<li>Shows distribution shape (normal, skewed, bimodal)</li>
-<li>Example: Distribution of exam scores</li>
+<li>Distribution plots (basic plots)
+<ul>
+<li>Frequency plot when nominal</li>
+<li>Histogram when scale/ordinal</li>
+</ul></li>
+<li>Correlation plots (basic plots)</li>
+<li>Scatter plots (customizable plots)</li>
+<li>Raincloud plots</li>
 </ul>
-<p><strong>How to in JASP:</strong><br>
-1. Go to <code>Descriptives</code> &gt; <code>Descriptive Plots</code> 2. Select your continuous variable 3. Choose “Histogram”</p>
 <hr>
 </section>
 <section id="boxplots-visualizing-spread-and-outliers" class="level2">
@@ -123,18 +112,12 @@ ul.task-list li input[type="checkbox"] {
 <li>Shows median, quartiles, and outliers</li>
 <li>Useful for comparing groups</li>
 </ul>
-<p><strong>How to in JASP:</strong><br>
-1. Go to <code>Descriptives</code> &gt; <code>Descriptive Plots</code> 2. Select variable(s) 3. Choose “Boxplot”</p>
-<hr>
-</section>
-<section id="scatterplots-relationships-between-variables" class="level2">
-<h2 class="anchored" data-anchor-id="scatterplots-relationships-between-variables">Scatterplots: Relationships Between Variables</h2>
-<ul>
-<li>Visualizes association between two continuous variables</li>
-<li>Example: Age vs.&nbsp;cognitive performance</li>
-</ul>
-<p><strong>How to in JASP:</strong><br>
-1. Go to <code>Descriptives</code> &gt; <code>Descriptive Plots</code> 2. Select two continuous variables 3. Choose “Scatterplot”</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/figure-5-9.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure 5.9 Boxplots</figcaption>
+</figure>
+</div>
 <hr>
 </section>
 <section id="best-practices-in-data-visualization" class="level2">
@@ -145,8 +128,6 @@ ul.task-list li input[type="checkbox"] {
 <li>Choose appropriate scales</li>
 <li>Check for misleading representations</li>
 </ul>
-<p><strong>Discussion:</strong><br>
-What makes a graph misleading?</p>
 <hr>
 </section>
 <section id="critically-assess-graphs" class="level2">
@@ -156,14 +137,15 @@ What makes a graph misleading?</p>
 <li>Are axes broken/equally spaced?</li>
 <li>Are error bars (e.g., confidence intervals) included where relevant?</li>
 </ul>
-</section>
-<section id="critically-assess-graphs-1" class="level2">
-<h2 class="anchored" data-anchor-id="critically-assess-graphs-1">Critically Assess Graphs</h2>
+<hr>
+<section id="critically-assess-graphs-1" class="level3">
+<h3 class="anchored" data-anchor-id="critically-assess-graphs-1">Critically Assess Graphs</h3>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="visualization_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+</section>
 </section>
 <section id="scale-matters" class="level2">
 <h2 class="anchored" data-anchor-id="scale-matters">Scale Matters</h2>

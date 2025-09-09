@@ -8,7 +8,7 @@ format:
     toc-location: left
 ---
 
-This page will be continuously updated to feature extra materials, such as applets, data sets, and additional explanations.
+This page will be continuously updated to feature slides and extra materials, such as applets, data sets, and additional explanations.
 
 ## Slides
 
@@ -23,13 +23,13 @@ library("lubridate")
 library("dplyr")
 library('kableExtra')
 allLinks <- c("https://statisticalreasoning-uva.shinyapps.io/NHST_Binomial",
-              "https://statisticalreasoning-uva.shinyapps.io/NHST_Continuous"
+              "https://statisticalreasoning-uva.shinyapps.io/NHST_Continuous",
               # "https://statisticalreasoning-uva.shinyapps.io/NHST_Fdistribution",
               # "https://statisticalreasoning-uva.shinyapps.io/onewayANOVA",
               # "https://statisticalreasoning-uva.shinyapps.io/ANCOVA",
               # "https://statisticalreasoning-uva-2.shinyapps.io/Multi-ANOVA",
               # "https://statisticalreasoning-uva-2.shinyapps.io/RM_ANOVA",
-              # "https://statisticalreasoning-uva-2.shinyapps.io/SimpleRegression",
+               "https://statisticalreasoning-uva-2.shinyapps.io/SimpleRegression"
               # "https://statisticalreasoning-uva-2.shinyapps.io/MultiRegression"
 
 )

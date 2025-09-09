@@ -1,0 +1,28 @@
+---
+title: "7. Linear Model (Regression)"
+author: "Johnny van Doorn"
+date: "16 sept 2025"
+footer: "Scientific & Statistical Reasoning"
+format:
+  revealjs:
+    output-ext: slide.html
+    css: ../../ajohnson.css
+  html: default
+css: ../../ajohnson.css
+---
+
+
+
+<!-- ```{r child="../../topics/correlation/correlation.qmd"} -->
+<!-- ``` -->
+
+
+```{r child="../../topics/regression_one_predictor/regression_one_predictor.qmd", eval=TRUE}
+```
+
+
+<!-- Footer insert below -->
+
+```{r child="../../footer.qmd"}
+```
+

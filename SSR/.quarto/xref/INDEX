@@ -148,5 +148,24 @@
   },
   "topics/visualization/visualization.qmd": {
     "visualization.html": "b12f2991"
+  },
+  "2025/7. correlation_and_simple_regression/correlation_simple_regression.qmd": {
+    "correlation_simple_regression.html": "0fd087b9"
+  },
+  "2025/7. correlation_and_simple_regression/linear_model_regression.qmd": {
+    "linear_model_regression.html": "50d3eff9",
+    "linear_model_regression.slide.html": "c934f0a3"
+  },
+  "2025/4. reasoning_nhst/intro-statistics.qmd": {
+    "intro-statistics.slide.html": "0af125d0",
+    "intro-statistics.html": "71c77931"
+  },
+  "2025/5. visualization_correlation/5. visualization_correlation.qmd": {
+    "5. visualization_correlation.slide.html": "13ad2423",
+    "5. visualization_correlation.html": "920b5172"
+  },
+  "2025/7. correlation_and_simple_regression/7. linear_model_regression.qmd": {
+    "7. linear_model_regression.slide.html": "4dd2051a",
+    "7. linear_model_regression.html": "3ff3fd68"
   }
 }

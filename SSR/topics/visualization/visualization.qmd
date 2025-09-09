@@ -21,39 +21,23 @@ rm(list=ls())
 
 ---
 
+### Why Visualize Data?
 
-## Types of Data and Suitable Graphs
-
-- **Categorical data:** Bar charts, pie charts
-- **Continuous data:** Histograms, boxplots, raincloud plots
-- **Relationships:** Scatterplots
+![Figure 5.15 Catterplot](../../images/catterplot.jpg) 
 
 
 ---
 
-## Distribution plots in JASP
 
-- Used for categorical variables
-- Shows frequency or proportion
-- Example: Number of students by major
+## Different types of graphs in JASP
+- Distribution plots (basic plots)
+  - Frequency plot when nominal
+  - Histogram when scale/ordinal
 
-**How to in JASP:**  
-1. Go to `Descriptives` > `Descriptive Plots`
-2. Select your categorical variable
-3. Choose "Bar Plot"
+- Correlation plots (basic plots)
+- Scatter plots (customizable plots)
+- Raincloud plots
 
----
-
-## Histograms in JASP
-
-- Used for continuous variables
-- Shows distribution shape (normal, skewed, bimodal)
-- Example: Distribution of exam scores
-
-**How to in JASP:**  
-1. Go to `Descriptives` > `Descriptive Plots`
-2. Select your continuous variable
-3. Choose "Histogram"
 
 ---
 
@@ -62,22 +46,8 @@ rm(list=ls())
 - Shows median, quartiles, and outliers
 - Useful for comparing groups
 
-**How to in JASP:**  
-1. Go to `Descriptives` > `Descriptive Plots`
-2. Select variable(s)
-3. Choose "Boxplot"
+![Figure 5.9 Boxplots](../../images/figure-5-9.jpg) 
 
----
-
-## Scatterplots: Relationships Between Variables
-
-- Visualizes association between two continuous variables
-- Example: Age vs. cognitive performance
-
-**How to in JASP:**  
-1. Go to `Descriptives` > `Descriptive Plots`
-2. Select two continuous variables
-3. Choose "Scatterplot"
 
 ---
 
@@ -87,9 +57,6 @@ rm(list=ls())
 - Avoid unnecessary 3D effects
 - Choose appropriate scales
 - Check for misleading representations
-
-**Discussion:**  
-What makes a graph misleading?
 
 
 ---
@@ -101,7 +68,9 @@ What makes a graph misleading?
 - Are axes broken/equally spaced?
 - Are error bars (e.g., confidence intervals) included where relevant?
 
-## Critically Assess Graphs
+---
+
+### Critically Assess Graphs
 ```{r, echo=FALSE}
 set.seed(123)
 
@@ -116,6 +85,8 @@ bp <- barplot(means, names.arg = c("SPSS", "JASP"),
               ylab = "Exam performance",
               col = c("skyblue", "orange"), ylim = c(0, 10), axes = FALSE)
 ```
+
+
 
 
 ## Scale Matters
