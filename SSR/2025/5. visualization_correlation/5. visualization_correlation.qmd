@@ -50,6 +50,13 @@ Chapters 4, 5, 7
 ```{r child="../../topics/correlation/correlation.qmd", eval=TRUE}
 ```
 
+## Next Time
+
+- The linear model
+  - Predictions
+  - Assumptions
+  - Fun
+
 ## Bored? 
 ::: {}
 - [Exercise 5.1](https://discoverjasp.com/pages/smart_alex#task-5.1), [Exercise 5.5](https://discoverjasp.com/pages/smart_alex#task-5.5)

@@ -5,7 +5,7 @@
 rm(list=ls())
 ```
 
-## Pearson Correlation
+## Pearson Correlation {.smaller}
 
 <img style="float:left; width:150px; margin:0 20px 20px 0px;" src="https://upload.wikimedia.org/wikipedia/commons/1/18/Karl_Pearson%2C_1912.jpg">
 
@@ -28,7 +28,10 @@ data <- read.csv("../../../datasets/Album Sales.csv")[, -4]
 tinydat <- data[1:5, ]
 x <- tinydat$airplay
 y <- tinydat$sales
-plot(x, y, las = 1, xlab = "Airplay", ylab = "Album Sales")
+myLimsX <- c(25, 50)
+myLimsY <- c(100, 400)
+plot(x, y, las = 1, xlab = "Airplay", ylab = "Album Sales", 
+     xlim = myLimsX, ylim = myLimsY)
 
 m.x <- mean(x)
 m.y <- mean(y)
@@ -42,7 +45,8 @@ corners <- par("usr")
 ## Plot correlation
 
 ```{r,echo=FALSE, fig.width=5, fig.height=5, fig.align='center'}
-plot(x, y, las = 1, xlab = "Airplay", ylab = "Album Sales")
+plot(x, y, las = 1, xlab = "Airplay", ylab = "Album Sales", 
+     xlim = myLimsX, ylim = myLimsY)
 
 m.x <- mean(x)
 m.y <- mean(y)
@@ -74,7 +78,8 @@ mtext(side = 4, bquote(bar(y) ~ "= 260"), cex = 1.5, padj = 0.5, srt=180)
 ## Plot correlation
 
 ```{r,echo=FALSE, fig.width=5, fig.height=5, fig.align='center'}
-plot(x, y, las = 1, xlab = "Airplay", ylab = "Album Sales")
+plot(x, y, las = 1, xlab = "Airplay", ylab = "Album Sales", 
+     xlim = myLimsX, ylim = myLimsY)
 
 m.x <- mean(x)
 m.y <- mean(y)
@@ -107,9 +112,9 @@ $$(x_i - \bar{x})(y_i - \bar{y})$$
 ## Load data
 
 ```{r, eval=TRUE, echo=TRUE}
-n     <- 30
+n     <- 10
 data <- read.csv("../../../datasets/Album Sales.csv")[, -4]
-data <- data[1:n, ] # take the first 30 rows of the album sales data set from Field
+data <- data[1:n, ] # take the first 10 rows of the album sales data set from Field
 DT::datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
 ```
 
@@ -133,12 +138,11 @@ lines(rep(mean.sales, N), col='orange')
 lines(rep(mean.airplay,    N), col='blue', lt=1)
 ```
 
-## Standardize {.smaller}
+## Standardize 
 
 $$z = \frac{x_i - \bar{x}}{{sd}_x}$$
 
 ```{r, echo=TRUE}
-#| output-location: slide
 z.sales      <- (data$sales   - mean(data$sales))   / sd(data$sales)
 z.airplay    <- (data$airplay - mean(data$airplay)) / sd(data$airplay)
 ```
@@ -201,18 +205,18 @@ covariance <- sum(prod) / (N - 1)
 covariance
 ```
 
-## Covariance {.smaller}
+<!-- ## Covariance {.smaller} -->
 
-```{r, echo=FALSE}
-mydf <- round(data.frame(sales, 
-                         meanSales = mean.sales, 
-                         deltaSales = delta.sales,  
-                         airplay = airplay, 
-                         meanAir = mean.airplay, 
-                         deltaAir = delta.airplay, 
-                         deltaProduct = prod), 2)
-DT::datatable(mydf, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
-```
+<!-- ```{r, echo=FALSE} -->
+<!-- mydf <- round(data.frame(sales,  -->
+<!--                          meanSales = mean.sales,  -->
+<!--                          deltaSales = delta.sales,   -->
+<!--                          airplay = airplay,  -->
+<!--                          meanAir = mean.airplay,  -->
+<!--                          deltaAir = delta.airplay,  -->
+<!--                          deltaProduct = prod), 2) -->
+<!-- DT::datatable(mydf, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F)) -->
+<!-- ``` -->
 
 ## Correlation
 
@@ -264,10 +268,23 @@ text(mean.sales+xMargin, mean.airplay-yMargin, "+ * -", cex = 2, col = "red")
 text(mean.sales-xMargin, mean.airplay+yMargin, "- * +", cex = 2, col = "red")
 ```
 
+## Significance testing using $t$
+
+> A test statistic with a known probability distribution (the t-distribution).
+
+It's a standardized measure of how closely our observed statistic matches the value claimed by $\mathcal{H}_0$:
+
+$$t = \frac{\text{estimate} - \mathcal{H}_0 \text{ value}}{\text{SE}(\text{estimate})}$$
+
 ## Significance of a correlation {.subsection}
 
-$$t_r = \frac{r \sqrt{N-2}}{\sqrt{1 - r^2}} \\ 
-{df} = N - 2$$
+> We convert $r$ to a $t$-statistic because $t$ has a sampling distribution: the $t$-distribution with df = N-2:
+
+$$t_r = \frac{r \sqrt{N-2}}{\sqrt{1 - r^2}}$$
+
+$${df} = N - 2$$
+
+## Hypotheses for $t$ 
 
 $$
 \begin{aligned}
@@ -278,17 +295,19 @@ H_A &: t_r < 0 \\
 \end{aligned}
 $$
 
-## r to t
+## $r$  to $t$ 
 
 ```{r, echo=TRUE}
 df  <- N-2
 t.r <- ( correlation*sqrt(df) ) / sqrt(1-correlation^2)
-cbind(t.r, df)
+
+t.r
+df
 ```
 
 ## Visualize
 
-Locate in t-distribution
+Locate in $t$-distribution
 
 ```{r, echo=FALSE}
 #| output-location: slide

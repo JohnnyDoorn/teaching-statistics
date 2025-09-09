@@ -90,8 +90,8 @@ Chapters 1, 2, 3
 
 - Visualization in JASP
 - Correlation
-  - Hypothesis testing using p-values
-  - Estimation using confidence intervals
+  * How it works
+  * Controlling for a third variable
 
 ## Bored? 
 ::: {}

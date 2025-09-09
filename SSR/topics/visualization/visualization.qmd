@@ -41,7 +41,7 @@ rm(list=ls())
 
 ---
 
-## Boxplots: Visualizing Spread and Outliers
+## Boxplots: Visualizing Spread and Outliers {.smaller}
 
 - Shows median, quartiles, and outliers
 - Useful for comparing groups

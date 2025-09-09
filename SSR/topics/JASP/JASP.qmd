@@ -77,7 +77,7 @@ rm(list=ls())
 
 - [JASP Video Library](https://jasp-stats.github.io/jasp-video-library/)
 - The book
-- ![Help files in JASP](../../images/info-button.png){height="30"}
+- ![](../../images/info-button.png){height="40"}
 
 
 

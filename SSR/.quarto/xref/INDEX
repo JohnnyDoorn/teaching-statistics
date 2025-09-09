@@ -167,5 +167,12 @@
   "2025/7. correlation_and_simple_regression/7. linear_model_regression.qmd": {
     "7. linear_model_regression.slide.html": "4dd2051a",
     "7. linear_model_regression.html": "3ff3fd68"
+  },
+  "2025/4. reasoning_nhst/4. intro-statistics.qmd": {
+    "4. intro-statistics.slide.html": "78106c98",
+    "4. intro-statistics.html": "8ed266d4"
+  },
+  "topics/t-distribution/t-distribution.qmd": {
+    "t-distribution.html": "aa946dd9"
   }
 }
