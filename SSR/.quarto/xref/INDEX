@@ -174,5 +174,11 @@
   },
   "topics/t-distribution/t-distribution.qmd": {
     "t-distribution.html": "aa946dd9"
+  },
+  "footer.qmd": {
+    "footer.html": "b5951f43"
+  },
+  "topics/correlation/correlation-partial.qmd": {
+    "correlation-partial.html": "033f9262"
   }
 }

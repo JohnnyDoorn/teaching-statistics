@@ -32,7 +32,7 @@ rm(list=ls())
 
 1. Download from [jasp-stats.org](https://jasp-stats.org)
 2. Open JASP, load your dataset (.jasp, .csv, .sav, etc.)
-3. Familiarize with the interface: Data view, Analysis panel, Output panel
+3. Familiarize with the interface: Data view, Input panel, Output panel
 
 ![Figure 4.3](../../images/figure-4-3.png){height="300"}
 

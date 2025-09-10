@@ -1,0 +1,83 @@
+# Partial correlation {.section}
+
+## Venn diagram of Variance
+```{r, echo=FALSE, warning=FALSE, message=FALSE, prompt=FALSE}
+if(!"VennDiagram" %in% installed.packages()) { install.packages("VennDiagram") };
+library("VennDiagram")
+n     <- 10
+data <- read.csv("../../../datasets/Album Sales.csv")[, -4]
+data <- data[1:n, ] # take the first 10 rows of the album sales data set from Field
+sales         <- data$sales
+airplay       <- data$airplay
+adverts       <- data$adverts
+N             <- length(sales)
+```
+
+```{r, echo=FALSE, results='hide'}
+grid.newpage()
+draw.triple.venn(area1 = 100, area2 = 100, area3 = 100, 
+                 n12  = 50, 
+                 n23  = 50, 
+                 n13  = 50, 
+                 n123 = 25, 
+                 category = c("X", "Y", "Z"), lty = "blank", 
+                 fill = c("skyblue", "pink1", "mediumorchid"), cat.prompts = F)
+```
+
+
+## Partial correlation {.smaller}
+
+
+$$\LARGE{r_{xy \cdot z} = \frac{r_{xy} - r_{xz} r_{yz}}{\sqrt{(1 - r_{xz}^2)(1 - r_{yz}^2)}}}$$
+
+```{r, echo=TRUE}
+adverts <- data$adverts
+
+cor.sales.airplay    <- cor(sales,airplay)
+cor.sales.adverts    <- cor(sales,adverts)
+cor.airplay.adverts  <- cor(airplay,adverts)
+
+data.frame(cor.sales.airplay, cor.sales.adverts, cor.airplay.adverts)
+```
+
+------
+
+```{r, echo=TRUE}
+numerator   <- cor.sales.airplay - (cor.sales.adverts * cor.airplay.adverts)
+denominator <- sqrt( (1-cor.sales.adverts^2)*(1-cor.airplay.adverts^2) )
+
+partial.correlation <- numerator / denominator
+
+partial.correlation
+```
+
+## Significance of partial correlation {.subsection}
+
+Locate in t-distribution
+
+```{r, echo=TRUE}
+df <- N - 3
+
+t.pr <- ( partial.correlation*sqrt(df) ) / sqrt(1-partial.correlation^2)
+t.pr
+```
+
+## p-value
+```{r, echo=FALSE}
+# Set up the plot for the F-distribution
+curve(dt(x, df), from = -8, to = 8, n = 1000, bty = "n", las = 1,
+      xlab = "t-value", ylab = "Density", main = "t-distribution with P-value Region")
+
+# Shade the upper tail (p-value region) using polygon
+# Define the region to fill (upper tail, greater than fStat)
+x_vals <- seq(t.pr, 10, length.out = 100)
+y_vals <- dt(x_vals, df)
+
+# Draw the polygon to fill the area under the curve
+polygon(c(t.pr, x_vals, 10), c(0, y_vals, 0), col = "lightblue", border = NA)
+
+# Optionally, add a vertical line at the F-statistic
+arrows(x0 = t.pr, x1 = t.pr, y0 = 0 , y1 = 0.25, col = "darkred", lwd = 2)
+text(x = t.pr, y = 0.3, paste("t =", round(t.pr, 2)), cex = 1.2)
+text(x = t.pr, y = 0.35, paste("p-val < 0.001"), cex = 1.2)
+```

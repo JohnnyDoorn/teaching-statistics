@@ -32,8 +32,6 @@ In this lecture we aim to:
   * Descriptive statistics
   * Data visualizations
 * Correlation
-  * How it works
-  * Controlling for a third variable
     
 <strong>Reading:</strong>
 Chapters 4, 5, 7
@@ -50,14 +48,17 @@ Chapters 4, 5, 7
 ```{r child="../../topics/correlation/correlation.qmd", eval=TRUE}
 ```
 
-## Next Time
+# Closing
 
+## Next Week
+
+- Partial correlation
 - The linear model
   - Predictions
   - Assumptions
   - Fun
 
-## Bored? 
+## Recommended Exercises
 ::: {}
 - [Exercise 5.1](https://discoverjasp.com/pages/smart_alex#task-5.1), [Exercise 5.5](https://discoverjasp.com/pages/smart_alex#task-5.5)
 

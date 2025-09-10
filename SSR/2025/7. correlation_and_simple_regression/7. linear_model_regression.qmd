@@ -13,16 +13,44 @@ css: ../../ajohnson.css
 
 
 
-<!-- ```{r child="../../topics/correlation/correlation.qmd"} -->
-<!-- ``` -->
+<div class="goals">
+In this lecture we discuss:
 
+* Correlation
+  * In JASP
+  * Control for third variable
+* Linear model
+  * Theory
+  * In JASP
+    
+<strong>Reading:</strong>
+Chapters 7, 8-8.8
+</div>
+
+
+```{r child="../../topics/correlation/correlation-partial.qmd", eval=TRUE}
+```
 
 ```{r child="../../topics/regression_one_predictor/regression_one_predictor.qmd", eval=TRUE}
 ```
 
 
-<!-- Footer insert below -->
 
+# Closing
+
+## Next Week
+
+- Exam!
+
+## Recommended Exercises
+::: {}
+
+- [Exercise 7.6](https://discoverjasp.com/pages/smart_alex#task-7.6), [Exercise 7.7](https://discoverjasp.com/pages/smart_alex#task-7.7)
+    - Note: `pets.jasp` can also be downloaded from the [Data page](https://discoverjasp.com/pages/data)
+    
+- [Exercise 8.1](https://discoverjasp.com/pages/smart_alex#task-8.1)
+
+:::
 ```{r child="../../footer.qmd"}
 ```
 

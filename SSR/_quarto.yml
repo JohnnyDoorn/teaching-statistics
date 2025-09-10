@@ -1,6 +1,6 @@
 # project:
 #   output-dir: ../slides/
-author: "Sharon Klinkenberg & Johnny van Doorn"
+author: Johnny van Doorn"
 institute: "University of Amsterdam"
 format:
   html:
@@ -10,17 +10,16 @@ format:
   revealjs:
     smaller: false
     linkcolor: '#BC0031'
-    logo: https://shklinkenberg.github.io/uva_style/images/logo_uva.png
+    logo: images/logo_uva.png
     transition: slide
     background-transition: fade
     theme: white
     slide-number: true
-    css: https://shklinkenberg.github.io/statistics-lectures/courses/uva_reveal.css
+    css: uva_reveal.css
     touch: true
-    # footer: "Klinkenberg"
     google-analytics: "UA-107432294-1"
     title-slide-attributes:
-      data-background-image: https://cdn.pixabay.com/photo/2017/08/22/16/46/bike-2669639_960_720.jpg
+      data-background-image: images/bikes.jpg
       data-background-size: contain
       data-background-position: bottom
       

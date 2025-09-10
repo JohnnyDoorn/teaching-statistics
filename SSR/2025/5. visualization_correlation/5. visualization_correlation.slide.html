@@ -97,7 +97,7 @@
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="5. visualization_correlation_files/libs/revealjs/dist/theme/quarto.css" id="theme">
-  <link rel="stylesheet" href="https://shklinkenberg.github.io/statistics-lectures/courses/uva_reveal.css">
+  <link rel="stylesheet" href="../../uva_reveal.css">
   <link rel="stylesheet" href="../../ajohnson.css">
   <link href="5. visualization_correlation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="5. visualization_correlation_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -403,7 +403,7 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="https://cdn.pixabay.com/photo/2017/08/22/16/46/bike-2669639_960_720.jpg" data-background-position="bottom" data-background-size="contain" class="quarto-title-block center">
+<section id="title-slide" data-background-image="../../images/bikes.jpg" data-background-position="bottom" data-background-size="contain" class="quarto-title-block center">
   <h1 class="title">5. JASP: Visualization and Correlation</h1>
 
 <div class="quarto-title-authors">
@@ -442,11 +442,7 @@ Johnny van Doorn
 <li>Descriptive statistics</li>
 <li>Data visualizations</li>
 </ul></li>
-<li>Correlation
-<ul>
-<li>How it works</li>
-<li>Controlling for a third variable</li>
-</ul></li>
+<li>Correlation</li>
 </ul>
 <p><strong>Reading:</strong> Chapters 4, 5, 7</p>
 </div>
@@ -474,7 +470,7 @@ Johnny van Doorn
 <ol type="1">
 <li>Download from <a href="https://jasp-stats.org">jasp-stats.org</a></li>
 <li>Open JASP, load your dataset (.jasp, .csv, .sav, etc.)</li>
-<li>Familiarize with the interface: Data view, Analysis panel, Output panel</li>
+<li>Familiarize with the interface: Data view, Input panel, Output panel</li>
 </ol>
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -792,65 +788,14 @@ H_A &amp;: t_r &lt; 0 \\
 
 <img data-src="5.-visualization_correlation_files/figure-revealjs/unnamed-chunk-35-1.png" width="960" class="r-stretch"></section></section>
 <section>
-<section id="partial-correlation" class="title-slide slide level1 section center">
-<h1>Partial correlation</h1>
+<section id="closing" class="title-slide slide level1 center">
+<h1>Closing</h1>
 
 </section>
-<section id="venn-diagram-of-variance" class="slide level2">
-<h2>Venn diagram of Variance</h2>
-
-<img data-src="5.-visualization_correlation_files/figure-revealjs/unnamed-chunk-37-1.png" width="960" class="r-stretch"></section>
-<section id="partial-correlation-1" class="slide level2 smaller">
-<h2>Partial correlation</h2>
-<p><span class="math display">\[\LARGE{r_{xy \cdot z} = \frac{r_{xy} - r_{xz} r_{yz}}{\sqrt{(1 - r_{xz}^2)(1 - r_{yz}^2)}}}\]</span></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>adverts <span class="ot">&lt;-</span> data<span class="sc">$</span>adverts</span>
-<span id="cb19-2"><a href="#cb19-2"></a></span>
-<span id="cb19-3"><a href="#cb19-3"></a>cor.sales.airplay    <span class="ot">&lt;-</span> <span class="fu">cor</span>(sales,airplay)</span>
-<span id="cb19-4"><a href="#cb19-4"></a>cor.sales.adverts    <span class="ot">&lt;-</span> <span class="fu">cor</span>(sales,adverts)</span>
-<span id="cb19-5"><a href="#cb19-5"></a>cor.airplay.adverts  <span class="ot">&lt;-</span> <span class="fu">cor</span>(airplay,adverts)</span>
-<span id="cb19-6"><a href="#cb19-6"></a></span>
-<span id="cb19-7"><a href="#cb19-7"></a><span class="fu">data.frame</span>(cor.sales.airplay, cor.sales.adverts, cor.airplay.adverts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  cor.sales.airplay cor.sales.adverts cor.airplay.adverts
-1         0.6864408        0.08531506          -0.1130884</code></pre>
-</div>
-</div>
-</section>
-<section class="slide level2">
-
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>numerator   <span class="ot">&lt;-</span> cor.sales.airplay <span class="sc">-</span> (cor.sales.adverts <span class="sc">*</span> cor.airplay.adverts)</span>
-<span id="cb21-2"><a href="#cb21-2"></a>denominator <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( (<span class="dv">1</span><span class="sc">-</span>cor.sales.adverts<span class="sc">^</span><span class="dv">2</span>)<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>cor.airplay.adverts<span class="sc">^</span><span class="dv">2</span>) )</span>
-<span id="cb21-3"><a href="#cb21-3"></a></span>
-<span id="cb21-4"><a href="#cb21-4"></a>partial.correlation <span class="ot">&lt;-</span> numerator <span class="sc">/</span> denominator</span>
-<span id="cb21-5"><a href="#cb21-5"></a></span>
-<span id="cb21-6"><a href="#cb21-6"></a>partial.correlation</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7031469</code></pre>
-</div>
-</div>
-</section>
-<section id="significance-of-partial-correlation" class="slide level2 subsection">
-<h2>Significance of partial correlation</h2>
-<p>Locate in t-distribution</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>df <span class="ot">&lt;-</span> N <span class="sc">-</span> <span class="dv">3</span></span>
-<span id="cb23-2"><a href="#cb23-2"></a></span>
-<span id="cb23-3"><a href="#cb23-3"></a>t.pr <span class="ot">&lt;-</span> ( partial.correlation<span class="sc">*</span><span class="fu">sqrt</span>(df) ) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">-</span>partial.correlation<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb23-4"><a href="#cb23-4"></a>t.pr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.616364</code></pre>
-</div>
-</div>
-</section>
-<section id="p-value" class="slide level2">
-<h2>p-value</h2>
-
-<img data-src="5.-visualization_correlation_files/figure-revealjs/unnamed-chunk-41-1.png" width="960" class="r-stretch"></section>
-<section id="next-time" class="slide level2">
-<h2>Next Time</h2>
+<section id="next-week" class="slide level2">
+<h2>Next Week</h2>
 <ul>
+<li>Partial correlation</li>
 <li>The linear model
 <ul>
 <li>Predictions</li>
@@ -859,8 +804,8 @@ H_A &amp;: t_r &lt; 0 \\
 </ul></li>
 </ul>
 </section>
-<section id="bored" class="slide level2">
-<h2>Bored?</h2>
+<section id="recommended-exercises" class="slide level2">
+<h2>Recommended Exercises</h2>
 <div>
 <ul>
 <li><p><a href="https://discoverjasp.com/pages/smart_alex#task-5.1">Exercise 5.1</a>, <a href="https://discoverjasp.com/pages/smart_alex#task-5.5">Exercise 5.5</a></p></li>
@@ -871,11 +816,6 @@ H_A &amp;: t_r &lt; 0 \\
 </ul>
 </div>
 <!-- Footer insert below -->
-</section></section>
-<section>
-<section id="end" class="title-slide slide level1 center">
-<h1>End</h1>
-
 </section>
 <section id="contact" class="slide level2">
 <h2>Contact</h2>
@@ -896,7 +836,7 @@ H_A &amp;: t_r &lt; 0 \\
 </figure>
 </div>
 </small><p><small style="text-align:left;"></small></p>
-<p><img src="https://shklinkenberg.github.io/uva_style/images/logo_uva.png" class="slide-logo"></p>
+<p><img src="../../images/logo_uva.png" class="slide-logo"></p>
 <div class="footer footer-default">
 <p>Scientific &amp; Statistical Reasoning</p>
 </div>
