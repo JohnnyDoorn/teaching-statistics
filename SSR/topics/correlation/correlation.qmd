@@ -321,13 +321,14 @@ curve(dt(x, df), from = -8, to = 8, n = 1000, bty = "n", las = 1,
 x_vals <- seq(t.r, 10, length.out = 100)
 y_vals <- dt(x_vals, df)
 
+pval <- pt(t.r, df, lower.tail = FALSE)
 # Draw the polygon to fill the area under the curve
 polygon(c(t.r, x_vals, 10), c(0, y_vals, 0), col = "lightblue", border = NA)
 
 # Optionally, add a vertical line at the F-statistic
 arrows(x0 = t.r, x1 = t.r, y0 = 0 , y1 = 0.25, col = "darkred", lwd = 2)
 text(x = t.r, y = 0.3, paste("t =", round(t.r, 2)), cex = 1.2)
-text(x = t.r, y = 0.35, paste("p-val < 0.001"), cex = 1.2)
+text(x = t.r, y = 0.35, paste("p =", round(pval, 2)), cex = 1.2)
 ```
 
 # Partial correlation {.section}
