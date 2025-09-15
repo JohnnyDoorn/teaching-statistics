@@ -51,7 +51,7 @@ axis(1)
 
 ## A sample {.smaller}
 
-Let's take one sample from our normal populatiion and calculate the t-value.
+Let's take one sample from our normal population and calculate the t-value.
 
 ```{r, echo=TRUE}
 x <- rnorm(n, mu, sigma); x
@@ -306,28 +306,20 @@ See Tukey (1969) and Section 3.7.4 of Field:
 
 
 
-## Effect-size r {.subsection}
+<!-- ## Effect-size r {.subsection} -->
 
-Another option is to have the effect size expressed as $r$ (similar to correlation coefficient).
-$$r = \sqrt{\frac{t^2}{t^2 + \text{df}}}$$
+<!-- Another option is to have the effect size expressed as $r$ (similar to correlation coefficient). -->
+<!-- $$r = \sqrt{\frac{t^2}{t^2 + \text{df}}}$$ -->
 
-```{r, echo=TRUE}
-r <- sqrt(tStat^2 / (tStat^2 + df))
+<!-- ```{r, echo=TRUE} -->
+<!-- r <- sqrt(tStat^2 / (tStat^2 + df)) -->
 
-r
-```
+<!-- r -->
+<!-- ``` -->
 
-## Effect-sizes
+## Effect-sizes distribution
 
-We can also calculate effect-sizes $r$ for all our calculated t-values. Under the assumption of $H_0$ the effect-size distribution looks like this.
-
-```{r}
-r <- sqrt(t.values^2/(t.values^2 + df))
-
-tail(cbind(mean.x.values, mu, se.x.values, t.values, r))
-```
-
-## Effect-size distribution
+We can also calculate effect-sizes $Cohen's d$ for all our calculated t-values. Under the assumption of $H_0$ the effect-size distribution looks like this.
 
 ```{r, fig.height=3, echo=FALSE}
 hist(t.values / sqrt(n), 

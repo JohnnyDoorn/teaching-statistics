@@ -1,6 +1,6 @@
 ---
 title: "Statistics Lectures"
-author: "Klinkenberg"
+# author: "
 date: today
 format: 
   html: 

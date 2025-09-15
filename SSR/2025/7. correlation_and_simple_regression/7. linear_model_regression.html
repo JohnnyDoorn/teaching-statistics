@@ -105,33 +105,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#regression-one-predictor" id="toc-regression-one-predictor" class="nav-link" data-scroll-target="#regression-one-predictor">Regression<br>(one predictor)</a>
   <ul class="collapse">
   <li><a href="#regression" id="toc-regression" class="nav-link" data-scroll-target="#regression">Regression</a></li>
-  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions">Assumptions</a></li>
+  <li><a href="#assumptions-of-the-linear-model" id="toc-assumptions-of-the-linear-model" class="nav-link" data-scroll-target="#assumptions-of-the-linear-model">Assumptions of the Linear Model</a></li>
   <li><a href="#sensitivity" id="toc-sensitivity" class="nav-link" data-scroll-target="#sensitivity">Sensitivity</a></li>
-  <li><a href="#sensitivity-1" id="toc-sensitivity-1" class="nav-link" data-scroll-target="#sensitivity-1">Sensitivity</a></li>
+  <li><a href="#normality" id="toc-normality" class="nav-link" data-scroll-target="#normality">Normality</a></li>
+  <li><a href="#linearity" id="toc-linearity" class="nav-link" data-scroll-target="#linearity">Linearity</a></li>
   <li><a href="#homoscedasticity" id="toc-homoscedasticity" class="nav-link" data-scroll-target="#homoscedasticity">Homoscedasticity</a></li>
   <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data">The data</a></li>
-  <li><a href="#the-data-1" id="toc-the-data-1" class="nav-link" data-scroll-target="#the-data-1">The data</a></li>
   <li><a href="#calculate-regression-parameters" id="toc-calculate-regression-parameters" class="nav-link" data-scroll-target="#calculate-regression-parameters">Calculate regression parameters</a></li>
   <li><a href="#calculate-b_1" id="toc-calculate-b_1" class="nav-link" data-scroll-target="#calculate-b_1">Calculate <span class="math inline">\(b_1\)</span></a></li>
   <li><a href="#calculate-b_0" id="toc-calculate-b_0" class="nav-link" data-scroll-target="#calculate-b_0">Calculate <span class="math inline">\(b_0\)</span></a></li>
   <li><a href="#the-slope" id="toc-the-slope" class="nav-link" data-scroll-target="#the-slope">The slope</a></li>
-  <li><a href="#the-slope-1" id="toc-the-slope-1" class="nav-link" data-scroll-target="#the-slope-1">The slope</a></li>
   <li><a href="#the-slope---zoomed-in" id="toc-the-slope---zoomed-in" class="nav-link" data-scroll-target="#the-slope---zoomed-in">The slope - zoomed in</a></li>
   <li><a href="#define-regression-equation" id="toc-define-regression-equation" class="nav-link" data-scroll-target="#define-regression-equation">Define regression equation</a></li>
   <li><a href="#predicted-values" id="toc-predicted-values" class="nav-link" data-scroll-target="#predicted-values">Predicted values</a></li>
   <li><a href="#y-vs-haty" id="toc-y-vs-haty" class="nav-link" data-scroll-target="#y-vs-haty"><span class="math inline">\(y\)</span> vs <span class="math inline">\(\hat{y}\)</span></a></li>
   <li><a href="#error" id="toc-error" class="nav-link" data-scroll-target="#error">Error</a></li>
-  <li><a href="#homoscedasticity-1" id="toc-homoscedasticity-1" class="nav-link" data-scroll-target="#homoscedasticity-1">Homoscedasticity</a></li>
+  <li><a href="#normality-of-residuals" id="toc-normality-of-residuals" class="nav-link" data-scroll-target="#normality-of-residuals">Normality of Residuals</a></li>
   <li><a href="#model-fit" id="toc-model-fit" class="nav-link" data-scroll-target="#model-fit">Model fit</a></li>
   <li><a href="#explained-variance" id="toc-explained-variance" class="nav-link" data-scroll-target="#explained-variance">Explained variance</a></li>
   <li><a href="#explained-variance-visually-n-10" id="toc-explained-variance-visually-n-10" class="nav-link" data-scroll-target="#explained-variance-visually-n-10">Explained variance visually (<span class="math inline">\(n = 10\)</span>)</a></li>
-  <li><a href="#test-model-fit" id="toc-test-model-fit" class="nav-link" data-scroll-target="#test-model-fit">Test model fit</a></li>
-  <li><a href="#signal-to-noise" id="toc-signal-to-noise" class="nav-link" data-scroll-target="#signal-to-noise">Signal to noise</a></li>
   <li><a href="#calculate-t-values-for-bs-for-hypothesis-testing" id="toc-calculate-t-values-for-bs-for-hypothesis-testing" class="nav-link" data-scroll-target="#calculate-t-values-for-bs-for-hypothesis-testing">Calculate t-values for b’s for hypothesis testing</a></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#converting-b-to-t" id="toc-converting-b-to-t" class="nav-link" data-scroll-target="#converting-b-to-t">Converting b to <span class="math inline">\(t\)</span></a></li>
   <li><a href="#p-values-of-b_1" id="toc-p-values-of-b_1" class="nav-link" data-scroll-target="#p-values-of-b_1">P-values of <span class="math inline">\(b_1\)</span></a></li>
-  <li><a href="#visualize" id="toc-visualize" class="nav-link" data-scroll-target="#visualize">Visualize</a></li>
-  <li><a href="#its-all-the-same-thing" id="toc-its-all-the-same-thing" class="nav-link" data-scroll-target="#its-all-the-same-thing">It’s all the same thing…</a></li>
   <li><a href="#so-how-many-ways-do-we-have-for-assessing-an-association" id="toc-so-how-many-ways-do-we-have-for-assessing-an-association" class="nav-link" data-scroll-target="#so-how-many-ways-do-we-have-for-assessing-an-association">So how many <code>@!&amp;#$</code> ways do we have for assessing an association?!</a></li>
   </ul></li>
   <li><a href="#closing" id="toc-closing" class="nav-link" data-scroll-target="#closing">Closing</a>
@@ -270,31 +265,125 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In linear regression, the relationships are modeled using linear predictor functions whose unknown model parameters are estimated from the data.</p>
 <p>Source: <a href="https://en.wikipedia.org/wiki/Linear_regression">wikipedia</a></p>
 </section>
-<section id="assumptions" class="level2">
-<h2 class="anchored" data-anchor-id="assumptions">Assumptions</h2>
-<p>A selection from Field (Section 8.4):</p>
+<section id="assumptions-of-the-linear-model" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="assumptions-of-the-linear-model">Assumptions of the Linear Model</h2>
+<p>A selection from Field (Section 8.4.1):</p>
 <ul>
-<li>Sensitivity (Section 6.4)</li>
-<li>Homoscedasticity (Section 6.7)</li>
-<li>Normality (Section 6.7)</li>
+<li>Sensitivity (Section 6.4)
+<ul>
+<li>Are there outliers?</li>
+</ul></li>
+<li>Normality (Section 6.7)
+<ul>
+<li>Are the model errors non-normally distributed?</li>
+</ul></li>
+<li>Linearity (Section 6.6)
+<ul>
+<li>Is the association non-linear?</li>
+</ul></li>
+<li>Homoscedasticity (Section 6.7)
+<ul>
+<li>Is there systematic model error?</li>
+</ul></li>
 </ul>
+<blockquote class="blockquote">
+<p>The greater the assumption violation, the less reliable your results are</p>
+</blockquote>
+<hr>
+<section id="exam-note-about-assumptions" class="level3">
+<h3 class="anchored" data-anchor-id="exam-note-about-assumptions">Exam Note about Assumptions</h3>
+<p>For exam 1:</p>
+<ul>
+<li>We only focus on Sensitivity, Normality, Linearity</li>
+<li>We only focus on assessing the assumptions</li>
+<li>Don’t need to study ch6; lecture and application in ch8 suffice</li>
+</ul>
+</section>
 </section>
 <section id="sensitivity" class="level2">
 <h2 class="anchored" data-anchor-id="sensitivity">Sensitivity</h2>
 <p>Outliers</p>
 <ul>
-<li>Extreme residuals</li>
-<li>Cook’s distance (&lt; 1)</li>
+<li>Extreme residuals (e.g., &gt; 3)</li>
+<li>Cook’s distance (e.g., &gt; 1)</li>
 <li>Check Q-Q, residuals plots, casewise diagnostics</li>
 </ul>
-</section>
-<section id="sensitivity-1" class="level2">
-<h2 class="anchored" data-anchor-id="sensitivity-1">Sensitivity</h2>
+<hr>
+<section id="sensitivity-1" class="level3">
+<h3 class="anchored" data-anchor-id="sensitivity-1">Sensitivity</h3>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="7.-linear_model_regression_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<!-- ## Normality -->
+<!-- ::: {.columns} -->
+<!-- ::: {.column} -->
+<!-- * Residuals should be normally distributed -->
+<!-- * Look at Q-Q plot standardized residuals. Most points should be on the diagonal -->
+<!-- * After the analysis is complete because it's based on the residuals -->
+<!-- * See figure 6.26 -->
+<!-- ::: -->
+<!-- ::: {.column} -->
+<!-- ```{r, fig.align='center', fig.width=5, fig.height=5, echo=FALSE} -->
+<!-- # Example vector of errors -->
+<!-- set.seed(123) -->
+<!-- errors <- rnorm(100, mean = 0, sd = 1)  # replace with your residuals -->
+<!-- # QQ plot -->
+<!-- qqnorm(errors, -->
+<!--        main = "QQ Plot of Residuals", -->
+<!--        xlab = "Theoretical Quantiles", -->
+<!--        ylab = "Sample Quantiles", -->
+<!--        pch = 21, bg = "orange", col ="black", cex = 1.2, bty = "n", las = 1) -->
+<!-- # Add reference line (uses same vector as qqnorm) -->
+<!-- qqline(errors, col = "darkred", lwd = 2) -->
+<!-- ``` -->
+<!-- ::: -->
+<!-- ::: -->
+</section>
+</section>
+<section id="normality" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="normality">Normality</h2>
+<div class="columns">
+<div class="column">
+<ul>
+<li>Residuals should be normally distributed</li>
+<li>Look at Q-Q plot standardized residuals. Most points should be on the diagonal</li>
+<li>After the analysis is complete because it’s based on the residuals</li>
+<li>See figure 6.25</li>
+</ul>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/figure-6-25.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">figure 6.25</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="linearity" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="linearity">Linearity</h2>
+<div class="columns">
+<div class="column">
+<ul>
+<li>The relationship between predictors and the outcome should be linear</li>
+<li>Inspect using plots:
+<ul>
+<li>Scatter plots (or partial plots) of predictors vs.&nbsp;outcome</li>
+<li>Residuals vs.&nbsp;predicted</li>
+</ul></li>
+<li>See figure 6.28</li>
+</ul>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/figure-6-28.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">figure 6.28</figcaption>
 </figure>
 </div>
 </div>
@@ -306,7 +395,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="column">
 <ul>
 <li>Variance of residuals should be equal across all expected values</li>
-<li>Look at scatterplot of standardized: predicted values vs.&nbsp;residuals. Roughly round shape is needed</li>
+<li>Look at scatterplot of residuals vs.&nbsp;predicted values. Ideally it’s an uncorrelated, round cloud</li>
 <li>After the analysis is complete because it’s based on the residuals</li>
 </ul>
 </div><div class="column">
@@ -325,18 +414,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="the-data" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="the-data">The data</h2>
 <blockquote class="blockquote">
-<p>Predict album sales (x 1,000 copies) based on airplay (no. plays).</p>
+<p>Predict album sales (x 1,000 copies) based on adverts (x 100,000£).</p>
 </blockquote>
 <div class="cell">
 <div class="cell-output-display">
 
 <div class="datatables html-widget html-fill-item" id="htmlwidget-fa819060c9c3a62aa268" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-fa819060c9c3a62aa268">{"x":{"filter":"none","vertical":false,"data":[[10.256,985.6849999999999,1445.563,1188.193,574.513,568.954,471.814,537.352,514.068,174.093,1720.806,611.479,251.192,97.97199999999999,406.814,265.398,1323.287,196.65,1326.598,1380.689,792.345,957.167,1789.659,656.1369999999999,613.697,313.362,336.51,1544.899,68.95399999999999,785.692,125.628,377.925,217.994,759.862,1163.444,842.957,125.179,236.598,669.811,612.234,922.019,50,2000,1054.027,385.045,1507.972,102.568,204.568,1170.918,689.547,784.22,405.913,179.778,607.258,1542.329,1112.47,856.985,836.331,236.908,1077.855,579.321,1500,731.364,25.689,391.749,233.999,275.7,56.895,255.117,566.501,102.568,250.568,68.59399999999999,642.7859999999999,1500,102.563,756.984,51.229,644.151,15.313,243.237,256.894,22.464,45.689,724.938,1126.461,1985.119,1837.516,135.986,237.703,976.641,1452.689,1600,268.598,900.889,982.063,201.356,746.024,1132.877,1000,75.896,1351.254,202.705,365.985,305.268,263.268,513.694,152.609,35.987,102.568,215.368,426.784,507.772,233.291,1035.433,102.642,526.1420000000001,624.538,912.349,215.994,561.963,474.76,231.523,678.596,70.922,1567.548,263.598,1423.568,715.678,777.237,509.43,964.11,583.627,923.373,344.392,1095.578,100.025,30.425,1080.342,799.899,1071.752,893.355,283.161,917.0170000000001,234.568,456.897,206.973,1294.099,826.859,564.158,192.607,10.652,45.689,42.568,20.456,635.192,1002.273,1177.047,507.638,215.689,526.48,26.895,883.877,9.103999999999999,103.568,169.583,429.504,223.639,145.585,985.968,500.922,226.652,1051.168,68.093,1547.159,393.774,804.282,801.577,450.562,26.598,179.061,345.687,295.84,2271.86,1134.575,601.434,45.298,759.518,832.869,56.894,709.399,56.895,767.134,503.172,700.929,910.851,888.569,800.615,1500,785.694],[330,120,360,270,220,170,70,210,200,300,290,70,150,190,240,100,250,210,280,230,210,230,320,210,230,250,60,330,150,150,180,80,180,130,320,280,200,130,190,150,230,310,340,240,180,220,40,190,290,340,250,190,120,230,190,210,170,310,90,140,300,340,170,100,200,80,100,70,50,240,160,290,140,210,300,230,280,160,200,110,110,70,100,190,70,360,360,300,120,150,220,280,300,140,290,180,140,210,250,250,120,290,60,140,290,160,100,160,150,140,230,230,30,80,190,90,120,150,230,150,210,180,140,360,10,240,270,290,220,230,220,240,260,170,130,270,140,60,210,210,240,210,200,140,90,120,100,360,180,150,110,90,160,230,40,60,230,230,120,150,120,60,280,120,230,230,40,140,360,210,260,250,200,150,250,100,260,210,290,220,70,110,250,320,300,180,180,200,320,140,100,120,230,150,250,190,240,250,230,110],[43,28,35,33,44,19,20,22,21,40,32,20,24,38,24,25,35,36,27,33,33,28,30,34,49,40,20,42,35,8,49,19,42,6,36,32,28,25,34,21,34,63,31,25,42,37,25,26,39,46,36,12,2,29,33,28,10,38,19,13,30,38,22,23,22,20,18,37,16,32,26,53,28,32,24,37,30,19,47,22,10,1,1,39,8,38,35,40,22,27,31,19,24,1,38,26,11,34,55,5,34,37,13,23,54,18,2,11,30,22,36,37,9,2,12,5,14,20,57,19,35,22,16,53,4,29,43,26,28,37,32,34,30,15,23,31,21,28,18,28,37,26,30,10,21,18,14,38,36,32,9,39,24,45,13,17,32,23,0,35,26,19,26,53,29,28,17,26,42,17,36,45,20,15,28,27,17,32,46,47,19,22,55,31,39,21,36,21,44,27,16,33,33,21,35,26,14,34,11,20]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>adverts<\/th>\n      <th>sales<\/th>\n      <th>airplay<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2]},{"name":"adverts","targets":0},{"name":"sales","targets":1},{"name":"airplay","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-fa819060c9c3a62aa268">{"x":{"filter":"none","vertical":false,"data":[[0.1,9.859999999999999,14.46,11.88,5.75,5.69,4.72,5.37,5.14,1.74,17.21,6.11,2.51,0.98,4.07,2.65,13.23,1.97,13.27,13.81,7.92,9.57,17.9,6.56,6.14,3.13,3.37,15.45,0.6899999999999999,7.86,1.26,3.78,2.18,7.6,11.63,8.43,1.25,2.37,6.7,6.12,9.220000000000001,0.5,20,10.54,3.85,15.08,1.03,2.05,11.71,6.9,7.84,4.06,1.8,6.07,15.42,11.12,8.57,8.359999999999999,2.37,10.78,5.79,15,7.31,0.26,3.92,2.34,2.76,0.57,2.55,5.67,1.03,2.51,0.6899999999999999,6.43,15,1.03,7.57,0.51,6.44,0.15,2.43,2.57,0.22,0.46,7.25,11.26,19.85,18.38,1.36,2.38,9.77,14.53,16,2.69,9.01,9.82,2.01,7.46,11.33,10,0.76,13.51,2.03,3.66,3.05,2.63,5.14,1.53,0.36,1.03,2.15,4.27,5.08,2.33,10.35,1.03,5.26,6.25,9.119999999999999,2.16,5.62,4.75,2.32,6.79,0.71,15.68,2.64,14.24,7.16,7.77,5.09,9.640000000000001,5.84,9.23,3.44,10.96,1,0.3,10.8,8,10.72,8.93,2.83,9.17,2.35,4.57,2.07,12.94,8.27,5.64,1.93,0.11,0.46,0.43,0.2,6.35,10.02,11.77,5.08,2.16,5.26,0.27,8.84,0.09,1.04,1.7,4.3,2.24,1.46,9.859999999999999,5.01,2.27,10.51,0.68,15.47,3.94,8.039999999999999,8.02,4.51,0.27,1.79,3.46,2.96,22.72,11.35,6.01,0.45,7.6,8.33,0.57,7.09,0.57,7.67,5.03,7.01,9.109999999999999,8.890000000000001,8.01,15,7.86],[330,120,360,270,220,170,70,210,200,300,290,70,150,190,240,100,250,210,280,230,210,230,320,210,230,250,60,330,150,150,180,80,180,130,320,280,200,130,190,150,230,310,340,240,180,220,40,190,290,340,250,190,120,230,190,210,170,310,90,140,300,340,170,100,200,80,100,70,50,240,160,290,140,210,300,230,280,160,200,110,110,70,100,190,70,360,360,300,120,150,220,280,300,140,290,180,140,210,250,250,120,290,60,140,290,160,100,160,150,140,230,230,30,80,190,90,120,150,230,150,210,180,140,360,10,240,270,290,220,230,220,240,260,170,130,270,140,60,210,210,240,210,200,140,90,120,100,360,180,150,110,90,160,230,40,60,230,230,120,150,120,60,280,120,230,230,40,140,360,210,260,250,200,150,250,100,260,210,290,220,70,110,250,320,300,180,180,200,320,140,100,120,230,150,250,190,240,250,230,110]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>adverts<\/th>\n      <th>sales<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1]},{"name":"adverts","targets":0},{"name":"sales","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-</section>
-<section id="the-data-1" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="the-data-1">The data</h2>
+<hr>
+<section id="the-data-1" class="level3 smaller">
+<h3 class="smaller anchored" data-anchor-id="the-data-1">The data</h3>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -347,11 +436,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
+</section>
 <section id="calculate-regression-parameters" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="calculate-regression-parameters">Calculate regression parameters</h2>
-<p><span class="math display">\[{sales}_i = b_0 + b_1 {airplay}_i + \epsilon_i\]</span></p>
+<p><span class="math display">\[{sales}_i = b_0 + b_1 {adverts}_i + \epsilon_i\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>airplay  <span class="ot">&lt;-</span> data<span class="sc">$</span>airplay</span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>adverts  <span class="ot">&lt;-</span> data<span class="sc">$</span>adverts</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>sales    <span class="ot">&lt;-</span> data<span class="sc">$</span>sales</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -361,14 +451,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate b1</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>cor.sales.airplay <span class="ot">&lt;-</span> <span class="fu">cor</span>(sales,airplay)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>cor.sales.adverts <span class="ot">&lt;-</span> <span class="fu">cor</span>(sales,adverts)</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>sd.sales          <span class="ot">&lt;-</span> <span class="fu">sd</span>(sales)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>sd.airplay        <span class="ot">&lt;-</span> <span class="fu">sd</span>(airplay)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>sd.adverts        <span class="ot">&lt;-</span> <span class="fu">sd</span>(adverts)</span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> cor.sales.airplay <span class="sc">*</span> ( sd.sales <span class="sc">/</span> sd.airplay )</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> cor.sales.adverts <span class="sc">*</span> ( sd.sales <span class="sc">/</span> sd.adverts )</span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>b1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.939182</code></pre>
+<pre><code>[1] 9.613511</code></pre>
 </div>
 </div>
 </section>
@@ -377,12 +467,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><span class="math display">\[b_0 = \bar{y} - b_1 \bar{x}\]</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>mean.sales    <span class="ot">&lt;-</span> <span class="fu">mean</span>(sales)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>mean.airplay  <span class="ot">&lt;-</span> <span class="fu">mean</span>(airplay)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>mean.adverts  <span class="ot">&lt;-</span> <span class="fu">mean</span>(adverts)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>b0 <span class="ot">&lt;-</span> mean.sales <span class="sc">-</span> b1 <span class="sc">*</span> mean.airplay</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>b0 <span class="ot">&lt;-</span> mean.sales <span class="sc">-</span> b1 <span class="sc">*</span> mean.adverts</span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>b0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 84.87251</code></pre>
+<pre><code>[1] 134.1274</code></pre>
 </div>
 </div>
 </section>
@@ -397,9 +487,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-</section>
-<section id="the-slope-1" class="level2">
-<h2 class="anchored" data-anchor-id="the-slope-1">The slope</h2>
+<hr>
+<section id="the-slope-1" class="level3">
+<h3 class="anchored" data-anchor-id="the-slope-1">The slope</h3>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -409,6 +499,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+</section>
 </section>
 <section id="the-slope---zoomed-in" class="level2">
 <h2 class="anchored" data-anchor-id="the-slope---zoomed-in">The slope - zoomed in</h2>
@@ -421,14 +512,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>For every additional airplay, we predict sales to increase by <span class="math inline">\(3.94\)</span></p>
+<p>For every additional adverts, we predict sales to increase by 9.61</p>
 </section>
 <section id="define-regression-equation" class="level2">
 <h2 class="anchored" data-anchor-id="define-regression-equation">Define regression equation</h2>
-<p><span class="math display">\[\widehat{sales} = {\text{model prediction}} = b_0 + b_1 {airplay}\]</span></p>
+<p><span class="math display">\[\widehat{sales} = {\text{model prediction}} = b_0 + b_1 {adverts}\]</span> <span class="math display">\[\widehat{sales} = {\text{model prediction}} = 134.13 + 9.61\times {adverts}\]</span></p>
 <p>So now we can add the expected sales based on this model</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>prediction <span class="ot">&lt;-</span> b0 <span class="sc">+</span> b1 <span class="sc">*</span> airplay</span>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>prediction <span class="ot">&lt;-</span> b0 <span class="sc">+</span> b1 <span class="sc">*</span> adverts</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>prediction <span class="ot">&lt;-</span> <span class="fu">round</span>(prediction, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -439,7 +530,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 
 <div class="datatables html-widget html-fill-item" id="htmlwidget-50cccb5301691c7140e0" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-50cccb5301691c7140e0">{"x":{"filter":"none","vertical":false,"data":[[10.256,985.6849999999999,1445.563,1188.193,574.513,568.954,471.814,537.352,514.068,174.093,1720.806,611.479,251.192,97.97199999999999,406.814,265.398,1323.287,196.65,1326.598,1380.689,792.345,957.167,1789.659,656.1369999999999,613.697,313.362,336.51,1544.899,68.95399999999999,785.692,125.628,377.925,217.994,759.862,1163.444,842.957,125.179,236.598,669.811,612.234,922.019,50,2000,1054.027,385.045,1507.972,102.568,204.568,1170.918,689.547,784.22,405.913,179.778,607.258,1542.329,1112.47,856.985,836.331,236.908,1077.855,579.321,1500,731.364,25.689,391.749,233.999,275.7,56.895,255.117,566.501,102.568,250.568,68.59399999999999,642.7859999999999,1500,102.563,756.984,51.229,644.151,15.313,243.237,256.894,22.464,45.689,724.938,1126.461,1985.119,1837.516,135.986,237.703,976.641,1452.689,1600,268.598,900.889,982.063,201.356,746.024,1132.877,1000,75.896,1351.254,202.705,365.985,305.268,263.268,513.694,152.609,35.987,102.568,215.368,426.784,507.772,233.291,1035.433,102.642,526.1420000000001,624.538,912.349,215.994,561.963,474.76,231.523,678.596,70.922,1567.548,263.598,1423.568,715.678,777.237,509.43,964.11,583.627,923.373,344.392,1095.578,100.025,30.425,1080.342,799.899,1071.752,893.355,283.161,917.0170000000001,234.568,456.897,206.973,1294.099,826.859,564.158,192.607,10.652,45.689,42.568,20.456,635.192,1002.273,1177.047,507.638,215.689,526.48,26.895,883.877,9.103999999999999,103.568,169.583,429.504,223.639,145.585,985.968,500.922,226.652,1051.168,68.093,1547.159,393.774,804.282,801.577,450.562,26.598,179.061,345.687,295.84,2271.86,1134.575,601.434,45.298,759.518,832.869,56.894,709.399,56.895,767.134,503.172,700.929,910.851,888.569,800.615,1500,785.694],[330,120,360,270,220,170,70,210,200,300,290,70,150,190,240,100,250,210,280,230,210,230,320,210,230,250,60,330,150,150,180,80,180,130,320,280,200,130,190,150,230,310,340,240,180,220,40,190,290,340,250,190,120,230,190,210,170,310,90,140,300,340,170,100,200,80,100,70,50,240,160,290,140,210,300,230,280,160,200,110,110,70,100,190,70,360,360,300,120,150,220,280,300,140,290,180,140,210,250,250,120,290,60,140,290,160,100,160,150,140,230,230,30,80,190,90,120,150,230,150,210,180,140,360,10,240,270,290,220,230,220,240,260,170,130,270,140,60,210,210,240,210,200,140,90,120,100,360,180,150,110,90,160,230,40,60,230,230,120,150,120,60,280,120,230,230,40,140,360,210,260,250,200,150,250,100,260,210,290,220,70,110,250,320,300,180,180,200,320,140,100,120,230,150,250,190,240,250,230,110],[43,28,35,33,44,19,20,22,21,40,32,20,24,38,24,25,35,36,27,33,33,28,30,34,49,40,20,42,35,8,49,19,42,6,36,32,28,25,34,21,34,63,31,25,42,37,25,26,39,46,36,12,2,29,33,28,10,38,19,13,30,38,22,23,22,20,18,37,16,32,26,53,28,32,24,37,30,19,47,22,10,1,1,39,8,38,35,40,22,27,31,19,24,1,38,26,11,34,55,5,34,37,13,23,54,18,2,11,30,22,36,37,9,2,12,5,14,20,57,19,35,22,16,53,4,29,43,26,28,37,32,34,30,15,23,31,21,28,18,28,37,26,30,10,21,18,14,38,36,32,9,39,24,45,13,17,32,23,0,35,26,19,26,53,29,28,17,26,42,17,36,45,20,15,28,27,17,32,46,47,19,22,55,31,39,21,36,21,44,27,16,33,33,21,35,26,14,34,11,20],[254.26,195.17,222.74,214.87,258.2,159.72,163.66,171.53,167.6,242.44,210.93,163.66,179.41,234.56,179.41,183.35,222.74,226.68,191.23,214.87,214.87,195.17,203.05,218.8,277.89,242.44,163.66,250.32,222.74,116.39,277.89,159.72,250.32,108.51,226.68,210.93,195.17,183.35,218.8,167.6,218.8,333.04,206.99,183.35,250.32,230.62,183.35,187.29,238.5,266.07,226.68,132.14,92.75,199.11,214.87,195.17,124.26,234.56,159.72,136.08,203.05,234.56,171.53,175.47,171.53,163.66,155.78,230.62,147.9,210.93,187.29,293.65,195.17,210.93,179.41,230.62,203.05,159.72,270.01,171.53,124.26,88.81,88.81,238.5,116.39,234.56,222.74,242.44,171.53,191.23,206.99,159.72,179.41,88.81,234.56,187.29,128.2,218.8,301.53,104.57,218.8,230.62,136.08,175.47,297.59,155.78,92.75,128.2,203.05,171.53,226.68,230.62,120.33,92.75,132.14,104.57,140.02,163.66,309.41,159.72,222.74,171.53,147.9,293.65,100.63,199.11,254.26,187.29,195.17,230.62,210.93,218.8,203.05,143.96,175.47,206.99,167.6,195.17,155.78,195.17,230.62,187.29,203.05,124.26,167.6,155.78,140.02,234.56,226.68,210.93,120.33,238.5,179.41,262.14,136.08,151.84,210.93,175.47,84.87,222.74,187.29,159.72,187.29,293.65,199.11,195.17,151.84,187.29,250.32,151.84,226.68,262.14,163.66,143.96,195.17,191.23,151.84,210.93,266.07,270.01,159.72,171.53,301.53,206.99,238.5,167.6,226.68,167.6,258.2,191.23,147.9,214.87,214.87,167.6,222.74,187.29,140.02,218.8,128.2,163.66]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>adverts<\/th>\n      <th>sales<\/th>\n      <th>airplay<\/th>\n      <th>prediction<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":375,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]},{"name":"adverts","targets":0},{"name":"sales","targets":1},{"name":"airplay","targets":2},{"name":"prediction","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-50cccb5301691c7140e0">{"x":{"filter":"none","vertical":false,"data":[[0.1,9.859999999999999,14.46,11.88,5.75,5.69,4.72,5.37,5.14,1.74,17.21,6.11,2.51,0.98,4.07,2.65,13.23,1.97,13.27,13.81,7.92,9.57,17.9,6.56,6.14,3.13,3.37,15.45,0.6899999999999999,7.86,1.26,3.78,2.18,7.6,11.63,8.43,1.25,2.37,6.7,6.12,9.220000000000001,0.5,20,10.54,3.85,15.08,1.03,2.05,11.71,6.9,7.84,4.06,1.8,6.07,15.42,11.12,8.57,8.359999999999999,2.37,10.78,5.79,15,7.31,0.26,3.92,2.34,2.76,0.57,2.55,5.67,1.03,2.51,0.6899999999999999,6.43,15,1.03,7.57,0.51,6.44,0.15,2.43,2.57,0.22,0.46,7.25,11.26,19.85,18.38,1.36,2.38,9.77,14.53,16,2.69,9.01,9.82,2.01,7.46,11.33,10,0.76,13.51,2.03,3.66,3.05,2.63,5.14,1.53,0.36,1.03,2.15,4.27,5.08,2.33,10.35,1.03,5.26,6.25,9.119999999999999,2.16,5.62,4.75,2.32,6.79,0.71,15.68,2.64,14.24,7.16,7.77,5.09,9.640000000000001,5.84,9.23,3.44,10.96,1,0.3,10.8,8,10.72,8.93,2.83,9.17,2.35,4.57,2.07,12.94,8.27,5.64,1.93,0.11,0.46,0.43,0.2,6.35,10.02,11.77,5.08,2.16,5.26,0.27,8.84,0.09,1.04,1.7,4.3,2.24,1.46,9.859999999999999,5.01,2.27,10.51,0.68,15.47,3.94,8.039999999999999,8.02,4.51,0.27,1.79,3.46,2.96,22.72,11.35,6.01,0.45,7.6,8.33,0.57,7.09,0.57,7.67,5.03,7.01,9.109999999999999,8.890000000000001,8.01,15,7.86],[330,120,360,270,220,170,70,210,200,300,290,70,150,190,240,100,250,210,280,230,210,230,320,210,230,250,60,330,150,150,180,80,180,130,320,280,200,130,190,150,230,310,340,240,180,220,40,190,290,340,250,190,120,230,190,210,170,310,90,140,300,340,170,100,200,80,100,70,50,240,160,290,140,210,300,230,280,160,200,110,110,70,100,190,70,360,360,300,120,150,220,280,300,140,290,180,140,210,250,250,120,290,60,140,290,160,100,160,150,140,230,230,30,80,190,90,120,150,230,150,210,180,140,360,10,240,270,290,220,230,220,240,260,170,130,270,140,60,210,210,240,210,200,140,90,120,100,360,180,150,110,90,160,230,40,60,230,230,120,150,120,60,280,120,230,230,40,140,360,210,260,250,200,150,250,100,260,210,290,220,70,110,250,320,300,180,180,200,320,140,100,120,230,150,250,190,240,250,230,110],[135.09,228.92,273.14,248.34,189.41,188.83,179.5,185.75,183.54,150.85,299.58,192.87,158.26,143.55,173.25,159.6,261.31,153.07,261.7,266.89,210.27,226.13,306.21,197.19,193.15,164.22,166.52,282.66,140.76,209.69,146.24,170.47,155.08,207.19,245.93,215.17,146.14,156.91,198.54,192.96,222.76,138.93,326.4,235.45,171.14,279.1,144.03,153.84,246.7,200.46,209.5,173.16,151.43,192.48,282.37,241.03,216.52,214.5,156.91,237.76,189.79,278.33,204.4,136.63,171.81,156.62,160.66,139.61,158.64,188.64,144.03,158.26,140.76,195.94,278.33,144.03,206.9,139.03,196.04,135.57,157.49,158.83,136.24,138.55,203.83,242.38,324.96,310.82,147.2,157.01,228.05,273.81,287.94,159.99,220.75,228.53,153.45,205.84,243.05,230.26,141.43,264.01,153.64,169.31,163.45,159.41,183.54,148.84,137.59,144.03,154.8,175.18,182.96,156.53,233.63,144.03,184.69,194.21,221.8,154.89,188.16,179.79,156.43,199.4,140.95,284.87,159.51,271.02,202.96,208.82,183.06,226.8,190.27,222.86,167.2,239.49,143.74,137.01,237.95,211.04,237.18,219.98,161.33,222.28,156.72,178.06,154.03,258.53,213.63,188.35,152.68,135.18,138.55,138.26,136.05,195.17,230.45,247.28,182.96,154.89,184.69,136.72,219.11,134.99,144.13,150.47,175.47,155.66,148.16,228.92,182.29,155.95,235.17,140.66,282.85,172,211.42,211.23,177.48,136.72,151.34,167.39,162.58,352.55,243.24,191.9,138.45,207.19,214.21,139.61,202.29,139.61,207.86,182.48,201.52,221.71,219.59,211.13,278.33,209.69]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>adverts<\/th>\n      <th>sales<\/th>\n      <th>prediction<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":375,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2]},{"name":"adverts","targets":0},{"name":"sales","targets":1},{"name":"prediction","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -458,7 +549,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="error" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="error">Error</h2>
-<p>The error / residual is the difference between the model predictions and observed values</p>
+<p>The error (residual) is the difference between the model predictions and observed values</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>error <span class="ot">&lt;-</span> sales <span class="sc">-</span> prediction</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>error <span class="ot">&lt;-</span> <span class="fu">round</span>(error, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -467,14 +558,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 
 <div class="datatables html-widget html-fill-item" id="htmlwidget-70953493dabb74e942d2" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-70953493dabb74e942d2">{"x":{"filter":"none","vertical":false,"data":[[10.256,985.6849999999999,1445.563,1188.193,574.513,568.954,471.814,537.352,514.068,174.093,1720.806,611.479,251.192,97.97199999999999,406.814,265.398,1323.287,196.65,1326.598,1380.689,792.345,957.167,1789.659,656.1369999999999,613.697,313.362,336.51,1544.899,68.95399999999999,785.692,125.628,377.925,217.994,759.862,1163.444,842.957,125.179,236.598,669.811,612.234,922.019,50,2000,1054.027,385.045,1507.972,102.568,204.568,1170.918,689.547,784.22,405.913,179.778,607.258,1542.329,1112.47,856.985,836.331,236.908,1077.855,579.321,1500,731.364,25.689,391.749,233.999,275.7,56.895,255.117,566.501,102.568,250.568,68.59399999999999,642.7859999999999,1500,102.563,756.984,51.229,644.151,15.313,243.237,256.894,22.464,45.689,724.938,1126.461,1985.119,1837.516,135.986,237.703,976.641,1452.689,1600,268.598,900.889,982.063,201.356,746.024,1132.877,1000,75.896,1351.254,202.705,365.985,305.268,263.268,513.694,152.609,35.987,102.568,215.368,426.784,507.772,233.291,1035.433,102.642,526.1420000000001,624.538,912.349,215.994,561.963,474.76,231.523,678.596,70.922,1567.548,263.598,1423.568,715.678,777.237,509.43,964.11,583.627,923.373,344.392,1095.578,100.025,30.425,1080.342,799.899,1071.752,893.355,283.161,917.0170000000001,234.568,456.897,206.973,1294.099,826.859,564.158,192.607,10.652,45.689,42.568,20.456,635.192,1002.273,1177.047,507.638,215.689,526.48,26.895,883.877,9.103999999999999,103.568,169.583,429.504,223.639,145.585,985.968,500.922,226.652,1051.168,68.093,1547.159,393.774,804.282,801.577,450.562,26.598,179.061,345.687,295.84,2271.86,1134.575,601.434,45.298,759.518,832.869,56.894,709.399,56.895,767.134,503.172,700.929,910.851,888.569,800.615,1500,785.694],[330,120,360,270,220,170,70,210,200,300,290,70,150,190,240,100,250,210,280,230,210,230,320,210,230,250,60,330,150,150,180,80,180,130,320,280,200,130,190,150,230,310,340,240,180,220,40,190,290,340,250,190,120,230,190,210,170,310,90,140,300,340,170,100,200,80,100,70,50,240,160,290,140,210,300,230,280,160,200,110,110,70,100,190,70,360,360,300,120,150,220,280,300,140,290,180,140,210,250,250,120,290,60,140,290,160,100,160,150,140,230,230,30,80,190,90,120,150,230,150,210,180,140,360,10,240,270,290,220,230,220,240,260,170,130,270,140,60,210,210,240,210,200,140,90,120,100,360,180,150,110,90,160,230,40,60,230,230,120,150,120,60,280,120,230,230,40,140,360,210,260,250,200,150,250,100,260,210,290,220,70,110,250,320,300,180,180,200,320,140,100,120,230,150,250,190,240,250,230,110],[43,28,35,33,44,19,20,22,21,40,32,20,24,38,24,25,35,36,27,33,33,28,30,34,49,40,20,42,35,8,49,19,42,6,36,32,28,25,34,21,34,63,31,25,42,37,25,26,39,46,36,12,2,29,33,28,10,38,19,13,30,38,22,23,22,20,18,37,16,32,26,53,28,32,24,37,30,19,47,22,10,1,1,39,8,38,35,40,22,27,31,19,24,1,38,26,11,34,55,5,34,37,13,23,54,18,2,11,30,22,36,37,9,2,12,5,14,20,57,19,35,22,16,53,4,29,43,26,28,37,32,34,30,15,23,31,21,28,18,28,37,26,30,10,21,18,14,38,36,32,9,39,24,45,13,17,32,23,0,35,26,19,26,53,29,28,17,26,42,17,36,45,20,15,28,27,17,32,46,47,19,22,55,31,39,21,36,21,44,27,16,33,33,21,35,26,14,34,11,20],[254.26,195.17,222.74,214.87,258.2,159.72,163.66,171.53,167.6,242.44,210.93,163.66,179.41,234.56,179.41,183.35,222.74,226.68,191.23,214.87,214.87,195.17,203.05,218.8,277.89,242.44,163.66,250.32,222.74,116.39,277.89,159.72,250.32,108.51,226.68,210.93,195.17,183.35,218.8,167.6,218.8,333.04,206.99,183.35,250.32,230.62,183.35,187.29,238.5,266.07,226.68,132.14,92.75,199.11,214.87,195.17,124.26,234.56,159.72,136.08,203.05,234.56,171.53,175.47,171.53,163.66,155.78,230.62,147.9,210.93,187.29,293.65,195.17,210.93,179.41,230.62,203.05,159.72,270.01,171.53,124.26,88.81,88.81,238.5,116.39,234.56,222.74,242.44,171.53,191.23,206.99,159.72,179.41,88.81,234.56,187.29,128.2,218.8,301.53,104.57,218.8,230.62,136.08,175.47,297.59,155.78,92.75,128.2,203.05,171.53,226.68,230.62,120.33,92.75,132.14,104.57,140.02,163.66,309.41,159.72,222.74,171.53,147.9,293.65,100.63,199.11,254.26,187.29,195.17,230.62,210.93,218.8,203.05,143.96,175.47,206.99,167.6,195.17,155.78,195.17,230.62,187.29,203.05,124.26,167.6,155.78,140.02,234.56,226.68,210.93,120.33,238.5,179.41,262.14,136.08,151.84,210.93,175.47,84.87,222.74,187.29,159.72,187.29,293.65,199.11,195.17,151.84,187.29,250.32,151.84,226.68,262.14,163.66,143.96,195.17,191.23,151.84,210.93,266.07,270.01,159.72,171.53,301.53,206.99,238.5,167.6,226.68,167.6,258.2,191.23,147.9,214.87,214.87,167.6,222.74,187.29,140.02,218.8,128.2,163.66],[75.73999999999999,-75.17,137.26,55.13,-38.2,10.28,-93.66,38.47,32.4,57.56,79.06999999999999,-93.66,-29.41,-44.56,60.59,-83.34999999999999,27.26,-16.68,88.77,15.13,-4.87,34.83,116.95,-8.800000000000001,-47.89,7.56,-103.66,79.68000000000001,-72.73999999999999,33.61,-97.89,-79.72,-70.31999999999999,21.49,93.31999999999999,69.06999999999999,4.83,-53.35,-28.8,-17.6,11.2,-23.04,133.01,56.65,-70.31999999999999,-10.62,-143.35,2.71,51.5,73.93000000000001,23.32,57.86,27.25,30.89,-24.87,14.83,45.74,75.44,-69.72,3.92,96.95,105.44,-1.53,-75.47,28.47,-83.66,-55.78,-160.62,-97.90000000000001,29.07,-27.29,-3.65,-55.17,-0.93,120.59,-0.62,76.95,0.28,-70.01000000000001,-61.53,-14.26,-18.81,11.19,-48.5,-46.39,125.44,137.26,57.56,-51.53,-41.23,13.01,120.28,120.59,51.19,55.44,-7.29,11.8,-8.800000000000001,-51.53,145.43,-98.8,59.38,-76.08,-35.47,-7.59,4.22,7.25,31.8,-53.05,-31.53,3.32,-0.62,-90.33,-12.75,57.86,-14.57,-20.02,-13.66,-79.41,-9.720000000000001,-12.74,8.470000000000001,-7.9,66.34999999999999,-90.63,40.89,15.74,102.71,24.83,-0.62,9.07,21.2,56.95,26.04,-45.47,63.01,-27.6,-135.17,54.22,14.83,9.380000000000001,22.71,-3.05,15.74,-77.59999999999999,-35.78,-40.02,125.44,-46.68,-60.93,-10.33,-148.5,-19.41,-32.14,-96.08,-91.84,19.07,54.53,35.13,-72.73999999999999,-67.29000000000001,-99.72,92.70999999999999,-173.65,30.89,34.83,-111.84,-47.29,109.68,58.16,33.32,-12.14,36.34,6.04,54.83,-91.23,108.16,-0.93,23.93,-50.01,-89.72,-61.53,-51.53,113.01,61.5,12.4,-46.68,32.4,61.8,-51.23,-47.9,-94.87,15.13,-17.6,27.26,2.71,99.98,31.2,101.8,-53.66]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>adverts<\/th>\n      <th>sales<\/th>\n      <th>airplay<\/th>\n      <th>prediction<\/th>\n      <th>error<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":300,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4]},{"name":"adverts","targets":0},{"name":"sales","targets":1},{"name":"airplay","targets":2},{"name":"prediction","targets":3},{"name":"error","targets":4}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-70953493dabb74e942d2">{"x":{"filter":"none","vertical":false,"data":[[0.1,9.859999999999999,14.46,11.88,5.75,5.69,4.72,5.37,5.14,1.74,17.21,6.11,2.51,0.98,4.07,2.65,13.23,1.97,13.27,13.81,7.92,9.57,17.9,6.56,6.14,3.13,3.37,15.45,0.6899999999999999,7.86,1.26,3.78,2.18,7.6,11.63,8.43,1.25,2.37,6.7,6.12,9.220000000000001,0.5,20,10.54,3.85,15.08,1.03,2.05,11.71,6.9,7.84,4.06,1.8,6.07,15.42,11.12,8.57,8.359999999999999,2.37,10.78,5.79,15,7.31,0.26,3.92,2.34,2.76,0.57,2.55,5.67,1.03,2.51,0.6899999999999999,6.43,15,1.03,7.57,0.51,6.44,0.15,2.43,2.57,0.22,0.46,7.25,11.26,19.85,18.38,1.36,2.38,9.77,14.53,16,2.69,9.01,9.82,2.01,7.46,11.33,10,0.76,13.51,2.03,3.66,3.05,2.63,5.14,1.53,0.36,1.03,2.15,4.27,5.08,2.33,10.35,1.03,5.26,6.25,9.119999999999999,2.16,5.62,4.75,2.32,6.79,0.71,15.68,2.64,14.24,7.16,7.77,5.09,9.640000000000001,5.84,9.23,3.44,10.96,1,0.3,10.8,8,10.72,8.93,2.83,9.17,2.35,4.57,2.07,12.94,8.27,5.64,1.93,0.11,0.46,0.43,0.2,6.35,10.02,11.77,5.08,2.16,5.26,0.27,8.84,0.09,1.04,1.7,4.3,2.24,1.46,9.859999999999999,5.01,2.27,10.51,0.68,15.47,3.94,8.039999999999999,8.02,4.51,0.27,1.79,3.46,2.96,22.72,11.35,6.01,0.45,7.6,8.33,0.57,7.09,0.57,7.67,5.03,7.01,9.109999999999999,8.890000000000001,8.01,15,7.86],[330,120,360,270,220,170,70,210,200,300,290,70,150,190,240,100,250,210,280,230,210,230,320,210,230,250,60,330,150,150,180,80,180,130,320,280,200,130,190,150,230,310,340,240,180,220,40,190,290,340,250,190,120,230,190,210,170,310,90,140,300,340,170,100,200,80,100,70,50,240,160,290,140,210,300,230,280,160,200,110,110,70,100,190,70,360,360,300,120,150,220,280,300,140,290,180,140,210,250,250,120,290,60,140,290,160,100,160,150,140,230,230,30,80,190,90,120,150,230,150,210,180,140,360,10,240,270,290,220,230,220,240,260,170,130,270,140,60,210,210,240,210,200,140,90,120,100,360,180,150,110,90,160,230,40,60,230,230,120,150,120,60,280,120,230,230,40,140,360,210,260,250,200,150,250,100,260,210,290,220,70,110,250,320,300,180,180,200,320,140,100,120,230,150,250,190,240,250,230,110],[135.09,228.92,273.14,248.34,189.41,188.83,179.5,185.75,183.54,150.85,299.58,192.87,158.26,143.55,173.25,159.6,261.31,153.07,261.7,266.89,210.27,226.13,306.21,197.19,193.15,164.22,166.52,282.66,140.76,209.69,146.24,170.47,155.08,207.19,245.93,215.17,146.14,156.91,198.54,192.96,222.76,138.93,326.4,235.45,171.14,279.1,144.03,153.84,246.7,200.46,209.5,173.16,151.43,192.48,282.37,241.03,216.52,214.5,156.91,237.76,189.79,278.33,204.4,136.63,171.81,156.62,160.66,139.61,158.64,188.64,144.03,158.26,140.76,195.94,278.33,144.03,206.9,139.03,196.04,135.57,157.49,158.83,136.24,138.55,203.83,242.38,324.96,310.82,147.2,157.01,228.05,273.81,287.94,159.99,220.75,228.53,153.45,205.84,243.05,230.26,141.43,264.01,153.64,169.31,163.45,159.41,183.54,148.84,137.59,144.03,154.8,175.18,182.96,156.53,233.63,144.03,184.69,194.21,221.8,154.89,188.16,179.79,156.43,199.4,140.95,284.87,159.51,271.02,202.96,208.82,183.06,226.8,190.27,222.86,167.2,239.49,143.74,137.01,237.95,211.04,237.18,219.98,161.33,222.28,156.72,178.06,154.03,258.53,213.63,188.35,152.68,135.18,138.55,138.26,136.05,195.17,230.45,247.28,182.96,154.89,184.69,136.72,219.11,134.99,144.13,150.47,175.47,155.66,148.16,228.92,182.29,155.95,235.17,140.66,282.85,172,211.42,211.23,177.48,136.72,151.34,167.39,162.58,352.55,243.24,191.9,138.45,207.19,214.21,139.61,202.29,139.61,207.86,182.48,201.52,221.71,219.59,211.13,278.33,209.69],[194.91,-108.92,86.86,21.66,30.59,-18.83,-109.5,24.25,16.46,149.15,-9.58,-122.87,-8.26,46.45,66.75,-59.6,-11.31,56.93,18.3,-36.89,-0.27,3.87,13.79,12.81,36.85,85.78,-106.52,47.34,9.24,-59.69,33.76,-90.47,24.92,-77.19,74.06999999999999,64.83,53.86,-26.91,-8.539999999999999,-42.96,7.24,171.07,13.6,4.55,8.859999999999999,-59.1,-104.03,36.16,43.3,139.54,40.5,16.84,-31.43,37.52,-92.37,-31.03,-46.52,95.5,-66.91,-97.76000000000001,110.21,61.67,-34.4,-36.63,28.19,-76.62,-60.66,-69.61,-108.64,51.36,15.97,131.74,-0.76,14.06,21.67,85.97,73.09999999999999,20.97,3.96,-25.57,-47.49,-88.83,-36.24,51.45,-133.83,117.62,35.04,-10.82,-27.2,-7.01,-8.050000000000001,6.19,12.06,-19.99,69.25,-48.53,-13.45,4.16,6.95,19.74,-21.43,25.99,-93.64,-29.31,126.55,0.59,-83.54000000000001,11.16,12.41,-4.03,75.2,54.82,-152.96,-76.53,-43.63,-54.03,-64.69,-44.21,8.199999999999999,-4.89,21.84,0.21,-16.43,160.6,-130.95,-44.87,110.49,18.98,17.04,21.18,36.94,13.2,69.73,-52.86,-37.2,30.51,-3.74,-77.01000000000001,-27.95,-1.04,2.82,-9.98,38.67,-82.28,-66.72,-58.06,-54.03,101.47,-33.63,-38.35,-42.68,-45.18,21.45,91.73999999999999,-96.05,-135.17,-0.45,-17.28,-62.96,-4.89,-64.69,-76.72,60.89,-14.99,85.87,79.53,-135.47,-15.66,211.84,-18.92,77.70999999999999,94.05,-35.17,9.34,-32.85,-72,48.58,-1.23,112.52,83.28,-81.34,-57.39,87.42,-32.55,56.76,-11.9,41.55,-7.19,105.79,0.39,-102.29,-19.61,22.14,-32.48,48.48,-31.71,20.41,38.87,-48.33,-99.69]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>adverts<\/th>\n      <th>sales<\/th>\n      <th>prediction<\/th>\n      <th>error<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":300,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]},{"name":"adverts","targets":0},{"name":"sales","targets":1},{"name":"prediction","targets":2},{"name":"error","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
+<!-- ## Homoscedasticity -->
+<!-- >Is there any systematic error?  -->
+<!-- ```{r, fig.height=5, fig.width=5, fig.align='center', echo=FALSE} -->
+<!-- plot(prediction, error, xlim = c(0,360), ylim = c(-200,200), main = "Predictions vs. Residuals", -->
+<!--      xlab = "Predicted Sales", ylab = "Model Error (Residuals)", -->
+<!--      las = 1, pch = 21, bg = "lightgreen") -->
+<!-- abline(lm(error ~ prediction),  -->
+<!--        col='darkred') -->
+<!-- text(50, -150, bquote("cor = " ~.(round(cor(prediction, error), 5)))) -->
+<!-- ``` -->
 </section>
-<section id="homoscedasticity-1" class="level2">
-<h2 class="anchored" data-anchor-id="homoscedasticity-1">Homoscedasticity</h2>
+<section id="normality-of-residuals" class="level2">
+<h2 class="anchored" data-anchor-id="normality-of-residuals">Normality of Residuals</h2>
 <blockquote class="blockquote">
-<p>Is there any systematic error?</p>
+<p>Are the residuals normally distributed?</p>
 </blockquote>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -490,23 +591,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="smaller anchored" data-anchor-id="model-fit">Model fit</h2>
 <ul>
 <li>The fit of the model can be viewed in terms of the correlation (<span class="math inline">\(r\)</span>) between the predictions and the observed values: if the predictions are perfect, the correlation will be 1.</li>
-<li>For simple regression, this is equal to the correlation between airplay and sales. For multiple regression (next lecture), these will differ.</li>
+<li>For simple regression, this is equal to the correlation between adverts and sales. For multiple regression (block 3), these will differ.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">cor</span>(prediction, sales)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5989188</code></pre>
+<pre><code>[1] 0.5785264</code></pre>
 </div>
 </div>
 </section>
 <section id="explained-variance" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="explained-variance">Explained variance</h2>
-<p>Squaring this correlation gives the proportion of variance in sales that is explained by airplay:</p>
+<p>Squaring this correlation gives the proportion of variance in sales that is explained by adverts:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>r<span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3587037</code></pre>
+<pre><code>[1] 0.3346928</code></pre>
 </div>
 </div>
 </section>
@@ -522,38 +623,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><span class="math inline">\(r^2\)</span> is the proportion of <span style="color: blue;">blue</span> to <span style="color: orange;">orange</span>, while <span class="math inline">\(1 - r^2\)</span> is the proportion of <span style="color: red;">red</span> to <span style="color: orange;">orange</span></p>
-</section>
-<section id="test-model-fit" class="level2">
-<h2 class="anchored" data-anchor-id="test-model-fit">Test model fit</h2>
-<p>Compare model to mean Y (sales) as model</p>
-<p><span class="math display">\[F = \frac{(n-p-1) r^2}{p (1-r^2)}\]</span></p>
-<p>Where <span class="math inline">\({df}_{model} = n - p - 1 = N - K - 1\)</span>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>fStat <span class="ot">&lt;-</span> ( (n<span class="sc">-</span>p<span class="dv">-1</span>)<span class="sc">*</span>r<span class="sc">^</span><span class="dv">2</span> ) <span class="sc">/</span> ( p<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>r<span class="sc">^</span><span class="dv">2</span>) )</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>fStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 110.7496</code></pre>
-</div>
-</div>
-</section>
-<section id="signal-to-noise" class="level2">
-<h2 class="anchored" data-anchor-id="signal-to-noise">Signal to noise</h2>
-<p>Given the description of explained variance, F can again be seen as a proportion of explained to unexplained variance. Also known as a signal to noise ratio.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df.model <span class="ot">&lt;-</span> p <span class="co"># n = rows, p = predictors</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>df.error <span class="ot">&lt;-</span> n <span class="sc">-</span> p <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>SS_model <span class="ot">&lt;-</span> <span class="fu">sum</span>((prediction <span class="sc">-</span> <span class="fu">mean</span>(sales))<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>SS_error <span class="ot">&lt;-</span> <span class="fu">sum</span>((sales <span class="sc">-</span> prediction)<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>MS_model <span class="ot">&lt;-</span> SS_model <span class="sc">/</span> df.model</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>MS_error <span class="ot">&lt;-</span> SS_error <span class="sc">/</span> df.error</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>fStat <span class="ot">&lt;-</span> MS_model <span class="sc">/</span> MS_error </span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>fStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 110.7496</code></pre>
-</div>
-</div>
+<!-- ## Test model fit -->
+<!-- Compare model to mean Y (sales) as model -->
+<!-- $$F = \frac{(n-p-1) r^2}{p (1-r^2)}$$ -->
+<!-- Where ${df}_{model} = n - p - 1 = N - K - 1$. -->
+<!-- ```{r, echo=TRUE} -->
+<!-- p <- 1 -->
+<!-- fStat <- ( (n-p-1)*r^2 ) / ( p*(1-r^2) ) -->
+<!-- fStat -->
+<!-- ``` -->
+<!-- ## Signal to noise -->
+<!-- Given the description of explained variance, F can again be seen as a proportion of explained to unexplained variance. Also known as a signal to noise ratio. -->
+<!-- ```{r, echo=TRUE} -->
+<!-- df.model <- p # n = rows, p = predictors -->
+<!-- df.error <- n - p - 1 -->
+<!-- SS_model <- sum((prediction - mean(sales))^2) -->
+<!-- SS_error <- sum((sales - prediction)^2) -->
+<!-- MS_model <- SS_model / df.model -->
+<!-- MS_error <- SS_error / df.error -->
+<!-- fStat <- MS_model / MS_error  -->
+<!-- fStat -->
+<!-- ``` -->
 </section>
 <section id="calculate-t-values-for-bs-for-hypothesis-testing" class="level2">
 <h2 class="anchored" data-anchor-id="calculate-t-values-for-bs-for-hypothesis-testing">Calculate t-values for b’s for hypothesis testing</h2>
@@ -564,94 +654,90 @@ df &amp;= n - p - 1 \\
 \end{aligned}\]</span></p>
 <p>Where <span class="math inline">\(b\)</span> is the beta coefficient, <span class="math inline">\({SE}\)</span> is the standard error of the beta coefficient, <span class="math inline">\(n\)</span> is the number of subjects and <span class="math inline">\(p\)</span> the number of predictors. <span class="math inline">\(\mu_b\)</span> is the null-hypothesized value for <span class="math inline">\(b\)</span> - usually set to 0.</p>
 </section>
-<section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section"></h2>
+<section id="converting-b-to-t" class="level2">
+<h2 class="anchored" data-anchor-id="converting-b-to-t">Converting b to <span class="math inline">\(t\)</span></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get Standard error's for b (bonus)</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>se.b1 <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(MS_error <span class="sc">/</span> (<span class="fu">var</span>(airplay) <span class="sc">*</span> (n<span class="dv">-1</span>))); se.b1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get Standard error's for b (bonus)</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>se.b1 <span class="ot">&lt;-</span> <span class="fu">sqrt</span>((n<span class="sc">/</span>(n<span class="dv">-2</span>)) <span class="sc">*</span> <span class="fu">mean</span>(error<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> (<span class="fu">var</span>(adverts) <span class="sc">*</span> (n<span class="dv">-1</span>))); se.b1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3743129</code></pre>
+<pre><code>[1] 0.9632463</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate t for b1</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>mu.b1 <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>t.b1  <span class="ot">&lt;-</span> (b1 <span class="sc">-</span> mu.b1) <span class="sc">/</span> se.b1; t.b1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate t for b1</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>mu.b1 <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>t.b1  <span class="ot">&lt;-</span> (b1 <span class="sc">-</span> mu.b1) <span class="sc">/</span> se.b1; t.b1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 10.52377</code></pre>
+<pre><code>[1] 9.980326</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>n     <span class="ot">&lt;-</span> <span class="fu">nrow</span>(data) <span class="co"># number of rows</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>p     <span class="ot">&lt;-</span> <span class="dv">1</span>          <span class="co"># number of predictors</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>df.b1 <span class="ot">&lt;-</span> n <span class="sc">-</span> p <span class="sc">-</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>n     <span class="ot">&lt;-</span> <span class="fu">nrow</span>(data) <span class="co"># number of rows</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>p     <span class="ot">&lt;-</span> <span class="dv">1</span>          <span class="co"># number of predictors</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>df.b1 <span class="ot">&lt;-</span> n <span class="sc">-</span> p <span class="sc">-</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="p-values-of-b_1" class="level2">
 <h2 class="anchored" data-anchor-id="p-values-of-b_1">P-values of <span class="math inline">\(b_1\)</span></h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="7.-linear_model_regression_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid" width="672"></p>
+<p><img src="7.-linear_model_regression_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-</section>
-<section id="visualize" class="level2">
-<h2 class="anchored" data-anchor-id="visualize">Visualize</h2>
-<p>Instead of obtaining the p-value by locating the t in the t-distribution, we can locate the F in the F-distribution</p>
-<div class="cell">
-<div class="cell-output-display">
-<p><img src="7.-linear_model_regression_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="its-all-the-same-thing" class="level2">
-<h2 class="anchored" data-anchor-id="its-all-the-same-thing">It’s all the same thing…</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>fStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 110.7496</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>t.b1<span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 110.7496</code></pre>
-</div>
-</div>
+<!-- ## Visualize -->
+<!-- Instead of obtaining the p-value by locating the t in the t-distribution, we can locate the F in the F-distribution -->
+<!-- ```{r, warning=FALSE, echo=FALSE} -->
+<!-- curve(df(x, df.model, df.error), from = 0, to = 150, n = 1000, bty = "n", las = 1, -->
+<!--       xlab = "F-value", ylab = "Density", main = "F-distribution with P-value Region") -->
+<!-- # Shade the upper tail (p-value region) using polygon -->
+<!-- # Define the region to fill (upper tail, greater than fStat) -->
+<!-- x_vals <- seq(fStat, 10, length.out = 100) -->
+<!-- y_vals <- df(x_vals, df.model, df.error) -->
+<!-- # Draw the polygon to fill the area under the curve -->
+<!-- polygon(c(fStat, x_vals, 10), c(0, y_vals, 0), col = "lightblue", border = NA) -->
+<!-- # Optionally, add a vertical line at the F-statistic -->
+<!-- arrows(x0 = fStat, x1 = fStat, y0 = 0 , y1 = 0.4, col = "darkred", lwd = 2) -->
+<!-- text(x = fStat, y = 0.55, paste("F =", round(fStat, 2)), cex = 1.2) -->
+<!-- text(x = fStat, y = 0.7, paste("p-val < 0.001"), cex = 1.2) -->
+<!-- ``` -->
+<!-- ## It's all the same thing...  -->
+<!-- ```{r, echo=TRUE} -->
+<!-- fStat -->
+<!-- t.b1^2 -->
+<!-- ``` -->
 </section>
 <section id="so-how-many-ways-do-we-have-for-assessing-an-association" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="so-how-many-ways-do-we-have-for-assessing-an-association">So how many <code>@!&amp;#$</code> ways do we have for assessing an association?!</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the correlation between x and y, standardized (between -1, 1)</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(sales, airplay) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the correlation between x and y, standardized (between -1, 1)</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(sales, adverts) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5989188</code></pre>
+<pre><code>[1] 0.5785264</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the covariance between x and y, unstandardized </span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cov</span>(sales, airplay)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the covariance between x and y, unstandardized </span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cov</span>(sales, adverts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 593.0151</code></pre>
+<pre><code>[1] 226.7254</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># regression coefficient in linear regression, standardized (not bounded)</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co"># generalizes easily to settings with multiple predictors</span></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>b1 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># regression coefficient in linear regression, standardized (not bounded)</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># generalizes easily to settings with multiple predictors</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>b1 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.939182</code></pre>
+<pre><code>[1] 9.613511</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># t-statistic: standardized difference between b1 and 0</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>t.b1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># t-statistic: standardized difference between b1 and 0</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>t.b1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 10.52377</code></pre>
+<pre><code>[1] 9.980326</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The metrics below are more indicative of an overall model's performance</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co"># the correlation between y and model prediction, standardized (between -1, 1)</span></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(sales, prediction) <span class="co"># can be squared to get proportion explained variance</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The metrics below are more indicative of an overall model's performance</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># the correlation between y and model prediction, standardized (between -1, 1)</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(sales, prediction) <span class="co"># can be squared to get proportion explained variance</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5989188</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># F: signal/noise ratio of a model</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>fStat </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 110.7496</code></pre>
+<pre><code>[1] 0.5785264</code></pre>
 </div>
 </div>
+<!-- # F: signal/noise ratio of a model -->
+<!-- fStat  -->
 </section>
 </section>
 <section id="closing" class="level1">
@@ -659,7 +745,12 @@ df &amp;= n - p - 1 \\
 <section id="next-week" class="level2">
 <h2 class="anchored" data-anchor-id="next-week">Next Week</h2>
 <ul>
-<li>Exam!</li>
+<li>Exam!
+<ul>
+<li>Mix of using JASP, interpreting output, conceptual understanding</li>
+<li>WA will contain old exam questions</li>
+<li>Field book available (like in this weeks WA), including glossary</li>
+</ul></li>
 </ul>
 </section>
 <section id="recommended-exercises" class="level2">

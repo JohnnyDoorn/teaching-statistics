@@ -3,7 +3,8 @@
 ```{r, echo=FALSE}
 if(!"DT" %in% installed.packages()) { install.packages("DT") }
 library("DT")
-data <- read.csv("Album Sales.csv")[, -4]
+data <- read.csv("Album Sales.csv")[, -c(3, 4)]
+data$adverts <- round(data$adverts / 100, 2)
 ```
 
 ## Regression {.smaller}
@@ -19,23 +20,42 @@ In linear regression, the relationships are modeled using linear predictor funct
 Source: [wikipedia](https://en.wikipedia.org/wiki/Linear_regression)
 
 
-## Assumptions
+## Assumptions of the Linear Model {.smaller}
 
-A selection from Field (Section 8.4):
+A selection from Field (Section 8.4.1):
 
 * Sensitivity (Section 6.4)
-* Homoscedasticity (Section 6.7)
+  * Are there outliers?
 * Normality (Section 6.7)
+  * Are the model errors non-normally distributed?
+* Linearity (Section 6.6)
+  * Is the association non-linear? 
+* Homoscedasticity (Section 6.7)
+  * Is there systematic model error?
+  
+> The greater the assumption violation, the less reliable your results are
+
+--- 
+
+###  Exam Note about Assumptions
+
+For exam 1:
+
+- We only focus on Sensitivity, Normality, Linearity
+- We only focus on assessing the assumptions
+- Don't need to study ch6; lecture and application in ch8 suffice
 
 ## Sensitivity
 
 Outliers
 
-* Extreme residuals
-* Cook's distance (< 1)
+* Extreme residuals (e.g., > 3)
+* Cook's distance (e.g., > 1)
 * Check Q-Q, residuals plots, casewise diagnostics
 
-## Sensitivity
+--- 
+
+### Sensitivity
 
 ```{r, fig.align='center', fig.width=10, fig.height=5, echo=FALSE}
 n <- 20
@@ -81,6 +101,82 @@ abline(fit2, col = "blue")
 text(0.5, y[1], bquote("r ="~ .(r) ~ "," ~ r^2 ~ " = " ~ .(r.2)), pos = 2, col = "blue")
 ```
 
+<!-- ## Normality -->
+
+<!-- ::: {.columns} -->
+
+<!-- ::: {.column} -->
+
+<!-- * Residuals should be normally distributed -->
+<!-- * Look at Q-Q plot standardized residuals. Most points should be on the diagonal -->
+<!-- * After the analysis is complete because it's based on the residuals -->
+<!-- * See figure 6.26 -->
+<!-- ::: -->
+
+<!-- ::: {.column} -->
+
+<!-- ```{r, fig.align='center', fig.width=5, fig.height=5, echo=FALSE} -->
+<!-- # Example vector of errors -->
+<!-- set.seed(123) -->
+<!-- errors <- rnorm(100, mean = 0, sd = 1)  # replace with your residuals -->
+
+<!-- # QQ plot -->
+<!-- qqnorm(errors, -->
+<!--        main = "QQ Plot of Residuals", -->
+<!--        xlab = "Theoretical Quantiles", -->
+<!--        ylab = "Sample Quantiles", -->
+<!--        pch = 21, bg = "orange", col ="black", cex = 1.2, bty = "n", las = 1) -->
+
+<!-- # Add reference line (uses same vector as qqnorm) -->
+<!-- qqline(errors, col = "darkred", lwd = 2) -->
+
+
+<!-- ``` -->
+<!-- ::: -->
+
+<!-- ::: -->
+
+
+
+## Normality {.smaller}
+
+::: {.columns}
+
+::: {.column}
+
+* Residuals should be normally distributed
+* Look at Q-Q plot standardized residuals. Most points should be on the diagonal
+* After the analysis is complete because it's based on the residuals
+* See figure 6.25
+:::
+
+::: {.column}
+![figure 6.25](../../images/figure-6-25.jpg)
+:::
+
+:::
+
+
+## Linearity {.smaller}
+
+::: {.columns}
+
+::: {.column}
+
+* The relationship between predictors and the outcome should be linear
+* Inspect using plots:
+    * Scatter plots (or partial plots) of predictors vs. outcome
+    * Residuals vs. predicted
+* See figure 6.28
+:::
+
+::: {.column}
+![figure 6.28](../../images/figure-6-28.png)
+:::
+
+:::
+
+
 ## Homoscedasticity
 
 ::: {.columns}
@@ -88,14 +184,14 @@ text(0.5, y[1], bquote("r ="~ .(r) ~ "," ~ r^2 ~ " = " ~ .(r.2)), pos = 2, col =
 ::: {.column}
 
 * Variance of residuals should be equal across all expected values
-* Look at scatterplot of standardized: predicted values vs. residuals. Roughly round shape is needed
+* Look at scatterplot of residuals vs. predicted values. Ideally it's an uncorrelated, round cloud
 * After the analysis is complete because it's based on the residuals
 :::
 
 ::: {.column}
 
 ```{r, fig.align='center', fig.width=5, fig.height=5, echo=FALSE}
-fit <- lm(sales ~ airplay, data = data)
+fit <- lm(sales ~ adverts, data = data)
 z.pred  = scale(fit$fitted.values) # convert model predictions to z-scores
 z.resid = scale(fit$residuals)     # convert model residuals to z-scores
 
@@ -113,28 +209,31 @@ draw.circle(0,0,1.7,col=rgb(1,0,0,.5))
 
 ## The data {.smaller}
 
-> Predict album sales (x 1,000 copies) based on airplay (no. plays).
+> Predict album sales (x 1,000 copies) based on adverts (x 100,000£).
 
 ```{r, echo=FALSE}
 n <- nrow(data)
 datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
 ```
 
-## The data {.smaller}
+--- 
+
+### The data {.smaller}
 ```{r, fig.align='center', fig.width=8, fig.height=6, echo=FALSE}
-plot(data$airplay, data$sales, las = 1, xlab = "Airplay", ylab = "Sales (x 1,000)",
-     xlim=c(0, 65), ylim=c(0,350), cex= 1.2,
+plot(data$adverts, data$sales, las = 1, xlab = "adverts", ylab = "Sales (x 1,000)",
+     xlim=c(0, 20), ylim=c(0,350), cex= 1.2,
      bty = "n",
      pch = 21,
      bg = "purple")
+text(15, 50, bquote("cor = " ~.(round(cor(data$adverts, data$sale), 3))), cex = 1.4)
 ```
 
 ## Calculate regression parameters {.subsection}
 
-$${sales}_i = b_0 + b_1 {airplay}_i + \epsilon_i$$
+$${sales}_i = b_0 + b_1 {adverts}_i + \epsilon_i$$
 
 ```{r, eval=TRUE}
-airplay  <- data$airplay
+adverts  <- data$adverts
 sales    <- data$sales
 ```
 
@@ -145,11 +244,11 @@ $$b_1 = r_{xy} \frac{s_y}{s_x}$$
 ```{r, echo=TRUE}
 # Calculate b1
 
-cor.sales.airplay <- cor(sales,airplay)
+cor.sales.adverts <- cor(sales,adverts)
 sd.sales          <- sd(sales)
-sd.airplay        <- sd(airplay)
+sd.adverts        <- sd(adverts)
 
-b1 <- cor.sales.airplay * ( sd.sales / sd.airplay )
+b1 <- cor.sales.adverts * ( sd.sales / sd.adverts )
 b1
 ```
 
@@ -159,9 +258,9 @@ $$b_0 = \bar{y} - b_1 \bar{x}$$
 
 ```{r, echo=TRUE}
 mean.sales    <- mean(sales)
-mean.airplay  <- mean(airplay)
+mean.adverts  <- mean(adverts)
 
-b0 <- mean.sales - b1 * mean.airplay
+b0 <- mean.sales - b1 * mean.adverts
 b0
 ```
 
@@ -170,34 +269,36 @@ b0
 ```{r, fig.align='center', fig.width=8, fig.height=6, echo=FALSE}
 # Extra
 
-plot(airplay,sales, las = 1, 
-     xlim=c(0, 65), ylim=c(0,350),
+plot(adverts,sales, las = 1, 
+     xlim=c(0, 20), ylim=c(0,350),
      bty = "n",  cex= 1.2,
      pch = 21,
      bg = "purple")
-abline(lm(sales~airplay), lwd = 2)
-text(60, 350, bquote(beta[1] ~ " = " ~ .(round(b1, 2))))
+abline(lm(sales~adverts), lwd = 2)
+text(1500, 50, bquote(beta[1] ~ " = " ~ .(round(b1, 2))))
 ```
 
-## The slope
+--- 
+
+### The slope
 
 ```{r, fig.align='center', fig.width=8, fig.height=6, echo=FALSE}
 # Extra
 
-plot(airplay,sales, las = 1, 
-     xlim=c(0, 65), ylim=c(0,350),
+plot(adverts,sales, las = 1, 
+     xlim=c(0, 20), ylim=c(0,350),
      bty = "n",  cex= 1.2,
      pch = 21,
      bg = "purple")
-abline(lm(sales~airplay))
+abline(lm(sales~adverts))
 abline(v=c(2,3),col='red')
 abline(h=b0 + b1 * c(2, 3),col='red')
-text(60, 350, bquote(beta[1] ~ " = " ~ .(round(b1, 2))))
+text(1500, 50, bquote(beta[1] ~ " = " ~ .(round(b1, 2))))
 
 lines(c(3,3),c(b0 + b1 * 2,b0 + b1 * 3),col='green',lwd=3)
 lines(c(2,3), rep(b0 + b1 * 2, 2),col='blue',lwd=3)
 
-text(2.5, (b0 + b1 * 2),1, pos=1, cex=1)
+text(2.5, (b0 + b1 * 2), 1, pos=1, cex=1)
 text(3  , (b0 + b1 * 2.5),
      round((b0 + b1 * 3)-(b0 + b1 * 2), 2), 
      pos=4, 
@@ -208,12 +309,12 @@ text(3  , (b0 + b1 * 2.5),
 
 ```{r, echo=FALSE, fig.align='center', fig.width=8, fig.height=6, echo=FALSE}
 # Extra
-plot(airplay,sales, las = 1, 
-     xlim=c(1, 4), ylim=c(90,100),
+plot(adverts,sales, las = 1, 
+     xlim=c(1, 4), ylim=c(150,170),
      bty = "n", cex= 1.2,
      pch = 21,
      bg = "purple")
-abline(lm(sales~airplay))
+abline(lm(sales~adverts))
 abline(v=c(2,3),col='red')
 abline(h=b0 + b1 * c(2, 3),col='red')
 
@@ -226,18 +327,21 @@ text(3  , (b0 + b1 * 2.5),
      cex=1)
 ```
 
-For every additional airplay, we predict sales to increase by $3.94$
+For every additional adverts, we predict sales to increase by `r round(b1, 2)`
 
 ## Define regression equation
 
-$$\widehat{sales} = {\text{model prediction}} = b_0 + b_1 {airplay}$$
+$$\widehat{sales} = {\text{model prediction}} = b_0 + b_1 {adverts}$$
+$$\widehat{sales} = {\text{model prediction}} = `r round(b0, 2)` + `r round(b1, 2)`\times {adverts}$$
 
 So now we can add the expected sales based on this model
 
 ```{r, echo=TRUE}
-prediction <- b0 + b1 * airplay
+prediction <- b0 + b1 * adverts
 data$prediction <- round(prediction, 2)
 ```
+
+
 
 ## Predicted values {.smaller .subsection}
 
@@ -256,12 +360,14 @@ And lets have a look at this relation between model prediction and observed
 plot(prediction,sales, xlim = c(0,360), ylim = c(0,360),
      xlab = "Predicted Sales", ylab = "Observed Sales",
      las = 1, pch = 21, bg = "lightgreen")
-lines(c(0,1000), c(0,1000), col='red')
+abline(lm(prediction~sales), col = "red")
+text(50, 50, bquote("cor = " ~.(round(cor(prediction, sales), 3))))
+# lines(c(0,1000), c(0,1000), col='red')
 ```
 
 ## Error {.smaller}
 
-The error / residual is the difference between the model predictions and observed values
+The error (residual) is the difference between the model predictions and observed values
 
 ```{r, echo=TRUE}
 error <- sales - prediction
@@ -272,23 +378,39 @@ data$error <- round(error, 2)
 datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 300, paging = F, info = F))
 ```
 
-## Homoscedasticity
+<!-- ## Homoscedasticity -->
 
->Is there any systematic error? 
+<!-- >Is there any systematic error?  -->
+
+<!-- ```{r, fig.height=5, fig.width=5, fig.align='center', echo=FALSE} -->
+<!-- plot(prediction, error, xlim = c(0,360), ylim = c(-200,200), main = "Predictions vs. Residuals", -->
+<!--      xlab = "Predicted Sales", ylab = "Model Error (Residuals)", -->
+<!--      las = 1, pch = 21, bg = "lightgreen") -->
+<!-- abline(lm(error ~ prediction),  -->
+<!--        col='darkred') -->
+<!-- text(50, -150, bquote("cor = " ~.(round(cor(prediction, error), 5)))) -->
+<!-- ``` -->
+
+## Normality of Residuals
+
+> Are the residuals normally distributed?
 
 ```{r, fig.height=5, fig.width=5, fig.align='center', echo=FALSE}
-plot(prediction, error, xlim = c(0,360), ylim = c(-200,200), main = "Predictions vs. Residuals",
-     xlab = "Predicted Sales", ylab = "Model Error (Residuals)",
-     las = 1, pch = 21, bg = "lightgreen")
-abline(lm(error ~ prediction), 
-       col='darkred')
-text(50, -150, bquote("cor = " ~.(round(cor(prediction, error), 5))))
+qqnorm(error,
+       main = "QQ Plot of Residuals",
+       xlab = "Theoretical Quantiles",
+       ylab = "Sample Quantiles",
+       pch = 21, bg = "orange", col ="black", cex = 1.2, bty = "n", las = 1)
+
+# Add reference line
+qqline(error, col = "darkred", lwd = 2)
 ```
+
 
 ## Model fit {.smaller}
 
 - The fit of the model can be viewed in terms of the correlation ($r$) between the predictions and the observed values: if the predictions are perfect, the correlation will be 1. 
-- For simple regression, this is equal to the correlation between airplay and sales. For multiple regression (next lecture), these will differ. 
+- For simple regression, this is equal to the correlation between adverts and sales. For multiple regression (block 3), these will differ. 
 
 ```{r, echo=TRUE}
 r <- cor(prediction, sales)
@@ -297,7 +419,7 @@ r
 
 ## Explained variance {.subsection}
 
-Squaring this correlation gives the proportion of variance in sales that is explained by airplay:
+Squaring this correlation gives the proportion of variance in sales that is explained by adverts:
 
 ```{r, echo=TRUE}
 r^2
@@ -349,35 +471,35 @@ legend("topright", c("Observed", "Predicted"),
 ```
 $r^2$ is the proportion of <span style="color: blue;">blue</span> to <span style="color: orange;">orange</span>, while $1 - r^2$ is the proportion of <span style="color: red;">red</span> to <span style="color: orange;">orange</span> 
 
-## Test model fit
+<!-- ## Test model fit -->
 
-Compare model to mean Y (sales) as model
+<!-- Compare model to mean Y (sales) as model -->
 
-$$F = \frac{(n-p-1) r^2}{p (1-r^2)}$$
+<!-- $$F = \frac{(n-p-1) r^2}{p (1-r^2)}$$ -->
 
-Where ${df}_{model} = n - p - 1 = N - K - 1$.
+<!-- Where ${df}_{model} = n - p - 1 = N - K - 1$. -->
 
-```{r, echo=TRUE}
-p <- 1
-fStat <- ( (n-p-1)*r^2 ) / ( p*(1-r^2) )
-fStat
-```
+<!-- ```{r, echo=TRUE} -->
+<!-- p <- 1 -->
+<!-- fStat <- ( (n-p-1)*r^2 ) / ( p*(1-r^2) ) -->
+<!-- fStat -->
+<!-- ``` -->
 
-## Signal to noise
+<!-- ## Signal to noise -->
 
-Given the description of explained variance, F can again be seen as a proportion of explained to unexplained variance. Also known as a signal to noise ratio.
+<!-- Given the description of explained variance, F can again be seen as a proportion of explained to unexplained variance. Also known as a signal to noise ratio. -->
 
-```{r, echo=TRUE}
-df.model <- p # n = rows, p = predictors
-df.error <- n - p - 1
+<!-- ```{r, echo=TRUE} -->
+<!-- df.model <- p # n = rows, p = predictors -->
+<!-- df.error <- n - p - 1 -->
 
-SS_model <- sum((prediction - mean(sales))^2)
-SS_error <- sum((sales - prediction)^2)
-MS_model <- SS_model / df.model
-MS_error <- SS_error / df.error
-fStat <- MS_model / MS_error 
-fStat
-```
+<!-- SS_model <- sum((prediction - mean(sales))^2) -->
+<!-- SS_error <- sum((sales - prediction)^2) -->
+<!-- MS_model <- SS_model / df.model -->
+<!-- MS_error <- SS_error / df.error -->
+<!-- fStat <- MS_model / MS_error  -->
+<!-- fStat -->
+<!-- ``` -->
 
 
 ## Calculate t-values for b's for hypothesis testing
@@ -391,13 +513,12 @@ df &= n - p - 1 \\
 
 Where $b$ is the beta coefficient, ${SE}$ is the standard error of the beta coefficient, $n$ is the number of subjects and $p$ the number of predictors. $\mu_b$ is the null-hypothesized value for $b$ - usually set to 0.
 
-##
+## Converting b to $t$
 
 ```{r, echo=TRUE}
 # Get Standard error's for b (bonus)
-se.b1 <- sqrt(MS_error / (var(airplay) * (n-1))); se.b1
+se.b1 <- sqrt((n/(n-2)) * mean(error^2) / (var(adverts) * (n-1))); se.b1
 ```
-
 
 
 ```{r, echo=TRUE}
@@ -435,45 +556,45 @@ text(x = t.b1, y = 0.3, paste("t =", round(t.b1, 2)), cex = 1.2)
 text(x = t.b1, y = 0.35, paste("p-val < 0.001"), cex = 1.2)
 ```
 
-## Visualize
+<!-- ## Visualize -->
 
-Instead of obtaining the p-value by locating the t in the t-distribution, we can locate the F in the F-distribution
+<!-- Instead of obtaining the p-value by locating the t in the t-distribution, we can locate the F in the F-distribution -->
 
-```{r, warning=FALSE, echo=FALSE}
-curve(df(x, df.model, df.error), from = 0, to = 150, n = 1000, bty = "n", las = 1,
-      xlab = "F-value", ylab = "Density", main = "F-distribution with P-value Region")
+<!-- ```{r, warning=FALSE, echo=FALSE} -->
+<!-- curve(df(x, df.model, df.error), from = 0, to = 150, n = 1000, bty = "n", las = 1, -->
+<!--       xlab = "F-value", ylab = "Density", main = "F-distribution with P-value Region") -->
 
-# Shade the upper tail (p-value region) using polygon
-# Define the region to fill (upper tail, greater than fStat)
-x_vals <- seq(fStat, 10, length.out = 100)
-y_vals <- df(x_vals, df.model, df.error)
+<!-- # Shade the upper tail (p-value region) using polygon -->
+<!-- # Define the region to fill (upper tail, greater than fStat) -->
+<!-- x_vals <- seq(fStat, 10, length.out = 100) -->
+<!-- y_vals <- df(x_vals, df.model, df.error) -->
 
-# Draw the polygon to fill the area under the curve
-polygon(c(fStat, x_vals, 10), c(0, y_vals, 0), col = "lightblue", border = NA)
+<!-- # Draw the polygon to fill the area under the curve -->
+<!-- polygon(c(fStat, x_vals, 10), c(0, y_vals, 0), col = "lightblue", border = NA) -->
 
-# Optionally, add a vertical line at the F-statistic
-arrows(x0 = fStat, x1 = fStat, y0 = 0 , y1 = 0.4, col = "darkred", lwd = 2)
-text(x = fStat, y = 0.55, paste("F =", round(fStat, 2)), cex = 1.2)
-text(x = fStat, y = 0.7, paste("p-val < 0.001"), cex = 1.2)
-```
+<!-- # Optionally, add a vertical line at the F-statistic -->
+<!-- arrows(x0 = fStat, x1 = fStat, y0 = 0 , y1 = 0.4, col = "darkred", lwd = 2) -->
+<!-- text(x = fStat, y = 0.55, paste("F =", round(fStat, 2)), cex = 1.2) -->
+<!-- text(x = fStat, y = 0.7, paste("p-val < 0.001"), cex = 1.2) -->
+<!-- ``` -->
 
-## It's all the same thing... 
+<!-- ## It's all the same thing...  -->
 
-```{r, echo=TRUE}
-fStat
+<!-- ```{r, echo=TRUE} -->
+<!-- fStat -->
 
-t.b1^2
-```
+<!-- t.b1^2 -->
+<!-- ``` -->
 
 
 ## So how many `@!&#$` ways do we have for assessing an association?! {.smaller}
 
 ```{r, echo = TRUE}
 # the correlation between x and y, standardized (between -1, 1)
-cor(sales, airplay) 
+cor(sales, adverts) 
 
 # the covariance between x and y, unstandardized 
-cov(sales, airplay)
+cov(sales, adverts)
 
 # regression coefficient in linear regression, standardized (not bounded)
 # generalizes easily to settings with multiple predictors
@@ -486,10 +607,10 @@ t.b1
 
 # the correlation between y and model prediction, standardized (between -1, 1)
 cor(sales, prediction) # can be squared to get proportion explained variance
-
-# F: signal/noise ratio of a model
-fStat 
 ```
+<!-- # F: signal/noise ratio of a model -->
+<!-- fStat  -->
+
 
 
 

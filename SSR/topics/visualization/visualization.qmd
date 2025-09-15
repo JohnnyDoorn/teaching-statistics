@@ -48,6 +48,9 @@ rm(list=ls())
 
 ![Figure 5.9 Boxplots](../../images/figure-5-9.jpg) 
 
+## Raincloud plots: Boxplots + Raw Data {.smaller}
+
+![Figure 5.11 Raincloud plots](../../images/figure-5-11.jpg) 
 
 ---
 

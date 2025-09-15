@@ -180,5 +180,8 @@
   },
   "topics/correlation/correlation-partial.qmd": {
     "correlation-partial.html": "033f9262"
+  },
+  "index.qmd": {
+    "index.html": "72a4ca35"
   }
 }

@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Sharon Klinkenberg &amp; Johnny van Doorn">
+<meta name="author" content="Johnny van Doorn”">
 
 <title>t-distribution</title>
 <style>
@@ -99,9 +99,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#one-or-two-sided" id="toc-one-or-two-sided" class="nav-link" data-scroll-target="#one-or-two-sided">One or two sided</a></li>
   <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
   <li><a href="#effect-size-d" id="toc-effect-size-d" class="nav-link" data-scroll-target="#effect-size-d">Effect-size d</a></li>
-  <li><a href="#effect-size-r" id="toc-effect-size-r" class="nav-link" data-scroll-target="#effect-size-r">Effect-size r</a></li>
-  <li><a href="#effect-sizes" id="toc-effect-sizes" class="nav-link" data-scroll-target="#effect-sizes">Effect-sizes</a></li>
-  <li><a href="#effect-size-distribution" id="toc-effect-size-distribution" class="nav-link" data-scroll-target="#effect-size-distribution">Effect-size distribution</a></li>
+  <li><a href="#effect-sizes-distribution" id="toc-effect-sizes-distribution" class="nav-link" data-scroll-target="#effect-sizes-distribution">Effect-sizes distribution</a></li>
   <li><a href="#power" id="toc-power" class="nav-link" data-scroll-target="#power">Power</a></li>
   <li><a href="#alpha-power" id="toc-alpha-power" class="nav-link" data-scroll-target="#alpha-power">Alpha Power</a></li>
   </ul></li>
@@ -169,7 +167,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="a-sample" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="a-sample">A sample</h2>
-<p>Let’s take one sample from our normal populatiion and calculate the t-value.</p>
+<p>Let’s take one sample from our normal population and calculate the t-value.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma); x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -340,42 +338,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <blockquote class="blockquote">
 <p>being so disinterested in our variables that we do not care about their units can hardly be desirable.</p>
 </blockquote>
+<!-- ## Effect-size r {.subsection} -->
+<!-- Another option is to have the effect size expressed as $r$ (similar to correlation coefficient). -->
+<!-- $$r = \sqrt{\frac{t^2}{t^2 + \text{df}}}$$ -->
+<!-- ```{r, echo=TRUE} -->
+<!-- r <- sqrt(tStat^2 / (tStat^2 + df)) -->
+<!-- r -->
+<!-- ``` -->
 </section>
-<section id="effect-size-r" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="effect-size-r">Effect-size r</h2>
-<p>Another option is to have the effect size expressed as <span class="math inline">\(r\)</span> (similar to correlation coefficient). <span class="math display">\[r = \sqrt{\frac{t^2}{t^2 + \text{df}}}\]</span></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(tStat<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> (tStat<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> df))</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2747211</code></pre>
-</div>
-</div>
-</section>
-<section id="effect-sizes" class="level2">
-<h2 class="anchored" data-anchor-id="effect-sizes">Effect-sizes</h2>
-<p>We can also calculate effect-sizes <span class="math inline">\(r\)</span> for all our calculated t-values. Under the assumption of <span class="math inline">\(H_0\)</span> the effect-size distribution looks like this.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(t.values<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>(t.values<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> df))</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(<span class="fu">cbind</span>(mean.x.values, mu, se.x.values, t.values, r))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>        mean.x.values  mu se.x.values    t.values          r
- [995,]     104.50415 100    2.440743  1.84539987 0.25491891
- [996,]      98.14145 100    1.980949 -0.93821319 0.13284256
- [997,]      99.79017 100    2.351101 -0.08924917 0.01274885
- [998,]     101.63763 100    2.070541  0.79091992 0.11227416
- [999,]     103.63661 100    2.409829  1.50907422 0.21074050
-[1000,]      96.48503 100    2.439441 -1.44089031 0.20161451</code></pre>
-</div>
-</div>
-</section>
-<section id="effect-size-distribution" class="level2">
-<h2 class="anchored" data-anchor-id="effect-size-distribution">Effect-size distribution</h2>
+<section id="effect-sizes-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="effect-sizes-distribution">Effect-sizes distribution</h2>
+<p>We can also calculate effect-sizes <span class="math inline">\(Cohen's d\)</span> for all our calculated t-values. Under the assumption of <span class="math inline">\(H_0\)</span> the effect-size distribution looks like this.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="t-distribution_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+<p><img src="t-distribution_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Cohen (1988)</p>

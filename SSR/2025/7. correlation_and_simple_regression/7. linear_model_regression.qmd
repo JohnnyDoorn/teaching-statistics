@@ -41,6 +41,10 @@ Chapters 7, 8-8.8
 ## Next Week
 
 - Exam!
+  - Mix of using JASP, interpreting output, conceptual understanding
+  - WA will contain old exam questions
+  - Field book available (like in this weeks WA), including glossary
+
 
 ## Recommended Exercises
 ::: {}
