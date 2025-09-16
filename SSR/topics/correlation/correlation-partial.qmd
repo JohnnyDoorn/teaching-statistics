@@ -79,5 +79,5 @@ polygon(c(t.pr, x_vals, 10), c(0, y_vals, 0), col = "lightblue", border = NA)
 # Optionally, add a vertical line at the F-statistic
 arrows(x0 = t.pr, x1 = t.pr, y0 = 0 , y1 = 0.25, col = "darkred", lwd = 2)
 text(x = t.pr, y = 0.3, paste("t =", round(t.pr, 2)), cex = 1.2)
-text(x = t.pr, y = 0.35, paste("p-val < 0.001"), cex = 1.2)
+text(x = t.pr, y = 0.35, paste("p-val =", round(1 - pt(t.pr, df), 3)), cex = 1.2)
 ```

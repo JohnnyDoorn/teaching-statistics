@@ -396,6 +396,10 @@ datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 30
 
 > Are the residuals normally distributed?
 
+::: {.columns}
+
+::: {.column}
+
 ```{r, fig.height=5, fig.width=5, fig.align='center', echo=FALSE}
 qqnorm(error,
        main = "QQ Plot of Residuals",
@@ -406,6 +410,22 @@ qqnorm(error,
 # Add reference line
 qqline(error, col = "darkred", lwd = 2)
 ```
+:::
+
+::: {.column}
+
+```{r, fig.height=5, fig.width=5, fig.align='center', echo=FALSE}
+hist(error,
+       main = "Histogram of Residuals",
+       xlab = "Residuals",
+       freq = FALSE,
+       col = rainbow(20), bty = "n", las = 1, breaks = 20, xlim = c(-200, 200))
+```
+:::
+
+:::
+
+
 
 
 ## Model fit {.smaller}
@@ -599,10 +619,10 @@ cov(sales, adverts)
 
 # regression coefficient in linear regression, standardized (not bounded)
 # generalizes easily to settings with multiple predictors
-b1 
+b1 # how much does y-prediction increase, if we increase x by 1 unit?
 
 # t-statistic: standardized difference between b1 and 0
-t.b1
+t.b1 # used for testing the null hypothesis that b1 = 0
 
 # The metrics below are more indicative of an overall model's performance
 

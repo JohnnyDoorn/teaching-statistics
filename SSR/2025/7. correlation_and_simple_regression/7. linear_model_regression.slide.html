@@ -769,8 +769,30 @@ Johnny van Doorn
 <blockquote>
 <p>Are the residuals normally distributed?</p>
 </blockquote>
-
-<img data-src="7.-linear_model_regression_files/figure-revealjs/unnamed-chunk-34-1.png" width="480" class="r-stretch quarto-figure-center"></section>
+<div class="columns">
+<div class="column">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="7.-linear_model_regression_files/figure-revealjs/unnamed-chunk-34-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="7.-linear_model_regression_files/figure-revealjs/unnamed-chunk-35-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 <section id="model-fit" class="slide level2 smaller">
 <h2>Model fit</h2>
 <ul>
@@ -798,7 +820,7 @@ Johnny van Doorn
 <section id="explained-variance-visually-n-10" class="slide level2 smaller">
 <h2>Explained variance visually (<span class="math inline">\(n = 10\)</span>)</h2>
 
-<img data-src="7.-linear_model_regression_files/figure-revealjs/unnamed-chunk-37-1.png" width="1440" class="r-stretch quarto-figure-center"><p><span class="math inline">\(r^2\)</span> is the proportion of <span style="color: blue;">blue</span> to <span style="color: orange;">orange</span>, while <span class="math inline">\(1 - r^2\)</span> is the proportion of <span style="color: red;">red</span> to <span style="color: orange;">orange</span></p>
+<img data-src="7.-linear_model_regression_files/figure-revealjs/unnamed-chunk-38-1.png" width="1440" class="r-stretch quarto-figure-center"><p><span class="math inline">\(r^2\)</span> is the proportion of <span style="color: blue;">blue</span> to <span style="color: orange;">orange</span>, while <span class="math inline">\(1 - r^2\)</span> is the proportion of <span style="color: red;">red</span> to <span style="color: orange;">orange</span></p>
 <!-- ## Test model fit -->
 <!-- Compare model to mean Y (sales) as model -->
 <!-- $$F = \frac{(n-p-1) r^2}{p (1-r^2)}$$ -->
@@ -875,7 +897,7 @@ df &amp;= n - p - 1 \\
 <!-- fStat -->
 <!-- t.b1^2 -->
 <!-- ``` -->
-<img data-src="7.-linear_model_regression_files/figure-revealjs/unnamed-chunk-40-1.png" width="960" class="r-stretch"></section>
+<img data-src="7.-linear_model_regression_files/figure-revealjs/unnamed-chunk-41-1.png" width="960" class="r-stretch"></section>
 <section id="so-how-many-ways-do-we-have-for-assessing-an-association" class="slide level2 smaller">
 <h2>So how many <code>@!&amp;#$</code> ways do we have for assessing an association?!</h2>
 <div class="cell">
@@ -891,12 +913,12 @@ df &amp;= n - p - 1 \\
 </div>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># regression coefficient in linear regression, standardized (not bounded)</span></span>
 <span id="cb26-2"><a href="#cb26-2"></a><span class="co"># generalizes easily to settings with multiple predictors</span></span>
-<span id="cb26-3"><a href="#cb26-3"></a>b1 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-3"><a href="#cb26-3"></a>b1 <span class="co"># how much does y-prediction increase, if we increase x by 1 unit?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 9.613511</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># t-statistic: standardized difference between b1 and 0</span></span>
-<span id="cb28-2"><a href="#cb28-2"></a>t.b1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-2"><a href="#cb28-2"></a>t.b1 <span class="co"># used for testing the null hypothesis that b1 = 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 9.980326</code></pre>
 </div>
@@ -910,22 +932,6 @@ df &amp;= n - p - 1 \\
 </div>
 <!-- # F: signal/noise ratio of a model -->
 <!-- fStat  -->
-</section></section>
-<section>
-<section id="closing" class="title-slide slide level1 center">
-<h1>Closing</h1>
-
-</section>
-<section id="next-week" class="slide level2">
-<h2>Next Week</h2>
-<ul>
-<li>Exam!
-<ul>
-<li>Mix of using JASP, interpreting output, conceptual understanding</li>
-<li>WA will contain old exam questions</li>
-<li>Field book available (like in this weeks WA), including glossary</li>
-</ul></li>
-</ul>
 </section>
 <section id="recommended-exercises" class="slide level2">
 <h2>Recommended Exercises</h2>

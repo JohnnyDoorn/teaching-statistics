@@ -1,0 +1,155 @@
+---
+title: "8. Wrapping up Stats Block 1"
+author: "Johnny van Doorn"
+date: "17 sept 2025"
+footer: "Scientific & Statistical Reasoning"
+format:
+  revealjs:
+    output-ext: slide.html
+    css: ../../ajohnson.css
+  html: default
+css: ../../ajohnson.css
+--- 
+
+<div class="goals">
+In this lecture we discuss:
+
+* Correlation
+  * In JASP
+* Linear model
+  * In JASP
+* Revisiting NHST
+  * Alpha
+  * Confidence intervals
+    
+<strong>Reading:</strong>
+Chapters 1-8.8, not 6
+</div>
+
+
+# Loose ends
+
+## JASP
+
+- Open non .jasp files (e.g., .sav / .csv) - **important for exam**
+- Correlation
+- Partial correlation
+- Regression
+  - Transforming Adverts (1,000£ vs. 100,000£)
+  - Assumptions
+  - Outliers
+  - Export (not for exam)
+
+
+## Correlation & NHST
+
+> We will collect n = 10 observations
+
+- Set alpha: for which $t$'s do we reject $H_0$?
+  - P($t$ | $H_0: r = 0$)?
+  - P($t$ | $H_1: r = 0.3$)?
+  
+```{r, echo=TRUE}
+n <- 10
+correlation <- 0.3
+t.r <- ( correlation*sqrt(n-2) ) / sqrt(1-correlation^2)
+t.r
+```
+
+--- 
+
+### Correlation & NHST
+
+> We will collect n = **30** observations
+
+- Set alpha
+  - P($t$ | $H_0: r = 0$)?
+  - P($t$ | $H_1: r = 0.3$)?
+  
+```{r, echo=TRUE}
+n <- 30
+correlation <- 0.3
+t.r <- ( correlation*sqrt(n-2) ) / sqrt(1-correlation^2)
+t.r
+```
+
+## Confidence Intervals
+
+- Based on the sampling distribution, centered on the observed statistic
+
+```{r, echo=FALSE}
+ll <- -1.96
+uu <- 1.96
+n <- 10
+ss <- 1
+mm <- 0
+curve(dnorm(x, mm, ss), from = -3, to = 3, axes = FALSE, xlab = "t-statistics", ylab = "",
+      main = "t Distribution (df = 9)", cex.lab = 1.5)
+axis(1, at = c(-3,0, 3), labels = c(NA, expression("observed t"), NA))
+sq <- seq(ll, uu, length.out = 1e3)
+polygon(c(ll, sq, uu, sq), c(0, dnorm(sq, 0, 1), 0, rep(0, 1e3)), col = "lightgreen")
+sq <- seq(-3, ll, length.out = 1e3)
+polygon(c(-3, sq, ll, sq), c(0, dnorm(sq, 0, 1), 0, rep(0, 1e3)), col = "red")
+sq <- seq(uu, 3, length.out = 1e3)
+polygon(c(uu, sq, 3, sq), c(0, dnorm(sq, 0, 1), 0, rep(0, 1e3)), col = "red")
+text(0, y = 0.2, "95%", cex = 2)
+text(-2.3, y = 0.2, "2.5%", cex = 1.5)
+text(2.3, y = 0.2, "2.5%", cex = 1.5)
+arrows(-2.3, 0.01, -2.3, 0.15, lwd = 4)
+arrows(2.3, 0.01, 2.3, 0.15, lwd = 4)
+arrows(-1.96, 0.02, 0, 0.02, lwd = 2, lty = 1, code = 3, length = 0.1)
+text(-1, 0.06, "Margin of error", cex = 1.1)
+text(-1, 0.035, expression(SE ~ "x" ~ t[0.025]), cex = 1.1)
+sq <- seq(-3, ll, length.out = 1e3)
+polygon(c(-3, sq, ll, sq), c(0, dnorm(sq, 0, 1), 0, rep(0, 1e3)), col = "red")
+sq <- seq(uu, 3, length.out = 1e3)
+polygon(c(uu, sq, 3, sq), c(0, dnorm(sq, 0, 1), 0, rep(0, 1e3)), col = "red")
+text(0, y = 0.2, "95%", cex = 2)
+text(-2.3, y = 0.2, "2.5%", cex = 1.5)
+text(2.3, y = 0.2, "2.5%", cex = 1.5)
+```
+
+
+---
+### Confidence Intervals {.smaller}
+
+::: {.columns}
+
+::: {.column}
+
+* On repeated sampling, $(100 - \alpha)%$ of the intervals contain population/true value
+* If you conclude the present interval contains true value, you have $\alpha$% chance of being wrong (Misconception Mutt 2.1)
+
+:::
+
+::: {.column}
+
+![](../../images/ci-treeplot.png)
+
+:::
+
+:::
+
+
+# Closing
+
+## Next Week
+
+- Exam!
+  - Mix of using JASP/interpreting output/conceptual understanding
+  - Field book available (like in this weeks WA), including glossary
+  - WA will contain old exam questions
+
+
+## Recommended Exercises
+::: {}
+
+- [Exercise 7.6](https://discoverjasp.com/pages/smart_alex#task-7.6), [Exercise 7.7](https://discoverjasp.com/pages/smart_alex#task-7.7)
+    - Note: `pets.jasp` can also be downloaded from the [Data page](https://discoverjasp.com/pages/data)
+    
+- [Exercise 8.1](https://discoverjasp.com/pages/smart_alex#task-8.1)
+
+:::
+```{r child="../../footer.qmd"}
+```
+

@@ -128,10 +128,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#converting-b-to-t" id="toc-converting-b-to-t" class="nav-link" data-scroll-target="#converting-b-to-t">Converting b to <span class="math inline">\(t\)</span></a></li>
   <li><a href="#p-values-of-b_1" id="toc-p-values-of-b_1" class="nav-link" data-scroll-target="#p-values-of-b_1">P-values of <span class="math inline">\(b_1\)</span></a></li>
   <li><a href="#so-how-many-ways-do-we-have-for-assessing-an-association" id="toc-so-how-many-ways-do-we-have-for-assessing-an-association" class="nav-link" data-scroll-target="#so-how-many-ways-do-we-have-for-assessing-an-association">So how many <code>@!&amp;#$</code> ways do we have for assessing an association?!</a></li>
-  </ul></li>
-  <li><a href="#closing" id="toc-closing" class="nav-link" data-scroll-target="#closing">Closing</a>
-  <ul class="collapse">
-  <li><a href="#next-week" id="toc-next-week" class="nav-link" data-scroll-target="#next-week">Next Week</a></li>
   <li><a href="#recommended-exercises" id="toc-recommended-exercises" class="nav-link" data-scroll-target="#recommended-exercises">Recommended Exercises</a></li>
   <li><a href="#contact" id="toc-contact" class="nav-link" data-scroll-target="#contact">Contact</a></li>
   </ul></li>
@@ -578,12 +574,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <blockquote class="blockquote">
 <p>Are the residuals normally distributed?</p>
 </blockquote>
+<div class="columns">
+<div class="column">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="7.-linear_model_regression_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" width="480"></p>
 </figure>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="7.-linear_model_regression_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -618,7 +628,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="7.-linear_model_regression_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid figure-img" width="1440"></p>
+<p><img src="7.-linear_model_regression_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid figure-img" width="1440"></p>
 </figure>
 </div>
 </div>
@@ -680,7 +690,7 @@ df &amp;= n - p - 1 \\
 <h2 class="anchored" data-anchor-id="p-values-of-b_1">P-values of <span class="math inline">\(b_1\)</span></h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="7.-linear_model_regression_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid" width="672"></p>
+<p><img src="7.-linear_model_regression_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <!-- ## Visualize -->
@@ -720,12 +730,12 @@ df &amp;= n - p - 1 \\
 </div>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># regression coefficient in linear regression, standardized (not bounded)</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># generalizes easily to settings with multiple predictors</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>b1 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>b1 <span class="co"># how much does y-prediction increase, if we increase x by 1 unit?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 9.613511</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># t-statistic: standardized difference between b1 and 0</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>t.b1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>t.b1 <span class="co"># used for testing the null hypothesis that b1 = 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 9.980326</code></pre>
 </div>
@@ -739,20 +749,6 @@ df &amp;= n - p - 1 \\
 </div>
 <!-- # F: signal/noise ratio of a model -->
 <!-- fStat  -->
-</section>
-</section>
-<section id="closing" class="level1">
-<h1>Closing</h1>
-<section id="next-week" class="level2">
-<h2 class="anchored" data-anchor-id="next-week">Next Week</h2>
-<ul>
-<li>Exam!
-<ul>
-<li>Mix of using JASP, interpreting output, conceptual understanding</li>
-<li>WA will contain old exam questions</li>
-<li>Field book available (like in this weeks WA), including glossary</li>
-</ul></li>
-</ul>
 </section>
 <section id="recommended-exercises" class="level2">
 <h2 class="anchored" data-anchor-id="recommended-exercises">Recommended Exercises</h2>
