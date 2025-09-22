@@ -60,8 +60,8 @@ Chapters 1, 2, 3
 
 ## Software
 - JASP: main tool for analyses, data management
-    - Freely available at [www.jasp-stats.org](www.jasp-stats.org)
-    - Also available at libraries, [apps.uva.nl](apps.uva.nl)
+    - Freely available at [www.jasp-stats.org](https://www.jasp-stats.org)
+    - Also available at libraries, [apps.uva.nl](https://apps.uva.nl)
 - R: very flexible, 100% optional
     - Freely available at [https://cran.r-project.org/](https://cran.r-project.org/)
     - Want a nicer environment for coding? Try [Rstudio](https://posit.co/download/rstudio-desktop/)
