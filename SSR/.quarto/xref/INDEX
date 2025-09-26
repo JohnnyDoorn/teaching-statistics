@@ -187,5 +187,15 @@
   "2025/7. correlation_and_simple_regression/8. Wrap_up.qmd": {
     "8. Wrap_up.html": "f858d0ed",
     "8. Wrap_up.slide.html": "f0dd218b"
+  },
+  "topics/t-test_independent/t-test_independent.qmd": {
+    "t-test_independent.html": "0350d4da"
+  },
+  "topics/t-test_one-sample/One-sample_t-test.qmd": {
+    "One-sample_t-test.html": "35111046"
+  },
+  "2025/10. t_test/11. t_test.qmd": {
+    "11. t_test.slide.html": "5b7191e6",
+    "11. t_test.html": "73b233a4"
   }
 }

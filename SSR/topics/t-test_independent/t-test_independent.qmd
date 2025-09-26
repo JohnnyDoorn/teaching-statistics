@@ -163,18 +163,7 @@ d <- 2*tStat / sqrt(n)
 d
 ```
 
-## Effect-size r
-
-$$r = \sqrt{\frac{t^2}{t^2 + \text{df}}}$$
-
-```{r, echo=TRUE}
-r <- sqrt(tStat^2/(tStat^2 + df))
-
-r
-```
-
-
-## But what about equal variances?!
+## But what about equal variances?
 
 There exist different hypothesis tests for this - the most used is Levene's test:
 
@@ -186,7 +175,7 @@ library("car")
 leveneTest(y = ownIQ, group = classPosition)
 ```
 
-## But what about equal variances?!
+## But what about equal variances?
 
 ::: {.callout-warning}
 Levene's test (and other significance tests like it, such as Shapiro for normality) are heavily influenced by sample size, so a significant test result does not necessarily mean that you have a problem. A more pragmatic rule of thumb is to look at the ratio of variances - a ratio greater than 2 is problematic. Additionally, Welch test is a version of the $t$-test that handles unequal variances better. 
@@ -218,15 +207,16 @@ tStatWelch
 ```
 
 
-## Normality?!
+## Normality
 
+- Assess using a plot (Q-Q plot)
+    - Points should be along the diagonal
+    - Not exact 
 - Test using hypothesis test (Shapiro-Wilk)
     - $p < \alpha \rightarrow$ assumption violated 
     - Same caution as Levene's test (see also Jane Superbrain Box 6.7)
     - Plus caution as with any p-value (black-and-white decision making)
-- Assess using a plot (Q-Q plot)
-    - Points should be along the diagonal
-    - Not exact 
+- Becomes less important as $n$ grows ($n \approx 30$)
 
     
 <img src="https://upload.wikimedia.org/wikipedia/en/3/3f/Pok%C3%A9mon_Snorlax_art.png" alt="Snorlax" width="100"/>
@@ -239,5 +229,6 @@ Assumption violations affect the shape of the sampling distribution and mess up 
 - Unequal variances?
     - Welch $t$-test
 - Non-normality?
-    - Use nonparametric test (Chapter 15/Lecture 17)
+    - Use nonparametric test (Chapter 15)
+    - Bootstrapping
 

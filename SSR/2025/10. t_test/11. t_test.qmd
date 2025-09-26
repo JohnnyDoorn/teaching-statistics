@@ -1,0 +1,58 @@
+---
+title: "11. T-tests"
+author: "Johnny van Doorn"
+date: "30 sep 2025"
+footer: "Scientific & Statistical Reasoning"
+format:
+  revealjs:
+    output-ext: slide.html
+    css: ../../ajohnson.css
+  html: default
+css: ../../ajohnson.css
+---
+
+# Block 2: Life is Mean
+
+- Comparing 2 means (t-test)
+- Comparing 2 or more means (ANOVA)
+- Between subjects vs. Within subjects
+- Adding predictors
+    
+--- 
+
+<div class="goals">
+In this lecture we aim to:
+
+* Introduce the t-test for comparing two means
+  * Between subjects
+  * Within subjects
+* Regression?!
+    
+<strong>Reading:</strong>
+Chapters 9
+</div>
+
+```{r child="../../topics/t-test_one-sample/One-sample_t-test.qmd"}
+```
+
+
+```{r child="../../topics/t-test_paired/t-test_paired.qmd"}
+```
+
+```{r child="../../topics/t-test_independent/t-test_independent.qmd"}
+```
+
+# Closing
+
+## Recommended Exercises
+::: {}
+- [Exercise 5.1](https://discoverjasp.com/pages/smart_alex#task-5.1), [Exercise 5.5](https://discoverjasp.com/pages/smart_alex#task-5.5)
+
+- [Exercise 7.1](https://discoverjasp.com/pages/smart_alex#task-7.1), [Exercise 7.6](https://discoverjasp.com/pages/smart_alex#task-7.6), [Exercise 7.7](https://discoverjasp.com/pages/smart_alex#task-7.7)
+    - Note: `pets.jasp` can also be downloaded from the [Data page](https://discoverjasp.com/pages/data)
+
+:::
+
+
+```{r child="../../footer.qmd"}
+```

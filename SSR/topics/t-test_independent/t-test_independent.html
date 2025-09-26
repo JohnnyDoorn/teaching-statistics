@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Johnny van Doorn”">
 
 <title>t-test_independent</title>
 <style>
@@ -84,10 +85,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="fullcontent">
+<body>
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#independent-samples-t-test" id="toc-independent-samples-t-test" class="nav-link active" data-scroll-target="#independent-samples-t-test">Independent-samples t-test</a>
+  <ul class="collapse">
+  <li><a href="#independent-samples-t-test-1" id="toc-independent-samples-t-test-1" class="nav-link" data-scroll-target="#independent-samples-t-test-1">Independent-samples t-test</a></li>
+  <li><a href="#hypothesis" id="toc-hypothesis" class="nav-link" data-scroll-target="#hypothesis">Hypothesis</a></li>
+  <li><a href="#data-structure" id="toc-data-structure" class="nav-link" data-scroll-target="#data-structure">Data structure</a></li>
+  <li><a href="#additional-assumption" id="toc-additional-assumption" class="nav-link" data-scroll-target="#additional-assumption">Additional assumption</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data">The data</a></li>
+  <li><a href="#calculate-means" id="toc-calculate-means" class="nav-link" data-scroll-target="#calculate-means">Calculate means</a></li>
+  <li><a href="#calculate-variance" id="toc-calculate-variance" class="nav-link" data-scroll-target="#calculate-variance">Calculate variance</a></li>
+  <li><a href="#calculate-t-value" id="toc-calculate-t-value" class="nav-link" data-scroll-target="#calculate-t-value">Calculate t-value</a></li>
+  <li><a href="#calculate-pooled-variance" id="toc-calculate-pooled-variance" class="nav-link" data-scroll-target="#calculate-pooled-variance">Calculate pooled variance</a></li>
+  <li><a href="#calculate-pooled-se" id="toc-calculate-pooled-se" class="nav-link" data-scroll-target="#calculate-pooled-se">Calculate pooled SE</a></li>
+  <li><a href="#calculate-t-value-1" id="toc-calculate-t-value-1" class="nav-link" data-scroll-target="#calculate-t-value-1">Calculate t-value</a></li>
+  <li><a href="#test-for-significance" id="toc-test-for-significance" class="nav-link" data-scroll-target="#test-for-significance">Test for significance</a></li>
+  <li><a href="#effect-size-d" id="toc-effect-size-d" class="nav-link" data-scroll-target="#effect-size-d">Effect-size d</a></li>
+  <li><a href="#effect-size-r" id="toc-effect-size-r" class="nav-link" data-scroll-target="#effect-size-r">Effect-size r</a></li>
+  <li><a href="#but-what-about-equal-variances" id="toc-but-what-about-equal-variances" class="nav-link" data-scroll-target="#but-what-about-equal-variances">But what about equal variances?</a></li>
+  <li><a href="#but-what-about-equal-variances-1" id="toc-but-what-about-equal-variances-1" class="nav-link" data-scroll-target="#but-what-about-equal-variances-1">But what about equal variances?</a></li>
+  <li><a href="#the-difference-only-matters-when-n_a-neq-n_b" id="toc-the-difference-only-matters-when-n_a-neq-n_b" class="nav-link" data-scroll-target="#the-difference-only-matters-when-n_a-neq-n_b">The difference only matters when <span class="math inline">\(n_A \neq n_B\)</span>!</a></li>
+  <li><a href="#normality" id="toc-normality" class="nav-link" data-scroll-target="#normality">Normality</a></li>
+  <li><a href="#handling-assumption-violations" id="toc-handling-assumption-violations" class="nav-link" data-scroll-target="#handling-assumption-violations">Handling Assumption violations</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="t-test_independent.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</div>
 <main class="content" id="quarto-document-content">
 
 
@@ -276,25 +309,32 @@ ownIQback.n    31</code></pre>
 </div>
 </div>
 </section>
-<section id="effect-size" class="level2">
-<h2 class="anchored" data-anchor-id="effect-size">Effect-size</h2>
-<p><span class="math display">\[r = \sqrt{\frac{t^2}{t^2 + \text{df}}}\]</span></p>
+<section id="effect-size-d" class="level2">
+<h2 class="anchored" data-anchor-id="effect-size-d">Effect-size d</h2>
+<p><span class="math display">\[r = \frac{2t}{\sqrt{n_1 + n_2}}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(tStat<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>(tStat<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> df))</span>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>tStat <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.03736281</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>tStat <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.07368613</code></pre>
 </div>
 </div>
 </section>
+<section id="effect-size-r" class="level2">
+<h2 class="anchored" data-anchor-id="effect-size-r">Effect-size r</h2>
+<p><span class="math display">\[r = \sqrt{\frac{t^2}{t^2 + \text{df}}}\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(tStat<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>(tStat<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> df))</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.03736281</code></pre>
+</div>
+</div>
+</section>
 <section id="but-what-about-equal-variances" class="level2">
-<h2 class="anchored" data-anchor-id="but-what-about-equal-variances">But what about equal variances?!</h2>
+<h2 class="anchored" data-anchor-id="but-what-about-equal-variances">But what about equal variances?</h2>
 <p>There exist different hypothesis tests for this - the most used is Levene’s test:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="st">"car"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()) { <span class="fu">install.packages</span>(<span class="st">"car"</span>) }</span>
@@ -310,7 +350,7 @@ group  1  0.0669 0.7966
 </div>
 </section>
 <section id="but-what-about-equal-variances-1" class="level2">
-<h2 class="anchored" data-anchor-id="but-what-about-equal-variances-1">But what about equal variances?!</h2>
+<h2 class="anchored" data-anchor-id="but-what-about-equal-variances-1">But what about equal variances?</h2>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -356,19 +396,20 @@ Warning
 </div>
 </section>
 <section id="normality" class="level2">
-<h2 class="anchored" data-anchor-id="normality">Normality?!</h2>
+<h2 class="anchored" data-anchor-id="normality">Normality</h2>
 <ul>
+<li>Assess using a plot (Q-Q plot)
+<ul>
+<li>Points should be along the diagonal</li>
+<li>Not exact</li>
+</ul></li>
 <li>Test using hypothesis test (Shapiro-Wilk)
 <ul>
 <li><span class="math inline">\(p &lt; \alpha \rightarrow\)</span> assumption violated</li>
 <li>Same caution as Levene’s test (see also Jane Superbrain Box 6.7)</li>
 <li>Plus caution as with any p-value (black-and-white decision making)</li>
 </ul></li>
-<li>Assess using a plot (Q-Q plot)
-<ul>
-<li>Points should be along the diagonal</li>
-<li>Not exact</li>
-</ul></li>
+<li>Becomes less important as <span class="math inline">\(n\)</span> grows (+- <span class="math inline">\(n = 30\)</span>)</li>
 </ul>
 <p><img src="https://upload.wikimedia.org/wikipedia/en/3/3f/Pok%C3%A9mon_Snorlax_art.png" alt="Snorlax" width="100"></p>
 </section>
@@ -394,7 +435,8 @@ Warning
 </ul></li>
 <li>Non-normality?
 <ul>
-<li>Use nonparametric test (Chapter 15/Lecture 17)</li>
+<li>Use nonparametric test (Chapter 15)</li>
+<li>Bootstrapping</li>
 </ul></li>
 </ul>
 </section>

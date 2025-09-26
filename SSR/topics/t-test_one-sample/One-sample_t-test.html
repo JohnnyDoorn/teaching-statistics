@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Johnny van Doorn”">
 
 <title>one-sample_t-test</title>
 <style>
@@ -73,10 +74,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="fullcontent">
+<body>
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#one-sample-t-test" id="toc-one-sample-t-test" class="nav-link active" data-scroll-target="#one-sample-t-test">One-sample t-test</a>
+  <ul class="collapse">
+  <li><a href="#iq-next-to-you" id="toc-iq-next-to-you" class="nav-link" data-scroll-target="#iq-next-to-you">IQ next to you</a></li>
+  <li><a href="#models" id="toc-models" class="nav-link" data-scroll-target="#models">Models</a></li>
+  <li><a href="#compare-sample-mean-to-120" id="toc-compare-sample-mean-to-120" class="nav-link" data-scroll-target="#compare-sample-mean-to-120">Compare sample mean to 120</a></li>
+  <li><a href="#hypothesis" id="toc-hypothesis" class="nav-link" data-scroll-target="#hypothesis">Hypothesis</a></li>
+  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions">Assumptions</a></li>
+  <li><a href="#t-statistic" id="toc-t-statistic" class="nav-link" data-scroll-target="#t-statistic">T-statistic</a></li>
+  <li><a href="#type-i-error" id="toc-type-i-error" class="nav-link" data-scroll-target="#type-i-error">Type I error</a></li>
+  <li><a href="#p-value-one-sided" id="toc-p-value-one-sided" class="nav-link" data-scroll-target="#p-value-one-sided">P-value one sided</a></li>
+  <li><a href="#p-value-two-sided" id="toc-p-value-two-sided" class="nav-link" data-scroll-target="#p-value-two-sided">P-value two sided</a></li>
+  <li><a href="#effect-size-cohens-d" id="toc-effect-size-cohens-d" class="nav-link" data-scroll-target="#effect-size-cohens-d">Effect-size Cohen’s <span class="math inline">\(d\)</span></a></li>
+  <li><a href="#applet" id="toc-applet" class="nav-link" data-scroll-target="#applet">Applet</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="One-sample_t-test.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</div>
 <main class="content" id="quarto-document-content">
 
 
@@ -111,7 +135,7 @@ https://edu.nl/9umub
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(n, mean_x, sd_x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      n   mean_x     sd_x
-[1,] 64 117.7344 16.12082</code></pre>
+[1,] 69 116.8841 16.10219</code></pre>
 </div>
 </div>
 <p><small> Does this mean differ significantly from the student population mean <span class="math inline">\(\mu = 120\)</span>? </small></p>
@@ -147,12 +171,12 @@ https://edu.nl/9umub
 </section>
 <section id="t-statistic" class="level2">
 <h2 class="anchored" data-anchor-id="t-statistic">T-statistic</h2>
-<p><span class="math display">\[T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}} = \frac{117.73 - 120 }{16.12 / \sqrt{64}}\]</span></p>
+<p><span class="math display">\[T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}} = \frac{116.88 - 120 }{16.1 / \sqrt{69}}\]</span></p>
 <p>So the t-statistic represents the deviation of the sample mean <span class="math inline">\(\bar{x}\)</span> from the population mean <span class="math inline">\(\mu\)</span>, considering the sample size.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>tStat <span class="ot">&lt;-</span> (mean_x <span class="sc">-</span> mu) <span class="sc">/</span> (sd_x <span class="sc">/</span> <span class="fu">sqrt</span>(n)); tStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -1.124323</code></pre>
+<pre><code>[1] -1.607419</code></pre>
 </div>
 </div>
 </section>
@@ -169,14 +193,14 @@ https://edu.nl/9umub
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span>; df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 63</code></pre>
+<pre><code>[1] 68</code></pre>
 </div>
 </div>
 <div class="cell" data-output-location="slide">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="st">"visualize"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()) { <span class="fu">install.packages</span>(<span class="st">"visualize"</span>) }</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"visualize"</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>visualize<span class="sc">::</span><span class="fu">visualize.t</span>(<span class="sc">-</span>tStat, <span class="fu">ifelse</span>(df <span class="sc">&lt;</span> <span class="dv">3</span>, df, <span class="dv">10</span>), <span class="at">section =</span> <span class="st">"upper"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>visualize<span class="sc">::</span><span class="fu">visualize.t</span>(<span class="sc">-</span>tStat, <span class="fu">ifelse</span>(df <span class="sc">&gt;</span> <span class="dv">3</span>, df, <span class="dv">10</span>), <span class="at">section =</span> <span class="st">"upper"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="One-sample_t-test_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -185,7 +209,7 @@ https://edu.nl/9umub
 <section id="p-value-two-sided" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="p-value-two-sided">P-value two sided</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.t</span>(<span class="fu">c</span>(<span class="sc">-</span>tStat, tStat), <span class="dv">10</span>, <span class="at">section =</span> <span class="st">"tails"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.t</span>(<span class="fu">c</span>(<span class="sc">-</span>tStat, tStat), <span class="fu">ifelse</span>(df <span class="sc">&gt;</span> <span class="dv">3</span>, df, <span class="dv">10</span>), <span class="at">section =</span> <span class="st">"tails"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="One-sample_t-test_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -199,7 +223,7 @@ https://edu.nl/9umub
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.1405403</code></pre>
+<pre><code>[1] -0.1935105</code></pre>
 </div>
 </div>
 </section>
