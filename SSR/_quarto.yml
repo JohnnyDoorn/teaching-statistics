@@ -17,7 +17,6 @@ format:
     slide-number: true
     css: uva_reveal.css
     touch: true
-    google-analytics: "UA-107432294-1"
     title-slide-attributes:
       data-background-image: images/bikes.jpg
       data-background-size: contain

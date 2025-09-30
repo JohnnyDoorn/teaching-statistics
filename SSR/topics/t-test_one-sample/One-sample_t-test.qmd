@@ -1,27 +1,44 @@
 # One-sample t-test {.section}
 
-## IQ next to you
+Compare 1 group mean to a hypothesized value
 
-::: {.r-stack}
-<img src="qr_9umub.png" style="width:40%;"/>
+## Measuring IQ
 
-<p style="font-size: 30px;"> https://edu.nl/9umub</p>
+<img src="../../images/qr_mxyau.png" style="width:20%;"/>
 
-
-:::
+<!-- <p style="font-size: 30px;"> https://edu.nl/mxyau</p> -->
 
 ## Models {.center}
 
-<div style="font-size:200%; transform: rotate(-11deg);">
+<div style="font-size:200%;;">
 $$\text{outcome} = \text{model} + \text{error}$$
 </div>
 
-## Compare sample mean to 120 {.smaller}
+
+$\mathcal{H}_0:  \text{model} = 120$
+
+$\mathcal{H}_A:  \text{model} = \bar{x}$
+
+## Hypotheses {.subsection .smaller}
+
+### Null hypothesis
+
+* $H_0: \mu = 120$
+
+### Alternative hypotheses
+
+* $H_A: \mu \neq 120$
+* $H_A: \mu > 120$
+* $H_A: \mu < 120$
+
+Can you phrase research questions that would lead you to each of these three versions of $\mathcal{H}_A$?
+
+
+
+## Compare sample mean to 120
 
 <small>
-We use the one-sample t-test to compare the sample mean $\bar{x}$ to the population mean $\mu = 120$. 
-
-Let's take a sample and calculate the mean of this sample.
+We use the one-sample t-test to compare the sample mean $\bar{x}$ to the mean that is hypothesized by $\mathcal{H}_0$: $\mu = 120$. Let's take a look at our sample:
 </small>
 
 ```{r, message=FALSE, eval=TRUE, echo=FALSE}
@@ -45,28 +62,13 @@ cbind(n, mean_x, sd_x)
 ```
 
 <small>
-Does this mean differ significantly from the student population mean $\mu = `r mu`$?
+Does this mean differ significantly from $\mathcal{H}_0:$ $\mu = `r mu`$?
 </small>
-
-## Hypothesis {.subsection}
-
-### Null hypothesis
-
-* $H_0: \bar{x} = \mu$
-
-### Alternative hypothesis
-
-* $H_A: \bar{x} \neq \mu$
-* $H_A: \bar{x} > \mu$
-* $H_A: \bar{x} < \mu$
 
 ## Assumptions
 
-* Normal samples distribution
+* Normally distributed residuals (i.e., model errors)
 * Random samples
-* Measurement level
-    * Interval
-    * Ratio
 
 ## T-statistic
 
@@ -82,32 +84,54 @@ tStat <- (mean_x - mu) / (sd_x / sqrt(n)); tStat
 
 To determine if this t-value significantly differs from the population mean we have to specify a type I error that we are willing to make.
 
-* Type I error / $\alpha$ = .05
+* Type I error / $\alpha$ = .01
+
+
+## P-value two sided {.subsection .smaller}
+Finally we have to calculate our $p$-value for which we need the degrees of freedom $df = n - 1$ to determine the shape of the t-distribution.
+
+$$ \mathcal{H}_A: \mu \neq 120 \rightarrow t \neq 0 $$ 
+
+```{r, echo=FALSE, fig.align = 'center'}
+source("../../plotFunctionsSSR.r")
+df <- n-1
+plotTstatSamplingDistribution(tVal = tStat, myDF = df, yAxisMod = 1.5)
+```
 
 ## P-value one sided {.subsection}
 
-Finally we have to calculate our _p_-value for which we need the degrees of freedom $df = n - 1$ to determine the shape of the t-distribution.
 
-```{r, echo=TRUE}
-df <- n - 1; df
+$$ \mathcal{H}_A: \mu > 120 \rightarrow t > 0 $$ 
+
+
+```{r, echo=FALSE, fig.align = 'center'}
+plotTstatSamplingDistribution(tVal = tStat, myDF = df, yAxisMod = 1.5, altHyp = "Negative only")
 ```
 
-```{r, echo=TRUE}
-#| output-location: slide
 
-if(!"visualize" %in% installed.packages()) { install.packages("visualize") }
-library("visualize")
+---
 
-visualize::visualize.t(-tStat, ifelse(df > 3, df, 10), section = "upper")
+### P-value one sided
+
+
+$$ \mathcal{H}_A: \mu < 120 \rightarrow t < 0 $$ 
+
+
+```{r, echo=FALSE, fig.align = 'center'}
+source("../../plotFunctionsSSR.r")
+
+plotTstatSamplingDistribution(tVal = tStat, myDF = df, yAxisMod = 1.5, altHyp = "Positive only")
+
 ```
 
-## P-value two sided {.subsection}
 
-```{r, echo=TRUE}
-visualize.t(c(-tStat, tStat), ifelse(df > 3, df, 10), section = "tails")
-```
 
-## Effect-size Cohen's $d$
+
+## Effect-size Cohen's $d$ {.smaller}
+
+- $t$-statistic can be significant because of a big effect and/or a high sample size
+- Effect-size Cohen's $d$ is unaffected by sample size
+- See [here](https://johnnydoorn.github.io/teaching-statistics/extra-texts/EffSizeVsTestStat.html) for additional ramblings
 
 $$d = \frac{t}{\sqrt{n}}$$
 
@@ -118,6 +142,5 @@ d
 ```
 
 ## Applet
-
 
 [Link](https://statisticalreasoning-uva.shinyapps.io/NHST_Continuous/)

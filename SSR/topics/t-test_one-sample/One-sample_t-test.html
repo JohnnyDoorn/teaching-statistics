@@ -86,13 +86,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#iq-next-to-you" id="toc-iq-next-to-you" class="nav-link" data-scroll-target="#iq-next-to-you">IQ next to you</a></li>
   <li><a href="#models" id="toc-models" class="nav-link" data-scroll-target="#models">Models</a></li>
+  <li><a href="#hypotheses" id="toc-hypotheses" class="nav-link" data-scroll-target="#hypotheses">Hypotheses</a></li>
   <li><a href="#compare-sample-mean-to-120" id="toc-compare-sample-mean-to-120" class="nav-link" data-scroll-target="#compare-sample-mean-to-120">Compare sample mean to 120</a></li>
-  <li><a href="#hypothesis" id="toc-hypothesis" class="nav-link" data-scroll-target="#hypothesis">Hypothesis</a></li>
   <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions">Assumptions</a></li>
   <li><a href="#t-statistic" id="toc-t-statistic" class="nav-link" data-scroll-target="#t-statistic">T-statistic</a></li>
   <li><a href="#type-i-error" id="toc-type-i-error" class="nav-link" data-scroll-target="#type-i-error">Type I error</a></li>
-  <li><a href="#p-value-one-sided" id="toc-p-value-one-sided" class="nav-link" data-scroll-target="#p-value-one-sided">P-value one sided</a></li>
   <li><a href="#p-value-two-sided" id="toc-p-value-two-sided" class="nav-link" data-scroll-target="#p-value-two-sided">P-value two sided</a></li>
+  <li><a href="#p-value-one-sided" id="toc-p-value-one-sided" class="nav-link" data-scroll-target="#p-value-one-sided">P-value one sided</a></li>
   <li><a href="#effect-size-cohens-d" id="toc-effect-size-cohens-d" class="nav-link" data-scroll-target="#effect-size-cohens-d">Effect-size Cohen’s <span class="math inline">\(d\)</span></a></li>
   <li><a href="#applet" id="toc-applet" class="nav-link" data-scroll-target="#applet">Applet</a></li>
   </ul></li>
@@ -109,23 +109,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1 class="section">One-sample t-test</h1>
 <section id="iq-next-to-you" class="level2">
 <h2 class="anchored" data-anchor-id="iq-next-to-you">IQ next to you</h2>
-<div class="r-stack">
-<p><img src="qr_9umub.png" style="width:40%;"></p>
-<p style="font-size: 30px;">
-https://edu.nl/9umub
-</p>
-</div>
+<p><img src="../../images/qr_mxyau.png" style="width:100%;"></p>
+<!-- <p style="font-size: 30px;"> https://edu.nl/mxyau</p> -->
 </section>
 <section id="models" class="level2 center">
 <h2 class="center anchored" data-anchor-id="models">Models</h2>
-<div style="font-size:200%; transform: rotate(-11deg);">
+<div style="font-size:200%;;">
 <p><span class="math display">\[\text{outcome} = \text{model} + \text{error}\]</span></p>
 </div>
+<p><span class="math inline">\(\mathcal{H}_0: \text{model} = 120\)</span></p>
+<p><span class="math inline">\(\mathcal{H}_A: \text{model} = \bar{x}\)</span></p>
 </section>
-<section id="compare-sample-mean-to-120" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="compare-sample-mean-to-120">Compare sample mean to 120</h2>
-<p><small> We use the one-sample t-test to compare the sample mean <span class="math inline">\(\bar{x}\)</span> to the population mean <span class="math inline">\(\mu = 120\)</span>.</small></p><small>
-</small><p><small>Let’s take a sample and calculate the mean of this sample. </small></p>
+<section id="hypotheses" class="level2 subsection smaller">
+<h2 class="subsection smaller anchored" data-anchor-id="hypotheses">Hypotheses</h2>
+<section id="null-hypothesis" class="level3">
+<h3 class="anchored" data-anchor-id="null-hypothesis">Null hypothesis</h3>
+<ul>
+<li><span class="math inline">\(H_0: \mu = 120\)</span></li>
+</ul>
+</section>
+<section id="alternative-hypotheses" class="level3">
+<h3 class="anchored" data-anchor-id="alternative-hypotheses">Alternative hypotheses</h3>
+<ul>
+<li><span class="math inline">\(H_A: \mu \neq 120\)</span></li>
+<li><span class="math inline">\(H_A: \mu &gt; 120\)</span></li>
+<li><span class="math inline">\(H_A: \mu &lt; 120\)</span></li>
+</ul>
+<p>Can you phrase research questions that would lead you to each of these three versions of <span class="math inline">\(\mathcal{H}_A\)</span>?</p>
+</section>
+</section>
+<section id="compare-sample-mean-to-120" class="level2">
+<h2 class="anchored" data-anchor-id="compare-sample-mean-to-120">Compare sample mean to 120</h2>
+<p><small> We use the one-sample t-test to compare the sample mean <span class="math inline">\(\bar{x}\)</span> to the mean that is hypothesized by <span class="math inline">\(\mathcal{H}_0\)</span>: <span class="math inline">\(\mu = 120\)</span>. Let’s take a look at our sample: </small></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mu     <span class="ot">&lt;-</span> <span class="dv">120</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>n      <span class="ot">&lt;-</span> <span class="fu">length</span>(IQ.next.to.you)</span>
@@ -138,35 +153,13 @@ https://edu.nl/9umub
 [1,] 69 116.8841 16.10219</code></pre>
 </div>
 </div>
-<p><small> Does this mean differ significantly from the student population mean <span class="math inline">\(\mu = 120\)</span>? </small></p>
-</section>
-<section id="hypothesis" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="hypothesis">Hypothesis</h2>
-<section id="null-hypothesis" class="level3">
-<h3 class="anchored" data-anchor-id="null-hypothesis">Null hypothesis</h3>
-<ul>
-<li><span class="math inline">\(H_0: \bar{x} = \mu\)</span></li>
-</ul>
-</section>
-<section id="alternative-hypothesis" class="level3">
-<h3 class="anchored" data-anchor-id="alternative-hypothesis">Alternative hypothesis</h3>
-<ul>
-<li><span class="math inline">\(H_A: \bar{x} \neq \mu\)</span></li>
-<li><span class="math inline">\(H_A: \bar{x} &gt; \mu\)</span></li>
-<li><span class="math inline">\(H_A: \bar{x} &lt; \mu\)</span></li>
-</ul>
-</section>
+<p><small> Does this mean differ significantly from <span class="math inline">\(\mathcal{H}_0:\)</span> <span class="math inline">\(\mu = 120\)</span>? </small></p>
 </section>
 <section id="assumptions" class="level2">
 <h2 class="anchored" data-anchor-id="assumptions">Assumptions</h2>
 <ul>
-<li>Normal samples distribution</li>
+<li>Normally distributed residuals (i.e., model errors)</li>
 <li>Random samples</li>
-<li>Measurement level
-<ul>
-<li>Interval</li>
-<li>Ratio</li>
-</ul></li>
 </ul>
 </section>
 <section id="t-statistic" class="level2">
@@ -184,44 +177,46 @@ https://edu.nl/9umub
 <h2 class="subsection anchored" data-anchor-id="type-i-error">Type I error</h2>
 <p>To determine if this t-value significantly differs from the population mean we have to specify a type I error that we are willing to make.</p>
 <ul>
-<li>Type I error / <span class="math inline">\(\alpha\)</span> = .05</li>
+<li>Type I error / <span class="math inline">\(\alpha\)</span> = .01</li>
 </ul>
+</section>
+<section id="p-value-two-sided" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="p-value-two-sided">P-value two sided</h2>
+<p>Finally we have to calculate our <span class="math inline">\(p\)</span>-value for which we need the degrees of freedom <span class="math inline">\(df = n - 1\)</span> to determine the shape of the t-distribution.</p>
+<p><span class="math display">\[ \mathcal{H}_A: \mu \neq 120 \rightarrow t \neq 0 \]</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="One-sample_t-test_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 </section>
 <section id="p-value-one-sided" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="p-value-one-sided">P-value one sided</h2>
-<p>Finally we have to calculate our <em>p</em>-value for which we need the degrees of freedom <span class="math inline">\(df = n - 1\)</span> to determine the shape of the t-distribution.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span>; df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 68</code></pre>
-</div>
-</div>
+<p><span class="math display">\[ \mathcal{H}_A: \mu &gt; 120 \rightarrow t &gt; 0 \]</span></p>
 <div class="cell" data-output-location="slide">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="st">"visualize"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()) { <span class="fu">install.packages</span>(<span class="st">"visualize"</span>) }</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"visualize"</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>visualize<span class="sc">::</span><span class="fu">visualize.t</span>(<span class="sc">-</span>tStat, <span class="fu">ifelse</span>(df <span class="sc">&gt;</span> <span class="dv">3</span>, df, <span class="dv">10</span>), <span class="at">section =</span> <span class="st">"upper"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="One-sample_t-test_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-</section>
-<section id="p-value-two-sided" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="p-value-two-sided">P-value two sided</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.t</span>(<span class="fu">c</span>(<span class="sc">-</span>tStat, tStat), <span class="fu">ifelse</span>(df <span class="sc">&gt;</span> <span class="dv">3</span>, df, <span class="dv">10</span>), <span class="at">section =</span> <span class="st">"tails"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+<section id="p-value-one-sided-1" class="level3">
+<h3 class="anchored" data-anchor-id="p-value-one-sided-1">P-value one sided</h3>
+<p><span class="math display">\[ \mathcal{H}_A: \mu &lt; 120 \rightarrow t &lt; 0 \]</span></p>
+<div class="cell" data-output-location="slide">
 <div class="cell-output-display">
 <p><img src="One-sample_t-test_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
+</section>
 <section id="effect-size-cohens-d" class="level2">
 <h2 class="anchored" data-anchor-id="effect-size-cohens-d">Effect-size Cohen’s <span class="math inline">\(d\)</span></h2>
+<p>The <span class="math inline">\(t\)</span>-statistic can be significant because of a big difference and/or a high sample size. The effect-size Cohen’s <span class="math inline">\(d\)</span> is the standardized difference between the mean and the expected <span class="math inline">\(\mu\)</span>, unaffected by sample size. See <a href="https://johnnydoorn.github.io/teaching-statistics/extra-texts/EffSizeVsTestStat.html">here</a> for additional ramblings.</p>
 <p><span class="math display">\[d = \frac{t}{\sqrt{n}}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> tStat <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> tStat <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -0.1935105</code></pre>
 </div>

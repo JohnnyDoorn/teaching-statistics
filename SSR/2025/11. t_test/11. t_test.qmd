@@ -23,10 +23,11 @@ css: ../../ajohnson.css
 <div class="goals">
 In this lecture we aim to:
 
-* Introduce the t-test for comparing two means
-  * Between subjects
-  * Within subjects
-* Regression?!
+* Introduce the t-test for comparing means
+  * One mean
+  * Two means, within subjects
+  * Two means, between subjects
+* What numbers can we look at? Where do they come from?
     
 <strong>Reading:</strong>
 Chapters 9
@@ -34,7 +35,6 @@ Chapters 9
 
 ```{r child="../../topics/t-test_one-sample/One-sample_t-test.qmd"}
 ```
-
 
 ```{r child="../../topics/t-test_paired/t-test_paired.qmd"}
 ```
@@ -46,11 +46,9 @@ Chapters 9
 
 ## Recommended Exercises
 ::: {}
-- [Exercise 5.1](https://discoverjasp.com/pages/smart_alex#task-5.1), [Exercise 5.5](https://discoverjasp.com/pages/smart_alex#task-5.5)
-
-- [Exercise 7.1](https://discoverjasp.com/pages/smart_alex#task-7.1), [Exercise 7.6](https://discoverjasp.com/pages/smart_alex#task-7.6), [Exercise 7.7](https://discoverjasp.com/pages/smart_alex#task-7.7)
-    - Note: `pets.jasp` can also be downloaded from the [Data page](https://discoverjasp.com/pages/data)
-
+- [Exercise 9.1](https://discoverjasp.com/pages/smart_alex#task-9.3), [Exercise 9.2](https://discoverjasp.com/pages/smart_alex#task-9.4),  [Exercise 9.3](https://discoverjasp.com/pages/smart_alex#task-9.3), [Exercise 9.4](https://discoverjasp.com/pages/smart_alex#task-9.4)
+- How would conclusions/interpretations differ for $\alpha = 0.01$?
+- How are the assumptions looking for these data sets?
 :::
 
 

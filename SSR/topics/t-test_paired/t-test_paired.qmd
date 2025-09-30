@@ -1,6 +1,6 @@
 # Paired-samples t-test {.section}
 
-Paired 2 samples
+Compare 2 dependent/paired group means
 
 ## Paired-samples t-test
 
@@ -19,7 +19,12 @@ $$\LARGE{
   H_A &: \bar{D} < \mu_D \\
   \end{aligned}}$$
 
-## Data structure
+## Assumptions
+
+* Normally distributed residuals (i.e., model errors)
+* Random samples
+
+## Wide data structure
 
 index | k1 | k2
 ------|----|--
@@ -29,6 +34,11 @@ index | k1 | k2
 4     | x  | x
 
 Where $k$ is the level of the categorical predictor variable and $x$ is the value of the outcome/dependent variable.
+
+
+## Long vs. wide format
+
+![](../../images/figure-4-5.png)
 
 ## Data example
 
@@ -94,7 +104,7 @@ $$t_{n-1} = \frac{\bar{D} - \mu}{ {SE}_D }$$
 ```{r, echo=TRUE}
 mu <- 0                # Define mu
 
-diffSD <- sd(diffScores)          # Calculate standard deviation
+diffSD <- sd(diffScores)   # Calculate standard deviation
 diffSE <- diffSD / sqrt(n) # Calculate standard error
 
 df   <- n - 1          # Calculate degrees of freedom
@@ -106,15 +116,13 @@ tStat
 
 ## Test for significance {.subsection}
 
-Two tailed
+$$ \mathcal{H}_A: \mu_1 = \mu_2 \rightarrow t \neq 0 $$ 
 
-```{r, echo=TRUE}
-#| output-location: slide
+```{r, echo=FALSE, fig.align = 'center'}
+source("../../plotFunctionsSSR.r")
 
-if(!"visualize" %in% installed.packages()) { install.packages("visualize") }
-library("visualize")
+plotTstatSamplingDistribution(tVal = tStat, myDF = df, yAxisMod = 1.5)
 
-visualize.t(c(-tStat,tStat), ifelse(df > 2, df, 5), section="tails")
 ```
 
 ## Effect-size $d$ {.subsection}

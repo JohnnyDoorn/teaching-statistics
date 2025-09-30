@@ -1,6 +1,6 @@
 # Independent-samples t-test
 
-Compare 2 independent samples
+Compare 2 independent group means
 
 ## Independent-samples t-test
 
@@ -18,7 +18,7 @@ H_A &: t > 0 \\
 H_A &: t < 0 \\
 \end{aligned}
 
-## Data structure
+## Long data structure
 
 index | k | outcome
 ------|----|--
@@ -29,69 +29,72 @@ index | k | outcome
 
 Where $k$ is the level of the categorical predictor variable and $x$ is the value of the outcome/dependent variable.
 
-## Additional assumption
+## Assumptions
 
-Specific for independent sample $t$-test.
+* Normally distributed residuals (i.e., model errors)
+* Random samples
+
+Specific for independent sample $t$-test:
 
 * Equality of variance
-    * $H_0$ : Variance $=$ equal ($p$ > .05)
-    * $H_A$ : Variance $\neq$ equal ($p$ < .05)
+    * Assess with observed sd's or Levene's test
+    * Use Welch $t$-test (robust to unequal variances)
 
 ## Example
 
-We are going to use the IQ estimates we collected. You had to guess the IQ of the one sitting next to you and your own IQ. But we are going to add class position to the data set. We did not register this so we are going to simulate some positions.
+We are going to use the IQ estimates we collected. You had to guess the IQ of the one sitting next to you and your own IQ. Do your guesses differ from the guesses from last year??
 
 ```{r, warning=FALSE, echo=FALSE, message=FALSE}
 if(!'gsheet' %in% installed.packages()) { install.packages('gsheet') }
 library("gsheet")
-data <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1E9tlgFEv8OAyPBe_y2lwn2eUI1JmCg05Wk_wONAK1UM/edit?usp=sharing')[, -1]
-colnames(data) <- c("ownIQ", "nextIQ")
+data2024 <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1E9tlgFEv8OAyPBe_y2lwn2eUI1JmCg05Wk_wONAK1UM/edit?usp=sharing')[, -1]
+colnames(data2024) <- c("ownIQ", "nextIQ")
 # data = data[grep("2017", as.character(data$Timestamp)),c("IQ next to you", "Own IQ")]
 
-nextIQ <- data$nextIQ
-ownIQ  <- data$ownIQ
-```
+
+data2025 <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1wfuAqJwIx3p-ZXPBi3oyQWwJi4kM1XFUL1ilVRaRpVQ/edit?usp=sharing')[, -1]
+colnames(data2025) <- c("ownIQ", "nextIQ")
+# data = data[grep("2017", as.character(data$Timestamp)),c("IQ next to you", "Own IQ")]
 
 
-```{r, echo=TRUE}
-set.seed(23)
-classPosition <- sample(c("front", "back"), dim(data)[1], replace = TRUE)
+
+iq2024 <- data2024$ownIQ
+iq2025 <- c(100, 120, 110) # data2025$ownIQ
+
+data <- data.frame(IQ = c(iq2024, iq2025), year = c(rep("2024", length(iq2024)), 
+                                                    rep("2025", length(iq2025))))
 ```
+
 
 ## The data
 
 ```{r, echo=FALSE}
-data$classPosition <- classPosition
-
 # Write data for use in SPSS
 write.table(data, "IQ.csv", row.names=FALSE, col.names=TRUE, dec=',')
 
-DT::datatable(data[, c('classPosition', 'ownIQ')], options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+DT::datatable(data[, c('year', 'IQ')], options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
 ```
 
 ## Calculate means {.subsection}
 
 ```{r, echo=TRUE}
-ownIQfront  <- subset(data, classPosition == "front",   select = ownIQ)$ownIQ
-ownIQback <- subset(data, classPosition == "back", select = ownIQ)$ownIQ
+iq2024.mean <- mean(iq2024, na.rm = TRUE)
+iq2025.mean <- mean(iq2025, na.rm = TRUE)
 
-ownIQfront.mean <- mean(ownIQfront, na.rm = TRUE)
-ownIQback.mean <- mean(ownIQback, na.rm = TRUE)
-
-rbind(ownIQfront.mean, ownIQback.mean)
+rbind(iq2024.mean, iq2025.mean)
 ```
 
 ## Calculate variance {.smaller .subsection}
 
 ```{r, echo=TRUE}
-ownIQfront.var   <- var(ownIQfront,   na.rm = TRUE)
-ownIQback.var <- var(ownIQback, na.rm = TRUE)
-print(rbind(ownIQfront.var, ownIQback.var))
+iq2024.var   <- var(iq2024,   na.rm = TRUE)
+iq2025.var <- var(iq2025, na.rm = TRUE)
+print(rbind(iq2024.var, iq2025.var))
 
-ownIQfront.n   <- length(ownIQfront)
-ownIQback.n <- length(ownIQback)
-n <- ownIQfront.n + ownIQback.n
-print(rbind(ownIQfront.n, ownIQback.n))
+iq2024.n   <- length(iq2024)
+iq2025.n <- length(iq2025)
+n <- iq2024.n + iq2025.n
+print(rbind(iq2024.n, iq2025.n))
 ```
 
 
@@ -114,8 +117,8 @@ Where $s^2$ is the variance and $n$ the sample size.
 $$S^2_p = \frac{(n_1-1)s^2_1+(n_2-1)s^2_2}{n_1+n_2-2}$$
 
 ```{r, echo=TRUE}
-df <- ownIQfront.n + ownIQback.n - 2
-pooledVar <- ( (ownIQfront.n-1)*ownIQfront.var + (ownIQback.n-1)*ownIQback.var ) / df
+df <- iq2024.n + iq2025.n - 2
+pooledVar <- ( (iq2024.n-1)*iq2024.var + (iq2025.n-1)*iq2025.var ) / df
 
 df
 pooledVar
@@ -126,7 +129,7 @@ pooledVar
 $$ {SE}_p = \sqrt{\frac{S^2_p}{n_1}+\frac{S^2_p}{n_2}} $$
 
 ```{r, echo=TRUE}
-sePooled <- sqrt( ((pooledVar/ownIQfront.n) + (pooledVar/ownIQback.n)) )
+sePooled <- sqrt( ((pooledVar/iq2024.n) + (pooledVar/iq2025.n)) )
 sePooled
 ```
 
@@ -135,24 +138,24 @@ sePooled
 $$t_{n_1 + n_2 -2} = \frac{(\bar{X}_1 - \bar{X}_2) - \mu}{{SE}_p}$$
 
 ```{r, echo=TRUE}
-tStat <- ( ownIQfront.mean - ownIQback.mean ) / sePooled
+tStat <- ( iq2024.mean - iq2025.mean ) / sePooled
 
 tStat
 ```
 
 ## Test for significance
 
-Two tailed
+$$ \mathcal{H}_A: \mu_1 = \mu_2 \rightarrow t \neq 0 $$ 
 
-```{r, echo=TRUE}
-#| output-location: slide
-if(!"visualize" %in% installed.packages()) { install.packages("visualize") }
-library("visualize")
 
-if (df <= 3) df <- df + 5 # cheat to be able to build slides.. 
-if (is.na(tStat)) tStat <- 1 # cheat to be able to build slides.. 
-visualize.t(c(-round(tStat, 2), round(tStat, 2)), df+1, section="tails")
+```{r, echo=FALSE, fig.align = 'center'}
+source("../../plotFunctionsSSR.r")
+
+plotTstatSamplingDistribution(tVal = tStat, myDF = df, yAxisMod = 1.5)
+
 ```
+
+
 ## Effect-size d
 
 $$r = \frac{2t}{\sqrt{n_1 + n_2}}$$
@@ -167,45 +170,36 @@ d
 
 There exist different hypothesis tests for this - the most used is Levene's test:
 
-```{r, echo=TRUE, warning=FALSE, message=FALSE}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 
 if(!"car" %in% installed.packages()) { install.packages("car") }
 library("car")
 
-leveneTest(y = ownIQ, group = classPosition)
+leveneTest(y = data$IQ, group = data$year)
 ```
 
-## But what about equal variances?
+But more nuance lies in comparing observed sd's or variances:
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+tapply(data$IQ, data$year, sd)
+```
+
+---
+
+### But what about equal variances?
 
 ::: {.callout-warning}
-Levene's test (and other significance tests like it, such as Shapiro for normality) are heavily influenced by sample size, so a significant test result does not necessarily mean that you have a problem. A more pragmatic rule of thumb is to look at the ratio of variances - a ratio greater than 2 is problematic. Additionally, Welch test is a version of the $t$-test that handles unequal variances better. 
+Levene's test (and other significance tests like it, such as Shapiro for normality) are heavily influenced by sample size, so a significant test result does not necessarily mean that you have a problem. A more pragmatic rule of thumb is to look at the ratio of variances - a ratio greater than 2 is problematic. Additionally, Welch $t$-test is a version of the $t$-test that is robust to unequal variances. 
 :::
 
-## The difference only matters when $n_A \neq n_B$!
+## Welch $t$-test is more robust
 
+> Unequal variances bias the sampling distribution of $t$. Welch makes a correction:
 
-```{r, echo=TRUE, warning=FALSE, message=FALSE}
-meanA <- 50
-meanB <- 55
-
-sdA <- 5
-sdB <- 10
-
-nA <- 20
-nB <- 20
-
-seA <- sdA / sqrt(nA)    
-seB <- sdB / sqrt(nB)  
-tStatWelch <- (meanA - meanB) / sqrt((sdA^2 / nA) + (sdB^2 / nB))
-
-
-pooledS <- sqrt(((nA - 1) * sdA^2 + (nA - 1) * sdB^2) / (nA + nB - 2))
-tStatStudent <- (meanA - meanB) / (pooledS *  sqrt(1/nA + 1/nA))
-
-tStatStudent
-tStatWelch
-```
-
+- It uses the unpooled SE
+- It lowers the df 
+  - More inequality = more reduction
+  
+$$SE_{\text{unpooled}} = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}$$
 
 ## Normality
 
@@ -230,5 +224,5 @@ Assumption violations affect the shape of the sampling distribution and mess up 
     - Welch $t$-test
 - Non-normality?
     - Use nonparametric test (Chapter 15)
-    - Bootstrapping
+    - Bootstrapping (Section 6.10.5; bonus)
 

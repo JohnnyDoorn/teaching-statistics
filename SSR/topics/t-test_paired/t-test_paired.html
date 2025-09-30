@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Johnny van Doorn”">
 
 <title>t-test_paired</title>
 <style>
@@ -84,10 +85,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="fullcontent">
+<body>
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#paired-samples-t-test" id="toc-paired-samples-t-test" class="nav-link active" data-scroll-target="#paired-samples-t-test">Paired-samples t-test</a>
+  <ul class="collapse">
+  <li><a href="#paired-samples-t-test-1" id="toc-paired-samples-t-test-1" class="nav-link" data-scroll-target="#paired-samples-t-test-1">Paired-samples t-test</a></li>
+  <li><a href="#hypothesis" id="toc-hypothesis" class="nav-link" data-scroll-target="#hypothesis">Hypothesis</a></li>
+  <li><a href="#wide-data-structure" id="toc-wide-data-structure" class="nav-link" data-scroll-target="#wide-data-structure">Wide data structure</a></li>
+  <li><a href="#wide-vs.-long-format" id="toc-wide-vs.-long-format" class="nav-link" data-scroll-target="#wide-vs.-long-format">Wide vs.&nbsp;long format</a></li>
+  <li><a href="#data-example" id="toc-data-example" class="nav-link" data-scroll-target="#data-example">Data example</a></li>
+  <li><a href="#iq-estimates" id="toc-iq-estimates" class="nav-link" data-scroll-target="#iq-estimates">IQ estimates</a></li>
+  <li><a href="#calculate-d" id="toc-calculate-d" class="nav-link" data-scroll-target="#calculate-d">Calculate <span class="math inline">\(D\)</span></a></li>
+  <li><a href="#calculate-bard" id="toc-calculate-bard" class="nav-link" data-scroll-target="#calculate-bard">Calculate <span class="math inline">\(\bar{D}\)</span></a></li>
+  <li><a href="#calculate-t-value" id="toc-calculate-t-value" class="nav-link" data-scroll-target="#calculate-t-value">Calculate t-value</a></li>
+  <li><a href="#test-for-significance" id="toc-test-for-significance" class="nav-link" data-scroll-target="#test-for-significance">Test for significance</a></li>
+  <li><a href="#effect-size-d" id="toc-effect-size-d" class="nav-link" data-scroll-target="#effect-size-d">Effect-size <span class="math inline">\(d\)</span></a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="t-test_paired.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</div>
 <main class="content" id="quarto-document-content">
 
 
@@ -110,8 +134,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   H_A &amp;: \bar{D} &lt; \mu_D \\
   \end{aligned}}\]</span></p>
 </section>
-<section id="data-structure" class="level2">
-<h2 class="anchored" data-anchor-id="data-structure">Data structure</h2>
+<section id="wide-data-structure" class="level2">
+<h2 class="anchored" data-anchor-id="wide-data-structure">Wide data structure</h2>
 <table class="table">
 <thead>
 <tr class="header">
@@ -145,6 +169,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 <p>Where <span class="math inline">\(k\)</span> is the level of the categorical predictor variable and <span class="math inline">\(x\)</span> is the value of the outcome/dependent variable.</p>
 </section>
+<section id="wide-vs.-long-format" class="level2">
+<h2 class="anchored" data-anchor-id="wide-vs.-long-format">Wide vs.&nbsp;long format</h2>
+<p><img src="../../images/figure-4-5.png" class="img-fluid"></p>
+</section>
 <section id="data-example" class="level2">
 <h2 class="anchored" data-anchor-id="data-example">Data example</h2>
 <p>We are going to use the IQ estimates we collected. You had to guess your neighbor’s IQ and your own IQ.</p>
@@ -155,8 +183,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-31b2505382949192b58b" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-31b2505382949192b58b">{"x":{"filter":"none","vertical":false,"data":[["1","2"],[110,120],[115,120]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ownIQ<\/th>\n      <th>nextIQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ownIQ","targets":1},{"name":"nextIQ","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-f108d37e5521259b9a95" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-f108d37e5521259b9a95">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69"],[110,120,110,108,115,162,110,108,108,130,110,103,120,130,104,119,108,108,135,145,110,130,130,120,125,120,115,125,105,117,120,142,130,115,152,100,115,100,110,100,100,143,108,130,120,113,131,122,120,105,113,137,100,110,105,141,120,130,145,120,120,118,105,120,90,125,125,110,80],[115,120,110,108,115,140,110,90,109,140,120,108,110,140,109,119,98,125,125,135,100,120,115,109,125,120,128,125,115,83,125,125,130,105,130,85,110,109,103,70,100,135,106,108,120,120,125,122,180,100,113,115,130,115,125,135,130,130,140,120,125,115,118,130,110,105,125,95,95]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ownIQ<\/th>\n      <th>nextIQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ownIQ","targets":1},{"name":"nextIQ","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -168,8 +196,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-eed2e6563c93b070ebe5" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-eed2e6563c93b070ebe5">{"x":{"filter":"none","vertical":false,"data":[["1","2"],[110,120],[115,120],[5,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ownIQ<\/th>\n      <th>nextIQ<\/th>\n      <th>diffScores<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":315,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ownIQ","targets":1},{"name":"nextIQ","targets":2},{"name":"diffScores","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-6a7faab031a38a8bbdc6" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-6a7faab031a38a8bbdc6">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69"],[110,120,110,108,115,162,110,108,108,130,110,103,120,130,104,119,108,108,135,145,110,130,130,120,125,120,115,125,105,117,120,142,130,115,152,100,115,100,110,100,100,143,108,130,120,113,131,122,120,105,113,137,100,110,105,141,120,130,145,120,120,118,105,120,90,125,125,110,80],[115,120,110,108,115,140,110,90,109,140,120,108,110,140,109,119,98,125,125,135,100,120,115,109,125,120,128,125,115,83,125,125,130,105,130,85,110,109,103,70,100,135,106,108,120,120,125,122,180,100,113,115,130,115,125,135,130,130,140,120,125,115,118,130,110,105,125,95,95],[5,0,0,0,0,-22,0,-18,1,10,10,5,-10,10,5,0,-10,17,-10,-10,-10,-10,-15,-11,0,0,13,0,10,-34,5,-17,0,-10,-22,-15,-5,9,-7,-30,0,-8,-2,-22,0,7,-6,0,60,-5,0,-22,30,5,20,-6,10,0,-5,0,5,-3,13,10,20,-20,0,-15,15]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ownIQ<\/th>\n      <th>nextIQ<\/th>\n      <th>diffScores<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":315,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ownIQ","targets":1},{"name":"nextIQ","targets":2},{"name":"diffScores","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -180,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>diffMean        <span class="ot">&lt;-</span> <span class="fu">mean</span>(diffScores)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>diffMean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.5</code></pre>
+<pre><code>[1] -1.231884</code></pre>
 </div>
 </div>
 <p>And we also need n.</p>
@@ -188,7 +216,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(diffScores)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>n</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
+<pre><code>[1] 69</code></pre>
 </div>
 </div>
 </section>
@@ -198,7 +226,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">0</span>                <span class="co"># Define mu</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>diffSD <span class="ot">&lt;-</span> <span class="fu">sd</span>(diffScores)          <span class="co"># Calculate standard deviation</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>diffSD <span class="ot">&lt;-</span> <span class="fu">sd</span>(diffScores)   <span class="co"># Calculate standard deviation</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>diffSE <span class="ot">&lt;-</span> diffSD <span class="sc">/</span> <span class="fu">sqrt</span>(n) <span class="co"># Calculate standard error</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>df   <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span>          <span class="co"># Calculate degrees of freedom</span></span>
@@ -207,56 +235,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>tStat <span class="ot">&lt;-</span> ( diffMean <span class="sc">-</span> mu ) <span class="sc">/</span> diffSE</span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>tStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1</code></pre>
+<pre><code>[1] -0.7208622</code></pre>
 </div>
 </div>
 </section>
 <section id="test-for-significance" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="test-for-significance">Test for significance</h2>
-<p>Two tailed</p>
-<div class="cell" data-output-location="slide">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="st">"visualize"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()) { <span class="fu">install.packages</span>(<span class="st">"visualize"</span>) }</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"visualize"</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.t</span>(<span class="fu">c</span>(<span class="sc">-</span>tStat,tStat), <span class="fu">ifelse</span>(df <span class="sc">&gt;</span> <span class="dv">2</span>, df, <span class="dv">5</span>), <span class="at">section=</span><span class="st">"tails"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span class="math display">\[ \mathcal{H}_A: \mu_1 = \mu_2 \rightarrow t \neq 0 \]</span></p>
+<div class="cell" data-layout-align="center" data-output-location="slide">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../../plotFunctionsSSR.r"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plotTstatSamplingDistribution</span>(<span class="at">tVal =</span> tStat, <span class="at">myDF =</span> df, <span class="at">yAxisMod =</span> <span class="fl">1.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="t-test_paired_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="t-test_paired_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
-<section id="effect-size" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="effect-size">Effect-size</h2>
-<p><span class="math display">\[r = \sqrt{\frac{t^2}{t^2 + \text{df}}}\]</span></p>
+<section id="effect-size-d" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="effect-size-d">Effect-size <span class="math inline">\(d\)</span></h2>
+<p><span class="math display">\[d = \frac{t}{\sqrt{n}}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">=</span> <span class="fu">sqrt</span>(tStat<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>(tStat<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> df))</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> tStat<span class="sc">/</span>(<span class="fu">sqrt</span>(n))</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7071068</code></pre>
+<pre><code>[1] -0.08678161</code></pre>
 </div>
 </div>
-</section>
-<section id="confidence-interval-bonus" class="level2">
-<h2 class="anchored" data-anchor-id="confidence-interval-bonus">Confidence interval (bonus)</h2>
-<p>To display correct confidence intervals in SPSS we need to correct the original scores for whithin subject variation.</p>
-<code>
-<pre>** SPSS SYNTAX
-
-COMPUTE personal_mean = MEAN(nextIQ, ownIQ).
-EXECUTE.
-
-AGGREGATE
-  /OUTFILE=* MODE=ADDVARIABLES
-  /BREAK=
-  /total_mean = MEAN(personal_mean).
-
-COMPUTE adjustment = total_mean - personal_mean.
-EXECUTE.
-
-COMPUTE nextIQ.adj = nextIQ + adjustment.
-COMPUTE ownIQ.adj  = ownIQ + adjustment.
-EXECUTE.
-</pre>
-</code><p><code></code></p>
 </section>
 </section>
 

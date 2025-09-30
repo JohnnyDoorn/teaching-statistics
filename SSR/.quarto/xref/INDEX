@@ -197,5 +197,16 @@
   "2025/10. t_test/11. t_test.qmd": {
     "11. t_test.slide.html": "5b7191e6",
     "11. t_test.html": "73b233a4"
+  },
+  "2025/8. t_distribution_and_test/7. t_distribution_and_test.qmd": {
+    "7. t_distribution_and_test.slide.html": "184210c5",
+    "7. t_distribution_and_test.html": "1ba38a55"
+  },
+  "2025/11. t_test/11. t_test.qmd": {
+    "11. t_test.slide.html": "5156a71b",
+    "11. t_test.html": "3adb9ffa"
+  },
+  "topics/t-test_paired/t-test_paired.qmd": {
+    "t-test_paired.html": "87455a8b"
   }
 }

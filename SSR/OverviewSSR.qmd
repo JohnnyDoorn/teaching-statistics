@@ -52,7 +52,7 @@ n <- length(files)
 files <- files[order(as.numeric(gsub("\\..*", "", files)))]
 files <- files[files!= "OverviewSSR.qmd"]
 htmlFiles <- gsub(x =files, pattern = ".qmd", replacement = ".html")
-htmlFiles <- htmlFiles[htmlFiles %in% c("OneSidedVsTwoSided.html","Heteroscedasticity.html", "EffSizeVsTestStat.html", "ViolatingNormalityANOVA.html")]
+htmlFiles <- htmlFiles[htmlFiles %in% c("OneSidedVsTwoSided.html","Heteroscedasticity.html", "EffSizeVsTestStat.html", "ViolatingAssumptionsANOVA.html")]
 
 allLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistics/extra-texts/%s" target="_blank" class="external">link</a>',htmlFiles) 
 

@@ -94,9 +94,6 @@ tStat <- observedDifference / pooledSE
 # Convert the t-statistic to effect size d:
 d <- 2*tStat / sqrt(df) 
 d  
-# Or we can compute r:
-r <- sqrt(tStat^2/(tStat^2 + df))
-r
 ```
 
 And repeated with a higher sample size:
@@ -111,13 +108,9 @@ observedPooledSD <- sqrt(((nA - 1) * sdA^2 + (nA - 1) * sdB^2) / (nA + nB - 2))
 pooledSE <- sqrt(observedPooledSD / nA + observedPooledSD / nB)
 tStat <- observedDifference / pooledSE
 
-tStat
 # Convert the t-statistic to effect size d:
 d <- 2*tStat / sqrt(df) 
 d  
-# Or we can compute r:
-r <- sqrt(tStat^2/(tStat^2 + df))
-r
 ```
 
 While the effect sizes are still somewhat affected by the sample size, it is much less affected by sample size than the $t$- and $p$-value. We therefore generally also include an effect size when reporting on a study, preferably also including a confidence interval to express our uncertainty about the value of the effect size (just as we would do with a mean difference, or t-statistic). 
