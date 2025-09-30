@@ -44,7 +44,7 @@ We use the one-sample t-test to compare the sample mean $\bar{x}$ to the mean th
 ```{r, message=FALSE, eval=TRUE, echo=FALSE}
 if(!'gsheet' %in% installed.packages()) { install.packages('gsheet') }
 library("gsheet")
-data <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1E9tlgFEv8OAyPBe_y2lwn2eUI1JmCg05Wk_wONAK1UM/edit?usp=sharing')[, -1]
+data <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1wfuAqJwIx3p-ZXPBi3oyQWwJi4kM1XFUL1ilVRaRpVQ/edit?usp=sharing')[, -1]
 colnames(data) <- c("ownIQ", "nextIQ")
 # IQ.next.to.you = data[grep("2017|2020", as.character(data$Timestamp)),"IQ next to you"]
 IQ.next.to.you <- data$nextIQ
@@ -105,7 +105,7 @@ $$ \mathcal{H}_A: \mu > 120 \rightarrow t > 0 $$
 
 
 ```{r, echo=FALSE, fig.align = 'center'}
-plotTstatSamplingDistribution(tVal = tStat, myDF = df, yAxisMod = 1.5, altHyp = "Negative only")
+plotTstatSamplingDistribution(tVal = tStat, myDF = df, yAxisMod = 1.5, altHyp = "Positive only")
 ```
 
 
@@ -120,7 +120,7 @@ $$ \mathcal{H}_A: \mu < 120 \rightarrow t < 0 $$
 ```{r, echo=FALSE, fig.align = 'center'}
 source("../../plotFunctionsSSR.r")
 
-plotTstatSamplingDistribution(tVal = tStat, myDF = df, yAxisMod = 1.5, altHyp = "Positive only")
+plotTstatSamplingDistribution(tVal = tStat, myDF = df, yAxisMod = 1.5, altHyp = "Negative only")
 
 ```
 

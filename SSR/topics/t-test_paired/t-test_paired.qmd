@@ -51,7 +51,7 @@ Let's take a look at the data.
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, eval=TRUE}
 if(!'gsheet' %in% installed.packages()) { install.packages('gsheet') }
 library("gsheet")
-data <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1E9tlgFEv8OAyPBe_y2lwn2eUI1JmCg05Wk_wONAK1UM/edit?usp=sharing')[, -1]
+data <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1wfuAqJwIx3p-ZXPBi3oyQWwJi4kM1XFUL1ilVRaRpVQ/edit?usp=sharing')[, -1]
 colnames(data) <- c("ownIQ", "nextIQ")
 
 # data = data[grep("2017", as.character(data$Timestamp)),c("IQ next to you", "Own IQ")]

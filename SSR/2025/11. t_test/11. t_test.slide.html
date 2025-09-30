@@ -489,7 +489,7 @@ Johnny van Doorn
 <span id="cb1-6"><a href="#cb1-6"></a><span class="fu">cbind</span>(n, mean_x, sd_x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      n   mean_x     sd_x
-[1,] 69 116.8841 16.10219</code></pre>
+[1,] 83 117.6024 20.31696</code></pre>
 </div>
 </div>
 <p><small> Does this mean differ significantly from <span class="math inline">\(\mathcal{H}_0:\)</span> <span class="math inline">\(\mu = 120\)</span>? </small></p>
@@ -503,12 +503,12 @@ Johnny van Doorn
 </section>
 <section id="t-statistic" class="slide level2">
 <h2>T-statistic</h2>
-<p><span class="math display">\[T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}} = \frac{116.88 - 120 }{16.1 / \sqrt{69}}\]</span></p>
+<p><span class="math display">\[T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}} = \frac{117.6 - 120 }{20.32 / \sqrt{83}}\]</span></p>
 <p>So the t-statistic represents the deviation of the sample mean <span class="math inline">\(\bar{x}\)</span> from the population mean <span class="math inline">\(\mu\)</span>, considering the sample size.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>tStat <span class="ot">&lt;-</span> (mean_x <span class="sc">-</span> mu) <span class="sc">/</span> (sd_x <span class="sc">/</span> <span class="fu">sqrt</span>(n)); tStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -1.607419</code></pre>
+<pre><code>[1] -1.075116</code></pre>
 </div>
 </div>
 </section>
@@ -549,7 +549,7 @@ Johnny van Doorn
 <span id="cb5-2"><a href="#cb5-2"></a></span>
 <span id="cb5-3"><a href="#cb5-3"></a>d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.1935105</code></pre>
+<pre><code>[1] -0.1180093</code></pre>
 </div>
 </div>
 </section>
@@ -633,8 +633,8 @@ Johnny van Doorn
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-606bfd3efa100e272734" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-606bfd3efa100e272734">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69"],[110,120,110,108,115,162,110,108,108,130,110,103,120,130,104,119,108,108,135,145,110,130,130,120,125,120,115,125,105,117,120,142,130,115,152,100,115,100,110,100,100,143,108,130,120,113,131,122,120,105,113,137,100,110,105,141,120,130,145,120,120,118,105,120,90,125,125,110,80],[115,120,110,108,115,140,110,90,109,140,120,108,110,140,109,119,98,125,125,135,100,120,115,109,125,120,128,125,115,83,125,125,130,105,130,85,110,109,103,70,100,135,106,108,120,120,125,122,180,100,113,115,130,115,125,135,130,130,140,120,125,115,118,130,110,105,125,95,95]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ownIQ<\/th>\n      <th>nextIQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ownIQ","targets":1},{"name":"nextIQ","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-84974fbfda798952516b" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-84974fbfda798952516b">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83"],[120,108,122,115,130,100,110,110,116,100,115,100,115,122,115,112,120,180,125,110,110,128,115,110,130,125,120,120,72,100,101,120,110,110,110,100,110,100,130,128,120,110,110,100,120,120,105,105,110,130,200,120,115,130,130,180,120,98,105,200,115,130,135,115,120,120,110,131,200,110,140,125,126,115,110,120,120,100,103,125,136,128,112],[120,115,128,115,120,100,130,120,130,115,120,100,110,115,115,130,110,181,72,110,140,120,120,80,110,120,120,120,105,110,150,130,105,110,140,120,115,110,132,130,120,105,112,120,120,140,125,105,120,125,50,129,115,130,110,200,130,125,120,50,140,110,125,120,110,120,100,131,100,119,80,123,120,120,110,110,124,100,105,110,140,130,120]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ownIQ<\/th>\n      <th>nextIQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ownIQ","targets":1},{"name":"nextIQ","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -646,8 +646,8 @@ Johnny van Doorn
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-3b90720a21a7d95733d8" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-3b90720a21a7d95733d8">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69"],[110,120,110,108,115,162,110,108,108,130,110,103,120,130,104,119,108,108,135,145,110,130,130,120,125,120,115,125,105,117,120,142,130,115,152,100,115,100,110,100,100,143,108,130,120,113,131,122,120,105,113,137,100,110,105,141,120,130,145,120,120,118,105,120,90,125,125,110,80],[115,120,110,108,115,140,110,90,109,140,120,108,110,140,109,119,98,125,125,135,100,120,115,109,125,120,128,125,115,83,125,125,130,105,130,85,110,109,103,70,100,135,106,108,120,120,125,122,180,100,113,115,130,115,125,135,130,130,140,120,125,115,118,130,110,105,125,95,95],[5,0,0,0,0,-22,0,-18,1,10,10,5,-10,10,5,0,-10,17,-10,-10,-10,-10,-15,-11,0,0,13,0,10,-34,5,-17,0,-10,-22,-15,-5,9,-7,-30,0,-8,-2,-22,0,7,-6,0,60,-5,0,-22,30,5,20,-6,10,0,-5,0,5,-3,13,10,20,-20,0,-15,15]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ownIQ<\/th>\n      <th>nextIQ<\/th>\n      <th>diffScores<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":315,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ownIQ","targets":1},{"name":"nextIQ","targets":2},{"name":"diffScores","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-675e4ee6b5d79b495d33" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-675e4ee6b5d79b495d33">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83"],[120,108,122,115,130,100,110,110,116,100,115,100,115,122,115,112,120,180,125,110,110,128,115,110,130,125,120,120,72,100,101,120,110,110,110,100,110,100,130,128,120,110,110,100,120,120,105,105,110,130,200,120,115,130,130,180,120,98,105,200,115,130,135,115,120,120,110,131,200,110,140,125,126,115,110,120,120,100,103,125,136,128,112],[120,115,128,115,120,100,130,120,130,115,120,100,110,115,115,130,110,181,72,110,140,120,120,80,110,120,120,120,105,110,150,130,105,110,140,120,115,110,132,130,120,105,112,120,120,140,125,105,120,125,50,129,115,130,110,200,130,125,120,50,140,110,125,120,110,120,100,131,100,119,80,123,120,120,110,110,124,100,105,110,140,130,120],[0,7,6,0,-10,0,20,10,14,15,5,0,-5,-7,0,18,-10,1,-53,0,30,-8,5,-30,-20,-5,0,0,33,10,49,10,-5,0,30,20,5,10,2,2,0,-5,2,20,0,20,20,0,10,-5,-150,9,0,0,-20,20,10,27,15,-150,25,-20,-10,5,-10,0,-10,0,-100,9,-60,-2,-6,5,0,-10,4,0,2,-15,4,2,8]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ownIQ<\/th>\n      <th>nextIQ<\/th>\n      <th>diffScores<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":315,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ownIQ","targets":1},{"name":"nextIQ","targets":2},{"name":"diffScores","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -658,7 +658,7 @@ Johnny van Doorn
 <span id="cb8-2"><a href="#cb8-2"></a>diffMean        <span class="ot">&lt;-</span> <span class="fu">mean</span>(diffScores)</span>
 <span id="cb8-3"><a href="#cb8-3"></a>diffMean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -1.231884</code></pre>
+<pre><code>[1] -2.493976</code></pre>
 </div>
 </div>
 <p>And we also need n.</p>
@@ -666,7 +666,7 @@ Johnny van Doorn
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(diffScores)</span>
 <span id="cb10-2"><a href="#cb10-2"></a>n</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 69</code></pre>
+<pre><code>[1] 83</code></pre>
 </div>
 </div>
 </section>
@@ -685,7 +685,7 @@ Johnny van Doorn
 <span id="cb12-9"><a href="#cb12-9"></a>tStat <span class="ot">&lt;-</span> ( diffMean <span class="sc">-</span> mu ) <span class="sc">/</span> diffSE</span>
 <span id="cb12-10"><a href="#cb12-10"></a>tStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.7208622</code></pre>
+<pre><code>[1] -0.7502965</code></pre>
 </div>
 </div>
 </section>
@@ -701,7 +701,7 @@ Johnny van Doorn
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>d <span class="ot">&lt;-</span> tStat<span class="sc">/</span>(<span class="fu">sqrt</span>(n))</span>
 <span id="cb14-2"><a href="#cb14-2"></a>d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.08678161</code></pre>
+<pre><code>[1] -0.08235574</code></pre>
 </div>
 </div>
 </section></section>
@@ -783,8 +783,8 @@ H_A &amp;: t &lt; 0 \\
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-e33a621fcb6835a6afeb" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-e33a621fcb6835a6afeb">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72"],["2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2025","2025","2025"],[110,120,110,108,115,162,110,108,108,130,110,103,120,130,104,119,108,108,135,145,110,130,130,120,125,120,115,125,105,117,120,142,130,115,152,100,115,100,110,100,100,143,108,130,120,113,131,122,120,105,113,137,100,110,105,141,120,130,145,120,120,118,105,120,90,125,125,110,80,100,120,110]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>year<\/th>\n      <th>IQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"year","targets":1},{"name":"IQ","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-8c19b050aec4abfb5209" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-8c19b050aec4abfb5209">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72"],["2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2025","2025","2025"],[110,120,110,108,115,162,110,108,108,130,110,103,120,130,104,119,108,108,135,145,110,130,130,120,125,120,115,125,105,117,120,142,130,115,152,100,115,100,110,100,100,143,108,130,120,113,131,122,120,105,113,137,100,110,105,141,120,130,145,120,120,118,105,120,90,125,125,110,80,100,120,110]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>year<\/th>\n      <th>IQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"year","targets":1},{"name":"IQ","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
