@@ -30,7 +30,7 @@ In this lecture we aim to:
 * What numbers can we look at? Where do they come from?
     
 <strong>Reading:</strong>
-Chapters 9
+Chapter 9
 </div>
 
 ```{r child="../../topics/t-test_one-sample/One-sample_t-test.qmd"}

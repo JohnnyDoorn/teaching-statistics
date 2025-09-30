@@ -1,7 +1,6 @@
 ---
 title: "SSR 2024-2025"
 author: "Sharon Kinkenberg & Johnny van Doorn"
-date: today
 ---
 
 These slides were originally created by SH and tweaked by JvD.

@@ -1,0 +1,53 @@
+---
+title: "12. ANOVA"
+subtitle: "F-distribution & One-way independent ANOVA"
+author: "Johnny van Doorn"
+date: "01 oct 2025"
+footer: "Scientific & Statistical Reasoning"
+format:
+  revealjs:
+    output-ext: slide.html
+    css: ../../ajohnson.css
+  html: default
+css: ../../ajohnson.css
+---
+
+<div class="goals">
+In this lecture we aim to:
+
+- Introducing ANOVA
+- F-Distribution
+- ANOVA in JASP
+    
+<strong>Reading:</strong>
+Chapter 11
+</div>
+
+
+
+## Models {.center}
+
+<div style="font-size:200%; transform: rotate(-11deg);">
+$$\text{outcome} = \text{model} + \text{error}$$
+</div>
+
+```{r child="../../topics/ANOVA_one_way_independent/ANOVA_one_way_independent.qmd"}
+```
+
+
+```{r child="../../topics/f_distribution/f_distribution.qmd"}
+```
+
+# Closing
+
+## Recommended Exercises
+
+::: {}
+- [Exercise 9.1](https://discoverjasp.com/pages/smart_alex#task-9.3), [Exercise 9.2](https://discoverjasp.com/pages/smart_alex#task-9.4),  [Exercise 9.3](https://discoverjasp.com/pages/smart_alex#task-9.3), [Exercise 9.4](https://discoverjasp.com/pages/smart_alex#task-9.4)
+- How would conclusions/interpretations differ for $\alpha = 0.01$?
+- How are the assumptions looking for these data sets?
+:::
+
+
+```{r child="../../footer.qmd"}
+```

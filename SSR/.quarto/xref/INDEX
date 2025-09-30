@@ -208,5 +208,9 @@
   },
   "topics/t-test_paired/t-test_paired.qmd": {
     "t-test_paired.html": "87455a8b"
+  },
+  "2025/12. f_distribution_ANOVA_one_way_independent/12. f_distribution_ANOVA_one_way_independent.qmd": {
+    "12. f_distribution_ANOVA_one_way_independent.html": "639cb062",
+    "12. f_distribution_ANOVA_one_way_independent.slide.html": "e652ed0a"
   }
 }
