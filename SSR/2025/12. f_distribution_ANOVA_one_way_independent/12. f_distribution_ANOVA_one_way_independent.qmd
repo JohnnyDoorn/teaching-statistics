@@ -15,9 +15,9 @@ css: ../../ajohnson.css
 <div class="goals">
 In this lecture we aim to:
 
-- Introducing ANOVA
-- F-Distribution
-- ANOVA in JASP
+- Introduce ANOVA
+- Discuss follow-up tests
+- Show ANOVA in JASP
     
 <strong>Reading:</strong>
 Chapter 11
@@ -31,19 +31,19 @@ Chapter 11
 $$\text{outcome} = \text{model} + \text{error}$$
 </div>
 
-```{r child="../../topics/ANOVA_one_way_independent/ANOVA_one_way_independent.qmd"}
+```{r child="../../topics/ANOVA_one_way_independent/ANOVA_one_way_puppies.qmd"}
 ```
 
 
-```{r child="../../topics/f_distribution/f_distribution.qmd"}
-```
+<!-- ```{r child="../../topics/f_distribution/f_distribution.qmd"} -->
+<!-- ``` -->
 
 # Closing
 
 ## Recommended Exercises
 
 ::: {}
-- [Exercise 9.1](https://discoverjasp.com/pages/smart_alex#task-9.3), [Exercise 9.2](https://discoverjasp.com/pages/smart_alex#task-9.4),  [Exercise 9.3](https://discoverjasp.com/pages/smart_alex#task-9.3), [Exercise 9.4](https://discoverjasp.com/pages/smart_alex#task-9.4)
+- [Exercise 11.1](https://discoverjasp.com/pages/smart_alex#task-11.1), [Exercise 11.2](https://discoverjasp.com/pages/smart_alex#task-11.2),  [Exercise 11.4](https://discoverjasp.com/pages/smart_alex#task-11.4)
 - How would conclusions/interpretations differ for $\alpha = 0.01$?
 - How are the assumptions looking for these data sets?
 :::

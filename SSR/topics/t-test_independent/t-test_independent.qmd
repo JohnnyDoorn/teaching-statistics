@@ -158,7 +158,7 @@ plotTstatSamplingDistribution(tVal = tStat, myDF = df, yAxisMod = 1.5)
 
 ## Effect-size d
 
-$$r = \frac{2t}{\sqrt{n_1 + n_2}}$$
+$$d = \frac{2t}{\sqrt{n_1 + n_2}}$$
 
 ```{r, echo=TRUE}
 d <- 2*tStat / sqrt(n)

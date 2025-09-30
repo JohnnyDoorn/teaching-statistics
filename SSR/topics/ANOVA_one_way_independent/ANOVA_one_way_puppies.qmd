@@ -1,0 +1,329 @@
+# One-way independent ANOVA {.section}
+
+Compare 2 or more independent groups.
+
+## Assumptions
+
+Assuming th $H_0$ hypothesis to be true, the following should hold:
+
+* Continuous variable
+* Random sample
+* Normally distributed residuals
+    * Q-Q plots (or Shapiro-Wilk)
+* Equal variance within groups (i.e., *Homogeneity of variances*)
+    * Ratio of variances/sd (or Levene's test)
+
+## Puppies!
+
+We would like to contribute to the literature on animal-assisted therapy, and study the effect of puppy therapy. We divide 15 people over 3 conditions ($n_1 = n_2 = n_3 = 5$):
+
+* Control condition (no puppies)
+* Short exposure (15 minutes of puppies)
+* Long exposure (30 minutes of puppies)
+
+```{r, echo=FALSE}
+rm(list=ls())
+data <- read.csv("~/GitHubStuff/teaching-statistics/datasets/puppies.csv")
+x <- data$Happiness
+data$Dose <- factor(data$Dose, levels = c("No puppies", "15 mins", "30 mins"))
+plotData <- data
+data <- data[, -1]
+x.c <- x[data$Dose == "No puppies"] # Control 
+x.k <- x[data$Dose == "15 mins"] # Knees
+x.e <- x[data$Dose == "30 mins"] # Eyes
+```
+
+## The data
+
+```{r, echo=FALSE}
+library("DT")
+datatable(data, options = list(searching = FALSE, scrollY = 415, paging = FALSE, info = FALSE))
+
+```
+
+## The means
+
+```{r, echo=FALSE}
+tapply(data$Happiness, data$Dose, mean)
+```
+
+## Visualizing data
+
+```{r, echo=FALSE}
+set.seed(124)
+plot(jitter(as.numeric(data$Dose), 0.23), x, 
+     col="red",
+     pch = 21, 
+     bg = "gray",
+     main='Response to puppy treatment',
+     ylab="Happiness",
+     xlab="Puppy treatment condition",
+     xlim=c(.5,3.5),
+     las = 1,
+     cex = 1.2,
+     bty = "n",
+     xaxt="n")
+axis(1,at=1:3,labels=levels(data$Dose))
+
+lines(c(1,1.2,1.1,1.1,1,1.2),
+      c(rep((mean(x.c)-((sd(x.c)/sqrt(length(x.c))))),3),
+        rep((mean(x.c)+((sd(x.c)/sqrt(length(x.c))))),3))
+)
+lines(c(2,2.2,2.1,2.1,2,2.2),
+      c(rep((mean(x.k)-((sd(x.k)/sqrt(length(x.k))))),3),
+        rep((mean(x.k)+((sd(x.k)/sqrt(length(x.k))))),3))
+)
+lines(c(3,3.2,3.1,3.1,3,3.2),
+      c(rep((mean(x.e)-((sd(x.e)/sqrt(length(x.e))))),3),
+        rep((mean(x.e)+((sd(x.e)/sqrt(length(x.e))))),3))
+)
+points(c(1,2,3)+.1,c(mean(x.c),mean(x.k),mean(x.e)),bg="darkred",pch=21, col = "gray", cex = 1.6)
+```
+
+
+## Define the model {.subsection}
+
+$$\hat{Happiness} = {Puppy dose} + {Error}$$
+
+Regression model:
+
+$$\hat{y} = b_0 + b_1 {dummy}_1 + b_2 {dummy}_2$$
+
+
+## Define the dummies
+
+$$\hat{y} = b_0 + b_1 {dummy}_1 + b_2 {dummy}_2$$
+
+- ${dummy}_1 =$ 1 if participant received 15 minutes, 0 otherwise
+- ${dummy}_2 =$: 1 if participant received 30 minutes, 0 otherwise
+
+## Model predictions 
+
+$$\hat{y} = b_0 + b_1 {dummy}_1 + b_2 {dummy}_2$$
+
+- If 0 puppies: we predict $b_0 + 0 + 0$
+  - $b_0 =$  the mean of the control group
+- If 15 min puppies: we predict $b_0 + b_1 + 0$
+  - $b_1 =$ difference between control and 15 minute group
+- If 30 min puppies: we predict $b_0 + 0 + b_2$
+  - $b_2 =$ difference between control and 30 minute group
+
+## Data + predictions (i.e., group means)
+
+```{r, echo=FALSE}
+library("DT")
+data$Predictions <- tapply(data$Happiness, data$Dose, mean)[data$Dose]
+datatable(data, options = list(searching = FALSE, scrollY = 415, paging = FALSE, info = FALSE))
+```
+
+
+## Variance components
+
+Variance | Sum of Squares | DF | Mean Squares | F-ratio
+---------|----------------|----|--------------|---------
+Model    | ${SS}_{model} = \sum n_k(\bar{X}_k - \bar{X})^2$ | $k-1$ | $\frac{{SS}_{model}}{{df}_{model}}$ | $\frac{{MS}_{model}}{{MS}_{error}}$
+Error    | ${SS}_{error} = \sum s_k^2 (n_k - 1)$            | $N-k$ | $\frac{{SS}_{error}}{{df}_{error}}$ | 
+Total    | ${SS}_{total} = {SS}_{model} + {SS}_{error}$     | $N-1$ | $\frac{{SS}_{total}}{{df}_{total}}$ | 
+
+Where $N$ is the total sample size, $n_k$ is the sample size per category and $k$ is the number of categories. Finally $s_k^2$ is the variance per category.
+
+## Variance questions {.smaller}
+
+- How much total variance is there in the dependent variable?
+  - Total variance = distance between observations and grand mean
+
+- How much of this variance can we explain by looking at the group means?
+  - Model variance = distance between group means and grand mean
+- How much of this variance is **not** explained by the group means?
+  - Error variance = distance between group means and observations
+
+> DV = Model + Error
+
+## Total variance {.smaller}
+
+$${SS}_{total} = \sum(x - \bar{x})^2$$
+
+```{r, echo=TRUE}
+N <- length(x)
+
+ss.t <- sum( (x - mean(x))^2 )
+ss.t
+
+ss.t / (N-1) # ms.t
+```
+
+
+
+$${MS}_{total} = \frac{SS_{total}}{N-1} = s_x^2$$
+
+```{r, echo=FALSE}
+ms.t <- var(x)
+```
+
+
+## Visual ${SS}_{total}  = `r round(ss.t, 3)`$
+
+```{r, echo=FALSE}
+source("../../plotFunctionsSSR.r")
+colnames(plotData) <- c("pp", "group", "dv")
+plotData$pp <- 1:nrow(data)
+plotData$group <- as.factor(plotData$group)
+plotSumSquares(data = plotData, whatPred = "Mean", myLimY = c(0, 10), whatDisplay = c("Segments", "Sums"))
+
+# plotData <- data
+# plotData$pp <- 1:nrow(data)
+# colnames(plotData) <- c("dv", "group", "pp")
+# plotSumSquares(data = plotData, whatPred = "Mean", myLimY = c(-3, 3), whatDisplay = "Segments")
+```
+
+## Model variance
+
+$${MS}_{model} = \frac{{SS}_{model}}{{df}_{model}} \\ {df}_{model} = k - 1$$
+
+Where $k$ is the number of independent groups and
+
+$${SS}_{model} = \sum_{k} n_k (\bar{X}_k - \bar{X})^2$$
+
+```{r, echo=FALSE}
+k   <- 3
+n.c <- length(x.c)
+n.k <- length(x.k)
+n.e <- length(x.e)
+```
+
+--------
+
+```{r, echo=FALSE}
+ss.m.c <- n.c * (mean(x.c) - mean(x))^2
+ss.m.k <- n.k * (mean(x.k) - mean(x))^2
+ss.m.e <- n.e * (mean(x.e) - mean(x))^2
+
+ss.m <- sum(ss.m.c, ss.m.k, ss.m.e)
+df.m <- (k - 1)
+ms.m <- ss.m / df.m
+```
+
+## Visual ${SS}_{model} = `r round(ss.m, 3)`$
+
+```{r, echo=FALSE}
+plotSumSquares(data = plotData, sumSq = "Model", whatPred = "Group means", myLimY = c(0, 10), whatDisplay = c("Segments"))
+```
+
+## Error variance {.smaller}
+
+$${MS}_{error} = \frac{{SS}_{error}}{{df}_{error}} \\ {df}_{error} = N - k$$
+
+where
+
+$${SS}_{error} = \sum_{k} s_k^2 (n_k - 1) = \sum_{k} \frac{\sum (x_{ik} - \bar{x}_k)^2}{(n_k - 1)} (n_k - 1)$$
+
+```{r, echo=FALSE}
+ss.e.c <- var(x.c) * (n.c - 1)
+ss.e.k <- var(x.k) * (n.k - 1)
+ss.e.e <- var(x.e) * (n.e - 1)
+ss.e   <- sum(ss.e.c, ss.e.k, ss.e.e)
+```
+
+
+$${MS}_{error} = \frac{{SS}_{error}}{{df}_{error}} \\ {df}_{error} = N - k$$
+
+```{r, echo=FALSE}
+df.e <- (N - k)
+ms.e <- ss.e / df.e
+# ; ms.e
+```
+
+## Visual ${SS}_{error}  = `r round(ss.e, 3)`$
+
+```{r, echo=FALSE}
+plotSumSquares(data = plotData, sumSq = "Error", whatPred = "Group means", myLimY = c(0, 10), whatDisplay = c("Segments"))
+```
+
+## Variance components {.subsection}
+
+$${SS}_{total} = {SS}_{model} + {SS}_{error}$$
+$$`r round(ss.t, 3)` = `r round(ss.m, 3)` + `r round(ss.e, 3)`$$
+
+$${MS}_{total} = \frac{{SS}_{total}}{{df}_{total}}= `r round(ms.t, 3)`$$
+$${MS}_{model} = \frac{{SS}_{model}}{{df}_{model}}= `r round(ms.m, 3)`$$
+$${MS}_{error} = \frac{{SS}_{error}}{{df}_{error}} = `r round(ms.e, 3)`$$
+
+## F-ratio {.subsection}
+
+![](../../images/figure-11-5.png)
+
+---
+
+### F-ratio {.subsection}
+
+$$F = \frac{{MS}_{model}}{{MS}_{error}} = \frac{{SIGNAL}}{{NOISE}}$$
+
+```{r, echo=TRUE}
+fStat <- ms.m / ms.e; fStat
+```
+
+## Reject $H_0$?
+
+```{r, echo=FALSE}
+# Set up the plot for the F-distribution
+curve(df(x, df.m, df.e), from = 0, to = 10, n = 1000, bty = "n", las = 1,
+      xlab = "F-value", ylab = "Density", main = "F-distribution with P-value Region")
+
+# Shade the upper tail (p-value region) using polygon
+# Define the region to fill (upper tail, greater than fStat)
+x_vals <- seq(fStat, 10, length.out = 100)
+y_vals <- df(x_vals, df.m, df.e)
+
+# Draw the polygon to fill the area under the curve
+polygon(c(fStat, x_vals, 10), c(0, y_vals, 0), col = "lightblue", border = NA)
+
+# Optionally, add a vertical line at the F-statistic
+arrows(x0 = fStat, x1 = fStat, y0 = 0 , y1 = 0.6, col = "darkred", lwd = 2)
+text(x = fStat, y = 0.8, paste("F =", round(fStat, 2)), cex = 1.2)
+text(x = fStat, y = 0.7, paste("p-val =", format(round(pf(fStat, df.m, df.e, lower.tail = FALSE), 4), scientific = FALSE, digits = 5)), cex = 1.2)
+```
+
+## Contrasts
+
+Planned comparisons
+
+* Exploring differences of theoretical interest
+* Higher precision
+* Higher power
+
+## Contrasts
+
+* Values add up to 0
+* Careful with specifying too many contrasts (Section 11.5.2 vs. section 11.5.3)
+
+##
+
+![](../../images/figure-11-6.png)
+
+
+## Post-hoc tests
+
+Unplanned comparisons
+
+* Exploring all pairwise differences
+* Adjust T value for inflated type 1 error
+    * [Why?](https://xkcd.com/882/)
+    * Different procedures exist (e.g., Tukey, Bonferroni)
+    * Bonferroni most conservative, Tukey more permissive 
+* Same procedure as contrasts, but: **exploratory vs. confirmatory research**
+
+
+
+
+## Effect size $\omega^2$
+
+The least bias estimate of explained variance in ANOVA is omega squared $\omega^2$:
+
+$$\omega^2 = \frac{{SS}_{model} - ({df}_{model}){MS}_{error}}{{SS}_{total}+{MS}_{error}}$$
+But what does it say?
+
+## Effect size $d$
+
+A more interpretable effect size measure is $d_{Contrast}$. Which gives Cohen's $d$ for a specific contrast.
+
+$$d_{Contrast} = \sqrt{\frac{2t}{\sqrt{n_1 + n_2}}}$$

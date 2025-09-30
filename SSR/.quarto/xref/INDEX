@@ -212,5 +212,11 @@
   "2025/12. f_distribution_ANOVA_one_way_independent/12. f_distribution_ANOVA_one_way_independent.qmd": {
     "12. f_distribution_ANOVA_one_way_independent.html": "639cb062",
     "12. f_distribution_ANOVA_one_way_independent.slide.html": "e652ed0a"
+  },
+  "topics/ANOVA_one_way_independent/ANOVA_one_way_independent2.qmd": {
+    "ANOVA_one_way_independent2.html": "299ee769"
+  },
+  "topics/ANOVA_one_way_independent/ANOVA_one_way_puppies.qmd": {
+    "ANOVA_one_way_puppies.html": "341db56b"
   }
 }

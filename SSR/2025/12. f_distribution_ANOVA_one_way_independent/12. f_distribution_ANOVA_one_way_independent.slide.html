@@ -387,6 +387,17 @@
       margin-right: 0; 
     }
   </style>
+  
+  <link href="12. f_distribution_ANOVA_one_way_independent_files/libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+  <script src="12. f_distribution_ANOVA_one_way_independent_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+  <link href="12. f_distribution_ANOVA_one_way_independent_files/libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+  <script src="12. f_distribution_ANOVA_one_way_independent_files/libs/datatables-binding-0.33/datatables.js"></script>
+  <script src="12. f_distribution_ANOVA_one_way_independent_files/libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+  <link href="12. f_distribution_ANOVA_one_way_independent_files/libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+  <link href="12. f_distribution_ANOVA_one_way_independent_files/libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+  <script src="12. f_distribution_ANOVA_one_way_independent_files/libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+  <link href="12. f_distribution_ANOVA_one_way_independent_files/libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+  <script src="12. f_distribution_ANOVA_one_way_independent_files/libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -414,11 +425,11 @@ Johnny van Doorn
 <div class="goals">
 <p>In this lecture we aim to:</p>
 <ul>
-<li>Introducing ANOVA</li>
-<li>F-Distribution</li>
-<li>ANOVA in JASP</li>
+<li>Introduce ANOVA</li>
+<li>Discuss follow-up tests</li>
+<li>Show ANOVA in JASP</li>
 </ul>
-<p><strong>Reading:</strong> Chapters 9</p>
+<p><strong>Reading:</strong> Chapter 11</p>
 </div>
 </section>
 <section id="models" class="slide level2 center">
@@ -438,36 +449,90 @@ Johnny van Doorn
 <ul>
 <li>Continuous variable</li>
 <li>Random sample</li>
-<li>Normally distributed
+<li>Normally distributed residuals
 <ul>
-<li>Shapiro-Wilk test or Q-Q plots</li>
+<li>Q-Q plots (or Shapiro-Wilk)</li>
 </ul></li>
 <li>Equal variance within groups (i.e., <em>Homogeneity of variances</em>)
 <ul>
-<li>Levene’s test or ratio of variances</li>
+<li>Ratio of variances/sd (or Levene’s test)</li>
 </ul></li>
 </ul>
 </section>
-<section id="jet-lag" class="slide level2 smaller">
-<h2>Jet lag</h2>
-<p>Wright and Czeisler (2002) performed an experiment where they measured the circadian rhythm by the daily cycle of melatonin production in 22 subjects randomly assigned to one of three light treatments.</p>
+<section id="puppies" class="slide level2">
+<h2>Puppies!</h2>
+<p>We would like to contribute to the literature on animal-assisted therapy, and study the effect of puppy therapy. We divide 15 people over 3 conditions (<span class="math inline">\(n_1 = n_2 = n_3 = 5\)</span>):</p>
 <ul>
-<li>Control condition (no light)</li>
-<li>Knees (3 hour light to back of knees)</li>
-<li>Eyes (3 hour light in eyes)</li>
+<li>Control condition (no puppies)</li>
+<li>Short exposure (15 minutes of puppies)</li>
+<li>Long exposure (30 minutes of puppies)</li>
 </ul>
+</section>
+<section id="the-data" class="slide level2">
+<h2>The data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
-<span id="cb1-2"><a href="#cb1-2"></a>x.c <span class="ot">&lt;-</span> <span class="fu">c</span>( .<span class="dv">53</span>, .<span class="dv">36</span>,  .<span class="dv">2</span>,  <span class="sc">-</span>.<span class="dv">37</span>, <span class="sc">-</span>.<span class="dv">6</span>,  <span class="sc">-</span>.<span class="dv">64</span>, <span class="sc">-</span><span class="fl">1.27</span>) <span class="co"># Control </span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>x.k <span class="ot">&lt;-</span> <span class="fu">c</span>( .<span class="dv">73</span>, .<span class="dv">31</span>,  .<span class="dv">03</span>, <span class="sc">-</span>.<span class="dv">29</span>, <span class="sc">-</span>.<span class="dv">56</span>, <span class="sc">-</span>.<span class="dv">96</span>, <span class="sc">-</span><span class="fl">1.61</span>) <span class="co"># Knees</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>x.e <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">78</span>,<span class="sc">-</span>.<span class="dv">86</span>,<span class="sc">-</span><span class="fl">1.35</span>,<span class="sc">-</span><span class="fl">1.48</span>,<span class="sc">-</span><span class="fl">1.52</span>,<span class="sc">-</span><span class="fl">2.04</span>, <span class="sc">-</span><span class="fl">2.83</span>) <span class="co"># Eyes</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>x   <span class="ot">&lt;-</span> <span class="fu">c</span>( x.c, x.k, x.e )                          <span class="co"># Conditions combined</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div class="datatables html-widget html-fill-item" id="htmlwidget-aa9bc69ba3405edf8d09" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-aa9bc69ba3405edf8d09">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"],["No puppies","No puppies","No puppies","No puppies","No puppies","15 mins","15 mins","15 mins","15 mins","15 mins","30 mins","30 mins","30 mins","30 mins","30 mins"],[3,2,1,1,4,5,2,4,2,3,7,4,5,3,6]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Dose<\/th>\n      <th>Happiness<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Dose","targets":1},{"name":"Happiness","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
 </div>
 </section>
-<section id="section" class="slide level2">
-<h2></h2>
+<section id="the-means" class="slide level2">
+<h2>The means</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>No puppies    15 mins    30 mins 
+       2.2        3.2        5.0 </code></pre>
+</div>
+</div>
+</section>
+<section id="visualizing-data" class="slide level2">
+<h2>Visualizing data</h2>
 
-<img data-src="12.-f_distribution_ANOVA_one_way_independent_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
+<img data-src="12.-f_distribution_ANOVA_one_way_independent_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
+<section id="define-the-model" class="slide level2 subsection">
+<h2>Define the model</h2>
+<p><span class="math display">\[\hat{Happiness} = {Puppy dose} + {Error}\]</span></p>
+<p>Regression model:</p>
+<p><span class="math display">\[\hat{y} = b_0 + b_1 {dummy}_1 + b_2 {dummy}_2\]</span></p>
+</section>
+<section id="define-the-dummies" class="slide level2">
+<h2>Define the dummies</h2>
+<p><span class="math display">\[\hat{y} = b_0 + b_1 {dummy}_1 + b_2 {dummy}_2\]</span></p>
+<ul>
+<li><span class="math inline">\({dummy}_1 =\)</span> 1 if participant received 15 minutes, 0 otherwise</li>
+<li><span class="math inline">\({dummy}_2 =\)</span>: 1 if participant received 30 minutes, 0 otherwise</li>
+</ul>
+</section>
+<section id="model-predictions" class="slide level2">
+<h2>Model predictions</h2>
+<p><span class="math display">\[\hat{y} = b_0 + b_1 {dummy}_1 + b_2 {dummy}_2\]</span></p>
+<ul>
+<li>If 0 puppies: we predict <span class="math inline">\(b_0 + 0 + 0\)</span>
+<ul>
+<li><span class="math inline">\(b_0 =\)</span> the mean of the control group</li>
+</ul></li>
+<li>If 15 min puppies: we predict <span class="math inline">\(b_0 + b_1 + 0\)</span>
+<ul>
+<li><span class="math inline">\(b_1 =\)</span> difference between control and 15 minute group</li>
+</ul></li>
+<li>If 30 min puppies: we predict <span class="math inline">\(b_0 + 0 + b_2\)</span>
+<ul>
+<li><span class="math inline">\(b_2 =\)</span> difference between control and 30 minute group</li>
+</ul></li>
+</ul>
+</section>
+<section id="data-predictions-i.e.-group-means" class="slide level2">
+<h2>Data + predictions (i.e., group means)</h2>
+<div class="cell">
+<div class="cell-output-display">
+
+<div class="datatables html-widget html-fill-item" id="htmlwidget-25f0df1c14620f84dda8" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-25f0df1c14620f84dda8">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"],["No puppies","No puppies","No puppies","No puppies","No puppies","15 mins","15 mins","15 mins","15 mins","15 mins","30 mins","30 mins","30 mins","30 mins","30 mins"],[3,2,1,1,4,5,2,4,2,3,7,4,5,3,6],[2.2,2.2,2.2,2.2,2.2,3.2,3.2,3.2,3.2,3.2,5,5,5,5,5]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Dose<\/th>\n      <th>Happiness<\/th>\n      <th>Predictions<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[2,3]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Dose","targets":1},{"name":"Happiness","targets":2},{"name":"Predictions","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
 <section id="variance-components" class="slide level2">
 <h2>Variance components</h2>
 <table>
@@ -513,146 +578,93 @@ Johnny van Doorn
 </table>
 <p>Where <span class="math inline">\(N\)</span> is the total sample size, <span class="math inline">\(n_k\)</span> is the sample size per category and <span class="math inline">\(k\)</span> is the number of categories. Finally <span class="math inline">\(s_k^2\)</span> is the variance per category.</p>
 </section>
-<section id="total-variance" class="slide level2 subsection">
+<section id="variance-questions" class="slide level2 smaller">
+<h2>Variance questions</h2>
+<ul>
+<li>How much total variance is there in the dependent variable?
+<ul>
+<li>Total variance = distance between observations and grand mean</li>
+</ul></li>
+<li>How much of this variance can we explain by looking at the group means?
+<ul>
+<li>Model variance = distance between group means and grand mean</li>
+</ul></li>
+<li>How much of this variance is <strong>not</strong> explained by the group means?
+<ul>
+<li>Error variance = distance between group means and observations</li>
+</ul></li>
+</ul>
+<blockquote>
+<p>DV = Model + Error</p>
+</blockquote>
+</section>
+<section id="total-variance" class="slide level2 smaller">
 <h2>Total variance</h2>
-<p><span class="math display">\[{MS}_{total} = s_x^2\]</span></p>
+<p><span class="math display">\[{SS}_{total} = \sum(x - \bar{x})^2\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>ms.t <span class="ot">&lt;-</span> <span class="fu">var</span>(x); ms.t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>N <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
+<span id="cb2-2"><a href="#cb2-2"></a></span>
+<span id="cb2-3"><a href="#cb2-3"></a>ss.t <span class="ot">&lt;-</span> <span class="fu">sum</span>( (x <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span> )</span>
+<span id="cb2-4"><a href="#cb2-4"></a>ss.t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.8319357</code></pre>
+<pre><code>[1] 43.73333</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">sum</span>( (x <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span> ) <span class="sc">/</span> (<span class="fu">length</span>(x) <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>ss.t <span class="sc">/</span> (N<span class="dv">-1</span>) <span class="co"># ms.t</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.8319357</code></pre>
+<pre><code>[1] 3.12381</code></pre>
 </div>
 </div>
+<p><span class="math display">\[{MS}_{total} = \frac{SS_{total}}{N-1} = s_x^2\]</span></p>
 </section>
-<section class="slide level2">
+<section id="visual-ss_total-43.733" class="slide level2">
+<h2>Visual <span class="math inline">\({SS}_{total} = 43.733\)</span></h2>
 
-<p><span class="math display">\[{SS}_{total} = s_x^2 (N-1)\]</span></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>N <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
-<span id="cb6-2"><a href="#cb6-2"></a></span>
-<span id="cb6-3"><a href="#cb6-3"></a>ss.t <span class="ot">&lt;-</span> <span class="fu">var</span>(x) <span class="sc">*</span> (N<span class="dv">-1</span>); ss.t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 16.63871</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">sum</span>( (x <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 16.63871</code></pre>
-</div>
-</div>
-</section>
-<section id="visual-ss_total" class="slide level2">
-<h2>Visual <span class="math inline">\({SS}_{total}\)</span></h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Assign labels</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a>lab <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Knee"</span>, <span class="st">"Eyes"</span>) </span>
-<span id="cb10-3"><a href="#cb10-3"></a></span>
-<span id="cb10-4"><a href="#cb10-4"></a><span class="co"># Plot all data points</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span>N,x, </span>
-<span id="cb10-6"><a href="#cb10-6"></a>     <span class="at">ylab=</span><span class="st">"Shift in circadian rhythm (h)"</span>,</span>
-<span id="cb10-7"><a href="#cb10-7"></a>     <span class="at">xlab=</span><span class="st">"Light treatment"</span>,</span>
-<span id="cb10-8"><a href="#cb10-8"></a>     <span class="at">main=</span><span class="st">"Total variance"</span>)</span>
-<span id="cb10-9"><a href="#cb10-9"></a></span>
-<span id="cb10-10"><a href="#cb10-10"></a><span class="co"># Add mean line</span></span>
-<span id="cb10-11"><a href="#cb10-11"></a><span class="fu">lines</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">22</span>),<span class="fu">rep</span>(<span class="fu">mean</span>(x),<span class="dv">2</span>),<span class="at">lwd=</span><span class="dv">3</span>)</span>
-<span id="cb10-12"><a href="#cb10-12"></a></span>
-<span id="cb10-13"><a href="#cb10-13"></a><span class="co"># Add delta lines / variance components</span></span>
-<span id="cb10-14"><a href="#cb10-14"></a><span class="fu">segments</span>(<span class="dv">1</span><span class="sc">:</span>N, <span class="fu">mean</span>(x), <span class="dv">1</span><span class="sc">:</span>N, x)</span>
-<span id="cb10-15"><a href="#cb10-15"></a></span>
-<span id="cb10-16"><a href="#cb10-16"></a><span class="co"># Add labels</span></span>
-<span id="cb10-17"><a href="#cb10-17"></a><span class="fu">text</span>(<span class="fu">c</span>(<span class="dv">4</span>,<span class="fl">11.5</span>,<span class="fl">18.5</span>),<span class="fu">rep</span>(.<span class="dv">6</span>,<span class="dv">3</span>),<span class="at">labels=</span>lab)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-
-</section>
-<section id="visual-ss_total-output" class="slide level2 output-location-slide"><h2>Visual <span class="math inline">\({SS}_{total}\)</span></h2><div class="cell output-location-slide">
-<div class="cell-output-display">
-<p><img data-src="12.-f_distribution_ANOVA_one_way_independent_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
-</div>
-</div></section><section id="model-variance" class="slide level2">
+<img data-src="12.-f_distribution_ANOVA_one_way_independent_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<section id="model-variance" class="slide level2">
 <h2>Model variance</h2>
 <p><span class="math display">\[{MS}_{model} = \frac{{SS}_{model}}{{df}_{model}} \\ {df}_{model} = k - 1\]</span></p>
 <p>Where <span class="math inline">\(k\)</span> is the number of independent groups and</p>
 <p><span class="math display">\[{SS}_{model} = \sum_{k} n_k (\bar{X}_k - \bar{X})^2\]</span></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>k   <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>n.c <span class="ot">&lt;-</span> <span class="fu">length</span>(x.c)</span>
-<span id="cb11-3"><a href="#cb11-3"></a>n.k <span class="ot">&lt;-</span> <span class="fu">length</span>(x.k)</span>
-<span id="cb11-4"><a href="#cb11-4"></a>n.e <span class="ot">&lt;-</span> <span class="fu">length</span>(x.e)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 </section>
-<section class="slide level2">
+<section id="visual-ss_model-20.133" class="slide level2">
+<h2>Visual <span class="math inline">\({SS}_{model} = 20.133\)</span></h2>
 
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>ss.m.c <span class="ot">&lt;-</span> n.c <span class="sc">*</span> (<span class="fu">mean</span>(x.c) <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a>ss.m.k <span class="ot">&lt;-</span> n.k <span class="sc">*</span> (<span class="fu">mean</span>(x.k) <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a>ss.m.e <span class="ot">&lt;-</span> n.e <span class="sc">*</span> (<span class="fu">mean</span>(x.e) <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a></span>
-<span id="cb12-5"><a href="#cb12-5"></a>ss.m <span class="ot">&lt;-</span> <span class="fu">sum</span>(ss.m.c, ss.m.k, ss.m.e); ss.m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 7.380886</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>df.m <span class="ot">&lt;-</span> (k <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb14-2"><a href="#cb14-2"></a>ms.m <span class="ot">&lt;-</span> ss.m <span class="sc">/</span> df.m; ms.m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.690443</code></pre>
-</div>
-</div>
-</section>
-<section id="visual-ss_model" class="slide level2">
-<h2>Visual <span class="math inline">\({SS}_{model}\)</span></h2>
-
-<img data-src="12.-f_distribution_ANOVA_one_way_independent_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
+<img data-src="12.-f_distribution_ANOVA_one_way_independent_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"></section>
 <section id="error-variance" class="slide level2 smaller">
 <h2>Error variance</h2>
 <p><span class="math display">\[{MS}_{error} = \frac{{SS}_{error}}{{df}_{error}} \\ {df}_{error} = N - k\]</span></p>
 <p>where</p>
 <p><span class="math display">\[{SS}_{error} = \sum_{k} s_k^2 (n_k - 1) = \sum_{k} \frac{\sum (x_{ik} - \bar{x}_k)^2}{(n_k - 1)} (n_k - 1)\]</span></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>ss.e.c <span class="ot">&lt;-</span> <span class="fu">var</span>(x.c) <span class="sc">*</span> (n.c <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb16-2"><a href="#cb16-2"></a>ss.e.k <span class="ot">&lt;-</span> <span class="fu">var</span>(x.k) <span class="sc">*</span> (n.k <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb16-3"><a href="#cb16-3"></a>ss.e.e <span class="ot">&lt;-</span> <span class="fu">var</span>(x.e) <span class="sc">*</span> (n.e <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb16-4"><a href="#cb16-4"></a>ss.e   <span class="ot">&lt;-</span> <span class="fu">sum</span>(ss.e.c, ss.e.k, ss.e.e); ss.e</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 9.257829</code></pre>
-</div>
-</div>
-</section>
-<section class="slide level2">
-
 <p><span class="math display">\[{MS}_{error} = \frac{{SS}_{error}}{{df}_{error}} \\ {df}_{error} = N - k\]</span></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>df.e <span class="ot">&lt;-</span> (N <span class="sc">-</span> k)</span>
-<span id="cb18-2"><a href="#cb18-2"></a>ms.e <span class="ot">&lt;-</span> ss.e <span class="sc">/</span> df.e; ms.e</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5143238</code></pre>
-</div>
-</div>
 </section>
-<section id="visual-ss_error" class="slide level2">
-<h2>Visual <span class="math inline">\({SS}_{error}\)</span></h2>
+<section id="visual-ss_error-23.6" class="slide level2">
+<h2>Visual <span class="math inline">\({SS}_{error} = 23.6\)</span></h2>
 
-<img data-src="12.-f_distribution_ANOVA_one_way_independent_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"></section>
+<img data-src="12.-f_distribution_ANOVA_one_way_independent_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section>
 <section id="variance-components-1" class="slide level2 subsection">
 <h2>Variance components</h2>
-<p><span class="math display">\[{SS}_{total} = {SS}_{model} + {SS}_{error}\]</span> <span class="math display">\[16.6387143 = 7.3808857 + 9.2578286\]</span></p>
-<p><span class="math display">\[{MS}_{total} = \frac{{SS}_{total}}{{df}_{total}}= 0.8319357\]</span> <span class="math display">\[{MS}_{model} = \frac{{SS}_{model}}{{df}_{model}}= 3.6904429\]</span> <span class="math display">\[{MS}_{error} = \frac{{SS}_{error}}{{df}_{error}} = 0.5143238\]</span></p>
+<p><span class="math display">\[{SS}_{total} = {SS}_{model} + {SS}_{error}\]</span> <span class="math display">\[43.733 = 20.133 + 23.6\]</span></p>
+<p><span class="math display">\[{MS}_{total} = \frac{{SS}_{total}}{{df}_{total}}= 3.124\]</span> <span class="math display">\[{MS}_{model} = \frac{{SS}_{model}}{{df}_{model}}= 10.067\]</span> <span class="math display">\[{MS}_{error} = \frac{{SS}_{error}}{{df}_{error}} = 1.967\]</span></p>
 </section>
 <section id="f-ratio" class="slide level2 subsection">
 <h2>F-ratio</h2>
+
+<img data-src="../../images/figure-11-5.png" class="r-stretch"></section>
+<section class="slide level2">
+
+<h3 class="subsection" id="f-ratio-1">F-ratio</h3>
 <p><span class="math display">\[F = \frac{{MS}_{model}}{{MS}_{error}} = \frac{{SIGNAL}}{{NOISE}}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>fStat <span class="ot">&lt;-</span> ms.m <span class="sc">/</span> ms.e; fStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>fStat <span class="ot">&lt;-</span> ms.m <span class="sc">/</span> ms.e; fStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 7.17533</code></pre>
+<pre><code>[1] 5.118644</code></pre>
 </div>
 </div>
 </section>
 <section id="reject-h_0" class="slide level2">
 <h2>Reject <span class="math inline">\(H_0\)</span>?</h2>
 
-<img data-src="12.-f_distribution_ANOVA_one_way_independent_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section>
+<img data-src="12.-f_distribution_ANOVA_one_way_independent_files/figure-revealjs/unnamed-chunk-19-1.png" width="960" class="r-stretch"></section>
 <section id="contrasts" class="slide level2">
 <h2>Contrasts</h2>
 <p>Planned comparisons</p>
@@ -666,236 +678,39 @@ Johnny van Doorn
 <h2>Contrasts</h2>
 <ul>
 <li>Values add up to 0</li>
-</ul>
-<p><img src="../../topics/ANOVA_one_way_independent/pie2.png" style="height:200px;"> <img src="../../topics/ANOVA_one_way_independent/pie1.png" style="height:200px;"></p>
-</section>
-<section id="section-1" class="slide level2">
-<h2></h2>
-<p><img src="../../topics/ANOVA_one_way_independent/pie3.png" style="height:200px;"></p>
-<ul>
-<li>AB-CDEF → A-B → CD-EF → C-D → E-F</li>
-<li>A-BCDEF → A-B → A-C</li>
-<li>A-BCDEG → BC-DEF → B-C → B-DEF</li>
-<li>ABC-DEF → BC-DEF → B-C</li>
+<li>Careful with specifying too many contrasts (Section 11.5.2 vs.&nbsp;section 11.5.3)</li>
 </ul>
 </section>
-<section id="section-2" class="slide level2">
-<h2></h2>
-<p>Assign values that sum to 0. Same values define chunk.</p>
-<ul>
-<li>AB-CDEF → A-B → CD-EF → C-D → E-F</li>
-</ul>
-<table>
-<thead>
-<tr class="header">
-<th></th>
-<th>A</th>
-<th>B</th>
-<th>C</th>
-<th>D</th>
-<th>E</th>
-<th>F</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Contrast 1</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Contrast 2</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Contrast 3</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Contrast 4</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="section-3" class="slide level2">
+<section id="section" class="slide level2">
 <h2></h2>
 
-<img data-src="12.-f_distribution_ANOVA_one_way_independent_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch"></section>
-<section id="post-hoc" class="slide level2">
-<h2>Post-hoc</h2>
+<img data-src="../../images/figure-11-6.png" class="r-stretch"></section>
+<section id="post-hoc-tests" class="slide level2">
+<h2>Post-hoc tests</h2>
 <p>Unplanned comparisons</p>
 <ul>
-<li>Exploring all possible differences</li>
+<li>Exploring all pairwise differences</li>
 <li>Adjust T value for inflated type 1 error
 <ul>
 <li><a href="https://xkcd.com/882/">Why?</a></li>
 <li>Different procedures exist (e.g., Tukey, Bonferroni)</li>
+<li>Bonferroni most conservative, Tukey more permissive</li>
 </ul></li>
 <li>Same procedure as contrasts, but: <strong>exploratory vs.&nbsp;confirmatory research</strong></li>
 </ul>
 </section>
-<section id="effect-size-eta2" class="slide level2">
-<h2>Effect size <span class="math inline">\(\eta^2\)</span></h2>
-<p>The amount of explained variance <span class="math inline">\(R^2\)</span> as a general effect size measure.</p>
-<p><span class="math display">\[R^2 = \frac{{SS}_{model}}{{SS}_{total}} = \eta^2\]</span> Taking the square root gives us Cohen’s <span class="math inline">\(r\)</span>.</p>
-</section>
 <section id="effect-size-omega2" class="slide level2">
 <h2>Effect size <span class="math inline">\(\omega^2\)</span></h2>
-<p>Less biased towards just the sample is omega squared <span class="math inline">\(\omega^2\)</span>.</p>
+<p>The least bias estimate of explained variance in ANOVA is omega squared <span class="math inline">\(\omega^2\)</span>:</p>
 <p><span class="math display">\[\omega^2 = \frac{{SS}_{model} - ({df}_{model}){MS}_{error}}{{SS}_{total}+{MS}_{error}}\]</span> But what does it say?</p>
 </section>
 <section id="effect-size-d" class="slide level2">
 <h2>Effect size <span class="math inline">\(d\)</span></h2>
 <p>A more interpretable effect size measure is <span class="math inline">\(d_{Contrast}\)</span>. Which gives Cohen’s <span class="math inline">\(d\)</span> for a specific contrast.</p>
 <p><span class="math display">\[d_{Contrast} = \sqrt{\frac{2t}{\sqrt{n_1 + n_2}}}\]</span></p>
+<!-- ```{r child="../../topics/f_distribution/f_distribution.qmd"} -->
+<!-- ``` -->
 </section></section>
-<section>
-<section id="f-distribution" class="title-slide slide level1 section center">
-<h1>F-distribution</h1>
-
-</section>
-<section id="ronald-fisher" class="slide level2 smaller subsection">
-<h2>Ronald Fisher</h2>
-<div class="columns">
-<div class="column" style="width:70%;">
-<p>The F-distribution, also known as Snedecor’s F distribution or the Fisher–Snedecor distribution (after Ronald Fisher and George W. Snedecor) is, in probability theory and statistics, a continuous probability distribution. The F-distribution arises frequently as the null distribution of a test statistic, most notably in the analysis of variance; see F-test.</p>
-<p><a href="https://en.wikipedia.org/wiki/F-distribution">Wikipedia</a></p>
-<p>Sir Ronald Aylmer Fisher FRS (17 February 1890 – 29 July 1962), known as R.A. Fisher, was an English statistician, evolutionary biologist, mathematician, geneticist, and eugenicist. Fisher is known as one of the three principal founders of population genetics, creating a mathematical and statistical basis for biology and uniting natural selection with Mendelian genetics.</p>
-<p><a href="https://en.wikipedia.org/wiki/Ronald_Fisher">Wikipedia</a></p>
-</div><div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="https://upload.wikimedia.org/wikipedia/commons/a/aa/Youngronaldfisher2.JPG" width="291"></p>
-<figcaption>Ronald Fisher</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="analysing-variance" class="slide level2">
-<h2>Analysing variance</h2>
-<p><a href="https://webcolleges.uva.nl/Mediasite/Play/42718d5968df45b29c089fcd02bcb86a1d?playFrom=377000">Decomposing variance example of height for males and females (video from last year’s lecture).</a></p>
-</section>
-<section id="population-distribution" class="slide level2 smaller subsection">
-<h2>Population distribution</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">7</span><span class="sc">:</span><span class="dv">8</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">9</span><span class="sc">:</span><span class="dv">13</span>), <span class="dv">4</span>, <span class="dv">4</span>))</span>
-<span id="cb22-2"><a href="#cb22-2"></a></span>
-<span id="cb22-3"><a href="#cb22-3"></a>n  <span class="ot">&lt;-</span> <span class="dv">56</span>    <span class="co"># Sample size</span></span>
-<span id="cb22-4"><a href="#cb22-4"></a>df <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span> <span class="co"># Degrees of freedom</span></span>
-<span id="cb22-5"><a href="#cb22-5"></a></span>
-<span id="cb22-6"><a href="#cb22-6"></a>mu    <span class="ot">&lt;-</span> <span class="dv">120</span></span>
-<span id="cb22-7"><a href="#cb22-7"></a>sigma <span class="ot">&lt;-</span> <span class="dv">15</span></span>
-<span id="cb22-8"><a href="#cb22-8"></a></span>
-<span id="cb22-9"><a href="#cb22-9"></a>IQ <span class="ot">&lt;-</span> <span class="fu">seq</span>(mu<span class="dv">-45</span>, mu<span class="sc">+</span><span class="dv">45</span>, <span class="dv">1</span>)</span>
-<span id="cb22-10"><a href="#cb22-10"></a></span>
-<span id="cb22-11"><a href="#cb22-11"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>))  </span>
-<span id="cb22-12"><a href="#cb22-12"></a><span class="fu">plot</span>(IQ, <span class="fu">dnorm</span>(IQ, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma), <span class="at">type=</span><span class="st">'l'</span>, <span class="at">col=</span><span class="st">"red"</span>)</span>
-<span id="cb22-13"><a href="#cb22-13"></a></span>
-<span id="cb22-14"><a href="#cb22-14"></a>n.samples <span class="ot">=</span> <span class="dv">12</span></span>
-<span id="cb22-15"><a href="#cb22-15"></a></span>
-<span id="cb22-16"><a href="#cb22-16"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n.samples) {</span>
-<span id="cb22-17"><a href="#cb22-17"></a>  </span>
-<span id="cb22-18"><a href="#cb22-18"></a>  <span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>))  </span>
-<span id="cb22-19"><a href="#cb22-19"></a>  <span class="fu">hist</span>(<span class="fu">rnorm</span>(n, mu, sigma), <span class="at">main=</span><span class="st">""</span>, <span class="at">cex.axis=</span>.<span class="dv">5</span>, <span class="at">col=</span><span class="st">"red"</span>)</span>
-<span id="cb22-20"><a href="#cb22-20"></a>  </span>
-<span id="cb22-21"><a href="#cb22-21"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-
-</section>
-<section id="population-distribution-output" class="slide level2 smaller subsection output-location-slide"><h2>Population distribution</h2><div class="cell output-location-slide">
-<div class="cell-output-display">
-<p><img data-src="12.-f_distribution_ANOVA_one_way_independent_files/figure-revealjs/unnamed-chunk-35-1.png" width="960"></p>
-</div>
-</div></section><section id="f-statistic" class="slide level2">
-<h2>F-statistic</h2>
-<p><span class="math display">\[F = \frac{{MS}_{model}}{{MS}_{error}} = \frac{{SIGNAL}}{{NOISE}}\]</span></p>
-<p>So the <span class="math inline">\(F\)</span>-statistic represents a signal to noise ratio by deviding the model variance component by the error variance component.</p>
-</section>
-<section id="a-samples" class="slide level2">
-<h2>A samples</h2>
-<p>Let’s take two sample from our normal populatiion and calculate the F-value.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>x<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma)</span>
-<span id="cb23-2"><a href="#cb23-2"></a>x<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma)</span>
-<span id="cb23-3"><a href="#cb23-3"></a></span>
-<span id="cb23-4"><a href="#cb23-4"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">group =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"s1"</span>, <span class="st">"s2"</span>), <span class="at">each=</span>n), <span class="at">score =</span> <span class="fu">c</span>(x<span class="fl">.1</span>,x<span class="fl">.2</span>))</span>
-<span id="cb23-5"><a href="#cb23-5"></a>    </span>
-<span id="cb23-6"><a href="#cb23-6"></a>fStat <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">aov</span>(<span class="fu">lm</span>(score <span class="sc">~</span> group, data)))[[<span class="dv">1</span>]]<span class="sc">$</span>F[<span class="dv">1</span>]</span>
-<span id="cb23-7"><a href="#cb23-7"></a>fStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3441866</code></pre>
-</div>
-</div>
-</section>
-<section id="more-samples" class="slide level2 smaller subsection">
-<h2>More samples</h2>
-<p>let’s take more samples and calculate the F-value every time.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>nSamples <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb25-2"><a href="#cb25-2"></a></span>
-<span id="cb25-3"><a href="#cb25-3"></a>fValues <span class="ot">=</span> <span class="fu">vector</span>()</span>
-<span id="cb25-4"><a href="#cb25-4"></a></span>
-<span id="cb25-5"><a href="#cb25-5"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nSamples) {</span>
-<span id="cb25-6"><a href="#cb25-6"></a>  </span>
-<span id="cb25-7"><a href="#cb25-7"></a>  x1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma); x1</span>
-<span id="cb25-8"><a href="#cb25-8"></a>  x2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma); x2</span>
-<span id="cb25-9"><a href="#cb25-9"></a></span>
-<span id="cb25-10"><a href="#cb25-10"></a>  data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">group =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"s1"</span>, <span class="st">"s2"</span>), <span class="at">each=</span>n), <span class="at">score =</span> <span class="fu">c</span>(x1,x2))</span>
-<span id="cb25-11"><a href="#cb25-11"></a>    </span>
-<span id="cb25-12"><a href="#cb25-12"></a>  fValues[i] <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">aov</span>(<span class="fu">lm</span>(score <span class="sc">~</span> group, data)))[[<span class="dv">1</span>]]<span class="sc">$</span>F[<span class="dv">1</span>]</span>
-<span id="cb25-13"><a href="#cb25-13"></a></span>
-<span id="cb25-14"><a href="#cb25-14"></a>}</span>
-<span id="cb25-15"><a href="#cb25-15"></a></span>
-<span id="cb25-16"><a href="#cb25-16"></a>k <span class="ot">=</span> <span class="dv">2</span></span>
-<span id="cb25-17"><a href="#cb25-17"></a>N <span class="ot">=</span> <span class="dv">2</span><span class="sc">*</span>n</span>
-<span id="cb25-18"><a href="#cb25-18"></a></span>
-<span id="cb25-19"><a href="#cb25-19"></a>dfModel <span class="ot">=</span> k <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb25-20"><a href="#cb25-20"></a>dfError <span class="ot">=</span> N <span class="sc">-</span> k</span>
-<span id="cb25-21"><a href="#cb25-21"></a></span>
-<span id="cb25-22"><a href="#cb25-22"></a><span class="fu">hist</span>(fValues, <span class="at">freq =</span> <span class="cn">FALSE</span>, <span class="at">main=</span><span class="st">"F-values"</span>, <span class="at">breaks=</span><span class="dv">100</span>)</span>
-<span id="cb25-23"><a href="#cb25-23"></a>fVal <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>, .<span class="dv">01</span>)</span>
-<span id="cb25-24"><a href="#cb25-24"></a><span class="fu">lines</span>(fVal, <span class="fu">df</span>(fVal,dfModel, dfError), <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-
-</section>
-<section id="more-samples-output" class="slide level2 smaller subsection output-location-slide"><h2>More samples</h2><div class="cell output-location-slide">
-<div class="cell-output-display">
-<p><img data-src="12.-f_distribution_ANOVA_one_way_independent_files/figure-revealjs/unnamed-chunk-37-1.png" width="960"></p>
-</div>
-</div></section><section id="f-distribution-1" class="slide level2 smaller">
-<h2>F-distribution</h2>
-<p>So if the population is normaly distributed (assumption of normality) the f-distribution represents the signal to noise ration given a certain number of samples (<span class="math inline">\({df}_{model} = k - 1\)</span>) and sample size (<span class="math inline">\({df}_{error} = N - k\)</span>).</p>
-<p>The F-distibution therefore is different for different sample sizes and number of groups.</p>
-</section>
-<section id="f-distribution-2" class="slide level2 smaller">
-<h2>F-distribution</h2>
-
-<img data-src="12.-f_distribution_ANOVA_one_way_independent_files/figure-revealjs/unnamed-chunk-38-1.png" width="960" class="r-stretch"></section>
-<section id="f-distribution-3" class="slide level2 flexbox vcenter">
-<h2>F-distribution</h2>
-
-<img data-src="../../topics/f_distribution/f_distributions.gif" class="r-stretch quarto-figure-center"><p class="caption">Animated F-distrigutions</p></section></section>
 <section>
 <section id="closing" class="title-slide slide level1 center">
 <h1>Closing</h1>
@@ -905,7 +720,7 @@ Johnny van Doorn
 <h2>Recommended Exercises</h2>
 <div>
 <ul>
-<li><a href="https://discoverjasp.com/pages/smart_alex#task-9.3">Exercise 9.1</a>, <a href="https://discoverjasp.com/pages/smart_alex#task-9.4">Exercise 9.2</a>, <a href="https://discoverjasp.com/pages/smart_alex#task-9.3">Exercise 9.3</a>, <a href="https://discoverjasp.com/pages/smart_alex#task-9.4">Exercise 9.4</a></li>
+<li><a href="https://discoverjasp.com/pages/smart_alex#task-11.1">Exercise 11.1</a>, <a href="https://discoverjasp.com/pages/smart_alex#task-11.2">Exercise 11.2</a>, <a href="https://discoverjasp.com/pages/smart_alex#task-11.4">Exercise 11.4</a></li>
 <li>How would conclusions/interpretations differ for <span class="math inline">\(\alpha = 0.01\)</span>?</li>
 <li>How are the assumptions looking for these data sets?</li>
 </ul>
