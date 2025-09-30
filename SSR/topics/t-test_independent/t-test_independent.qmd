@@ -58,8 +58,8 @@ colnames(data2025) <- c("ownIQ", "nextIQ")
 
 
 
-iq2024 <- data2024$ownIQ
-iq2025 <- c(100, 120, 110) # data2025$ownIQ
+iq2024 <- data2024$nextIQ
+iq2025 <- data2025$nextIQ
 
 data <- data.frame(IQ = c(iq2024, iq2025), year = c(rep("2024", length(iq2024)), 
                                                     rep("2025", length(iq2025))))
