@@ -116,7 +116,7 @@ tStat
 
 ## Test for significance {.subsection}
 
-$$ \mathcal{H}_A: \mu_1 = \mu_2 \rightarrow t \neq 0 $$ 
+$$ \mathcal{H}_A: \mu_1 \neq \mu_2 \rightarrow t \neq 0 $$ 
 
 ```{r, echo=FALSE, fig.align = 'center'}
 source("../../plotFunctionsSSR.r")
