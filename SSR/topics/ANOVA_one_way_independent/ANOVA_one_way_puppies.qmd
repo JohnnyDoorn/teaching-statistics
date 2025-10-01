@@ -49,7 +49,7 @@ tapply(data$Happiness, data$Dose, mean)
 
 ## Visualizing data
 
-![](../../images/puppies-raincloud.png)
+![](../../images/puppies-raincloud-box.png)
 
 
 
