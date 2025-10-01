@@ -65,34 +65,33 @@ knitr::kable(dplyr::arrange(linkList), escape = FALSE, format = "html"  ) %>%
 
 ```
 
-<!-- ## JASP + Data Files -->
-```{r, echo=FALSE, warning=FALSE, message=FALSE, eval=FALSE}
+## JASP + Data Files
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 files <- list.files(full.names = FALSE, pattern = "\\jasp", recursive = FALSE, 
-                    path = "../datasets")
+                    path = "../datasets/2025")
 
 files <- files[order(as.numeric(gsub("\\..*", "", files)))]
 files <- files[files!= "OverviewSSR.qmd"]
 htmlFiles <- gsub(x =files, pattern = ".jasp", replacement = ".html")
 
-htmlFiles <- gsub(x =files, pattern = ".jasp", replacement = ".html")
 htmlFound <- list.files(full.names = FALSE, pattern = "\\html", recursive = FALSE, 
-                    path = "../datasets")
+                    path = "../datasets/2025")
 csvFound  <- list.files(full.names = FALSE, pattern = "\\csv", recursive = FALSE, 
-                    path = "../datasets")
+                    path = "../datasets/2025")
   
-htmlLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistics/datasets/%s" target="_blank" class="external">link</a>',htmlFiles) 
+htmlLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistics/datasets/2025%s" target="_blank" class="external">link</a>',htmlFiles) 
 htmlLinks[!(htmlFiles %in% htmlFound)] <- "-"
 
-jaspLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistics/datasets/%s" target="_blank" 
+jaspLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistics/datasets/2025%s" target="_blank" 
                      class="external">link</a>',files) 
 titles <- gsub(htmlFiles, pattern = ".html", replacement = "")
 
 csvFiles <- gsub(x =files, pattern = ".jasp", replacement = ".csv")
-csvLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistics/datasets/%s" target="_blank" class="external">link</a>',csvFiles) 
+csvLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistics/datasets/2025%s" target="_blank" class="external">link</a>',csvFiles) 
 csvLinks[!(csvFiles %in% csvFound)] <- "-"
 
 
-linkList <- data.frame(Topic = titles, Html = htmlLinks, JASP = jaspLinks, Csv = csvLinks)
+linkList <- data.frame(Topic = titles, Html = htmlLinks, JASP = jaspLinks)
 
 knitr::kable(dplyr::arrange(linkList), escape = FALSE, format = "html"  ) %>%
   kable_styling(full_width = TRUE)
