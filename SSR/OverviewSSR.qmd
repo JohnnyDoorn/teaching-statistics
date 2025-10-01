@@ -91,7 +91,7 @@ csvLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistics/
 csvLinks[!(csvFiles %in% csvFound)] <- "-"
 
 
-linkList <- data.frame(Topic = titles, Html = htmlLinks, JASP = jaspLinks)
+linkList <- data.frame(Topic = titles, Data = jaspLinks, HtmlResults = htmlLinks)
 
 knitr::kable(dplyr::arrange(linkList), escape = FALSE, format = "html"  ) %>%
   kable_styling(full_width = TRUE)
