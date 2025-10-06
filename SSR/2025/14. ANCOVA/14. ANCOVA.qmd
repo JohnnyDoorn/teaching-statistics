@@ -1,7 +1,7 @@
 ---
 title: "14. ANCOVA"
 author: "Johnny van Doorn"
-date: "07 oct 2024"
+date: "07 oct 2025"
 footer: "Scientific & Statistical Reasoning"
 format:
   revealjs:
@@ -30,7 +30,10 @@ Chapter 11
 
 ## Recap
 
-- Bla bla
+- We can add a continuous predictor to the ANOVA model, to reduce the overall model error
+- With multiple predictors, we need to check:
+  - Whether there is an interaction effect
+  - Whether the predictors are associated 
 
 ## Recommended Exercises
 
