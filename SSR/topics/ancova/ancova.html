@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Sharon Klinkenberg &amp; Johnny van Doorn">
+<meta name="author" content="Johnny van Doorn”">
 
 <title>ancova</title>
 <style>
@@ -77,13 +77,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="ancova_files/libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="ancova_files/libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
 <script src="ancova_files/libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
-<link href="ancova_files/libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
-<script src="ancova_files/libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
 <link href="ancova_files/libs/dt-ext-buttons-1.13.6/css/buttons.dataTables.min.css" rel="stylesheet">
 <script src="ancova_files/libs/dt-ext-buttons-1.13.6/js/dataTables.buttons.min.js"></script>
 <script src="ancova_files/libs/dt-ext-buttons-1.13.6/js/buttons.html5.min.js"></script>
 <script src="ancova_files/libs/dt-ext-buttons-1.13.6/js/buttons.colVis.min.js"></script>
 <script src="ancova_files/libs/dt-ext-buttons-1.13.6/js/buttons.print.min.js"></script>
+<link href="ancova_files/libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="ancova_files/libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -101,34 +101,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#ancova" id="toc-ancova" class="nav-link active" data-scroll-target="#ancova">ANCOVA</a>
   <ul class="collapse">
   <li><a href="#ancova-1" id="toc-ancova-1" class="nav-link" data-scroll-target="#ancova-1">ANCOVA</a></li>
-  <li><a href="#ancova-2" id="toc-ancova-2" class="nav-link" data-scroll-target="#ancova-2">ANCOVA</a></li>
   <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions">Assumptions</a></li>
   <li><a href="#independence-of-the-covariate-and-treatment-effect-fig-12.2" id="toc-independence-of-the-covariate-and-treatment-effect-fig-12.2" class="nav-link" data-scroll-target="#independence-of-the-covariate-and-treatment-effect-fig-12.2">Independence of the covariate and treatment effect (Fig 12.2)</a></li>
   <li><a href="#data-example" id="toc-data-example" class="nav-link" data-scroll-target="#data-example">Data example</a></li>
-  <li><a href="#simulate-data" id="toc-simulate-data" class="nav-link" data-scroll-target="#simulate-data">Simulate data</a></li>
   <li><a href="#define-the-model" id="toc-define-the-model" class="nav-link" data-scroll-target="#define-the-model">Define the model</a></li>
-  <li><a href="#dummies" id="toc-dummies" class="nav-link" data-scroll-target="#dummies">Dummies</a></li>
   <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data">The data</a></li>
+  <li><a href="#dummies" id="toc-dummies" class="nav-link" data-scroll-target="#dummies">Dummies</a></li>
   <li><a href="#observed-group-means" id="toc-observed-group-means" class="nav-link" data-scroll-target="#observed-group-means">Observed group means</a></li>
   <li><a href="#model-fit-without-covariate" id="toc-model-fit-without-covariate" class="nav-link" data-scroll-target="#model-fit-without-covariate">Model fit without covariate</a></li>
   <li><a href="#model-fit-with-only-covariate" id="toc-model-fit-with-only-covariate" class="nav-link" data-scroll-target="#model-fit-with-only-covariate">Model fit with only covariate</a></li>
   <li><a href="#model-fit-with-all-predictor-variables-factor-covariate" id="toc-model-fit-with-all-predictor-variables-factor-covariate" class="nav-link" data-scroll-target="#model-fit-with-all-predictor-variables-factor-covariate">Model fit with all predictor variables (factor + covariate)</a></li>
-  <li><a href="#so-what-do-we-predict-for-each-participant" id="toc-so-what-do-we-predict-for-each-participant" class="nav-link" data-scroll-target="#so-what-do-we-predict-for-each-participant">So what do we predict for each participant??</a></li>
-  <li><a href="#total-variance" id="toc-total-variance" class="nav-link" data-scroll-target="#total-variance">Total variance</a></li>
-  <li><a href="#the-data-1" id="toc-the-data-1" class="nav-link" data-scroll-target="#the-data-1">The data</a></li>
+  <li><a href="#predictions-of-the-full-model" id="toc-predictions-of-the-full-model" class="nav-link" data-scroll-target="#predictions-of-the-full-model">Predictions of the full model</a></li>
   <li><a href="#total-variance-visual" id="toc-total-variance-visual" class="nav-link" data-scroll-target="#total-variance-visual">Total variance visual</a></li>
-  <li><a href="#model-variance-group" id="toc-model-variance-group" class="nav-link" data-scroll-target="#model-variance-group">Model variance group</a></li>
-  <li><a href="#model-variance-group-visual" id="toc-model-variance-group-visual" class="nav-link" data-scroll-target="#model-variance-group-visual">Model variance group visual</a></li>
-  <li><a href="#model-variance-covariate-visual" id="toc-model-variance-covariate-visual" class="nav-link" data-scroll-target="#model-variance-covariate-visual">Model variance covariate visual</a></li>
-  <li><a href="#model-variance-group-and-covariate" id="toc-model-variance-group-and-covariate" class="nav-link" data-scroll-target="#model-variance-group-and-covariate">Model variance group and covariate</a></li>
-  <li><a href="#model-variance-group-and-covariate-visual" id="toc-model-variance-group-and-covariate-visual" class="nav-link" data-scroll-target="#model-variance-group-and-covariate-visual">Model variance group and covariate visual</a></li>
-  <li><a href="#error-variance-with-covariate" id="toc-error-variance-with-covariate" class="nav-link" data-scroll-target="#error-variance-with-covariate">Error variance with covariate</a></li>
-  <li><a href="#sums-of-squares" id="toc-sums-of-squares" class="nav-link" data-scroll-target="#sums-of-squares">Sums of squares</a></li>
+  <li><a href="#explained-by-group" id="toc-explained-by-group" class="nav-link" data-scroll-target="#explained-by-group">Explained by group</a></li>
+  <li><a href="#explained-by-group---visual" id="toc-explained-by-group---visual" class="nav-link" data-scroll-target="#explained-by-group---visual">Explained by group - visual</a></li>
+  <li><a href="#explained-by-covariate" id="toc-explained-by-covariate" class="nav-link" data-scroll-target="#explained-by-covariate">Explained by covariate</a></li>
+  <li><a href="#explained-by-covariate---visual" id="toc-explained-by-covariate---visual" class="nav-link" data-scroll-target="#explained-by-covariate---visual">Explained by covariate - visual</a></li>
+  <li><a href="#explained-by-group-and-covariate" id="toc-explained-by-group-and-covariate" class="nav-link" data-scroll-target="#explained-by-group-and-covariate">Explained by group and covariate</a></li>
+  <li><a href="#explained-by-group-and-covariate---visual" id="toc-explained-by-group-and-covariate---visual" class="nav-link" data-scroll-target="#explained-by-group-and-covariate---visual">Explained by group and covariate - visual</a></li>
+  <li><a href="#unexplained-variance-group-and-cov" id="toc-unexplained-variance-group-and-cov" class="nav-link" data-scroll-target="#unexplained-variance-group-and-cov">Unexplained variance (group and cov)</a></li>
+  <li><a href="#divide-model-sum-of-squares" id="toc-divide-model-sum-of-squares" class="nav-link" data-scroll-target="#divide-model-sum-of-squares">Divide model sum of squares</a></li>
+  <li><a href="#divide-model-sum-of-squares-1" id="toc-divide-model-sum-of-squares-1" class="nav-link" data-scroll-target="#divide-model-sum-of-squares-1">Divide model sum of squares</a></li>
   <li><a href="#f-ratio" id="toc-f-ratio" class="nav-link" data-scroll-target="#f-ratio">F-ratio</a></li>
   <li><a href="#p-value" id="toc-p-value" class="nav-link" data-scroll-target="#p-value"><span class="math inline">\(P\)</span>-value</a></li>
   <li><a href="#alpha-power" id="toc-alpha-power" class="nav-link" data-scroll-target="#alpha-power">Alpha &amp; Power</a></li>
   <li><a href="#adjustedmarginal-means" id="toc-adjustedmarginal-means" class="nav-link" data-scroll-target="#adjustedmarginal-means">Adjusted/marginal means</a></li>
   <li><a href="#adjustedmarginal-means-1" id="toc-adjustedmarginal-means-1" class="nav-link" data-scroll-target="#adjustedmarginal-means-1">Adjusted/marginal means</a></li>
+  <li><a href="#jasp" id="toc-jasp" class="nav-link" data-scroll-target="#jasp">JASP</a></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="ancova.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
@@ -143,18 +142,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>ANCOVA</h1>
 <section id="ancova-1" class="level2 section">
 <h2 class="section anchored" data-anchor-id="ancova-1">ANCOVA</h2>
-<p>Analysis of covariance (ANCOVA) is a general linear model which blends ANOVA and regression. ANCOVA evaluates whether population means of a dependent variable (DV) are equal across levels of a categorical independent variable (IV) often called a treatment, while statistically controlling for the effects of other continuous variables that are not of primary interest, known as covariates (CV).</p>
-<p><a href="https://en.wikipedia.org/wiki/Analysis_of_covariance">WIKIPEDIA</a></p>
-</section>
-<section id="ancova-2" class="level2">
-<h2 class="anchored" data-anchor-id="ancova-2">ANCOVA</h2>
-<p>Determine main effect while correcting for covariate</p>
+<p>Determine main effect while accounting for covariate</p>
 <ul>
 <li>1 dependent variable</li>
 <li>1 or more independent variables</li>
 <li>1 or more covariates</li>
 </ul>
-<p>A covariate is a variable that can be a confounding variable biasing your results. By adding a covariate, we reduce error/residual in the model.</p>
+<p>A covariate is a variable that can influence the DV. By adding a covariate, we reduce error/residual in the model.</p>
 </section>
 <section id="assumptions" class="level2">
 <h2 class="anchored" data-anchor-id="assumptions">Assumptions</h2>
@@ -174,14 +168,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="independence-of-the-covariate-and-treatment-effect-fig-12.2" class="level2">
 <h2 class="anchored" data-anchor-id="independence-of-the-covariate-and-treatment-effect-fig-12.2">Independence of the covariate and treatment effect (Fig 12.2)</h2>
-<p><img src="FieldCovWarning.png" style="width:40%;"></p>
+<p><img src="../../images/FieldCovWarning.png" style="width:40%;"></p>
 </section>
 <section id="data-example" class="level2">
 <h2 class="anchored" data-anchor-id="data-example">Data example</h2>
-<p>We want to test the difference in national extraversion but want to also account for openness to experience.</p>
+<p>We want to test the difference in extraversion but want to also account for openness to experience.</p>
 <ul>
 <li>Dependent variable: Extraversion</li>
-<li>Independent variabele: Nationality
+<li>Independent variabele: Nationality (#groups <span class="math inline">\(= k = 3\)</span>)
 <ul>
 <li>Dutch</li>
 <li>German</li>
@@ -190,270 +184,208 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Covariate: Openness to experience</li>
 </ul>
 </section>
-<section id="simulate-data" class="level2">
-<h2 class="anchored" data-anchor-id="simulate-data">Simulate data</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1976</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate data</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">20</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>nationality       <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">runif</span>(n,<span class="dv">1</span>,k),<span class="dv">0</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>nationality <span class="ot">&lt;-</span> <span class="fu">factor</span>(nationality)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(nationality) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Dutch"</span>, <span class="st">"German"</span>, <span class="st">"Belgian"</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>mu.covar    <span class="ot">&lt;-</span> <span class="dv">8</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>sigma.covar <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>openness       <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">rnorm</span>(n,mu.covar,sigma.covar),<span class="dv">2</span>)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create dummy variables</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>dummy<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(nationality <span class="sc">==</span> <span class="st">"German"</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>dummy<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(nationality <span class="sc">==</span> <span class="st">"Belgian"</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Set parameters</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>b<span class="fl">.0</span> <span class="ot">&lt;-</span> <span class="dv">15</span> <span class="co"># initial value for group 1</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>b<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="dv">3</span>  <span class="co"># difference between group 1 and 2</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>b<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="dv">4</span>  <span class="co"># difference between group 1 and 3</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>b<span class="fl">.3</span> <span class="ot">&lt;-</span> <span class="dv">3</span>  <span class="co"># Weight for covariate</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Create error</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>error <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n,<span class="dv">0</span>,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
 <section id="define-the-model" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="define-the-model">Define the model</h2>
-<p><span class="math inline">\({extraversion} = {model} + {error}\)</span></p>
-<p><span class="math inline">\({model} = {independent} + {covariate} = {nationality} + {openness}\)</span></p>
-<p>Formal model</p>
-<p><span class="math inline">\(y = b_0 + b_1 {dummy}_1 + b_2 {dummy}_2 + b_3 covar\)</span></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define model</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>extraversion <span class="ot">&lt;-</span> b<span class="fl">.0</span> <span class="sc">+</span> b<span class="fl">.1</span> <span class="sc">*</span> dummy<span class="fl">.1</span> <span class="sc">+</span> b<span class="fl">.2</span> <span class="sc">*</span> dummy<span class="fl">.2</span> <span class="sc">+</span> b<span class="fl">.3</span> <span class="sc">*</span> openness <span class="sc">+</span> error</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="dummies" class="level2 smallest">
-<h2 class="smallest anchored" data-anchor-id="dummies">Dummies</h2>
-<div class="cell">
-<div class="cell-output-display">
-
-<div class="datatables html-widget html-fill-item" id="htmlwidget-27a87ee55979aa7d5bc7" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-27a87ee55979aa7d5bc7">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"],["Belgian","German","Dutch","Belgian","Dutch","Belgian","German","Dutch","German","German","German","Dutch","Dutch","German","German","Belgian","Dutch","German","Belgian","Dutch"],[15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15],[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],[0,1,0,0,0,0,1,0,1,1,1,0,0,1,1,0,0,1,0,0],[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],[1,0,0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0,1,0],[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],[9,9.300000000000001,8.42,8.15,9.380000000000001,8.470000000000001,7.26,6.7,8.33,8.039999999999999,7.7,8.07,7.61,6.72,8.68,7.65,6.14,9.039999999999999,7.78,8.85],[0.89,-1.45,-0.45,1.9,0.71,-0.02,-0.67,1.75,-0.46,0.74,0.63,0.26,-2.17,-0.15,0.27,-1.83,0.36,-0.79,-0.1,-0.28],[46.89,44.45,39.81,45.35,43.85,44.39,39.11,36.85,42.53,42.86,41.73,39.47,35.66,38.01,44.31,40.12,33.78,44.33,42.24,41.27]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>nationality<\/th>\n      <th>b.0<\/th>\n      <th>b.1<\/th>\n      <th>dummy.1<\/th>\n      <th>b.2<\/th>\n      <th>dummy.2<\/th>\n      <th>b.3<\/th>\n      <th>openness<\/th>\n      <th>error<\/th>\n      <th>extraversion<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":435,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[2,3,4,5,6,7,8,9,10]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"nationality","targets":1},{"name":"b.0","targets":2},{"name":"b.1","targets":3},{"name":"dummy.1","targets":4},{"name":"b.2","targets":5},{"name":"dummy.2","targets":6},{"name":"b.3","targets":7},{"name":"openness","targets":8},{"name":"error","targets":9},{"name":"extraversion","targets":10}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
-</div>
-</div>
+<p><span class="math display">\[{extraversion} = {model} + {error}\]</span></p>
+<p><span class="math inline">\({model} = {independent} + {covariate}\)</span> <span class="math inline">\(\color{white}{model} = {nationality} + {openness}\)</span></p>
+<p><span class="math inline">\(\color{white}{model}\)</span></p>
+<p>Linear model with <span class="math inline">\(k-1\)</span> dummy variables:</p>
+<p><span class="math display">\[\hat{y} = b_0 + b_1 {dummy}_1 + b_2 {dummy}_2 + b_3 covar\]</span></p>
 </section>
 <section id="the-data" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="the-data">The data</h2>
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-6d85f92aa695103e7f43" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-6d85f92aa695103e7f43">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["3","5","8","12","13","17","20","2","7","9","10","11","14","15","18","1","4","6","16","19"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],["Dutch","Dutch","Dutch","Dutch","Dutch","Dutch","Dutch","German","German","German","German","German","German","German","German","Belgian","Belgian","Belgian","Belgian","Belgian"],[8.42,9.380000000000001,6.7,8.07,7.61,6.14,8.85,9.300000000000001,7.26,8.33,8.039999999999999,7.7,6.72,8.68,9.039999999999999,9,8.15,8.470000000000001,7.65,7.78],[39.81,43.85,36.85,39.47,35.66,33.78,41.27,44.45,39.11,42.53,42.86,41.73,38.01,44.31,44.33,46.89,45.35,44.39,40.12,42.24]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>n<\/th>\n      <th>nationality<\/th>\n      <th>openness<\/th>\n      <th>extraversion<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":300,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"className":"dt-right","targets":[1,3,4]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"n","targets":1},{"name":"nationality","targets":2},{"name":"openness","targets":3},{"name":"extraversion","targets":4}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-d708d32e3b75ae203d13" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-d708d32e3b75ae203d13">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21],["Dutch","Dutch","Dutch","Dutch","Dutch","Dutch","Dutch","German","German","German","German","German","German","German","Belgian","Belgian","Belgian","Belgian","Belgian","Belgian","Belgian"],[8.92,6.21,6.74,8.56,7.93,8.1,7.02,7.48,6.78,9.42,9,9.300000000000001,8.42,8.15,9.380000000000001,8.470000000000001,7.26,6.7,8.33,8.039999999999999,7.7],[42.97,36.64,35.93,43.48,40.16,37.48,41.12,38.02,38.77,44.12,38.6,41.21,44.13,41.22,39.72,36.6,39.02,33.48,39.14,38.33,36.91]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>n<\/th>\n      <th>nationality<\/th>\n      <th>openness<\/th>\n      <th>extraversion<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":300,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"className":"dt-right","targets":[1,3,4]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"n","targets":1},{"name":"nationality","targets":2},{"name":"openness","targets":3},{"name":"extraversion","targets":4}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="dummies" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="dummies">Dummies</h2>
+<div class="cell">
+<div class="cell-output-display">
+
+<div class="datatables html-widget html-fill-item" id="htmlwidget-b96c719c0e1f27a87ee5" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-b96c719c0e1f27a87ee5">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21"],["Dutch","Dutch","Dutch","Dutch","Dutch","Dutch","Dutch","German","German","German","German","German","German","German","Belgian","Belgian","Belgian","Belgian","Belgian","Belgian","Belgian"],[0,0,0,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1],[8.92,6.21,6.74,8.56,7.93,8.1,7.02,7.48,6.78,9.42,9,9.300000000000001,8.42,8.15,9.380000000000001,8.470000000000001,7.26,6.7,8.33,8.039999999999999,7.7],[42.97,36.64,35.93,43.48,40.16,37.48,41.12,38.02,38.77,44.12,38.6,41.21,44.13,41.22,39.72,36.6,39.02,33.48,39.14,38.33,36.91]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>nationality<\/th>\n      <th>dummy.1<\/th>\n      <th>dummy.2<\/th>\n      <th>openness<\/th>\n      <th>extraversion<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":435,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[2,3,4,5]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"nationality","targets":1},{"name":"dummy.1","targets":2},{"name":"dummy.2","targets":3},{"name":"openness","targets":4},{"name":"extraversion","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
 <section id="observed-group-means" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="observed-group-means">Observed group means</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(extraversion <span class="sc">~</span> nationality, data, mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(extraversion <span class="sc">~</span> nationality, data, mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  nationality extraversion
-1       Dutch     38.67000
-2      German     42.16625
-3     Belgian     43.79800</code></pre>
+1       Dutch     39.68286
+2      German     40.86714
+3     Belgian     37.60000</code></pre>
 </div>
 </div>
 </section>
-<section id="model-fit-without-covariate" class="level2">
-<h2 class="anchored" data-anchor-id="model-fit-without-covariate">Model fit without covariate</h2>
-<p>What are the beta coefficients when we fit a model that only has “nationality” as a predictor variable?</p>
+<section id="model-fit-without-covariate" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="model-fit-without-covariate">Model fit without covariate</h2>
+<p>What are the beta coefficients when we fit a model that only has <code>nationality</code> as a predictor variable?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fit.group <span class="ot">&lt;-</span> <span class="fu">lm</span>(extraversion <span class="sc">~</span> nationality, data); fit.group</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fit.group <span class="ot">&lt;-</span> <span class="fu">lm</span>(extraversion <span class="sc">~</span> nationality, data); fit.group<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = extraversion ~ nationality, data = data)
-
-Coefficients:
-       (Intercept)   nationalityGerman  nationalityBelgian  
-            38.670               3.496               5.128  </code></pre>
+<pre><code>       (Intercept)  nationalityGerman nationalityBelgian 
+         39.682857           1.184286          -2.082857 </code></pre>
 </div>
 </div>
 <ul>
-<li><p><span class="math inline">\(\beta_{0} = 38.67\)</span></p></li>
-<li><p><span class="math inline">\(\beta_{German} = 3.5\)</span></p>
+<li><p><span class="math inline">\(\beta_{0} = 39.68\)</span></p></li>
+<li><p><span class="math inline">\(\beta_{German} = 1.18\)</span></p>
 <ul>
-<li>Prediction for German: 38.67 + 3.5 = 42.17</li>
+<li>Prediction for German: 39.68 + 1.18 = 40.86</li>
 </ul></li>
-<li><p><span class="math inline">\(\beta_{Belgian} = 5.13\)</span></p>
+<li><p><span class="math inline">\(\beta_{Belgian} = -2.08\)</span></p>
 <ul>
-<li>Prediction for Belgian: 38.67 + 5.13 = 43.8</li>
+<li>Prediction for Belgian: 39.68 + -2.08 = 37.6</li>
 </ul></li>
 </ul>
 </section>
-<section id="model-fit-with-only-covariate" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="model-fit-with-only-covariate">Model fit with only covariate</h2>
-<p>What are the beta coefficients when we fit a model that only has the covariate as predictor variable?</p>
+<section id="model-fit-with-only-covariate" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="model-fit-with-only-covariate">Model fit with only covariate</h2>
+<p>What are the beta coefficients when we fit a model that only has <code>openness</code> as predictor variable?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fit.covar <span class="ot">&lt;-</span> <span class="fu">lm</span>(extraversion <span class="sc">~</span> openness, data)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>fit.covar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fit.covar <span class="ot">&lt;-</span> <span class="fu">lm</span>(extraversion <span class="sc">~</span> openness, data); fit.covar<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = extraversion ~ openness, data = data)
-
-Coefficients:
-(Intercept)     openness  
-     15.667        3.185  </code></pre>
+<pre><code>(Intercept)    openness 
+  24.993473    1.799697 </code></pre>
 </div>
 </div>
-<p><span class="math inline">\(\beta_{0} = 15.67\)</span></p>
-<p><span class="math inline">\(\beta_{Open} = 3.18\)</span></p>
+<p><span class="math inline">\(\beta_{0} = 24.99\)</span></p>
+<p><span class="math inline">\(\beta_{Open} = 1.8\)</span></p>
 </section>
-<section id="model-fit-with-all-predictor-variables-factor-covariate" class="level2">
-<h2 class="anchored" data-anchor-id="model-fit-with-all-predictor-variables-factor-covariate">Model fit with all predictor variables (factor + covariate)</h2>
+<section id="model-fit-with-all-predictor-variables-factor-covariate" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="model-fit-with-all-predictor-variables-factor-covariate">Model fit with all predictor variables (factor + covariate)</h2>
+<p>What are the beta coefficients when we fit the full model (i.e., with both predictor variables)?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(extraversion <span class="sc">~</span>  nationality <span class="sc">+</span> openness, data); fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = extraversion ~ nationality + openness, data = data)
-
-Coefficients:
-       (Intercept)   nationalityGerman  nationalityBelgian            openness  
-            15.965               2.769               4.181               2.881  </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fit<span class="sc">$</span>coefficients[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="sc">+</span> fit<span class="sc">$</span>coefficients[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> nationalityGerman nationalityBelgian 
-          18.73401           20.14609 </code></pre>
-</div>
-</div>
-<p><span class="math inline">\(\beta_{Dutch} = 15.96\)</span></p>
-<p><span class="math inline">\(\beta_{German} = 2.77\)</span></p>
-<p><span class="math inline">\(\beta_{Belgian} = 4.18\)</span></p>
-<p><span class="math inline">\(\beta_{Open} = 2.88\)</span></p>
-</section>
-<section id="so-what-do-we-predict-for-each-participant" class="level2">
-<h2 class="anchored" data-anchor-id="so-what-do-we-predict-for-each-participant">So what do we predict for each participant??</h2>
-<p>For a German with a score of 8 on Openness:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(extraversion <span class="sc">~</span> nationality <span class="sc">+</span> openness, data); fit<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(extraversion <span class="sc">~</span>  nationality <span class="sc">+</span> openness, data); fit<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       (Intercept)  nationalityGerman nationalityBelgian           openness 
-         15.964661           2.769346           4.181430           2.880866 </code></pre>
+        25.9029405         -0.1220751         -2.7012528          1.8036540 </code></pre>
+</div>
+</div>
+<p><span class="math inline">\(\beta_{Dutch} = 25.9\)</span></p>
+<p><span class="math inline">\(\beta_{German} = -0.12\)</span></p>
+<p><span class="math inline">\(\beta_{Belgian} = -2.7\)</span></p>
+<p><span class="math inline">\(\beta_{Open} = 1.8\)</span></p>
+</section>
+<section id="predictions-of-the-full-model" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="predictions-of-the-full-model">Predictions of the full model</h2>
+<p>For a German with a score of 8 on Openness:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(extraversion <span class="sc">~</span> nationality <span class="sc">+</span> openness, data); fit<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       (Intercept)  nationalityGerman nationalityBelgian           openness 
+        25.9029405         -0.1220751         -2.7012528          1.8036540 </code></pre>
 </div>
 </div>
 <ul>
-<li><p><span class="math inline">\(\beta_{0} = 15.96\)</span></p></li>
-<li><p><span class="math inline">\(\beta_{German} = 2.77\)</span></p></li>
-<li><p><span class="math inline">\(\beta_{Open} = 2.88\)</span></p>
+<li><p><span class="math inline">\(\beta_{0} = 25.9\)</span></p></li>
+<li><p><span class="math inline">\(\beta_{German} = -0.12\)</span></p></li>
+<li><p><span class="math inline">\(\beta_{Open} = 1.8\)</span></p>
 <ul>
-<li>Prediction for German: 15.96 + 2.77 + 8 * 2.88 = 41.78</li>
+<li>Prediction for German: 25.9 + -0.12 + 8 * 1.8 = 40.21</li>
 </ul></li>
 </ul>
 <p>How about a Belgian with 6 Openness?</p>
-</section>
-<section id="total-variance" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="total-variance">Total variance</h2>
-<p>What is the total variance?</p>
-<p><span class="math inline">\({MS}_{total} = s^2_{extraversion} = \frac{{SS}_{extraversion}}{{df}_{extraversion}}\)</span></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>ms.t <span class="ot">&lt;-</span> <span class="fu">var</span>(data<span class="sc">$</span>extraversion); ms.t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 11.97756</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>ss.t <span class="ot">&lt;-</span> <span class="fu">var</span>(data<span class="sc">$</span>extraversion) <span class="sc">*</span> (<span class="fu">length</span>(data<span class="sc">$</span>extraversion) <span class="sc">-</span> <span class="dv">1</span>); ss.t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 227.5737</code></pre>
-</div>
-</div>
-</section>
-<section id="the-data-1" class="level2">
-<h2 class="anchored" data-anchor-id="the-data-1">The data</h2>
-<div class="cell">
-<div class="cell-output-display">
-
-<div class="datatables html-widget html-fill-item" id="htmlwidget-12b84c2369c5427c83b5" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-12b84c2369c5427c83b5">{"x":{"filter":"none","vertical":false,"data":[["3","5","8","12","13","17","20","2","7","9","10","11","14","15","18","1","4","6","16","19"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],["Dutch","Dutch","Dutch","Dutch","Dutch","Dutch","Dutch","German","German","German","German","German","German","German","German","Belgian","Belgian","Belgian","Belgian","Belgian"],[8.42,9.380000000000001,6.7,8.07,7.61,6.14,8.85,9.300000000000001,7.26,8.33,8.039999999999999,7.7,6.72,8.68,9.039999999999999,9,8.15,8.470000000000001,7.65,7.78],[39.81,43.85,36.85,39.47,35.66,33.78,41.27,44.45,39.11,42.53,42.86,41.73,38.01,44.31,44.33,46.89,45.35,44.39,40.12,42.24],[41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>n<\/th>\n      <th>nationality<\/th>\n      <th>openness<\/th>\n      <th>extraversion<\/th>\n      <th>grand.mean<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,3,4,5]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"n","targets":1},{"name":"nationality","targets":2},{"name":"openness","targets":3},{"name":"extraversion","targets":4},{"name":"grand.mean","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
-</div>
-</div>
+<!-- ## Total variance {.subsection} -->
+<!-- What is the total variance? -->
+<!-- ${MS}_{total} = s^2_{extraversion} = \frac{{SS}_{extraversion}}{{df}_{extraversion}}$ -->
+<!-- ```{r, echo=TRUE} -->
+<!-- ms.t <- var(data$extraversion); ms.t -->
+<!-- ss.t <- var(data$extraversion) * (length(data$extraversion) - 1); ss.t -->
+<!-- ``` -->
+<!-- ## The data -->
 </section>
 <section id="total-variance-visual" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="total-variance-visual">Total variance visual</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="ancova_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="explained-by-group" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="explained-by-group">Explained by group</h2>
+<p>The model that predicts only using group means:</p>
+<p><span class="math inline">\(\hat{y} = b_0 + b_1 {dummy}_1 + b_2 {dummy}_2\)</span></p>
+<p><span class="math inline">\(\hat{y} = 39.68 + 1.18 \times {dummy}_1 + -2.08 \times {dummy}_2\)</span></p>
+</section>
+<section id="explained-by-group---visual" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="explained-by-group---visual">Explained by group - visual</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="ancova_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="explained-by-covariate" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="explained-by-covariate">Explained by covariate</h2>
+<p>The model that predicts only using openness:</p>
+<p><span class="math inline">\(\hat{y} = b_0 + b_3 covar\)</span></p>
+<p><span class="math inline">\(\hat{y} = 24.99 + 1.8 \times {Openness}\)</span></p>
+</section>
+<section id="explained-by-covariate---visual" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="explained-by-covariate---visual">Explained by covariate - visual</h2>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="ancova_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
-<section id="model-variance-group" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="model-variance-group">Model variance group</h2>
-<p>The model variance consists of two parts. One for the independent variable and one for the covariate. Lets first look at the independent variable.</p>
-<div class="cell">
-<div class="cell-output-display">
-
-<div class="datatables html-widget html-fill-item" id="htmlwidget-20187b6762e1c8deebaf" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-20187b6762e1c8deebaf">{"x":{"filter":"none","vertical":false,"data":[["3","5","8","12","13","17","20","2","7","9","10","11","14","15","18","1","4","6","16","19"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],["Dutch","Dutch","Dutch","Dutch","Dutch","Dutch","Dutch","German","German","German","German","German","German","German","German","Belgian","Belgian","Belgian","Belgian","Belgian"],[8.42,9.380000000000001,6.7,8.07,7.61,6.14,8.85,9.300000000000001,7.26,8.33,8.039999999999999,7.7,6.72,8.68,9.039999999999999,9,8.15,8.470000000000001,7.65,7.78],[39.81,43.85,36.85,39.47,35.66,33.78,41.27,44.45,39.11,42.53,42.86,41.73,38.01,44.31,44.33,46.89,45.35,44.39,40.12,42.24],[41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505],[38.67,38.67,38.67,38.67,38.67,38.67,38.67,42.17,42.17,42.17,42.17,42.17,42.17,42.17,42.17,43.8,43.8,43.8,43.8,43.8]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>n<\/th>\n      <th>nationality<\/th>\n      <th>openness<\/th>\n      <th>extraversion<\/th>\n      <th>grand.mean<\/th>\n      <th>model.group<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":315,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,3,4,5,6]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"n","targets":1},{"name":"nationality","targets":2},{"name":"openness","targets":3},{"name":"extraversion","targets":4},{"name":"grand.mean","targets":5},{"name":"model.group","targets":6}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
-</div>
-</div>
+<section id="explained-by-group-and-covariate" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="explained-by-group-and-covariate">Explained by group and covariate</h2>
+<p>The model that predicts with group and covariate:</p>
+<p><span class="math inline">\(\hat{y} = b_0 + b_1 {dummy}_1 + b_2 {dummy}_2 + b_3 covar\)</span></p>
+<p><span class="math inline">\(\hat{y} = 25.9 + -0.12 \times {dummy}_1 + -2.7 \times {dummy}_2 + 1.8 \times {Openness}\)</span></p>
 </section>
-<section id="model-variance-group-visual" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="model-variance-group-visual">Model variance group visual</h2>
+<section id="explained-by-group-and-covariate---visual" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="explained-by-group-and-covariate---visual">Explained by group and covariate - visual</h2>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="ancova_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
-<section id="model-variance-covariate-visual" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="model-variance-covariate-visual">Model variance covariate visual</h2>
+<section id="unexplained-variance-group-and-cov" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="unexplained-variance-group-and-cov">Unexplained variance (group and cov)</h2>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="ancova_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
-<section id="model-variance-group-and-covariate" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="model-variance-group-and-covariate">Model variance group and covariate</h2>
-<div class="cell">
-<div class="cell-output-display">
-
-<div class="datatables html-widget html-fill-item" id="htmlwidget-aade037627a6e8e4ba69" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-aade037627a6e8e4ba69">{"x":{"filter":"none","vertical":false,"data":[["3","5","8","12","13","17","20","2","7","9","10","11","14","15","18","1","4","6","16","19"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],["Dutch","Dutch","Dutch","Dutch","Dutch","Dutch","Dutch","German","German","German","German","German","German","German","German","Belgian","Belgian","Belgian","Belgian","Belgian"],[8.42,9.380000000000001,6.7,8.07,7.61,6.14,8.85,9.300000000000001,7.26,8.33,8.039999999999999,7.7,6.72,8.68,9.039999999999999,9,8.15,8.470000000000001,7.65,7.78],[39.81,43.85,36.85,39.47,35.66,33.78,41.27,44.45,39.11,42.53,42.86,41.73,38.01,44.31,44.33,46.89,45.35,44.39,40.12,42.24],[41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505],[38.67,38.67,38.67,38.67,38.67,38.67,38.67,42.17,42.17,42.17,42.17,42.17,42.17,42.17,42.17,43.8,43.8,43.8,43.8,43.8],[42.48,45.54,37,41.37,39.9,35.22,43.85,45.29,38.79,42.2,41.27,40.19,37.07,43.31,44.46,44.33,41.62,42.64,40.03,40.44],[40.22,42.99,35.27,39.21,37.89,33.65,41.46,45.53,39.65,42.73,41.9,40.92,38.09,43.74,44.78,46.07,43.63,44.55,42.18,42.56]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>n<\/th>\n      <th>nationality<\/th>\n      <th>openness<\/th>\n      <th>extraversion<\/th>\n      <th>grand.mean<\/th>\n      <th>model.group<\/th>\n      <th>model.covar<\/th>\n      <th>model<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,3,4,5,6,7,8]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"n","targets":1},{"name":"nationality","targets":2},{"name":"openness","targets":3},{"name":"extraversion","targets":4},{"name":"grand.mean","targets":5},{"name":"model.group","targets":6},{"name":"model.covar","targets":7},{"name":"model","targets":8}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
-</div>
-</div>
+<section id="divide-model-sum-of-squares" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="divide-model-sum-of-squares">Divide model sum of squares</h2>
+<p><img src="../../images/FieldCovWarning.png" style="width:40%;"></p>
+<hr>
 </section>
-<section id="model-variance-group-and-covariate-visual" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="model-variance-group-and-covariate-visual">Model variance group and covariate visual</h2>
+<section id="divide-model-sum-of-squares-1" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="divide-model-sum-of-squares-1">Divide model sum of squares</h2>
+<p>Model SS of full model:</p>
 <div class="cell">
-<div class="cell-output-display">
-<p><img src="ancova_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="error-variance-with-covariate" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="error-variance-with-covariate">Error variance with covariate</h2>
-<div class="cell">
-<div class="cell-output-display">
-<p><img src="ancova_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="sums-of-squares" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="sums-of-squares">Sums of squares</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>SS.model <span class="ot">&lt;-</span> <span class="fu">with</span>(data, <span class="fu">sum</span>((model <span class="sc">-</span> grand.mean)<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>SS.error <span class="ot">&lt;-</span> <span class="fu">with</span>(data, <span class="fu">sum</span>((extraversion <span class="sc">-</span> model)<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Sums of squares for individual effects</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>SS.model.group <span class="ot">&lt;-</span> <span class="fu">with</span>(data, <span class="fu">sum</span>((model.group <span class="sc">-</span> grand.mean)<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>SS.model.covar <span class="ot">&lt;-</span> <span class="fu">with</span>(data, <span class="fu">sum</span>((model.covar <span class="sc">-</span> grand.mean)<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>SS.covar <span class="ot">&lt;-</span> SS.model <span class="sc">-</span> SS.model.group; SS.covar <span class="do">## SS.covar corrected for group</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>SS.model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 121.8463</code></pre>
+<pre><code>[1] 91.38149</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>SS.group <span class="ot">&lt;-</span> SS.model <span class="sc">-</span> SS.model.covar; SS.group <span class="do">## SS.group corrected for covar</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To see what is explained by group, we subtract the Model SS of the covariate model:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>SS.group <span class="ot">&lt;-</span> SS.model <span class="sc">-</span> SS.model.covar; SS.group <span class="do">## SS.group corrected for covar</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 54.65778</code></pre>
+<pre><code>[1] 32.58198</code></pre>
+</div>
+</div>
+<p>To see what is explained by covariate, we subtract the Model SS of the group model:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>SS.covar <span class="ot">&lt;-</span> SS.model <span class="sc">-</span> SS.model.group; SS.covar <span class="do">## SS.covar corrected for group</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 53.07971</code></pre>
 </div>
 </div>
 </section>
@@ -461,18 +393,8 @@ Coefficients:
 <h2 class="subsection anchored" data-anchor-id="f-ratio">F-ratio</h2>
 <p><span class="math inline">\(F = \frac{{MS}_{model}}{{MS}_{error}} = \frac{{SIGNAL}}{{NOISE}}\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">20</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>df.model <span class="ot">&lt;-</span> k <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>df.error <span class="ot">&lt;-</span> n <span class="sc">-</span> k <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>MS.model <span class="ot">&lt;-</span> SS.group <span class="sc">/</span> df.model</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>MS.error <span class="ot">&lt;-</span> SS.error <span class="sc">/</span> df.error</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>fStat <span class="ot">&lt;-</span> MS.model <span class="sc">/</span> MS.error</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>fStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 21.74406</code></pre>
+<pre><code>[1] 3.978448</code></pre>
 </div>
 </div>
 </section>
@@ -484,8 +406,8 @@ Coefficients:
 </div>
 </div>
 </section>
-<section id="alpha-power" class="level2">
-<h2 class="anchored" data-anchor-id="alpha-power">Alpha &amp; Power</h2>
+<section id="alpha-power" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="alpha-power">Alpha &amp; Power</h2>
 <p>Power becomes quite abstract when we increase the complexity (i.e., number of predictors) of our models. We can make an F-distribution that symbolizes the alternative distribution by shifting the distribution more to the right (although the interpretability becomes pretty murky..)</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -496,38 +418,35 @@ Coefficients:
 <section id="adjustedmarginal-means" class="level2">
 <h2 class="anchored" data-anchor-id="adjustedmarginal-means">Adjusted/marginal means</h2>
 <p>Marginal means are estimated group means, while keeping the covariate equal across the groups</p>
-<p>These are then the means that are used for follow-up tests, such as contrasts and post hoc tests</p>
-<p>See also <a href="https://jasp-stats.org/2020/04/14/the-wonderful-world-of-marginal-means/">this blogpost</a> I wrote a while ago</p>
+<blockquote class="blockquote">
+<p>What are extraversion averages in each group, if they would all score the same on openness?</p>
+</blockquote>
+<p>See also <a href="https://jasp-stats.org/2020/04/14/the-wonderful-world-of-marginal-means/">this blogpost</a></p>
 </section>
 <section id="adjustedmarginal-means-1" class="level2">
 <h2 class="anchored" data-anchor-id="adjustedmarginal-means-1">Adjusted/marginal means</h2>
+<p>Adjusted:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add dummy variables</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>dummy<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(data<span class="sc">$</span>nationality <span class="sc">==</span> <span class="st">"German"</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>dummy<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(data<span class="sc">$</span>nationality <span class="sc">==</span> <span class="st">"Belgian"</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co"># b coefficients</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>b.cov <span class="ot">&lt;-</span> fit<span class="sc">$</span>coefficients[<span class="st">"openness"</span>];          b.int <span class="ot">=</span> fit<span class="sc">$</span>coefficients[<span class="st">"(Intercept)"</span>]</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>b<span class="fl">.2</span>   <span class="ot">&lt;-</span> fit<span class="sc">$</span>coefficients[<span class="st">"nationalityGerman"</span>]; b<span class="fl">.3</span>   <span class="ot">=</span> fit<span class="sc">$</span>coefficients[<span class="st">"nationalityBelgian"</span>]</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjustment factor for the means of the independent variable</span></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>mean.adj <span class="ot">&lt;-</span> <span class="fu">with</span>(data, b.int <span class="sc">+</span> b.cov <span class="sc">*</span> <span class="fu">mean</span>(openness) <span class="sc">+</span> b<span class="fl">.2</span> <span class="sc">*</span> dummy<span class="fl">.1</span> <span class="sc">+</span> b<span class="fl">.3</span> <span class="sc">*</span> dummy<span class="fl">.2</span>)</span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(mean.adj <span class="sc">~</span> nationality, data, mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  nationality mean.adj
-1       Dutch 39.19740
-2      German 41.96675
-3     Belgian 43.37883</code></pre>
+1       Dutch 40.32444
+2      German 40.20237
+3     Belgian 37.62319</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(extraversion <span class="sc">~</span> nationality, data, mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Observed:</p>
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>  nationality extraversion
-1       Dutch     38.67000
-2      German     42.16625
-3     Belgian     43.79800</code></pre>
+1       Dutch     39.68286
+2      German     40.86714
+3     Belgian     37.60000</code></pre>
 </div>
 </div>
+</section>
+<section id="jasp" class="level2">
+<h2 class="anchored" data-anchor-id="jasp">JASP</h2>
+<p><img src="../../images/JASP_logo_green.svg" class="img-fluid" width="300"></p>
 </section>
 </section>
 

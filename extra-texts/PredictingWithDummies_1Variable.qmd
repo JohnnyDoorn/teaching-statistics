@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-To illustrate more clearly how we make predictions based on our statistical model, let's get our ducks in a row. We have our [observed data from the lecture](https://johnnydoorn.github.io/statistics-lectures/courses/SSR/SSR_2023-2024/12.%20ANCOVA/12.%20ANCOVA.html#the-data), loaded below. The dummy representation is especially important to see the similarity between ANOVA and linear regression. When we discuss regression in block 3 we will return to this similarity. 
+To illustrate more clearly how we make predictions based on our statistical model, let's get our ducks in a row. We have our [observed data from the lecture](https://johnnydoorn.github.io/teaching-statistics/SSR/2025/14.%20ANCOVA/14.%20ANCOVA.html#the-data), loaded below. The dummy representation is especially important to see the similarity between ANOVA and linear regression. When we discuss regression in block 3 we will return to this similarity. 
 
 ```{r}
 data <- read.csv("ExtraversionNationality.csv")

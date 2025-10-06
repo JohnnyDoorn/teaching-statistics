@@ -4,7 +4,7 @@ author: "Johnny van Doorn"
 date: today
 ---
 
-The handouts are 1 continuous page, while the slides are spread across multiple pages (navigate with the arrow keys). To get a pdf, I recommend you use the print option in your browser to print the handout to pdf (open the handout and press `ctrl + p` (Windows) or `cmd + p` (MacOS). 
+The handouts are 1 continuous page, while the slides are spread across multiple pages (navigate with the arrow keys). To get a pdf, I recommend you use the print option in your browser to print the handout to pdf (open the handout and press `ctrl + p` (Windows) or `cmd + p` (MacOS)). 
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 course.path = "SSR/2025/"

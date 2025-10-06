@@ -38,9 +38,7 @@ Chapter 11
 ## Recommended Exercises
 
 ::: {}
-- [Exercise 11.1](https://discoverjasp.com/pages/smart_alex#task-11.1), [Exercise 11.2](https://discoverjasp.com/pages/smart_alex#task-11.2),  [Exercise 11.4](https://discoverjasp.com/pages/smart_alex#task-11.4)
-- How would conclusions/interpretations differ for $\alpha = 0.01$?
-- How are the assumptions looking for these data sets?
+- [Exercise 12.2](https://discoverjasp.com/pages/smart_alex#task-12.2),  [Exercise 12.5](https://discoverjasp.com/pages/smart_alex#task-12.5), [Exercise 12.6](https://discoverjasp.com/pages/smart_alex#task-12.6)
 :::
 
 

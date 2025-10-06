@@ -213,3 +213,143 @@ darken_color <- function(color, factor = 3) {
   darkened_rgb <- col_rgb / factor
   rgb(darkened_rgb[1,], darkened_rgb[2,], darkened_rgb[3,], maxColorValue = 255)
 }
+
+
+plotSumSquaresCov <- function(data, sumSq = "Total", stats = NULL, plotMean = TRUE, whatDisplay = NULL, whatPred = "Mean", myLabY = "Score", myLimY = c(0, 10)) {
+  
+  nGroups <- nlevels((data$group))
+  groupN <- tapply(data$dv, data$group, length)[1]
+  totN <- nrow(data)
+  groupMeans <- tapply(data$dv, data$group, mean)
+  grandMean <- mean(data$dv)
+  myFullMod <- lm(dv ~ group + cov, data = data)
+  myCovMod <- lm(dv ~ cov, data = data)
+  
+  predictedOnGroup <- data[["predictedOnGroup"]] <-  groupMeans[as.numeric(data$group)]
+  predictedOnCov <- data[["predictedOnCov"]] <- myCovMod$fitted.values
+  predictedFull <- data[["predictedFull"]] <- myFullMod$fitted.values
+  
+  fullModelError <- myFullMod$residuals
+  
+  sumSquareFull <- sum((predictedFull - grandMean)^2)
+  sumSquareCov <- sum((predictedOnCov - grandMean)^2)
+  sumSquareGroup <- sum((predictedOnGroup - grandMean)^2)
+  
+  errorMS <- (sum(fullModelError^2) /  (totN - nGroups - 1))  # error variance
+  groupModelMS <- (sumSquareGroup / (nGroups - 1)) 
+  covModelMS <- (sumSquareCov / 1)
+  nulModelError <- data$dv - grandMean
+  
+  finalSumSquareCov <- sumSquareFull - sumSquareGroup
+  finalSumSquareGroup <- sumSquareFull - finalSumSquareCov
+  
+  dfGroup <- nGroups -1
+  dfCov <- 1
+  dfError <-  (groupN*nGroups) - (nGroups + 1)
+  
+  stats <- data.frame('Total Sum of Squares' = sum(nulModelError^2),
+                          'Group Sum of Squares' = finalSumSquareGroup,
+                          'Cov Sum of Squares' = finalSumSquareCov,
+                          'Full Model Sum of Squares' = sumSquareFull,
+                          'Error Sum of Squares' = sum(fullModelError^2),
+                          'Group df' = dfGroup,
+                          'Cov df' = 1,
+                          'Error df' = dfError,
+                          'Group Mean Squares' = finalSumSquareGroup / dfGroup,
+                          'Cov Mean Squares' = finalSumSquareCov,
+                          'Error Mean Squares' = sum(fullModelError^2) / dfError,
+                          'F Group' = (finalSumSquareGroup / dfGroup) / (sum(fullModelError^2) / dfError),
+                          'F Cov' = (finalSumSquareCov / dfCov) / (sum(fullModelError^2) / dfError)
+  )
+  
+  
+  myCols <- palette.colors(n = nGroups+1, palette = "Okabe-Ito")
+  darkCols <- sapply(myCols, darken_color)
+  
+  plot(data$dv, col = "black" , pch = 21, bg = myCols[as.numeric(data$group)+1], 
+       cex = 1.8, lwd = 3, las = 1, bty = "n",
+       ylab = myLabY, xlab = "Participant Nr.", xlim = c(0, length(data$dv)), 
+       ylim = myLimY, cex.lab = 1.3, cex.axis=1.3)
+  
+  totN <- length(data$dv)
+  # Calculate the grand mean
+  grandMean <- mean(data$dv)
+  
+  # Calculate the group mean
+  groupMeans <- tapply(data$dv, data$group, mean)
+  nulModelError <- data$dv - grandMean
+  
+  if (sumSq == "Total") {
+    if (plotMean) {
+      abline(h = mean(data$dv), lwd = 3, col = "purple")
+    }
+    if ("Segments" %in% whatDisplay) {
+      segments(x0 = data$pp, x1 = data$pp, y0 = mean(data$dv), y1 = data$dv, lwd = 2)
+      if ("Sums" %in% whatDisplay) {
+        mtext(paste0("Total Sum of Squares = ", round(sum(nulModelError^2), 2)), cex = 1.4)
+      } else {
+        mtext("", cex = 1.8)
+      }
+    }
+  } 
+  
+  if (whatPred == "Group means") {
+    predPoints <- data$predictedOnGroup
+    modSumSquares <- stats[['Group.Sum.of.Squares']]
+    dfMod <- nGroups - 1
+    dfError <- totN - (nGroups)
+    
+  } else if (whatPred == "Cov") {
+    predPoints <- data$predictedOnCov
+    modSumSquares <- stats[['Cov.Sum.of.Squares']]
+    dfMod <- 1
+    dfError <- totN - (1)
+  } else if (whatPred == "Group means + cov") {
+    predPoints <- data$predictedFull
+    modSumSquares <- stats[['Full.Model.Sum.of.Squares']]
+    dfMod <- nGroups
+    dfError <- totN - (1 + nGroups)
+  } else if (whatPred == "Mean") {
+    predPoints <- rep(grandMean, totN)
+    modSumSquares <- 0
+    dfMod <- totN - (1 + nGroups)
+    dfError <- 1
+  }
+  
+  fullModMeanSquareError <- round(stats[['Error.Sum.of.Squares']] / (totN - (1 + nGroups)), 3)
+
+  if (sumSq == "Model") {
+    abline(h = mean(data$dv), lwd = 3, col = "purple")
+    points(x = data$pp, y = predPoints, pch = 23, bg = darkCols[as.numeric(data$group)+1], col = "black", cex = 1.35)
+    if ("Segments" %in% whatDisplay) {
+      segments(x0 = data$pp, x1 = data$pp, y0 = predPoints, y1 = mean(data$dv), lwd = 2, col = myCols[as.numeric(data$group)+1])
+      if ("Sums" %in% whatDisplay) {
+        if (whatPred == "Mean" | !("F-stat" %in% whatDisplay)) {
+          mtext(paste0("Model Sum of Squares = ", round(modSumSquares, 3), "\nMean Square = ", round(modSumSquares/dfMod, 3)), cex = 1.4, line = 0)
+        } else {
+          mtext(paste0("Model Sum of Squares = ", round(modSumSquares, 3), "\nMean Square = ", round(modSumSquares/dfMod, 3), 
+                       "\nF = ",round(modSumSquares/dfMod, 3),"/",fullModMeanSquareError, " = ", round(round(modSumSquares/dfMod, 3)/fullModMeanSquareError, 3)) , cex = 1.4, line = 0)
+        }
+      } else {
+        mtext("Model improvement", cex = 1.8)
+      }
+    }
+  }
+  
+  
+  if (sumSq == "Error") {
+    # abline(h = mean(data$dv), lwd = 3, col = "purple")
+    points(x = data$pp, y = predPoints, pch = 23, bg = darkCols[as.numeric(data$group)+1], col = "black", cex = 1.35)
+    
+    if ("Segments" %in% whatDisplay) {
+      
+      segments(x0 = data$pp, x1 = data$pp, y0 = predPoints, y1 = data$dv, lwd = 2, col = darkCols[as.numeric(data$group)+1])
+      totSumSquares <- round(stats[['Total.Sum.of.Squares']] - modSumSquares, 3)
+      if ("Sums" %in% whatDisplay) {
+        mtext(paste0("Error Sum of Squares = ", totSumSquares, "\n Mean Square = ", round(totSumSquares/dfError, 3)), cex = 1.4)
+      } else {
+        mtext("Model error", cex = 1.8)
+      }
+    }
+  } 
+}
