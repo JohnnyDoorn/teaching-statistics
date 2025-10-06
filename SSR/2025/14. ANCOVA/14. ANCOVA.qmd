@@ -1,0 +1,45 @@
+---
+title: "14. ANCOVA"
+author: "Johnny van Doorn"
+date: "07 oct 2024"
+footer: "Scientific & Statistical Reasoning"
+format:
+  revealjs:
+    output-ext: slide.html
+    css: ../../ajohnson.css
+  html: default
+css: ../../ajohnson.css
+---
+
+<div class="goals">
+In this lecture we aim to:
+
+- Introduce ANOVA
+- Discuss follow-up tests
+- Show ANOVA in JASP
+    
+<strong>Reading:</strong>
+Chapter 11
+</div>
+
+
+```{r child="../../topics/ANCOVA/ANCOVA.qmd"}
+```
+
+# Closing
+
+## Recap
+
+- Bla bla
+
+## Recommended Exercises
+
+::: {}
+- [Exercise 11.1](https://discoverjasp.com/pages/smart_alex#task-11.1), [Exercise 11.2](https://discoverjasp.com/pages/smart_alex#task-11.2),  [Exercise 11.4](https://discoverjasp.com/pages/smart_alex#task-11.4)
+- How would conclusions/interpretations differ for $\alpha = 0.01$?
+- How are the assumptions looking for these data sets?
+:::
+
+
+```{r child="../../footer.qmd"}
+```

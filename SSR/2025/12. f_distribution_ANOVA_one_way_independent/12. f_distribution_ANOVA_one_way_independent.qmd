@@ -1,6 +1,6 @@
 ---
 title: "12. ANOVA"
-subtitle: "F-distribution & One-way independent ANOVA"
+subtitle: "One-way independent ANOVA"
 author: "Johnny van Doorn"
 date: "01 oct 2025"
 footer: "Scientific & Statistical Reasoning"
@@ -39,6 +39,14 @@ $$\text{outcome} = \text{model} + \text{error}$$
 <!-- ``` -->
 
 # Closing
+
+## Recap
+
+- ANOVA is a regression (linear model) with categorical predictor
+- We compare variance explained by the model, to unexplained variance
+- Follow-up tests (contrast/post hoc) inform us where the group differences lie
+ 
+> bigger group differences = more informative predictor = more explained variance 
 
 ## Recommended Exercises
 

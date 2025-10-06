@@ -127,6 +127,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#closing" id="toc-closing" class="nav-link" data-scroll-target="#closing">Closing</a>
   <ul class="collapse">
+  <li><a href="#recap" id="toc-recap" class="nav-link" data-scroll-target="#recap">Recap</a></li>
   <li><a href="#recommended-exercises" id="toc-recommended-exercises" class="nav-link" data-scroll-target="#recommended-exercises">Recommended Exercises</a></li>
   <li><a href="#contact" id="toc-contact" class="nav-link" data-scroll-target="#contact">Contact</a></li>
   </ul></li>
@@ -140,7 +141,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">12. ANOVA</h1>
-<p class="subtitle lead">F-distribution &amp; One-way independent ANOVA</p>
+<p class="subtitle lead">One-way independent ANOVA</p>
 </div>
 
 
@@ -222,8 +223,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-b2de63b1f3fbb4c3a0bc" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-b2de63b1f3fbb4c3a0bc">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"],["No puppies","No puppies","No puppies","No puppies","No puppies","15 mins","15 mins","15 mins","15 mins","15 mins","30 mins","30 mins","30 mins","30 mins","30 mins"],[3,2,1,1,4,5,2,4,2,3,7,4,5,3,6]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Dose<\/th>\n      <th>Happiness<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Dose","targets":1},{"name":"Happiness","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-466ff8fe3e6128ae08e8" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-466ff8fe3e6128ae08e8">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"],["No puppies","No puppies","No puppies","No puppies","No puppies","15 mins","15 mins","15 mins","15 mins","15 mins","30 mins","30 mins","30 mins","30 mins","30 mins"],[3,2,1,1,4,5,2,4,2,3,7,4,5,3,6]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Dose<\/th>\n      <th>Happiness<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Dose","targets":1},{"name":"Happiness","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -277,8 +278,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-a4c4e54295b684c09cd2" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-a4c4e54295b684c09cd2">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"],["No puppies","No puppies","No puppies","No puppies","No puppies","15 mins","15 mins","15 mins","15 mins","15 mins","30 mins","30 mins","30 mins","30 mins","30 mins"],[3,2,1,1,4,5,2,4,2,3,7,4,5,3,6],[2.2,2.2,2.2,2.2,2.2,3.2,3.2,3.2,3.2,3.2,5,5,5,5,5]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Dose<\/th>\n      <th>Happiness<\/th>\n      <th>Predictions<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[2,3]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Dose","targets":1},{"name":"Happiness","targets":2},{"name":"Predictions","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-6097751b68cc6c887543" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-6097751b68cc6c887543">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"],["No puppies","No puppies","No puppies","No puppies","No puppies","15 mins","15 mins","15 mins","15 mins","15 mins","30 mins","30 mins","30 mins","30 mins","30 mins"],[3,2,1,1,4,5,2,4,2,3,7,4,5,3,6],[2.2,2.2,2.2,2.2,2.2,3.2,3.2,3.2,3.2,3.2,5,5,5,5,5]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Dose<\/th>\n      <th>Happiness<\/th>\n      <th>Predictions<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[2,3]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Dose","targets":1},{"name":"Happiness","targets":2},{"name":"Predictions","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -480,6 +481,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="closing" class="level1">
 <h1>Closing</h1>
+<section id="recap" class="level2">
+<h2 class="anchored" data-anchor-id="recap">Recap</h2>
+<ul>
+<li>ANOVA is a regression (linear model) with categorical predictor</li>
+<li>We compare variance explained by the model, to unexplained variance</li>
+<li>Follow-up tests (contrast/post hoc) inform us where the group differences lie</li>
+</ul>
+<blockquote class="blockquote">
+<p>bigger group differences = more informative predictor = more explained variance</p>
+</blockquote>
+</section>
 <section id="recommended-exercises" class="level2">
 <h2 class="anchored" data-anchor-id="recommended-exercises">Recommended Exercises</h2>
 <div>
