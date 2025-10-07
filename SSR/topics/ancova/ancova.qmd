@@ -232,7 +232,7 @@ plotSumSquaresCov(data = plotData, whatPred = "Mean", myLimY = c(30, 50), whatDi
 
 ```
 
-## Explained by group {.smaller}
+## Explained by group model {.smaller}
 
 The model that predicts only using group means:
 
@@ -240,7 +240,7 @@ $\hat{y} = b_0 + b_1 {dummy}_1 + b_2 {dummy}_2$
 
 $\hat{y} = `r round(fit.group$coefficients[1], 2)` + `r round(fit.group$coefficients[2], 2)` \times {dummy}_1 + `r round(fit.group$coefficients[3], 2)` \times {dummy}_2$
 
-## Explained by group - visual {.subsection}
+## Explained by group model - visual {.subsection}
 
 ```{r, echo=FALSE}
 data$model.group <- (fit.group$fitted.values)
@@ -249,7 +249,7 @@ data$model.covar <- (fit.covar$fitted.values)
 plotSumSquaresCov(data = plotData, sumSq = "Model", whatPred = "Group means", myLimY = c(32, 48), whatDisplay = c("Segments", "Sums"), myLabY = "Extraversion")
 ```
 
-## Explained by covariate {.subsection}
+## Explained by covariate model {.subsection}
 
 The model that predicts only using openness:
 
@@ -258,7 +258,7 @@ $\hat{y} = b_0 + b_3 covar$
 $\hat{y} = `r round(fit.covar$coefficients[1], 2)` + `r round(fit.covar$coefficients[2], 2)` \times {Openness}$
 
 
-## Explained by covariate - visual {.subsection}
+## Explained by covariate model - visual {.subsection}
 
 ```{r, echo=FALSE}
 
@@ -266,7 +266,7 @@ plotSumSquaresCov(data = plotData, sumSq = "Model", whatPred = "Cov", myLimY = c
 
 ```
 
-## Explained by group and covariate {.smaller}
+## Explained by full model {.smaller}
 
 ```{r, echo=FALSE}
 data$model       <- (fit$fitted.values)
@@ -280,7 +280,7 @@ $\hat{y} = b_0 + b_1 {dummy}_1 + b_2 {dummy}_2 + b_3 covar$
 
 $\hat{y} = `r round(fit$coefficients[1], 2)` + `r round(fit$coefficients[2], 2)` \times {dummy}_1 + `r round(fit$coefficients[3], 2)` \times {dummy}_2  + `r round(fit$coefficients[4], 2)` \times {Openness}$
 
-## Explained by group and covariate - visual {.subsection}
+## Explained by full model - visual {.subsection}
 
 
 ```{r, echo=FALSE}

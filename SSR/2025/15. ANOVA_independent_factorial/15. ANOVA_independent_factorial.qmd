@@ -15,9 +15,9 @@ css: ../../ajohnson.css
 <div class="goals">
 In this lecture we aim to:
 
-- Introduce ANOVA
-- Discuss follow-up tests
-- Show ANOVA in JASP
+- ANOVA with 2 categorical predictors
+- Discuss interaction
+- Demonstration in JASP
     
 <strong>Reading:</strong>
 Chapter 11
