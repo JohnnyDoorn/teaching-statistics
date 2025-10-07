@@ -14,12 +14,12 @@ css: ../../ajohnson.css
 <div class="goals">
 In this lecture we aim to:
 
-- Introduce ANOVA
-- Discuss follow-up tests
-- Show ANOVA in JASP
+- Introduce ANCOVA
+- Implications of multiple predictors
+- Show ANCOVA in JASP
     
 <strong>Reading:</strong>
-Chapter 11
+Chapter 12
 </div>
 
 

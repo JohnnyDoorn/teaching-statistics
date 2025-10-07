@@ -35,13 +35,11 @@ Effects and interactions:
 * Continuous variable
 * Random sample
 * Normally distributed 
-    * Shapiro-Wilk test
     * Q-Q plot
 * Equal variance within groups
-    * Levene's test
     * Ratio of observed sd's
+    * Welch correction only exists for one-way ANOVA
     
-* **Exam Note** - On the exam we will only ask for assumption *hypothesis* tests. 
 
 ## Formulas {.smaller}
 
@@ -61,28 +59,24 @@ In this example we will look at the amount of accidents in a car driving simulat
 * Dependent variable
     * Accidents
 * Independent variables
-    * Speed
-        * None
-        * Small
-        * Large
-    * Alcohol
-        * None
-        * Small
-        * Large
+    * Speed dose
+        * None / Small / Large
+    * Alcohol dose
+        * None / small / large
 
-##
+<!-- ## -->
 
-person | alcohol | speed | accidents
--------|---------|-------|----------
-1      | 1       | 1     | 0
-2      | 1       | 2     | 2
-3      | 1       | 3     | 4
-4      | 2       | 1     | 6
-5      | 2       | 2     | 8
-6      | 2       | 3     | 10
-7      | 3       | 1     | 12
-8      | 3       | 2     | 14
-9      | 3       | 3     | 16
+<!-- person | alcohol | speed | accidents -->
+<!-- -------|---------|-------|---------- -->
+<!-- 1      | 1       | 1     | 0 -->
+<!-- 2      | 1       | 2     | 2 -->
+<!-- 3      | 1       | 3     | 4 -->
+<!-- 4      | 2       | 1     | 6 -->
+<!-- 5      | 2       | 2     | 8 -->
+<!-- 6      | 2       | 3     | 10 -->
+<!-- 7      | 3       | 1     | 12 -->
+<!-- 8      | 3       | 2     | 14 -->
+<!-- 9      | 3       | 3     | 16 -->
       
 ## Data {.smaller}
 
@@ -90,13 +84,15 @@ person | alcohol | speed | accidents
 datatable(data, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
 ```
 
-## SS model {.smaller}
+## SS full model {.smaller}
 
 | Variance | Sum of squares | df | Mean squares | F-ratio |
 |----------|----------------|----|--------------|---------|
 | Model | $\text{SS}_{\text{model}} = \sum{n_k(\bar{X}_k-\bar{X})^2}$ | $k_{model}-1$ | $\frac{\text{SS}_{\text{model}}}{\text{df}_{\text{model}}}$ | $\frac{\text{MS}_{\text{model}}}{\text{MS}_{\text{error}}}$ |
 
 <br>
+
+Predicts group means for each cell of the design:
 
 ```{r, echo=FALSE}
 accidents <- data$accidents
@@ -116,44 +112,43 @@ cbind(means.model, n = n.k.model$accidents)
 fit <- lm(accidents ~ speed + alcohol + speed * alcohol, data)
 exp.accidents <- fit$fitted.values
 
-datatable(data.frame(data$speed, 
-                     data$alcohol, 
+datatable(data.frame(speed = data$speed, 
+                     alcohol = data$alcohol, 
                      accidents = round(accidents,2), 
                      grand.mean = round(mean(accidents),2), 
                      group.mean = round(exp.accidents,2)), 
           options = list(searching = FALSE, scrollY = 415, paging = FALSE, info = FALSE))
 ```
 
-## Group means
+<!-- ## Group means -->
 
 ```{r, echo=FALSE}
 SS.model <- sum((exp.accidents - mean(data$accidents))^2)
 ```
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 means <- tapply(data$accidents, list(data$speed, data$alcohol), mean)
-means
+# means
 ns <- table(list(data$speed, data$alcohol))
-ns
+# ns
 
 ```
 
-##
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 squares <- (means - mean(accidents))^2
-squares 
+# squares 
 
 ss.model <- sum(squares * ns)
-ss.model
+# ss.model
 ```
 
-## SS model visual
+## SS full model visual
 
 ```{r, echo=FALSE}
 input <- list()
 input$whatPred <- "Alcohol + Speed + A:S"
-input$whatDisplay <- "Segments"
+input$whatDisplay <- c("Segments", "Sums")
     plotSumSquares(mydat, input = input, sumSq = "Model", myMain = "Full Model SS",
                    alcColors = palette.colors(n = 3, palette = "Okabe-Ito"),
                    speedSymbols = c(21, 22, 23)) 
@@ -168,21 +163,20 @@ input$whatDisplay <- "Segments"
 
 <br>
 
-```{r, echo=FALSE, eval=FALSE}
+```{r, echo=FALSE}
 SS.error <- sum((accidents - exp.accidents)^2)
-SS.error
+# SS.error
 ```
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 vars <- tapply(data$accidents, list(data$speed, data$alcohol), var)
-vars
+# vars
 ```
 
-##
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 ss.error <- sum(vars * (ns - 1))
-ss.error
+# ss.error
 ```
 
 ## SS error visual
@@ -190,7 +184,7 @@ ss.error
 ```{r, echo=FALSE}
 input <- list()
 input$whatPred <- "Alcohol + Speed + A:S"
-input$whatDisplay <- "Segments"
+input$whatDisplay <- c("Segments", "Sums")
     plotSumSquares(mydat, input = input, sumSq = "Error", myMain = "Full Model SS Error",
                    alcColors = palette.colors(n = 3, palette = "Okabe-Ito"),
                    speedSymbols = c(21, 22, 23)) 
@@ -221,7 +215,7 @@ SS.speed <- sum(with(data, (means.speed - mean.total)^2))
 #SS.speed
 ```
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 # m.s1 = mean(subset(data, speed == "none", select = "accidents")$accidents)
 # m.s2 = mean(subset(data, speed == "some", select = "accidents")$accidents)
 # m.s3 = mean(subset(data, speed == "much", select = "accidents")$accidents)
@@ -232,14 +226,13 @@ s.ns <- 60
 s.means
 ```
 
--------
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 s.squares <- (s.means - mean(accidents))^2
-s.squares
+# s.squares
 
 ss.speed <- sum(60 * s.squares)
-ss.speed
+# ss.speed
 ```
 
 ## SS A Speed Visual
@@ -247,7 +240,7 @@ ss.speed
 ```{r, echo=FALSE}
 input <- list()
 input$whatPred <- "Speed"
-input$whatDisplay <- "Segments"
+input$whatDisplay <- c("Segments", "Sums")
     plotSumSquares(mydat, input = input, sumSq = "Model", myMain = "Speed Model SS",
                    alcColors = palette.colors(n = 3, palette = "Okabe-Ito"),
                    speedSymbols = c(21, 22, 23)) 
@@ -258,7 +251,7 @@ input$whatDisplay <- "Segments"
 ```{r, echo=FALSE}
 input <- list()
 input$whatPred <- "Speed"
-input$whatDisplay <- "Segments"
+input$whatDisplay <- c("Segments", "Sums")
     plotSumSquares(mydat, input = input, sumSq = "Error", myMain = "Speed Model SS",
                    alcColors = palette.colors(n = 3, palette = "Okabe-Ito"),
                    speedSymbols = c(21, 22, 23), overlayFullPred = FALSE) 
@@ -287,21 +280,21 @@ SS.alcohol <- sum(with(data, (means.alcohol - mean.total)^2))
 # SS.alcohol
 ```
 
-```{r}
+```{r, echo = FALSE}
 a.means <- tapply(data$accidents, data$alcohol, mean)
 a.ns <- 60
 
 a.means
 ```
 
-------
 
-```{r, echo=TRUE}
+
+```{r, echo=FALSE}
 a.squares <- (a.means - mean(accidents))^2
-a.squares
+# a.squares
 
 ss.alcohol <- sum(60 * a.squares)
-ss.alcohol
+# ss.alcohol
 ```
 
 ## SS B Alcohol Visual
@@ -309,7 +302,7 @@ ss.alcohol
 ```{r, echo=FALSE}
 input <- list()
 input$whatPred <- "Alcohol"
-input$whatDisplay <- "Segments"
+input$whatDisplay <- c("Segments", "Sums")
     plotSumSquares(mydat, input = input, sumSq = "Model", myMain = "Alcohol Model SS",
                    alcColors = palette.colors(n = 3, palette = "Okabe-Ito"),
                    speedSymbols = c(21, 22, 23)) 
@@ -320,7 +313,7 @@ input$whatDisplay <- "Segments"
 ```{r, echo=FALSE}
 input <- list()
 input$whatPred <- "Alcohol"
-input$whatDisplay <- "Segments"
+input$whatDisplay <- c("Segments", "Sums")
     plotSumSquares(mydat, input = input, sumSq = "Error", myMain = "Alcohol Model SS",
                    alcColors = palette.colors(n = 3, palette = "Okabe-Ito"),
                    speedSymbols = c(21, 22, 23), overlayFullPred = FALSE) 
@@ -340,31 +333,16 @@ ss.speed.alcohol <- ss.model - ss.speed - ss.alcohol
 ss.speed.alcohol
 ```
 
-## Mean Squares
+## Using mean squares to compute $F$
 
-::: {.columns}
+For every $F$-statistic, we use the $MS_{error}$ of the full model:
 
-::: {.column}
-
-Mean squares for:
-
-* Speed
-* Alcohol
-* Speed $\times$ Alcohol
-
-:::
-
-::: {.column}
 
 $$\begin{aligned}
 F_{Speed} &= \frac{{MS}_{Speed}}{{MS}_{error}} \\
 F_{Alcohol} &= \frac{{MS}_{Alcohol}}{{MS}_{error}} \\
 F_{Alcohol \times Speed} &= \frac{{MS}_{Alcohol \times Speed}}{{MS}_{error}} \\
 \end{aligned}$$
-
-:::
-
-:::
 
 ## Interaction
 
@@ -387,38 +365,54 @@ ms.error <- ss.error / df.error
 
 ## $P$-value
 
-```{r, echo=TRUE}
-F.speed.alcohol <- ms.speed.alcohol / ms.error
-F.speed.alcohol
-
-library(visualize)
-visualize.f(F.speed.alcohol, df.speed.alcohol, df.error, section = "upper")
-```
-
-------
-
 ```{r, echo=FALSE}
-F.values = seq(0, 10, .01)
+F.speed.alcohol <- fStat <- ms.speed.alcohol / ms.error
+# F.speed.alcohol
 
-plot(F.values, df(F.values, df.speed.alcohol, df.error), type = "l", ylab="density", main = "H0 and HA F-distribution")
+# Set up the plot for the F-distribution
+curve(df(x, ms.error, df.error), from = 0, to = 4, n = 1000, bty = "n", las = 1, ylim = c(0, 6),
+      xlab = "F-value", ylab = "Density", main = "F-distribution with P-value Region")
 
-critical.value = qf(.95, df.speed.alcohol, df.error)
+# Shade the upper tail (p-value region) using polygon
+# Define the region to fill (upper tail, greater than fStat)
+x_vals <- seq(fStat, 10, length.out = 100)
+y_vals <- df(x_vals, ms.error, df.error)
 
-critical.range = seq(critical.value, 10, .01)
+# Draw the polygon to fill the area under the curve
+polygon(c(fStat, x_vals, 10), c(0, y_vals, 0), col = "lightblue", border = NA)
 
-polygon(c(critical.range,rev(critical.range)), 
-        c(critical.range*0, rev(df(critical.range, df.speed.alcohol, df.error, ncp = 5))), col = "green")
-
-lines(F.values, df(F.values, df.speed.alcohol, df.error, ncp = 5))
-
-polygon(c(critical.range,rev(critical.range)), 
-        c(critical.range*0, rev(df(critical.range, df.speed.alcohol, df.error))), col = rgb(1,0,0,1), density = 40, angle = -45)
-
-p.range = seq(F.speed.alcohol, 10, .01)
-
-polygon(c(p.range,rev(p.range)), 
-        c(p.range*0, rev(df(p.range, df.speed.alcohol, df.error))), col = rgb(0,0,1,.6), density = 20)
+# Optionally, add a vertical line at the F-statistic
+arrows(x0 = fStat, x1 = fStat, y0 = 0 , y1 = 3.6, col = "darkred", lwd = 2)
+text(x = fStat, y = 5.5, paste("F =", round(fStat, 2)), cex = 1.2)
+text(x = fStat, y = 4, paste("p-val =", round(pf(fStat, ms.error, df.error, lower.tail = FALSE), 4)), cex = 1.2)
 ```
+
+
+
+<!-- ------ -->
+
+<!-- ```{r, echo=FALSE} -->
+<!-- F.values = seq(0, 10, .01) -->
+
+<!-- plot(F.values, df(F.values, df.speed.alcohol, df.error), type = "l", ylab="density", main = "H0 and HA F-distribution") -->
+
+<!-- critical.value = qf(.95, df.speed.alcohol, df.error) -->
+
+<!-- critical.range = seq(critical.value, 10, .01) -->
+
+<!-- polygon(c(critical.range,rev(critical.range)),  -->
+<!--         c(critical.range*0, rev(df(critical.range, df.speed.alcohol, df.error, ncp = 5))), col = "green") -->
+
+<!-- lines(F.values, df(F.values, df.speed.alcohol, df.error, ncp = 5)) -->
+
+<!-- polygon(c(critical.range,rev(critical.range)),  -->
+<!--         c(critical.range*0, rev(df(critical.range, df.speed.alcohol, df.error))), col = rgb(1,0,0,1), density = 40, angle = -45) -->
+
+<!-- p.range = seq(F.speed.alcohol, 10, .01) -->
+
+<!-- polygon(c(p.range,rev(p.range)),  -->
+<!--         c(p.range*0, rev(df(p.range, df.speed.alcohol, df.error))), col = rgb(0,0,1,.6), density = 20) -->
+<!-- ``` -->
 
 ## Partition the explained variance (BONUS) {.smaller}
 
@@ -497,7 +491,7 @@ text(x = .6:14.6*1.2, y = values, labels = c(values[1:2], rep("?", 1), values[4]
 
 - Fit a model with only IV1, then use that to compute the explained variance for IV2: $SS_{M1} = 70 \rightarrow SS_{IV2} = 130 - 70 = 60$
 - Fit a model with only IV2, then use that to compute the explained variance for IV1: $SS_{M2} = 50 \rightarrow SS_{IV1} = 130 - 50 = 80$
-- [See also Oliver Twisted from Chapter 13](https://johnnydoorn.github.io/discoverjasp/pages/oliver_twisted.html#please-sir-can-i-customize-my-model)
+- [See also Oliver Twisted from Chapter 13](https://discoverjasp.com/pages/oliver_twisted.html#please-sir-can-i-customize-my-model)
 
 ## Contrast
 
@@ -507,24 +501,48 @@ Planned comparisons
 * Higher precision
 * Higher power
 
-## Post-Hoc
+## Post-Hoc {.smaller}
 
 Unplanned comparisons
 
 * Exploring all possible differences
-* Adjust T value for inflated type 1 error
+* Adjust p-value for inflated type 1 error
     * P(1 type-I error) = $0.05$
     * P(not 1 type-I error) = $0.95$
     * P(not 5 type-I errors) = $0.95^5 = `r round(0.950^5, 3)`$
+* Bonferroni more conservative, Tukey more permissive
 
-## Effect size
+> **Exam note:** know where the options are, exam question will inform you which correction to use
 
-General effect size measures
+## Effect size in ANOVA {.smaller}
 
-* Amount of explained variance $R^2$ also called eta squared $\eta^2$.
-* Omega squared $\omega^2$
+General effect size measure: Partial omega squared $\omega_p^2$
 
-Effect sizes of contrasts or post-hoc comparisons
+How to interpret? 
 
-* Cohen's $r$ gives the effect size for a specific comparison
-    * $r_{Contrast} = \sqrt{\frac{t^2}{t^2+{df}}}$
+| $\omega^2$ and $\omega_p^2$ | Magnitude of Effect | Interpretation |
+|---------------------|--------------------|----------------|
+| 0.00–0.009          | Very small         | Trivial practical importance |
+| 0.01–0.05           | Small              | Small but meaningful variance explained |
+| 0.06–0.13           | Medium             | Moderate variance explained |
+| ≥ 0.14              | Large              | Substantial variance explained |
+
+## Effect size in follow-up tests {.smaller}
+
+Effect sizes of contrasts or post-hoc comparisons: Cohen's $d$ 
+    
+How to interpret? 
+
+| Cohen’s *d* | Magnitude of Effect | Interpretation |
+|--------------|--------------------|----------------|
+| 0.00–0.19    | Very small         | Likely negligible in most contexts |
+| 0.20–0.49    | Small              | Noticeable but modest difference |
+| 0.50–0.79    | Medium             | Moderate, practically meaningful difference |
+| ≥ 0.80       | Large              | Substantial, easily noticeable difference |
+
+
+
+
+## JASP
+
+![](../../images/JASP_logo_green.svg){width="300px"}

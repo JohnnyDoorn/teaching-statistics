@@ -2,7 +2,7 @@
 title: "15. Factorial ANOVA"
 subtitle: "Independent factorial"
 author: "Johnny van Doorn"
-date: "08 oct 2024"
+date: "08 oct 2025"
 footer: "Scientific & Statistical Reasoning"
 format:
   revealjs:
@@ -20,7 +20,7 @@ In this lecture we aim to:
 - Demonstration in JASP
     
 <strong>Reading:</strong>
-Chapter 11
+Chapter 13
 </div>
 
 
@@ -32,14 +32,19 @@ Chapter 11
 
 ## Recap
 
-- Bla bla
+With multiple predictor variables:
+
+- We are still explaining variance
+- We check the interaction
+  - Plots!
+  - F-value of interaction effect
+  - Conditional post-hoc tests
 
 ## Recommended Exercises
 
 ::: {}
-- [Exercise 11.1](https://discoverjasp.com/pages/smart_alex#task-11.1), [Exercise 11.2](https://discoverjasp.com/pages/smart_alex#task-11.2),  [Exercise 11.4](https://discoverjasp.com/pages/smart_alex#task-11.4)
-- How would conclusions/interpretations differ for $\alpha = 0.01$?
-- How are the assumptions looking for these data sets?
+- [Exercise 13.1](https://discoverjasp.com/pages/smart_alex#task-13.1), [Exercise 13.3](https://discoverjasp.com/pages/smart_alex#task-13.3),  [Exercise 13.6](https://discoverjasp.com/pages/smart_alex#task-13.6)
+- You do not need to compute effects sizes by hand!
 :::
 
 ```{r child="../../footer.qmd"}

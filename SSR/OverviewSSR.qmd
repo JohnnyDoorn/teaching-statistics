@@ -27,7 +27,7 @@ allLinks <- c("https://statisticalreasoning-uva.shinyapps.io/NHST_Binomial",
               "https://statisticalreasoning-uva.shinyapps.io/NHST_Fdistribution",
               "https://statisticalreasoning-uva.shinyapps.io/onewayANOVA",
               "https://statisticalreasoning-uva.shinyapps.io/ANCOVA",
-              # "https://statisticalreasoning-uva-2.shinyapps.io/Multi-ANOVA",
+              "https://statisticalreasoning-uva-2.shinyapps.io/Multi-ANOVA",
               # "https://statisticalreasoning-uva-2.shinyapps.io/RM_ANOVA",
                "https://statisticalreasoning-uva-2.shinyapps.io/SimpleRegression"
               # "https://statisticalreasoning-uva-2.shinyapps.io/MultiRegression"
@@ -52,7 +52,7 @@ n <- length(files)
 files <- files[order(as.numeric(gsub("\\..*", "", files)))]
 files <- files[files!= "OverviewSSR.qmd"]
 htmlFiles <- gsub(x =files, pattern = ".qmd", replacement = ".html")
-htmlFiles <- htmlFiles[htmlFiles %in% c("OneSidedVsTwoSided.html","Heteroscedasticity.html", "EffSizeVsTestStat.html", "ViolatingAssumptionsANOVA.html", "PredictingWithDummies_1Variable.html")]
+htmlFiles <- htmlFiles[htmlFiles %in% c("OneSidedVsTwoSided.html","Heteroscedasticity.html", "EffSizeVsTestStat.html", "ViolatingAssumptionsANOVA.html", "PredictingWithDummies_1Variable.html", "PredictingWithDummies_2Variables.html")]
 
 allLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistics/extra-texts/%s" target="_blank" class="external">link</a>',htmlFiles) 
 
