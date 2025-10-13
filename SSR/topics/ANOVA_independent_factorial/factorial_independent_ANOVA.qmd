@@ -4,7 +4,7 @@ Two or more independent variables with two or more categories. One dependent var
 
 ```{r, echo=FALSE}
 rm(list=ls())
-source("~/GitHubStuff/ShinyApps/ShinyApps/FacANOVA/plotSquaresFunction.R")
+source("../../plotFunctionsSSR.r")
 
 data <- read.csv("anova_alcohol_speed_daytime.csv")
 data$speed <- factor(data$speed, levels = c("none", "some", "much"))
@@ -149,9 +149,9 @@ ss.model <- sum(squares * ns)
 input <- list()
 input$whatPred <- "Alcohol + Speed + A:S"
 input$whatDisplay <- c("Segments", "Sums")
-    plotSumSquares(mydat, input = input, sumSq = "Model", myMain = "Full Model SS",
-                   alcColors = palette.colors(n = 3, palette = "Okabe-Ito"),
-                   speedSymbols = c(21, 22, 23)) 
+plotSumSquaresFactorial(mydat, input = input, sumSq = "Model", myMain = "Full Model SS",
+               alcColors = palette.colors(n = 3, palette = "Okabe-Ito"),
+               speedSymbols = c(21, 22, 23)) 
 ```
 
 
@@ -185,7 +185,7 @@ ss.error <- sum(vars * (ns - 1))
 input <- list()
 input$whatPred <- "Alcohol + Speed + A:S"
 input$whatDisplay <- c("Segments", "Sums")
-    plotSumSquares(mydat, input = input, sumSq = "Error", myMain = "Full Model SS Error",
+    plotSumSquaresFactorial(mydat, input = input, sumSq = "Error", myMain = "Full Model SS Error",
                    alcColors = palette.colors(n = 3, palette = "Okabe-Ito"),
                    speedSymbols = c(21, 22, 23)) 
 ```
@@ -241,7 +241,7 @@ ss.speed <- sum(60 * s.squares)
 input <- list()
 input$whatPred <- "Speed"
 input$whatDisplay <- c("Segments", "Sums")
-    plotSumSquares(mydat, input = input, sumSq = "Model", myMain = "Speed Model SS",
+    plotSumSquaresFactorial(mydat, input = input, sumSq = "Model", myMain = "Speed Model SS",
                    alcColors = palette.colors(n = 3, palette = "Okabe-Ito"),
                    speedSymbols = c(21, 22, 23)) 
 ```
@@ -252,7 +252,7 @@ input$whatDisplay <- c("Segments", "Sums")
 input <- list()
 input$whatPred <- "Speed"
 input$whatDisplay <- c("Segments", "Sums")
-    plotSumSquares(mydat, input = input, sumSq = "Error", myMain = "Speed Model SS",
+    plotSumSquaresFactorial(mydat, input = input, sumSq = "Error", myMain = "Speed Model SS",
                    alcColors = palette.colors(n = 3, palette = "Okabe-Ito"),
                    speedSymbols = c(21, 22, 23), overlayFullPred = FALSE) 
 ```
@@ -303,7 +303,7 @@ ss.alcohol <- sum(60 * a.squares)
 input <- list()
 input$whatPred <- "Alcohol"
 input$whatDisplay <- c("Segments", "Sums")
-    plotSumSquares(mydat, input = input, sumSq = "Model", myMain = "Alcohol Model SS",
+    plotSumSquaresFactorial(mydat, input = input, sumSq = "Model", myMain = "Alcohol Model SS",
                    alcColors = palette.colors(n = 3, palette = "Okabe-Ito"),
                    speedSymbols = c(21, 22, 23)) 
 ```
@@ -314,7 +314,7 @@ input$whatDisplay <- c("Segments", "Sums")
 input <- list()
 input$whatPred <- "Alcohol"
 input$whatDisplay <- c("Segments", "Sums")
-    plotSumSquares(mydat, input = input, sumSq = "Error", myMain = "Alcohol Model SS",
+    plotSumSquaresFactorial(mydat, input = input, sumSq = "Error", myMain = "Alcohol Model SS",
                    alcColors = palette.colors(n = 3, palette = "Okabe-Ito"),
                    speedSymbols = c(21, 22, 23), overlayFullPred = FALSE) 
 ```

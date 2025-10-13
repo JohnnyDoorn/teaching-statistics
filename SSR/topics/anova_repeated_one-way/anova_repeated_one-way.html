@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Sharon Klinkenberg &amp; Johnny van Doorn">
+<meta name="author" content="Johnny van Doorn”">
 
 <title>anova_repeated_one-way</title>
 <style>
@@ -100,21 +100,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#formulas" id="toc-formulas" class="nav-link" data-scroll-target="#formulas">Formulas</a></li>
   <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
   <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data">The data</a></li>
-  <li><a href="#data-format-in-rm-anova-wide" id="toc-data-format-in-rm-anova-wide" class="nav-link" data-scroll-target="#data-format-in-rm-anova-wide">Data format in RM ANOVA: wide</a></li>
-  <li><a href="#ms-total" id="toc-ms-total" class="nav-link" data-scroll-target="#ms-total">MS total</a></li>
-  <li><a href="#ss-total" id="toc-ss-total" class="nav-link" data-scroll-target="#ss-total">SS total</a></li>
-  <li><a href="#ss-total-visual" id="toc-ss-total-visual" class="nav-link" data-scroll-target="#ss-total-visual">SS total visual</a></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#wide-vs.-long-data-formats" id="toc-wide-vs.-long-data-formats" class="nav-link" data-scroll-target="#wide-vs.-long-data-formats">Wide vs.&nbsp;long data formats</a></li>
+  <li><a href="#general-flow-rm-anova" id="toc-general-flow-rm-anova" class="nav-link" data-scroll-target="#general-flow-rm-anova">General flow RM ANOVA</a></li>
+  <li><a href="#total-variance-ss-total---visual" id="toc-total-variance-ss-total---visual" class="nav-link" data-scroll-target="#total-variance-ss-total---visual">Total variance (SS total) - visual</a></li>
   <li><a href="#ms-within" id="toc-ms-within" class="nav-link" data-scroll-target="#ms-within">MS within</a></li>
-  <li><a href="#ss-within" id="toc-ss-within" class="nav-link" data-scroll-target="#ss-within">SS within</a></li>
-  <li><a href="#ss-within-data" id="toc-ss-within-data" class="nav-link" data-scroll-target="#ss-within-data">SS within data</a></li>
-  <li><a href="#ss-within-visual" id="toc-ss-within-visual" class="nav-link" data-scroll-target="#ss-within-visual">SS within visual</a></li>
+  <li><a href="#within-subject-variance-ss-within" id="toc-within-subject-variance-ss-within" class="nav-link" data-scroll-target="#within-subject-variance-ss-within">Within subject variance (SS within)</a></li>
+  <li><a href="#within-subject-variance-ss-within---visual" id="toc-within-subject-variance-ss-within---visual" class="nav-link" data-scroll-target="#within-subject-variance-ss-within---visual">Within subject variance (SS within) - visual</a></li>
+  <li><a href="#within-subject-variance-ss-within---data" id="toc-within-subject-variance-ss-within---data" class="nav-link" data-scroll-target="#within-subject-variance-ss-within---data">Within subject variance (SS within) - data</a></li>
   <li><a href="#ms-between" id="toc-ms-between" class="nav-link" data-scroll-target="#ms-between">MS between</a></li>
   <li><a href="#ms-model" id="toc-ms-model" class="nav-link" data-scroll-target="#ms-model">MS model</a></li>
   <li><a href="#ss-model" id="toc-ss-model" class="nav-link" data-scroll-target="#ss-model">SS model</a></li>
-  <li><a href="#ss-model-visual" id="toc-ss-model-visual" class="nav-link" data-scroll-target="#ss-model-visual">SS model visual</a></li>
-  <li><a href="#ms-error" id="toc-ms-error" class="nav-link" data-scroll-target="#ms-error">MS error</a></li>
-  <li><a href="#ss-error" id="toc-ss-error" class="nav-link" data-scroll-target="#ss-error">SS error</a></li>
+  <li><a href="#alcohol-model-ss-visual" id="toc-alcohol-model-ss-visual" class="nav-link" data-scroll-target="#alcohol-model-ss-visual">Alcohol model SS visual</a></li>
+  <li><a href="#full-model-ss-visual" id="toc-full-model-ss-visual" class="nav-link" data-scroll-target="#full-model-ss-visual">Full model SS visual</a></li>
+  <li><a href="#full-model-error-ss-visual" id="toc-full-model-error-ss-visual" class="nav-link" data-scroll-target="#full-model-error-ss-visual">Full model error SS visual</a></li>
+  <li><a href="#we-use-full-model-error-to-compute-f-for-alcohol" id="toc-we-use-full-model-error-to-compute-f-for-alcohol" class="nav-link" data-scroll-target="#we-use-full-model-error-to-compute-f-for-alcohol">We use full model error to compute F for alcohol</a></li>
   <li><a href="#f-ratio" id="toc-f-ratio" class="nav-link" data-scroll-target="#f-ratio">F ratio</a></li>
   <li><a href="#p-value" id="toc-p-value" class="nav-link" data-scroll-target="#p-value">P-value</a></li>
   <li><a href="#contrast" id="toc-contrast" class="nav-link" data-scroll-target="#contrast">Contrast</a></li>
@@ -147,18 +146,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="assumptions" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="assumptions">Assumptions</h2>
 <ul>
-<li>Uni- or Multivariate</li>
 <li>Continuous dependent variable</li>
 <li>Normally distributed
 <ul>
-<li>Shapiro-Wilk</li>
 <li>Q-Q plots</li>
+<li>Shapiro-Wilk</li>
 </ul></li>
 <li>Equality of variance of the within-group differences
 <ul>
 <li>Mauchly’s test of Sphericity</li>
-<li>See Field 15.5, table 15.2 (p845), Jane Superbrain boxes 15.3 (p865) and 15.4 (p866)</li>
-<li>Always met when having only 2 groups</li>
+<li>See Field 14.5, table 14.2, Jane Superbrain boxes 14.2 and 14.3</li>
+<li>Always met when having only 2 levels</li>
 </ul></li>
 </ul>
 </section>
@@ -235,142 +233,85 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-e122729c37d682fed3b9" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-e122729c37d682fed3b9">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[4.426,4.227,5.278,4.632,5.288,5.025,4.496,5.359,4.492,3.587,5.548,4.759,5.359,4.421,4.229,5.53,4.289,3.43,5.017,5.228],[4.106,5.469,5.557,5.323,5.148,5.158,5.829,6.121,5.264,4.047,4.89,5.23,6.229,4.93,5.432,5.31,4.711,5.057,5.139,6.132],[7.043,5.901,7.045,6.208,6.853,6.492,6.972,6.38,6.12,6.84,6.334,6.624,5.849,6.564,6.382,7.14,6.527,7.101,7.137,7.155]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>none_alc<\/th>\n      <th>some_alc<\/th>\n      <th>much_alc<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]},{"name":"pp","targets":0},{"name":"none_alc","targets":1},{"name":"some_alc","targets":2},{"name":"much_alc","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-fd88fb2c7ca198c921d2" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-fd88fb2c7ca198c921d2">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5],[4.426,4.227,5.278,4.632,5.288],[4.106,5.469,5.557,5.323,5.148],[7.043,5.901,7.045,6.208,6.853]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>none_alc<\/th>\n      <th>some_alc<\/th>\n      <th>much_alc<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]},{"name":"pp","targets":0},{"name":"none_alc","targets":1},{"name":"some_alc","targets":2},{"name":"much_alc","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
-<section id="data-format-in-rm-anova-wide" class="level2">
-<h2 class="anchored" data-anchor-id="data-format-in-rm-anova-wide">Data format in RM ANOVA: wide</h2>
+<section id="wide-vs.-long-data-formats" class="level2">
+<h2 class="anchored" data-anchor-id="wide-vs.-long-data-formats">Wide vs.&nbsp;long data formats</h2>
 <p><img src="Screenshot_LongWide.png" style="width:40%;"></p>
 </section>
-<section id="ms-total" class="level2">
-<h2 class="anchored" data-anchor-id="ms-total">MS total</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign to individual variables</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>none_alc <span class="ot">&lt;-</span> data<span class="sc">$</span>none_alc</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>some_alc <span class="ot">&lt;-</span> data<span class="sc">$</span>some_alc</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>much_alc <span class="ot">&lt;-</span> data<span class="sc">$</span>much_alc</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>total    <span class="ot">&lt;-</span> <span class="fu">c</span>(none_alc,some_alc,much_alc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><span class="math inline">\({MS}_{total} = \frac{{SS}_{{total}}}{{DF}_{{total}}} = s_{grand}^2\)</span></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>MS_total <span class="ot">&lt;-</span> <span class="fu">var</span>(total); MS_total</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.9410458</code></pre>
-</div>
-</div>
+<section id="general-flow-rm-anova" class="level2">
+<h2 class="anchored" data-anchor-id="general-flow-rm-anova">General flow RM ANOVA</h2>
+<ul>
+<li>We look at total variance</li>
+<li>We divide it:
+<ul>
+<li>Within subject variance</li>
+<li>Between subject variance</li>
+</ul></li>
+</ul>
+<blockquote class="blockquote">
+<p>How much of the within subject variance can we explain by looking at alcohol condition?</p>
+</blockquote>
+<!-- ## MS total -->
+<!-- ${MS}_{total} = \frac{{SS}_{{total}}}{{DF}_{{total}}} = s_{grand}^2$ -->
+<!-- ## Total variance (SS total) -->
+<!-- ${DF_{total}} = N-1$ -->
+<!-- ${SS}_{{total}} = s_{grand}^2(N-1)$ -->
 </section>
-<section id="ss-total" class="level2">
-<h2 class="anchored" data-anchor-id="ss-total">SS total</h2>
-<p><span class="math inline">\({DF_{total}} = N-1\)</span></p>
-<p><span class="math inline">\({SS}_{{total}} = s_{grand}^2(N-1)\)</span></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">length</span>(total)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>DF_total <span class="ot">&lt;-</span> N <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>SS_total <span class="ot">&lt;-</span> MS_total <span class="sc">*</span> DF_total; SS_total</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 55.5217</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((total <span class="sc">-</span> <span class="fu">mean</span>(total))<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 55.5217</code></pre>
-</div>
-</div>
-</section>
-<section id="ss-total-visual" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="ss-total-visual">SS total visual</h2>
+<section id="total-variance-ss-total---visual" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="total-variance-ss-total---visual">Total variance (SS total) - visual</h2>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="anova_repeated_one-way_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
-<section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section"></h2>
-<div class="cell">
-<div class="cell-output-display">
-<p><img src="anova_repeated_one-way_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
 <section id="ms-within" class="level2">
 <h2 class="anchored" data-anchor-id="ms-within">MS within</h2>
-<p><span class="math inline">\({MS}_{within} = \frac{{SS}_{{within}}}{{DF}_{{within}}} \\ {DF}_{within} = (n_i-1)n\)</span></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>n.i <span class="ot">&lt;-</span> <span class="dv">3</span>  <span class="co"># Number of mesurements per individual (none, some, much)</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>n   <span class="ot">&lt;-</span> <span class="dv">20</span> <span class="co"># Number of mesurements per group</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>DF_within <span class="ot">&lt;-</span> (n.i <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> n</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>DF_within</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 40</code></pre>
-</div>
-</div>
+<p><span class="math inline">\({MS}_{within} = \frac{{SS}_{{within}}}{{DF}_{{within}}}\)</span></p>
+<p><span class="math inline">\({DF}_{within} = (n_i-1)n\)</span></p>
 </section>
-<section id="ss-within" class="level2">
-<h2 class="anchored" data-anchor-id="ss-within">SS within</h2>
+<section id="within-subject-variance-ss-within" class="level2">
+<h2 class="anchored" data-anchor-id="within-subject-variance-ss-within">Within subject variance (SS within)</h2>
 <p><span class="math inline">\({SS}_{{within}} = \sum{s_i^2(n_i-1)}\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>var_pp <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">cbind</span>(none_alc, some_alc, much_alc),<span class="dv">1</span>,var)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>ss_pp  <span class="ot">&lt;-</span> var_pp <span class="sc">*</span> (n.i <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>SS_within <span class="ot">&lt;-</span> <span class="fu">sum</span>(ss_pp); SS_within</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 48.45032</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>mean_pp <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">cbind</span>(none_alc, some_alc, much_alc),<span class="dv">1</span>,mean)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">c</span>((none_alc <span class="sc">-</span> mean_pp)<span class="sc">^</span><span class="dv">2</span>, </span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>      (some_alc <span class="sc">-</span> mean_pp)<span class="sc">^</span><span class="dv">2</span>,</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>      (much_alc <span class="sc">-</span> mean_pp)<span class="sc">^</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 48.45032</code></pre>
+<pre><code>[1] 11.54771</code></pre>
 </div>
 </div>
 </section>
-<section id="ss-within-data" class="level2">
-<h2 class="anchored" data-anchor-id="ss-within-data">SS within data</h2>
+<section id="within-subject-variance-ss-within---visual" class="level2">
+<h2 class="anchored" data-anchor-id="within-subject-variance-ss-within---visual">Within subject variance (SS within) - visual</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="anova_repeated_one-way_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="within-subject-variance-ss-within---data" class="level2">
+<h2 class="anchored" data-anchor-id="within-subject-variance-ss-within---data">Within subject variance (SS within) - data</h2>
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-8256004a9dff292a0ed2" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-8256004a9dff292a0ed2">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[4.426,4.227,5.278,4.632,5.288,5.025,4.496,5.359,4.492,3.587,5.548,4.759,5.359,4.421,4.229,5.53,4.289,3.43,5.017,5.228],[4.106,5.469,5.557,5.323,5.148,5.158,5.829,6.121,5.264,4.047,4.89,5.23,6.229,4.93,5.432,5.31,4.711,5.057,5.139,6.132],[7.043,5.901,7.045,6.208,6.853,6.492,6.972,6.38,6.12,6.84,6.334,6.624,5.849,6.564,6.382,7.14,6.527,7.101,7.137,7.155],[5.192,5.199,5.96,5.388,5.763,5.558,5.766,5.953,5.292,4.825,5.591,5.538,5.812,5.305,5.348,5.993,5.176,5.196,5.764,6.172],[5.192,1.51,1.805,1.248,1.792,1.316,3.071,0.5629999999999999,1.326,6.198,1.045,1.881,0.38,2.507,2.328,1.996,2.828,6.767,2.834,1.859]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>none_alc<\/th>\n      <th>some_alc<\/th>\n      <th>much_alc<\/th>\n      <th>mean_pp<\/th>\n      <th>ss_pp<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5]},{"name":"pp","targets":0},{"name":"none_alc","targets":1},{"name":"some_alc","targets":2},{"name":"much_alc","targets":3},{"name":"mean_pp","targets":4},{"name":"ss_pp","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
-</div>
-</div>
-</section>
-<section id="ss-within-visual" class="level2">
-<h2 class="anchored" data-anchor-id="ss-within-visual">SS within visual</h2>
-<div class="cell">
-<div class="cell-output-display">
-<p><img src="anova_repeated_one-way_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-6e722dbe8524d5d71130" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-6e722dbe8524d5d71130">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5],[4.426,4.227,5.278,4.632,5.288],[4.106,5.469,5.557,5.323,5.148],[7.043,5.901,7.045,6.208,6.853],[5.192,5.199,5.96,5.388,5.763],[5.192,1.51,1.805,1.248,1.792]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>none_alc<\/th>\n      <th>some_alc<\/th>\n      <th>much_alc<\/th>\n      <th>mean_pp<\/th>\n      <th>ss_pp<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5]},{"name":"pp","targets":0},{"name":"none_alc","targets":1},{"name":"some_alc","targets":2},{"name":"much_alc","targets":3},{"name":"mean_pp","targets":4},{"name":"ss_pp","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
 <section id="ms-between" class="level2">
 <h2 class="anchored" data-anchor-id="ms-between">MS between</h2>
-<p><span class="math inline">\({MS}_{between} = \frac{{SS}_{{between}}}{{DF}_{{between}}}\)</span></p>
-<p><span class="math inline">\({DF}_{between}-{DF}_{{within}} \\ {SS}_{between} = {SS}_{total} - {SS}_{within}\)</span></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>SS_between <span class="ot">&lt;-</span> SS_total <span class="sc">-</span> SS_within</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>SS_between</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 7.071382</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>DF_between <span class="ot">&lt;-</span> DF_total <span class="sc">-</span> DF_within</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>DF_between</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 19</code></pre>
-</div>
-</div>
 </section>
 <section id="ms-model" class="level2">
 <h2 class="anchored" data-anchor-id="ms-model">MS model</h2>
-<p><span class="math inline">\({MS}_{model} = \frac{{SS}_{{model}}}{{DF}_{{model}}} \\ {DF}_{model} = k-1\)</span></p>
+<p><span class="math inline">\({MS}_{model} = \frac{{SS}_{{model}}}{{DF}_{{model}}}\)</span></p>
+<p><span class="math inline">\({DF}_{model} = k-1\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>DF_model <span class="ot">&lt;-</span> k <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>DF_model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>DF_model <span class="ot">&lt;-</span> k <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>DF_model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2</code></pre>
 </div>
@@ -380,67 +321,79 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="ss-model">SS model</h2>
 <p><span class="math inline">\({SS}_{model} = \sum{n_k(\bar{X}_k-\bar{X})^2}\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># SS model</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>n_k1 <span class="ot">&lt;-</span> <span class="fu">length</span>(none_alc)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>n_k2 <span class="ot">&lt;-</span> <span class="fu">length</span>(some_alc)</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>n_k3 <span class="ot">&lt;-</span> <span class="fu">length</span>(much_alc)</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate sums of squares for the model</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>SS_k1 <span class="ot">&lt;-</span> n_k1 <span class="sc">*</span> (<span class="fu">mean</span>(none_alc) <span class="sc">-</span> <span class="fu">mean</span>(total))<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>SS_k2 <span class="ot">&lt;-</span> n_k2 <span class="sc">*</span> (<span class="fu">mean</span>(some_alc) <span class="sc">-</span> <span class="fu">mean</span>(total))<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>SS_k3 <span class="ot">&lt;-</span> n_k3 <span class="sc">*</span> (<span class="fu">mean</span>(much_alc) <span class="sc">-</span> <span class="fu">mean</span>(total))<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>SS_model <span class="ot">&lt;-</span> <span class="fu">sum</span>(SS_k1, SS_k2, SS_k3)</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>SS_model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># SS model</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>n_k1 <span class="ot">&lt;-</span> <span class="fu">length</span>(none_alc)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>n_k2 <span class="ot">&lt;-</span> <span class="fu">length</span>(some_alc)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>n_k3 <span class="ot">&lt;-</span> <span class="fu">length</span>(much_alc)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate sums of squares for the model</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>SS_k1 <span class="ot">&lt;-</span> n_k1 <span class="sc">*</span> (<span class="fu">mean</span>(none_alc) <span class="sc">-</span> <span class="fu">mean</span>(total))<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>SS_k2 <span class="ot">&lt;-</span> n_k2 <span class="sc">*</span> (<span class="fu">mean</span>(some_alc) <span class="sc">-</span> <span class="fu">mean</span>(total))<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>SS_k3 <span class="ot">&lt;-</span> n_k3 <span class="sc">*</span> (<span class="fu">mean</span>(much_alc) <span class="sc">-</span> <span class="fu">mean</span>(total))<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>SS_model <span class="ot">&lt;-</span> <span class="fu">sum</span>(SS_k1, SS_k2, SS_k3)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>SS_model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 38.63266</code></pre>
+<pre><code>[1] 9.543261</code></pre>
 </div>
 </div>
 </section>
-<section id="ss-model-visual" class="level2">
-<h2 class="anchored" data-anchor-id="ss-model-visual">SS model visual</h2>
+<section id="alcohol-model-ss-visual" class="level2">
+<h2 class="anchored" data-anchor-id="alcohol-model-ss-visual">Alcohol model SS visual</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="anova_repeated_one-way_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="full-model-ss-visual" class="level2">
+<h2 class="anchored" data-anchor-id="full-model-ss-visual">Full model SS visual</h2>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="anova_repeated_one-way_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
-<section id="ms-error" class="level2">
-<h2 class="anchored" data-anchor-id="ms-error">MS error</h2>
-<p><span class="math inline">\(\frac{{SS}_{error}}{{DF}_{error}}\)</span></p>
-<p><span class="math inline">\({DF}_{error} = (n-1)(k-1)\)</span></p>
+<section id="full-model-error-ss-visual" class="level2">
+<h2 class="anchored" data-anchor-id="full-model-error-ss-visual">Full model error SS visual</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>DF_error <span class="ot">&lt;-</span> DF_within <span class="sc">-</span> DF_model</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>DF_error</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 38</code></pre>
+<div class="cell-output-display">
+<p><img src="anova_repeated_one-way_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
-<section id="ss-error" class="level2">
-<h2 class="anchored" data-anchor-id="ss-error">SS error</h2>
-<p><span class="math inline">\({SS}_{error} = {SS}_{within} - {SS}_{model}\)</span></p>
+<section id="we-use-full-model-error-to-compute-f-for-alcohol" class="level2">
+<h2 class="anchored" data-anchor-id="we-use-full-model-error-to-compute-f-for-alcohol">We use full model error to compute F for alcohol</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>SS_error <span class="ot">&lt;-</span> SS_within <span class="sc">-</span> SS_model</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>SS_error</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 9.817655</code></pre>
+<div class="cell-output-display">
+<p><img src="anova_repeated_one-way_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<!-- ## MS error -->
+<!-- $\frac{{SS}_{error}}{{DF}_{error}}$ -->
+<!-- ${DF}_{error} = (n-1)(k-1)$ -->
+<!-- ## SS error -->
+<!-- ${SS}_{error} = {SS}_{within} - {SS}_{model}$ -->
 </section>
 <section id="f-ratio" class="level2">
 <h2 class="anchored" data-anchor-id="f-ratio">F ratio</h2>
 <p><span class="math inline">\(F = \frac{{MS}_{{model}}}{{MS}_{{error}}}\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate mean squares</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>MS_model <span class="ot">&lt;-</span> SS_model <span class="sc">/</span> DF_model</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>MS_error <span class="ot">&lt;-</span> SS_error <span class="sc">/</span> DF_error</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate F statistic</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>fStat <span class="ot">&lt;-</span> MS_model <span class="sc">/</span> MS_error</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>fStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate mean squares</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>MS_model <span class="ot">&lt;-</span> SS_model <span class="sc">/</span> DF_model</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>MS_error <span class="ot">&lt;-</span> SS_error <span class="sc">/</span> DF_error</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>MS_model; MS_error</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 74.76537</code></pre>
+<pre><code>[1] 4.77163</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.250556</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate F statistic</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>fStat <span class="ot">&lt;-</span> MS_model <span class="sc">/</span> MS_error</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>fStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 19.04416</code></pre>
 </div>
 </div>
 </section>
@@ -448,7 +401,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="p-value">P-value</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="anova_repeated_one-way_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+<p><img src="anova_repeated_one-way_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -466,7 +419,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Unplanned comparisons</p>
 <ul>
 <li>Exploring all possible differences</li>
-<li>Adjust T value for inflated type 1 error</li>
+<li>Adjust p-value for inflated type 1 error</li>
 </ul>
 </section>
 <section id="effect-size" class="level2 smaller">

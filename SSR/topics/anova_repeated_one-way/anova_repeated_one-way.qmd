@@ -4,6 +4,7 @@
 rm(list=ls())
 if(!"DT" %in% installed.packages()) { install.packages("DT") }
 library("DT")
+source("../../plotFunctionsSSR.r")
 ```
 
 ## One-way repeated measures ANOVA {.section}
@@ -17,15 +18,15 @@ The one-way repeated measures ANOVA analyses the variance of the model while red
 
 ## Assumptions {.smaller}
 
-* Uni- or Multivariate
 * Continuous dependent variable
 * Normally distributed
-    * Shapiro-Wilk
     * Q-Q plots
+    * Shapiro-Wilk
+
 * Equality of variance of the within-group differences
     * Mauchly's test of Sphericity
     * See Field 14.5, table 14.2, Jane Superbrain boxes 14.2 and 14.3
-    * Always met when having only 2 groups
+    * Always met when having only 2 levels
 
 
 ## Formulas {.smaller .subsection}
@@ -51,18 +52,30 @@ Measure driving ability in a driving simulator. Test in three consecutive condit
 ## The data {.smaller}
 
 ```{r, echo=FALSE}
-data <- read.csv("RM_ANOVA_Alcohol.csv")
+nSample <- 5
+data <- read.csv("RM_ANOVA_Alcohol.csv")[1:nSample, ]
+longdata <- read.csv("RM_ANOVA_Alcohol_LONG.csv")
+longdata <- longdata[longdata$pp <= nSample, ]
+longdata <- longdata[order(longdata$pp), ]
 datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = FALSE, info = FALSE))
 ```
-## Data format in RM ANOVA: wide
+## Wide vs. long data formats
 
 <img src="Screenshot_LongWide.png" style="width:40%;"/>
 
 
+## General flow RM ANOVA
 
-## MS total
+- We look at total variance
+- We divide it:
+  - Within subject variance
+  - Between subject variance
 
-```{r, echo=TRUE}
+>How much of the within subject variance can we explain by looking at alcohol condition?
+
+<!-- ## MS total -->
+
+```{r, echo=FALSE}
 # Assign to individual variables
 none_alc <- data$none_alc
 some_alc <- data$some_alc
@@ -70,87 +83,57 @@ much_alc <- data$much_alc
 total    <- c(none_alc,some_alc,much_alc)
 ```
 
-${MS}_{total} = \frac{{SS}_{{total}}}{{DF}_{{total}}} = s_{grand}^2$
+<!-- ${MS}_{total} = \frac{{SS}_{{total}}}{{DF}_{{total}}} = s_{grand}^2$ -->
 
-```{r, echo=TRUE}
-MS_total <- var(total); MS_total
+```{r, echo=FALSE}
+MS_total <- var(total)#; MS_total
 ```
 
-## SS total
+<!-- ## Total variance (SS total) -->
 
-${DF_{total}} = N-1$
+<!-- ${DF_{total}} = N-1$ -->
 
-${SS}_{{total}} = s_{grand}^2(N-1)$
+<!-- ${SS}_{{total}} = s_{grand}^2(N-1)$ -->
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 N <- length(total)
 DF_total <- N - 1
-SS_total <- MS_total * DF_total; SS_total
+SS_total <- MS_total * DF_total#; SS_total
 
-sum((total - mean(total))^2)
+# sum((total - mean(total))^2)
 ```
 
-## SS total visual {.smaller}
+## Total variance (SS total) - visual {.smaller}
 
 ```{r, echo=FALSE}
-# Set offset
-offset = .2
-
-# Calculate n
-n = length(none_alc)
-
-# Create plot
-plot(none_alc,
-     xlab = 'participants',
-     ylab = 'Brokken',
-     xlim = c(.5,22),
-     ylim = c(3,7.5),
-     col='green')
-points((1:n)-offset, some_alc, col='red')
-points((1:n)+offset, much_alc,   col='blue')
-
-# Add the total mean
-lines(c((1-offset),(n+offset)),rep(mean(total),2),col='black',lwd=2)
-
-segments(1:n,        mean(total), 1:n,        none_alc)
-segments(1:n-offset, mean(total), 1:n-offset, some_alc)
-segments(1:n+offset, mean(total), 1:n+offset, much_alc)
-
-text(n+offset,mean(total),expression(bar(X)[grand]),pos=4)
-
-p <- recordPlot()
+input <- list()
+input$whatPred <- "Alcohol + ID"
+input$whatDisplay <- c("Segments", "Sums")
+    plotSumSquaresRM(longdata, input = input, sumSq = "Total", myMain = "",
+                   alcColors = palette.colors(n = 3, palette = "Okabe-Ito"),
+                   speedSymbols = c(21, 22, 23)) 
 ```
 
-##
-
-```{r, echo=FALSE}
-p
-
-# add grid
-segments(1:21-.5, 3, 1:21-.5, 7.5, col='grey')
-
-
-p <- recordPlot()
-```
 
 ## MS within
 
-${MS}_{within} = \frac{{SS}_{{within}}}{{DF}_{{within}}} \\
-{DF}_{within} = (n_i-1)n$
+${MS}_{within} = \frac{{SS}_{{within}}}{{DF}_{{within}}}$
 
-```{r, echo=TRUE}
-n.i <- 3  # Number of mesurements per individual (none, some, much)
-n   <- 20 # Number of mesurements per group
+${DF}_{within} = (n_i-1)n$
+
+```{r, echo=FALSE}
+n.i <- length(unique(longdata$alcohol))  # Number of mesurements per individual (none, some, much)
+n   <- length(unique(longdata$pp)) # Number of mesurements per group
 
 DF_within <- (n.i - 1) * n
-DF_within
+# DF_within
 ```
 
-## SS within
+## Within subject variance (SS within)
 
 ${SS}_{{within}} = \sum{s_i^2(n_i-1)}$
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 var_pp <- apply(cbind(none_alc, some_alc, much_alc),1,var)
 ss_pp  <- var_pp * (n.i - 1)
 
@@ -158,12 +141,24 @@ SS_within <- sum(ss_pp); SS_within
 
 mean_pp <- apply(cbind(none_alc, some_alc, much_alc),1,mean)
 
-sum(c((none_alc - mean_pp)^2, 
-      (some_alc - mean_pp)^2,
-      (much_alc - mean_pp)^2))
+# sum(c((none_alc - mean_pp)^2, 
+#       (some_alc - mean_pp)^2,
+#       (much_alc - mean_pp)^2))
 ```
 
-## SS within data
+## Within subject variance (SS within) - visual
+
+```{r, echo=FALSE}
+input <- list()
+input$whatPred <- "ID"
+input$whatDisplay <- c("Segments", "Sums")
+    plotSumSquaresRM(longdata, input = input, sumSq = "Error", myMain = "Full Model SS Error",
+                   alcColors = palette.colors(n = 3, palette = "Okabe-Ito"),
+                   speedSymbols = c(21, 22, 23)) 
+```
+
+
+## Within subject variance (SS within) - data
 
 ```{r, echo=FALSE}
 data$mean_pp <- round(mean_pp,3)
@@ -171,42 +166,26 @@ data$ss_pp <- round(ss_pp, 3)
 datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
 ```
 
-## SS within visual
 
-```{r, echo=FALSE}
-p
-# Personal means
-segments(1:n-offset, mean_pp, 1:n+offset, mean_pp, col='orange', lwd=3)
-# The lines show the within deviation from the personal mean.
-segments(1:n-offset, mean_pp, 1:n-offset, some_alc, col='orange', lwd=3)
-segments(1:n, mean_pp,        1:n,        none_alc,   col='orange', lwd=3)
-segments(1:n+offset, mean_pp, 1:n+offset, much_alc,   col='orange', lwd=3)
 
-# Add personal means symbols
-for(i in 1:n) { text(i-(offset/2), mean_pp[i], expression(bar(X)[i]), pos=2, cex=.5)}
 
-p <- recordPlot()
-```
+
 
 ## MS between
 
-${MS}_{between} = \frac{{SS}_{{between}}}{{DF}_{{between}}}$
-
-${DF}_{between}-{DF}_{{within}} \\
-{SS}_{between} = {SS}_{total} - {SS}_{within}$
-
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 SS_between <- SS_total - SS_within
-SS_between
+# SS_between
 
 DF_between <- DF_total - DF_within
-DF_between
+# DF_between
 ```
 
 ## MS model
 
-${MS}_{model} = \frac{{SS}_{{model}}}{{DF}_{{model}}} \\
-{DF}_{model} = k-1$
+${MS}_{model} = \frac{{SS}_{{model}}}{{DF}_{{model}}}$
+
+${DF}_{model} = k-1$
 
 ```{r, echo=TRUE}
 k <- 3
@@ -233,49 +212,72 @@ SS_model <- sum(SS_k1, SS_k2, SS_k3)
 SS_model
 ```
 
-## SS model visual
+
+## Alcohol model SS visual
 
 ```{r, eval=TRUE,echo=FALSE}
-p
-# Add the no alcohol mean
-lines(c((1),(n)),rep(mean(none_alc),2),col='green',lwd=2)
-text(n+offset,mean(none_alc),expression(bar(X)[none]),pos=4)
-
-# With the bit alcohol mean
-lines(c((1-offset),(n-offset)),rep(mean(some_alc),2),col='red',lwd=2)
-text(n+offset,mean(some_alc),expression(bar(X)[some]),pos=4)
-
-# With the much alcohol mean
-lines(c((1+offset),(n+offset)),rep(mean(much_alc),2),col='blue',lwd=2)
-text(n+offset,mean(much_alc),expression(bar(X)[much]),pos=4)
-
-# The lines show the model deviation from the total mean.
-segments(1:n,        mean(total), 1:n,        mean(none_alc),   col='green')
-segments(1:n-offset, mean(total), 1:n-offset, mean(some_alc), col='red')
-segments(1:n+offset, mean(total), 1:n+offset, mean(much_alc),   col='blue')
-
-p <- recordPlot()
+input <- list()
+input$whatPred <- "Alcohol"
+input$whatDisplay <- c("Segments", "Sums")
+    plotSumSquaresRM(longdata, input = input, sumSq = "Model", myMain = "Full Model SS Error",
+                   alcColors = palette.colors(n = 3, palette = "Okabe-Ito"),
+                   speedSymbols = c(21, 22, 23)) 
 ```
 
-## MS error
 
-$\frac{{SS}_{error}}{{DF}_{error}}$
+## Full model SS visual
 
-${DF}_{error} = (n-1)(k-1)$
+```{r, eval=TRUE,echo=FALSE}
+input <- list()
+input$whatPred <- "Alcohol + ID"
+input$whatDisplay <- c("Segments", "Sums")
+    plotSumSquaresRM(longdata, input = input, sumSq = "Model", myMain = "Full Model SS Error",
+                   alcColors = palette.colors(n = 3, palette = "Okabe-Ito"),
+                   speedSymbols = c(21, 22, 23)) 
+```
 
-```{r, echo=TRUE}
+## Full model error SS visual
+
+```{r, eval=TRUE,echo=FALSE}
+input <- list()
+input$whatPred <- "Alcohol + ID"
+input$whatDisplay <- c("Segments", "Sums")
+    plotSumSquaresRM(longdata, input = input, sumSq = "Error", myMain = "Full Model SS Error",
+                   alcColors = palette.colors(n = 3, palette = "Okabe-Ito"),
+                   speedSymbols = c(21, 22, 23)) 
+```
+
+## We use full model error to compute F for alcohol
+
+```{r, eval=TRUE,echo=FALSE}
+input <- list()
+input$whatPred <- "Alcohol"
+input$whatDisplay <- c("Segments", "Sums", "F-stat")
+    plotSumSquaresRM(longdata, input = input, sumSq = "Model", myMain = "Full Model SS Error",
+                   alcColors = palette.colors(n = 3, palette = "Okabe-Ito"),
+                   speedSymbols = c(21, 22, 23)) 
+```
+
+
+<!-- ## MS error -->
+
+<!-- $\frac{{SS}_{error}}{{DF}_{error}}$ -->
+
+<!-- ${DF}_{error} = (n-1)(k-1)$ -->
+
+```{r, echo=FALSE}
 DF_error <- DF_within - DF_model
-DF_error
+# DF_error
 ```
 
 
-## SS error
+<!-- ## SS error -->
 
-${SS}_{error} = {SS}_{within} - {SS}_{model}$
+<!-- ${SS}_{error} = {SS}_{within} - {SS}_{model}$ -->
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 SS_error <- SS_within - SS_model
-SS_error
+# SS_error
 ```
 
 ## F ratio
@@ -286,17 +288,18 @@ $F = \frac{{MS}_{{model}}}{{MS}_{{error}}}$
 # Calculate mean squares
 MS_model <- SS_model / DF_model
 MS_error <- SS_error / DF_error
-
+MS_model; MS_error
 # Calculate F statistic
 fStat <- MS_model / MS_error
 fStat
 ```
 
+
 ## P-value
 
 ```{r, echo=FALSE}
 # Set up the plot for the F-distribution
-curve(df(x, DF_model, DF_error), from = 0, to = 100, n = 1000, bty = "n", las = 1,
+curve(df(x, DF_model, DF_error), from = 0, to = 25, n = 1000, bty = "n", las = 1,
       xlab = "F-value", ylab = "Density", main = "F-distribution with P-value Region")
 
 # Shade the upper tail (p-value region) using polygon
@@ -326,19 +329,35 @@ Planned comparisons
 Unplanned comparisons
 
 * Exploring all possible differences
-* Adjust T value for inflated type 1 error
+* Adjust p-value for inflated type 1 error
 
-## Effect size {.smaller}
+<!-- ## Effect size in RM ANOVA {.smaller} -->
 
-General effect size measures
+<!-- General effect size measure: Partial omega squared $\omega_p^2$ -->
 
-* Amount of explained variance $R^2$ also called eta squared $\eta^2$.
-    * When going for explained variance, partial eta squared ($\eta_p^2$) is recommended instead of $\eta^2$
-* Omega squared $\omega^2$
-* [Great overview of $\eta^2$ vs $\omega^2$](https://lbecker.uccs.edu/glm_effectsize)
+<!-- How to interpret?  -->
 
-Effect sizes of contrasts or post-hoc comparisons
+<!-- | $\omega^2$ and $\omega_p^2$ | Magnitude of Effect | Interpretation | -->
+<!-- |---------------------|--------------------|----------------| -->
+<!-- | 0.00–0.009          | Very small         | Trivial practical importance | -->
+<!-- | 0.01–0.05           | Small              | Small but meaningful variance explained | -->
+<!-- | 0.06–0.13           | Medium             | Moderate variance explained | -->
+<!-- | ≥ 0.14              | Large              | Substantial variance explained | -->
 
-* Cohen's $r$ gives the effect size for a specific comparison
-    * $r_{Contrast} = \sqrt{\frac{t^2}{t^2+{df}}}$
-    * $r_{Contrast} = \sqrt{\frac{F(1,{df}_R)}{F(1,{df}_R)+{df}_R}}$
+<!-- ## Effect size in follow-up tests {.smaller} -->
+
+<!-- Effect sizes of contrasts or post-hoc comparisons: Cohen's $d$  -->
+
+<!-- How to interpret?  -->
+
+<!-- | Cohen’s *d* | Magnitude of Effect | Interpretation | -->
+<!-- |--------------|--------------------|----------------| -->
+<!-- | 0.00–0.19    | Very small         | Likely negligible in most contexts | -->
+<!-- | 0.20–0.49    | Small              | Noticeable but modest difference | -->
+<!-- | 0.50–0.79    | Medium             | Moderate, practically meaningful difference | -->
+<!-- | ≥ 0.80       | Large              | Substantial, easily noticeable difference | -->
+    
+    
+## JASP
+
+![](../../images/JASP_logo_green.svg){width="300px"}
