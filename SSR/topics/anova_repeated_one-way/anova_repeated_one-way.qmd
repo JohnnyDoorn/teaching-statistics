@@ -171,7 +171,7 @@ datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 41
 
 
 
-## MS between
+<!-- ## MS between -->
 
 ```{r, echo=FALSE}
 SS_between <- SS_total - SS_within
@@ -187,10 +187,10 @@ ${MS}_{model} = \frac{{SS}_{{model}}}{{DF}_{{model}}}$
 
 ${DF}_{model} = k-1$
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 k <- 3
 DF_model <- k - 1
-DF_model
+# DF_model
 ```
 
 ## SS model

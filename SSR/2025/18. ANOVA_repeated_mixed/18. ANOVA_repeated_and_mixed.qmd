@@ -15,6 +15,7 @@ css: ../../ajohnson.css
 <div class="goals">
 In this lecture we aim to:
 
+- Refresh some concepts from previous lectures
 - Introduce RM ANOVA
 - Introduce Mixed ANOVA
 - Show these in JASP
@@ -23,6 +24,71 @@ In this lecture we aim to:
 Chapter 14
 </div>
 
+# What have we learned so far?
+
+- Explaining variance...
+- Partitioning explained variance
+- For each predictor, what is its model sum of squares?
+  - Divide by the error sum of squares of the full model (with all predictors) $\rightarrow$ F-ratio
+  
+## Having multiple predictors - interaction
+
+- Interaction effects
+  - For example [Labocat Leni 13](https://discoverjasp.com/repository/dsj1_leni/leni_13)
+
+![](../../images/labcoat-leni-13.png){width="400px"}
+
+---
+
+
+### Having multiple predictors - interaction
+
+Assess with:
+
+- Descriptives plots
+- Conditional post hoc tests
+- Simple main effects
+
+## Having multiple predictors - dependence
+
+- Check independence: dependence = explaining the same variance
+
+- For example [seeing if stress levels differ between two types of therapy](https://johnnydoorn.github.io/teaching-statistics/datasets/2025/dependenceANCOVA.html)
+  
+  
+![](../../images/ancova-dependence-stress.png){width="400px"}
+
+---
+
+### Having multiple predictors - dependence
+
+Avoid by:
+
+- Experimental manipulation
+- Randomization
+- Matching
+
+Assess with:
+
+- ANOVA (if categorical + continuous)
+- Correlation (if continuous + continuous) $\rightarrow$ block 3
+- Chi-squared (if categorical + categorical) $\rightarrow$ block 3
+
+
+## Contrasts
+
+Contrast 1: compare no alcohol to alcohol
+
+Contrast 2: compare two alcohol conditions
+
+![](../../images/factorial-anova-custom-contrasts.png){width="400px"}
+
+
+## Assumptions
+
+- Know which ones are relevant
+- Know how to assess them
+- How to apply corrections in JASP (for unequal variances, sphericity)
 
 ```{r child="../../topics/ANOVA_repeated_one-way/ANOVA_repeated_one-way.qmd"}
 ```

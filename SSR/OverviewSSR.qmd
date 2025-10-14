@@ -70,11 +70,17 @@ knitr::kable(dplyr::arrange(linkList), escape = FALSE, format = "html"  ) %>%
 files <- list.files(full.names = FALSE, pattern = "\\jasp", recursive = FALSE, 
                     path = "../datasets/2025")
 
+
 files <- files[order(as.numeric(gsub("\\..*", "", files)))]
 files <- files[files!= "OverviewSSR.qmd"]
+resultFiles <- files[grepl("-result", files)]
+files <- files[!grepl("-result", files)]
+
 htmlFiles <- gsub(x =files, pattern = ".jasp", replacement = ".html")
 
 htmlFound <- list.files(full.names = FALSE, pattern = "\\html", recursive = FALSE, 
+                    path = "../datasets/2025")
+jaspResultsFound <- list.files(full.names = FALSE, pattern = "result.jasp", recursive = FALSE, 
                     path = "../datasets/2025")
 csvFound  <- list.files(full.names = FALSE, pattern = "\\csv", recursive = FALSE, 
                     path = "../datasets/2025")
@@ -84,6 +90,10 @@ htmlLinks[!(htmlFiles %in% htmlFound)] <- "-"
 
 jaspLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistics/datasets/2025/%s" target="_blank" 
                      class="external">link</a>',files) 
+jaspResultsLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistics/datasets/2025/%s" target="_blank" 
+                     class="external">link</a>',resultFiles) 
+# jaspResultsLinks[!(resultFiles %in% jaspResultsFound)] <- "-"
+
 titles <- gsub(htmlFiles, pattern = ".html", replacement = "")
 
 csvFiles <- gsub(x =files, pattern = ".jasp", replacement = ".csv")

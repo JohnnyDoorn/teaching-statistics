@@ -430,6 +430,7 @@ Johnny van Doorn
 <div class="goals">
 <p>In this lecture we aim to:</p>
 <ul>
+<li>Refresh some concepts from previous lectures</li>
 <li>Introduce RM ANOVA</li>
 <li>Introduce Mixed ANOVA</li>
 <li>Show these in JASP</li>
@@ -437,6 +438,76 @@ Johnny van Doorn
 <p><strong>Reading:</strong> Chapter 14</p>
 </div>
 </section>
+<section>
+<section id="what-have-we-learned-so-far" class="title-slide slide level1 center">
+<h1>What have we learned so far?</h1>
+<ul>
+<li>Explaining variance…</li>
+<li>Partitioning explained variance</li>
+<li>For each predictor, what is its model sum of squares?
+<ul>
+<li>Divide by the error sum of squares of the full model (with all predictors) <span class="math inline">\(\rightarrow\)</span> F-ratio</li>
+</ul></li>
+</ul>
+</section>
+<section id="having-multiple-predictors---interaction" class="slide level2">
+<h2>Having multiple predictors - interaction</h2>
+<ul>
+<li>Interaction effects
+<ul>
+<li>For example <a href="https://discoverjasp.com/repository/dsj1_leni/leni_13">Labocat Leni 13</a></li>
+</ul></li>
+</ul>
+
+<img data-src="../../images/labcoat-leni-13.png" width="400" class="r-stretch"></section>
+<section class="slide level2">
+
+<h3 id="having-multiple-predictors---interaction-1">Having multiple predictors - interaction</h3>
+<p>Assess with:</p>
+<ul>
+<li>Descriptives plots</li>
+<li>Conditional post hoc tests</li>
+<li>Simple main effects</li>
+</ul>
+</section>
+<section id="having-multiple-predictors---dependence" class="slide level2">
+<h2>Having multiple predictors - dependence</h2>
+<ul>
+<li><p>Check independence: dependence = explaining the same variance</p></li>
+<li><p>For example <a href="https://johnnydoorn.github.io/teaching-statistics/datasets/2025/dependenceANCOVA.html">seeing if stress levels differ between two types of therapy</a></p></li>
+</ul>
+
+<img data-src="../../images/ancova-dependence-stress.png" width="400" class="r-stretch"></section>
+<section class="slide level2">
+
+<h3 id="having-multiple-predictors---dependence-1">Having multiple predictors - dependence</h3>
+<p>Avoid by:</p>
+<ul>
+<li>Experimental manipulation</li>
+<li>Randomization</li>
+<li>Matching</li>
+</ul>
+<p>Assess with:</p>
+<ul>
+<li>ANOVA (if categorical + continuous)</li>
+<li>Correlation (if continuous + continuous) <span class="math inline">\(\rightarrow\)</span> block 3</li>
+<li>Chi-squared (if categorical + categorical) <span class="math inline">\(\rightarrow\)</span> block 3</li>
+</ul>
+</section>
+<section id="contrasts" class="slide level2">
+<h2>Contrasts</h2>
+<p>Contrast 1: compare no alcohol to alcohol</p>
+<p>Contrast 2: compare two alcohol conditions</p>
+
+<img data-src="../../images/factorial-anova-custom-contrasts.png" width="400" class="r-stretch"></section>
+<section id="assumptions" class="slide level2">
+<h2>Assumptions</h2>
+<ul>
+<li>Know which ones are relevant</li>
+<li>Know how to assess them</li>
+<li>How to apply corrections in JASP (for unequal variances, sphericity)</li>
+</ul>
+</section></section>
 <section>
 <section id="anova-one-way-repeated" class="title-slide slide level1 center">
 <h1>ANOVA<br>One-way repeated</h1>
@@ -454,7 +525,7 @@ Johnny van Doorn
 <li>All with same subjects</li>
 </ul>
 </section>
-<section id="assumptions" class="slide level2 smaller">
+<section id="assumptions-1" class="slide level2 smaller">
 <h2>Assumptions</h2>
 <ul>
 <li>Continuous dependent variable</li>
@@ -544,8 +615,8 @@ Johnny van Doorn
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-b84d19d1a511aeee81e1" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-b84d19d1a511aeee81e1">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5],[4.426,4.227,5.278,4.632,5.288],[4.106,5.469,5.557,5.323,5.148],[7.043,5.901,7.045,6.208,6.853]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>none_alc<\/th>\n      <th>some_alc<\/th>\n      <th>much_alc<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]},{"name":"pp","targets":0},{"name":"none_alc","targets":1},{"name":"some_alc","targets":2},{"name":"much_alc","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-973ea2fe07bf4c3a534e" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-973ea2fe07bf4c3a534e">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5],[4.426,4.227,5.278,4.632,5.288],[4.106,5.469,5.557,5.323,5.148],[7.043,5.901,7.045,6.208,6.853]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>none_alc<\/th>\n      <th>some_alc<\/th>\n      <th>much_alc<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]},{"name":"pp","targets":0},{"name":"none_alc","targets":1},{"name":"some_alc","targets":2},{"name":"much_alc","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -599,43 +670,33 @@ Johnny van Doorn
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-762424890092d8cd135e" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-762424890092d8cd135e">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5],[4.426,4.227,5.278,4.632,5.288],[4.106,5.469,5.557,5.323,5.148],[7.043,5.901,7.045,6.208,6.853],[5.192,5.199,5.96,5.388,5.763],[5.192,1.51,1.805,1.248,1.792]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>none_alc<\/th>\n      <th>some_alc<\/th>\n      <th>much_alc<\/th>\n      <th>mean_pp<\/th>\n      <th>ss_pp<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5]},{"name":"pp","targets":0},{"name":"none_alc","targets":1},{"name":"some_alc","targets":2},{"name":"much_alc","targets":3},{"name":"mean_pp","targets":4},{"name":"ss_pp","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-886dae3f21982ae74089" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-886dae3f21982ae74089">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5],[4.426,4.227,5.278,4.632,5.288],[4.106,5.469,5.557,5.323,5.148],[7.043,5.901,7.045,6.208,6.853],[5.192,5.199,5.96,5.388,5.763],[5.192,1.51,1.805,1.248,1.792]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>none_alc<\/th>\n      <th>some_alc<\/th>\n      <th>much_alc<\/th>\n      <th>mean_pp<\/th>\n      <th>ss_pp<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5]},{"name":"pp","targets":0},{"name":"none_alc","targets":1},{"name":"some_alc","targets":2},{"name":"much_alc","targets":3},{"name":"mean_pp","targets":4},{"name":"ss_pp","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-</section>
-<section id="ms-between" class="slide level2">
-<h2>MS between</h2>
+<!-- ## MS between -->
 </section>
 <section id="ms-model" class="slide level2">
 <h2>MS model</h2>
 <p><span class="math inline">\({MS}_{model} = \frac{{SS}_{{model}}}{{DF}_{{model}}}\)</span></p>
 <p><span class="math inline">\({DF}_{model} = k-1\)</span></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>k <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>DF_model <span class="ot">&lt;-</span> k <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a>DF_model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
-</div>
-</div>
 </section>
 <section id="ss-model" class="slide level2">
 <h2>SS model</h2>
 <p><span class="math inline">\({SS}_{model} = \sum{n_k(\bar{X}_k-\bar{X})^2}\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># SS model</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>n_k1 <span class="ot">&lt;-</span> <span class="fu">length</span>(none_alc)</span>
-<span id="cb4-3"><a href="#cb4-3"></a>n_k2 <span class="ot">&lt;-</span> <span class="fu">length</span>(some_alc)</span>
-<span id="cb4-4"><a href="#cb4-4"></a>n_k3 <span class="ot">&lt;-</span> <span class="fu">length</span>(much_alc)</span>
-<span id="cb4-5"><a href="#cb4-5"></a></span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="co"># Calculate sums of squares for the model</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a>SS_k1 <span class="ot">&lt;-</span> n_k1 <span class="sc">*</span> (<span class="fu">mean</span>(none_alc) <span class="sc">-</span> <span class="fu">mean</span>(total))<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a>SS_k2 <span class="ot">&lt;-</span> n_k2 <span class="sc">*</span> (<span class="fu">mean</span>(some_alc) <span class="sc">-</span> <span class="fu">mean</span>(total))<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a>SS_k3 <span class="ot">&lt;-</span> n_k3 <span class="sc">*</span> (<span class="fu">mean</span>(much_alc) <span class="sc">-</span> <span class="fu">mean</span>(total))<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a></span>
-<span id="cb4-11"><a href="#cb4-11"></a>SS_model <span class="ot">&lt;-</span> <span class="fu">sum</span>(SS_k1, SS_k2, SS_k3)</span>
-<span id="cb4-12"><a href="#cb4-12"></a>SS_model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># SS model</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>n_k1 <span class="ot">&lt;-</span> <span class="fu">length</span>(none_alc)</span>
+<span id="cb2-3"><a href="#cb2-3"></a>n_k2 <span class="ot">&lt;-</span> <span class="fu">length</span>(some_alc)</span>
+<span id="cb2-4"><a href="#cb2-4"></a>n_k3 <span class="ot">&lt;-</span> <span class="fu">length</span>(much_alc)</span>
+<span id="cb2-5"><a href="#cb2-5"></a></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="co"># Calculate sums of squares for the model</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>SS_k1 <span class="ot">&lt;-</span> n_k1 <span class="sc">*</span> (<span class="fu">mean</span>(none_alc) <span class="sc">-</span> <span class="fu">mean</span>(total))<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>SS_k2 <span class="ot">&lt;-</span> n_k2 <span class="sc">*</span> (<span class="fu">mean</span>(some_alc) <span class="sc">-</span> <span class="fu">mean</span>(total))<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>SS_k3 <span class="ot">&lt;-</span> n_k3 <span class="sc">*</span> (<span class="fu">mean</span>(much_alc) <span class="sc">-</span> <span class="fu">mean</span>(total))<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a></span>
+<span id="cb2-11"><a href="#cb2-11"></a>SS_model <span class="ot">&lt;-</span> <span class="fu">sum</span>(SS_k1, SS_k2, SS_k3)</span>
+<span id="cb2-12"><a href="#cb2-12"></a>SS_model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 9.543261</code></pre>
 </div>
@@ -666,19 +727,19 @@ Johnny van Doorn
 <h2>F ratio</h2>
 <p><span class="math inline">\(F = \frac{{MS}_{{model}}}{{MS}_{{error}}}\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Calculate mean squares</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>MS_model <span class="ot">&lt;-</span> SS_model <span class="sc">/</span> DF_model</span>
-<span id="cb6-3"><a href="#cb6-3"></a>MS_error <span class="ot">&lt;-</span> SS_error <span class="sc">/</span> DF_error</span>
-<span id="cb6-4"><a href="#cb6-4"></a>MS_model; MS_error</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Calculate mean squares</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>MS_model <span class="ot">&lt;-</span> SS_model <span class="sc">/</span> DF_model</span>
+<span id="cb4-3"><a href="#cb4-3"></a>MS_error <span class="ot">&lt;-</span> SS_error <span class="sc">/</span> DF_error</span>
+<span id="cb4-4"><a href="#cb4-4"></a>MS_model; MS_error</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4.77163</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.250556</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Calculate F statistic</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>fStat <span class="ot">&lt;-</span> MS_model <span class="sc">/</span> MS_error</span>
-<span id="cb9-3"><a href="#cb9-3"></a>fStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Calculate F statistic</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>fStat <span class="ot">&lt;-</span> MS_model <span class="sc">/</span> MS_error</span>
+<span id="cb7-3"><a href="#cb7-3"></a>fStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 19.04416</code></pre>
 </div>
@@ -744,7 +805,7 @@ Johnny van Doorn
 <li>All with same subjects</li>
 </ul>
 </section>
-<section id="assumptions-1" class="slide level2">
+<section id="assumptions-2" class="slide level2">
 <h2>Assumptions</h2>
 <p>Same as one-way repeated measures ANOVA</p>
 </section>
@@ -909,8 +970,8 @@ Johnny van Doorn
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-92a60d5113df20b848b1" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-92a60d5113df20b848b1">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[1.59,2.18,3.23,2.18,1.36,2.18,2.91,4.26,2.96,1.67,2.88,1.24,1.94,3.29,2.77,2.79,2.03,1.33,1.34,1.1],[4.96,4.66,5.58,5.7,6.15,5.83,4.03,5.48,4.92,4.14,6.68,6.74,6.45,4.52,5.53,5.41,3.5,3.73,5.76,6.4],[6.72,5.84,7.01,6.02,8.359999999999999,7.07,6.55,6.34,5.6,4.96,7.08,6.3,7.68,5.46,4.38,8.4,7.34,5.23,7.95,8.18],[2.64,4.43,2.12,3,1.78,3.06,5.35,2.89,3.87,2.52,3.74,1.72,3.02,2.53,2.64,1.84,-0.06,2.23,1.54,5.05],[3.74,4.73,7.12,6.66,5.57,5.91,4.93,6.74,5.12,3.64,4.27,6.03,6.44,5.82,5.84,6.16,6.01,5.09,6.28,6.16],[5.93,7.25,7.43,6.32,8.1,6.51,7.22,8.74,6.8,5.98,6.66,7.94,9.220000000000001,6.44,7.82,7.93,8.19,7.84,7.6,7.19],[4.68,3.21,4.98,4.72,5.03,2.61,6.06,2.87,3.01,5.37,3.97,3.99,4.76,4.48,5.87,5.04,5.57,5.73,4.65,5.97],[6.93,3.78,6.66,4.52,5.71,6.09,6.27,7.01,6.06,6.01,5.07,6.36,3.67,5.73,3.74,6.82,4.54,6.33,5.64,7.66],[9.51,10.71,9.49,9.380000000000001,9.83,10.78,8.59,9.26,9.289999999999999,9.140000000000001,9.960000000000001,9.52,9.119999999999999,9.48,9.539999999999999,9.56,9.48,9.24,11.12,7.83]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>none_alc_none_speed<\/th>\n      <th>none_alc_some_speed<\/th>\n      <th>none_alc_much_speed<\/th>\n      <th>some_alc_none_speed<\/th>\n      <th>some_alc_some_speed<\/th>\n      <th>some_alc_much_speed<\/th>\n      <th>much_alc_none_speed<\/th>\n      <th>much_alc_some_speed<\/th>\n      <th>much_alc_much_speed<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5,6,7,8,9]},{"name":"pp","targets":0},{"name":"none_alc_none_speed","targets":1},{"name":"none_alc_some_speed","targets":2},{"name":"none_alc_much_speed","targets":3},{"name":"some_alc_none_speed","targets":4},{"name":"some_alc_some_speed","targets":5},{"name":"some_alc_much_speed","targets":6},{"name":"much_alc_none_speed","targets":7},{"name":"much_alc_some_speed","targets":8},{"name":"much_alc_much_speed","targets":9}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-a924b8cc7bf1117a4ec9" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-a924b8cc7bf1117a4ec9">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[1.59,2.18,3.23,2.18,1.36,2.18,2.91,4.26,2.96,1.67,2.88,1.24,1.94,3.29,2.77,2.79,2.03,1.33,1.34,1.1],[4.96,4.66,5.58,5.7,6.15,5.83,4.03,5.48,4.92,4.14,6.68,6.74,6.45,4.52,5.53,5.41,3.5,3.73,5.76,6.4],[6.72,5.84,7.01,6.02,8.359999999999999,7.07,6.55,6.34,5.6,4.96,7.08,6.3,7.68,5.46,4.38,8.4,7.34,5.23,7.95,8.18],[2.64,4.43,2.12,3,1.78,3.06,5.35,2.89,3.87,2.52,3.74,1.72,3.02,2.53,2.64,1.84,-0.06,2.23,1.54,5.05],[3.74,4.73,7.12,6.66,5.57,5.91,4.93,6.74,5.12,3.64,4.27,6.03,6.44,5.82,5.84,6.16,6.01,5.09,6.28,6.16],[5.93,7.25,7.43,6.32,8.1,6.51,7.22,8.74,6.8,5.98,6.66,7.94,9.220000000000001,6.44,7.82,7.93,8.19,7.84,7.6,7.19],[4.68,3.21,4.98,4.72,5.03,2.61,6.06,2.87,3.01,5.37,3.97,3.99,4.76,4.48,5.87,5.04,5.57,5.73,4.65,5.97],[6.93,3.78,6.66,4.52,5.71,6.09,6.27,7.01,6.06,6.01,5.07,6.36,3.67,5.73,3.74,6.82,4.54,6.33,5.64,7.66],[9.51,10.71,9.49,9.380000000000001,9.83,10.78,8.59,9.26,9.289999999999999,9.140000000000001,9.960000000000001,9.52,9.119999999999999,9.48,9.539999999999999,9.56,9.48,9.24,11.12,7.83]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>none_alc_none_speed<\/th>\n      <th>none_alc_some_speed<\/th>\n      <th>none_alc_much_speed<\/th>\n      <th>some_alc_none_speed<\/th>\n      <th>some_alc_some_speed<\/th>\n      <th>some_alc_much_speed<\/th>\n      <th>much_alc_none_speed<\/th>\n      <th>much_alc_some_speed<\/th>\n      <th>much_alc_much_speed<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5,6,7,8,9]},{"name":"pp","targets":0},{"name":"none_alc_none_speed","targets":1},{"name":"none_alc_some_speed","targets":2},{"name":"none_alc_much_speed","targets":3},{"name":"some_alc_none_speed","targets":4},{"name":"some_alc_some_speed","targets":5},{"name":"some_alc_much_speed","targets":6},{"name":"much_alc_none_speed","targets":7},{"name":"much_alc_some_speed","targets":8},{"name":"much_alc_much_speed","targets":9}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section></section>
@@ -934,7 +995,7 @@ Johnny van Doorn
 </ul></li>
 </ul>
 </section>
-<section id="assumptions-2" class="slide level2">
+<section id="assumptions-3" class="slide level2">
 <h2>Assumptions</h2>
 <p>Same as repeated measures ANOVA and same as factorial ANOVA.</p>
 </section>
@@ -972,8 +1033,8 @@ Johnny van Doorn
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-3c272d788be965804d9e" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-3c272d788be965804d9e">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2],[1.59,2.18,3.23,2.18,1.36,2.18,2.91,4.26,2.96,1.67,2.88,1.24,1.94,3.29,2.77,2.79,2.03,1.33,1.34,1.1],[4.96,4.66,5.58,5.7,6.15,5.83,4.03,5.48,4.92,4.14,6.68,6.74,6.45,4.52,5.53,5.41,3.5,3.73,5.76,6.4],[6.72,5.84,7.01,6.02,8.359999999999999,7.07,6.55,6.34,5.6,4.96,7.08,6.3,7.68,5.46,4.38,8.4,7.34,5.23,7.95,8.18],[2.64,4.43,2.12,3,1.78,3.06,5.35,2.89,3.87,2.52,3.74,1.72,3.02,2.53,2.64,1.84,-0.06,2.23,1.54,5.05],[3.74,4.73,7.12,6.66,5.57,5.91,4.93,6.74,5.12,3.64,4.27,6.03,6.44,5.82,5.84,6.16,6.01,5.09,6.28,6.16],[5.93,7.25,7.43,6.32,8.1,6.51,7.22,8.74,6.8,5.98,6.66,7.94,9.220000000000001,6.44,7.82,7.93,8.19,7.84,7.6,7.19],[4.68,3.21,4.98,4.72,5.03,2.61,6.06,2.87,3.01,5.37,3.97,3.99,4.76,4.48,5.87,5.04,5.57,5.73,4.65,5.97],[6.93,3.78,6.66,4.52,5.71,6.09,6.27,7.01,6.06,6.01,5.07,6.36,3.67,5.73,3.74,6.82,4.54,6.33,5.64,7.66],[9.51,10.71,9.49,9.380000000000001,9.83,10.78,8.59,9.26,9.289999999999999,9.140000000000001,9.960000000000001,9.52,9.119999999999999,9.48,9.539999999999999,9.56,9.48,9.24,11.12,7.83]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>Daytime<\/th>\n      <th>none_alc_none_speed<\/th>\n      <th>none_alc_some_speed<\/th>\n      <th>none_alc_much_speed<\/th>\n      <th>some_alc_none_speed<\/th>\n      <th>some_alc_some_speed<\/th>\n      <th>some_alc_much_speed<\/th>\n      <th>much_alc_none_speed<\/th>\n      <th>much_alc_some_speed<\/th>\n      <th>much_alc_much_speed<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5,6,7,8,9,10]},{"name":"pp","targets":0},{"name":"Daytime","targets":1},{"name":"none_alc_none_speed","targets":2},{"name":"none_alc_some_speed","targets":3},{"name":"none_alc_much_speed","targets":4},{"name":"some_alc_none_speed","targets":5},{"name":"some_alc_some_speed","targets":6},{"name":"some_alc_much_speed","targets":7},{"name":"much_alc_none_speed","targets":8},{"name":"much_alc_some_speed","targets":9},{"name":"much_alc_much_speed","targets":10}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-c612da8a4dede93da38c" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-c612da8a4dede93da38c">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2],[1.59,2.18,3.23,2.18,1.36,2.18,2.91,4.26,2.96,1.67,2.88,1.24,1.94,3.29,2.77,2.79,2.03,1.33,1.34,1.1],[4.96,4.66,5.58,5.7,6.15,5.83,4.03,5.48,4.92,4.14,6.68,6.74,6.45,4.52,5.53,5.41,3.5,3.73,5.76,6.4],[6.72,5.84,7.01,6.02,8.359999999999999,7.07,6.55,6.34,5.6,4.96,7.08,6.3,7.68,5.46,4.38,8.4,7.34,5.23,7.95,8.18],[2.64,4.43,2.12,3,1.78,3.06,5.35,2.89,3.87,2.52,3.74,1.72,3.02,2.53,2.64,1.84,-0.06,2.23,1.54,5.05],[3.74,4.73,7.12,6.66,5.57,5.91,4.93,6.74,5.12,3.64,4.27,6.03,6.44,5.82,5.84,6.16,6.01,5.09,6.28,6.16],[5.93,7.25,7.43,6.32,8.1,6.51,7.22,8.74,6.8,5.98,6.66,7.94,9.220000000000001,6.44,7.82,7.93,8.19,7.84,7.6,7.19],[4.68,3.21,4.98,4.72,5.03,2.61,6.06,2.87,3.01,5.37,3.97,3.99,4.76,4.48,5.87,5.04,5.57,5.73,4.65,5.97],[6.93,3.78,6.66,4.52,5.71,6.09,6.27,7.01,6.06,6.01,5.07,6.36,3.67,5.73,3.74,6.82,4.54,6.33,5.64,7.66],[9.51,10.71,9.49,9.380000000000001,9.83,10.78,8.59,9.26,9.289999999999999,9.140000000000001,9.960000000000001,9.52,9.119999999999999,9.48,9.539999999999999,9.56,9.48,9.24,11.12,7.83]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>Daytime<\/th>\n      <th>none_alc_none_speed<\/th>\n      <th>none_alc_some_speed<\/th>\n      <th>none_alc_much_speed<\/th>\n      <th>some_alc_none_speed<\/th>\n      <th>some_alc_some_speed<\/th>\n      <th>some_alc_much_speed<\/th>\n      <th>much_alc_none_speed<\/th>\n      <th>much_alc_some_speed<\/th>\n      <th>much_alc_much_speed<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5,6,7,8,9,10]},{"name":"pp","targets":0},{"name":"Daytime","targets":1},{"name":"none_alc_none_speed","targets":2},{"name":"none_alc_some_speed","targets":3},{"name":"none_alc_much_speed","targets":4},{"name":"some_alc_none_speed","targets":5},{"name":"some_alc_some_speed","targets":6},{"name":"some_alc_much_speed","targets":7},{"name":"much_alc_none_speed","targets":8},{"name":"much_alc_some_speed","targets":9},{"name":"much_alc_much_speed","targets":10}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section></section>
