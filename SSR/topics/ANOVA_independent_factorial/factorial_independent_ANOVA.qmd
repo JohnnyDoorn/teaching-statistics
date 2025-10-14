@@ -52,6 +52,11 @@ Effects and interactions:
 | Error  | $\text{SS}_{\text{error}} = \sum{s_k^2(n_k-1)}$ | $N-k_{model}$ | $\frac{\text{SS}_{\text{error}}}{\text{df}_{\text{error}}}$ | |
 | Total | $\text{SS}_{\text{total}} = \text{SS}_{\text{model}} + \text{SS}_{\text{error}}$ | $N-1$ | $\frac{\text{SS}_{\text{total}}}{\text{df}_{\text{total}}}$ | |
 
+## Variance in factorial designs 
+
+![](../../images/figure-13-6.png){width="400px"}
+
+
 ## Example {.smaller}
 
 In this example we will look at the amount of accidents in a car driving simulator while subjects where given varying doses of speed and alcohol.
