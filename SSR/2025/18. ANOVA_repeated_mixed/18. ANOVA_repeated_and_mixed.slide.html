@@ -450,7 +450,7 @@ Johnny van Doorn
 </ul></li>
 </ul>
 </section>
-<section id="having-multiple-predictors---interaction" class="slide level2">
+<section id="having-multiple-predictors---interaction" class="slide level2 smaller">
 <h2>Having multiple predictors - interaction</h2>
 <ul>
 <li>Interaction effects
@@ -470,7 +470,7 @@ Johnny van Doorn
 <li>Simple main effects</li>
 </ul>
 </section>
-<section id="having-multiple-predictors---dependence" class="slide level2">
+<section id="having-multiple-predictors---dependence" class="slide level2 smaller">
 <h2>Having multiple predictors - dependence</h2>
 <ul>
 <li><p>Check independence: dependence = explaining the same variance</p></li>
@@ -615,8 +615,8 @@ Johnny van Doorn
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-973ea2fe07bf4c3a534e" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-973ea2fe07bf4c3a534e">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5],[4.426,4.227,5.278,4.632,5.288],[4.106,5.469,5.557,5.323,5.148],[7.043,5.901,7.045,6.208,6.853]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>none_alc<\/th>\n      <th>some_alc<\/th>\n      <th>much_alc<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]},{"name":"pp","targets":0},{"name":"none_alc","targets":1},{"name":"some_alc","targets":2},{"name":"much_alc","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-be12a6dd7b3f2cbf8c68" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-be12a6dd7b3f2cbf8c68">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5],[4.426,4.227,5.278,4.632,5.288],[4.106,5.469,5.557,5.323,5.148],[7.043,5.901,7.045,6.208,6.853]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>none_alc<\/th>\n      <th>some_alc<\/th>\n      <th>much_alc<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]},{"name":"pp","targets":0},{"name":"none_alc","targets":1},{"name":"some_alc","targets":2},{"name":"much_alc","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -624,7 +624,7 @@ Johnny van Doorn
 <h2>Wide vs.&nbsp;long data formats</h2>
 
 <img src="Screenshot_LongWide.png" style="width:40%;" class="r-stretch"></section>
-<section id="general-flow-rm-anova" class="slide level2">
+<section id="general-flow-rm-anova" class="slide level2 smaller">
 <h2>General flow RM ANOVA</h2>
 <ul>
 <li>We look at total variance</li>
@@ -637,23 +637,22 @@ Johnny van Doorn
 <blockquote>
 <p>How much of the within subject variance can we explain by looking at alcohol condition?</p>
 </blockquote>
+
 <!-- ## MS total -->
 <!-- ${MS}_{total} = \frac{{SS}_{{total}}}{{DF}_{{total}}} = s_{grand}^2$ -->
 <!-- ## Total variance (SS total) -->
 <!-- ${DF_{total}} = N-1$ -->
 <!-- ${SS}_{{total}} = s_{grand}^2(N-1)$ -->
-</section>
+<img data-src="../../images/figure-14-3.png" width="300" class="r-stretch"></section>
 <section id="total-variance-ss-total---visual" class="slide level2 smaller">
 <h2>Total variance (SS total) - visual</h2>
 
+<!-- ## MS within -->
+<!-- ${MS}_{within} = \frac{{SS}_{{within}}}{{DF}_{{within}}}$ -->
+<!-- ${DF}_{within} = (n_i-1)n$ -->
 <img data-src="18.-ANOVA_repeated_and_mixed_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
-<section id="ms-within" class="slide level2">
-<h2>MS within</h2>
-<p><span class="math inline">\({MS}_{within} = \frac{{SS}_{{within}}}{{DF}_{{within}}}\)</span></p>
-<p><span class="math inline">\({DF}_{within} = (n_i-1)n\)</span></p>
-</section>
-<section id="within-subject-variance-ss-within" class="slide level2">
-<h2>Within subject variance (SS within)</h2>
+<section id="within-subject-variance-ss_w" class="slide level2">
+<h2>Within subject variance (<span class="math inline">\(SS_W\)</span>)</h2>
 <p><span class="math inline">\({SS}_{{within}} = \sum{s_i^2(n_i-1)}\)</span></p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -661,42 +660,28 @@ Johnny van Doorn
 </div>
 </div>
 </section>
-<section id="within-subject-variance-ss-within---visual" class="slide level2">
-<h2>Within subject variance (SS within) - visual</h2>
+<section id="within-subject-variance-ss_w---visual" class="slide level2">
+<h2>Within subject variance (<span class="math inline">\(SS_W\)</span>) - visual</h2>
 
 <img data-src="18.-ANOVA_repeated_and_mixed_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"></section>
-<section id="within-subject-variance-ss-within---data" class="slide level2">
-<h2>Within subject variance (SS within) - data</h2>
+<section id="within-subject-variance-ss_w---data" class="slide level2">
+<h2>Within subject variance (<span class="math inline">\(SS_W\)</span>) - data</h2>
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-886dae3f21982ae74089" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-886dae3f21982ae74089">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5],[4.426,4.227,5.278,4.632,5.288],[4.106,5.469,5.557,5.323,5.148],[7.043,5.901,7.045,6.208,6.853],[5.192,5.199,5.96,5.388,5.763],[5.192,1.51,1.805,1.248,1.792]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>none_alc<\/th>\n      <th>some_alc<\/th>\n      <th>much_alc<\/th>\n      <th>mean_pp<\/th>\n      <th>ss_pp<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5]},{"name":"pp","targets":0},{"name":"none_alc","targets":1},{"name":"some_alc","targets":2},{"name":"much_alc","targets":3},{"name":"mean_pp","targets":4},{"name":"ss_pp","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-9b83af854b2973e4bee2" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-9b83af854b2973e4bee2">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5],[4.426,4.227,5.278,4.632,5.288],[4.106,5.469,5.557,5.323,5.148],[7.043,5.901,7.045,6.208,6.853],[5.192,5.199,5.96,5.388,5.763],[5.192,1.51,1.805,1.248,1.792]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>none_alc<\/th>\n      <th>some_alc<\/th>\n      <th>much_alc<\/th>\n      <th>mean_pp<\/th>\n      <th>ss_pp<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5]},{"name":"pp","targets":0},{"name":"none_alc","targets":1},{"name":"some_alc","targets":2},{"name":"much_alc","targets":3},{"name":"mean_pp","targets":4},{"name":"ss_pp","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <!-- ## MS between -->
+<!-- ## MS model -->
+<!-- ${MS}_{model} = \frac{{SS}_{{model}}}{{DF}_{{model}}}$ -->
+<!-- ${DF}_{model} = k-1$ -->
 </section>
-<section id="ms-model" class="slide level2">
-<h2>MS model</h2>
-<p><span class="math inline">\({MS}_{model} = \frac{{SS}_{{model}}}{{DF}_{{model}}}\)</span></p>
-<p><span class="math inline">\({DF}_{model} = k-1\)</span></p>
-</section>
-<section id="ss-model" class="slide level2">
-<h2>SS model</h2>
+<section id="alcohol-model-ss-ss_m" class="slide level2">
+<h2>Alcohol model SS (<span class="math inline">\(SS_M\)</span>)</h2>
 <p><span class="math inline">\({SS}_{model} = \sum{n_k(\bar{X}_k-\bar{X})^2}\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># SS model</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>n_k1 <span class="ot">&lt;-</span> <span class="fu">length</span>(none_alc)</span>
-<span id="cb2-3"><a href="#cb2-3"></a>n_k2 <span class="ot">&lt;-</span> <span class="fu">length</span>(some_alc)</span>
-<span id="cb2-4"><a href="#cb2-4"></a>n_k3 <span class="ot">&lt;-</span> <span class="fu">length</span>(much_alc)</span>
-<span id="cb2-5"><a href="#cb2-5"></a></span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="co"># Calculate sums of squares for the model</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a>SS_k1 <span class="ot">&lt;-</span> n_k1 <span class="sc">*</span> (<span class="fu">mean</span>(none_alc) <span class="sc">-</span> <span class="fu">mean</span>(total))<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a>SS_k2 <span class="ot">&lt;-</span> n_k2 <span class="sc">*</span> (<span class="fu">mean</span>(some_alc) <span class="sc">-</span> <span class="fu">mean</span>(total))<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a>SS_k3 <span class="ot">&lt;-</span> n_k3 <span class="sc">*</span> (<span class="fu">mean</span>(much_alc) <span class="sc">-</span> <span class="fu">mean</span>(total))<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a></span>
-<span id="cb2-11"><a href="#cb2-11"></a>SS_model <span class="ot">&lt;-</span> <span class="fu">sum</span>(SS_k1, SS_k2, SS_k3)</span>
-<span id="cb2-12"><a href="#cb2-12"></a>SS_model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 9.543261</code></pre>
 </div>
@@ -710,8 +695,8 @@ Johnny van Doorn
 <h2>Full model SS visual</h2>
 
 <img data-src="18.-ANOVA_repeated_and_mixed_files/figure-revealjs/unnamed-chunk-20-1.png" width="960" class="r-stretch"></section>
-<section id="full-model-error-ss-visual" class="slide level2">
-<h2>Full model error SS visual</h2>
+<section id="full-model-error-ss-visual-ss_r" class="slide level2">
+<h2>Full model error SS visual (<span class="math inline">\(SS_R\)</span>)</h2>
 
 <img data-src="18.-ANOVA_repeated_and_mixed_files/figure-revealjs/unnamed-chunk-21-1.png" width="960" class="r-stretch"></section>
 <section id="we-use-full-model-error-to-compute-f-for-alcohol" class="slide level2">
@@ -727,19 +712,9 @@ Johnny van Doorn
 <h2>F ratio</h2>
 <p><span class="math inline">\(F = \frac{{MS}_{{model}}}{{MS}_{{error}}}\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Calculate mean squares</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>MS_model <span class="ot">&lt;-</span> SS_model <span class="sc">/</span> DF_model</span>
-<span id="cb4-3"><a href="#cb4-3"></a>MS_error <span class="ot">&lt;-</span> SS_error <span class="sc">/</span> DF_error</span>
-<span id="cb4-4"><a href="#cb4-4"></a>MS_model; MS_error</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4.77163</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.250556</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Calculate F statistic</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>fStat <span class="ot">&lt;-</span> MS_model <span class="sc">/</span> MS_error</span>
-<span id="cb7-3"><a href="#cb7-3"></a>fStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Calculate F statistic</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>fStat <span class="ot">&lt;-</span> MS_model <span class="sc">/</span> MS_error</span>
+<span id="cb3-3"><a href="#cb3-3"></a>fStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 19.04416</code></pre>
 </div>
@@ -748,7 +723,7 @@ Johnny van Doorn
 <section id="p-value" class="slide level2">
 <h2>P-value</h2>
 
-<img data-src="18.-ANOVA_repeated_and_mixed_files/figure-revealjs/unnamed-chunk-26-1.png" width="960" class="r-stretch"></section>
+<img data-src="18.-ANOVA_repeated_and_mixed_files/figure-revealjs/unnamed-chunk-27-1.png" width="960" class="r-stretch"></section>
 <section id="contrast" class="slide level2">
 <h2>Contrast</h2>
 <p>Planned comparisons</p>
@@ -970,8 +945,8 @@ Johnny van Doorn
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-a924b8cc7bf1117a4ec9" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-a924b8cc7bf1117a4ec9">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[1.59,2.18,3.23,2.18,1.36,2.18,2.91,4.26,2.96,1.67,2.88,1.24,1.94,3.29,2.77,2.79,2.03,1.33,1.34,1.1],[4.96,4.66,5.58,5.7,6.15,5.83,4.03,5.48,4.92,4.14,6.68,6.74,6.45,4.52,5.53,5.41,3.5,3.73,5.76,6.4],[6.72,5.84,7.01,6.02,8.359999999999999,7.07,6.55,6.34,5.6,4.96,7.08,6.3,7.68,5.46,4.38,8.4,7.34,5.23,7.95,8.18],[2.64,4.43,2.12,3,1.78,3.06,5.35,2.89,3.87,2.52,3.74,1.72,3.02,2.53,2.64,1.84,-0.06,2.23,1.54,5.05],[3.74,4.73,7.12,6.66,5.57,5.91,4.93,6.74,5.12,3.64,4.27,6.03,6.44,5.82,5.84,6.16,6.01,5.09,6.28,6.16],[5.93,7.25,7.43,6.32,8.1,6.51,7.22,8.74,6.8,5.98,6.66,7.94,9.220000000000001,6.44,7.82,7.93,8.19,7.84,7.6,7.19],[4.68,3.21,4.98,4.72,5.03,2.61,6.06,2.87,3.01,5.37,3.97,3.99,4.76,4.48,5.87,5.04,5.57,5.73,4.65,5.97],[6.93,3.78,6.66,4.52,5.71,6.09,6.27,7.01,6.06,6.01,5.07,6.36,3.67,5.73,3.74,6.82,4.54,6.33,5.64,7.66],[9.51,10.71,9.49,9.380000000000001,9.83,10.78,8.59,9.26,9.289999999999999,9.140000000000001,9.960000000000001,9.52,9.119999999999999,9.48,9.539999999999999,9.56,9.48,9.24,11.12,7.83]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>none_alc_none_speed<\/th>\n      <th>none_alc_some_speed<\/th>\n      <th>none_alc_much_speed<\/th>\n      <th>some_alc_none_speed<\/th>\n      <th>some_alc_some_speed<\/th>\n      <th>some_alc_much_speed<\/th>\n      <th>much_alc_none_speed<\/th>\n      <th>much_alc_some_speed<\/th>\n      <th>much_alc_much_speed<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5,6,7,8,9]},{"name":"pp","targets":0},{"name":"none_alc_none_speed","targets":1},{"name":"none_alc_some_speed","targets":2},{"name":"none_alc_much_speed","targets":3},{"name":"some_alc_none_speed","targets":4},{"name":"some_alc_some_speed","targets":5},{"name":"some_alc_much_speed","targets":6},{"name":"much_alc_none_speed","targets":7},{"name":"much_alc_some_speed","targets":8},{"name":"much_alc_much_speed","targets":9}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-3108126d3b3d4981f18a" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-3108126d3b3d4981f18a">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[1.59,2.18,3.23,2.18,1.36,2.18,2.91,4.26,2.96,1.67,2.88,1.24,1.94,3.29,2.77,2.79,2.03,1.33,1.34,1.1],[4.96,4.66,5.58,5.7,6.15,5.83,4.03,5.48,4.92,4.14,6.68,6.74,6.45,4.52,5.53,5.41,3.5,3.73,5.76,6.4],[6.72,5.84,7.01,6.02,8.359999999999999,7.07,6.55,6.34,5.6,4.96,7.08,6.3,7.68,5.46,4.38,8.4,7.34,5.23,7.95,8.18],[2.64,4.43,2.12,3,1.78,3.06,5.35,2.89,3.87,2.52,3.74,1.72,3.02,2.53,2.64,1.84,-0.06,2.23,1.54,5.05],[3.74,4.73,7.12,6.66,5.57,5.91,4.93,6.74,5.12,3.64,4.27,6.03,6.44,5.82,5.84,6.16,6.01,5.09,6.28,6.16],[5.93,7.25,7.43,6.32,8.1,6.51,7.22,8.74,6.8,5.98,6.66,7.94,9.220000000000001,6.44,7.82,7.93,8.19,7.84,7.6,7.19],[4.68,3.21,4.98,4.72,5.03,2.61,6.06,2.87,3.01,5.37,3.97,3.99,4.76,4.48,5.87,5.04,5.57,5.73,4.65,5.97],[6.93,3.78,6.66,4.52,5.71,6.09,6.27,7.01,6.06,6.01,5.07,6.36,3.67,5.73,3.74,6.82,4.54,6.33,5.64,7.66],[9.51,10.71,9.49,9.380000000000001,9.83,10.78,8.59,9.26,9.289999999999999,9.140000000000001,9.960000000000001,9.52,9.119999999999999,9.48,9.539999999999999,9.56,9.48,9.24,11.12,7.83]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>none_alc_none_speed<\/th>\n      <th>none_alc_some_speed<\/th>\n      <th>none_alc_much_speed<\/th>\n      <th>some_alc_none_speed<\/th>\n      <th>some_alc_some_speed<\/th>\n      <th>some_alc_much_speed<\/th>\n      <th>much_alc_none_speed<\/th>\n      <th>much_alc_some_speed<\/th>\n      <th>much_alc_much_speed<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5,6,7,8,9]},{"name":"pp","targets":0},{"name":"none_alc_none_speed","targets":1},{"name":"none_alc_some_speed","targets":2},{"name":"none_alc_much_speed","targets":3},{"name":"some_alc_none_speed","targets":4},{"name":"some_alc_some_speed","targets":5},{"name":"some_alc_much_speed","targets":6},{"name":"much_alc_none_speed","targets":7},{"name":"much_alc_some_speed","targets":8},{"name":"much_alc_much_speed","targets":9}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section></section>
@@ -1033,8 +1008,8 @@ Johnny van Doorn
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-c612da8a4dede93da38c" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-c612da8a4dede93da38c">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2],[1.59,2.18,3.23,2.18,1.36,2.18,2.91,4.26,2.96,1.67,2.88,1.24,1.94,3.29,2.77,2.79,2.03,1.33,1.34,1.1],[4.96,4.66,5.58,5.7,6.15,5.83,4.03,5.48,4.92,4.14,6.68,6.74,6.45,4.52,5.53,5.41,3.5,3.73,5.76,6.4],[6.72,5.84,7.01,6.02,8.359999999999999,7.07,6.55,6.34,5.6,4.96,7.08,6.3,7.68,5.46,4.38,8.4,7.34,5.23,7.95,8.18],[2.64,4.43,2.12,3,1.78,3.06,5.35,2.89,3.87,2.52,3.74,1.72,3.02,2.53,2.64,1.84,-0.06,2.23,1.54,5.05],[3.74,4.73,7.12,6.66,5.57,5.91,4.93,6.74,5.12,3.64,4.27,6.03,6.44,5.82,5.84,6.16,6.01,5.09,6.28,6.16],[5.93,7.25,7.43,6.32,8.1,6.51,7.22,8.74,6.8,5.98,6.66,7.94,9.220000000000001,6.44,7.82,7.93,8.19,7.84,7.6,7.19],[4.68,3.21,4.98,4.72,5.03,2.61,6.06,2.87,3.01,5.37,3.97,3.99,4.76,4.48,5.87,5.04,5.57,5.73,4.65,5.97],[6.93,3.78,6.66,4.52,5.71,6.09,6.27,7.01,6.06,6.01,5.07,6.36,3.67,5.73,3.74,6.82,4.54,6.33,5.64,7.66],[9.51,10.71,9.49,9.380000000000001,9.83,10.78,8.59,9.26,9.289999999999999,9.140000000000001,9.960000000000001,9.52,9.119999999999999,9.48,9.539999999999999,9.56,9.48,9.24,11.12,7.83]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>Daytime<\/th>\n      <th>none_alc_none_speed<\/th>\n      <th>none_alc_some_speed<\/th>\n      <th>none_alc_much_speed<\/th>\n      <th>some_alc_none_speed<\/th>\n      <th>some_alc_some_speed<\/th>\n      <th>some_alc_much_speed<\/th>\n      <th>much_alc_none_speed<\/th>\n      <th>much_alc_some_speed<\/th>\n      <th>much_alc_much_speed<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5,6,7,8,9,10]},{"name":"pp","targets":0},{"name":"Daytime","targets":1},{"name":"none_alc_none_speed","targets":2},{"name":"none_alc_some_speed","targets":3},{"name":"none_alc_much_speed","targets":4},{"name":"some_alc_none_speed","targets":5},{"name":"some_alc_some_speed","targets":6},{"name":"some_alc_much_speed","targets":7},{"name":"much_alc_none_speed","targets":8},{"name":"much_alc_some_speed","targets":9},{"name":"much_alc_much_speed","targets":10}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-54630433103a5dc7a2f5" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-54630433103a5dc7a2f5">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2],[1.59,2.18,3.23,2.18,1.36,2.18,2.91,4.26,2.96,1.67,2.88,1.24,1.94,3.29,2.77,2.79,2.03,1.33,1.34,1.1],[4.96,4.66,5.58,5.7,6.15,5.83,4.03,5.48,4.92,4.14,6.68,6.74,6.45,4.52,5.53,5.41,3.5,3.73,5.76,6.4],[6.72,5.84,7.01,6.02,8.359999999999999,7.07,6.55,6.34,5.6,4.96,7.08,6.3,7.68,5.46,4.38,8.4,7.34,5.23,7.95,8.18],[2.64,4.43,2.12,3,1.78,3.06,5.35,2.89,3.87,2.52,3.74,1.72,3.02,2.53,2.64,1.84,-0.06,2.23,1.54,5.05],[3.74,4.73,7.12,6.66,5.57,5.91,4.93,6.74,5.12,3.64,4.27,6.03,6.44,5.82,5.84,6.16,6.01,5.09,6.28,6.16],[5.93,7.25,7.43,6.32,8.1,6.51,7.22,8.74,6.8,5.98,6.66,7.94,9.220000000000001,6.44,7.82,7.93,8.19,7.84,7.6,7.19],[4.68,3.21,4.98,4.72,5.03,2.61,6.06,2.87,3.01,5.37,3.97,3.99,4.76,4.48,5.87,5.04,5.57,5.73,4.65,5.97],[6.93,3.78,6.66,4.52,5.71,6.09,6.27,7.01,6.06,6.01,5.07,6.36,3.67,5.73,3.74,6.82,4.54,6.33,5.64,7.66],[9.51,10.71,9.49,9.380000000000001,9.83,10.78,8.59,9.26,9.289999999999999,9.140000000000001,9.960000000000001,9.52,9.119999999999999,9.48,9.539999999999999,9.56,9.48,9.24,11.12,7.83]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>Daytime<\/th>\n      <th>none_alc_none_speed<\/th>\n      <th>none_alc_some_speed<\/th>\n      <th>none_alc_much_speed<\/th>\n      <th>some_alc_none_speed<\/th>\n      <th>some_alc_some_speed<\/th>\n      <th>some_alc_much_speed<\/th>\n      <th>much_alc_none_speed<\/th>\n      <th>much_alc_some_speed<\/th>\n      <th>much_alc_much_speed<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5,6,7,8,9,10]},{"name":"pp","targets":0},{"name":"Daytime","targets":1},{"name":"none_alc_none_speed","targets":2},{"name":"none_alc_some_speed","targets":3},{"name":"none_alc_much_speed","targets":4},{"name":"some_alc_none_speed","targets":5},{"name":"some_alc_some_speed","targets":6},{"name":"some_alc_much_speed","targets":7},{"name":"much_alc_none_speed","targets":8},{"name":"much_alc_some_speed","targets":9},{"name":"much_alc_much_speed","targets":10}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section></section>
@@ -1050,6 +1025,10 @@ Johnny van Doorn
 <li>With within-subjects predictors, we need to check:
 <ul>
 <li>Sphericity (equal variances of difference scores)</li>
+</ul></li>
+<li>With between-subjects predictors, we need to check:
+<ul>
+<li>Equal variances of groups</li>
 </ul></li>
 </ul>
 </section>

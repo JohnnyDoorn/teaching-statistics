@@ -31,10 +31,11 @@ Chapter 14
 - For each predictor, what is its model sum of squares?
   - Divide by the error sum of squares of the full model (with all predictors) $\rightarrow$ F-ratio
   
-## Having multiple predictors - interaction
+## Having multiple predictors - interaction {.smaller}
 
 - Interaction effects
   - For example [Labocat Leni 13](https://discoverjasp.com/repository/dsj1_leni/leni_13)
+
 
 ![](../../images/labcoat-leni-13.png){width="400px"}
 
@@ -49,7 +50,7 @@ Assess with:
 - Conditional post hoc tests
 - Simple main effects
 
-## Having multiple predictors - dependence
+## Having multiple predictors - dependence {.smaller}
 
 - Check independence: dependence = explaining the same variance
 
@@ -106,7 +107,9 @@ Contrast 2: compare two alcohol conditions
 - In a repeated measures design we can account for baseline differences, to reduce the overall model error
 - With within-subjects predictors, we need to check:
   - Sphericity (equal variances of difference scores)
-
+- With between-subjects predictors, we need to check:
+  - Equal variances of groups
+  
 ## Recommended Exercises
 
 ::: {}
