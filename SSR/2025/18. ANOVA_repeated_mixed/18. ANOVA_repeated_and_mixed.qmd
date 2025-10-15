@@ -1,5 +1,5 @@
 ---
-title: "16. RM ANOVA"
+title: "18. RM ANOVA"
 subtitle: "Repeated & Mixed"
 author: "Johnny van Doorn"
 date: "15 oct 2025"
