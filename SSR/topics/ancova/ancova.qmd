@@ -335,7 +335,6 @@ SS.covar <- SS.model - SS.model.group; SS.covar ## SS.covar corrected for group
 
 ## F-ratio {.subsection}
 
-$F = \frac{{MS}_{model}}{{MS}_{error}} = \frac{{SIGNAL}}{{NOISE}}$
 
 ```{r, echo=FALSE}
 n <- nrow(data)
@@ -347,12 +346,18 @@ MS.model <- SS.group / df.model
 MS.error <- SS.error / df.error
 
 fStat <- MS.model / MS.error
-fStat
+# fStat
 # 
 # plotSumSquaresCov(data = plotData, sumSq = "Model", whatPred = "Group means + cov", myLimY = c(32, 48), whatDisplay = c("Segments", "Sums", "F-stat"), myLabY = "Extraversion")
 
 
 ```
+
+$MS_{model-group} =  \frac{`r  round(SS.group, 3)`}{`r df.model`} = `r round(round(SS.group, 3) / df.model, 3)`$ 
+
+$F = \frac{{MS}_{model}}{{MS}_{error}} = \frac{{SIGNAL}}{{NOISE}} =  \frac{`r  round(MS.model, 3)`}{`r round( MS.error, 3)`} = `r round(fStat, 2)`$
+
+
 
 ## $P$-value
 ```{r, echo=FALSE}

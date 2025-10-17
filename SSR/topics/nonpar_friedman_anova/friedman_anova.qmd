@@ -134,8 +134,9 @@ df <- k - 1
 
 ## Test for significance
 
-```{r, fig.align='center', warning=FALSE, echo=TRUE}
-visualize.chisq(F.r, df, section="upper")
+```{r, fig.align='center', warning=FALSE, echo=FALSE}
+source("../../plotFunctionsSSR.r")
+visualize_chisq_base(H = F.r, df = df, section = "upper", myLimX = c(0, 6))
 ```
 
 ## Post hoc tests?

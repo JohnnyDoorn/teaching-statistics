@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Sharon Klinkenberg &amp; Johnny van Doorn">
+<meta name="author" content="Johnny van Doorn”">
 
 <title>friedman_anova</title>
 <style>
@@ -96,7 +96,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#friedmans-anova" id="toc-friedmans-anova" class="nav-link active" data-scroll-target="#friedmans-anova">Friedman’s ANOVA</a>
   <ul class="collapse">
   <li><a href="#friedmans-anova-1" id="toc-friedmans-anova-1" class="nav-link" data-scroll-target="#friedmans-anova-1">Friedman’s ANOVA</a></li>
-  <li><a href="#simulate-data" id="toc-simulate-data" class="nav-link" data-scroll-target="#simulate-data">Simulate data</a></li>
   <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data">The data</a></li>
   <li><a href="#assign-ranks" id="toc-assign-ranks" class="nav-link" data-scroll-target="#assign-ranks">Assign ranks</a></li>
   <li><a href="#the-data-with-ranks" id="toc-the-data-with-ranks" class="nav-link" data-scroll-target="#the-data-with-ranks">The data with ranks</a></li>
@@ -124,9 +123,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/William-Friedman.jpg/220px-William-Friedman.jpg" style="float: left; margin: 0 20px 0 0; height: 150px;"></p>
 <p>Created by <a href="http://en.wikipedia.org/wiki/William_F._Friedman">William Frederick Friedman</a> the Friedman’s ANOVA is a nonparametric alternative to the repeated one-way ANOVA.</p>
 <p>Just like the Kruskal-Wallis test, Friedman’s ANOVA, subtracts the expected mean ranking from the calculated observed mean ranking, which is also <span class="math inline">\(\chi^2\)</span> distributed.</p>
-</section>
-<section id="simulate-data" class="level2">
-<h2 class="anchored" data-anchor-id="simulate-data">Simulate data</h2>
+<!-- ## Simulate data -->
 <!-- ## Simulate data -->
 <!-- ```{r, echo=FALSE} -->
 <!-- ecstasy <- subset(data, factor=="ecstasy")$depres -->
@@ -219,7 +216,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="test-for-significance" class="level2">
 <h2 class="anchored" data-anchor-id="test-for-significance">Test for significance</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.chisq</span>(F.r, df, <span class="at">section=</span><span class="st">"upper"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">

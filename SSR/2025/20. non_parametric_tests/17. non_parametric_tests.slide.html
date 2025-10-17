@@ -10,8 +10,8 @@
 <link href="17. non_parametric_tests_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.3.340">
 
-  <meta name="author" content="Sharon Kinkenberg &amp; Johnny van Doorn">
-  <meta name="dcterms.date" content="2024-10-18">
+  <meta name="author" content="Johnny van Doorn">
+  <meta name="dcterms.date" content="2025-10-21">
   <title>18. Assumptions &amp; Non-parametric tests</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -97,7 +97,8 @@
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="17. non_parametric_tests_files/libs/revealjs/dist/theme/quarto.css" id="theme">
-  <link rel="stylesheet" href="https://shklinkenberg.github.io/statistics-lectures/courses/uva_reveal.css">
+  <link rel="stylesheet" href="../../uva_reveal.css">
+  <link rel="stylesheet" href="../../ajohnson.css">
   <link href="17. non_parametric_tests_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="17. non_parametric_tests_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="17. non_parametric_tests_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -402,13 +403,13 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="https://cdn.pixabay.com/photo/2017/08/22/16/46/bike-2669639_960_720.jpg" data-background-position="bottom" data-background-size="contain" class="quarto-title-block center">
+<section id="title-slide" data-background-image="../../images/bikes.jpg" data-background-position="bottom" data-background-size="contain" class="quarto-title-block center">
   <h1 class="title">18. Assumptions &amp; Non-parametric tests</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Sharon Kinkenberg &amp; Johnny van Doorn 
+Johnny van Doorn 
 </div>
         <p class="quarto-title-affiliation">
             University of Amsterdam
@@ -416,7 +417,20 @@ Sharon Kinkenberg &amp; Johnny van Doorn
     </div>
 </div>
 
-  <p class="date">2024-10-18</p>
+  <p class="date">2025-10-21</p>
+</section>
+<section class="slide level2">
+
+<div class="goals">
+<p>In this lecture we aim to:</p>
+<ul>
+<li>Repeat some assumptions</li>
+<li>Introduce rank-based methods</li>
+<li>Look at rank-based equivalents to some old friends</li>
+<li>Show these in JASP</li>
+</ul>
+<p><strong>Reading:</strong> Chapter 15</p>
+</div>
 </section>
 <section id="assumptions" class="slide level2">
 <h2>Assumptions</h2>
@@ -432,7 +446,8 @@ Sharon Kinkenberg &amp; Johnny van Doorn
 <section id="homogeneity-of-variances" class="slide level2">
 <h2>Homogeneity of variances</h2>
 <ul>
-<li>Apply correction when possible (Welch for t-test/one-way ANOVA)</li>
+<li>Between subjects designs</li>
+<li>Correction: Welch for t-test/one-way ANOVA</li>
 <li>Adjusts df <span class="math inline">\(\rightarrow p\)</span>-value &amp; CI</li>
 <li>Jane Superbrain 14.3 (pointless p)</li>
 </ul>
@@ -440,7 +455,8 @@ Sharon Kinkenberg &amp; Johnny van Doorn
 <section id="sphericity" class="slide level2">
 <h2>Sphericity</h2>
 <ul>
-<li>Apply correction when possible (Greenhouse-Geisser)</li>
+<li>Within subjects designs with &gt;2 levels</li>
+<li>Correction: Greenhouse-Geisser for RM ANOVA</li>
 <li>Adjusts df <span class="math inline">\(\rightarrow p\)</span>-value &amp; CI</li>
 <li>Jane Superbrain 14.3 (pointless p)</li>
 </ul>
@@ -449,11 +465,9 @@ Sharon Kinkenberg &amp; Johnny van Doorn
 <section id="normality" class="slide level2">
 <h2>Normality</h2>
 <ul>
-<li>Shape of distribution (and no CLT)
-<ul>
-<li><a href="https://johnnydoorn.github.io/teaching-statistics/extra-texts/ViolatingNormalityANOVA.html">Illustration of consequences</a></li>
-</ul></li>
+<li>Shape of distribution (and no CLT)</li>
 <li>Outliers</li>
+<li><a href="https://johnnydoorn.github.io/teaching-statistics/extra-texts/ViolatingNormalityANOVA.html">Illustration of consequences</a></li>
 </ul>
 </section>
 <section>
@@ -675,8 +689,8 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 </div>
 </div>
 </section>
-<section id="calculate-the-sum-of-ranks-per-group" class="slide level2 subsection">
-<h2>Calculate the sum of ranks per group</h2>
+<section id="test-statistic-w-is-the-sum-of-ranks-per-group" class="slide level2 subsection">
+<h2>Test statistic W is the sum of ranks per group</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>rankSums <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(rankedBDI <span class="sc">~</span> Drug, data, sum)</span>
 <span id="cb2-2"><a href="#cb2-2"></a>rankSums</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -686,21 +700,18 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 2 Ecstasy     119.5</code></pre>
 </div>
 </div>
-</section>
-<section id="so-w-is-the-lowest" class="slide level2">
-<h2>So W is the lowest</h2>
-<p><span class="math display">\[W=min\left(\sum{R_1},\sum{R_2}\right)\]</span></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>W <span class="ot">&lt;-</span> <span class="fu">min</span>(rankSums<span class="sc">$</span>rankedBDI)</span>
+<p>We can take the sum of ranks for the first group as W:<br>
+::: {.cell}</p>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>W <span class="ot">&lt;-</span> rankSums[<span class="dv">1</span>, <span class="dv">2</span>]</span>
 <span id="cb4-2"><a href="#cb4-2"></a>W</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 90.5</code></pre>
 </div>
-</div>
+<p>:::</p>
 </section>
 <section id="subtracting-the-minimum-score" class="slide level2">
 <h2>Subtracting the minimum score</h2>
-<p>Software reports the value of U, which is W with its minimum value subtracted:</p>
+<p>JASP reports the value of U, which is W with its minimum value subtracted:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>W.min <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>); W.min</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -775,28 +786,19 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 </section>
 <section id="test-for-significance-1-sided" class="slide level2">
 <h2>Test for significance 1 sided</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="st">"visualize"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()){ <span class="fu">install.packages</span>(<span class="st">"visualize"</span>) }</span>
-<span id="cb22-2"><a href="#cb22-2"></a><span class="fu">library</span>(<span class="st">"visualize"</span>)</span>
-<span id="cb22-3"><a href="#cb22-3"></a></span>
-<span id="cb22-4"><a href="#cb22-4"></a><span class="fu">visualize.norm</span>(z, <span class="at">section=</span><span class="st">"lower"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
-</div>
 <img data-src="17.-non_parametric_tests_files/figure-revealjs/unnamed-chunk-30-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="test-for-significance-2-sided" class="slide level2">
 <h2>Test for significance 2 sided</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">visualize.norm</span>(<span class="fu">c</span>(z,<span class="sc">-</span>z), <span class="at">section=</span><span class="st">"tails"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
-</div>
 <img data-src="17.-non_parametric_tests_files/figure-revealjs/unnamed-chunk-31-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="effect-size-rank-biserial-correlation" class="slide level2">
 <h2>Effect size rank-biserial correlation</h2>
 <p><span class="math display">\[r_{bs} = 1 - \frac{2*W}{n_1*n_2}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>W <span class="ot">&lt;-</span> W <span class="sc">-</span> W.min <span class="co"># use modern W</span></span>
-<span id="cb24-2"><a href="#cb24-2"></a>biserialCor <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> (<span class="dv">2</span><span class="sc">*</span>(W)) <span class="sc">/</span> (n<span class="fl">.1</span><span class="sc">*</span>n<span class="fl">.2</span>);</span>
-<span id="cb24-3"><a href="#cb24-3"></a>biserialCor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>W <span class="ot">&lt;-</span> W <span class="sc">-</span> W.min <span class="co"># use modern W</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>biserialCor <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> (<span class="dv">2</span><span class="sc">*</span>(W)) <span class="sc">/</span> (n<span class="fl">.1</span><span class="sc">*</span>n<span class="fl">.2</span>);</span>
+<span id="cb22-3"><a href="#cb22-3"></a>biserialCor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.29</code></pre>
 </div>
@@ -834,20 +836,20 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 <section id="calculate-t" class="slide level2 smaller subsection">
 <h2>Calculate T</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># Calculate difference in scores between first and second measure</span></span>
-<span id="cb26-2"><a href="#cb26-2"></a>data<span class="sc">$</span>diff <span class="ot">=</span> data<span class="sc">$</span>Sunday <span class="sc">-</span> data<span class="sc">$</span>Wednesday</span>
-<span id="cb26-3"><a href="#cb26-3"></a></span>
-<span id="cb26-4"><a href="#cb26-4"></a><span class="co"># Calculate absolute difference in scores between first and second measure</span></span>
-<span id="cb26-5"><a href="#cb26-5"></a>data<span class="sc">$</span>abs.diff <span class="ot">=</span> <span class="fu">abs</span>(data<span class="sc">$</span>Sunday <span class="sc">-</span> data<span class="sc">$</span>Wednesday)</span>
-<span id="cb26-6"><a href="#cb26-6"></a></span>
-<span id="cb26-7"><a href="#cb26-7"></a><span class="co"># Remove observations where the difference is 0</span></span>
-<span id="cb26-8"><a href="#cb26-8"></a>data <span class="ot">&lt;-</span> data[data<span class="sc">$</span>diff <span class="sc">!=</span> <span class="dv">0</span>, ]</span>
-<span id="cb26-9"><a href="#cb26-9"></a></span>
-<span id="cb26-10"><a href="#cb26-10"></a><span class="co"># Create rank variable with place holder NA</span></span>
-<span id="cb26-11"><a href="#cb26-11"></a>data<span class="sc">$</span>rank <span class="ot">&lt;-</span> <span class="fu">rank</span>(data<span class="sc">$</span>abs.diff)</span>
-<span id="cb26-12"><a href="#cb26-12"></a></span>
-<span id="cb26-13"><a href="#cb26-13"></a><span class="co"># Assign a '+' or a '-' to those values </span></span>
-<span id="cb26-14"><a href="#cb26-14"></a>data<span class="sc">$</span>sign <span class="ot">&lt;-</span> <span class="fu">sign</span>(data<span class="sc">$</span>Sunday <span class="sc">-</span> data<span class="sc">$</span>Wednesday)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># Calculate difference in scores between first and second measure</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a>data<span class="sc">$</span>diff <span class="ot">=</span> data<span class="sc">$</span>Sunday <span class="sc">-</span> data<span class="sc">$</span>Wednesday</span>
+<span id="cb24-3"><a href="#cb24-3"></a></span>
+<span id="cb24-4"><a href="#cb24-4"></a><span class="co"># Calculate absolute difference in scores between first and second measure</span></span>
+<span id="cb24-5"><a href="#cb24-5"></a>data<span class="sc">$</span>abs.diff <span class="ot">=</span> <span class="fu">abs</span>(data<span class="sc">$</span>Sunday <span class="sc">-</span> data<span class="sc">$</span>Wednesday)</span>
+<span id="cb24-6"><a href="#cb24-6"></a></span>
+<span id="cb24-7"><a href="#cb24-7"></a><span class="co"># Remove observations where the difference is 0</span></span>
+<span id="cb24-8"><a href="#cb24-8"></a>data <span class="ot">&lt;-</span> data[data<span class="sc">$</span>diff <span class="sc">!=</span> <span class="dv">0</span>, ]</span>
+<span id="cb24-9"><a href="#cb24-9"></a></span>
+<span id="cb24-10"><a href="#cb24-10"></a><span class="co"># Create rank variable with place holder NA</span></span>
+<span id="cb24-11"><a href="#cb24-11"></a>data<span class="sc">$</span>rank <span class="ot">&lt;-</span> <span class="fu">rank</span>(data<span class="sc">$</span>abs.diff)</span>
+<span id="cb24-12"><a href="#cb24-12"></a></span>
+<span id="cb24-13"><a href="#cb24-13"></a><span class="co"># Assign a '+' or a '-' to those values </span></span>
+<span id="cb24-14"><a href="#cb24-14"></a>data<span class="sc">$</span>sign <span class="ot">&lt;-</span> <span class="fu">sign</span>(data<span class="sc">$</span>Sunday <span class="sc">-</span> data<span class="sc">$</span>Wednesday)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="the-data" class="slide level2 smaller">
@@ -863,15 +865,15 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 <section id="calculate-t_" class="slide level2">
 <h2>Calculate <span class="math inline">\(T_+\)</span></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># Calculate the sum of the positive ranks</span></span>
-<span id="cb27-2"><a href="#cb27-2"></a>T_pos <span class="ot">&lt;-</span> <span class="fu">sum</span>(data<span class="sc">$</span>rank <span class="sc">*</span> (data<span class="sc">$</span>diff <span class="sc">&gt;</span> <span class="dv">0</span>))</span>
-<span id="cb27-3"><a href="#cb27-3"></a>T_pos</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># Calculate the sum of the positive ranks</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>T_pos <span class="ot">&lt;-</span> <span class="fu">sum</span>(data<span class="sc">$</span>rank <span class="sc">*</span> (data<span class="sc">$</span>diff <span class="sc">&gt;</span> <span class="dv">0</span>))</span>
+<span id="cb25-3"><a href="#cb25-3"></a>T_pos</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co"># Calculate N without 0 (no differences).</span></span>
-<span id="cb29-2"><a href="#cb29-2"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(data)</span>
-<span id="cb29-3"><a href="#cb29-3"></a>n</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># Calculate N without 0 (no differences).</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(data)</span>
+<span id="cb27-3"><a href="#cb27-3"></a>n</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 8</code></pre>
 </div>
@@ -881,36 +883,36 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 <h2>Calculate <span class="math inline">\(\bar{T}\)</span> and <span class="math inline">\({SE}_{T}\)</span></h2>
 <p><span class="math display">\[\bar{T} = \frac{n(n+1)}{4}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>T_mean <span class="ot">&lt;-</span> (n<span class="sc">*</span>(n<span class="sc">+</span><span class="dv">1</span>))<span class="sc">/</span><span class="dv">4</span></span>
-<span id="cb31-2"><a href="#cb31-2"></a>T_mean </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>T_mean <span class="ot">&lt;-</span> (n<span class="sc">*</span>(n<span class="sc">+</span><span class="dv">1</span>))<span class="sc">/</span><span class="dv">4</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a>T_mean </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 18</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="co"># T_mean is the middle point between the minimum and maximum possible value for T</span></span>
-<span id="cb33-2"><a href="#cb33-2"></a>T.min <span class="ot">&lt;-</span> <span class="dv">0</span>; T.min</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># T_mean is the middle point between the minimum and maximum possible value for T</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a>T.min <span class="ot">&lt;-</span> <span class="dv">0</span>; T.min</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>T.max <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="dv">1</span><span class="sc">:</span>n); T.max</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>T.max <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="dv">1</span><span class="sc">:</span>n); T.max</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 36</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">mean</span>(<span class="fu">c</span>(T.min, T.max))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">mean</span>(<span class="fu">c</span>(T.min, T.max))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 18</code></pre>
 </div>
 </div>
 <p><span class="math display">\[{SE}_{T} = \sqrt{\frac{n(n+1)(2n+1)}{24}}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>SE_T <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( (n<span class="sc">*</span>(n<span class="sc">+</span><span class="dv">1</span>)<span class="sc">*</span>(<span class="dv">2</span><span class="sc">*</span>n<span class="sc">+</span><span class="dv">1</span>)) <span class="sc">/</span> <span class="dv">24</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>SE_T <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( (n<span class="sc">*</span>(n<span class="sc">+</span><span class="dv">1</span>)<span class="sc">*</span>(<span class="dv">2</span><span class="sc">*</span>n<span class="sc">+</span><span class="dv">1</span>)) <span class="sc">/</span> <span class="dv">24</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="calculate-z-1" class="slide level2">
 <h2>Calculate Z</h2>
 <p><span class="math display">\[z = \frac{T_+ - \bar{T}}{{SE}_T}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>z <span class="ot">&lt;-</span> (T_pos <span class="sc">-</span> T_mean)<span class="sc">/</span>SE_T</span>
-<span id="cb40-2"><a href="#cb40-2"></a>z</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>z <span class="ot">&lt;-</span> (T_pos <span class="sc">-</span> T_mean)<span class="sc">/</span>SE_T</span>
+<span id="cb38-2"><a href="#cb38-2"></a>z</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -2.520504</code></pre>
 </div>
@@ -919,7 +921,7 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 <section id="test-for-significance" class="slide level2">
 <h2>Test for significance</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="fu">visualize.norm</span>(<span class="fu">c</span>(z,<span class="sc">-</span>z), <span class="at">section=</span><span class="st">"tails"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">visualize.norm</span>(<span class="fu">c</span>(z,<span class="sc">-</span>z), <span class="at">section=</span><span class="st">"tails"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="17.-non_parametric_tests_files/figure-revealjs/unnamed-chunk-60-1.png" width="960" class="r-stretch quarto-figure-center"></section>
@@ -931,13 +933,13 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 <p><span class="math display">\[r = \frac{T_+ - T_- }{T_+ + T_-}\]</span></p>
 <p>Here <span class="math inline">\(T_+\)</span> is the sum of the positive ranks (i.e., where Sunday &gt; Wednesday), which do not exist. <span class="math inline">\(T_-\)</span> is the sum of the negative ranks, which is 36. We have a maximum negative correlation (i.e., everybody scored lower on Wednesday).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>T_neg <span class="ot">&lt;-</span> <span class="fu">sum</span>(data<span class="sc">$</span>rank <span class="sc">*</span> (data<span class="sc">$</span>diff <span class="sc">&lt;</span> <span class="dv">0</span>)) <span class="co"># sum negative ranks</span></span>
-<span id="cb43-2"><a href="#cb43-2"></a>T_neg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a>T_neg <span class="ot">&lt;-</span> <span class="fu">sum</span>(data<span class="sc">$</span>rank <span class="sc">*</span> (data<span class="sc">$</span>diff <span class="sc">&lt;</span> <span class="dv">0</span>)) <span class="co"># sum negative ranks</span></span>
+<span id="cb41-2"><a href="#cb41-2"></a>T_neg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 36</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a>rbis <span class="ot">&lt;-</span> (T_pos <span class="sc">-</span> T_neg) <span class="sc">/</span> (T_pos <span class="sc">+</span> T_neg)</span>
-<span id="cb45-2"><a href="#cb45-2"></a>rbis</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>rbis <span class="ot">&lt;-</span> (T_pos <span class="sc">-</span> T_neg) <span class="sc">/</span> (T_pos <span class="sc">+</span> T_neg)</span>
+<span id="cb43-2"><a href="#cb43-2"></a>rbis</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -1</code></pre>
 </div>
@@ -970,8 +972,8 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 <section id="assign-ranks" class="slide level2 subsection">
 <h2>Assign ranks</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="co"># Assign ranks</span></span>
-<span id="cb47-2"><a href="#cb47-2"></a>data<span class="sc">$</span>ranks <span class="ot">&lt;-</span> <span class="fu">rank</span>(data<span class="sc">$</span>Testosterone)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="co"># Assign ranks</span></span>
+<span id="cb45-2"><a href="#cb45-2"></a>data<span class="sc">$</span>ranks <span class="ot">&lt;-</span> <span class="fu">rank</span>(data<span class="sc">$</span>Testosterone)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="the-data-1" class="slide level2 smaller">
@@ -997,18 +999,18 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 <section id="calculate-h-1" class="slide level2">
 <h2>Calculate H</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="co"># Now we need the sum of the ranks per group.</span></span>
-<span id="cb48-2"><a href="#cb48-2"></a>R.i <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(ranks <span class="sc">~</span> Soya, <span class="at">data =</span> data, sum)<span class="sc">$</span>ranks</span>
-<span id="cb48-3"><a href="#cb48-3"></a>R.i</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="co"># Now we need the sum of the ranks per group.</span></span>
+<span id="cb46-2"><a href="#cb46-2"></a>R.i <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(ranks <span class="sc">~</span> Soya, <span class="at">data =</span> data, sum)<span class="sc">$</span>ranks</span>
+<span id="cb46-3"><a href="#cb46-3"></a>R.i</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 883 883 547 927</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="co"># De total sample size N is:</span></span>
-<span id="cb50-2"><a href="#cb50-2"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(data)</span>
-<span id="cb50-3"><a href="#cb50-3"></a></span>
-<span id="cb50-4"><a href="#cb50-4"></a><span class="co"># And the sample size per group is n_i:</span></span>
-<span id="cb50-5"><a href="#cb50-5"></a>n.i <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(Testosterone <span class="sc">~</span> Soya, <span class="at">data=</span>data, length)<span class="sc">$</span>Testosterone</span>
-<span id="cb50-6"><a href="#cb50-6"></a>n.i</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="co"># De total sample size N is:</span></span>
+<span id="cb48-2"><a href="#cb48-2"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(data)</span>
+<span id="cb48-3"><a href="#cb48-3"></a></span>
+<span id="cb48-4"><a href="#cb48-4"></a><span class="co"># And the sample size per group is n_i:</span></span>
+<span id="cb48-5"><a href="#cb48-5"></a>n.i <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(Testosterone <span class="sc">~</span> Soya, <span class="at">data=</span>data, length)<span class="sc">$</span>Testosterone</span>
+<span id="cb48-6"><a href="#cb48-6"></a>n.i</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 20 20 20 20</code></pre>
 </div>
@@ -1018,24 +1020,21 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 <h2>Calculate H</h2>
 <p><span class="math display">\[H = \frac{12}{N(N+1)} \sum_{i=1}^k \frac{R_i^2}{n_i} - 3(N+1)\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a>H <span class="ot">&lt;-</span> ( <span class="dv">12</span><span class="sc">/</span>(N<span class="sc">*</span>(N<span class="sc">+</span><span class="dv">1</span>)) ) <span class="sc">*</span> <span class="fu">sum</span>(R.i<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>n.i) <span class="sc">-</span> <span class="dv">3</span><span class="sc">*</span>(N<span class="sc">+</span><span class="dv">1</span>)</span>
-<span id="cb52-2"><a href="#cb52-2"></a>H</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a>H <span class="ot">&lt;-</span> ( <span class="dv">12</span><span class="sc">/</span>(N<span class="sc">*</span>(N<span class="sc">+</span><span class="dv">1</span>)) ) <span class="sc">*</span> <span class="fu">sum</span>(R.i<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>n.i) <span class="sc">-</span> <span class="dv">3</span><span class="sc">*</span>(N<span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb50-2"><a href="#cb50-2"></a>H</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 8.658889</code></pre>
 </div>
 </div>
 <p>And the degrees of freedom</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a>k  <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb54-2"><a href="#cb54-2"></a>df <span class="ot">&lt;-</span> k <span class="sc">-</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a>k  <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb52-2"><a href="#cb52-2"></a>df <span class="ot">&lt;-</span> k <span class="sc">-</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="test-for-significance-1" class="slide level2 subsection">
 <h2>Test for significance</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="fu">visualize.chisq</span>(H, df, <span class="at">section=</span><span class="st">"upper"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
-</div>
 <img data-src="17.-non_parametric_tests_files/figure-revealjs/unnamed-chunk-82-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="follow-up" class="slide level2">
 <h2>Follow-up?</h2>
@@ -1079,8 +1078,8 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 <h2>Assign ranks</h2>
 <p>Rank <strong>within</strong> each participant (i.e., within each row).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a><span class="co"># Rank for each person</span></span>
-<span id="cb56-2"><a href="#cb56-2"></a>ranks <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">apply</span>(data, <span class="dv">1</span>, rank))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="co"># Rank for each person</span></span>
+<span id="cb53-2"><a href="#cb53-2"></a>ranks <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">apply</span>(data, <span class="dv">1</span>, rank))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="the-data-with-ranks" class="slide level2">
@@ -1107,23 +1106,23 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 <h2>Calculate <span class="math inline">\(F_r\)</span></h2>
 <p>Calculate ranks sum per condition and <span class="math inline">\(N\)</span>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a>R.i <span class="ot">&lt;-</span> <span class="fu">apply</span>(ranks, <span class="dv">2</span>, sum)</span>
-<span id="cb57-2"><a href="#cb57-2"></a>R.i</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a>R.i <span class="ot">&lt;-</span> <span class="fu">apply</span>(ranks, <span class="dv">2</span>, sum)</span>
+<span id="cb54-2"><a href="#cb54-2"></a>R.i</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Start_Rank Month1_Rank Month2_Rank 
          19          20          21 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a><span class="co"># N is number of participants</span></span>
-<span id="cb59-2"><a href="#cb59-2"></a>N <span class="ot">&lt;-</span> <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a><span class="co"># N is number of participants</span></span>
+<span id="cb56-2"><a href="#cb56-2"></a>N <span class="ot">&lt;-</span> <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="calculate-f_r-without-adjusting-for-ties" class="slide level2">
 <h2>Calculate <span class="math inline">\(F_r\)</span> (without adjusting for ties)</h2>
 <p><span class="math display">\[F_r = \left[ \frac{12}{Nk(k+1)} \sum_{i=1}^k R_i^2 \right] - 3N(k+1)\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a>k <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb60-2"><a href="#cb60-2"></a>F.r <span class="ot">&lt;-</span> ( ( <span class="dv">12</span><span class="sc">/</span>(N<span class="sc">*</span>k<span class="sc">*</span>(k<span class="sc">+</span><span class="dv">1</span>)) ) <span class="sc">*</span> <span class="fu">sum</span>(R.i<span class="sc">^</span><span class="dv">2</span>) ) <span class="sc">-</span> ( <span class="dv">3</span><span class="sc">*</span>N<span class="sc">*</span>(k<span class="sc">+</span><span class="dv">1</span>) )</span>
-<span id="cb60-3"><a href="#cb60-3"></a>F.r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a>k <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb57-2"><a href="#cb57-2"></a>F.r <span class="ot">&lt;-</span> ( ( <span class="dv">12</span><span class="sc">/</span>(N<span class="sc">*</span>k<span class="sc">*</span>(k<span class="sc">+</span><span class="dv">1</span>)) ) <span class="sc">*</span> <span class="fu">sum</span>(R.i<span class="sc">^</span><span class="dv">2</span>) ) <span class="sc">-</span> ( <span class="dv">3</span><span class="sc">*</span>N<span class="sc">*</span>(k<span class="sc">+</span><span class="dv">1</span>) )</span>
+<span id="cb57-3"><a href="#cb57-3"></a>F.r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.2</code></pre>
 </div>
@@ -1133,25 +1132,22 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 <h2>Adjusting for ties (just for fun)</h2>
 <p><span class="math display">\[  \frac{(k-1) \sum_i^k (R_i - \frac{b(k+1))}{2})^2}{\sum_i^b \sum_j^k (R_{ij}^2) - \frac{bk(k+1)^2}{4}} \]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a>k <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb62-2"><a href="#cb62-2"></a>b <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb62-3"><a href="#cb62-3"></a>F.r <span class="ot">&lt;-</span> (<span class="fu">sum</span> ((R.i <span class="sc">-</span> ((b<span class="sc">*</span>(k<span class="sc">+</span><span class="dv">1</span>))<span class="sc">/</span><span class="dv">2</span>) )<span class="sc">^</span><span class="dv">2</span>) <span class="sc">*</span> (k<span class="dv">-1</span>)) <span class="sc">/</span> (<span class="fu">sum</span>((ranks<span class="sc">^</span><span class="dv">2</span>)) <span class="sc">-</span> (b<span class="sc">*</span>k <span class="sc">*</span>(k<span class="sc">+</span><span class="dv">1</span>)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="dv">4</span>)</span>
-<span id="cb62-4"><a href="#cb62-4"></a>F.r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a>k <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb59-2"><a href="#cb59-2"></a>b <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb59-3"><a href="#cb59-3"></a>F.r <span class="ot">&lt;-</span> (<span class="fu">sum</span> ((R.i <span class="sc">-</span> ((b<span class="sc">*</span>(k<span class="sc">+</span><span class="dv">1</span>))<span class="sc">/</span><span class="dv">2</span>) )<span class="sc">^</span><span class="dv">2</span>) <span class="sc">*</span> (k<span class="dv">-1</span>)) <span class="sc">/</span> (<span class="fu">sum</span>((ranks<span class="sc">^</span><span class="dv">2</span>)) <span class="sc">-</span> (b<span class="sc">*</span>k <span class="sc">*</span>(k<span class="sc">+</span><span class="dv">1</span>)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="dv">4</span>)</span>
+<span id="cb59-4"><a href="#cb59-4"></a>F.r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.2</code></pre>
 </div>
 </div>
 <p>And the degrees of freedom</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a>df <span class="ot">&lt;-</span> k <span class="sc">-</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a>df <span class="ot">&lt;-</span> k <span class="sc">-</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="test-for-significance-2" class="slide level2">
 <h2>Test for significance</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a><span class="fu">visualize.chisq</span>(F.r, df, <span class="at">section=</span><span class="st">"upper"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
-</div>
 <img data-src="17.-non_parametric_tests_files/figure-revealjs/unnamed-chunk-101-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="post-hoc-tests" class="slide level2">
 <h2>Post hoc tests?</h2>
@@ -1159,14 +1155,30 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 <li>Conover test</li>
 <li>Follow up with Wilcoxon signed-rank tests!</li>
 </ul>
-<!-- # ```{r child="../../../../topics/rank_correlation/rank_correlation.qmd", eval=TRUE} -->
-<!-- # ``` -->
-<!-- Footer insert below -->
 </section></section>
 <section>
-<section id="end" class="title-slide slide level1 center">
-<h1>End</h1>
+<section id="closing" class="title-slide slide level1 center">
+<h1>Closing</h1>
 
+</section>
+<section id="recap" class="slide level2">
+<h2>Recap</h2>
+<ul>
+<li>Non-parametric tests are rank-based, which means they are robust to:
+<ul>
+<li>Non-normality</li>
+<li>Transformations of the data</li>
+<li>Outliers</li>
+</ul></li>
+</ul>
+</section>
+<section id="recommended-exercises" class="slide level2">
+<h2>Recommended Exercises</h2>
+<div>
+<ul>
+<li><a href="https://discoverjasp.com/pages/smart_alex#task-15.1">Exercise 15.1</a>, <a href="https://discoverjasp.com/pages/smart_alex#task-15.2">Exercise 15.2</a>, <a href="https://discoverjasp.com/pages/smart_alex#task-15.4">Exercise 15.4</a>, <a href="https://discoverjasp.com/pages/smart_alex#task-15.11">Exercise 15.11</a></li>
+</ul>
+</div>
 </section>
 <section id="contact" class="slide level2">
 <h2>Contact</h2>
@@ -1187,7 +1199,7 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 </figure>
 </div>
 </small><p><small style="text-align:left;"></small></p>
-<p><img src="https://shklinkenberg.github.io/uva_style/images/logo_uva.png" class="slide-logo"></p>
+<p><img src="../../images/logo_uva.png" class="slide-logo"></p>
 <div class="footer footer-default">
 <p>Scientific &amp; Statistical Reasoning</p>
 </div>

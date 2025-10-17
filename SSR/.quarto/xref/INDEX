@@ -230,5 +230,13 @@
   "2025/18. ANOVA_repeated_mixed/18. ANOVA_repeated_and_mixed.qmd": {
     "18. ANOVA_repeated_and_mixed.html": "fc3f885b",
     "18. ANOVA_repeated_and_mixed.slide.html": "4756e859"
+  },
+  "2025/20. non_parametric_tests/17. non_parametric_tests.qmd": {
+    "17. non_parametric_tests.slide.html": "bb85c2fa",
+    "17. non_parametric_tests.html": "c56e2927"
+  },
+  "2025/20. non_parametric_tests/20. non_parametric_tests.qmd": {
+    "20. non_parametric_tests.slide.html": "4b7d1eea",
+    "20. non_parametric_tests.html": "2aec28a7"
   }
 }

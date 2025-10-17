@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Sharon Klinkenberg &amp; Johnny van Doorn">
+<meta name="author" content="Johnny van Doorn”">
 
 <title>wilcoxon_rank_sum_test</title>
 <style>
@@ -97,8 +97,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#wilcoxon-rank-sum-test-1" id="toc-wilcoxon-rank-sum-test-1" class="nav-link" data-scroll-target="#wilcoxon-rank-sum-test-1">Wilcoxon rank-sum test</a></li>
   <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
-  <li><a href="#calculate-the-sum-of-ranks-per-group" id="toc-calculate-the-sum-of-ranks-per-group" class="nav-link" data-scroll-target="#calculate-the-sum-of-ranks-per-group">Calculate the sum of ranks per group</a></li>
-  <li><a href="#so-w-is-the-lowest" id="toc-so-w-is-the-lowest" class="nav-link" data-scroll-target="#so-w-is-the-lowest">So W is the lowest</a></li>
+  <li><a href="#test-statistic-w-is-the-sum-of-ranks-per-group" id="toc-test-statistic-w-is-the-sum-of-ranks-per-group" class="nav-link" data-scroll-target="#test-statistic-w-is-the-sum-of-ranks-per-group">Test statistic W is the sum of ranks per group</a></li>
   <li><a href="#subtracting-the-minimum-score" id="toc-subtracting-the-minimum-score" class="nav-link" data-scroll-target="#subtracting-the-minimum-score">Subtracting the minimum score</a></li>
   <li><a href="#normal-approximation-for-w" id="toc-normal-approximation-for-w" class="nav-link" data-scroll-target="#normal-approximation-for-w">Normal approximation for W</a></li>
   <li><a href="#mean-w-under-h_0" id="toc-mean-w-under-h_0" class="nav-link" data-scroll-target="#mean-w-under-h_0">Mean W under <span class="math inline">\(H_0\)</span></a></li>
@@ -139,8 +138,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="calculate-the-sum-of-ranks-per-group" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="calculate-the-sum-of-ranks-per-group">Calculate the sum of ranks per group</h2>
+<section id="test-statistic-w-is-the-sum-of-ranks-per-group" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="test-statistic-w-is-the-sum-of-ranks-per-group">Test statistic W is the sum of ranks per group</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>rankSums <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(rankedBDI <span class="sc">~</span> Drug, data, sum)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>rankSums</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -150,12 +149,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 2 Ecstasy     119.5</code></pre>
 </div>
 </div>
-</section>
-<section id="so-w-is-the-lowest" class="level2">
-<h2 class="anchored" data-anchor-id="so-w-is-the-lowest">So W is the lowest</h2>
-<p><span class="math display">\[W=min\left(\sum{R_1},\sum{R_2}\right)\]</span></p>
+<p>We can take the sum of ranks for the first group as W:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>W <span class="ot">&lt;-</span> <span class="fu">min</span>(rankSums<span class="sc">$</span>rankedBDI)</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>W <span class="ot">&lt;-</span> rankSums[<span class="dv">1</span>, <span class="dv">2</span>]</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>W</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 90.5</code></pre>
@@ -164,7 +160,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="subtracting-the-minimum-score" class="level2">
 <h2 class="anchored" data-anchor-id="subtracting-the-minimum-score">Subtracting the minimum score</h2>
-<p>Software reports the value of U, which is W with its minimum value subtracted:</p>
+<p>JASP reports the value of U, which is W with its minimum value subtracted:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>W.min <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>); W.min</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -240,10 +236,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="test-for-significance-1-sided" class="level2">
 <h2 class="anchored" data-anchor-id="test-for-significance-1-sided">Test for significance 1 sided</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="st">"visualize"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()){ <span class="fu">install.packages</span>(<span class="st">"visualize"</span>) }</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"visualize"</span>)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.norm</span>(z, <span class="at">section=</span><span class="st">"lower"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -256,7 +248,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="test-for-significance-2-sided" class="level2">
 <h2 class="anchored" data-anchor-id="test-for-significance-2-sided">Test for significance 2 sided</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.norm</span>(<span class="fu">c</span>(z,<span class="sc">-</span>z), <span class="at">section=</span><span class="st">"tails"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -270,9 +261,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="effect-size-rank-biserial-correlation">Effect size rank-biserial correlation</h2>
 <p><span class="math display">\[r_{bs} = 1 - \frac{2*W}{n_1*n_2}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>W <span class="ot">&lt;-</span> W <span class="sc">-</span> W.min <span class="co"># use modern W</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>biserialCor <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> (<span class="dv">2</span><span class="sc">*</span>(W)) <span class="sc">/</span> (n<span class="fl">.1</span><span class="sc">*</span>n<span class="fl">.2</span>);</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>biserialCor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>W <span class="ot">&lt;-</span> W <span class="sc">-</span> W.min <span class="co"># use modern W</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>biserialCor <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> (<span class="dv">2</span><span class="sc">*</span>(W)) <span class="sc">/</span> (n<span class="fl">.1</span><span class="sc">*</span>n<span class="fl">.2</span>);</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>biserialCor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.29</code></pre>
 </div>

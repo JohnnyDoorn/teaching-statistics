@@ -44,25 +44,22 @@ data$rankedBDI <- rank(data$Sunday.BDI)
 datatable(data, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
 ```
 
-## Calculate the sum of ranks per group {.subsection}
+## Test statistic W is the sum of ranks per group {.subsection}
 
 ```{r, echo=TRUE}
 rankSums <- aggregate(rankedBDI ~ Drug, data, sum)
 rankSums
 ```
 
-## So W is the lowest
-
-$$W=min\left(\sum{R_1},\sum{R_2}\right)$$
-  
+We can take the sum of ranks for the first group as W:  
 ```{r, echo=TRUE}
-W <- min(rankSums$rankedBDI)
+W <- rankSums[1, 2]
 W
 ```
 
 ## Subtracting the minimum score
 
-Software reports the value of U, which is W with its minimum value subtracted:
+JASP reports the value of U, which is W with its minimum value subtracted:
 
 ```{r, echo=TRUE}
 W.min <- sum(1:10); W.min
@@ -122,7 +119,7 @@ z
 
 ## Test for significance 1 sided
 
-```{r, echo=TRUE, warning=FALSE, fig.align='center'}
+```{r, echo=FALSE, warning=FALSE, fig.align='center'}
 if(!"visualize" %in% installed.packages()){ install.packages("visualize") }
 library("visualize")
 
@@ -131,7 +128,7 @@ visualize.norm(z, section="lower")
 
 ## Test for significance 2 sided
 
-```{r, echo=TRUE, warning=FALSE, fig.align='center'}
+```{r, echo=FALSE, warning=FALSE, fig.align='center'}
 visualize.norm(c(z,-z), section="tails")
 ```
 

@@ -103,8 +103,9 @@ df <- k - 1
 
 ## Test for significance {.subsection}
 
-```{r, fig.align='center', warning=FALSE, echo=TRUE}
-visualize.chisq(H, df, section="upper")
+```{r, fig.align='center', warning=FALSE, echo=FALSE}
+source("../../plotFunctionsSSR.r")
+visualize_chisq_base(H = H, df = df, section = "upper")
 ```
 
 

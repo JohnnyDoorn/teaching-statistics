@@ -113,12 +113,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#model-fit-with-all-predictor-variables-factor-covariate" id="toc-model-fit-with-all-predictor-variables-factor-covariate" class="nav-link" data-scroll-target="#model-fit-with-all-predictor-variables-factor-covariate">Model fit with all predictor variables (factor + covariate)</a></li>
   <li><a href="#predictions-of-the-full-model" id="toc-predictions-of-the-full-model" class="nav-link" data-scroll-target="#predictions-of-the-full-model">Predictions of the full model</a></li>
   <li><a href="#total-variance-visual" id="toc-total-variance-visual" class="nav-link" data-scroll-target="#total-variance-visual">Total variance visual</a></li>
-  <li><a href="#explained-by-group" id="toc-explained-by-group" class="nav-link" data-scroll-target="#explained-by-group">Explained by group</a></li>
-  <li><a href="#explained-by-group---visual" id="toc-explained-by-group---visual" class="nav-link" data-scroll-target="#explained-by-group---visual">Explained by group - visual</a></li>
-  <li><a href="#explained-by-covariate" id="toc-explained-by-covariate" class="nav-link" data-scroll-target="#explained-by-covariate">Explained by covariate</a></li>
-  <li><a href="#explained-by-covariate---visual" id="toc-explained-by-covariate---visual" class="nav-link" data-scroll-target="#explained-by-covariate---visual">Explained by covariate - visual</a></li>
-  <li><a href="#explained-by-group-and-covariate" id="toc-explained-by-group-and-covariate" class="nav-link" data-scroll-target="#explained-by-group-and-covariate">Explained by group and covariate</a></li>
-  <li><a href="#explained-by-group-and-covariate---visual" id="toc-explained-by-group-and-covariate---visual" class="nav-link" data-scroll-target="#explained-by-group-and-covariate---visual">Explained by group and covariate - visual</a></li>
+  <li><a href="#explained-by-group-model" id="toc-explained-by-group-model" class="nav-link" data-scroll-target="#explained-by-group-model">Explained by group model</a></li>
+  <li><a href="#explained-by-group-model---visual" id="toc-explained-by-group-model---visual" class="nav-link" data-scroll-target="#explained-by-group-model---visual">Explained by group model - visual</a></li>
+  <li><a href="#explained-by-covariate-model" id="toc-explained-by-covariate-model" class="nav-link" data-scroll-target="#explained-by-covariate-model">Explained by covariate model</a></li>
+  <li><a href="#explained-by-covariate-model---visual" id="toc-explained-by-covariate-model---visual" class="nav-link" data-scroll-target="#explained-by-covariate-model---visual">Explained by covariate model - visual</a></li>
+  <li><a href="#explained-by-full-model" id="toc-explained-by-full-model" class="nav-link" data-scroll-target="#explained-by-full-model">Explained by full model</a></li>
+  <li><a href="#explained-by-full-model---visual" id="toc-explained-by-full-model---visual" class="nav-link" data-scroll-target="#explained-by-full-model---visual">Explained by full model - visual</a></li>
   <li><a href="#unexplained-variance-group-and-cov" id="toc-unexplained-variance-group-and-cov" class="nav-link" data-scroll-target="#unexplained-variance-group-and-cov">Unexplained variance (group and cov)</a></li>
   <li><a href="#divide-model-sum-of-squares" id="toc-divide-model-sum-of-squares" class="nav-link" data-scroll-target="#divide-model-sum-of-squares">Divide model sum of squares</a></li>
   <li><a href="#divide-model-sum-of-squares-1" id="toc-divide-model-sum-of-squares-1" class="nav-link" data-scroll-target="#divide-model-sum-of-squares-1">Divide model sum of squares</a></li>
@@ -310,42 +310,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="explained-by-group" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="explained-by-group">Explained by group</h2>
+<section id="explained-by-group-model" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="explained-by-group-model">Explained by group model</h2>
 <p>The model that predicts only using group means:</p>
 <p><span class="math inline">\(\hat{y} = b_0 + b_1 {dummy}_1 + b_2 {dummy}_2\)</span></p>
 <p><span class="math inline">\(\hat{y} = 39.68 + 1.18 \times {dummy}_1 + -2.08 \times {dummy}_2\)</span></p>
 </section>
-<section id="explained-by-group---visual" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="explained-by-group---visual">Explained by group - visual</h2>
+<section id="explained-by-group-model---visual" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="explained-by-group-model---visual">Explained by group model - visual</h2>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="ancova_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
-<section id="explained-by-covariate" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="explained-by-covariate">Explained by covariate</h2>
+<section id="explained-by-covariate-model" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="explained-by-covariate-model">Explained by covariate model</h2>
 <p>The model that predicts only using openness:</p>
 <p><span class="math inline">\(\hat{y} = b_0 + b_3 covar\)</span></p>
 <p><span class="math inline">\(\hat{y} = 24.99 + 1.8 \times {Openness}\)</span></p>
 </section>
-<section id="explained-by-covariate---visual" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="explained-by-covariate---visual">Explained by covariate - visual</h2>
+<section id="explained-by-covariate-model---visual" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="explained-by-covariate-model---visual">Explained by covariate model - visual</h2>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="ancova_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
-<section id="explained-by-group-and-covariate" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="explained-by-group-and-covariate">Explained by group and covariate</h2>
+<section id="explained-by-full-model" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="explained-by-full-model">Explained by full model</h2>
 <p>The model that predicts with group and covariate:</p>
 <p><span class="math inline">\(\hat{y} = b_0 + b_1 {dummy}_1 + b_2 {dummy}_2 + b_3 covar\)</span></p>
 <p><span class="math inline">\(\hat{y} = 25.9 + -0.12 \times {dummy}_1 + -2.7 \times {dummy}_2 + 1.8 \times {Openness}\)</span></p>
 </section>
-<section id="explained-by-group-and-covariate---visual" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="explained-by-group-and-covariate---visual">Explained by group and covariate - visual</h2>
+<section id="explained-by-full-model---visual" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="explained-by-full-model---visual">Explained by full model - visual</h2>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="ancova_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
@@ -391,12 +391,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="f-ratio" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="f-ratio">F-ratio</h2>
-<p><span class="math inline">\(F = \frac{{MS}_{model}}{{MS}_{error}} = \frac{{SIGNAL}}{{NOISE}}\)</span></p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3.978448</code></pre>
 </div>
 </div>
+<p><span class="math inline">\(MS_{model-group} = \frac{32.582}{2} = 16.291\)</span></p>
+<p><span class="math inline">\(F = \frac{{MS}_{model}}{{MS}_{error}} = \frac{{SIGNAL}}{{NOISE}} = \frac{16.291}{4.095} = 3.98\)</span></p>
 </section>
 <section id="p-value" class="level2">
 <h2 class="anchored" data-anchor-id="p-value"><span class="math inline">\(P\)</span>-value</h2>

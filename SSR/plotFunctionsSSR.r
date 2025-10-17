@@ -92,6 +92,58 @@ plotTstatSamplingDistribution <- function(tVal = 0, myDF = 10, myNCP = 0, altHyp
 }
 
 
+# Function to visualize chi-square distribution with shaded region
+visualize_chisq_base <- function(H, df, section = "upper", col = "skyblue", myLimX =NULL) {
+  # Set up x range (wide enough to show distribution)
+  x <- seq(0, max(ceiling(H) * 1.5, qchisq(0.999, df)), length = 500)
+  y <- dchisq(x, df)
+  
+  # Plot the chi-square density
+  plot(x, y, type = "l", lwd = 2, col = "black", bty = "n", las =1,
+       xlab = expression(chi^2), ylab = "Density",
+       main = bquote("Chi-square Distribution (" ~ df == .(df) ~ ")"), xlim = myLimX)
+  
+  # Shade area depending on section
+  if (section == "upper") {
+    x_shade <- x[x >= H]
+    y_shade <- y[x >= H]
+  } else if (section == "lower") {
+    x_shade <- x[x <= H]
+    y_shade <- y[x <= H]
+  } else if (section == "both") {
+    cutoff <- H
+    x_shade <- x[x <= cutoff | x >= qchisq(1 - pchisq(cutoff, df), df)]
+    y_shade <- y[x <= cutoff | x >= qchisq(1 - pchisq(cutoff, df), df)]
+  } else {
+    stop("section must be 'upper', 'lower', or 'both'")
+  }
+  
+  # Shade area under curve
+  polygon(c(x_shade, rev(x_shade)),
+          c(y_shade, rep(0, length(y_shade))),
+          col = col, border = NA)
+  
+  # Add vertical cutoff line
+  abline(v = H, col = "darkred", lwd = 2, lty = 2)
+  
+  # Add text showing p-value
+  if (section == "upper") {
+    pval <- pchisq(H, df, lower.tail = FALSE)
+    legend("topright",
+           legend = bquote("P(" * chi^2 >= .(round(H, 3)) * ") = " * .(round(pval, 4))),
+           bty = "n")
+  } else if (section == "lower") {
+    pval <- pchisq(H, df)
+    legend("topright",
+           legend = bquote("P(" * chi^2 <= .round(H, 3) * ") = " * .(round(pval, 4))),
+           bty = "n")
+  }
+}
+
+# Example usage
+# visualize_chisq_base(H = 6.5, df = 3, section = "upper")
+
+
 # plotTstatSamplingDistribution(tVal = 2)
 
 

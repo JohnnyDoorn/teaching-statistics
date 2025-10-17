@@ -1,13 +1,27 @@
 ---
-title: "18. Assumptions & Non-parametric tests"
-author: "Sharon Kinkenberg & Johnny van Doorn"
-date: "18 oct 2024"
+title: "20. Non-parametric tests"
+author: "Johnny van Doorn"
+date: "21 oct 2025"
 footer: "Scientific & Statistical Reasoning"
-format: 
-  html: default
-  revealjs: 
+format:
+  revealjs:
     output-ext: slide.html
+    css: ../../ajohnson.css
+  html: default
+css: ../../ajohnson.css
 ---
+
+<div class="goals">
+In this lecture we aim to:
+
+- Repeat some assumptions
+- Introduce rank-based methods
+- Look at rank-based equivalents to some old friends
+- Show these in JASP
+    
+<strong>Reading:</strong>
+Chapter 15
+</div>
 
 ## Assumptions
 - Not an all-or-nothing case
@@ -18,12 +32,14 @@ format:
 - Don't trash your data, but investigate: why is this occurring?
 
 ## Homogeneity of variances
-- Apply correction when possible (Welch for t-test/one-way ANOVA)
+- Between subjects designs
+- Correction: Welch for t-test/one-way ANOVA
 - Adjusts df $\rightarrow p$-value & CI
 - Jane Superbrain 14.3 (pointless p)
 
 ## Sphericity
-- Apply correction when possible (Greenhouse-Geisser)
+- Within subjects designs with >2 levels
+- Correction: Greenhouse-Geisser for RM ANOVA
 - Adjusts df $\rightarrow p$-value & CI
 - Jane Superbrain 14.3 (pointless p)
 
@@ -31,8 +47,8 @@ format:
 
 ## Normality
 - Shape of distribution (and no CLT)
-    - [Illustration of consequences](https://johnnydoorn.github.io/teaching-statistics/extra-texts/ViolatingNormalityANOVA.html)
 - Outliers
+- [Illustration of consequences](https://johnnydoorn.github.io/teaching-statistics/extra-texts/ViolatingNormalityANOVA.html)
 
 
 ```{r child="../../topics/non_parametric_concept/non_parametric_concept.qmd", eval=TRUE}
@@ -50,10 +66,20 @@ format:
 ```{r child="../../topics/nonpar_friedman_anova/friedman_anova.qmd", eval=TRUE}
 ```
 
-<!-- # ```{r child="../../../../topics/rank_correlation/rank_correlation.qmd", eval=TRUE} -->
-<!-- # ``` -->
+# Closing
 
-<!-- Footer insert below -->
+## Recap
+
+- Non-parametric tests are rank-based, which means they are robust to:
+  - Non-normality
+  - Transformations of the data
+  - Outliers
+  
+## Recommended Exercises
+
+::: {}
+- [Exercise 15.1](https://discoverjasp.com/pages/smart_alex#task-15.1),  [Exercise 15.2](https://discoverjasp.com/pages/smart_alex#task-15.2), [Exercise 15.4](https://discoverjasp.com/pages/smart_alex#task-15.4), [Exercise 15.11](https://discoverjasp.com/pages/smart_alex#task-15.11)
+:::
 
 ```{r child="../../footer.qmd"}
 ```

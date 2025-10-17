@@ -19,8 +19,7 @@ format:
 - [Addition: chapter 7 on ANOVA](https://johnnydoorn.github.io/IntroductionBayesianInference/07-anova.html)
 
 - [All data sets in Field](https://johnnydoorn.github.io/discoverjasp/repository/dsuj_sav_files.zip)
-- JASP version 0.18 in IWO
-    - No conditional posthoc tests
+
 
 ```{r child="../../topics/bayes/bayesian_parameter_estimation.qmd"}
 ```
