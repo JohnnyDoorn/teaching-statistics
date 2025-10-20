@@ -120,7 +120,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Paired &gt;2 samples</p>
 <section id="friedmans-anova-1" class="level2 section">
 <h2 class="section anchored" data-anchor-id="friedmans-anova-1">Friedman’s ANOVA</h2>
-<p><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/William-Friedman.jpg/220px-William-Friedman.jpg" style="float: left; margin: 0 20px 0 0; height: 150px;"></p>
 <p>Created by <a href="http://en.wikipedia.org/wiki/William_F._Friedman">William Frederick Friedman</a> the Friedman’s ANOVA is a nonparametric alternative to the repeated one-way ANOVA.</p>
 <p>Just like the Kruskal-Wallis test, Friedman’s ANOVA, subtracts the expected mean ranking from the calculated observed mean ranking, which is also <span class="math inline">\(\chi^2\)</span> distributed.</p>
 <!-- ## Simulate data -->
@@ -134,11 +133,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="the-data" class="level2">
 <h2 class="anchored" data-anchor-id="the-data">The data</h2>
+<p><a href="https://discoverjasp.com/repository/dsj1_data/data/soya.jasp">Link</a></p>
 <div class="cell">
 <div class="cell-output-display">
 
 <div class="datatables html-widget html-fill-item" id="htmlwidget-19b75abc08a16462c931" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-19b75abc08a16462c931">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[63.75,62.98,65.98,107.27,66.58,120.46,62.01,71.87,83.01000000000001,76.62],[65.38,66.23999999999999,67.7,102.72,69.45,119.96,66.09,73.62,75.81,67.66],[81.34,69.31,77.89,91.33,72.87,114.26,68.01000000000001,55.43,71.63,68.59999999999999]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Start<\/th>\n      <th>Month1<\/th>\n      <th>Month2<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Start","targets":1},{"name":"Month1","targets":2},{"name":"Month2","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-19b75abc08a16462c931">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[63.75,62.98,65.98,107.27,66.58,120.46,62.01,71.87,83.01000000000001,76.62],[65.38,66.23999999999999,67.7,102.72,69.45,119.96,66.09,73.62,75.81,67.66],[81.34,69.31,77.89,91.33,72.87,114.26,68.01000000000001,55.43,71.63,68.59999999999999]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>T0<\/th>\n      <th>T1<\/th>\n      <th>T2<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"T0","targets":1},{"name":"T1","targets":2},{"name":"T2","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -150,13 +150,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>ranks <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">apply</span>(data, <span class="dv">1</span>, rank))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="the-data-with-ranks" class="level2">
-<h2 class="anchored" data-anchor-id="the-data-with-ranks">The data with ranks</h2>
+<section id="the-data-with-ranks" class="level2 small">
+<h2 class="small anchored" data-anchor-id="the-data-with-ranks">The data with ranks</h2>
 <div class="cell">
 <div class="cell-output-display">
 
 <div class="datatables html-widget html-fill-item" id="htmlwidget-fa5a51200a4e3a61c57e" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-fa5a51200a4e3a61c57e">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[63.75,62.98,65.98,107.27,66.58,120.46,62.01,71.87,83.01000000000001,76.62],[65.38,66.23999999999999,67.7,102.72,69.45,119.96,66.09,73.62,75.81,67.66],[81.34,69.31,77.89,91.33,72.87,114.26,68.01000000000001,55.43,71.63,68.59999999999999],[1,1,1,3,1,3,1,2,3,3],[2,2,2,2,2,2,2,3,2,1],[3,3,3,1,3,1,3,1,1,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Start<\/th>\n      <th>Month1<\/th>\n      <th>Month2<\/th>\n      <th>Start_Rank<\/th>\n      <th>Month1_Rank<\/th>\n      <th>Month2_Rank<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Start","targets":1},{"name":"Month1","targets":2},{"name":"Month2","targets":3},{"name":"Start_Rank","targets":4},{"name":"Month1_Rank","targets":5},{"name":"Month2_Rank","targets":6}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-fa5a51200a4e3a61c57e">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[63.75,62.98,65.98,107.27,66.58,120.46,62.01,71.87,83.01000000000001,76.62],[65.38,66.23999999999999,67.7,102.72,69.45,119.96,66.09,73.62,75.81,67.66],[81.34,69.31,77.89,91.33,72.87,114.26,68.01000000000001,55.43,71.63,68.59999999999999],[1,1,1,3,1,3,1,2,3,3],[2,2,2,2,2,2,2,3,2,1],[3,3,3,1,3,1,3,1,1,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>T0<\/th>\n      <th>T1<\/th>\n      <th>T2<\/th>\n      <th>T0_R<\/th>\n      <th>T1_R<\/th>\n      <th>T2_R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":5,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"T0","targets":1},{"name":"T1","targets":2},{"name":"T2","targets":3},{"name":"T0_R","targets":4},{"name":"T1_R","targets":5},{"name":"T2_R","targets":6}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -177,8 +177,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>R.i <span class="ot">&lt;-</span> <span class="fu">apply</span>(ranks, <span class="dv">2</span>, sum)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>R.i</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> Start_Rank Month1_Rank Month2_Rank 
-         19          20          21 </code></pre>
+<pre><code>T0_R T1_R T2_R 
+  19   20   21 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># N is number of participants</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

@@ -16,7 +16,7 @@ Independent >2 samples
 
 Created by [William Henry Kruskal](http://en.wikipedia.org/wiki/William_Kruskal) (L) and [Wilson Allen Wallis](http://en.wikipedia.org/wiki/W._Allen_Wallis) (R), the Kruskal-Wallis test is a nonparametric alternative to the independent one-way ANOVA.
 
-The Kruskal-Wallis test essentially subtracts the expected mean ranking from the calculated oberved mean ranking, which is $\chi^2$ distributed.
+The Kruskal-Wallis test essentially subtracts the expected mean ranking from each oberved mean ranking, which is $\chi^2$ distributed.
 
 <!-- ## Simulate data -->
 
@@ -50,9 +50,15 @@ data$ranks <- rank(data$Testosterone)
 ```
 
 ## The data {.smaller}
+[Link](https://discoverjasp.com/repository/dsj1_data/data/soya.jasp)
 
 ```{r, echo=FALSE}
-datatable(data, options = list(iDisplayLength = 7, searching = FALSE, scrollY = 415, paging = F, info = F))
+datatable(data, options = list(searching = FALSE, 
+                            scrollY   = 300, 
+                            paging    = F, 
+                            info      = F,
+                            dom       = 'Bfrtip',
+                            buttons   = c('csv')))
 
 # Write data for use in SPSS
 # write.csv(data, "kruskal-Wallis.csv", row.names=FALSE)

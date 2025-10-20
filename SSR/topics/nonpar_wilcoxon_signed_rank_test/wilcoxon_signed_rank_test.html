@@ -129,8 +129,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-9163a08b1309944f71eb" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-9163a08b1309944f71eb">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[15,35,16,18,19,17,27,16,13,20],[28,35,35,24,39,32,27,29,36,35]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sunday<\/th>\n      <th>Wednesday<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Sunday","targets":1},{"name":"Wednesday","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-e6848e012ec5828529fe" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-e6848e012ec5828529fe">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[15,35,16,18,19,17,27,16,13,20],[28,35,35,24,39,32,27,29,36,35]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sunday<\/th>\n      <th>Wednesday<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Sunday","targets":1},{"name":"Wednesday","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -146,8 +146,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="the-plot">The plot</h2>
 <p><img src="../../images/figure-15-7.jpeg" class="img-fluid" width="300"></p>
 </section>
-<section id="calculate-t" class="level2 smaller subsection">
-<h2 class="smaller subsection anchored" data-anchor-id="calculate-t">Calculate T</h2>
+<section id="calculate-t" class="level2 small subsection">
+<h2 class="small subsection anchored" data-anchor-id="calculate-t">Calculate T</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate difference in scores between first and second measure</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>diff <span class="ot">=</span> data<span class="sc">$</span>Sunday <span class="sc">-</span> data<span class="sc">$</span>Wednesday</span>
@@ -158,7 +158,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove observations where the difference is 0</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data[data<span class="sc">$</span>diff <span class="sc">!=</span> <span class="dv">0</span>, ]</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create rank variable with place holder NA</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create rank variable</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>rank <span class="ot">&lt;-</span> <span class="fu">rank</span>(data<span class="sc">$</span>abs.diff)</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign a '+' or a '-' to those values </span></span>
@@ -170,8 +170,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-53dcc0c714e0b3f24086" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-53dcc0c714e0b3f24086">{"x":{"filter":"none","vertical":false,"data":[["1","3","4","5","6","8","9","10"],[15,16,18,19,17,16,13,20],[28,35,24,39,32,29,36,35],[-13,-19,-6,-20,-15,-13,-23,-15],[13,19,6,20,15,13,23,15],[2.5,6,1,7,4.5,2.5,8,4.5],[-1,-1,-1,-1,-1,-1,-1,-1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sunday<\/th>\n      <th>Wednesday<\/th>\n      <th>diff<\/th>\n      <th>abs.diff<\/th>\n      <th>rank<\/th>\n      <th>sign<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Sunday","targets":1},{"name":"Wednesday","targets":2},{"name":"diff","targets":3},{"name":"abs.diff","targets":4},{"name":"rank","targets":5},{"name":"sign","targets":6}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-c7350f3bcc444881d46a" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-c7350f3bcc444881d46a">{"x":{"filter":"none","vertical":false,"data":[["1","3","4","5","6","8","9","10"],[15,16,18,19,17,16,13,20],[28,35,24,39,32,29,36,35],[-13,-19,-6,-20,-15,-13,-23,-15],[13,19,6,20,15,13,23,15],[2.5,6,1,7,4.5,2.5,8,4.5],[-1,-1,-1,-1,-1,-1,-1,-1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sunday<\/th>\n      <th>Wednesday<\/th>\n      <th>diff<\/th>\n      <th>abs.diff<\/th>\n      <th>rank<\/th>\n      <th>sign<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":300,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Sunday","targets":1},{"name":"Wednesday","targets":2},{"name":"diff","targets":3},{"name":"abs.diff","targets":4},{"name":"rank","targets":5},{"name":"sign","targets":6}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>

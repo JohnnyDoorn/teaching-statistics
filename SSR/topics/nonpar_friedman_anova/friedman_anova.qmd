@@ -39,6 +39,7 @@ Just like the Kruskal-Wallis test, Friedman's ANOVA, subtracts the expected mean
 # data <- data.frame(factor, depres)
 data <- read.csv("diet.csv")
 data <- round(data, 2)
+colnames(data) <- c("T0", "T1", "T2")
 ```
 
 <!-- ## Simulate data -->
@@ -52,6 +53,7 @@ data <- round(data, 2)
 <!-- ``` -->
 
 ## The data
+[Link](https://discoverjasp.com/repository/dsj1_data/data/soya.jasp)
 
 ```{r, echo=FALSE}
 datatable(data, options = list(iDisplayLength = 7, searching = FALSE, scrollY = 415, paging = F, info = F))
@@ -70,14 +72,19 @@ Rank **within** each participant (i.e., within each row).
 ranks <- t(apply(data, 1, rank))
 ```
 
-## The data with ranks
+## The data with ranks {.small}
 
 ```{r, echo=FALSE}
-colnames(ranks) <- paste0(colnames(data), "_Rank")
+colnames(ranks) <- paste0(colnames(data), "_R")
 combDat <- cbind(data, ranks)
 # Write data for use in SPSS
 write.csv(combDat, "Friedman.csv", row.names=FALSE)
-datatable(combDat, options = list(iDisplayLength = 7, searching = FALSE, scrollY = 415, paging = F, info = F))
+datatable(combDat, options = list(searching = FALSE, 
+                            scrollY   = 300, 
+                            paging    = F, 
+                            info      = F,
+                            dom       = 'Bfrtip',
+                            buttons   = c('csv')))
 ```
 
 ## Calculate $F_r$ {.subsection}

@@ -62,7 +62,7 @@ qqline(scale(Sunday), col = "darkred", lwd = 2)  # Adds a reference line for nor
 
 ![](../../images/figure-15-7.jpeg){width="300px"}
 
-## Calculate T {.smaller .subsection}
+## Calculate T {.small .subsection}
 
 
 ```{r, echo=TRUE}
@@ -85,7 +85,12 @@ data$sign <- sign(data$Sunday - data$Wednesday)
 ## The data {.smaller}
 
 ```{r, echo=FALSE}
-datatable(data, options = list(iDisplayLength = 7, searching = FALSE, scrollY = 415, paging = F, info = F))
+datatable(data, options = list(searching = FALSE, 
+                            scrollY   = 300, 
+                            paging    = F, 
+                            info      = F,
+                            dom       = 'Bfrtip',
+                            buttons   = c('csv')))
 ```
 
 

@@ -38,9 +38,15 @@ data$rankedBDI <- rank(data$Sunday.BDI)
 
 
 ## Example
+[Link](https://discoverjasp.com/repository/dsj1_data/data/drug_long.jasp)
 
 ```{r, echo=FALSE}
-datatable(data, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+datatable(data, options = list(searching = FALSE, 
+                            scrollY   = 300, 
+                            paging    = F, 
+                            info      = F,
+                            dom       = 'Bfrtip',
+                            buttons   = c('csv')))
 ```
 
 ## Test statistic W is the sum of ranks per group {.subsection}

@@ -31,11 +31,15 @@ Chapter 15
 - Sometimes there are cures, sometimes not...
 - Don't trash your data, but investigate: why is this occurring?
 
+--- 
+
 ### Homogeneity of variances
 - Between subjects designs
 - Correction: Welch for t-test/one-way ANOVA
 - Adjusts df $\rightarrow p$-value & CI
 - Jane Superbrain 14.3 (pointless p)
+
+---
 
 ### Sphericity
 - Within subjects designs with >2 levels
@@ -44,6 +48,7 @@ Chapter 15
 - Jane Superbrain 14.3 (pointless p)
 
 <!-- ## Overlap (association) between predictors -->
+---
 
 ### Normality
 - Shape of distribution (and no CLT)
