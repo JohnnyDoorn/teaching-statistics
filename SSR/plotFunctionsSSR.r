@@ -140,6 +140,64 @@ visualize_chisq_base <- function(H, df, section = "upper", col = "skyblue", myLi
   }
 }
 
+visualize_normal_base <- function(testStat, mu = 0, sd = 1,
+                                  side = c("two-sided", "negative", "positive"),
+                                  col = "skyblue", myLimX = NULL) {
+  side <- match.arg(side)
+  
+  # Define x range (wide enough to show full curve)
+  if (is.null(myLimX)) {
+    x <- seq(mu - 4 * sd, mu + 4 * sd, length.out = 500)
+  } else {
+    x <- seq(myLimX[1], myLimX[2], length.out = 500)
+  }
+  y <- dnorm(x, mu, sd)
+  
+  ## ---- Compute p-value and title text ----
+  if (side == "positive") {
+    pval <- pnorm(testStat, mu, sd, lower.tail = FALSE)
+    subtitle <- bquote("P(" * z >= .(round(testStat, 3)) * ") = " * .(round(pval, 4)))
+  } else if (side == "negative") {
+    pval <- pnorm(testStat, mu, sd, lower.tail = TRUE)
+    subtitle <- bquote("P(" * z <= .(round(testStat, 3)) * ") = " * .(round(pval, 4)))
+  } else {  # two-sided
+    cutoff <- abs(testStat)
+    pval <- 2 * pnorm(-cutoff, mu, sd)
+    subtitle <- bquote("P(|" * z * "| ≥ " * .(round(cutoff, 3)) * ") = " * .(round(pval, 4)))
+  }
+  
+  ## ---- Base plot ----
+  plot(x, y, type = "l", lwd = 2, col = "black", bty = "n", las = 1,
+       xlab = expression(z), ylab = "Density",
+       main = bquote(atop(
+         "Normal Distribution (" ~ mu == .(mu) ~ "," ~ sigma == .(sd) ~ ")",
+         .(subtitle)
+       )))
+  
+  ## ---- Shading ----
+  if (side == "positive") {
+    x_shade <- x[x >= testStat]; y_shade <- y[x >= testStat]
+    polygon(c(x_shade, rev(x_shade)), c(y_shade, rep(0, length(y_shade))), col = col, border = NA)
+    abline(v = testStat, col = "darkred", lwd = 2, lty = 2)
+    
+  } else if (side == "negative") {
+    x_shade <- x[x <= testStat]; y_shade <- y[x <= testStat]
+    polygon(c(x_shade, rev(x_shade)), c(y_shade, rep(0, length(y_shade))), col = col, border = NA)
+    abline(v = testStat, col = "darkred", lwd = 2, lty = 2)
+    
+  } else if (side == "two-sided") {
+    cutoff <- abs(testStat)
+    # Left tail
+    x_left <- x[x <= -cutoff]; y_left <- y[x <= -cutoff]
+    polygon(c(x_left, rev(x_left)), c(y_left, rep(0, length(y_left))), col = col, border = NA)
+    # Right tail
+    x_right <- x[x >= cutoff]; y_right <- y[x >= cutoff]
+    polygon(c(x_right, rev(x_right)), c(y_right, rep(0, length(y_right))), col = col, border = NA)
+    abline(v = c(-cutoff, cutoff), col = "darkred", lwd = 2, lty = 2)
+  }
+}
+
+
 # Example usage
 # visualize_chisq_base(H = 6.5, df = 3, section = "upper")
 

@@ -11,8 +11,6 @@ Also known as the Mann-Whitney U test
 
 ## Wilcoxon rank-sum test
 
-<img src="http://upload.wikimedia.org/wikipedia/en/9/9a/FrankWilcoxon.png" style="float: left; margin: 0 20px 0 0; width: 300px;">
-  
 Developed by [Frank Wilcoxon](http://en.wikipedia.org/wiki/Frank_Wilcoxon) the rank-sum test is an [nonparametric](http://en.wikipedia.org/wiki/Nonparametric_statistics) alternative to the independent samples t-test.
 
 By ranking all values and then summing the ranks per group, one would expect under the null hypothesis, that the sum of ranks is approximately equal.
@@ -38,6 +36,7 @@ data$Drug <- ifelse(data$Drug == 1, "Ecstasy", "Alcohol")
 data$rankedBDI <- rank(data$Sunday.BDI)
 ```
 
+
 ## Example
 
 ```{r, echo=FALSE}
@@ -52,6 +51,7 @@ rankSums
 ```
 
 We can take the sum of ranks for the first group as W:  
+
 ```{r, echo=TRUE}
 W <- rankSums[1, 2]
 W
@@ -117,20 +117,21 @@ z <- (W - W.mean) / W.se
 z
 ```
 
-## Test for significance 1 sided
-
-```{r, echo=FALSE, warning=FALSE, fig.align='center'}
-if(!"visualize" %in% installed.packages()){ install.packages("visualize") }
-library("visualize")
-
-visualize.norm(z, section="lower")
-```
-
 ## Test for significance 2 sided
 
 ```{r, echo=FALSE, warning=FALSE, fig.align='center'}
-visualize.norm(c(z,-z), section="tails")
+source("../../plotFunctionsSSR.r")
+
+visualize_normal_base(z, side = "two-sided")
 ```
+
+
+## Test for significance 1 sided
+
+```{r, echo=FALSE, warning=FALSE, fig.align='center'}
+visualize_normal_base(z, side = "negative")
+```
+
 
 
 ## Effect size rank-biserial correlation
@@ -176,6 +177,7 @@ y4Stats <- c(t.test(y4 ~ gr)$statistic, wilcox.test(y4 ~ gr)$statistic)
 
 yList <- list(y1, y2, y3, y4)
 ```
+
 ```{r, echo= FALSE}
 par(mfrow = c(2, 2), cex = 1, bty = "n")
 plotCex<- 1

@@ -13,7 +13,6 @@ Paired 2 samples
 
 ## Wilcoxon signed-rank test {.section}
 
-<img src="http://upload.wikimedia.org/wikipedia/en/9/9a/FrankWilcoxon.png" style="float: left; margin: 0 20px 0 0; width: 10%;">
 
 The Wilcoxon signed-rank test is a nonparametric alternative to the paired samples t-test. It assigns + or - signs to the difference between two repeated measures. By ranking the *absolute* differences and summing these ranks for the positive group, the null hypothesis is tested that both positive and negative differences are equal.
 
@@ -59,6 +58,10 @@ qqline(scale(Sunday), col = "darkred", lwd = 2)  # Adds a reference line for nor
 # write.csv(data, "mann-whitney-signed-rank.csv", row.names=FALSE)
 ```
 
+## The plot 
+
+![](../../images/figure-15-7.jpeg){width="300px"}
+
 ## Calculate T {.smaller .subsection}
 
 
@@ -72,7 +75,7 @@ data$abs.diff = abs(data$Sunday - data$Wednesday)
 # Remove observations where the difference is 0
 data <- data[data$diff != 0, ]
 
-# Create rank variable with place holder NA
+# Create rank variable
 data$rank <- rank(data$abs.diff)
 
 # Assign a '+' or a '-' to those values 
@@ -84,6 +87,7 @@ data$sign <- sign(data$Sunday - data$Wednesday)
 ```{r, echo=FALSE}
 datatable(data, options = list(iDisplayLength = 7, searching = FALSE, scrollY = 415, paging = F, info = F))
 ```
+
 
 ## Calculate $T_+$
 
@@ -97,6 +101,8 @@ n <- nrow(data)
 n
 ```
 
+> How likely is it to observe the lowest possible rank sum (0), for $n=8$, if there is no difference in BDI between Sunday and Wednesday?
+
 ## Calculate $\bar{T}$ and ${SE}_{T}$ {.subsection}
 
 $$\bar{T} = \frac{n(n+1)}{4}$$
@@ -104,12 +110,16 @@ $$\bar{T} = \frac{n(n+1)}{4}$$
 ```{r, echo=TRUE}
 T_mean <- (n*(n+1))/4
 T_mean 
-
-# T_mean is the middle point between the minimum and maximum possible value for T
-T.min <- 0; T.min
-T.max <- sum(1:n); T.max
-mean(c(T.min, T.max))
 ```
+
+
+```{r, echo=FALSE}
+T.min <- 0
+T.max <- sum(1:n)
+# mean(c(T.min, T.max))
+```
+
+> T_mean is the middle point between the minimum (`r T.min`) and maximum possible (`r T.max`) value for T
 
 $${SE}_{T} = \sqrt{\frac{n(n+1)(2n+1)}{24}}$$
 
@@ -128,8 +138,9 @@ z
 
 ## Test for significance
 
-```{r, fig.align='center', warning=FALSE, echo=TRUE}
-visualize.norm(c(z,-z), section="tails")
+```{r, fig.align='center', warning=FALSE, echo=FALSE}
+source("../../plotFunctionsSSR.r")
+visualize_normal_base(z, side = "two-sided")
 ```
 
 ## Effect size

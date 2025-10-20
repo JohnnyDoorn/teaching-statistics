@@ -31,13 +31,13 @@ Chapter 15
 - Sometimes there are cures, sometimes not...
 - Don't trash your data, but investigate: why is this occurring?
 
-## Homogeneity of variances
+### Homogeneity of variances
 - Between subjects designs
 - Correction: Welch for t-test/one-way ANOVA
 - Adjusts df $\rightarrow p$-value & CI
 - Jane Superbrain 14.3 (pointless p)
 
-## Sphericity
+### Sphericity
 - Within subjects designs with >2 levels
 - Correction: Greenhouse-Geisser for RM ANOVA
 - Adjusts df $\rightarrow p$-value & CI
@@ -45,7 +45,7 @@ Chapter 15
 
 <!-- ## Overlap (association) between predictors -->
 
-## Normality
+### Normality
 - Shape of distribution (and no CLT)
 - Outliers
 - [Illustration of consequences](https://johnnydoorn.github.io/teaching-statistics/extra-texts/ViolatingNormalityANOVA.html)

@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Sharon Klinkenberg &amp; Johnny van Doorn">
+<meta name="author" content="Johnny van Doorn”">
 
 <title>wilcoxon_signed_rank_test</title>
 <style>
@@ -96,9 +96,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#wilcoxon-signed-rank-test" id="toc-wilcoxon-signed-rank-test" class="nav-link active" data-scroll-target="#wilcoxon-signed-rank-test">Wilcoxon signed-rank test</a>
   <ul class="collapse">
   <li><a href="#wilcoxon-signed-rank-test-1" id="toc-wilcoxon-signed-rank-test-1" class="nav-link" data-scroll-target="#wilcoxon-signed-rank-test-1">Wilcoxon signed-rank test</a></li>
-  <li><a href="#simulate-data" id="toc-simulate-data" class="nav-link" data-scroll-target="#simulate-data">Simulate data</a></li>
   <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
   <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1">Example</a></li>
+  <li><a href="#the-plot" id="toc-the-plot" class="nav-link" data-scroll-target="#the-plot">The plot</a></li>
   <li><a href="#calculate-t" id="toc-calculate-t" class="nav-link" data-scroll-target="#calculate-t">Calculate T</a></li>
   <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data">The data</a></li>
   <li><a href="#calculate-t_" id="toc-calculate-t_" class="nav-link" data-scroll-target="#calculate-t_">Calculate <span class="math inline">\(T_+\)</span></a></li>
@@ -121,19 +121,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Paired 2 samples</p>
 <section id="wilcoxon-signed-rank-test-1" class="level2 section">
 <h2 class="section anchored" data-anchor-id="wilcoxon-signed-rank-test-1">Wilcoxon signed-rank test</h2>
-<p><img src="http://upload.wikimedia.org/wikipedia/en/9/9a/FrankWilcoxon.png" style="float: left; margin: 0 20px 0 0; width: 10%;"></p>
 <p>The Wilcoxon signed-rank test is a nonparametric alternative to the paired samples t-test. It assigns + or - signs to the difference between two repeated measures. By ranking the <em>absolute</em> differences and summing these ranks for the positive group, the null hypothesis is tested that both positive and negative differences are equal.</p>
-</section>
-<section id="simulate-data" class="level2">
-<h2 class="anchored" data-anchor-id="simulate-data">Simulate data</h2>
+<!-- ## Simulate data -->
 </section>
 <section id="example" class="level2">
 <h2 class="anchored" data-anchor-id="example">Example</h2>
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-a1f138f0fe6dff5ecc27" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-a1f138f0fe6dff5ecc27">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[15,35,16,18,19,17,27,16,13,20],[28,35,35,24,39,32,27,29,36,35]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sunday<\/th>\n      <th>Wednesday<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Sunday","targets":1},{"name":"Wednesday","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-9163a08b1309944f71eb" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-9163a08b1309944f71eb">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[15,35,16,18,19,17,27,16,13,20],[28,35,35,24,39,32,27,29,36,35]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sunday<\/th>\n      <th>Wednesday<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Sunday","targets":1},{"name":"Wednesday","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -144,6 +141,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="wilcoxon_signed_rank_test_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+</section>
+<section id="the-plot" class="level2">
+<h2 class="anchored" data-anchor-id="the-plot">The plot</h2>
+<p><img src="../../images/figure-15-7.jpeg" class="img-fluid" width="300"></p>
 </section>
 <section id="calculate-t" class="level2 smaller subsection">
 <h2 class="smaller subsection anchored" data-anchor-id="calculate-t">Calculate T</h2>
@@ -169,8 +170,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-ffed0fc4dc2e94ad12ac" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-ffed0fc4dc2e94ad12ac">{"x":{"filter":"none","vertical":false,"data":[["1","3","4","5","6","8","9","10"],[15,16,18,19,17,16,13,20],[28,35,24,39,32,29,36,35],[-13,-19,-6,-20,-15,-13,-23,-15],[13,19,6,20,15,13,23,15],[2.5,6,1,7,4.5,2.5,8,4.5],[-1,-1,-1,-1,-1,-1,-1,-1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sunday<\/th>\n      <th>Wednesday<\/th>\n      <th>diff<\/th>\n      <th>abs.diff<\/th>\n      <th>rank<\/th>\n      <th>sign<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Sunday","targets":1},{"name":"Wednesday","targets":2},{"name":"diff","targets":3},{"name":"abs.diff","targets":4},{"name":"rank","targets":5},{"name":"sign","targets":6}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-53dcc0c714e0b3f24086" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-53dcc0c714e0b3f24086">{"x":{"filter":"none","vertical":false,"data":[["1","3","4","5","6","8","9","10"],[15,16,18,19,17,16,13,20],[28,35,24,39,32,29,36,35],[-13,-19,-6,-20,-15,-13,-23,-15],[13,19,6,20,15,13,23,15],[2.5,6,1,7,4.5,2.5,8,4.5],[-1,-1,-1,-1,-1,-1,-1,-1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sunday<\/th>\n      <th>Wednesday<\/th>\n      <th>diff<\/th>\n      <th>abs.diff<\/th>\n      <th>rank<\/th>\n      <th>sign<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Sunday","targets":1},{"name":"Wednesday","targets":2},{"name":"diff","targets":3},{"name":"abs.diff","targets":4},{"name":"rank","targets":5},{"name":"sign","targets":6}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -190,6 +191,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] 8</code></pre>
 </div>
 </div>
+<blockquote class="blockquote">
+<p>How likely is it to observe the lowest possible rank sum (0), for <span class="math inline">\(n=8\)</span>, if there is no difference in BDI between Sunday and Wednesday?</p>
+</blockquote>
 </section>
 <section id="calculate-bart-and-se_t" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="calculate-bart-and-se_t">Calculate <span class="math inline">\(\bar{T}\)</span> and <span class="math inline">\({SE}_{T}\)</span></h2>
@@ -200,31 +204,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 18</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># T_mean is the middle point between the minimum and maximum possible value for T</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>T.min <span class="ot">&lt;-</span> <span class="dv">0</span>; T.min</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>T.max <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="dv">1</span><span class="sc">:</span>n); T.max</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 36</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">c</span>(T.min, T.max))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 18</code></pre>
-</div>
-</div>
+<blockquote class="blockquote">
+<p>T_mean is the middle point between the minimum (0) and maximum possible (36) value for T</p>
+</blockquote>
 <p><span class="math display">\[{SE}_{T} = \sqrt{\frac{n(n+1)(2n+1)}{24}}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>SE_T <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( (n<span class="sc">*</span>(n<span class="sc">+</span><span class="dv">1</span>)<span class="sc">*</span>(<span class="dv">2</span><span class="sc">*</span>n<span class="sc">+</span><span class="dv">1</span>)) <span class="sc">/</span> <span class="dv">24</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>SE_T <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( (n<span class="sc">*</span>(n<span class="sc">+</span><span class="dv">1</span>)<span class="sc">*</span>(<span class="dv">2</span><span class="sc">*</span>n<span class="sc">+</span><span class="dv">1</span>)) <span class="sc">/</span> <span class="dv">24</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="calculate-z" class="level2">
 <h2 class="anchored" data-anchor-id="calculate-z">Calculate Z</h2>
 <p><span class="math display">\[z = \frac{T_+ - \bar{T}}{{SE}_T}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> (T_pos <span class="sc">-</span> T_mean)<span class="sc">/</span>SE_T</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>z</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> (T_pos <span class="sc">-</span> T_mean)<span class="sc">/</span>SE_T</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>z</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -2.520504</code></pre>
 </div>
@@ -233,11 +227,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="test-for-significance" class="level2">
 <h2 class="anchored" data-anchor-id="test-for-significance">Test for significance</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.norm</span>(<span class="fu">c</span>(z,<span class="sc">-</span>z), <span class="at">section=</span><span class="st">"tails"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="wilcoxon_signed_rank_test_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="wilcoxon_signed_rank_test_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -251,13 +244,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><span class="math display">\[r = \frac{T_+ - T_- }{T_+ + T_-}\]</span></p>
 <p>Here <span class="math inline">\(T_+\)</span> is the sum of the positive ranks (i.e., where Sunday &gt; Wednesday), which do not exist. <span class="math inline">\(T_-\)</span> is the sum of the negative ranks, which is 36. We have a maximum negative correlation (i.e., everybody scored lower on Wednesday).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>T_neg <span class="ot">&lt;-</span> <span class="fu">sum</span>(data<span class="sc">$</span>rank <span class="sc">*</span> (data<span class="sc">$</span>diff <span class="sc">&lt;</span> <span class="dv">0</span>)) <span class="co"># sum negative ranks</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>T_neg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>T_neg <span class="ot">&lt;-</span> <span class="fu">sum</span>(data<span class="sc">$</span>rank <span class="sc">*</span> (data<span class="sc">$</span>diff <span class="sc">&lt;</span> <span class="dv">0</span>)) <span class="co"># sum negative ranks</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>T_neg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 36</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>rbis <span class="ot">&lt;-</span> (T_pos <span class="sc">-</span> T_neg) <span class="sc">/</span> (T_pos <span class="sc">+</span> T_neg)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>rbis</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>rbis <span class="ot">&lt;-</span> (T_pos <span class="sc">-</span> T_neg) <span class="sc">/</span> (T_pos <span class="sc">+</span> T_neg)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>rbis</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -1</code></pre>
 </div>

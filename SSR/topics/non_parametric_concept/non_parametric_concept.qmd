@@ -52,7 +52,7 @@ kable(rbind('A' = x1, 'B' = x2,'-' = " ", 'rank(A)' = rank(x1), 'rank(B)' = rank
 ```
 
 ## Ties {.smaller}
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 # Scores
 x <- c(11, 42, 62, 73, 84, 84, 42, 73, 84)
 
