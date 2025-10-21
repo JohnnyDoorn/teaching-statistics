@@ -84,6 +84,9 @@ data$sign <- sign(data$Sunday - data$Wednesday)
 
 ## The data {.smaller}
 
+[Link](https://discoverjasp.com/repository/dsj1_data/data/drug_wide.jasp)
+
+
 ```{r, echo=FALSE}
 datatable(data, options = list(searching = FALSE, 
                             scrollY   = 300, 
