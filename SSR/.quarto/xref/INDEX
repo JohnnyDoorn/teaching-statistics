@@ -240,10 +240,15 @@
     "20. non_parametric_tests.html": "2aec28a7"
   },
   "2025/22. multiple_regression/22. multiple_regresson.qmd": {
-    "22. multiple_regresson.html": "80f28d58"
+    "22. multiple_regresson.html": "80f28d58",
+    "22. multiple_regresson.slide.html": "ee8d7bc4"
   },
   "2025/27. mediation/27. mediation.qmd": {
     "27. mediation.slide.html": "1cafe666",
     "27. mediation.html": "52c7cafd"
+  },
+  "2025/26. moderation/26. moderation.qmd": {
+    "26. moderation.slide.html": "b0fd0ebc",
+    "26. moderation.html": "573850f3"
   }
 }
