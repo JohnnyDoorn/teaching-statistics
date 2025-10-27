@@ -42,6 +42,7 @@ For simple regression
 
 * Sensitivity
 * Homoscedasticity
+  * See [here](https://johnnydoorn.github.io/teaching-statistics/extra-texts/Heteroscedasticity.html) for further illustration
 * Linearity
 
 
@@ -63,6 +64,7 @@ This can be assessed through:
 * Collinearity diagnostics
     * VIF: max < 10, mean < 1
     * Tolerance \> 0.2 -> good
+    * Tolerance = $\frac{1}{VIF}$
 
 :::
 
@@ -79,6 +81,38 @@ This can be checked through:
 
 * Correlations
 * Matrix scatterplot with predictors and outcome variable
+
+
+```{r, echo=FALSE}
+
+par(mfrow = c(1, 2))
+
+n <- 30
+# 1. Linear relationship
+set.seed(1)
+x1 <- 1:n
+y1 <- 3 + 2 * x1 + rnorm(n, 0, 10)
+plot(x1, y1,
+     main = "Linear relationship", ylim = c(0, 60),
+     xlab = "X",
+     ylab = "Y", bty = "n", las = 1,
+     pch = 19, col = "steelblue")
+abline(lm(y1 ~ x1), col = "red", lwd = 2)
+
+# 2. Nonlinear relationship
+set.seed(2)
+x2 <- 1:n
+y2 <- 3 + 2 * sin(x2 / 10) * 20 + rnorm(n, 0, 5)
+plot(x2, y2,
+     main = "Nonlinear relationship", ylim = c(0, 60),
+     xlab = "X",
+     ylab = "Y", bty = "n", las = 1,
+     pch = 19, col = "tomato")
+abline(lm(y2 ~ x2), col = "red", lwd = 2)
+
+
+```
+
 
 ## Example
 
@@ -320,7 +354,7 @@ r <- round(r, 2)
 
 ```
 
-## Demonstration
+## JASP
 
-![](JASP_logo_green.svg){width="400px"}
+![](../../images/JASP_logo_green.svg){width="300px"}
 

@@ -1,0 +1,44 @@
+---
+title: "17. Chi-squared test"
+author: "Johnny van Doorn"
+date: "15 oct 2024"
+footer: "Scientific & Statistical Reasoning"
+format:
+  revealjs:
+    output-ext: slide.html
+    css: ../../ajohnson.css
+  html: default
+css: ../../ajohnson.css
+---
+
+<div class="goals">
+In this lecture we aim to:
+
+- Repeat some assumptions
+- Introduce rank-based methods
+- Look at rank-based equivalents to some old friends
+- Show these in JASP
+    
+<strong>Reading:</strong>
+Chapter 15
+
+
+```{r child="../../topics/chi_square/chi_square_test.qmd"}
+```
+
+# Closing
+
+## Recap
+
+- Non-parametric tests are rank-based, which means they are robust to:
+  - Non-normality
+  - Transformations of the data
+  - Outliers
+  
+## Recommended Exercises
+
+::: {}
+- [Exercise 15.1](https://discoverjasp.com/pages/smart_alex#task-15.1),  [Exercise 15.2](https://discoverjasp.com/pages/smart_alex#task-15.2), [Exercise 15.4](https://discoverjasp.com/pages/smart_alex#task-15.4), [Exercise 15.11](https://discoverjasp.com/pages/smart_alex#task-15.11)
+:::
+```{r child="../../footer.qmd"}
+```

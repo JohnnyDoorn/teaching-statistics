@@ -302,3 +302,4 @@ DT::datatable(round(data,2)[, c(2, 5)],
                          paging    = F, 
                          info      = F))
 ```
+

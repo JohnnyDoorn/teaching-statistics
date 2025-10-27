@@ -238,5 +238,12 @@
   "2025/20. non_parametric_tests/20. non_parametric_tests.qmd": {
     "20. non_parametric_tests.slide.html": "4b7d1eea",
     "20. non_parametric_tests.html": "2aec28a7"
+  },
+  "2025/22. multiple_regression/22. multiple_regresson.qmd": {
+    "22. multiple_regresson.html": "80f28d58"
+  },
+  "2025/27. mediation/27. mediation.qmd": {
+    "27. mediation.slide.html": "1cafe666",
+    "27. mediation.html": "52c7cafd"
   }
 }

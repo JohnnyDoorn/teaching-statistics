@@ -1,0 +1,61 @@
+---
+title: "19. Bayesian ANOVA"
+subtitle: "Parameter estimation & hypothesis testing"
+author: "Johnny van Doorn"
+date: "22 oct 2024"
+footer: "Scientific & Statistical Reasoning"
+format:
+  revealjs:
+    output-ext: slide.html
+    css: ../../ajohnson.css
+  html: default
+css: ../../ajohnson.css
+---
+
+<div class="goals">
+In this lecture we aim to:
+
+- Repeat some assumptions
+- Introduce rank-based methods
+- Look at rank-based equivalents to some old friends
+- Show these in JASP
+    
+<strong>Reading:</strong>
+Chapter 15
+
+## Course literature
+
+- [Repitition from RMS](https://johnnydoorn.github.io/IntroductionBayesianInference/)
+- [Addition: chapter 7 on ANOVA](https://johnnydoorn.github.io/IntroductionBayesianInference/07-anova.html)
+
+- [All data sets in Field](https://johnnydoorn.github.io/discoverjasp/repository/dsuj_sav_files.zip)
+
+
+```{r child="../../topics/bayes/bayesian_parameter_estimation.qmd"}
+```
+
+```{r child="../../topics/bayes/bayesian_hypothesis_testing.qmd"}
+```
+
+```{r child="../../topics/bayes/bayesian_anova.qmd"}
+```
+
+
+# Closing
+
+## Recap
+
+- Non-parametric tests are rank-based, which means they are robust to:
+  - Non-normality
+  - Transformations of the data
+  - Outliers
+  
+## Recommended Exercises
+
+::: {}
+- [Exercise 15.1](https://discoverjasp.com/pages/smart_alex#task-15.1),  [Exercise 15.2](https://discoverjasp.com/pages/smart_alex#task-15.2), [Exercise 15.4](https://discoverjasp.com/pages/smart_alex#task-15.4), [Exercise 15.11](https://discoverjasp.com/pages/smart_alex#task-15.11)
+:::
+<!-- Footer insert below -->
+
+```{r child="../../footer.qmd"}
+```

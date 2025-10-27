@@ -1,0 +1,62 @@
+---
+title: "22. Multiple regression"
+author: "Johnny van Doorn"
+date: "29 oct 2025"
+footer: "Scientific & Statistical Reasoning"
+format:
+  revealjs:
+    output-ext: slide.html
+    css: ../../ajohnson.css
+  html: default
+css: ../../ajohnson.css
+---
+
+# Block 3: Life is Continuous
+
+- Regression with multiple predictors
+- Interaction effects
+- Mediation effects
+- Chi-square
+- Bayes!
+    
+--- 
+
+<div class="goals">
+In this lecture we aim to:
+
+- Repeat some regression
+- Look at multiple predictors
+- Show these in JASP
+    
+<strong>Reading:</strong>
+Chapter 8
+</div>
+
+
+## WA 10 Data
+
+- [Salary (partial correlation)](https://johnnydoorn.github.io/teaching-statistics/datasets/Salary.jasp)
+- [Health (regression)](https://johnnydoorn.github.io/teaching-statistics/datasets/Health.jasp)
+
+```{r child="../../topics/regression_multiple_predictors/regression_multiple_predictors.qmd"}
+```
+
+# Closing
+
+## Recap
+
+- In linear regression, we can build multiple models and look at their fit
+- Just as in ANOVA, when we have multiple predictors we look out for:
+  - Dependence between predictors
+  - Interaction effects
+
+  
+## Recommended Exercises
+
+::: {}
+- [Exercise 8.1](https://discoverjasp.com/pages/smart_alex#task-8.1),  [Exercise 8.2](https://discoverjasp.com/pages/smart_alex#task-8.2)
+:::
+
+```{r child="../../footer.qmd"}
+```
+

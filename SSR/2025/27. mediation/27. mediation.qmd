@@ -1,0 +1,49 @@
+---
+title: "25. Mediation"
+author: "Johnny van Doorn"
+date: "11 nov 2025"
+footer: "Scientific & Statistical Reasoning"
+format:
+  revealjs:
+    output-ext: slide.html
+    css: ../../ajohnson.css
+  html: default
+css: ../../ajohnson.css
+---
+
+<div class="goals">
+In this lecture we aim to:
+
+- Explore mediation analysis
+- Link it to regression
+- Demonstrate in JASP
+
+    
+<strong>Reading:</strong>
+Chapter 10
+</div>
+
+
+
+```{r child="../../topics/mediation/mediationNames.qmd"}
+```
+
+# Closing
+
+## Recap
+
+- Mediation analysis is a way to model dependence between predictors
+- PROCESS module is very flexible
+- Causal assumptions extremely important with PROCESS models
+  
+## Recommended Exercises
+
+::: {}
+- [Exercise 10.1](https://discoverjasp.com/pages/smart_alex#task-10.1),  [Exercise 10.2](https://discoverjasp.com/pages/smart_alex#task-10.2)
+:::
+
+<!-- Footer insert below -->
+
+```{r child="../../footer.qmd"}
+```
+
