@@ -252,7 +252,7 @@ $\text{model prediction} = \widehat{\text{album sales}}$
 
 $\widehat{\text{album sales}} = b_0 + b_1 \text{airplay} + b_2 \text{adverts}$
 
-$\widehat{\text{model prediction}} = b_0 + b_1 \text{airplay} + b_2 \text{adverts}$
+<!-- $\widehat{\text{model prediction}} = b_0 + b_1 \text{airplay} + b_2 \text{adverts}$ -->
 
 ```{r, echo=FALSE}
 
@@ -265,12 +265,14 @@ DT::datatable(cbind(predicted.sales, b.0, b.1, airplay, b.2, adverts)[1:5,],
                                                dom       = 'Bfrtip',
                                                buttons   = c('csv')))
 
+thisPred <- b.0 + b.1 * 43 +  b.2 * 10.256 # for participant 1
+
+
 ```
 
-$\widehat{\text{model prediction}} = `r b.0` + `r b.1` \times \text{airplay} + `r b.2` \times \text{adverts}$
+$\widehat{\text{album sales}} = `r b.0` + `r b.1` \times \text{airplay} + `r b.2` \times \text{adverts} = `r round(thisPred, 3)`$
 
-```{r, echo=TRUE}
-b.0 + b.1 * 43 +  b.2 * 10.256 # for participant 1
+```{r, echo=FALSE}
 ```
 
 ## How far are we off?
@@ -280,7 +282,7 @@ error <- sales - predicted.sales
 ```
 
 ```{r, echo=FALSE}
-DT::datatable(cbind(sales, predicted.sales, round(error, 3))[1:5,],
+DT::datatable(data.frame(sales, predicted.sales, error = round(error, 3))[1:5,],
               rownames = FALSE, options = list(searching = FALSE, 
                                                scrollY   = 300, 
                                                paging    = F, 
