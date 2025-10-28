@@ -129,11 +129,16 @@ airplay <- data$airplay
 adverts <- data$adverts
 fit <- lm(sales ~ airplay + adverts, data)
 
-DT::datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+DT::datatable(data, rownames = FALSE, options = list(searching = FALSE, 
+                            scrollY   = 300, 
+                            paging    = F, 
+                            info      = F,
+                            dom       = 'Bfrtip',
+                            buttons   = c('csv')))
 ```
 
 
-## Regression model in R 
+## Regression model
 
 Predict album sales based on airplay and adverts.
 
@@ -146,8 +151,8 @@ fit <- lm(sales ~ airplay + adverts, data = data)
 
 ## What is the model? {.subsection .smaller}
 
-```{r, echo=TRUE}
-fit$coefficients
+```{r, echo=FALSE}
+# fit$coefficients
 
 b.0 <- round(fit$coefficients[1], 2) ## Intercept
 b.1 <- round(fit$coefficients[2], 2) ## Beta coefficient for airplay
@@ -249,8 +254,17 @@ $\widehat{\text{album sales}} = b_0 + b_1 \text{airplay} + b_2 \text{adverts}$
 
 $\widehat{\text{model prediction}} = b_0 + b_1 \text{airplay} + b_2 \text{adverts}$
 
-```{r, echo=TRUE}
-cbind(predicted.sales, b.0, b.1, airplay, b.2, adverts)[1:5,]
+```{r, echo=FALSE}
+
+
+DT::datatable(cbind(predicted.sales, b.0, b.1, airplay, b.2, adverts)[1:5,],
+              rownames = FALSE, options = list(searching = FALSE, 
+                                               scrollY   = 300, 
+                                               paging    = F, 
+                                               info      = F,
+                                               dom       = 'Bfrtip',
+                                               buttons   = c('csv')))
+
 ```
 
 $\widehat{\text{model prediction}} = `r b.0` + `r b.1` \times \text{airplay} + `r b.2` \times \text{adverts}$
@@ -263,8 +277,16 @@ b.0 + b.1 * 43 +  b.2 * 10.256 # for participant 1
 
 ```{r, echo=TRUE}
 error <- sales - predicted.sales
+```
 
-cbind(predicted.sales, sales, error)[1:5,]
+```{r, echo=FALSE}
+DT::datatable(cbind(sales, predicted.sales, round(error, 3))[1:5,],
+              rownames = FALSE, options = list(searching = FALSE, 
+                                               scrollY   = 300, 
+                                               paging    = F, 
+                                               info      = F,
+                                               dom       = 'Bfrtip',
+                                               buttons   = c('csv')))
 ```
 
 ## Outcome = Model Prediction + Error {.subsection}
