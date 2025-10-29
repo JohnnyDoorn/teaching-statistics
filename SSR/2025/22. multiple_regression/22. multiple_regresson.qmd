@@ -33,10 +33,10 @@ Chapter 8
 </div>
 
 
-## WA 10 Data
+<!-- ## WA 10 Data -->
 
-- [Salary (partial correlation)](https://johnnydoorn.github.io/teaching-statistics/datasets/Salary.jasp)
-- [Health (regression)](https://johnnydoorn.github.io/teaching-statistics/datasets/Health.jasp)
+<!-- - [Salary (partial correlation)](https://johnnydoorn.github.io/teaching-statistics/datasets/Salary.jasp) -->
+<!-- - [Health (regression)](https://johnnydoorn.github.io/teaching-statistics/datasets/Health.jasp) -->
 
 ```{r child="../../topics/regression_multiple_predictors/regression_multiple_predictors.qmd"}
 ```
