@@ -44,6 +44,7 @@ For simple regression
 * Homoscedasticity
   * See [here](https://johnnydoorn.github.io/teaching-statistics/extra-texts/Heteroscedasticity.html) for further illustration
 * Linearity
+* Normality
 
 
 Additionally, for multiple regression
