@@ -12,7 +12,7 @@ While we want as little error in the model as possible, all models will have som
 
 For example, let's say we want to predict people's cognitive performance based on their age. While age is not a perfect predictor, it might help us explain some variability in cognitive performance. Homoscedasticity in this case means that our prediction error will be constant across the whole range of predicted performance scores. Because we base our predictions on age, that means that we want our model to be equally accurate for young people as for old people.    
 
-Below are some cases of the predicted vs. residual plot. The definition of error here is `observed - predicted`, so when a residual is greater than 0, that means the observed value was greater than the predicted value (i.e., *underestimation*).
+Below are some cases of the predicted vs. residual plot. The definition of error here is `observed - predicted`, so when a residual is greater than 0, that means the observed value was greater than the predicted value (i.e., *underestimation*). We look at data where there is a positive association between age and cognitive ability; that means that the models below will predict higher values for cognitive ability for older people. In other words, the predictions for older people are located more to the right of the plots (z-pred $> 0$), while the predictions for younger people are located more to the left of the plots (z-pred $< 0$).  
 
 First we have an example of a "healthy" plot, where there is no systematic error: 
 

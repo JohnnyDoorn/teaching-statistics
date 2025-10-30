@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="JvD">
-<meta name="dcterms.date" content="2025-09-04">
+<meta name="dcterms.date" content="2025-10-30">
 
 <title>Some examples of heteroscedasticity</title>
 <style>
@@ -66,7 +66,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 4, 2025</p>
+      <p class="date">October 30, 2025</p>
     </div>
   </div>
   
@@ -79,7 +79,7 @@ ul.task-list li input[type="checkbox"] {
 <p>In linear regression, a core assumption is that there is no systematic error: our model should be equally accurate/wrong across the whole range of its predictions (i.e., <a href="https://en.wikipedia.org/wiki/Homoscedasticity_and_heteroscedasticity">homoscedasiticity of error</a>). To assess this assumption, we can look at a scatterplot of the standardized (i.e., z-scores) model predictions and residuals, and hope to see an uncorrelated cloud of points, rather than some other shape (e.g., funnel shape or correlation).</p>
 <p>While we want as little error in the model as possible, all models will have some error and that is OK as long as this error is reliable. Unsystematic error is desirable, because it allows us to get a grip on the error of the model and reliably quantify our uncertainty across the whole range of the dependent variable.</p>
 <p>For example, let’s say we want to predict people’s cognitive performance based on their age. While age is not a perfect predictor, it might help us explain some variability in cognitive performance. Homoscedasticity in this case means that our prediction error will be constant across the whole range of predicted performance scores. Because we base our predictions on age, that means that we want our model to be equally accurate for young people as for old people.</p>
-<p>Below are some cases of the predicted vs.&nbsp;residual plot. The definition of error here is <code>observed - predicted</code>, so when a residual is greater than 0, that means the observed value was greater than the predicted value (i.e., <em>underestimation</em>).</p>
+<p>Below are some cases of the predicted vs.&nbsp;residual plot. The definition of error here is <code>observed - predicted</code>, so when a residual is greater than 0, that means the observed value was greater than the predicted value (i.e., <em>underestimation</em>). We look at data where there is a positive association between age and cognitive ability; that means that the models below will predict higher values for cognitive ability for older people. In other words, the predictions for older people are located more to the right of the plots (z-pred <span class="math inline">\(&gt; 0\)</span>), while the predictions for younger people are located more to the left of the plots (z-pred <span class="math inline">\(&lt; 0\)</span>).</p>
 <p>First we have an example of a “healthy” plot, where there is no systematic error:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
