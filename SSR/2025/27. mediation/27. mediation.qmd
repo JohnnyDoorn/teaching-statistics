@@ -1,5 +1,5 @@
 ---
-title: "25. Mediation"
+title: "27. Mediation"
 author: "Johnny van Doorn"
 date: "11 nov 2025"
 footer: "Scientific & Statistical Reasoning"
