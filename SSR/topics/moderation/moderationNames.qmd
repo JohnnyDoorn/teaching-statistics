@@ -39,7 +39,7 @@ $\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
 
 <!-- Source: Field 11.3.1 -->
 
-## Simulate data
+<!-- ## Simulate data -->
 
 <!-- # ```{r, echo=TRUE} -->
 <!-- # set.seed(283) ##  -->
@@ -52,7 +52,7 @@ $\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
 <!-- #                          .4*predictor*ml.coffee +  -->
 <!-- #                          error -->
 <!-- # ``` -->
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 set.seed(283) ## 
 n <- 100
 hours.awake <- round(runif(n, 1, 18))
@@ -80,7 +80,7 @@ wakefulness <- intercept + -3 * hours.awake +
 ## View data {.smaller}
 ```{r, echo=FALSE}
 data <- data.frame(hours.awake, ml.coffee, wakefulness)
-save(data, file="moderation.rdata")
+# save(data, file="moderation.rdata")
 DT::datatable(round(data,2), 
           rownames   = FALSE, 
           extensions = 'Buttons',
