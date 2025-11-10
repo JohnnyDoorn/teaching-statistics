@@ -492,48 +492,12 @@ Johnny van Doorn
 <p><img data-src="mediation.png" width="500"></p>
 </div>
 </div>
-</section>
-<section id="simulate-data" class="slide level2 subsection">
-<h2>Simulate data</h2>
-<p>Create predictor variable</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">set.seed</span>(<span class="dv">1976</span>)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="do">## Set parameters for simulation</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>n     <span class="ot">&lt;-</span> <span class="dv">50</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>mu    <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>sigma <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="do">## Predictor</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a>use.homeopathic.remedies <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="mediator" class="slide level2">
-<h2>Mediator</h2>
-<p>Create mediator</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>b0    <span class="ot">&lt;-</span> <span class="dv">2</span>             <span class="co"># intercept of lifestyle</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>b1    <span class="ot">&lt;-</span> <span class="fl">1.5</span>           <span class="co"># association homeopathy and lifestyle, b.a</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a>error <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n,<span class="dv">0</span>,.<span class="dv">7</span>)</span>
-<span id="cb2-4"><a href="#cb2-4"></a>healthy.lifestyle <span class="ot">&lt;-</span> b0 <span class="sc">+</span> b1 <span class="sc">*</span> use.homeopathic.remedies <span class="sc">+</span> error</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="specify-model" class="slide level2">
-<h2>Specify model</h2>
-<p>Create outcome variable</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>b0    <span class="ot">&lt;-</span> <span class="dv">6</span> <span class="co"># intercept of healing</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>b1    <span class="ot">&lt;-</span> <span class="fl">0.5</span> <span class="co"># association homeopathy and healing, b.c</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>b2    <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># association lifestyle and healing, b.b</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a>error <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="fl">1.4</span>)</span>
-<span id="cb3-5"><a href="#cb3-5"></a>speed.of.healing <span class="ot">&lt;-</span> b0 <span class="sc">+</span> </span>
-<span id="cb3-6"><a href="#cb3-6"></a>                    b1 <span class="sc">*</span> use.homeopathic.remedies <span class="sc">+</span> </span>
-<span id="cb3-7"><a href="#cb3-7"></a>                    b2 <span class="sc">*</span> healthy.lifestyle <span class="sc">+</span> </span>
-<span id="cb3-8"><a href="#cb3-8"></a>                    error</span>
-<span id="cb3-9"><a href="#cb3-9"></a></span>
-<span id="cb3-10"><a href="#cb3-10"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(use.homeopathic.remedies, </span>
-<span id="cb3-11"><a href="#cb3-11"></a>                   healthy.lifestyle, </span>
-<span id="cb3-12"><a href="#cb3-12"></a>                   speed.of.healing)</span>
-<span id="cb3-13"><a href="#cb3-13"></a>data <span class="ot">&lt;-</span> <span class="fu">round</span>(data, <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<!-- ## Simulate data {.subsection} -->
+<!-- Create predictor variable -->
+<!-- ## Mediator  -->
+<!-- Create mediator -->
+<!-- ## Specify model  -->
+<!-- Create outcome variable -->
 </section>
 <section id="the-data" class="slide level2 subsection smaller">
 <h2>The data</h2>
@@ -548,9 +512,9 @@ Johnny van Doorn
 <section id="fit-3-models" class="slide level2 smaller flexbox vcenter">
 <h2>Fit 3 models</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>model.outcome.predictor  <span class="ot">&lt;-</span> <span class="fu">lm</span>(speed.of.healing  <span class="sc">~</span> use.homeopathic.remedies)</span>
-<span id="cb4-2"><a href="#cb4-2"></a>model.mediator.predictor <span class="ot">&lt;-</span> <span class="fu">lm</span>(healthy.lifestyle <span class="sc">~</span> use.homeopathic.remedies)</span>
-<span id="cb4-3"><a href="#cb4-3"></a>model.combined           <span class="ot">&lt;-</span> <span class="fu">lm</span>(speed.of.healing  <span class="sc">~</span> use.homeopathic.remedies <span class="sc">+</span> healthy.lifestyle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>model.outcome.predictor  <span class="ot">&lt;-</span> <span class="fu">lm</span>(speed.of.healing  <span class="sc">~</span> use.homeopathic.remedies)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>model.mediator.predictor <span class="ot">&lt;-</span> <span class="fu">lm</span>(healthy.lifestyle <span class="sc">~</span> use.homeopathic.remedies)</span>
+<span id="cb1-3"><a href="#cb1-3"></a>model.combined           <span class="ot">&lt;-</span> <span class="fu">lm</span>(speed.of.healing  <span class="sc">~</span> use.homeopathic.remedies <span class="sc">+</span> healthy.lifestyle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol type="1">
 <li>Total effect:
@@ -573,10 +537,10 @@ Johnny van Doorn
 <section id="extract-beta-coëfficients" class="slide level2 smaller flexbox vcenter">
 <h2>Extract beta coëfficients</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>b.outcome.predictor       <span class="ot">&lt;-</span> model.outcome.predictor<span class="sc">$</span>coefficients[<span class="dv">2</span>]   <span class="co"># b.t</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>b.mediator.predictor      <span class="ot">&lt;-</span> model.mediator.predictor<span class="sc">$</span>coefficients[<span class="dv">2</span>]  <span class="co"># b.a</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a>b.combined.mediator       <span class="ot">&lt;-</span> model.combined<span class="sc">$</span>coefficients[<span class="dv">3</span>]            <span class="co"># b.b</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a>b.combined.predictor      <span class="ot">&lt;-</span> model.combined<span class="sc">$</span>coefficients[<span class="dv">2</span>]            <span class="co"># b.c</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>b.outcome.predictor       <span class="ot">&lt;-</span> model.outcome.predictor<span class="sc">$</span>coefficients[<span class="dv">2</span>]   <span class="co"># b.t</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>b.mediator.predictor      <span class="ot">&lt;-</span> model.mediator.predictor<span class="sc">$</span>coefficients[<span class="dv">2</span>]  <span class="co"># b.a</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>b.combined.mediator       <span class="ot">&lt;-</span> model.combined<span class="sc">$</span>coefficients[<span class="dv">3</span>]            <span class="co"># b.b</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>b.combined.predictor      <span class="ot">&lt;-</span> model.combined<span class="sc">$</span>coefficients[<span class="dv">2</span>]            <span class="co"># b.c</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol type="1">
 <li>Total effect:
@@ -599,11 +563,11 @@ Johnny van Doorn
 <section id="view-beta-coëfficients" class="slide level2 subsection">
 <h2>View beta coëfficients</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>b.mediator.predictor     <span class="co"># b.a</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>b.mediator.predictor     <span class="co"># b.a</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.530447</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>b.combined.mediator      <span class="co"># b.b</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>b.combined.mediator      <span class="co"># b.b</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.9725824</code></pre>
 </div>
@@ -612,19 +576,19 @@ Johnny van Doorn
 <section id="view-beta-coëfficients-1" class="slide level2 smaller flexbox vcenter">
 <h2>View beta coëfficients</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>b.outcome.predictor      <span class="co"># b.t </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>b.outcome.predictor      <span class="co"># b.t </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.035573</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>b.mediator.predictor     <span class="co"># b.a </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>b.mediator.predictor     <span class="co"># b.a </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.530447</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>b.combined.mediator      <span class="co"># b.b</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>b.combined.mediator      <span class="co"># b.b</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.9725824</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>b.combined.predictor     <span class="co"># b.c</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>b.combined.predictor     <span class="co"># b.c</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.5470875</code></pre>
 </div>
@@ -644,15 +608,15 @@ Johnny van Doorn
 <h2>Calculate indirect effect</h2>
 <p><span class="math inline">\(a \times b = b_a \times b_b\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>indirect <span class="ot">&lt;-</span> b.mediator.predictor <span class="sc">*</span> b.combined.mediator; indirect  <span class="co"># a * b</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>indirect <span class="ot">&lt;-</span> b.mediator.predictor <span class="sc">*</span> b.combined.mediator; indirect  <span class="co"># a * b</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.488485</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>indirect <span class="sc">+</span> b.combined.predictor <span class="co"># a * b + c </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>indirect <span class="sc">+</span> b.combined.predictor <span class="co"># a * b + c </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.035573</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>b.outcome.predictor         <span class="co"># total effect</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>b.outcome.predictor         <span class="co"># total effect</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.035573</code></pre>
 </div>
@@ -665,8 +629,8 @@ Johnny van Doorn
 <h2>Calculate indirect effect (standardized)</h2>
 <p><span class="math inline">\(\frac{ab}{s_{Outcome}} \times s_{Predictor} = \frac{b_a b_b}{s_{Outcome}} \times s_{Predictor}\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>b.mediator.predictor<span class="sc">*</span>b.combined.mediator <span class="sc">/</span> </span>
-<span id="cb24-2"><a href="#cb24-2"></a>  <span class="fu">sd</span>(speed.of.healing)<span class="sc">*</span><span class="fu">sd</span>(use.homeopathic.remedies)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>b.mediator.predictor<span class="sc">*</span>b.combined.mediator <span class="sc">/</span> </span>
+<span id="cb21-2"><a href="#cb21-2"></a>  <span class="fu">sd</span>(speed.of.healing)<span class="sc">*</span><span class="fu">sd</span>(use.homeopathic.remedies)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.67769</code></pre>
 </div>
@@ -676,8 +640,8 @@ Johnny van Doorn
 <h2>Calculate <span class="math inline">\(P_M\)</span></h2>
 <p><span class="math inline">\(\frac{ab}{total} = \frac{b_a b_b}{b_t} = \frac{b_a b_b}{b_a b_b + b_c}\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>(b.mediator.predictor<span class="sc">*</span>b.combined.mediator) <span class="sc">/</span></span>
-<span id="cb26-2"><a href="#cb26-2"></a>  b.outcome.predictor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>(b.mediator.predictor<span class="sc">*</span>b.combined.mediator) <span class="sc">/</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a>  b.outcome.predictor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.7312366</code></pre>
 </div>

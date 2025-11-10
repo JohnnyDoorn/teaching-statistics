@@ -64,11 +64,11 @@ Does the speed of recovery after sickness improve with the use of alternative me
 
 ::::
 
-## Simulate data {.subsection}
+<!-- ## Simulate data {.subsection} -->
 
-Create predictor variable
+<!-- Create predictor variable -->
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 set.seed(1976)
 ## Set parameters for simulation
 n     <- 50
@@ -78,22 +78,22 @@ sigma <- 2
 use.homeopathic.remedies <- rnorm(n, mu, sigma)
 ```
 
-## Mediator 
+<!-- ## Mediator  -->
 
-Create mediator
+<!-- Create mediator -->
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 b0    <- 2             # intercept of lifestyle
 b1    <- 1.5           # association homeopathy and lifestyle, b.a
 error <- rnorm(n,0,.7)
 healthy.lifestyle <- b0 + b1 * use.homeopathic.remedies + error
 ```
 
-## Specify model 
+<!-- ## Specify model  -->
 
-Create outcome variable
+<!-- Create outcome variable -->
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 b0    <- 6 # intercept of healing
 b1    <- 0.5 # association homeopathy and healing, b.c
 b2    <- 1 # association lifestyle and healing, b.b
