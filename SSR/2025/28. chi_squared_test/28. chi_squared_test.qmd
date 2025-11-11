@@ -1,5 +1,6 @@
 ---
 title: "28. Chi-squared test"
+subtitle: "Contingency Tables"
 author: "Johnny van Doorn"
 date: "12 nov 2025"
 footer: "Scientific & Statistical Reasoning"
@@ -20,6 +21,7 @@ In this lecture we aim to:
     
 <strong>Reading:</strong>
 Chapter 16
+</div>
 
 
 ```{r child="../../topics/chi_square/chi_square_test.qmd"}
@@ -37,8 +39,8 @@ Chapter 16
 
 ::: {}
 - [Exercise 16.1](https://discoverjasp.com/pages/smart_alex#task-16.1),  
-[Exercise 16.6](https://discoverjasp.com/pages/smart_alex#task-16.6)
-[Exercise 16.7](https://discoverjasp.com/pages/smart_alex#task-16.7),
+[Exercise 16.6](https://discoverjasp.com/pages/smart_alex#task-16.6),
+[Exercise 16.7](https://discoverjasp.com/pages/smart_alex#task-16.7)
 :::
 ```{r child="../../footer.qmd"}
 ```

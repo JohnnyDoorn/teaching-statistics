@@ -86,8 +86,13 @@ legend("topright", legend = paste("k =",df), col = mycols, lty = 1, bty = "n")
 if(!'gsheet' %in% installed.packages()) { install.packages('gsheet') }
 library("gsheet")
 gResults <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1I6p6wVmATt8VM0PvGt4lSbFCcV3WrTFs5FUQlG9Q4nQ/edit?usp=sharing')
+noMonth <- sapply(strsplit(gResults$Timestamp, split = "/"), function(x) x[[3]])
+years <- sapply(strsplit(noMonth, split = " "), function(x) x[[1]])
+gResults <- gResults[years == "2024", ]
 
 gResults <- as.data.frame(gResults)[-(1:5), -1 ]
+
+
 
 # results <- results[grep("2017|2022", results$Timestamp),]
 for (i in 1:ncol(gResults)) {
@@ -310,4 +315,4 @@ Is the ratio of these odds.
 
 $OR = \frac{\text{digital}}{\text{live}} = \frac{`r odds[1,1] / odds[1,2]`}{`r odds[2,1] / odds[2,2]`} = \frac{\text{extrovert}}{\text{introvert}}  =  \frac{`r odds[1,1] / odds[2,1]`}{`r odds[1,2] / odds[2,2]`} = `r (odds[1,1] / odds[1,2]) / (odds[2,1] / odds[2,2])`$
 
-For this data, extroverts were approximately `r round((odds[1,1] / odds[1,2]) / (odds[2,1] / odds[2,2]), 2)` times more likely to watch digitally, compared to introverts. The odds ratio also accounts for the scores in both conditions—watching digitally and watching live—by comparing the odds of watching digitally to live viewing across both personality types.
+For these data, extroverts were approximately `r round((odds[1,1] / odds[1,2]) / (odds[2,1] / odds[2,2]), 2)` times more likely to watch digitally, compared to introverts. The odds ratio also accounts for the scores in both conditions—watching digitally and watching live—by comparing the odds of watching digitally to live viewing across both personality types.
