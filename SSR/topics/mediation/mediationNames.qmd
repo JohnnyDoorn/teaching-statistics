@@ -25,6 +25,38 @@ Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Mediation_(statistics))
 
 ::::
 
+
+## Venn diagrams - effect
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, prompt=FALSE, results='hide'}
+library("VennDiagram")
+
+grid.newpage()
+
+draw.pairwise.venn(area1 = 100, area2 = 100,
+                 cross.area  = 80,
+                 category = c("Predictor", "Outcome"), lty = "blank", 
+                 fill = c("skyblue", "pink1"), cat.prompts = F)
+```
+
+## Venn diagrams - mediator
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, prompt=FALSE, results='hide'}
+library("VennDiagram")
+
+grid.newpage()
+
+draw.triple.venn(area1 = 100, area2 = 100, area3 = 100, 
+                 n12  = 80, 
+                 n23  = 85, 
+                 n13  = 90, 
+                 n123 = 75, 
+                 category = c("Predictor", "Outcome", "Mediator"), lty = "blank", 
+                 fill = c("skyblue", "pink1", "mediumorchid"), cat.prompts = F)
+```
+
+
+
 ## Example
 
 Does the speed of recovery after sickness improve with the use of alternative medicine or is this effect mediated by a healthy lifestyle?
@@ -188,6 +220,8 @@ b.combined.mediator      # b.b
 b.combined.predictor     # b.c
 ```
 
+
+
 <!-- 1. $\widehat{\text{Outcome}} = b_0 + b_c \text{Predictor}_i$ -->
 <!-- 2. $\widehat{\text{Mediator}} = b_0 + b_a \text{Predictor}_i$ -->
 <!-- 3. $\widehat{\text{Outcome}} = b_0 + b_{c`} \text{Predictor}_i + b_b \text{Mediator}_i$ -->
@@ -195,6 +229,12 @@ b.combined.predictor     # b.c
 <div style="text-align: center;">
 ![](mediation.png){width="400px"}
 </div>
+
+
+## Path plot
+
+![](../../images/homeopathy-pathplot.png){width="400px"}
+
 
 ## Visual {.subsection}
 
@@ -264,7 +304,7 @@ b.mediator.predictor*b.combined.mediator /
 
 
 
-## Calculate $P_M$ {.small}
+## Calculate $P_M$
 
 $\frac{ab}{total} = \frac{b_a b_b}{b_t} = \frac{b_a b_b}{b_a b_b + b_c}$
 
@@ -284,36 +324,6 @@ blockquote {
 > Does not take into account size of total effect
 
 > "although it is tempting to think of $P_M$ as a proportion (because it is the ratio of the indirect effect to the total effect) it is not: it can exceed 1 and even take negative values (Preacher & Kelley, 2011)."
-
-
-## Venn diagrams - effect
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE, prompt=FALSE, results='hide'}
-library("VennDiagram")
-
-grid.newpage()
-
-draw.pairwise.venn(area1 = 100, area2 = 100,
-                 cross.area  = 80,
-                 category = c("Predictor", "Outcome"), lty = "blank", 
-                 fill = c("skyblue", "pink1"), cat.prompts = F)
-```
-
-## Venn diagrams - mediator
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE, prompt=FALSE, results='hide'}
-library("VennDiagram")
-
-grid.newpage()
-
-draw.triple.venn(area1 = 100, area2 = 100, area3 = 100, 
-                 n12  = 80, 
-                 n23  = 85, 
-                 n13  = 90, 
-                 n123 = 75, 
-                 category = c("Predictor", "Outcome", "Mediator"), lty = "blank", 
-                 fill = c("skyblue", "pink1", "mediumorchid"), cat.prompts = F)
-```
 
 
 ## Caution with PROCESS

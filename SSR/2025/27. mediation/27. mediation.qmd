@@ -39,7 +39,7 @@ Chapter 10
 ## Recommended Exercises
 
 ::: {}
-- [Exercise 10.1](https://discoverjasp.com/pages/smart_alex#task-10.1),  [Exercise 10.2](https://discoverjasp.com/pages/smart_alex#task-10.2)
+- [Exercise 10.4](https://discoverjasp.com/pages/smart_alex#task-10.4),  [Exercise 10.5](https://discoverjasp.com/pages/smart_alex#task-10.5)
 :::
 
 <!-- Footer insert below -->
