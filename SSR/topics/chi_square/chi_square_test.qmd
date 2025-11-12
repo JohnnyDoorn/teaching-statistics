@@ -113,7 +113,15 @@ results <- data.frame(Animal = gResults$`Cats/dogs/other?`,
 
 # install.packages("DT")
 library("DT")
-datatable(results)
+DT::datatable(results, 
+          rownames   = FALSE, 
+          extensions = 'Buttons',
+          options = list(searching = FALSE, 
+                         scrollY   = 350, 
+                         paging    = F, 
+                         info      = F,                          
+                         dom       = 'Bfrtip',
+                         buttons   = c('csv')))
 ```
 
 </small>
