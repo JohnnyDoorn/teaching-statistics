@@ -15,6 +15,7 @@ css: ../../ajohnson.css
 <div class="goals">
 In this lecture we aim to:
 
+<!-- - Stroll down memory lane -->
 - Discuss association between categorical variables
   - Contingency tables
 - Show this test in JASP

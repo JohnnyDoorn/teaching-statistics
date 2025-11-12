@@ -201,23 +201,9 @@ $df = (r - 1) (c - 1)$
 
 ## $P$-value
 ```{r, echo=FALSE}
-# Set up the plot for the F-distribution
+source("../../plotFunctionsSSR.r")
 df <- 1
-curve(dchisq(x, df), from = 0, to = 5, n = 1000, bty = "n", las = 1,
-      xlab = "Chi-squared", ylab = "Density", main = "Chi-squared distribution with P-value Region")
-
-# Shade the upper tail (p-value region) using polygon
-# Define the region to fill (upper tail, greater than fStat)
-x_vals <- seq(chi.squared, 10, length.out = 100)
-y_vals <- dchisq(x_vals, df)
-
-# Draw the polygon to fill the area under the curve
-polygon(c(chi.squared, x_vals, 10), c(0, y_vals, 0), col = "lightblue", border = NA)
-
-# Optionally, add a vertical line at the F-statistic
-arrows(x0 = chi.squared, x1 = chi.squared, y0 = 0 , y1 = 1.6, col = "darkred", lwd = 2)
-text(x = chi.squared, y = 3, bquote(Chi^2 ~ " = " ~ .(round(chi.squared, 2))), cex = 1.2)
-text(x = chi.squared, y = 2, paste("p-val =", round(pchisq(chi.squared, df), 5)), cex = 1.2)
+visualize_chisq_base(H = chi.squared, df = df, section = "upper", myLimX = c(0, 5))
 ```
 
 ## Fisher's exact test {.subsection}
@@ -240,7 +226,7 @@ $\chi^2 = \sum \frac{ ( | \text{observed}_{ij} - \text{model}_{ij} | - .5)^2}{\t
 # Calculate Yates's corrected chi squared
 chi.squared.yates <- sum((abs(observed - modelPredictions) - .5)^2 / modelPredictions)
 chi.squared.yates
-visualize::visualize.chisq(chi.squared.yates, df, section='upper')
+visualize_chisq_base(H = chi.squared.yates, df = df, section = "upper", myLimX = c(0, 5))
 ```
 
 <!-- ## Likelihood ratio {.subsection} -->
