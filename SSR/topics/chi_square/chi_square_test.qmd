@@ -88,7 +88,7 @@ library("gsheet")
 gResults <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1I6p6wVmATt8VM0PvGt4lSbFCcV3WrTFs5FUQlG9Q4nQ/edit?usp=sharing')
 noMonth <- sapply(strsplit(gResults$Timestamp, split = "/"), function(x) x[[3]])
 years <- sapply(strsplit(noMonth, split = " "), function(x) x[[1]])
-gResults <- gResults[years == "2024", ]
+gResults <- gResults[years == "2025", ]
 
 gResults <- as.data.frame(gResults)[-(1:5), -1 ]
 
