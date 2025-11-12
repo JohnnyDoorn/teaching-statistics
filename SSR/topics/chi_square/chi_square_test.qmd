@@ -222,7 +222,7 @@ Calculate all possible permutations.
 
 * Cell size < 5
 
-## Yates's correction {.subsection}
+## Yates's correction {.smaller}
 
 For 2 x 2 contingency tables, Yates's correction is to prevent overestimation of statistical significance for small data (at least one cell of the table has an expected count smaller than 5). Unfortunately, Yates's correction may tend to overcorrect. This can result in an overly conservative result. 
 
