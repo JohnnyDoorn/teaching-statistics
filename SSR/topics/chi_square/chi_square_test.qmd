@@ -228,7 +228,7 @@ For 2 x 2 contingency tables, Yates's correction is to prevent overestimation of
 
 $\chi^2 = \sum \frac{ ( | \text{observed}_{ij} - \text{model}_{ij} | - .5)^2}{\text{model}_{ij}}$
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 #| output-location: slide
 
 # Calculate Yates's corrected chi squared

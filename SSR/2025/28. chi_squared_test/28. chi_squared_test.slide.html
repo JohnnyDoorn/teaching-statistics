@@ -479,8 +479,8 @@ Johnny van Doorn
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-d45c3fe43703621b361a" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-d45c3fe43703621b361a">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["Cats","Dogs","Dogs","Dogs","Dogs","Cats","Dogs","Cats","Cats","Cats","Dogs","Dogs","Cats","Other","Cats","Cats","Dogs","Cats","Cats","Other","Cats","Dogs","Dogs","Cats","Dogs","Dogs","Other","Dogs","Cats","Dogs","Cats","Cats","Dogs","Dogs","Dogs","Other","Other","Cats","Cats","Other","Cats","Cats","Dogs","Dogs"],["Live","Live","Live","Live","Live","Live","Live","Live","Digital","Live","Live","Live","Live","Live","Live","Digital","Live","Live","Live","Live","Live","Live","Live","Digital","Live","Digital","Live","Digital","Live","Digital","Digital","Digital","Live","Digital","Digital","Live","Live","Live","Digital","Live","Digital","Digital","Digital","Digital"],["Introvert","Extrovert","Extrovert","Introvert","Extrovert","Introvert","Introvert","Introvert","Introvert","Extrovert","Extrovert","Introvert","Extrovert","Extrovert","Introvert","Introvert","Introvert","Introvert","Introvert","Extrovert","Extrovert","Extrovert","Extrovert","Introvert","Introvert","Extrovert","Introvert","Introvert","Introvert","Extrovert","Introvert","Introvert","Extrovert","Introvert","Introvert","Introvert","Extrovert","Introvert","Extrovert","Introvert","Introvert","Introvert","Extrovert","Extrovert"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Animal<\/th>\n      <th>Lecture<\/th>\n      <th>Personality<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":350,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"name":"Animal","targets":0},{"name":"Lecture","targets":1},{"name":"Personality","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-5956c22223528bc52374" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-5956c22223528bc52374">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["Cats","Dogs","Dogs","Dogs","Dogs","Cats","Dogs","Cats","Cats","Cats","Dogs","Dogs","Cats","Other","Cats","Cats","Dogs","Cats","Cats","Other","Cats","Dogs","Dogs","Cats","Dogs","Dogs","Other","Dogs","Cats","Dogs","Cats","Cats","Dogs","Dogs","Dogs","Other","Other","Cats","Cats","Other","Cats","Cats","Dogs","Dogs"],["Live","Live","Live","Live","Live","Live","Live","Live","Digital","Live","Live","Live","Live","Live","Live","Digital","Live","Live","Live","Live","Live","Live","Live","Digital","Live","Digital","Live","Digital","Live","Digital","Digital","Digital","Live","Digital","Digital","Live","Live","Live","Digital","Live","Digital","Digital","Digital","Digital"],["Introvert","Extrovert","Extrovert","Introvert","Extrovert","Introvert","Introvert","Introvert","Introvert","Extrovert","Extrovert","Introvert","Extrovert","Extrovert","Introvert","Introvert","Introvert","Introvert","Introvert","Extrovert","Extrovert","Extrovert","Extrovert","Introvert","Introvert","Extrovert","Introvert","Introvert","Introvert","Extrovert","Introvert","Introvert","Extrovert","Introvert","Introvert","Introvert","Extrovert","Introvert","Extrovert","Introvert","Introvert","Introvert","Extrovert","Extrovert"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Animal<\/th>\n      <th>Lecture<\/th>\n      <th>Personality<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":350,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"name":"Animal","targets":0},{"name":"Lecture","targets":1},{"name":"Personality","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </small><p><small></small></p>
@@ -599,11 +599,11 @@ Lecture   Extrovert Introvert
 <p>For 2 x 2 contingency tables, Yates’s correction is to prevent overestimation of statistical significance for small data (at least one cell of the table has an expected count smaller than 5). Unfortunately, Yates’s correction may tend to overcorrect. This can result in an overly conservative result.</p>
 <p><span class="math inline">\(\chi^2 = \sum \frac{ ( | \text{observed}_{ij} - \text{model}_{ij} | - .5)^2}{\text{model}_{ij}}\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Calculate Yates's corrected chi squared</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a>chi.squared.yates <span class="ot">&lt;-</span> <span class="fu">sum</span>((<span class="fu">abs</span>(observed <span class="sc">-</span> modelPredictions) <span class="sc">-</span> .<span class="dv">5</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> modelPredictions)</span>
-<span id="cb15-3"><a href="#cb15-3"></a>chi.squared.yates</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1694469</code></pre>
 </div>
 
+</div>
 <!-- ## Likelihood ratio {.subsection} -->
 <!-- Alternative to Pearson's $\chi^2$.  -->
 <!-- $L \chi^2 = 2 \sum \text{observed}_{ij} ln \left( \frac{\text{observed}_{ij}}{\text{model}_{ij}} \right)$ -->
@@ -613,20 +613,12 @@ Lecture   Extrovert Introvert
 <!-- ll.ratio <- 2 * sum(observed * log(observed / modelPredictions) ); ll.ratio -->
 <!-- visualize.chisq(ll.ratio, df, section='upper') -->
 <!-- ``` -->
-</section>
-<section id="yatess-correction-output" class="slide level2 subsection output-location-slide"><h2>Yates’s correction</h2><div class="cell output-location-slide">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1694469</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">visualize_chisq_base</span>(<span class="at">H =</span> chi.squared.yates, <span class="at">df =</span> df, <span class="at">section =</span> <span class="st">"upper"</span>, <span class="at">myLimX =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img data-src="28.-chi_squared_test_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
-</div>
-</div></section><section id="standardized-residuals" class="slide level2 subsection">
+<img data-src="28.-chi_squared_test_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section>
+<section id="standardized-residuals" class="slide level2 subsection">
 <h2>Standardized residuals</h2>
 <p><span class="math inline">\(\text{standardized residuals} = \frac{ \text{observed}_{ij} - \text{model}_{ij} }{ \sqrt{ \text{model}_{ij} } }\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>(observed <span class="sc">-</span> modelPredictions) <span class="sc">/</span> <span class="fu">sqrt</span>(modelPredictions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>(observed <span class="sc">-</span> modelPredictions) <span class="sc">/</span> <span class="fu">sqrt</span>(modelPredictions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         Personality
 Lecture    Extrovert  Introvert
@@ -639,7 +631,7 @@ Lecture    Extrovert  Introvert
 <h2>Effect size</h2>
 <p>Odds ratio based on the observed values</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>odds <span class="ot">&lt;-</span> <span class="fu">round</span>( observed, <span class="dv">2</span>); odds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>odds <span class="ot">&lt;-</span> <span class="fu">round</span>( observed, <span class="dv">2</span>); odds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         Personality
 Lecture   Extrovert Introvert
