@@ -47,7 +47,10 @@ In this lecture we aim to:
 ## Recommended Exercises
 
 ::: {}
-- [Exercises chapter 7](https://johnnydoorn.github.io/IntroductionBayesianInference/07-anova.html)
+- Revisit Labcoat Leni's and do a Bayesian analysis
+  - [Chapter 8 - Regression](https://discoverjasp.com/pages/labcoat_leni#chapter-8)
+  - [Chapter 9 - T-test](https://discoverjasp.com/pages/labcoat_leni#chapter-9)
+  - [Chapter 11 - ANOVA](https://discoverjasp.com/pages/labcoat_leni#chapter-11)
 :::
 <!-- Footer insert below -->
 
