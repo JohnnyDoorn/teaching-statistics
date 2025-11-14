@@ -52,7 +52,7 @@ In this lecture we aim to:
   - [Chapter 9 - T-test](https://discoverjasp.com/pages/labcoat_leni#chapter-9)
     - My take: [jasp](https://johnnydoorn.github.io/teaching-statistics/datasets/leni_09b-bayes.jasp) & [html](https://johnnydoorn.github.io/teaching-statistics/datasets/leni_09b-bayes.html)
   - [Chapter 11 - ANOVA](https://discoverjasp.com/pages/labcoat_leni#chapter-11)
-    - My take: [jasp](https://johnnydoorn.github.io/teaching-statistics/datasets/leni_10-bayes.jasp) & [html](https://johnnydoorn.github.io/teaching-statistics/datasets/leni_10-bayes.html)
+    - My take: [jasp](https://johnnydoorn.github.io/teaching-statistics/datasets/leni_11-bayes.jasp) & [html](https://johnnydoorn.github.io/teaching-statistics/datasets/leni_11-bayes.html)
   - [Chapter 13 - Factorial ANOVA](https://discoverjasp.com/pages/labcoat_leni#chapter-13)
     - My take: [jasp](https://johnnydoorn.github.io/teaching-statistics/datasets/leni_13-bayes.jasp) & [html](https://johnnydoorn.github.io/teaching-statistics/datasets/leni_13-bayes.html)
 
