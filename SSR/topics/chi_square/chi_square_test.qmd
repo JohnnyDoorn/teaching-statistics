@@ -216,15 +216,15 @@ visualize_chisq_base(H = chi.squared, df = df, section = "upper", myLimX = c(0, 
 
 ## Fisher's exact test {.subsection}
 
-Calculates exact $\chi^2$ for small samples, when the $\chi^2$-distribution does not yet suffice. 
+Calculates exact $\chi^2$ for small samples (at least one cell of the table has an expected count smaller than 5), when the $\chi^2$ approximation does not yet suffice. 
 
 Calculate all possible permutations.
 
-* Cell size < 5
+* Exptected cell size < 5
 
 ## Yates's correction {.smaller}
 
-For 2 x 2 contingency tables, Yates's correction is to prevent overestimation of statistical significance for small data (at least one cell of the table has an expected count smaller than 5). Unfortunately, Yates's correction may tend to overcorrect. This can result in an overly conservative result. 
+For 2 x 2 contingency tables, Yates's correction is to prevent overestimation of statistical significance for small data. Unfortunately, Yates's correction may tend to overcorrect (i.e., produce an overly conservative result), and is not really recommended anymore (see Section 16.3.5). 
 
 $\chi^2 = \sum \frac{ ( | \text{observed}_{ij} - \text{model}_{ij} | - .5)^2}{\text{model}_{ij}}$
 

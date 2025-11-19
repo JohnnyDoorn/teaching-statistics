@@ -58,6 +58,16 @@ In this lecture we aim to:
 
 
 :::
+
+<!-- ## Closing Mantra's -->
+
+<!-- - Always plot -->
+<!--   - descriptives, scatter, raincloud, q-q -->
+<!-- - $\alpha = 0.05$ is pretty weak -->
+<!--   - Especially when doing multiple hyppthesis tests, 0.005 would be much safer -->
+<!-- - Assumption checks are sources of information -->
+<!-- -  -->
+
 <!-- Footer insert below -->
 
 ```{r child="../../footer.qmd"}
