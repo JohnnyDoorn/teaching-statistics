@@ -12,15 +12,27 @@ This page will be continuously updated to feature slides and extra materials for
 
 ## Slides
 
+- [Lecture 1 - What Is Science](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_1_WhatIsScience.pdf)
+- [Lecture 2 - Measurement](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_2_Measurement.pdf)
 - [Lecture 3 - Why Statistics](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_3_WhyStatistics.pdf)
 - [Lecture 4 - Variability & Association](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_4_VariabilityAssociation.pdf)
+- [Lecture 5 - Probability I](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_5_ProbabilityI.pdf)
 - [Lecture 6 - Conditional Probability](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_6_ConditionalProbability.pdf)
+- [Lecture 7 - Frequency & Association Claims](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_7_Frequency%26AssociationClaims.pdf)
 - [Lecture 8 - Experimental Research](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_8_ExperimentalResearch.pdf)
+- [Lecture 9 - Probability Distributions](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_9_ProbabilityDistributions.pdf)
 - [Lecture 10 - Sampling Distributions](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_10_SamplingDistributions.pdf)
+- [Lecture 11 - Confidence Intervals I](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_11_ConfidenceIntervals_I.pdf)
 - [Lecture 12 - Confidence Intervals (Mean)](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_12_ConfidenceIntervalsMean.pdf)
+- [Lecture 13 - Factorial Design](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_13_FactorialDesign.pdf)
+- [Lecture 14 - Clinical Trials](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_14_ClinicalTrials.pdf)
+- [Lecture 15 - Hypothesis Test](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_15_HypothesisTest.pdf)
 - [Lecture 16 - Comparing Means](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_16_ComparingMeans.pdf)
+- [Lecture 17 - Comparing Groups II](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_17_ComparingGroupsII.pdf)
 - [Lecture 18 - Categorical Associations](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_18_CategoricalAssociations.pdf)
+- [Lecture 19 - ANOVA](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_19_ANOVA.pdf)
 - [Lecture 20 - Bayesian Estimation](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_20_BayesianEstimation.pdf)
+- [Lecture 21 - Regression](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_21_Regression.pdf)
 - [Lecture 22 - Bayesian Testing](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_22_BayesianTesting.pdf)
 - [Lecture 24 - More Bayes](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_24_MoreBayes.pdf)
 
