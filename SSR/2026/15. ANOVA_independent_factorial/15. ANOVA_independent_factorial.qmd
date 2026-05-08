@@ -1,0 +1,51 @@
+---
+title: "15. Factorial ANOVA"
+subtitle: "Independent factorial"
+author: "Johnny van Doorn"
+date: "TODO 2026"
+footer: "Scientific & Statistical Reasoning"
+format:
+  revealjs:
+    output-ext: slide.html
+    css: ../../ajohnson.css
+  html: default
+css: ../../ajohnson.css
+---
+
+<div class="goals">
+In this lecture we aim to:
+
+- ANOVA with 2 categorical predictors
+- Discuss interaction
+- Demonstration in JASP
+    
+<strong>Reading:</strong>
+Chapter 13 (§13.1–13.14)
+</div>
+
+
+```{r child="factorial_independent_ANOVA.qmd"}
+```
+
+
+# Closing
+
+## Recap
+
+With multiple predictor variables:
+
+- We are still explaining variance
+- We check the interaction
+  - Plots!
+  - F-value of interaction effect
+  - Conditional post-hoc tests
+
+## Recommended Exercises
+
+- [Exercise 13.1](https://discoverjasp.com/pages/exercises#chapter-13)
+- [Exercise 13.3](https://discoverjasp.com/pages/exercises#chapter-13)
+- [Exercise 13.6](https://discoverjasp.com/pages/exercises#chapter-13)
+- You do not need to compute effects sizes by hand!
+
+```{r child="../../footer.qmd"}
+```

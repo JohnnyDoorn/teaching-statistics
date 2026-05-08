@@ -1,0 +1,189 @@
+# The BEAST
+
+## What is BIAS {.section}
+
+<quote style="font-style:italic;">Things that lead us to the wrong conclusions (Field)</quote>
+
+$$outcome_i = model_i + error_i$$
+$$model_i = b_1 X_{1i} + b_2 X_{2i} + \ldots + b_n X_{ni}$$
+
+- $X$ = predictor variables
+- $b$ = parameters
+
+## BIAS
+
+Wrong conclusions about:
+
+- Parameters $b_i$
+- Standard error and confidence intervals
+- Test statistics and $p$-values
+
+means &rarr; SE &rarr; CI
+
+SE &rarr; test statistics &rarr; $p$-values
+
+## The beasts {.flexbox .vcenter}
+
+![](../../../topics/bias/here-be-dragons.jpg)
+
+>- Outliers
+>- Violations of assumptions
+
+## Example
+
+IQ estimations of people in the front and in the back. We want to know the differences in the population, not the sample. We therefore want to make an inference about the population, hence the name inferential statistics. 
+
+```{r}
+data = read.table("../../topics/t-test_independent/IQ.csv", sep = ' ', header = T)
+names(data)[3] <- "front"
+data$front <- ifelse(data$front == "front", 0, 1)
+data[12:15,]
+```
+
+-----
+
+We can see that back is coded as 0 and front as 1. Such coding can be used in a linear regression equation.
+
+$$\text{IQ you}_i = b_0 + b_1 front_i + error_i$$
+
+```{r}
+means <- aggregate(IQ.you ~ factor(front), data, mean); means
+```
+
+We can now calculate the $b$'s: $b_0 = `r round(means[1,2],2)`$ and $b_1 = `r round(means[2,2] - means[1,2],2)`$
+
+-----
+
+$$\text{IQ you}_i = b_0 + b_1 front_i + error_i$$
+
+If we apply this to the regression model we get:
+
+```{r, echo=FALSE, warning=FALSE}
+fit <- lm(IQ.you ~ factor(front), data)
+cbind(b.0    = round(fit$coefficients[1], 2),
+      b.1    = round(fit$coefficients[2], 2),
+      front  = data$front, 
+      model  = round(fit$fitted.values, 2),
+      IQ.you = data$IQ.you,
+      error  = round(fit$residuals, 2)
+      ) -> regression.model
+regression.model[1:8,]
+```
+
+The means indirectly represent the parameters $b$'s in this regression model. These $b$'s are the estimates of the population parameters $\beta$'s.
+
+```{r, echo=FALSE}
+boxplot(data$IQ.you, horizontal = T, col= 'red')
+```
+
+But what if these means are not correct, because of an extreme outlier.
+
+## Outliers {.subsection}
+
+Outliers can have a huge impact on the estimations
+
+- **Trim** Delete based on boxplot.
+- **Trim** Delete based on 3 standard deviations.
+- **Trim** Trimmed mean: Delete upper and lower percentages.
+- **Winsorizing** Replace outliers with highest non outlier.
+
+-----
+
+Without these outliers the results look a bit different.
+
+```{r, echo=FALSE}
+data2 <- subset(data,  IQ.you > 100)
+data2 <- subset(data2, IQ.you < 140)
+
+aggregate(IQ.you ~ factor(front), data2, mean)
+
+fit <- lm(IQ.you ~ factor(front), data2)
+cbind(IQ.you = data2$IQ.you, b.0 =fit$coefficients[1], b.1 = fit$coefficients[2], front = data2$front, error = fit$residuals)[12:17,]
+```
+
+```{r, echo=FALSE}
+boxplot(data2$IQ.you, horizontal = TRUE, col= 'red')
+```
+
+## Assumptions {.subsection}
+
+- Additivity and linearity
+- Normality
+- Homoscedasticity/homogenity of variance
+- Independence
+
+## Additivity and linearity {.subsection}
+
+The outcome variable is linearly related to the predictors.
+
+![relations](../../../topics/bias/relationships.jpg)
+
+$$\text{MODEL}_i = b_1 X_{1i} + b_2 X_{2i} + \ldots + b_n X_{ni}$$
+
+## Additivity and linearity
+
+We can check this by looking at the scatterplot of the predictors with the outcome variable.
+
+## Normality {.subsection}
+
+- Parameter estimates $b$'s
+- Confidence intervals (SE * **1.196**)
+- “Null hypothesis significance testing”
+- Errors
+
+Not the normality of the sample but the normality of the parameter $\beta$ in the population. We will test this assumption based on the data, though with large samples the [centrel limit theorem](https://youtu.be/JNm3M9cqWyc) ensures that the parameters are bell shaped.
+
+## Centrel limit theorem
+
+<iframe style="width:750px; height:480px;" src="https://www.youtube.com/embed/aS8B2yY73g0" frameborder="0" allowfullscreen></iframe>
+
+## Normality
+
+You can look at:
+
+- Skewness and Kurtosis
+
+We can test with:
+
+- Kolmogorov-Smirnof test
+- Shapiro-Wilk test
+
+But, the bigger the sample the smaller the $p$-value at equal test statistic. So we are losing power at large samples.
+
+- We can also transform the variable
+
+## Homoscedasticity/homogenity <br> of variance {.subsection}
+
+Influences:
+
+- Parameters $b$'s
+- NHT
+
+The null hypothesis assumes the null distribution to be true. Therefore, different sampples from that districution should have equal variances. Otherwise the assumption could not hold.
+
+In general, we can say that on every value of the predictor variable the variances in the outcome variable should be equal.
+
+-----
+
+We can check this by plotting the standardised error/resiual and the standardised expected outcome/model.
+
+```{r, echo=FALSE, fig.height=4}
+plot(scale(fit$fitted.values), scale(fit$residuals), ylab="(e - mean e) / sd e", xlab="(m - mean m) / sd m")
+lines(c(-10,10),c(0,0), col='red')
+lines(c(0,0),c(-10,10), col='red')
+```
+
+-----
+
+![Lineairiteit](../../../topics/bias/linearity_heteroscedasticity_heterogeneity.png)
+
+-----
+
+<iframe style="width:750px; height:480px;" src="http://www.youtube.com/embed/V5BUIy6cThw?rel=0" frameborder="0" allowfullscreen></iframe>
+
+## Independence {.subsection}
+
+The observed outcome (rows in SPSS or participants in your research) should be independent from each other. The answer of person B should not depend on the answer of person A.
+
+![Whisper](../../../topics/bias/whisper-clipart.png)
+

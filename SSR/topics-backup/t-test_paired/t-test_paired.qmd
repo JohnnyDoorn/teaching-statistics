@@ -1,0 +1,135 @@
+# Paired-samples t-test {.section}
+
+Compare 2 dependent/paired group means
+
+## Paired-samples t-test
+
+In the Paired samples t-test the deviation ($D$) for each pair is calculated and the mean of these deviations ($\bar{D}$) is tested against the null hypothesis where $\mu = 0$.
+
+$$t_{n-1} = \frac{\bar{D} - \mu}{ {SE}_D }$$
+Where $n$ (the number of cases) minus $1$, are the degrees of freedom $df = n - 1$ and $SE_D$ is the standard error of $D$, defined as $s_D/\sqrt{n}$.
+
+## Hypothesis
+
+$$\LARGE{
+  \begin{aligned}
+  H_0 &: \bar{D} = \mu_D \\
+  H_A &: \bar{D} \neq \mu_D \\
+  H_A &: \bar{D} > \mu_D \\
+  H_A &: \bar{D} < \mu_D \\
+  \end{aligned}}$$
+
+## Assumptions
+
+* Normally distributed residuals (i.e., model errors)
+* Random samples
+
+## Wide data structure
+
+index | k1 | k2
+------|----|--
+1     | x  | x
+2     | x  | x
+3     | x  | x
+4     | x  | x
+
+Where $k$ is the level of the categorical predictor variable and $x$ is the value of the outcome/dependent variable.
+
+
+## Long vs. wide format
+
+![](../../images/figure-4-5.png)
+
+## Data example
+
+We are going to use the IQ estimates we collected. You had to guess your neighbor's IQ and your own IQ.
+
+Let's take a look at the data.
+
+## IQ estimates
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, eval=TRUE}
+if(!'gsheet' %in% installed.packages()) { install.packages('gsheet') }
+library("gsheet")
+data <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1wfuAqJwIx3p-ZXPBi3oyQWwJi4kM1XFUL1ilVRaRpVQ/edit?usp=sharing')[, -1]
+colnames(data) <- c("ownIQ", "nextIQ")
+
+# data = data[grep("2017", as.character(data$Timestamp)),c("IQ next to you", "Own IQ")]
+
+IQ.next.to.you <- data$nextIQ
+IQ.you         <- data$ownIQ
+
+if(!"DT" %in% installed.packages()) { install.packages("DT") }
+library("DT")
+```
+
+
+
+```{r, echo=FALSE}
+datatable(data, options = list(searching = FALSE, scrollY = 415, paging = FALSE, info = FALSE))
+```
+
+## Calculate $D$ {.smaller .subsection}
+
+```{r, echo=TRUE}
+diffScores <- IQ.next.to.you - IQ.you
+```
+
+
+```{r, echo=FALSE}
+data$diffScores <- diffScores
+
+datatable(data, options = list(searching = FALSE, scrollY = 315, paging = FALSE, info = FALSE))
+```
+
+## Calculate $\bar{D}$
+
+```{r, echo=TRUE}
+diffScores      <- na.omit(diffScores) # get rid of all missing values
+diffMean        <- mean(diffScores)
+diffMean
+```
+
+And we also need n.
+
+```{r, echo=TRUE}
+n <- length(diffScores)
+n
+```
+
+## Calculate t-value {.subsection}
+
+$$t_{n-1} = \frac{\bar{D} - \mu}{ {SE}_D }$$
+
+```{r, echo=TRUE}
+mu <- 0                # Define mu
+
+diffSD <- sd(diffScores)   # Calculate standard deviation
+diffSE <- diffSD / sqrt(n) # Calculate standard error
+
+df   <- n - 1          # Calculate degrees of freedom
+
+# Calculate t
+tStat <- ( diffMean - mu ) / diffSE
+tStat
+```
+
+## Test for significance {.subsection}
+
+$$ \mathcal{H}_A: \mu_D \neq 0 \rightarrow t \neq 0 $$ 
+
+```{r, echo=FALSE, fig.align = 'center'}
+source("../../plotFunctionsSSR.r")
+
+plotTstatSamplingDistribution(tVal = tStat, myDF = df, yAxisMod = 1.5)
+
+```
+
+## Effect-size $d$ {.subsection}
+
+$$d = \frac{t}{\sqrt{n}}$$
+
+```{r, echo=TRUE}
+d <- tStat/(sqrt(n))
+d
+```

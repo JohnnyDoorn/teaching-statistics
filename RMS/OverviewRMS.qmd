@@ -1,0 +1,32 @@
+---
+title: "RMS - Overview"
+author: "Johnny van Doorn"
+date: today
+format:
+  html:
+    toc: true
+    toc-location: left
+---
+
+This page will be continuously updated to feature slides and extra materials for the Research Methods & Statistics course.
+
+## Slides
+
+- [Lecture 3 - Why Statistics](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_3_WhyStatistics.pdf)
+- [Lecture 4 - Variability & Association](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_4_VariabilityAssociation.pdf)
+- [Lecture 6 - Conditional Probability](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_6_ConditionalProbability.pdf)
+- [Lecture 8 - Experimental Research](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_8_ExperimentalResearch.pdf)
+- [Lecture 10 - Sampling Distributions](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_10_SamplingDistributions.pdf)
+- [Lecture 12 - Confidence Intervals (Mean)](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_12_ConfidenceIntervalsMean.pdf)
+- [Lecture 16 - Comparing Means](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_16_ComparingMeans.pdf)
+- [Lecture 18 - Categorical Associations](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_18_CategoricalAssociations.pdf)
+- [Lecture 20 - Bayesian Estimation](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_20_BayesianEstimation.pdf)
+- [Lecture 22 - Bayesian Testing](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_22_BayesianTesting.pdf)
+- [Lecture 24 - More Bayes](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_24_MoreBayes.pdf)
+
+## OEQ Practice
+
+Practice with the open-ended (trial) exam questions below. The accompanying data file is linked alongside.
+
+- [Trial Exam Question 2](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/OEQs/OE_MockExam2.pdf) — [data file (xlsx)](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/OEQs/Data_OE_TrialExam2.xlsx)
+- [Trial Exam Question 4 (Bayes)](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/OEQs/OE_MockExam4_Bayes.pdf)

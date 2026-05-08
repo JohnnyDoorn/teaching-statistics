@@ -1,0 +1,45 @@
+---
+title: "8. Wrapping up Stats Block 1"
+author: "Johnny van Doorn"
+date: "TODO 2026"
+footer: "Scientific & Statistical Reasoning"
+format:
+  revealjs:
+    output-ext: slide.html
+    css: ../../ajohnson.css
+  html: default
+css: ../../ajohnson.css
+---
+
+<div class="goals">
+In this lecture we discuss:
+
+* Correlation
+  * In JASP
+* Linear model
+  * In JASP
+* Revisiting NHST
+  * Alpha
+  * Confidence intervals
+    
+<strong>Reading:</strong>
+Chapters 1–8.8 (not Chapter 6)
+</div>
+
+# Closing
+
+## Next Week
+
+- Exam!
+  - Mix of using JASP/interpreting output/conceptual understanding
+  - Field book available (like in this weeks WA), including glossary
+  - WA will contain old exam questions
+
+## Recommended Exercises
+
+- [Exercise 7.6](https://discoverjasp.com/pages/exercises#chapter-7)
+- [Exercise 7.7](https://discoverjasp.com/pages/exercises#chapter-7)
+- [Exercise 8.1](https://discoverjasp.com/pages/exercises#chapter-8)
+
+```{r child="../../footer.qmd"}
+```

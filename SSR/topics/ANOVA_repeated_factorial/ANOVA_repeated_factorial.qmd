@@ -2,8 +2,7 @@
 
 ```{r, echo=FALSE}
 rm(list=ls())
-if(!"DT" %in% installed.packages()) { install.packages("DT") }
-library("DT")
+source("../../_setup.R")
 ```
 
 ## Factorial repeated measures ANOVA {.section}
@@ -60,7 +59,7 @@ data <- read.csv(file = "RM_ANOVA_AlcoholSpeedTime.csv", header = T)
 
 data <- data[, -2]
 
-datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+ssrTable(data, rownames = FALSE)
 ```
 
 

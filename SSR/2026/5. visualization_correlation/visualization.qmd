@@ -1,0 +1,128 @@
+# Visualization {.section}
+
+```{r, eval=FALSE, echo=FALSE}
+# Remove all objects from workspace
+rm(list=ls())
+```
+
+
+## Data visualization
+
+![](../../images/nightingale.jpg){height="300"}
+
+[Florence Nightingale](https://en.wikipedia.org/wiki/Florence_Nightingale)
+
+
+## Why Visualize Data?
+
+- Quick overview of the data
+- Spot patterns, outliers, or errors
+- Invite the reader
+
+---
+
+### Why Visualize Data?
+
+![Figure 5.15 Catterplot](../../images/catterplot.jpg) 
+
+
+---
+
+
+## Different types of graphs in JASP
+- Distribution plots (basic plots)
+  - Frequency plot when nominal
+  - Histogram when scale/ordinal
+
+- Correlation plots (basic plots)
+- Scatter plots (customizable plots)
+- Raincloud plots
+
+
+---
+
+## Boxplots: Visualizing Spread and Outliers {.smaller}
+
+- Shows median, quartiles, and outliers
+- Useful for comparing groups
+
+![Figure 5.9 Boxplots](../../images/figure-5-9.jpg) 
+
+## Raincloud plots: Boxplots + Raw Data {.smaller}
+
+![Figure 5.11 Raincloud plots](../../images/figure-5-11.jpg) 
+
+---
+
+## Best Practices in Data Visualization
+
+- Use clear labels and titles
+- Avoid unnecessary 3D effects
+- Choose appropriate scales
+- Check for misleading representations
+
+
+---
+
+
+## Critically Assess Graphs
+
+- Are axes labelled (variable, units)?
+- Are axes broken/equally spaced?
+- Are error bars (e.g., confidence intervals) included where relevant?
+
+---
+
+### Critically Assess Graphs
+```{r, echo=FALSE}
+set.seed(123)
+
+A <- rnorm(10, mean = 5, sd = 3)
+B <- rnorm(10, mean = 7, sd = 3)
+means <- c(mean(A), mean(B))
+ses   <- c(sd(A)/sqrt(length(A)), sd(B)/sqrt(length(B)))
+tcrit <- qt(0.975, df = c(length(A)-1, length(B)-1))
+
+# Bad: no axis labels
+bp <- barplot(means, names.arg = c("SPSS", "JASP"),
+              ylab = "Exam performance",
+              col = c("skyblue", "orange"), ylim = c(0, 10), axes = FALSE)
+```
+
+
+
+
+## Scale Matters
+```{r, echo=FALSE}
+
+# Bad: no axis labels
+par(mfrow = c(1, 2))
+bp <- barplot(means, names.arg = c("SPSS", "JASP"),
+              ylab = "Grade (0-10)",
+              col = c("skyblue", "orange"), ylim = c(0, 10), axes = FALSE)
+axis(2)
+
+bp <- barplot(means, names.arg = c("SPSS", "JASP"),
+              ylab = "Grade (0-100)",
+              col = c("skyblue", "orange"), ylim = c(0, 10), axes = FALSE)
+# Add error bars
+# arrows(x0 = bp, y0 = means - ses, x1 = bp, y1 = means + ses,
+#        angle = 90, code = 3, length = 0.06, lwd = 1.5)
+axis(2, labels = seq(90, 100, 2), at = seq(0, 10, by =2))
+```
+
+
+## Error Bars!
+```{r, echo=FALSE}
+
+# Bad: no axis labels
+bp <- barplot(means, names.arg = c("SPSS", "JASP"),
+              ylab = "Grade (0-10)",
+              col = c("skyblue", "orange"), ylim = c(0, 10), axes = FALSE)
+axis(2)
+arrows(x0 = bp, y0 = means - ses*tcrit, x1 = bp, y1 = means + ses*tcrit,
+        angle = 90, code = 3, length = 0.06, lwd = 1.5)
+
+```
+
+

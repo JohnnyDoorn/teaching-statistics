@@ -1,6 +1,5 @@
 ```{r, echo=FALSE}
-if(!"DT" %in% installed.packages()) { install.packages("DT") }
-library("DT")
+source("../../_setup.R")
 ```
 
 # Wilcoxon rank-sum test
@@ -41,12 +40,9 @@ data$rankedBDI <- rank(data$Sunday.BDI)
 [Link](https://discoverjasp.com/repository/dsj1_data/data/drug_long.jasp)
 
 ```{r, echo=FALSE}
-datatable(data, options = list(searching = FALSE, 
-                            scrollY   = 300, 
-                            paging    = F, 
-                            info      = F,
-                            dom       = 'Bfrtip',
-                            buttons   = c('csv')))
+ssrTable(data, height = 300,
+          options = list(dom = 'Bfrtip',
+                         buttons = c('csv')))
 ```
 
 ## Test statistic W is the sum of ranks per group {.subsection}
@@ -126,8 +122,6 @@ z
 ## Test for significance 2 sided
 
 ```{r, echo=FALSE, warning=FALSE, fig.align='center'}
-source("../../plotFunctionsSSR.r")
-
 visualize_normal_base(z, side = "two-sided")
 ```
 

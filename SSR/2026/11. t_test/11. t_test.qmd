@@ -1,0 +1,56 @@
+---
+title: "11. T-tests"
+author: "Johnny van Doorn"
+date: "TODO 2026"
+footer: "Scientific & Statistical Reasoning"
+format:
+  revealjs:
+    output-ext: slide.html
+    css: ../../ajohnson.css
+  html: default
+css: ../../ajohnson.css
+---
+
+# Block 2: Life is Mean
+
+- Comparing 2 means (t-test)
+- Comparing 2 or more means (ANOVA)
+- Between subjects vs. Within subjects
+- Adding predictors
+    
+--- 
+
+<div class="goals">
+In this lecture we aim to:
+
+* Introduce the t-test for comparing means
+  * One mean
+  * Two means, within subjects
+  * Two means, between subjects
+* What numbers can we look at? Where do they come from?
+    
+<strong>Reading:</strong>
+Chapter 9 (§9.1–9.14)
+</div>
+
+```{r child="One-sample_t-test.qmd"}
+```
+
+```{r child="t-test_paired.qmd"}
+```
+
+```{r child="t-test_independent.qmd"}
+```
+
+# Closing
+
+## Recommended Exercises
+
+- [Exercise 9.1](https://discoverjasp.com/pages/exercises#chapter-9)
+- [Exercise 9.3](https://discoverjasp.com/pages/exercises#chapter-9)
+- [Exercise 9.4](https://discoverjasp.com/pages/exercises#chapter-9)
+- How would conclusions/interpretations differ for α = 0.01?
+- How are the assumptions looking for these data sets?
+
+```{r child="../../footer.qmd"}
+```

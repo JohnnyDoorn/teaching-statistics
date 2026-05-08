@@ -258,5 +258,126 @@
   "2025/29. Bayesian ANOVA/29. bayesian anova.qmd": {
     "29. bayesian anova.html": "5f309dee",
     "29. bayesian anova.slide.html": "0ffbf5d4"
+  },
+  "2026/11. t_test/11. t_test.qmd": {
+    "11. t_test.slide.html": "6fd66284",
+    "11. t_test.html": "f1ff0ab0"
+  },
+  "2026/11. t_test/One-sample_t-test.qmd": {
+    "One-sample_t-test.html": "1d92f95b"
+  },
+  "2026/11. t_test/t-test_independent.qmd": {
+    "t-test_independent.html": "f4445b93"
+  },
+  "2026/11. t_test/t-test_paired.qmd": {
+    "t-test_paired.html": "142e36a3"
+  },
+  "2026/12. f_distribution_ANOVA_one_way_independent/12. f_distribution_ANOVA_one_way_independent.qmd": {
+    "12. f_distribution_ANOVA_one_way_independent.slide.html": "d4eb8d66",
+    "12. f_distribution_ANOVA_one_way_independent.html": "c81c47e9"
+  },
+  "2026/12. f_distribution_ANOVA_one_way_independent/ANOVA_one_way_puppies.qmd": {
+    "ANOVA_one_way_puppies.html": "9b4f8a81"
+  },
+  "2026/14. ANCOVA/14. ANCOVA.qmd": {
+    "14. ANCOVA.slide.html": "28efef69",
+    "14. ANCOVA.html": "407565c8"
+  },
+  "2026/14. ANCOVA/ANCOVA.qmd": {
+    "ANCOVA.html": "1330dd6b"
+  },
+  "2026/15. ANOVA_independent_factorial/15. ANOVA_independent_factorial.qmd": {
+    "15. ANOVA_independent_factorial.slide.html": "9404fc7f",
+    "15. ANOVA_independent_factorial.html": "daef722b"
+  },
+  "2026/15. ANOVA_independent_factorial/factorial_independent_ANOVA.qmd": {
+    "factorial_independent_ANOVA.html": "7cfb00f0"
+  },
+  "2026/18. ANOVA_repeated_mixed/18. ANOVA_repeated_and_mixed.qmd": {
+    "18. ANOVA_repeated_and_mixed.slide.html": "e51ffc81",
+    "18. ANOVA_repeated_and_mixed.html": "e6194a85"
+  },
+  "2026/18. ANOVA_repeated_mixed/ANOVA_mixed.qmd": {
+    "ANOVA_mixed.html": "044ea0d0"
+  },
+  "2026/18. ANOVA_repeated_mixed/ANOVA_repeated_factorial.qmd": {
+    "ANOVA_repeated_factorial.html": "ab6bfac4"
+  },
+  "2026/18. ANOVA_repeated_mixed/ANOVA_repeated_one-way.qmd": {
+    "ANOVA_repeated_one-way.html": "59683b69"
+  },
+  "2026/20. non_parametric_tests/20. non_parametric_tests.qmd": {
+    "20. non_parametric_tests.slide.html": "0982949c",
+    "20. non_parametric_tests.html": "f81a88d8"
+  },
+  "2026/20. non_parametric_tests/friedman_anova.qmd": {
+    "friedman_anova.html": "f1a5416b"
+  },
+  "2026/20. non_parametric_tests/kruskal_wallis_test.qmd": {
+    "kruskal_wallis_test.html": "201100fd"
+  },
+  "2026/20. non_parametric_tests/non_parametric_concept.qmd": {
+    "non_parametric_concept.html": "9e1ff641"
+  },
+  "2026/20. non_parametric_tests/wilcoxon_rank_sum_test.qmd": {
+    "wilcoxon_rank_sum_test.html": "97074e5f"
+  },
+  "2026/20. non_parametric_tests/wilcoxon_signed_rank_test.qmd": {
+    "wilcoxon_signed_rank_test.html": "594d1ceb"
+  },
+  "2026/22. multiple_regression/22. multiple_regression.qmd": {
+    "22. multiple_regression.slide.html": "21e0761e",
+    "22. multiple_regression.html": "5b90054d"
+  },
+  "2026/22. multiple_regression/regression_multiple_predictors.qmd": {
+    "regression_multiple_predictors.html": "d66135eb"
+  },
+  "2026/26. moderation/26. moderation.qmd": {
+    "26. moderation.slide.html": "3f0a715d",
+    "26. moderation.html": "028419eb"
+  },
+  "2026/26. moderation/moderationNames.qmd": {
+    "moderationNames.html": "f8e4a0a8"
+  },
+  "2026/27. mediation/27. mediation.qmd": {
+    "27. mediation.slide.html": "cca6ca0b",
+    "27. mediation.html": "18441e3a"
+  },
+  "2026/27. mediation/mediationNames.qmd": {
+    "mediationNames.html": "704cb5d1"
+  },
+  "2026/28. chi_squared_test/28. chi_squared_test.qmd": {
+    "28. chi_squared_test.slide.html": "48e137cd",
+    "28. chi_squared_test.html": "31c3a351"
+  },
+  "2026/28. chi_squared_test/chi_square_test.qmd": {
+    "chi_square_test.html": "78b292b3"
+  },
+  "2026/29. Bayesian ANOVA/29. bayesian anova.qmd": {
+    "29. bayesian anova.slide.html": "aed0b7a3",
+    "29. bayesian anova.html": "ac80c559"
+  },
+  "2026/4. reasoning_nhst/4. intro-statistics.qmd": {
+    "4. intro-statistics.slide.html": "bb9781d1",
+    "4. intro-statistics.html": "6e3209be"
+  },
+  "2026/5. visualization_correlation/5. visualization_correlation.qmd": {
+    "5. visualization_correlation.slide.html": "704fec85",
+    "5. visualization_correlation.html": "a4b202c8"
+  },
+  "2026/7. correlation_and_simple_regression/7. linear_model_regression.qmd": {
+    "7. linear_model_regression.slide.html": "12c4524d",
+    "7. linear_model_regression.html": "148ff83e"
+  },
+  "2026/7. correlation_and_simple_regression/8. Wrap_up.qmd": {
+    "8. Wrap_up.slide.html": "65cd5a86",
+    "8. Wrap_up.html": "ad708116"
+  },
+  "2026/8. t_distribution_and_test/7. t_distribution_and_test.qmd": {
+    "7. t_distribution_and_test.slide.html": "cdec4f33",
+    "7. t_distribution_and_test.html": "44f25584"
+  },
+  "2026/SSR.qmd": {
+    "SSR.html": "d9cee70d"
   }
 }

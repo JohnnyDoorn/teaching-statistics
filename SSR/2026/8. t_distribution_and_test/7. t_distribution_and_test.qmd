@@ -1,0 +1,18 @@
+---
+title: "7. T-distribution"
+author: "Sharon Kinkenberg & Johnny van Doorn"
+date: "TODO 2026"
+footer: "Scientific & Statistical Reasoning"
+format:
+  revealjs:
+    output-ext: slide.html
+    css: ../../ajohnson.css
+  html: default
+css: ../../ajohnson.css
+---
+
+```{r child="t-distribution.qmd"}
+```
+
+```{r child="../../footer.qmd"}
+```

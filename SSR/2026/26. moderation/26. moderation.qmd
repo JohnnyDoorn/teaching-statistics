@@ -1,0 +1,45 @@
+---
+title: "26. Moderation"
+author: "Johnny van Doorn"
+date: "TODO 2026"
+footer: "Scientific & Statistical Reasoning"
+format:
+  revealjs:
+    output-ext: slide.html
+    css: ../../ajohnson.css
+  html: default
+css: ../../ajohnson.css
+---
+
+<div class="goals">
+In this lecture we aim to:
+
+- Look at interactions between continuous predictors
+- Introduce the PROCESS module
+- Demonstrate in JASP
+    
+<strong>Reading:</strong>
+Chapter 10 (§10.1–10.3)
+</div>
+
+
+```{r child="moderationNames.qmd"}
+```
+
+
+# Closing
+
+## Recap
+
+- Interactions still matter with continuous predictors
+- Continuous interactions can be assessed with:
+  - Linear regression
+  - PROCESS module
+
+## Recommended Exercises
+
+- [Exercise 10.1](https://discoverjasp.com/pages/exercises#chapter-10)
+- [Exercise 10.2](https://discoverjasp.com/pages/exercises#chapter-10)
+
+```{r child="../../footer.qmd"}
+```

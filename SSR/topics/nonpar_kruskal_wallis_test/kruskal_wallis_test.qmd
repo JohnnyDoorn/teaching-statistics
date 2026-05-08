@@ -1,8 +1,5 @@
 ```{r, echo=FALSE}
-if(!"DT" %in% installed.packages()) { install.packages("DT") }
-library("DT")
-
-if(!"visualize" %in% installed.packages()){ install.packages("visualize") }
+source("../../_setup.R")
 library("visualize")
 
 set.seed(2348586)
@@ -39,7 +36,7 @@ The Kruskal-Wallis test essentially subtracts the expected mean ranking from eac
 # data <- data.frame(factor, depres)
 data <- read.csv("soya.csv")[, -1]
 data$Testosterone <- round(data$Testosterone, 2)
-datatable(data, options = list(iDisplayLength = 7, searching = FALSE, scrollY = 415, paging = F, info = F))
+ssrTable(data, options = list(iDisplayLength = 7))
 ```
 
 ## Assign ranks {.subsection}
@@ -53,12 +50,9 @@ data$ranks <- rank(data$Testosterone)
 [Link](https://discoverjasp.com/repository/dsj1_data/data/soya.jasp)
 
 ```{r, echo=FALSE}
-datatable(data, options = list(searching = FALSE, 
-                            scrollY   = 300, 
-                            paging    = F, 
-                            info      = F,
-                            dom       = 'Bfrtip',
-                            buttons   = c('csv')))
+ssrTable(data, height = 300,
+          options = list(dom = 'Bfrtip',
+                         buttons = c('csv')))
 
 # Write data for use in SPSS
 # write.csv(data, "kruskal-Wallis.csv", row.names=FALSE)
@@ -107,7 +101,6 @@ df <- k - 1
 ## Test for significance {.subsection}
 
 ```{r, fig.align='center', warning=FALSE, echo=FALSE}
-source("../../plotFunctionsSSR.r")
 visualize_chisq_base(H = H, df = df, section = "upper")
 ```
 

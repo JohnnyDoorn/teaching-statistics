@@ -1,8 +1,5 @@
 ```{r, echo=FALSE}
-if(!"DT" %in% installed.packages()) { install.packages("DT") }
-library("DT")
-
-if(!"visualize" %in% installed.packages()){ install.packages("visualize") }
+source("../../_setup.R")
 library("visualize")
 
 set.seed(87364536)
@@ -56,7 +53,7 @@ colnames(data) <- c("T0", "T1", "T2")
 [Link](https://discoverjasp.com/repository/dsj1_data/data/soya.jasp)
 
 ```{r, echo=FALSE}
-datatable(data, options = list(iDisplayLength = 7, searching = FALSE, scrollY = 415, paging = F, info = F))
+ssrTable(data, options = list(iDisplayLength = 7))
 nTies <- sum(data[, 1] == data[, 2]) +
   sum(data[, 1] == data[, 3]) +
   sum(data[, 2] == data[, 3])
@@ -79,12 +76,9 @@ colnames(ranks) <- paste0(colnames(data), "_R")
 combDat <- cbind(data, ranks)
 # Write data for use in SPSS
 write.csv(combDat, "Friedman.csv", row.names=FALSE)
-datatable(combDat, options = list(searching = FALSE, 
-                            scrollY   = 300, 
-                            paging    = F, 
-                            info      = F,
-                            dom       = 'Bfrtip',
-                            buttons   = c('csv')))
+ssrTable(combDat, height = 300,
+          options = list(dom = 'Bfrtip',
+                         buttons = c('csv')))
 ```
 
 ## Calculate $F_r$ {.subsection}
@@ -140,7 +134,6 @@ df <- k - 1
 ## Test for significance
 
 ```{r, fig.align='center', warning=FALSE, echo=FALSE}
-source("../../plotFunctionsSSR.r")
 visualize_chisq_base(H = F.r, df = df, section = "upper", myLimX = c(0, 6))
 ```
 

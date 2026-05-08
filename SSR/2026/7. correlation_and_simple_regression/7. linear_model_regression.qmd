@@ -1,0 +1,46 @@
+---
+title: "7. Linear Model (Regression)"
+author: "Johnny van Doorn"
+date: "TODO 2026"
+footer: "Scientific & Statistical Reasoning"
+format:
+  revealjs:
+    output-ext: slide.html
+    css: ../../ajohnson.css
+  html: default
+css: ../../ajohnson.css
+---
+
+<div class="goals">
+In this lecture we discuss:
+
+* Correlation
+  * In JASP
+  * Control for third variable
+* Linear model
+  * Theory
+  * In JASP
+    
+<strong>Reading:</strong>
+Chapters 7 (§7.8–7.11), 8 (§8.1–8.8)
+</div>
+
+
+```{r child="correlation-partial.qmd"}
+```
+
+
+```{r child="regression_one_predictor.qmd"}
+```
+
+
+# Closing
+
+## Recommended Exercises
+
+- [Exercise 7.6](https://discoverjasp.com/pages/exercises#chapter-7)
+- [Exercise 7.7](https://discoverjasp.com/pages/exercises#chapter-7)
+- [Exercise 8.1](https://discoverjasp.com/pages/exercises#chapter-8)
+
+```{r child="../../footer.qmd"}
+```

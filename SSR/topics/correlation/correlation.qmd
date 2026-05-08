@@ -1,8 +1,7 @@
 # Correlation {.section}
 
-```{r, eval=FALSE, echo=FALSE}
-# Remove all objects from workspace
-rm(list=ls())
+```{r, eval=TRUE, echo=FALSE}
+source("../../_setup.R")
 ```
 
 ## Pearson Correlation {.smaller}
@@ -113,9 +112,9 @@ $$(x_i - \bar{x})(y_i - \bar{y})$$
 
 ```{r, eval=TRUE, echo=TRUE}
 n     <- 10
-data <- read.csv("../../../datasets/Album Sales.csv")[, -4]
+data <- read.csv(datasetsPath("Album Sales.csv"))[, -4]
 data <- data[1:n, ] # take the first 10 rows of the album sales data set from Field
-DT::datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+ssrTable(data)
 ```
 
 

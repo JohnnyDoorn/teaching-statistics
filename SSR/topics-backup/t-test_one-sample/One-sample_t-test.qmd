@@ -1,0 +1,146 @@
+# One-sample t-test {.section}
+
+Compare 1 group mean to a hypothesized value
+
+## Measuring IQ
+
+<img src="../../images/qr_mxyau.png" style="width:20%;"/>
+
+<!-- <p style="font-size: 30px;"> https://edu.nl/mxyau</p> -->
+
+## Models {.center}
+
+<div style="font-size:200%;;">
+$$\text{outcome} = \text{model} + \text{error}$$
+</div>
+
+
+$\mathcal{H}_0:  \text{model} = 120$
+
+$\mathcal{H}_A:  \text{model} = \bar{x}$
+
+## Hypotheses {.subsection .smaller}
+
+### Null hypothesis
+
+* $H_0: \mu = 120$
+
+### Alternative hypotheses
+
+* $H_A: \mu \neq 120$
+* $H_A: \mu > 120$
+* $H_A: \mu < 120$
+
+Can you phrase research questions that would lead you to each of these three versions of $\mathcal{H}_A$?
+
+
+
+## Compare sample mean to 120
+
+<small>
+We use the one-sample t-test to compare the sample mean $\bar{x}$ to the mean that is hypothesized by $\mathcal{H}_0$: $\mu = 120$. Let's take a look at our sample:
+</small>
+
+```{r, message=FALSE, eval=TRUE, echo=FALSE}
+if(!'gsheet' %in% installed.packages()) { install.packages('gsheet') }
+library("gsheet")
+data <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1wfuAqJwIx3p-ZXPBi3oyQWwJi4kM1XFUL1ilVRaRpVQ/edit?usp=sharing')[, -1]
+colnames(data) <- c("ownIQ", "nextIQ")
+# IQ.next.to.you = data[grep("2017|2020", as.character(data$Timestamp)),"IQ next to you"]
+IQ.next.to.you <- data$nextIQ
+```
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE}
+mu     <- 120
+n      <- length(IQ.next.to.you)
+x      <- IQ.next.to.you
+mean_x <- mean(x, na.rm = TRUE)
+sd_x   <- sd(x, na.rm = TRUE)
+cbind(n, mean_x, sd_x)
+```
+
+<small>
+Does this mean differ significantly from $\mathcal{H}_0:$ $\mu = `r mu`$?
+</small>
+
+## Assumptions
+
+* Normally distributed residuals (i.e., model errors)
+* Random samples
+
+## T-statistic
+
+$$T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}} = \frac{`r round(mean_x,2)` - `r mu` }{`r round(sd_x,2)` / \sqrt{`r n`}}$$
+
+So the t-statistic represents the deviation of the sample mean $\bar{x}$ from the population mean $\mu$, considering the sample size.
+
+```{r, echo=TRUE}
+tStat <- (mean_x - mu) / (sd_x / sqrt(n)); tStat
+```
+
+## Type I error {.subsection}
+
+To determine if this t-value significantly differs from the population mean we have to specify a type I error that we are willing to make.
+
+* Type I error / $\alpha$ = .01
+
+
+## P-value two sided {.subsection .smaller}
+Finally we have to calculate our $p$-value for which we need the degrees of freedom $df = n - 1$ to determine the shape of the t-distribution.
+
+$$ \mathcal{H}_A: \mu \neq 120 \rightarrow t \neq 0 $$ 
+
+```{r, echo=FALSE, fig.align = 'center'}
+source("../../plotFunctionsSSR.r")
+df <- n-1
+plotTstatSamplingDistribution(tVal = tStat, myDF = df, yAxisMod = 1.5)
+```
+
+## P-value one sided {.subsection}
+
+
+$$ \mathcal{H}_A: \mu > 120 \rightarrow t > 0 $$ 
+
+
+```{r, echo=FALSE, fig.align = 'center'}
+plotTstatSamplingDistribution(tVal = tStat, myDF = df, yAxisMod = 1.5, altHyp = "Positive only")
+```
+
+
+---
+
+### P-value one sided
+
+
+$$ \mathcal{H}_A: \mu < 120 \rightarrow t < 0 $$ 
+
+
+```{r, echo=FALSE, fig.align = 'center'}
+source("../../plotFunctionsSSR.r")
+
+plotTstatSamplingDistribution(tVal = tStat, myDF = df, yAxisMod = 1.5, altHyp = "Negative only")
+
+```
+
+
+
+
+## Effect-size Cohen's $d$ {.smaller}
+
+- $t$-statistic can be significant because of a big effect and/or a high sample size
+- Effect-size Cohen's $d$ is unaffected by sample size
+- See [here](https://johnnydoorn.github.io/teaching-statistics/extra-texts/EffSizeVsTestStat.html) for additional ramblings
+
+$$d = \frac{t}{\sqrt{n}}$$
+
+```{r, echo=TRUE}
+d <- tStat / sqrt(n)
+
+d
+```
+
+## Applet
+
+[Link](https://statisticalreasoning-uva.shinyapps.io/NHST_Continuous/)

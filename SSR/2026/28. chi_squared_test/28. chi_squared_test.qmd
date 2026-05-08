@@ -1,0 +1,46 @@
+---
+title: "28. Chi-squared test"
+subtitle: "Contingency Tables"
+author: "Johnny van Doorn"
+date: "TODO 2026"
+footer: "Scientific & Statistical Reasoning"
+format:
+  revealjs:
+    output-ext: slide.html
+    css: ../../ajohnson.css
+  html: default
+css: ../../ajohnson.css
+---
+
+<div class="goals">
+In this lecture we aim to:
+
+- Discuss association between categorical variables
+  - Contingency tables
+- Show this test in JASP
+    
+<strong>Reading:</strong>
+Chapter 16 (§16.1–16.10)
+</div>
+
+
+```{r child="chi_square_test.qmd"}
+```
+
+
+# Closing
+
+## Recap
+
+- Chi-square test assesses categorical associations
+- Can be used to assess (in)dependence between predictors
+- Has test statistic (χ²) + effect size (odds ratio)
+
+## Recommended Exercises
+
+- [Exercise 16.1](https://discoverjasp.com/pages/exercises#chapter-16)
+- [Exercise 16.6](https://discoverjasp.com/pages/exercises#chapter-16)
+- [Exercise 16.7](https://discoverjasp.com/pages/exercises#chapter-16)
+
+```{r child="../../footer.qmd"}
+```

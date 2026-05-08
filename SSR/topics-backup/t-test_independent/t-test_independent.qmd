@@ -1,0 +1,228 @@
+# Independent-samples t-test
+
+Compare 2 independent group means
+
+## Independent-samples t-test
+
+In the independent-samples t-test the mean of both independent samples is calculated and the difference of these $(\bar{X}_1 - \bar{X}_2)$ means is tested against the null hypothesis where $\mu = 0$.
+
+$$t_{n_1 + n_2 -2} = \frac{(\bar{X}_1 - \bar{X}_2) - \mu}{{SE}_p}$$
+Where $n_1$ and $n_2$ are the number of cases in each group and $SE_p$ is the pooled standard error.
+
+## Hypothesis
+
+\begin{aligned}
+H_0 &: t = 0 = \mu_t \\
+H_A &: t \neq 0 \\
+H_A &: t > 0 \\
+H_A &: t < 0 \\
+\end{aligned}
+
+## Long data structure
+
+index | k | outcome
+------|----|--
+1     | 1 | x
+2     | 1 | x
+3     | 2 | x
+4     | 2 | x
+
+Where $k$ is the level of the categorical predictor variable and $x$ is the value of the outcome/dependent variable.
+
+## Assumptions
+
+* Normally distributed residuals (i.e., model errors)
+* Random samples
+
+Specific for independent sample $t$-test:
+
+* Equality of variance
+    * Assess with observed sd's or Levene's test
+    * Use Welch $t$-test (robust to unequal variances)
+
+## Example
+
+We are going to use the IQ estimates we collected. You had to guess the IQ of the one sitting next to you and your own IQ. Do your guesses differ from the guesses from last year??
+
+```{r, warning=FALSE, echo=FALSE, message=FALSE}
+if(!'gsheet' %in% installed.packages()) { install.packages('gsheet') }
+library("gsheet")
+data2024 <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1E9tlgFEv8OAyPBe_y2lwn2eUI1JmCg05Wk_wONAK1UM/edit?usp=sharing')[, -1]
+colnames(data2024) <- c("ownIQ", "nextIQ")
+# data = data[grep("2017", as.character(data$Timestamp)),c("IQ next to you", "Own IQ")]
+
+
+data2025 <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1wfuAqJwIx3p-ZXPBi3oyQWwJi4kM1XFUL1ilVRaRpVQ/edit?usp=sharing')[, -1]
+colnames(data2025) <- c("ownIQ", "nextIQ")
+# data = data[grep("2017", as.character(data$Timestamp)),c("IQ next to you", "Own IQ")]
+
+
+
+iq2024 <- data2024$nextIQ
+iq2025 <- data2025$nextIQ
+
+data <- data.frame(IQ = c(iq2024, iq2025), year = c(rep("2024", length(iq2024)), 
+                                                    rep("2025", length(iq2025))))
+```
+
+
+## The data
+
+```{r, echo=FALSE}
+# Write data for use in SPSS
+write.table(data, "IQ.csv", row.names=FALSE, col.names=TRUE, dec=',')
+
+DT::datatable(data[, c('year', 'IQ')], options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+```
+
+## Calculate means {.subsection}
+
+```{r, echo=TRUE}
+iq2024.mean <- mean(iq2024, na.rm = TRUE)
+iq2025.mean <- mean(iq2025, na.rm = TRUE)
+
+rbind(iq2024.mean, iq2025.mean)
+```
+
+## Calculate variance {.smaller .subsection}
+
+```{r, echo=TRUE}
+iq2024.var   <- var(iq2024,   na.rm = TRUE)
+iq2025.var <- var(iq2025, na.rm = TRUE)
+print(rbind(iq2024.var, iq2025.var))
+
+iq2024.n   <- length(iq2024)
+iq2025.n <- length(iq2025)
+n <- iq2024.n + iq2025.n
+print(rbind(iq2024.n, iq2025.n))
+```
+
+
+## Calculate t-value {.smaller}
+
+$$t_{n_1 + n_2 -2} = \frac{(\bar{X}_1 - \bar{X}_2) - \mu}{{SE}_p}$$
+
+Where ${SE}_p$ is the pooled standard error.
+
+$${SE}_p = \sqrt{\frac{S^2_p}{n_1}+\frac{S^2_p}{n_2}}$$
+
+And $S^2_p$ is the pooled variance.
+
+$$S^2_p = \frac{(n_1-1)s^2_1+(n_2-1)s^2_2}{n_1+n_2-2}$$
+
+Where $s^2$ is the variance and $n$ the sample size.
+
+## Calculate pooled variance {.subsection}
+
+$$S^2_p = \frac{(n_1-1)s^2_1+(n_2-1)s^2_2}{n_1+n_2-2}$$
+
+```{r, echo=TRUE}
+df <- iq2024.n + iq2025.n - 2
+pooledVar <- ( (iq2024.n-1)*iq2024.var + (iq2025.n-1)*iq2025.var ) / df
+
+df
+pooledVar
+```
+
+## Calculate pooled SE {.subsection}
+
+$$ {SE}_p = \sqrt{\frac{S^2_p}{n_1}+\frac{S^2_p}{n_2}} $$
+
+```{r, echo=TRUE}
+sePooled <- sqrt( ((pooledVar/iq2024.n) + (pooledVar/iq2025.n)) )
+sePooled
+```
+
+## Calculate t-value {.subsection}
+
+$$t_{n_1 + n_2 -2} = \frac{(\bar{X}_1 - \bar{X}_2) - \mu}{{SE}_p}$$
+
+```{r, echo=TRUE}
+tStat <- ( iq2024.mean - iq2025.mean ) / sePooled
+
+tStat
+```
+
+## Test for significance
+
+$$ \mathcal{H}_A: \mu_1 \neq \mu_2 \rightarrow t \neq 0 $$ 
+
+
+```{r, echo=FALSE, fig.align = 'center'}
+source("../../plotFunctionsSSR.r")
+
+plotTstatSamplingDistribution(tVal = tStat, myDF = df, yAxisMod = 1.5)
+
+```
+
+
+## Effect-size d
+
+$$d = \frac{2t}{\sqrt{n_1 + n_2}}$$
+
+```{r, echo=TRUE}
+d <- 2*tStat / sqrt(n)
+
+d
+```
+
+## But what about equal variances?
+
+There exist different hypothesis tests for this - the most used is Levene's test:
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+
+if(!"car" %in% installed.packages()) { install.packages("car") }
+library("car")
+
+leveneTest(y = data$IQ, group = data$year)
+```
+
+But more nuance lies in comparing observed sd's or variances:
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+tapply(data$IQ, data$year, sd)
+```
+
+---
+
+### But what about equal variances?
+
+::: {.callout-warning}
+Levene's test (and other significance tests like it, such as Shapiro for normality) are heavily influenced by sample size, so a significant test result does not necessarily mean that you have a problem. A more pragmatic rule of thumb is to look at the ratio of variances - a ratio greater than 2 is problematic. Additionally, Welch $t$-test is a version of the $t$-test that is robust to unequal variances. 
+:::
+
+## Welch $t$-test is more robust
+
+> Unequal variances bias the sampling distribution of $t$. Welch makes a correction:
+
+- It uses the unpooled SE
+- It lowers the df 
+  - More inequality = more reduction
+  
+$$SE_{\text{unpooled}} = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}$$
+
+## Normality
+
+- Assess using a plot (Q-Q plot)
+    - Points should be along the diagonal
+    - Not exact 
+- Test using hypothesis test (Shapiro-Wilk)
+    - $p < \alpha \rightarrow$ assumption violated 
+    - Same caution as Levene's test (see also Jane Superbrain Box 6.7)
+    - Plus caution as with any p-value (black-and-white decision making)
+- Becomes less important as $n$ grows ($n \approx 30$)
+
+    
+<img src="https://upload.wikimedia.org/wikipedia/en/3/3f/Pok%C3%A9mon_Snorlax_art.png" alt="Snorlax" width="100"/>
+
+## Handling Assumption violations
+::: {.callout-warning}
+Assumption violations affect the shape of the sampling distribution and mess up the type 1/2 error rates
+:::
+
+- Unequal variances?
+    - Welch $t$-test
+- Non-normality?
+    - Use nonparametric test (Chapter 15)
+    - Bootstrapping (Section 6.10.5; bonus)
+

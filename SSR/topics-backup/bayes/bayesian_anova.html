@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.340">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Sharon Klinkenberg &amp; Johnny van Doorn">
+
+<title>bayesian_anova</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="bayesian_anova_files/libs/clipboard/clipboard.min.js"></script>
+<script src="bayesian_anova_files/libs/quarto-html/quarto.js"></script>
+<script src="bayesian_anova_files/libs/quarto-html/popper.min.js"></script>
+<script src="bayesian_anova_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="bayesian_anova_files/libs/quarto-html/anchor.min.js"></script>
+<link href="bayesian_anova_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="bayesian_anova_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="bayesian_anova_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="bayesian_anova_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="bayesian_anova_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#bayesian-anova" id="toc-bayesian-anova" class="nav-link active" data-scroll-target="#bayesian-anova">Bayesian ANOVA</a>
+  <ul class="collapse">
+  <li><a href="#anova-in-regression-formula" id="toc-anova-in-regression-formula" class="nav-link" data-scroll-target="#anova-in-regression-formula">ANOVA in regression formula</a></li>
+  <li><a href="#two-models-1-predictor-with-2-groups" id="toc-two-models-1-predictor-with-2-groups" class="nav-link" data-scroll-target="#two-models-1-predictor-with-2-groups">Two Models (1 predictor with 2 groups)</a></li>
+  <li><a href="#two-models" id="toc-two-models" class="nav-link" data-scroll-target="#two-models">Two Models</a></li>
+  <li><a href="#model-comparison" id="toc-model-comparison" class="nav-link" data-scroll-target="#model-comparison">Model Comparison</a></li>
+  <li><a href="#marginal-likelihood-of-mathcalm_1" id="toc-marginal-likelihood-of-mathcalm_1" class="nav-link" data-scroll-target="#marginal-likelihood-of-mathcalm_1">Marginal Likelihood of <span class="math inline">\(\mathcal{M}_1\)</span></a></li>
+  <li><a href="#marginal-likelihood-of-mathcalm_0" id="toc-marginal-likelihood-of-mathcalm_0" class="nav-link" data-scroll-target="#marginal-likelihood-of-mathcalm_0">Marginal Likelihood of <span class="math inline">\(\mathcal{M}_0\)</span></a></li>
+  <li><a href="#ratio-of-marginal-likelihoods-bayes-factor" id="toc-ratio-of-marginal-likelihoods-bayes-factor" class="nav-link" data-scroll-target="#ratio-of-marginal-likelihoods-bayes-factor">Ratio of Marginal Likelihoods = Bayes Factor</a></li>
+  <li><a href="#four-models-2-predictors-with-2-groups-each" id="toc-four-models-2-predictors-with-2-groups-each" class="nav-link" data-scroll-target="#four-models-2-predictors-with-2-groups-each">Four Models (2 predictors with 2 groups each)</a></li>
+  <li><a href="#priors-for-mathcalm_a" id="toc-priors-for-mathcalm_a" class="nav-link" data-scroll-target="#priors-for-mathcalm_a">Priors for <span class="math inline">\(\mathcal{M_A}\)</span></a></li>
+  <li><a href="#priors-for-mathcalm_c" id="toc-priors-for-mathcalm_c" class="nav-link" data-scroll-target="#priors-for-mathcalm_c">Priors for <span class="math inline">\(\mathcal{M_C}\)</span></a></li>
+  <li><a href="#priors-for-mathcalm_ac" id="toc-priors-for-mathcalm_ac" class="nav-link" data-scroll-target="#priors-for-mathcalm_ac">Priors for <span class="math inline">\(\mathcal{M_{A+C}}\)</span></a></li>
+  <li><a href="#model-comparison-results" id="toc-model-comparison-results" class="nav-link" data-scroll-target="#model-comparison-results">Model comparison results</a></li>
+  <li><a href="#looking-at-the-individual-effects" id="toc-looking-at-the-individual-effects" class="nav-link" data-scroll-target="#looking-at-the-individual-effects">Looking at the individual effects</a></li>
+  <li><a href="#single-model-inference" id="toc-single-model-inference" class="nav-link" data-scroll-target="#single-model-inference">Single model inference</a></li>
+  <li><a href="#single-model-inference-posterior-for-beertype" id="toc-single-model-inference-posterior-for-beertype" class="nav-link" data-scroll-target="#single-model-inference-posterior-for-beertype">Single model inference: Posterior for BeerType</a></li>
+  <li><a href="#single-model-inference-posteriors-for-correctidentify" id="toc-single-model-inference-posteriors-for-correctidentify" class="nav-link" data-scroll-target="#single-model-inference-posteriors-for-correctidentify">Single model inference: Posteriors for CorrectIdentify</a></li>
+  <li><a href="#lost" id="toc-lost" class="nav-link" data-scroll-target="#lost">Lost?</a></li>
+  <li><a href="#jasp" id="toc-jasp" class="nav-link" data-scroll-target="#jasp">JASP</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="bayesian_anova.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</div>
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="bayesian-anova" class="level1 section">
+<h1 class="section">Bayesian ANOVA</h1>
+<section id="anova-in-regression-formula" class="level2">
+<h2 class="anchored" data-anchor-id="anova-in-regression-formula">ANOVA in regression formula</h2>
+<p>Show model predictions using dummy variables:</p>
+<p><span class="math display">\[ y_i = b_0 + b_1 \times x_i. \]</span> where <span class="math inline">\(x_i\)</span> indicates whether we are in group A or group B, then <span class="math inline">\(b_1\)</span> indicates the group difference (if equal to 0, then no group difference)</p>
+</section>
+<section id="two-models-1-predictor-with-2-groups" class="level2">
+<h2 class="anchored" data-anchor-id="two-models-1-predictor-with-2-groups">Two Models (1 predictor with 2 groups)</h2>
+<p><span class="math display">\[ y_i = b_0 + b_1 \times x_i \]</span></p>
+<p><span class="math display">\[\mathcal{M_0}: b_1 = 0 \]</span> <span class="math display">\[\mathcal{M_1}: b_1 \sim Cauchy(0.707)\]</span></p>
+</section>
+<section id="two-models" class="level2">
+<h2 class="anchored" data-anchor-id="two-models">Two Models</h2>
+<p><span class="math display">\[\mathcal{M_0}: b_1 = 0 \]</span> <span class="math display">\[\mathcal{M_1}: b_1 \sim Cauchy(0.707)\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="bayesian_anova_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="model-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="model-comparison">Model Comparison</h2>
+<p>How well did each model predict the data?</p>
+<p><span class="math inline">\(\rightarrow\)</span> Marginal likelihood</p>
+</section>
+<section id="marginal-likelihood-of-mathcalm_1" class="level2">
+<h2 class="anchored" data-anchor-id="marginal-likelihood-of-mathcalm_1">Marginal Likelihood of <span class="math inline">\(\mathcal{M}_1\)</span></h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="bayesian_anova_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="marginal-likelihood-of-mathcalm_0" class="level2">
+<h2 class="anchored" data-anchor-id="marginal-likelihood-of-mathcalm_0">Marginal Likelihood of <span class="math inline">\(\mathcal{M}_0\)</span></h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="bayesian_anova_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="ratio-of-marginal-likelihoods-bayes-factor" class="level2">
+<h2 class="anchored" data-anchor-id="ratio-of-marginal-likelihoods-bayes-factor">Ratio of Marginal Likelihoods = Bayes Factor</h2>
+<p><span class="math display">\[\frac{P(data \mid \mathcal{M}_1)}{P(data \mid \mathcal{M}_0)} \approx 10,000\]</span> The data are 10,000 times more likely under <span class="math inline">\(\mathcal{M}_1\)</span> than under <span class="math inline">\(\mathcal{M}_0\)</span></p>
+</section>
+<section id="four-models-2-predictors-with-2-groups-each" class="level2">
+<h2 class="anchored" data-anchor-id="four-models-2-predictors-with-2-groups-each">Four Models (2 predictors with 2 groups each)</h2>
+<p><span class="math display">\[ tastiness = b_0 + b_1 \times alcoholic + b_2 \times correct\]</span></p>
+<ul>
+<li><span class="math inline">\(\mathcal{M_0}\)</span>: model with only the intercept <span class="math inline">\(b_0\)</span></li>
+<li><span class="math inline">\(\mathcal{M_A}\)</span>: model with the intercept <span class="math inline">\(b_0\)</span> and the main effect of alcohol <span class="math inline">\(b_1\)</span></li>
+<li><span class="math inline">\(\mathcal{M_C}\)</span>: model with the intercept <span class="math inline">\(b_0\)</span> and the main effect of correct identification <span class="math inline">\(b_2\)</span></li>
+<li><span class="math inline">\(\mathcal{M}_{A+C}\)</span>: model with the intercept <span class="math inline">\(b_0\)</span> and the two main effects</li>
+</ul>
+</section>
+<section id="priors-for-mathcalm_a" class="level2">
+<h2 class="anchored" data-anchor-id="priors-for-mathcalm_a">Priors for <span class="math inline">\(\mathcal{M_A}\)</span></h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="bayesian_anova_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="priors-for-mathcalm_c" class="level2">
+<h2 class="anchored" data-anchor-id="priors-for-mathcalm_c">Priors for <span class="math inline">\(\mathcal{M_C}\)</span></h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="bayesian_anova_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="priors-for-mathcalm_ac" class="level2">
+<h2 class="anchored" data-anchor-id="priors-for-mathcalm_ac">Priors for <span class="math inline">\(\mathcal{M_{A+C}}\)</span></h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="bayesian_anova_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="model-comparison-results" class="level2">
+<h2 class="anchored" data-anchor-id="model-comparison-results">Model comparison results</h2>
+<div style="text-align: center;">
+<p><img src="../../topics/bayes/ANOVA_ModelComparison.png" alt="Bayes factor table" width="900"></p>
+</div>
+</section>
+<section id="looking-at-the-individual-effects" class="level2">
+<h2 class="anchored" data-anchor-id="looking-at-the-individual-effects">Looking at the individual effects</h2>
+<div style="text-align: center;">
+<p><img src="../../topics/bayes/ANOVA_AnalysisEffects.png" alt="Bayes factor table" width="900"></p>
+</div>
+</section>
+<section id="single-model-inference" class="level2">
+<h2 class="anchored" data-anchor-id="single-model-inference">Single model inference</h2>
+<div style="text-align: center;">
+<p><img src="../../topics/bayes/ANOVA_SingleModelInferenceMainEffects.png" alt="Bayes factor table" width="900"></p>
+</div>
+</section>
+<section id="single-model-inference-posterior-for-beertype" class="level2">
+<h2 class="anchored" data-anchor-id="single-model-inference-posterior-for-beertype">Single model inference: Posterior for BeerType</h2>
+<div style="text-align: center;">
+<p><img src="../../topics/bayes/ANOVA_BeerType.png" alt="Bayes factor table" width="550"></p>
+</div>
+</section>
+<section id="single-model-inference-posteriors-for-correctidentify" class="level2">
+<h2 class="anchored" data-anchor-id="single-model-inference-posteriors-for-correctidentify">Single model inference: Posteriors for CorrectIdentify</h2>
+<div style="text-align: center;">
+<p><img src="../../topics/bayes/ANOVA_CorrectIdentify.png" alt="Bayes factor table" width="450"></p>
+</div>
+</section>
+<section id="lost" class="level2">
+<h2 class="anchored" data-anchor-id="lost">Lost?</h2>
+<div style="text-align: center;">
+<p><img src="../../topics/bayes/info.png" alt="Info button in JASP" width="200"></p>
+</div>
+</section>
+<section id="jasp" class="level2">
+<h2 class="anchored" data-anchor-id="jasp">JASP</h2>
+<div style="text-align: center;">
+<p><img src="../../topics/bayes/JASP_logo_green.svg" alt="JASP" width="200"></p>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

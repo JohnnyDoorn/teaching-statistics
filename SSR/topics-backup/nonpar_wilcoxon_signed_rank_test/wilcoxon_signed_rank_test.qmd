@@ -1,0 +1,176 @@
+```{r, echo=FALSE}
+if(!"DT" %in% installed.packages()) { install.packages("DT") }
+library("DT")
+
+if(!"visualize" %in% installed.packages()){ install.packages("visualize") }
+library("visualize")
+
+```
+
+# Wilcoxon signed-rank test
+
+Paired 2 samples
+
+## Wilcoxon signed-rank test {.section}
+
+
+The Wilcoxon signed-rank test is a nonparametric alternative to the paired samples t-test. It assigns + or - signs to the difference between two repeated measures. By ranking the *absolute* differences and summing these ranks for the positive group, the null hypothesis is tested that both positive and negative differences are equal.
+
+<!-- ## Simulate data -->
+
+```{r, echo=FALSE}
+# set.seed(3562534)
+# n      <- 20
+# factor <- rep(c("Ecstasy","Alcohol"),each=n/2)
+# dummy  <- ifelse(factor == "Ecstacy", 0, 1)
+# b.0    <- 23
+# b.1    <- 5
+# error  <- rnorm(n, 0, 1.7)
+# depres <- b.0 + b.1*dummy + error
+# depres <- round(depres)
+# 
+# data <- data.frame(factor, depres)
+data <- read.csv("drug_wide.csv")
+# data$Drug <- ifelse(data$Drug == 1, "Ecstasy", "Alcohol")
+# Ecstasy <- subset(data, Drug=="Ecstasy")$Sunday.BDI
+# Alcohol <- subset(data, Drug=="Alcohol")$Sunday.BDI
+Sunday <- data$Sunday.BDI.Ecstasy
+Wednesday <- data$Wednesday.BDI.Ecstasy
+
+data <- data.frame(Sunday, Wednesday)
+```
+
+## Example
+```{r, echo=FALSE}
+datatable(data, options = list(iDisplayLength = 7, searching = FALSE, scrollY = 415, paging = F, info = F))
+
+# Write data for use in SPSS
+# write.csv(data, "mann-whitney-signed-rank.csv", row.names=FALSE)
+```
+
+## Example
+
+```{r, echo=FALSE}
+par(pty = "s")
+qqnorm(scale(Sunday), main = "Normal Q-Q Plot", bty = "n", xlim = c(-1.5, 1.5), ylim = c(-1.5, 1.5))
+qqline(scale(Sunday), col = "darkred", lwd = 2)  # Adds a reference line for normality
+# Write data for use in SPSS
+# write.csv(data, "mann-whitney-signed-rank.csv", row.names=FALSE)
+```
+
+## The plot 
+
+![](../../images/figure-15-7.jpeg){width="300px"}
+
+## Calculate T {.small .subsection}
+
+
+```{r, echo=TRUE}
+# Calculate difference in scores between first and second measure
+data$diff = data$Sunday - data$Wednesday
+
+# Calculate absolute difference in scores between first and second measure
+data$abs.diff = abs(data$Sunday - data$Wednesday)
+
+# Remove observations where the difference is 0
+data <- data[data$diff != 0, ]
+
+# Create rank variable
+data$rank <- rank(data$abs.diff)
+
+# Assign a '+' or a '-' to those values 
+data$sign <- sign(data$Sunday - data$Wednesday)
+```
+
+## The data {.smaller}
+
+[Link](https://discoverjasp.com/repository/dsj1_data/data/drug_wide.jasp)
+
+
+```{r, echo=FALSE}
+datatable(data, options = list(searching = FALSE, 
+                            scrollY   = 300, 
+                            paging    = F, 
+                            info      = F,
+                            dom       = 'Bfrtip',
+                            buttons   = c('csv')))
+```
+
+
+## Calculate $T_+$
+
+```{r, echo=TRUE}
+# Calculate the sum of the positive ranks
+T_pos <- sum(data$rank * (data$diff > 0))
+T_pos
+
+# Calculate N without 0 (no differences).
+n <- nrow(data)
+n
+```
+
+> How likely is it to observe the lowest possible rank sum (0), for $n=8$, if there is no difference in BDI between Sunday and Wednesday?
+
+## Calculate $\bar{T}$ and ${SE}_{T}$ {.subsection}
+
+$$\bar{T} = \frac{n(n+1)}{4}$$
+
+```{r, echo=TRUE}
+T_mean <- (n*(n+1))/4
+T_mean 
+```
+
+
+```{r, echo=FALSE}
+T.min <- 0
+T.max <- sum(1:n)
+# mean(c(T.min, T.max))
+```
+
+> T_mean is the middle point between the minimum (`r T.min`) and maximum possible (`r T.max`) value for T
+
+$${SE}_{T} = \sqrt{\frac{n(n+1)(2n+1)}{24}}$$
+
+```{r, echo=TRUE}
+SE_T <- sqrt( (n*(n+1)*(2*n+1)) / 24)
+```
+
+## Calculate Z
+
+$$z = \frac{T_+ - \bar{T}}{{SE}_T}$$
+
+```{r, echo=TRUE}
+z <- (T_pos - T_mean)/SE_T
+z
+```
+
+## Test for significance
+
+```{r, fig.align='center', warning=FALSE, echo=FALSE}
+source("../../plotFunctionsSSR.r")
+visualize_normal_base(z, side = "two-sided")
+```
+
+## Effect size
+
+- Matched rank-biserial correlation
+
+$$r = \frac{T_+ - T_- }{T_+ + T_-}$$
+
+Here $T_+$ is the sum of the positive ranks (i.e., where Sunday > Wednesday), which do not exist. $T_-$ is the sum of the negative ranks, which is 36. We have a maximum negative correlation (i.e., everybody scored lower on Wednesday).
+
+```{r, echo=TRUE}
+T_neg <- sum(data$rank * (data$diff < 0)) # sum negative ranks
+T_neg
+rbis <- (T_pos - T_neg) / (T_pos + T_neg)
+rbis
+```
+
+
+
+<!-- ## The Actual Sampling Distribution of W -->
+<!-- ```{r, echo=TRUE} -->
+
+<!-- barplot(height = dbinom(0:28, 28, 0.5), names.arg = 0:28, xlab = "W") -->
+<!-- pbinom(18.5, 28, 0.5, lower.tail = FALSE) -->
+<!-- ``` -->

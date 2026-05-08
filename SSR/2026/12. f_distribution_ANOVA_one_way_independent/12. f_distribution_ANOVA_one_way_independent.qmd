@@ -1,0 +1,50 @@
+---
+title: "12. ANOVA"
+subtitle: "One-way independent ANOVA"
+author: "Johnny van Doorn"
+date: "TODO 2026"
+footer: "Scientific & Statistical Reasoning"
+format:
+  revealjs:
+    output-ext: slide.html
+    css: ../../ajohnson.css
+  html: default
+css: ../../ajohnson.css
+---
+
+<div class="goals">
+In this lecture we aim to:
+
+- Introduce ANOVA
+- Discuss follow-up tests
+- Show ANOVA in JASP
+    
+<strong>Reading:</strong>
+Chapter 11 (§11.1–11.13)
+</div>
+
+
+```{r child="ANOVA_one_way_puppies.qmd"}
+```
+
+
+# Closing
+
+## Recap
+
+- ANOVA is a regression (linear model) with categorical predictor
+- We compare variance explained by the model, to unexplained variance
+- Follow-up tests (contrast/post hoc) inform us where the group differences lie
+
+> bigger group differences = more informative predictor = more explained variance
+
+## Recommended Exercises
+
+- [Exercise 11.1](https://discoverjasp.com/pages/exercises#chapter-11)
+- [Exercise 11.2](https://discoverjasp.com/pages/exercises#chapter-11)
+- [Exercise 11.4](https://discoverjasp.com/pages/exercises#chapter-11)
+- How would conclusions/interpretations differ for α = 0.01?
+- How are the assumptions looking for these data sets?
+
+```{r child="../../footer.qmd"}
+```

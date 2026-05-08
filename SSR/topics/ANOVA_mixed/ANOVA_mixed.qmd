@@ -2,8 +2,7 @@
 
 ```{r, echo=FALSE}
 rm(list=ls())
-if(!"DT" %in% installed.packages()) { install.packages("DT") }
-library("DT")
+source("../../_setup.R")
 ```
 
 ## Mixed design 
@@ -45,16 +44,11 @@ data <- read.csv(file = "RM_ANOVA_AlcoholSpeedTime.csv", header = TRUE)
 
 # data[,-1] <- round(data[,-1],2)
 
-datatable(data, 
+ssrTable(data, 
           rownames = FALSE, 
           extensions = 'Buttons',
-          options = list(searching = FALSE, 
-                         scrollY = 415, 
-                         paging = FALSE, 
-                         info = FALSE,
-                         dom = 'Bfrtip',
-                         buttons   = c('csv'))
-        )
+          options = list(dom = 'Bfrtip',
+                         buttons = c('csv')))
 ```
 
 ## Further reading {.smaller}

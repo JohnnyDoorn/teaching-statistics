@@ -2,9 +2,7 @@
 
 ```{r, echo=FALSE}
 rm(list=ls())
-if(!"DT" %in% installed.packages()) { install.packages("DT") }
-library("DT")
-source("../../plotFunctionsSSR.r")
+source("../../_setup.R")
 ```
 
 ## One-way repeated measures ANOVA {.section}
@@ -57,7 +55,7 @@ data <- read.csv("RM_ANOVA_Alcohol.csv")[1:nSample, ]
 longdata <- read.csv("RM_ANOVA_Alcohol_LONG.csv")
 longdata <- longdata[longdata$pp <= nSample, ]
 longdata <- longdata[order(longdata$pp), ]
-datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = FALSE, info = FALSE))
+ssrTable(data, rownames = FALSE)
 ```
 ## Wide vs. long data formats
 
@@ -165,7 +163,7 @@ input$whatDisplay <- c("Segments", "Sums")
 ```{r, echo=FALSE}
 data$mean_pp <- round(mean_pp,3)
 data$ss_pp <- round(ss_pp, 3)
-datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+ssrTable(data, rownames = FALSE)
 ```
 
 

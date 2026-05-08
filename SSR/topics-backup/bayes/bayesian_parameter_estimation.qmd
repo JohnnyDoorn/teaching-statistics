@@ -1,0 +1,196 @@
+# Bayesian parameter estimation {.section}
+
+<!-- ## Updating belief -->
+
+<!-- > Posterior $\propto$ Likelihood $\times$ Prior -->
+
+## What is a model?
+
+```{r fig.align='center', out.width='90%', echo = FALSE, cache=FALSE}
+tBetFun <- function(x, shape1 = 1, shape2 = 1, side = "pos") {
+  ds <- dbeta(x, shape1, shape2)
+  if (side == "pos") {
+    ds[x<0.5] <- 0
+    ds <- ds / integrate(function(x) dbeta(x, shape1, shape2), lower = 0.5, upper = 1)[[1]]
+  } else if (side == "neg") {
+    ds[x>0.5] <- 0
+    ds <- ds / integrate(function(x) dbeta(x, shape1, shape2), lower = 0, upper = 0.5)[[1]]
+  }
+  return(ds)
+}
+par(mfrow = c(1, 2))
+cols <- viridis::viridis(6)
+plot(1, 1, type ="n", xlim = c(0,1), ylim = c(0,4), bty = "n", main = "Sarah's Model",
+     las = 1, xlab = expression(theta), ylab = "Density")
+arrows(x0 = 0.5, x1 = 0.5, y0 = 0, y1 = 4.0, lwd = 4, col = cols[1])
+
+plot(1, 1, type ="n", xlim = c(0,1), ylim = c(0,4), bty = "n", main = "Paul's Model", 
+     las = 1, xlab = expression(theta), ylab = "Density")
+arrows(x0 = 0.8, x1 = 0.8, y0 = 0, y1 = 4.0, lwd = 4, col = cols[3])
+```
+
+
+## What does a model predict?
+
+```{r fig.align='center', out.width='90%', echo = FALSE}
+par(mfrow = c(1, 2), cex.main = 0.95)
+cols <- viridis::viridis(6)
+barplot(dbinom(0:10, 10, 0.5), names.arg = 0:10, xlab = "Number of heads", ylab = "Likelihood",
+        main = "Likely Outcomes under Sarah's Model", col = cols[1], ylim = c(0,0.32))
+barplot(c(rep(0, 8), dbinom(8, 10, 0.5)), add = TRUE, col = cols[6])
+
+barplot(dbinom(0:10, 10, 0.8), names.arg = 0:10, xlab = "Number of heads", ylab = "Likelihood",
+        main = "Likely Outcomes under Paul's Model", col = cols[3], ylim = c(0,0.32))
+barplot(c(rep(0, 8), dbinom(8, 10, 0.8)), add = TRUE, col = cols[6])
+```
+
+## Model with multiple values
+```{r fig.align='center', out.width='90%', echo = FALSE}
+par(mfrow = c(1, 2), cex.main = 0.95)
+cols <- viridis::viridis(6)
+plot(1, 1, type ="n", xlim = c(0,1), ylim = c(0,4), bty = "n", main = "Alex's Model",
+     las = 1, xlab = expression(theta), ylab = "Density")
+# curve(tBetFun(x, 1, 1), add = TRUE, col = cols[4], lwd = 4)
+mySeq <- seq(0, 1, length.out = 1e3)
+polygon(x =  c(mySeq, rev(mySeq)), y = c(rep(0, 1e3), tBetFun(mySeq, 1, 1, side = "neutral")), col = cols[4]) 
+
+barplot(rep(1/11, 11), names.arg = 0:10, xlab = "Number of heads", ylab = "Likelihood",
+        main = "Likely Outcomes under Alex's Model", col = cols[4], ylim = c(0,0.32))
+barplot(c(rep(0, 8), 1/11), add = TRUE, col = cols[6])
+```
+
+## One-sided model
+
+```{r fig.align='center', out.width='90%', echo = FALSE}
+par(mfrow = c(1, 2), cex.main = 0.95)
+cols <- viridis::viridis(6)
+plot(1, 1, type ="n", xlim = c(0,1), ylim = c(0,4), bty = "n", main = "Betty's Model",
+     las = 1, xlab = expression(theta), ylab = "Density")
+# curve(tBetFun(x, 1, 1), add = TRUE, col = cols[4], lwd = 4)
+mySeq <- seq(0.5, 1, length.out = 1e3)
+polygon(x =  c(mySeq, rev(mySeq)), y = c(rep(0, 1e3), tBetFun(mySeq, 1, 1)), col = cols[2]) 
+sampsU <- c(0:5, rbinom(1e5, 10, runif(1e5, 0.5, 1)))
+barplot(table(sampsU)/1e5, names.arg = 0:10, xlab = "Number of heads", ylab = "Likelihood",
+        main = "Likely Outcomes under Betty's Model", col = cols[2], ylim = c(0,0.32))
+barplot(c(rep(0, 8), (table(sampsU)/1e5)[9]), add = TRUE, col = cols[6])
+theta <- seq(0,1,length.out = 1e3)
+```
+
+## Prior distribution - ($P(\theta)$)
+
+Each model has assigned a prior probability distribution to the parameter $\theta$ by means of a probability distribution. In the case of a proportion, a convenient distribution is the Beta distribution because it also has a domain of [0,1]. 
+
+
+## Now what is the data saying
+
+### Ten coin tosses
+
+$\begin{aligned}
+  k &= 8 \\
+  n &= 10
+  \end{aligned}$
+
+```{r, echo=TRUE}
+k = 8
+n = 10
+```
+
+
+## Likelihood function - $P(data | \theta)$
+
+How likely is 8 out of 10 for all possible $\theta$ values?
+
+$$\binom{n}{k} \theta^k (1-\theta)^{n-k}$$
+
+```{r fig.align='center', out.width='90%', echo = FALSE}
+par(cex = 1.4, cex.lab = 1.4, mar = c(5.1, 4.5, 4.1, 2.1), cex.main = 0.95)
+ss <- seq(0, 1, length.out = 1e4)
+dd <- dbinom(x = 8, size = 10, ss)
+plot(ss, dd, type = "l", bty = "n", las = 1, ylab = bquote("P(Data |" ~ theta * ")"), xlab = bquote(theta),
+     main = bquote("Likelihood of the observed data, for each value of" ~theta),
+     lwd = 3, col = "darkgreen")
+```
+
+## Marginal likelihood - $P(data)$
+How likely is 8 out of 10 for all $\theta$ values  **in the model, on average**?
+
+```{r fig.align='center', out.width='90%', echo = FALSE}
+par(cex = 1.4, cex.lab = 1.4, mar = c(5.1, 4.5, 4.1, 2.1), cex.main = 0.95)
+pCol <- palette.colors(NULL, "Okabe-Ito")
+margLik <- round(1/11, 2)
+bords <- round(ss[round(dd, 3) == margLik], 2)
+ll <- unique(bords)[1]
+uu <- unique(bords)[length(unique(bords))]
+plot(ss, dd, type = "l", bty = "n", las = 1, ylab = bquote("P(Data |" ~ theta * ")"), xlab = bquote(theta),
+     main = bquote("Likelihood of the observed data, for each value of" ~theta),
+     lwd = 3, col = "darkgreen")
+abline(h = margLik, lwd = 4, col = "purple")
+```
+
+<!-- ----- -->
+
+<!-- ![](../../topics/bayes/likelihood_function.gif) -->
+
+## Posterior
+
+Now we can update Alex' belief about the possible values of theta based on the data (the likelihood function) we found. Values with a likelihood higher than the average likelihood receive a boost, and others receive a penalty, in plausibility.
+
+## Updating beliefs
+```{r fig.align='center', out.width='90%', echo = FALSE}
+par(cex = 1.4, cex.lab = 1.4, mar = c(5.1, 4.5, 4.1, 2.1), cex.main = 0.95)
+pCol <- palette.colors(NULL, "Okabe-Ito")
+margLik <- round(1/11, 2)
+bords <- round(ss[round(dd, 3) == margLik], 2)
+ll <- unique(bords)[1]
+uu <- unique(bords)[length(unique(bords))]
+plot(ss, dd, type = "l", bty = "n", las = 1, ylab = bquote("P(Data |" ~ theta * ")"), xlab = bquote(theta),
+     main = bquote("Likelihood of the observed data, for each value of" ~theta),
+     lwd = 3, col = "darkgreen")
+ll <- unique(bords)[1]
+uu <- unique(bords)[length(unique(bords))]
+abline(v = uu)
+abline(v = ll)
+arrows(ll, 0, uu, 0,  lwd = 4, length = 0.1, code = 3, col = pCol[3])
+abline(h = margLik, lwd = 4, col = "purple")
+
+ll <- 0
+uu <- unique(bords)[1]
+arrows(ll, 0, uu, 0,  lwd = 4, length = 0.1, code = 3, col = pCol[7])
+ll <- unique(bords)[length(unique(bords))]
+uu <- 1
+
+sq <- seq(ll, uu, length.out = 1e3) #+0.001
+arrows(ll, 0, uu, 0,  lwd = 4, length = 0.1, code = 3, col =  pCol[7])
+abline(h = margLik, lwd = 4, col = "purple")
+```
+
+## Posterior distribution - $P(\theta | data)$
+```{r fig.align='center', out.width='90%', echo = FALSE}
+prior <- dbeta(ss, 1, 1)
+posterior <- prior * dd / margLik
+par(cex = 1.4, cex.lab = 1.4, mar = c(5.1, 4.5, 4.1, 2.1))
+plot(ss, posterior, type = "l", bty = "n", las = 1, ylab = "Density", xlab = bquote(theta),
+     main = bquote("Alex's Prior and Posterior Distribution of" ~theta),
+     lwd = 3, col = "darkorange")
+ll <- unique(bords)[1]
+uu <- unique(bords)[length(unique(bords))]
+abline(v = uu)
+abline(v = ll)
+curve(dbeta(x, 1, 1), from = 0, to = 1, lwd = 3, col ="blue", add = TRUE)
+legend("topleft", legend = c("Prior", "Posterior"), col = c("blue", "darkorange"), lty = 1, lwd = 4, bty = "n")
+```
+
+
+## Bayesian estimation
+The posterior distribution is a probability distribution, so we can make probabilistic statements based on it:
+
+
+>In the Bayesian framework, this is known as the **credible interval**. This interval entails taking the middle $x$% of the posterior distribution. For instance, we can take a 95% credible interval, which ranges from $0.482$ to $0.940$ in this case. This means that under Alex's model, there is a 95% probability that the true value of $\theta$ is between $0.482$ and $0.940$.
+
+
+
+## Take home message
+
+* Bayesians quantify uncertainty through distributions.
+* The more peaked the distribution, the lower the uncertainty.
+* Incoming information continually updates our knowledge; today’s posterior is tomorrow’s prior.

@@ -468,7 +468,7 @@ plotSumSquaresCov <- function(data, sumSq = "Total", stats = NULL, plotMean = TR
 plotSumSquaresFactorial <- function(data, input, sumSq = "Total", stats = NULL, plotMean = TRUE, myMain = "",
                                     alcColors = NULL, speedSymbols = NULL, overlayFullPred = FALSE) {
   
-  mydat <- read.csv("anova_alcohol_speed_daytime.csv")
+  mydat <- data
   grandMean <- mean(mydat$accidents)
   nGroups <- 9
   myAlcMod <-  lm(accidents ~ alcohol, data = mydat)

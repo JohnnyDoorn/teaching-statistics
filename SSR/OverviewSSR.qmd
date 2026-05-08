@@ -12,7 +12,7 @@ This page will be continuously updated to feature slides and extra materials, su
 
 ## Slides
 
-```{r child="../SSR/2025/SSR.qmd"}
+```{r child="../SSR/2026/SSR.qmd"}
 ```
 
 

@@ -1,0 +1,342 @@
+# Mediation {.section}
+
+```{r, echo=FALSE}
+if(!"DT" %in% installed.packages()) { install.packages("DT") }
+library("DT")
+```
+
+## Mediation {.smaller}
+
+:::: {.columns}
+
+::: {.column}
+
+![](mediation.png)
+
+:::
+
+::: {.column}
+
+In statistics, a mediation model is one that seeks to identify and explain the mechanism or process that underlies an observed relationship between an independent variable and a dependent variable via the inclusion of a third hypothetical variable, known as a mediator variable (also a mediating variable, intermediary variable, or intervening variable).
+
+Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Mediation_(statistics))
+
+:::
+
+::::
+
+
+## Venn diagrams - effect
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, prompt=FALSE, results='hide'}
+library("VennDiagram")
+
+grid.newpage()
+
+draw.pairwise.venn(area1 = 100, area2 = 100,
+                 cross.area  = 80,
+                 category = c("Predictor", "Outcome"), lty = "blank", 
+                 fill = c("skyblue", "pink1"), cat.prompts = F)
+```
+
+## Venn diagrams - mediator
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, prompt=FALSE, results='hide'}
+library("VennDiagram")
+
+grid.newpage()
+
+draw.triple.venn(area1 = 100, area2 = 100, area3 = 100, 
+                 n12  = 80, 
+                 n23  = 85, 
+                 n13  = 90, 
+                 n123 = 75, 
+                 category = c("Predictor", "Outcome", "Mediator"), lty = "blank", 
+                 fill = c("skyblue", "pink1", "mediumorchid"), cat.prompts = F)
+```
+
+
+
+## Example
+
+Does the speed of recovery after sickness improve with the use of alternative medicine or is this effect mediated by a healthy lifestyle?
+
+![<a style="font-size:50%;" href="https://www.pexels.com/photo/green-purple-flower-163186/" target="_blank">Photo from Pixabay</a>](green-purple-flower-163186.jpg)
+
+## Total effect 
+
+
+1. Total effect:
+    - $\widehat{\text{Outcome}} = b_0 + b_t \text{Predictor}_i$
+
+<div style="width: 400px; height: calc(400px / 4); overflow: hidden;">
+  <img src="mediation.png" alt="Mediation Image" style="width: 400px;">
+</div>
+
+## Mediation paths  {.smaller}
+
+:::: {.columns}
+
+::: {.column}
+<span style="color: white;">You found my sneaky text to create space! You are awesome. Muahahahahahahahahahahahahahahahahahahahahahahahaha haha...hah.. uhhhh </span>
+
+1. Total effect:
+    - $\widehat{\text{Outcome}} = b_0 + b_t \text{Predictor}_i$
+2. Mediator effect (a):
+    - $\widehat{\text{Mediator}} = b_0 + b_a \text{Predictor}_i$
+3. Combined effect (b + c):
+    - $\widehat{\text{Outcome}} = b_0 + b_{c} \text{Predictor}_i + b_b \text{Mediator}_i$
+
+::: 
+
+::: {.column}
+
+![](mediation.png){width="500px"}
+::: 
+
+::::
+
+<!-- ## Simulate data {.subsection} -->
+
+<!-- Create predictor variable -->
+
+```{r, echo=FALSE}
+set.seed(1976)
+## Set parameters for simulation
+n     <- 50
+mu    <- 10
+sigma <- 2
+## Predictor
+use.homeopathic.remedies <- rnorm(n, mu, sigma)
+```
+
+<!-- ## Mediator  -->
+
+<!-- Create mediator -->
+
+```{r, echo=FALSE}
+b0    <- 2             # intercept of lifestyle
+b1    <- 1.5           # association homeopathy and lifestyle, b.a
+error <- rnorm(n,0,.7)
+healthy.lifestyle <- b0 + b1 * use.homeopathic.remedies + error
+```
+
+<!-- ## Specify model  -->
+
+<!-- Create outcome variable -->
+
+```{r, echo=FALSE}
+b0    <- 6 # intercept of healing
+b1    <- 0.5 # association homeopathy and healing, b.c
+b2    <- 1 # association lifestyle and healing, b.b
+error <- rnorm(n, 0, 1.4)
+speed.of.healing <- b0 + 
+                    b1 * use.homeopathic.remedies + 
+                    b2 * healthy.lifestyle + 
+                    error
+
+data <- data.frame(use.homeopathic.remedies, 
+                   healthy.lifestyle, 
+                   speed.of.healing)
+data <- round(data, 4)
+```
+
+```{r, echo=FALSE, eval=TRUE}
+## Write data for use in JASP
+write.csv(data, "homeopathy-mediation.csv", row.names=FALSE)
+```
+
+## The data {.subsection .smaller}
+
+```{r, echo=FALSE}
+datatable(data, rownames = FALSE, 
+          extensions = 'Buttons',
+          options = list(searching = FALSE, 
+                         scrollY   = 300, 
+                         paging    = FALSE, 
+                         info      = FALSE,
+                         dom       = 'Bfrtip',
+                         buttons   = c('csv')
+          )
+)
+```
+
+## Fit 3 models {.smaller .flexbox .vcenter}
+
+```{r, echo=TRUE}
+model.outcome.predictor  <- lm(speed.of.healing  ~ use.homeopathic.remedies)
+model.mediator.predictor <- lm(healthy.lifestyle ~ use.homeopathic.remedies)
+model.combined           <- lm(speed.of.healing  ~ use.homeopathic.remedies + healthy.lifestyle)
+```
+1. Total effect:
+    - $\widehat{\text{Outcome}} = b_0 + b_t \text{Predictor}_i$
+2. Mediator effect:
+    - $\widehat{\text{Mediator}} = b_0 + b_a \text{Predictor}_i$
+3. Combined effect:
+    - $\widehat{\text{Outcome}} = b_0 + b_{c} \text{Predictor}_i + b_b \text{Mediator}_i$
+
+<div style="text-align: center;">
+![](mediation.png){width="400px"}
+</div>
+
+## Extract beta coëfficients {.smaller .flexbox .vcenter}
+
+```{r, echo=TRUE}
+b.outcome.predictor       <- model.outcome.predictor$coefficients[2]   # b.t
+b.mediator.predictor      <- model.mediator.predictor$coefficients[2]  # b.a
+b.combined.mediator       <- model.combined$coefficients[3]            # b.b
+b.combined.predictor      <- model.combined$coefficients[2]            # b.c
+```
+1. Total effect:
+    - $\widehat{\text{Outcome}} = b_0 + b_t \text{Predictor}_i$
+2. Mediator effect:
+    - $\widehat{\text{Mediator}} = b_0 + b_a \text{Predictor}_i$
+3. Combined effect:
+    - $\widehat{\text{Outcome}} = b_0 + b_{c} \text{Predictor}_i + b_b \text{Mediator}_i$
+
+<div style="text-align: center;">
+![](mediation.png){width="400px"}
+</div>
+
+## View beta coëfficients {.subsection}
+```{r, echo = FALSE}
+b.mediator.predictor  <- unname(b.mediator.predictor)
+b.combined.mediator       <- unname(b.combined.mediator)
+b.outcome.predictor   <- unname(b.outcome.predictor)
+b.combined.predictor      <- unname(b.combined.predictor)
+```
+
+```{r, echo=TRUE}
+b.mediator.predictor     # b.a
+b.combined.mediator      # b.b
+```
+
+## View beta coëfficients  {.smaller .flexbox .vcenter}
+
+```{r, echo=TRUE}
+b.outcome.predictor      # b.t 
+b.mediator.predictor     # b.a 
+b.combined.mediator      # b.b
+b.combined.predictor     # b.c
+```
+
+
+
+<!-- 1. $\widehat{\text{Outcome}} = b_0 + b_c \text{Predictor}_i$ -->
+<!-- 2. $\widehat{\text{Mediator}} = b_0 + b_a \text{Predictor}_i$ -->
+<!-- 3. $\widehat{\text{Outcome}} = b_0 + b_{c`} \text{Predictor}_i + b_b \text{Mediator}_i$ -->
+
+<div style="text-align: center;">
+![](mediation.png){width="400px"}
+</div>
+
+
+## Path plot
+
+![](../../images/homeopathy-pathplot.png){width="400px"}
+
+
+## Visual {.subsection}
+
+```{r, fig.align='center',echo=FALSE}
+par(mfrow = c(1, 3), cex.lab = 1.3, cex = 1.1)
+mycor <- cor(data$use.homeopathic.remedies, data$speed.of.healing)
+plot(data$use.homeopathic.remedies, data$speed.of.healing, 
+     main = paste0("Homeopathy/Healing\ncor = ", round(mycor, 2)), 
+     bg = 'purple', pch = 21, bty = "n", las = 1,
+     xlab="Homeopathy",
+     ylab="Speed of Healing")
+
+fit.1 <- lm(speed.of.healing ~ use.homeopathic.remedies, data)
+
+abline(fit.1, col = 'darkgreen', lwd = 3)
+
+mycor <- cor(data$use.homeopathic.remedies, data$healthy.lifestyle)
+plot(data$use.homeopathic.remedies, data$healthy.lifestyle, 
+     main = paste0("Homeopathy/Lifestyle\ncor = ", round(mycor, 2)), 
+     bg = 'purple', pch = 21, bty = "n", las = 1,
+     xlab="Homeopathy",
+     ylab="Healthy Lifestyle")
+
+fit.1 <- lm(healthy.lifestyle ~ use.homeopathic.remedies, data)
+
+abline(fit.1, col = 'darkgreen', lwd = 3)
+
+mycor <- cor(data$healthy.lifestyle, data$speed.of.healing)
+plot(data$healthy.lifestyle, data$speed.of.healing, 
+     main = paste0("Lifestyle/Healing\ncor = ", round(mycor, 2)), 
+     bg = 'purple', pch = 21, bty = "n", las = 1,
+     xlab="Healthy Lifestyle",
+     ylab="Speed of Healing")
+
+fit.1 <- lm(speed.of.healing ~ healthy.lifestyle, data)
+
+abline(fit.1, col = 'darkgreen', lwd = 3)
+
+
+```
+
+
+## Calculate indirect effect {.subsection .smaller .flexbox .vcenter}
+
+$a \times b = b_a \times b_b$
+
+```{r, echo=TRUE}
+indirect <- b.mediator.predictor * b.combined.mediator; indirect  # a * b
+
+indirect + b.combined.predictor # a * b + c 
+
+b.outcome.predictor         # total effect
+```
+
+<div style="text-align: center;">
+![](mediation.png){width="400px"}
+</div>
+
+## Calculate indirect effect (standardized) {.subsection}
+
+$\frac{ab}{s_{Outcome}} \times s_{Predictor} = \frac{b_a b_b}{s_{Outcome}} \times s_{Predictor}$
+
+```{r, echo=TRUE}
+b.mediator.predictor*b.combined.mediator / 
+  sd(speed.of.healing)*sd(use.homeopathic.remedies)
+```
+
+
+
+## Calculate $P_M$
+
+$\frac{ab}{total} = \frac{b_a b_b}{b_t} = \frac{b_a b_b}{b_a b_b + b_c}$
+
+```{r, echo=TRUE}
+(b.mediator.predictor*b.combined.mediator) /
+  b.outcome.predictor
+```
+
+The proportion of the total effect that can be attributed to the mediator
+
+<style>
+blockquote {
+  font-size: 0.8em; /* Adjust size as needed */
+}
+</style>
+
+> Does not take into account size of total effect
+
+> "although it is tempting to think of $P_M$ as a proportion (because it is the ratio of the indirect effect to the total effect) it is not: it can exceed 1 and even take negative values (Preacher & Kelley, 2011)."
+
+
+## Caution with PROCESS
+
+- [Rohrer et al (2022). That’s a Lot to Process! Pitfalls of Popular Path Models. Advances in Methods and Practices in Psychological Science. ](https://journals.sagepub.com/doi/full/10.1177/25152459221095827)
+
+> When we test such hypotheses with the help of path models applied to observational data, we are in the business of causal inference on the basis of observational data
+
+## More examples
+
+[JASP Data Library](https://jasp-stats.github.io/jasp-data-library/myChapters/chapter_20.html#presumed-media-influence)
+
+- [Basic mediation - Presumed Media Influence](https://htmlpreview.github.io/?https://github.com/jasp-stats/jasp-data-library/blob/main/Presumed%20Media%20Influence/Presumed_Media_Influence.html)
+- [Crazier example - Age and Fatigue](https://htmlpreview.github.io/?https://github.com/jasp-stats/jasp-data-library/blob/main/Age%20and%20Fatigue/Age_and_Fatigue.html)
+- For the exam, max 1 mediator (but see Section 10.4.7)
+

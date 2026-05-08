@@ -124,20 +124,16 @@ abline(lm(y2 ~ x2), col = "red", lwd = 2)
 ## Read data {.smaller}
 
 ```{r, echo=FALSE, eval=TRUE, warning=FALSE, message=FALSE}
+source("../../_setup.R")
 set.seed(273645)
-data <- read.csv("Album Sales.csv")[, -4]
+data <- read.csv(datasetsPath("Album Sales.csv"))[, -4]
 n <- nrow(data)
 sales <- data$sales
 airplay <- data$airplay
 adverts <- data$adverts
 fit <- lm(sales ~ airplay + adverts, data)
 
-DT::datatable(data, rownames = FALSE, options = list(searching = FALSE, 
-                            scrollY   = 300, 
-                            paging    = F, 
-                            info      = F,
-                            dom       = 'Bfrtip',
-                            buttons   = c('csv')))
+ssrTable(data, height = 300)
 ```
 
 
@@ -260,13 +256,10 @@ $\widehat{\text{album sales}} = b_0 + b_1 \text{airplay} + b_2 \text{adverts}$
 ```{r, echo=FALSE}
 
 
-DT::datatable(cbind(predicted.sales, b.0, b.1, airplay, b.2, adverts)[1:5,],
-              rownames = FALSE, options = list(searching = FALSE, 
-                                               scrollY   = 300, 
-                                               paging    = F, 
-                                               info      = F,
-                                               dom       = 'Bfrtip',
-                                               buttons   = c('csv')))
+ssrTable(cbind(predicted.sales, b.0, b.1, airplay, b.2, adverts)[1:5,],
+              rownames = FALSE, height = 300,
+              options = list(dom = 'Bfrtip',
+                             buttons = c('csv')))
 
 thisPred <- b.0 + b.1 * 43 +  b.2 * 10.256 # for participant 1
 
@@ -285,13 +278,10 @@ error <- sales - predicted.sales
 ```
 
 ```{r, echo=FALSE}
-DT::datatable(data.frame(sales, predicted.sales, error = round(error, 3))[1:5,],
-              rownames = FALSE, options = list(searching = FALSE, 
-                                               scrollY   = 300, 
-                                               paging    = F, 
-                                               info      = F,
-                                               dom       = 'Bfrtip',
-                                               buttons   = c('csv')))
+ssrTable(data.frame(sales, predicted.sales, error = round(error, 3))[1:5,],
+              rownames = FALSE, height = 300,
+              options = list(dom = 'Bfrtip',
+                             buttons = c('csv')))
 ```
 
 ## Outcome = Model Prediction + Error {.subsection}

@@ -1,0 +1,70 @@
+---
+title: "5. JASP: Visualization and Correlation"
+author: "Johnny van Doorn"
+date: "TODO 2026"
+footer: "Scientific & Statistical Reasoning"
+format:
+  revealjs:
+    output-ext: slide.html
+    css: ../../ajohnson.css
+  html: default
+css: ../../ajohnson.css
+---
+
+<div class="goals">
+In block 1 we aim to:
+
+* Discuss NHST concepts
+* Introduce JASP
+* Correlation
+* Linear model (regression)
+    
+<strong>Reading:</strong>
+Chapters 1–8.8
+</div>
+
+--- 
+
+<div class="goals">
+In this lecture we aim to:
+
+* Introduce JASP
+  * Descriptive statistics
+  * Data visualizations
+* Correlation
+    
+<strong>Reading:</strong>
+Chapters 4 (§4.1–4.10), 5 (§5.1–5.6), 7 (§7.1–7.7)
+</div>
+
+
+```{r child="JASP.qmd", eval=TRUE}
+```
+
+
+```{r child="visualization.qmd", eval=TRUE}
+```
+
+
+```{r child="correlation.qmd", eval=TRUE}
+```
+
+
+# Closing
+
+## Next Week
+
+- Partial correlation
+- The linear model
+  - Predictions
+  - Assumptions
+  - Fun
+
+## Recommended Exercises
+
+- [Exercise 5.1](https://discoverjasp.com/pages/exercises#chapter-5)
+- [Exercise 7.1](https://discoverjasp.com/pages/exercises#chapter-7)
+  - Note: `pets.jasp` can be downloaded from the JASP data library
+
+```{r child="../../footer.qmd"}
+```

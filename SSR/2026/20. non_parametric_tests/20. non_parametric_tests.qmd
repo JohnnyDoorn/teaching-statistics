@@ -1,0 +1,60 @@
+---
+title: "20. Non-parametric tests"
+author: "Johnny van Doorn"
+date: "TODO 2026"
+footer: "Scientific & Statistical Reasoning"
+format:
+  revealjs:
+    output-ext: slide.html
+    css: ../../ajohnson.css
+  html: default
+css: ../../ajohnson.css
+---
+
+<div class="goals">
+In this lecture we aim to:
+
+- Repeat some assumptions
+- Introduce rank-based methods
+- Look at rank-based equivalents to some old friends
+- Show these in JASP
+    
+<strong>Reading:</strong>
+Chapter 15 (§15.1–15.9)
+</div>
+
+
+```{r child="non_parametric_concept.qmd"}
+```
+
+```{r child="wilcoxon_rank_sum_test.qmd"}
+```
+
+```{r child="wilcoxon_signed_rank_test.qmd"}
+```
+
+```{r child="kruskal_wallis_test.qmd"}
+```
+
+```{r child="friedman_anova.qmd"}
+```
+
+
+# Closing
+
+## Recap
+
+- Non-parametric tests are rank-based, which means they are robust to:
+  - Non-normality
+  - Transformations of the data
+  - Outliers
+
+## Recommended Exercises
+
+- [Exercise 15.1](https://discoverjasp.com/pages/exercises#chapter-15)
+- [Exercise 15.2](https://discoverjasp.com/pages/exercises#chapter-15)
+- [Exercise 15.4](https://discoverjasp.com/pages/exercises#chapter-15)
+- [Exercise 15.11](https://discoverjasp.com/pages/exercises#chapter-15)
+
+```{r child="../../footer.qmd"}
+```

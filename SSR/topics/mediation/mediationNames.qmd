@@ -1,8 +1,7 @@
 # Mediation {.section}
 
 ```{r, echo=FALSE}
-if(!"DT" %in% installed.packages()) { install.packages("DT") }
-library("DT")
+source("../../_setup.R")
 ```
 
 ## Mediation {.smaller}
@@ -149,16 +148,11 @@ write.csv(data, "homeopathy-mediation.csv", row.names=FALSE)
 ## The data {.subsection .smaller}
 
 ```{r, echo=FALSE}
-datatable(data, rownames = FALSE, 
+ssrTable(data, rownames = FALSE, 
+          height = 300,
           extensions = 'Buttons',
-          options = list(searching = FALSE, 
-                         scrollY   = 300, 
-                         paging    = FALSE, 
-                         info      = FALSE,
-                         dom       = 'Bfrtip',
-                         buttons   = c('csv')
-          )
-)
+          options = list(dom = 'Bfrtip',
+                         buttons = c('csv')))
 ```
 
 ## Fit 3 models {.smaller .flexbox .vcenter}

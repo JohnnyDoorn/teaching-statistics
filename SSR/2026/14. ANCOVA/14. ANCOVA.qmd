@@ -1,0 +1,46 @@
+---
+title: "14. ANCOVA"
+author: "Johnny van Doorn"
+date: "TODO 2026"
+footer: "Scientific & Statistical Reasoning"
+format:
+  revealjs:
+    output-ext: slide.html
+    css: ../../ajohnson.css
+  html: default
+css: ../../ajohnson.css
+---
+
+<div class="goals">
+In this lecture we aim to:
+
+- Introduce ANCOVA
+- Implications of multiple predictors
+- Show ANCOVA in JASP
+    
+<strong>Reading:</strong>
+Chapter 12 (§12.1–12.12)
+</div>
+
+
+```{r child="ANCOVA.qmd"}
+```
+
+
+# Closing
+
+## Recap
+
+- We can add a continuous predictor to the ANOVA model, to reduce the overall model error
+- With multiple predictors, we need to check:
+  - Whether there is an interaction effect
+  - Whether the predictors are associated
+
+## Recommended Exercises
+
+- [Exercise 12.2](https://discoverjasp.com/pages/exercises#chapter-12)
+- [Exercise 12.5](https://discoverjasp.com/pages/exercises#chapter-12)
+- [Exercise 12.6](https://discoverjasp.com/pages/exercises#chapter-12)
+
+```{r child="../../footer.qmd"}
+```

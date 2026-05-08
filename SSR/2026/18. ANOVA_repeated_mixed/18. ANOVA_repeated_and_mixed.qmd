@@ -1,0 +1,58 @@
+---
+title: "18. RM ANOVA"
+subtitle: "Repeated & Mixed"
+author: "Johnny van Doorn"
+date: "TODO 2026"
+footer: "Scientific & Statistical Reasoning"
+format:
+  revealjs:
+    output-ext: slide.html
+    css: ../../ajohnson.css
+  html: default
+css: ../../ajohnson.css
+---
+
+<div class="goals">
+In this lecture we aim to:
+
+- Refresh some concepts from previous lectures
+- Introduce RM ANOVA
+- Introduce Mixed ANOVA
+- Show these in JASP
+    
+<strong>Reading:</strong>
+Chapter 14 (§14.1–14.18)
+</div>
+
+
+```{r child="ANOVA_repeated_one-way.qmd"}
+```
+
+
+```{r child="ANOVA_repeated_factorial.qmd"}
+```
+
+
+```{r child="ANOVA_mixed.qmd"}
+```
+
+
+# Closing
+
+## Recap
+
+- In a repeated measures design we can account for baseline differences, to reduce the overall model error
+- With within-subjects predictors, we need to check:
+  - Sphericity (equal variances of difference scores)
+- With between-subjects predictors, we need to check:
+  - Equal variances of groups
+
+## Recommended Exercises
+
+- [Exercise 14.4](https://discoverjasp.com/pages/exercises#chapter-14)
+- [Exercise 14.5](https://discoverjasp.com/pages/exercises#chapter-14)
+- To understand mechanics of RM ANOVA, [Exercise 14.1](https://discoverjasp.com/pages/exercises#chapter-14)
+- No sums of squares or effect size calculations required for the exam
+
+```{r child="../../footer.qmd"}
+```

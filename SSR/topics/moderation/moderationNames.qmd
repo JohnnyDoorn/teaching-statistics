@@ -7,10 +7,7 @@
 
 ```{r, echo=FALSE}
 rm(list=ls())
-if(!"DT" %in% installed.packages()) { install.packages("DT") }
-library("DT")
-
-if(!"manipulateWidget" %in% installed.packages()) { install.packages("manipulateWidget") }
+source("../../_setup.R")
 library("manipulateWidget")
 ```
 
@@ -81,15 +78,12 @@ wakefulness <- intercept + -3 * hours.awake +
 ```{r, echo=FALSE}
 data <- data.frame(hours.awake, ml.coffee, wakefulness)
 # save(data, file="moderation.rdata")
-DT::datatable(round(data,2), 
+ssrTable(round(data,2), 
           rownames   = FALSE, 
+          height     = 350,
           extensions = 'Buttons',
-          options = list(searching = FALSE, 
-                         scrollY   = 350, 
-                         paging    = F, 
-                         info      = F,                          
-                         dom       = 'Bfrtip',
-                         buttons   = c('csv')))
+          options = list(dom = 'Bfrtip',
+                         buttons = c('csv')))
 ```
 
 ## Correlations
@@ -190,15 +184,11 @@ y.mod <- seq( 0,450,length.out=30)
 z.pre <- outer(x.pre, y.mod, FUN='regeq', model=fit)
 data$prediction <- fit$fitted.values
 data <- round(data, 2)
-datatable(data, rownames = FALSE, 
+ssrTable(data, rownames = FALSE, 
+          height = 300,
           extensions = 'Buttons',
-          options = list(searching = FALSE, 
-                         scrollY   = 300, 
-                         paging    = FALSE, 
-                         info      = FALSE,
-                         dom       = 'Bfrtip',
-                         buttons   = c('csv')
-          ))
+          options = list(dom = 'Bfrtip',
+                         buttons = c('csv')))
 ```
 
 ```{r, echo=FALSE}
@@ -295,11 +285,8 @@ data$cups.coffee <- data$ml.coffee %/% 150
 
 ```{r, echo=FALSE}
 write.csv(data, "moderation-coffee.csv", row.names = FALSE)
-DT::datatable(round(data,2)[, c(2, 5)], 
+ssrTable(round(data,2)[, c(2, 5)], 
           rownames   = FALSE, 
-          options = list(searching = FALSE, 
-                         scrollY   = 350, 
-                         paging    = F, 
-                         info      = F))
+          height     = 350)
 ```
 

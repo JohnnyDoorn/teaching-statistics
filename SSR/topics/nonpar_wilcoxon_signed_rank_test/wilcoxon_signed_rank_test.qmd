@@ -1,10 +1,6 @@
 ```{r, echo=FALSE}
-if(!"DT" %in% installed.packages()) { install.packages("DT") }
-library("DT")
-
-if(!"visualize" %in% installed.packages()){ install.packages("visualize") }
+source("../../_setup.R")
 library("visualize")
-
 ```
 
 # Wilcoxon signed-rank test
@@ -42,7 +38,7 @@ data <- data.frame(Sunday, Wednesday)
 
 ## Example
 ```{r, echo=FALSE}
-datatable(data, options = list(iDisplayLength = 7, searching = FALSE, scrollY = 415, paging = F, info = F))
+ssrTable(data, options = list(iDisplayLength = 7))
 
 # Write data for use in SPSS
 # write.csv(data, "mann-whitney-signed-rank.csv", row.names=FALSE)
@@ -88,12 +84,9 @@ data$sign <- sign(data$Sunday - data$Wednesday)
 
 
 ```{r, echo=FALSE}
-datatable(data, options = list(searching = FALSE, 
-                            scrollY   = 300, 
-                            paging    = F, 
-                            info      = F,
-                            dom       = 'Bfrtip',
-                            buttons   = c('csv')))
+ssrTable(data, height = 300,
+          options = list(dom = 'Bfrtip',
+                         buttons = c('csv')))
 ```
 
 
@@ -147,7 +140,6 @@ z
 ## Test for significance
 
 ```{r, fig.align='center', warning=FALSE, echo=FALSE}
-source("../../plotFunctionsSSR.r")
 visualize_normal_base(z, side = "two-sided")
 ```
 
