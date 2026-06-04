@@ -9,3 +9,5 @@
 # Never commit exam materials — they must not reach students via the public repo.
 # Matches any directory named "Exam" anywhere in the tree (current and future course years).
 Exam/
+
+/.quarto/
