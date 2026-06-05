@@ -1,5 +1,5 @@
 ---
-title: "8 Posterior Inference & Hypothesis Testing"
+title: "6 & 7 Obtaining the Posterior: Grid Approximation & MCMC"
 author: "Johnny van Doorn"
 date: "2026-06-10"
 format:
@@ -32,14 +32,15 @@ library(coda)
 <div class="goals">
 By the end of this lecture, you will be able to:
 
-- Summarise a posterior distribution using point estimates and credible intervals (ETI and HPD)
-- Evaluate interval hypotheses using posterior probabilities and Bayes factors
-- Test point hypotheses using the Savage–Dickey density ratio
-- Explain why and when to go beyond conjugacy (grid approximation, MCMC)
+- Explain why conjugate models are limited and when you must go beyond them
+- Implement **grid approximation** to obtain posterior samples for non-conjugate models
+- Explain the intuition behind **Markov Chain Monte Carlo (MCMC)** and the Metropolis algorithm
+- Read the key MCMC convergence diagnostics (trace plots, $\hat R$, effective sample size)
+- Use posterior samples — regardless of how they were obtained — to compute summaries
 </div>
 
 <div class="note">
-**Recommended Reading:** *Bayes Rules!* Chapters 8.1–8.2; course addendum *Testing Point Hypotheses*. Suggested exercises: 2, 3, 4, 6, 7, 8, 9, 10, 14 (Ch. 8), and exercises 25–27 from the addendum.
+**Recommended Reading:** *Bayes Rules!* Chapters 6 (approximating the posterior) and 7 (MCMC under the hood). Suggested exercises: Ch. 6 — 2, 4, 6, 8, 10; Ch. 7 — 2, 4, 6.
 </div>
 
 ---
@@ -67,13 +68,13 @@ The three conjugate families from last lecture:
 | Poisson$(\lambda)$ | Gamma$(s, r)$ | Gamma$(s+\sum y_i,\; r+n)$ |
 | Normal$(\mu, \sigma^2)$, $\sigma$ known | Normal$(\mu_0, \tau^2)$ | Normal$(\mu_\text{post}, \sigma^2_\text{post})$ |
 
-**Today** we use these posteriors to draw conclusions: estimating parameters and testing hypotheses.
+**Today** we ask: what happens when the model is *not* conjugate, or when the posterior simply has no closed form? We turn to numerical approximations — grid approximation and MCMC.
 
 ---
 
 # Running Example: Dutch Railways
 
-We will use one running example throughout this lecture.
+We will use one running example throughout this lecture, starting with a conjugate set-up and then breaking it.
 
 <div class="describe">
 
@@ -102,304 +103,11 @@ plot_gamma_poisson(shape = 2, rate = 0.5, sum_y = sum(y), n = length(y))
 summarize_gamma_poisson(shape = 2, rate = 0.5, sum_y = sum(y), n = length(y))
 ```
 
----
+So far so familiar — the Gamma–Poisson is conjugate, and the posterior is a clean Gamma(8, 4.5). But what if the engineer's prior beliefs *aren't* Gamma-shaped? Maybe she's confident that $\lambda$ lies in $[1, 5]$ and is unwilling to commit to a particular shape within that range. Or maybe she has two competing hypotheses about the maintenance regime that suggest a bimodal prior. The conjugacy trick breaks — but the mathematics
 
-# Posterior Estimation (Ch. 8.1)
+$$f(\lambda \mid y) \propto f(\lambda) \cdot L(y \mid \lambda)$$
 
-## Point Estimates
-
-We can summarise the posterior with a single "best guess":
-
-| Summary | Formula (Gamma) | Use when |
-|---|---|---|
-| **Mean** | $s / r$ | Symmetric posteriors; minimises squared error |
-| **Mode (MAP)** | $(s-1) / r$ | Need the single most plausible value |
-| **Median** | `qgamma(0.5, s, r)` | Skewed posteriors; more robust |
-
-```{r point-estimates}
-s <- 8; r <- 4.5
-
-mean_lambda   <- s / r
-mode_lambda   <- (s - 1) / r
-median_lambda <- qgamma(0.5, shape = s, rate = r)
-sd_lambda     <- sqrt(s) / r
-
-cat("Mean:  ", round(mean_lambda, 3),   "\n")
-cat("Mode:  ", round(mode_lambda, 3),   "\n")
-cat("Median:", round(median_lambda, 3), "\n")
-cat("SD:    ", round(sd_lambda, 3),     "\n")
-```
-
-<div class="note">
-For symmetric posteriors (e.g. Normal–Normal), mean = median = mode. For skewed posteriors (e.g. Gamma), they differ — the mean is pulled toward the heavier tail. When in doubt about which to report, reporting all three is informative.
-</div>
-
-## Credible Intervals
-
-<div class="describe">
-
-**Posterior credible interval**
-
-A $100(1-\alpha)\%$ credible interval $[L, U]$ satisfies:
-$$P(L \leq \theta \leq U \mid y) = 1 - \alpha$$
-
-This is a **direct probability statement** about the parameter given the data and prior. It says exactly what most people think a frequentist confidence interval says — but doesn't.
-
-</div>
-
-### Equal-Tailed Interval (ETI)
-
-Cuts equal probability from each tail: $P(\theta < L \mid y) = P(\theta > U \mid y) = \alpha/2$.
-
-```{r eti}
-# 95% ETI for Gamma(8, 4.5)
-ci_95 <- qgamma(c(0.025, 0.975), shape = s, rate = r)
-ci_50 <- qgamma(c(0.25,  0.75),  shape = s, rate = r)
-ci_99 <- qgamma(c(0.005, 0.995), shape = s, rate = r)
-
-cat("95% ETI: [", round(ci_95[1], 3), ",", round(ci_95[2], 3), "]\n")
-cat("50% ETI: [", round(ci_50[1], 3), ",", round(ci_50[2], 3), "]\n")
-cat("99% ETI: [", round(ci_99[1], 3), ",", round(ci_99[2], 3), "]\n")
-```
-
-### Highest Density Interval (HDI)
-
-The **shortest** interval containing $1-\alpha$ of the posterior mass — always includes the mode.
-
-```{r hdi}
-library(coda)
-posterior_samples <- rgamma(1e5, shape = s, rate = r)
-hdi_95 <- HPDinterval(as.mcmc(posterior_samples), prob = 0.95)
-cat("95% HDI: [", round(hdi_95[1], 3), ",", round(hdi_95[2], 3), "]\n")
-```
-
-```{r eti-vs-hdi-plot, fig.width=10, fig.height=4}
-lambda_vals <- seq(0, 4, length.out = 1000)
-dens_df <- data.frame(x = lambda_vals,
-                      y = dgamma(lambda_vals, shape = s, rate = r))
-
-ci  <- qgamma(c(0.025, 0.975), shape = s, rate = r)
-hdi_vals <- as.numeric(HPDinterval(as.mcmc(rgamma(1e5, s, r)), prob = 0.95))
-
-make_panel <- function(lo, hi, title, fill_col) {
-  ggplot(dens_df, aes(x, y)) +
-    geom_line(linewidth = 1) +
-    geom_area(data = subset(dens_df, x >= lo & x <= hi),
-              aes(x, y), fill = fill_col, alpha = 0.4) +
-    geom_vline(xintercept = (s-1)/r, linetype = "dashed",
-               color = "tomato", linewidth = 1) +
-    labs(title = title, x = expression(lambda), y = "Density") +
-    theme_minimal(base_size = 13)
-}
-
-grid.arrange(
-  make_panel(ci[1],       ci[2],       "95% ETI (equal-tailed)", "steelblue"),
-  make_panel(hdi_vals[1], hdi_vals[2], "95% HDI (shortest)",     "darkorange"),
-  ncol = 2
-)
-```
-
-<div class="note">
-**When to use which?**
-
-- For **symmetric** posteriors (Normal–Normal): ETI ≈ HDI — either is fine.
-- For **skewed** posteriors (Gamma, Beta near boundary): HDI is shorter and contains the mode. Prefer HDI when reporting the most credible parameter region.
-- ETI always contains the median; HDI always contains the mode.
-- Whichever you use, state which in your report.
-</div>
-
----
-
-# Hypothesis Testing (Ch. 8.2)
-
-## Interval Hypotheses
-
-An **interval hypothesis** asserts the parameter falls in some range. We evaluate it using the **Bayes factor**, which quantifies how much the data update our beliefs between two competing claims.
-
-<div class="describe">
-
-**Bayes factor for interval hypotheses**
-
-$$
-BF_{a0} = \frac{\text{Posterior odds}}{\text{Prior odds}} = \frac{P(H_a \mid y) / P(H_0 \mid y)}{P(H_a) / P(H_0)}
-$$
-
-- $BF_{a0} > 1$: data support $H_a$ over $H_0$
-- $BF_{a0} < 1$: data support $H_0$ over $H_a$
-- $BF_{a0} \approx 1$: data are uninformative about this contrast
-
-</div>
-
-### Dutch Railways: Is the failure rate below 2 per month?
-
-$$H_a: \lambda < 2 \quad \text{vs.} \quad H_0: \lambda \geq 2$$
-
-```{r interval-bf}
-# Prior: Gamma(2, 0.5) — before seeing any data
-prior_prob <- pgamma(2, shape = 2, rate = 0.5)
-prior_odds <- prior_prob / (1 - prior_prob)
-cat("Prior P(lambda < 2):", round(prior_prob, 3),
-    "| Prior odds:", round(prior_odds, 3), "\n")
-
-# Posterior after 4 months: Gamma(8, 4.5)
-post_prob <- pgamma(2, shape = 8, rate = 4.5)
-post_odds <- post_prob / (1 - post_prob)
-cat("Posterior P(lambda < 2 | y):", round(post_prob, 3),
-    "| Posterior odds:", round(post_odds, 3), "\n")
-
-# Bayes factor
-BF_a0 <- post_odds / prior_odds
-cat("BF(a, 0) =", round(BF_a0, 3), "\n")
-```
-
-```{r interval-plot, fig.width=10, fig.height=5}
-lambda_vals <- seq(0, 6, length.out = 500)
-df <- data.frame(
-  lambda    = lambda_vals,
-  Prior     = dgamma(lambda_vals, shape = 2, rate = 0.5),
-  Posterior = dgamma(lambda_vals, shape = 8, rate = 4.5)
-)
-
-thresh <- 2
-
-make_hyp_panel <- function(data, col_name, fill_ha, title) {
-  ggplot(data, aes(x = lambda, y = .data[[col_name]])) +
-    geom_line(linewidth = 1) +
-    geom_area(data = subset(data, lambda <  thresh),
-              aes(y = .data[[col_name]]), fill = fill_ha, alpha = 0.4) +
-    geom_area(data = subset(data, lambda >= thresh),
-              aes(y = .data[[col_name]]), fill = "grey70", alpha = 0.3) +
-    geom_vline(xintercept = thresh, linetype = "dashed", color = "grey30") +
-    annotate("text", x = 0.6, y = max(data[[col_name]]) * 0.88,
-             label = expression(H[a]), color = fill_ha, size = 5, fontface = "bold") +
-    annotate("text", x = 3.5, y = max(data[[col_name]]) * 0.88,
-             label = expression(H[0]), color = "grey40", size = 5, fontface = "bold") +
-    labs(title = title, x = expression(lambda), y = "Density") +
-    theme_minimal(base_size = 13)
-}
-
-grid.arrange(
-  make_hyp_panel(df, "Prior",     "steelblue",  "Prior: Gamma(2, 0.5)"),
-  make_hyp_panel(df, "Posterior", "darkorange", "Posterior: Gamma(8, 4.5)"),
-  ncol = 2
-)
-```
-
-**Interpretation:** A BF ≈ 5.8 indicates **moderate evidence** that the failure rate is below 2/month. The posterior shifted substantially toward $H_a$.
-
-### Evidence scale (Kass & Raftery, 1995)
-
-| BF | Evidence for $H_a$ |
-|---|---|
-| 1 – 3 | Barely worth mentioning |
-| 3 – 10 | Moderate / substantial |
-| 10 – 30 | Strong |
-| 30 – 100 | Very strong |
-| > 100 | Decisive |
-
-### What happens with more data?
-
-After 10 months ($\sum y = 15$), posterior becomes Gamma(17, 10.5):
-
-```{r more-data-bf}
-prior_odds_saved <- prior_prob / (1 - prior_prob)
-
-post_prob2 <- pgamma(2, shape = 17, rate = 10.5)
-post_odds2 <- post_prob2 / (1 - post_prob2)
-BF_full    <- post_odds2 / prior_odds_saved
-
-cat("BF after 10 months =", round(BF_full, 2), "\n")
-```
-
-The BF grows from 5.8 to ~14, crossing into **strong** evidence. More data, stronger conclusions.
-
----
-
-## Point Hypotheses & the Savage–Dickey Density Ratio
-
-A **point hypothesis** like $H_0: \lambda = 2$ cannot be evaluated using posterior probabilities — a continuous distribution assigns zero probability to any single point. Instead, we reframe as a **model comparison**:
-
-- $H_0$: $\lambda$ is fixed at $\lambda_0 = 2$
-- $H_1$: $\lambda$ is unknown, modelled with a continuous prior
-
-<div class="describe">
-
-**Savage–Dickey density ratio**
-
-When $H_0$ is nested within $H_1$ (i.e. $H_0$ is a special case of the prior), the Bayes factor simplifies elegantly:
-
-$$BF_{01} = \frac{f(\lambda_0 \mid y)}{f(\lambda_0)}$$
-
-Compare the **posterior density** to the **prior density** at the null value. No integration needed.
-
-- $BF_{01} > 1$: posterior peaked more at $\lambda_0$ than prior → evidence *for* $H_0$
-- $BF_{01} < 1$: data moved probability away from $\lambda_0$ → evidence *against* $H_0$
-
-</div>
-
-```{r savage-dickey}
-# Prior: Gamma(2, 0.5);  Posterior after 10 months: Gamma(17, 10.5)
-lambda0 <- 2
-
-prior_dens <- dgamma(lambda0, shape = 2,  rate = 0.5)
-post_dens  <- dgamma(lambda0, shape = 17, rate = 10.5)
-
-BF_01 <- post_dens / prior_dens
-cat("Prior density at lambda=2:    ", round(prior_dens, 4), "\n")
-cat("Posterior density at lambda=2:", round(post_dens,  4), "\n")
-cat("BF_01 =", round(BF_01, 3), " (> 1: favours H_0)\n")
-cat("BF_10 =", round(1/BF_01, 3), " (> 1: favours H_1)\n")
-```
-
-```{r savage-dickey-plot, fig.width=9, fig.height=4}
-lambda_vals <- seq(0, 5, length.out = 500)
-df_sd <- data.frame(
-  lambda    = lambda_vals,
-  Prior     = dgamma(lambda_vals, shape = 2,  rate = 0.5),
-  Posterior = dgamma(lambda_vals, shape = 17, rate = 10.5)
-)
-
-df_long <- pivot_longer(df_sd, Prior:Posterior,
-                        names_to = "Dist", values_to = "Density")
-
-ggplot(df_long, aes(x = lambda, y = Density, color = Dist, fill = Dist)) +
-  geom_area(alpha = 0.3, position = "identity") +
-  geom_line(linewidth = 1.2) +
-  geom_vline(xintercept = lambda0, linetype = "dashed", color = "grey30") +
-  geom_point(aes(x = lambda0,
-                 y = ifelse(Dist == "Prior",
-                            dgamma(lambda0, 2, 0.5),
-                            dgamma(lambda0, 17, 10.5))),
-             size = 4, shape = 21, fill = "white") +
-  annotate("text", x = lambda0 + 0.15, y = 0.55,
-           label = paste0("BF[0*1] == ", round(BF_01, 2)),
-           parse = TRUE, size = 5) +
-  scale_color_manual(values = c("Prior" = "steelblue", "Posterior" = "darkorange")) +
-  scale_fill_manual(values  = c("Prior" = "steelblue", "Posterior" = "darkorange")) +
-  labs(title = "Savage–Dickey: comparing densities at the null value",
-       x = expression(lambda), y = "Density") +
-  theme_minimal(base_size = 13) +
-  theme(legend.title = element_blank())
-```
-
-**Interpretation:** The posterior density at $\lambda = 2$ substantially exceeds the prior density — the data are *consistent with* the null benchmark. $BF_{01} \approx 3$ indicates modest evidence *for* $H_0: \lambda = 2$. This is nuanced: the interval test shows the rate is likely *below* 2, but the point test says it's not dramatically different from 2.
-
-### Effect of prior diffuseness on the BF
-
-Vaguer priors spread probability thinly, so they predict data less precisely everywhere — leading to larger $BF_{01}$ values for the null even when the data are not especially compatible with it. This is Occam's razor in action.
-
-```{r sd-sensitivity}
-# Same posterior (Gamma(17, 10.5)); compare tight vs diffuse prior
-prior_tight   <- dgamma(lambda0, shape = 2, rate = 0.5)   # tight
-prior_diffuse <- dgamma(lambda0, shape = 2, rate = 0.1)   # diffuse
-
-cat("BF_01 with tight prior Gamma(2,0.5):  ", round(post_dens / prior_tight,   3), "\n")
-cat("BF_01 with diffuse prior Gamma(2,0.1):", round(post_dens / prior_diffuse, 3), "\n")
-```
-
-<div class="note">
-**Always** report a sensitivity analysis for Bayes factors. The BF depends on the prior under $H_1$; a diffuse alternative automatically yields larger $BF_{01}$ values.
-</div>
+still holds. We just can't read off the answer in closed form. That's the puzzle the rest of this lecture solves.
 
 ---
 
@@ -488,104 +196,7 @@ quantile(theta_mcmc, c(0.025, 0.975))   # 95% ETI
 
 # In-Class Exercises
 
-## Exercise 1: Posterior Summaries (Dutch Railways)
-
-> Posterior: $\lambda \mid y \sim \text{Gamma}(8, 4.5)$.
-
-::: {.panel-tabset}
-
-### Exercise
-
-1. Compute the posterior mean, mode, and median analytically.
-2. Construct the 90%, 95%, and 99% ETI.
-3. Compute $P(\lambda < 1.5 \mid y)$.
-4. Compute $P(\lambda \leq 2 \mid y)$ and interpret.
-
-### Solution
-
-```{r ex1-solution}
-s <- 8; r <- 4.5
-
-cat("Mean:  ", round(s/r, 3),       "\n")
-cat("Mode:  ", round((s-1)/r, 3),   "\n")
-cat("Median:", round(qgamma(0.5, s, r), 3), "\n")
-
-for (level in c(0.90, 0.95, 0.99)) {
-  a <- (1 - level) / 2
-  ci <- qgamma(c(a, 1-a), s, r)
-  cat(level*100, "% ETI: [", round(ci[1],3), ",", round(ci[2],3), "]\n")
-}
-
-cat("P(lambda < 1.5 | y):", round(pgamma(1.5, s, r), 3), "\n")
-cat("P(lambda <= 2  | y):", round(pgamma(2.0, s, r), 3), "\n")
-```
-
-**Interpretation:** About 68% posterior probability that the rate is at or below the safety threshold of 2/month.
-
-:::
-
-## Exercise 2: Interval Hypothesis Testing
-
-> A researcher tests whether more than half of psychology studies replicate. Prior: Beta(4, 6). Observed: 58 of 100 studies replicate.
-
-::: {.panel-tabset}
-
-### Exercise
-
-1. Derive the posterior.
-2. Compute $BF_{+0}$ for $H_+: \theta > 0.5$ vs. $H_0: \theta \leq 0.5$.
-3. Interpret the BF using the Kass & Raftery scale.
-4. How much did beliefs change? Compare $P(\theta > 0.5)$ to $P(\theta > 0.5 \mid y)$.
-
-### Solution
-
-```{r ex2-solution}
-# 1. Posterior: Beta(4+58, 6+42) = Beta(62, 48)
-a_post <- 62; b_post <- 48
-
-# 2. BF
-prior_prob <- pbeta(0.5, 4, 6,     lower.tail = FALSE)
-post_prob  <- pbeta(0.5, a_post, b_post, lower.tail = FALSE)
-BF_plus0   <- (post_prob / (1 - post_prob)) / (prior_prob / (1 - prior_prob))
-
-cat("Prior P(theta > 0.5):     ", round(prior_prob, 3), "\n")
-cat("Posterior P(theta > 0.5 | y):", round(post_prob, 3), "\n")
-cat("BF(+, 0) =", round(BF_plus0, 2), "\n")
-
-plot_beta_binomial(alpha = 4, beta = 6, y = 58, n = 100)
-```
-
-:::
-
-## Exercise 3: Savage–Dickey
-
-> Same replication study. Test the point null $H_0: \theta = 0.5$.
-
-::: {.panel-tabset}
-
-### Exercise
-
-1. Compute $BF_{01}$ using the Savage–Dickey formula.
-2. Interpret $BF_{10}$.
-3. Does this agree directionally with Exercise 2? Why might the magnitude differ?
-
-### Solution
-
-```{r ex3-solution}
-theta0     <- 0.5
-prior_dens <- dbeta(theta0, 4,     6    )
-post_dens  <- dbeta(theta0, 62,    48   )
-
-BF_01 <- post_dens / prior_dens
-cat("BF_01 =", round(BF_01, 3), "\n")
-cat("BF_10 =", round(1/BF_01, 3), "\n")
-```
-
-**Note:** The interval BF (Exercise 2) and the Savage–Dickey BF answer subtly different questions — one asks about a region, the other about a specific value. Both should agree *directionally* if the data are consistent.
-
-:::
-
-## Exercise 4: Grid Approximation with a Truncated Prior
+## Exercise 1: Grid Approximation with a Truncated Prior
 
 > A researcher believes the placebo effect rate is between 30% and 90%, and is otherwise uncertain. Prior: Beta(2,2) truncated to $[0.30, 0.90]$. Observed: 18 of 25 patients improve.
 
@@ -636,8 +247,74 @@ ggplot(df_plot, aes(x = theta, fill = Prior)) +
 
 :::
 
+## Exercise 2: Metropolis by hand (Dutch Railways)
+
+> Back to NS signal failures with prior Gamma(2, 0.5) and data $y = (2, 0, 3, 1)$. Pretend you've forgotten that the conjugate posterior is Gamma(8, 4.5). Build a tiny Metropolis sampler instead and compare.
+
+::: {.panel-tabset}
+
+### Exercise
+
+1. Implement a Metropolis sampler for $\lambda > 0$ with a Normal proposal centred at the current value (e.g. SD = 0.5). Use the **unnormalised** posterior $f(\lambda) \cdot L(y \mid \lambda)$ in the acceptance ratio.
+2. Run 5,000 iterations, discard the first 1,000 as burn-in.
+3. Compare your sampled mean and 95% ETI to the analytic posterior Gamma(8, 4.5).
+4. Produce a trace plot. Does the chain look like a "hairy caterpillar"?
+
+### Solution
+
+```{r ex2-solution}
+set.seed(2026)
+
+y <- c(2, 0, 3, 1)
+
+log_post <- function(lambda) {
+  if (lambda <= 0) return(-Inf)
+  dgamma(lambda, shape = 2, rate = 0.5, log = TRUE) +
+    sum(dpois(y, lambda, log = TRUE))
+}
+
+n_iter   <- 5000
+lambda   <- numeric(n_iter)
+lambda[1] <- 1            # starting value
+accepts  <- 0
+
+for (t in 2:n_iter) {
+  proposal <- rnorm(1, mean = lambda[t - 1], sd = 0.5)
+  log_a <- log_post(proposal) - log_post(lambda[t - 1])
+  if (log(runif(1)) < log_a) {
+    lambda[t] <- proposal
+    accepts   <- accepts + 1
+  } else {
+    lambda[t] <- lambda[t - 1]
+  }
+}
+
+cat("Acceptance rate:", round(accepts / (n_iter - 1), 3), "\n")
+
+post <- lambda[1001:n_iter]                       # burn-in
+cat("MCMC mean :", round(mean(post), 3), "\n")
+cat("Analytic  :", round(8 / 4.5, 3), "\n")
+cat("MCMC 95% ETI:", round(quantile(post, c(.025, .975)), 3), "\n")
+cat("Analytic   :", round(qgamma(c(.025, .975), 8, 4.5), 3), "\n")
+
+par(mfrow = c(1, 2))
+plot(lambda, type = "l", col = "steelblue",
+     xlab = "iteration", ylab = expression(lambda),
+     main = "Trace plot")
+abline(v = 1000, col = "red", lty = 2)
+hist(post, breaks = 40, probability = TRUE, col = "steelblue",
+     border = "white", main = "Posterior (after burn-in)",
+     xlab = expression(lambda))
+curve(dgamma(x, 8, 4.5), add = TRUE, col = "darkred", lwd = 2)
+par(mfrow = c(1, 1))
+```
+
+The MCMC mean and ETI should sit very close to the analytic Gamma(8, 4.5) values — same posterior, two different routes.
+
+:::
+
 ---
 
 <div class="note">
-**Next lecture (June 15):** Posterior prediction — the posterior predictive distribution, prior predictive checks, model checking, and how hypothesis specification shapes the Bayes factor (Ch. 8 + Etz et al. 2018).
+**Next lectures (June 15):** Two parallel lectures use this same posterior machinery for *inference*. **Lecture 6a** focuses on posterior prediction, prior + posterior predictive checks, and hypothesis specification (Ch. 8 + Etz et al. 2018). **Lecture 6b** revisits the Dutch Railways posterior to build point estimates, credible intervals, and Bayes factors (Ch. 8.1–8.2 + addendum on testing point hypotheses).
 </div>

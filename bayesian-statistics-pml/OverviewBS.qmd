@@ -1,5 +1,5 @@
 ---
-title: "Bayesian Statistics (PML) — Overview"
+title: "Bayesian Statistics — Overview"
 author: "Johnny van Doorn"
 date: today
 format:
@@ -17,8 +17,9 @@ The slides are on 1 continuous page. To get a pdf, I recommend you use the print
 | Date | Lecture | Topics | Slides |
 |---|---|---|---|
 | 8 Jun  | **Lecture 4** — Conjugate Models & Choosing Your Prior        | Conjugacy; selecting plausible priors; prior predictive check (Ch. 5)                                          | [link](https://johnnydoorn.github.io/teaching-statistics/bayesian-statistics-pml/2026/Lecture4_Conjugacy/lecture4_conjugacy.html) |
-| 10 Jun | **Lecture 5** — Posterior Inference & Hypothesis Testing      | Point estimates; equal-tailed & highest-density intervals; Bayes factors; Savage–Dickey; grid + MCMC (Ch. 6–8) | [link](https://johnnydoorn.github.io/teaching-statistics/bayesian-statistics-pml/2026/Lecture5_GridMCMC/lecture5_gridmcmc.html) |
-| 15 Jun | **Lecture 6** — Posterior Prediction & Hypothesis Specification | Prior + posterior predictive; predictive p-values; hypothesis testing as model comparison; ESP running example  | [link](https://johnnydoorn.github.io/teaching-statistics/bayesian-statistics-pml/2026/Lecture6_PredictionReporting/lecture6_predictionreporting.html) |
+| 10 Jun | **Lecture 5** — Obtaining the Posterior: Grid Approximation & MCMC | Why we need numerical methods; grid approximation; the intuition behind MCMC; convergence diagnostics (Ch. 6 & 7) | [link](https://johnnydoorn.github.io/teaching-statistics/bayesian-statistics-pml/2026/Lecture5_GridMCMC/lecture5_gridmcmc.html) |
+| 15 Jun | **Lecture 6a** — Posterior Prediction & Hypothesis Specification | Prior + posterior predictive; predictive p-values; hypothesis testing as model comparison; ESP running example  | [link](https://johnnydoorn.github.io/teaching-statistics/bayesian-statistics-pml/2026/Lecture6_PredictionReporting/lecture6_predictionreporting.html) |
+| 15 Jun | **Lecture 6b** — Using the Posterior: Inference, Prediction & Hypothesis Testing | Point estimates; equal-tailed & HPD credible intervals; interval hypotheses via Bayes factors; point hypotheses via Savage–Dickey; Dutch Railways running example (Ch. 8) | [link](https://johnnydoorn.github.io/teaching-statistics/bayesian-statistics-pml/2026/Lecture6b_PosteriorInference/lecture6b_posteriorinference.html) |
 | 17 Jun | **Lecture 7** — Reporting Guidelines & Exam Preparation       | van Doorn et al. (2021) reporting checklist; five common exam mistakes; error-spotting exercises; mock exam     | [link](https://johnnydoorn.github.io/teaching-statistics/bayesian-statistics-pml/2026/Lecture7_ExamPrep/lecture7_examprep.html) |
 
 ## Contact
