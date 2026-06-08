@@ -1,0 +1,401 @@
+---
+title: "8 Posterior Prediction & Hypothesis Specification"
+author: "Johnny van Doorn"
+date: "2026-06-15"
+format:
+  html:
+    css: ajohnson.css
+    code-fold: true
+    theme: cosmo
+    toc: true
+    toc-depth: 3
+    number-sections: false
+    df-print: paged
+    self-contained: true
+engine: knitr
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(bayesrules)
+library(ggplot2)
+library(gridExtra)
+library(dplyr)
+library(tidyr)
+```
+
+<div class="goals">
+By the end of this lecture, you will be able to:
+
+- Derive and simulate the posterior predictive distribution
+- Run a prior predictive check and a posterior predictive model check
+- Explain how the choice of $H_1$ changes the Bayes factor (Jeffreys's platitude)
+- Compute and compare Bayes factors for different hypothesis specifications
+- Describe why vague alternatives are penalised (Occam's razor)
+</div>
+
+<div class="note">
+**Recommended Reading:** *Bayes Rules!* Chapter 8; Etz, Haaf, Rouder & Vandekerckhove (2018). Bayesian inference and testing any hypothesis you can specify. *Advances in Methods and Practices in Psychological Science*. doi: [10.1177/2515245918773087](https://doi.org/10.1177/2515245918773087)
+</div>
+
+---
+
+# Posterior Prediction
+
+## Two Uses of Prediction
+
+| | Question | Timing |
+|---|---|---|
+| **Prior predictive** | What does my model predict *before* data? | Before data |
+| **Posterior predictive** | What new data should I expect *after* updating? | After updating |
+
+Both simulate *data* (not parameters), and serve different purposes.
+
+## Prior Predictive Check
+
+Simulate data from the prior to check whether the prior encodes scientifically plausible values.
+
+<div class="describe">
+
+**Algorithm**
+
+1. Draw $\theta^{(i)}$ from the prior $f(\theta)$
+2. Simulate $y^{(i)}$ from the likelihood $f(y \mid \theta^{(i)})$
+3. Plot $\{y^{(i)}\}$: if it implies impossible or absurd observations, revise the prior
+
+</div>
+
+```{r prior-predictive}
+# Prior: Beta(4, 6);  planning n = 20
+theta_prior  <- rbeta(1e4, shape1 = 4, shape2 = 6)
+y_prior_pred <- rbinom(1e4, size = 20, prob = theta_prior)
+
+hist(y_prior_pred, breaks = 0:20, probability = FALSE,
+     main = "Prior Predictive Distribution  (Beta(4,6), n=20)",
+     xlab = "Simulated successes (out of 20)",
+     col = "steelblue", border = "white")
+```
+
+**Interpretation:** The prior predicts mostly 4–12 successes out of 20, centred around 8 (40%). This looks plausible for a proportion expected to be around 40% (since $\mathbb{E}[\pi] = 4/10 = 0.4$).
+
+## The Posterior Predictive Distribution
+
+After updating on $y$, we want to predict $Y'$ for a new observation:
+
+$$f(y' \mid y) = \int f(y' \mid \theta)\, f(\theta \mid y)\, d\theta$$
+
+This marginalises over **two sources of uncertainty**:
+
+- **Parameter uncertainty**: we don't know $\theta$ exactly → integrate over the posterior
+- **Sampling variability**: even if $\theta$ were known, new observations vary around it
+
+<div class="describe">
+
+**Simulation algorithm**
+
+1. Draw $\theta^{(i)}$ from the posterior $f(\theta \mid y)$
+2. Simulate $Y'^{(i)}$ from the likelihood at each $\theta^{(i)}$
+3. $\{Y'^{(i)}\}$ approximates the posterior predictive distribution
+
+</div>
+
+```{r posterior-predictive}
+# Posterior: Beta(18, 92);  predict for n = 20 new cases
+theta_post  <- rbeta(1e4, 18, 92)
+y_post_pred <- rbinom(1e4, size = 20, prob = theta_post)
+
+cat("E(Y' | y):", round(mean(y_post_pred), 2), "\n")
+cat("P(Y' >= 5 | y):", round(mean(y_post_pred >= 5), 3), "\n")
+
+hist(y_post_pred, breaks = 0:20, probability = FALSE,
+     main = "Posterior Predictive Distribution  (Beta(18,92), n=20)",
+     xlab = "Predicted successes (out of 20)",
+     col = "darkorange", border = "white")
+```
+
+## Posterior Predictive Model Check
+
+Simulate replicated datasets $y^\text{rep}$ under the fitted model and compare them to the observed data $y_\text{obs}$. This is a Bayesian analogue of a goodness-of-fit test.
+
+```{r ppc}
+# Original data: n = 20, y_obs = 14;  Posterior: Beta(18, 9)
+theta_rep <- rbeta(1e3, 18, 9)
+y_rep     <- rbinom(1e3, size = 20, prob = theta_rep)
+
+hist(y_rep, breaks = 0:20, probability = FALSE,
+     main = "Posterior Predictive Check",
+     xlab = "Replicated successes (out of 20)",
+     col  = "steelblue", border = "white")
+abline(v = 14, col = "tomato", lwd = 3)
+legend("topleft", legend = "y_obs = 14", col = "tomato", lwd = 3)
+
+# Posterior predictive p-value
+pp_pval <- mean(y_rep >= 14)
+cat("Posterior predictive p-value:", round(pp_pval, 3), "\n")
+```
+
+<div class="note">
+A posterior predictive p-value (pp p-value) near 0.5 indicates good model fit — the observed data fall near the centre of the replicated distribution. Values close to 0 or 1 suggest the model is systematically missing something.
+</div>
+
+---
+
+# Hypothesis Testing: Specifying the Question
+
+## Testing = Model Comparison
+
+The Bayes factor compares how well two **fully specified** models predicted the data:
+
+$$BF_{10} = \frac{P(y \mid \mathcal{H}_1)}{P(y \mid \mathcal{H}_0)}$$
+
+where $P(y \mid \mathcal{H}) = \int f(y \mid \theta)\, f(\theta \mid \mathcal{H})\, d\theta$ is the **marginal likelihood** — the average predictive accuracy of the model.
+
+<div class="note">
+
+**Jeffreys's Platitude** (Etz et al., 2018)
+
+"The answer depends on the question." Slightly different hypothesis specifications can lead to different Bayes factors — sometimes qualitatively different conclusions. The null is always $H_0: \theta = \theta_0$; but there are many possible $H_1$s.
+
+</div>
+
+## The Running Example: Extrasensory Perception
+
+> In a guessing task with 25 trials, a participant gets 15 correct.
+
+The null is clear: $H_0: \theta = 0.5$ (performance at chance). But what should $H_1$ say?
+
+| Alternative | Prior on $\theta$ | What it says |
+|---|---|---|
+| One-sided ($H_+$) | $U(0.5, 1)$ | Any above-chance level is equally plausible |
+| Slab ($H_S$) | $U(0, 1)$ | Completely agnostic |
+| Specific point ($H_A$) | spike at 0.53 | A precise ESP-induced advantage |
+| Negligible-effect ($H_N$) | $U(0.47, 0.53)$ | Any real effect is negligibly small |
+
+## Computing the BFs
+
+```{r bf-computations}
+y_obs <- 15; n_obs <- 25
+
+# H_0: theta = 0.5
+p_H0 <- dbinom(y_obs, n_obs, prob = 0.5)
+
+# H_+: theta ~ U(0.5, 1)  (one-sided)
+theta_plus <- seq(0.5, 1, length.out = 1e4)
+p_Hplus    <- mean(dbinom(y_obs, n_obs, prob = theta_plus))
+BF_plus0   <- p_Hplus / p_H0
+
+# H_S: theta ~ U(0, 1)  (slab)
+theta_slab <- seq(0, 1, length.out = 1e4)
+p_HS       <- mean(dbinom(y_obs, n_obs, prob = theta_slab))
+BF_S0      <- p_HS / p_H0
+
+# H_A: theta = 0.53  (specific point)
+p_HA  <- dbinom(y_obs, n_obs, prob = 0.53)
+BF_A0 <- p_HA / p_H0
+
+# H_N: theta ~ U(0.47, 0.53)  (negligible)
+theta_neg <- seq(0.47, 0.53, length.out = 1e4)
+p_HN      <- mean(dbinom(y_obs, n_obs, prob = theta_neg))
+# H_Nbar: complement
+theta_Nb  <- c(seq(0, 0.47, length.out = 5e3),
+               seq(0.53, 1, length.out = 5e3))
+p_HNb     <- mean(dbinom(y_obs, n_obs, prob = theta_Nb))
+BF_N_Nb   <- p_HN / p_HNb
+
+cat("BF(+, 0)  =", round(BF_plus0, 3), "— one-sided vs chance\n")
+cat("BF(S, 0)  =", round(BF_S0,    3), "— slab vs chance\n")
+cat("BF(A, 0)  =", round(BF_A0,    3), "— spike 0.53 vs chance\n")
+cat("BF(N, Nb) =", round(BF_N_Nb,  3), "— negligible vs non-negligible\n")
+```
+
+## The Same Data, Different Answers
+
+| $\mathcal{H}_1$ | Prior on $\theta$ | $BF_{10}$ | Interpretation |
+|---|---|---|---|
+| One-sided ($H_+$) | $U(0.5, 1)$ | ≈ 1.5 | Anecdotal for $H_1$ |
+| Slab ($H_S$) | $U(0, 1)$ | ≈ 0.4 | Anecdotal for $H_0$ |
+| Specific point ($H_A$) | spike at 0.53 | ≈ 1.3 | Negligible |
+| Negligible-effect ($H_N$) | $U(0.47, 0.53)$ | ≈ 2.8 | Anecdotal for negligible |
+
+*Table following Etz et al. (2018). Same 15/25 data — very different answers depending on the question asked.*
+
+## Occam's Razor: Why Vague Alternatives Are Penalised
+
+<div class="describe">
+
+**Occam's razor in Bayes factor testing**
+
+A model that spreads probability thinly over many outcomes makes weak predictions everywhere. It is automatically penalised relative to a more specific model — even if the data are consistent with it.
+
+The slab $H_S: \theta \sim U(0,1)$ assigns equal probability to a success rate of 0.01 and 0.99. Because it must "cover everything," it predicts 15/25 weakly — less strongly than $H_0: \theta = 0.5$ does. Result: $BF_{S0} < 1$ even though 15/25 is slightly above chance.
+
+</div>
+
+```{r occam-plot, fig.width=10, fig.height=4}
+theta_vals <- seq(0, 1, length.out = 500)
+lik_vals   <- dbinom(15, 25, prob = theta_vals)
+
+df_binom <- data.frame(theta = theta_vals, likelihood = lik_vals)
+
+ggplot(df_binom, aes(x = theta, y = likelihood)) +
+  geom_line(linewidth = 1.2, color = "steelblue") +
+  geom_vline(xintercept = 0.5,  linetype = "dashed", color = "tomato",   linewidth = 1) +
+  geom_vline(xintercept = 0.53, linetype = "dotted", color = "darkgreen",linewidth = 1) +
+  annotate("text", x = 0.50, y = max(lik_vals) * 0.92,
+           label = "H[0]: theta==0.5", parse = TRUE, color = "tomato", hjust = 1.1, size = 4) +
+  annotate("text", x = 0.53, y = max(lik_vals) * 0.8,
+           label = "H[A]: theta==0.53", parse = TRUE, color = "darkgreen", hjust = -0.1, size = 4) +
+  annotate("rect", xmin = 0, xmax = 1, ymin = 0, ymax = mean(lik_vals),
+           fill = "grey80", alpha = 0.3) +
+  annotate("text", x = 0.15, y = mean(lik_vals) * 1.5,
+           label = "H[S]: average\nlikelihood", color = "grey40", size = 3.5) +
+  labs(title = "Likelihood for y=15, n=25",
+       subtitle = "The slab H_S predicts via an average — much lower than the spike at 0.5",
+       x = expression(theta), y = "Likelihood") +
+  theme_minimal(base_size = 13)
+```
+
+**Implication for researchers:** think carefully about what your $H_1$ actually predicts. A vague "something is going on" hypothesis is not a strong scientific claim and will be penalised by the BF.
+
+---
+
+# In-Class Exercises
+
+## Exercise 1: Posterior Prediction (CBT App)
+
+> A researcher used the CBT app dataset with posterior Beta(26, 14) to predict outcomes in a new study of $n = 30$.
+
+::: {.panel-tabset}
+
+### Exercise
+
+1. Simulate 10,000 predictions for $Y'$.
+2. Estimate $E(Y' \mid y)$ and $P(Y' \geq 20 \mid y)$.
+3. Run a posterior predictive check on the original $y_\text{obs} = 14$ ($n = 20$). Is the model well-calibrated?
+
+### Solution
+
+```{r ex1-solution}
+set.seed(42)
+
+# 1. Simulate posterior predictive for n = 30
+theta_post  <- rbeta(1e4, 26, 14)
+y_pred_30   <- rbinom(1e4, size = 30, prob = theta_post)
+
+# 2. Summaries
+cat("E(Y' | y) =", round(mean(y_pred_30), 2), "\n")
+cat("P(Y' >= 20 | y) =", round(mean(y_pred_30 >= 20), 3), "\n")
+
+hist(y_pred_30, breaks = 0:30, probability = FALSE,
+     main = "Posterior Predictive: n=30 new patients",
+     xlab = "Predicted successes", col = "steelblue", border = "white")
+
+# 3. PPC for original data (n = 20, y_obs = 14)
+theta_rep2  <- rbeta(1e3, 26, 14)
+y_rep2      <- rbinom(1e3, size = 20, prob = theta_rep2)
+
+hist(y_rep2, breaks = 0:20,
+     main = "Posterior Predictive Check (original data)",
+     xlab = "Replicated y", col = "steelblue", border = "white")
+abline(v = 14, col = "tomato", lwd = 3)
+
+pp_pval <- mean(y_rep2 >= 14)
+cat("PP p-value:", round(pp_pval, 3), "\n")
+```
+
+**Interpretation:** A pp p-value near 0.5 means $y_\text{obs} = 14$ falls close to the centre of the replicated distribution — good model fit.
+
+:::
+
+## Exercise 2: Hypothesis Specification
+
+> You test whether a new memory strategy improves recall above 50%. In 30 trials, 20 are correct.
+
+::: {.panel-tabset}
+
+### Exercise
+
+For each hypothesis below, compute the BF:
+
+1. $H_0: \theta = 0.5$ vs. $H_+: \theta \sim U(0.5, 1)$
+2. $H_0: \theta = 0.5$ vs. $H_S: \theta \sim U(0, 1)$
+3. $H_0: \theta = 0.5$ vs. $H_A: \theta = 0.65$ (specific prediction from a theory)
+4. How do the three BFs compare? What does this tell you about hypothesis specification?
+
+### Solution
+
+```{r ex2-solution}
+y2 <- 20; n2 <- 30
+p0 <- dbinom(y2, n2, 0.5)
+
+# 1. One-sided
+theta_p <- seq(0.5, 1, length.out = 1e4)
+BF_plus <- mean(dbinom(y2, n2, theta_p)) / p0
+
+# 2. Slab
+theta_s <- seq(0, 1, length.out = 1e4)
+BF_slab <- mean(dbinom(y2, n2, theta_s)) / p0
+
+# 3. Point alternative
+BF_A <- dbinom(y2, n2, 0.65) / p0
+
+cat("BF(+, 0)  =", round(BF_plus, 3), "— one-sided\n")
+cat("BF(S, 0)  =", round(BF_slab, 3), "— slab\n")
+cat("BF(A, 0)  =", round(BF_A,    3), "— point 0.65\n")
+```
+
+**Discussion:** The one-sided BF is likely the largest — it concentrates prior probability where the data are. The slab is penalised for spreading probability across values like 0.1 that the data make implausible. The specific point alternative shows how much evidence there is for a precise theoretical prediction.
+
+:::
+
+## Exercise 3: Prior Predictive Check for a Gamma–Poisson Model
+
+> A researcher models daily number of panic attacks. They propose $\lambda \sim \text{Gamma}(2, 1)$ as a prior. Patients will be monitored for $n = 14$ days.
+
+::: {.panel-tabset}
+
+### Exercise
+
+1. Run a prior predictive check — simulate 14-day totals under this prior.
+2. Is the prior plausible? What does it predict about the maximum daily count?
+3. Suggest a revised prior and show how the predictive distribution changes.
+
+### Solution
+
+```{r ex3-solution}
+set.seed(123)
+
+# Prior: Gamma(2, 1), mean = 2 attacks/day
+lambda_prior <- rgamma(1e4, shape = 2, rate = 1)
+
+# Simulate 14-day totals
+y_total <- rpois(1e4, lambda = lambda_prior * 14)   # sum of 14 Poisson draws
+
+hist(y_total, breaks = 50,
+     main = "Prior Predictive: 14-day panic attack totals (Gamma(2,1))",
+     xlab = "Total attacks over 14 days", col = "steelblue", border = "white")
+
+cat("Prior predictive mean total:", round(mean(y_total), 1), "\n")
+cat("P(total > 100):", round(mean(y_total > 100), 3), "\n")
+
+# Revised: more informative prior, e.g. Gamma(4, 2), mean still = 2 but tighter
+lambda_rev <- rgamma(1e4, shape = 4, rate = 2)
+y_total_rev <- rpois(1e4, lambda = lambda_rev * 14)
+
+hist(y_total_rev, breaks = 50, add = FALSE,
+     main = "Revised Prior: Gamma(4, 2)",
+     xlab = "Total attacks over 14 days", col = "darkorange", border = "white")
+cat("Revised P(total > 100):", round(mean(y_total_rev > 100), 3), "\n")
+```
+
+:::
+
+---
+
+<div class="note">
+**Next lecture (June 17):** Reporting guidelines (van Doorn et al. 2021), common mistakes, and mock exam preparation.
+</div>

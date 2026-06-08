@@ -1,0 +1,384 @@
+---
+title: "Chapter 8.3 Exercises - Solutions"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+## Exercise 8.5
+
+**a.** What two types of variability do posterior predictive models incorporate? Define each type such that your non-Bayesian statistics friends could understand.
+
+**b.** Describe a real-life situation in which it would be helpful to carry out posterior prediction.
+
+**c.** Is a posterior predictive model conditional on just the data, just the parameter, or on both the data and the parameter?
+
+#### Solution
+
+**a.** Posterior predictive models account for:
+
+- **Sampling variability**: Even if we knew the true population value, results from new samples would still vary randomly.
+- **Posterior uncertainty**: We don't know the exact value of the population parameter, only what values are plausible based on our current data.
+
+**b.** Predicting whether a new medical treatment will help the next 10 patients based on a Bayesian analysis of data from previous patients.
+
+**c.** Both. It uses the posterior distribution of the parameter (which is based on the observed data) to make predictions about new data.
+
+---
+
+---
+
+## Exercise 8.11 (Simulation Version)
+
+**a.** Suppose you observed y=14 successes out of n=100 trials and used a Beta(4, 6) prior. What is the posterior distribution of $\pi$?
+
+**b.** Use the simulated posterior to generate 10,000 predictions for $Y' \sim Binomial(n'=20, \pi)$ where $\pi$ is drawn from the posterior.
+
+**c.** Plot the posterior predictive distribution of Y' 
+
+**d.** Use the simulated predictive distribution to estimate:
+
+- The expected number of successes in 20 new trials
+- The probability of observing 5 or more successes
+
+#### Solution
+
+```{r}
+set.seed(123)
+
+# a. Posterior parameters
+priorA <- 4
+priorB <- 6
+y <- 14
+n <- 100
+
+# Posterior is Beta(4 + 14, 6 + 86) = Beta(18, 92)
+curve(dbeta(x,  priorA + y, shape2 = priorB + (n - y)), xlab = expression(theta), lwd = 3, col = "orange", bty = "n", ylab = expression(p(theta)))
+
+# sample from posterior
+postThetas <- rbeta(1e5, shape1 = priorA + y, shape2 = priorB + (n - y))
+
+# b. Generate posterior predictive samples
+n_new <- 20
+y_pred <- rbinom(1e5, size = n_new, prob = postThetas)
+
+
+# c. Plot the posterior predictive distribution
+hist(y_pred, breaks = seq(-0.5, max(y_pred) + 0.5, 1),
+     main = "Posterior Predictions",
+     xlab = "# Successes out of 20",
+     col = rainbow(10), freq = FALSE)
+
+# d. Summaries
+mean(y_pred)           
+mean(y_pred >= 5)      
+
+```
+---
+
+
+## Exercise 8.12 (Simulation Version)
+
+### Posterior Predictive Gamma-Poisson 
+
+**a.** Suppose you observed y=7 events and used a Gamma(50, 50) prior. Simulate the posterior distribution of $\lambda$.
+
+**b.** Simulate 10,000 new draws from $Y' \sim Poisson(\lambda)$ where $\lambda$ is drawn from the posterior.
+
+**c.** Use this predictive distribution to estimate:
+
+- The expected number of new events
+- The probability of seeing at least 10 events
+
+**d.** Plot the distribution and describe its shape.
+
+#### Solution
+
+
+```{r}
+set.seed(123)
+
+# a. Posterior parameters
+s <- 50
+r <- 50
+y_obs <- 7
+n <- 1
+
+# Posterior is Gamma(s + y, r + 1) = Gamma(57, 51)
+curve(dgamma(x,  s + y_obs, r + n), from = 0, to = 5, xlab = expression(lambda), lwd = 3, col = "orange", bty = "n", ylab = expression(p(lambda)))
+
+# sample from posterior
+postLambdas <- rgamma(1e5, shape = s + y_obs, rate = r + 1)
+
+# b. Posterior predictive draws
+y_pred <- rpois(1e5, lambda = postLambdas)
+
+# c. Plot the posterior predictive distribution
+hist(y_pred, breaks = seq(-0.5, max(y_pred) + 0.5, 1),
+     main = "Posterior Predictive Distribution of Y'",
+     xlab = "Number of Events",
+     col = rainbow(5), freq = FALSE)
+
+# d. Summaries
+mean(y_pred)      
+mean(y_pred >= 7) 
+
+```
+
+**e.** 
+The prior is so strong that this single observation of 7 is not doing much, so it is just very unlikely to occur given the prior/posterior
+
+---
+
+
+---
+
+## Exercise 8.13 (Simulation Version)
+
+**a.** Given single observation \( y = -10 \), \( \sigma = 3 \), \( \theta = 0 \), and \( \tau^2 = 1 \), simulate 10,000 draws from the posterior distribution of \( \mu \).
+
+**b.** For each posterior draw of $\mu$, simulate a new observation Y' from $N(\mu, \sigma^2)$. 
+
+**c.** Use this posterior predictive distribution to estimate:
+
+- The expected value of \( Y' \)
+- The posterior predictive probability that \( Y' > -8 \)
+
+**d.** Plot the posterior predictive distribution and interpret it.
+
+**Bonus.** How would you rewrite your code so that $n$ can be tweaked? What happens when you increase $n$?
+
+#### Solution
+
+```{r}
+set.seed(123)
+
+# Known parameters
+y <- -10
+sigma <- 3
+theta <- 0
+tau <- 1
+n <- 100
+
+# a. Posterior distribution parameters
+priorWeight <- sigma^2     / (n * tau^2 + sigma^2)
+dataWeight  <- (n * tau^2) / (n * tau^2 + sigma^2)
+
+postMean   <- priorWeight * theta + dataWeight * y
+postVar   <- (tau^2 * sigma^2) / (n * tau^2 + sigma^2)
+
+
+# Simulate from posterior of mu
+myMus <- rnorm(1e5, mean = postMean, sd = sqrt(postVar))
+
+# b. Simulate posterior predictive Y'
+y_pred <- rnorm(1e5, mean = myMus, sd = sigma)
+
+# c. Plot posterior predictive distribution
+hist(y_pred, breaks = 50,
+     main = "Posterior Predictive",
+     xlab = "Y'", col = rainbow(4), freq = FALSE)
+
+# d. Expected value and probability Y' > -8
+mean(y_pred)       
+mean(y_pred > -8)  
+
+
+# Bonus:
+y_pred <- sapply(1:1e5, function(x)  mean(rnorm(n, mean = myMus, sd = sigma)))
+hist(y_pred, breaks = 50,
+     main = "Posterior Predictive",
+     xlab = "Y'", col = rainbow(4), freq = FALSE)
+# Expected value and probability Y' > -8
+mean(y_pred)       
+mean(y_pred > -8)  
+```
+**bonus.** When $n$ increases, the posterior changes (more certainty about the parameter values), but also the posterior predictive due to the decreasing sampling variability (see Exercise 8.5 about the two types of variability)
+
+---
+
+
+## Exercise 8.21 - 8.24 (Simulation Version)
+
+You're investigating the number of loons (a type of bird) typically observed in a 100-hour birdwatching period in Ontario. 
+Let \( \lambda \) denote the average number of loons observed in such a period. 
+Use the `loons` dataset from the `bayesrules` package, which contains loon counts from previous observation periods.
+
+**a.** Given that the data are counts of events in fixed time periods, which Bayesian model is most appropriate here:
+
+- Beta-Binomial  
+- Gamma-Poisson  
+- Normal-Normal?
+
+#### Solution
+
+The **Gamma–Poisson** model is appropriate here. We are modeling count data (number of loons) over a fixed time interval, which is naturally handled by the Poisson distribution, and the conjugate prior for the Poisson rate \( \lambda \) is the Gamma distribution.
+
+---
+
+**b.** Prior studies suggest that birdwatchers tend to observe 2 loons on average in 100 hours, with a standard deviation of 1. Specify a prior distribution for \( \lambda \), clearly stating its form and parameters.  
+
+
+#### Solution
+
+We use a Gamma prior with:
+
+- Mean = \( \frac{s}{r} = 2 \)
+- SD = \( \frac{\sqrt{s}}{r} = 1 \)
+
+Solving:
+
+- From the SD: \( \sqrt{s}/r = 1 \Rightarrow \sqrt{s} = r \Rightarrow s = r^2 \)
+- From the mean: \( s/r = 2 \Rightarrow r^2/r = 2 \Rightarrow r = 2 \), \( s = 4 \)
+
+So the prior is \( \lambda \sim \text{Gamma}(s = 4, r = 2) \)
+
+---
+
+**c.** Simulate 10,000 values from the prior predictive distribution of loon counts:
+
+- Simulate 10,000 values of \( \lambda \) from the prior.
+- For each value, simulate \( Y^{\prime} \sim \text{Poisson}(\lambda) \).
+- Plot and interpret a histogram of the simulated \( Y^{\prime} \).
+
+What range of loon counts would you expect before seeing any data?
+
+### Solution
+
+```{r}
+set.seed(123)
+library(bayesrules)
+
+# Prior parameters
+s <- 4
+r <- 2
+
+# Simulate prior lambda and predictive loon counts
+priorLambdas <- rgamma(1e5, shape = s, rate = r)
+y_pred_prior <- rpois(1e5, lambda = priorLambdas)
+
+# Plot prior predictive distribution
+hist(y_pred_prior, col = rainbow(5),
+     main = "Prior Predictive Distribution",
+     xlab = "Loons in 100-hour Period", freq = FALSE)
+
+quantile(y_pred_prior, c(0.1, 0.9)) # some measure of expectations
+```
+
+
+**d.**  Use the `loons` dataset:
+
+- How many observations are there?
+- What is the observed average count?
+- Use these data to update your prior and specify the posterior model for \( \lambda \).
+
+
+### Solution
+
+```{r}
+data("loons")
+
+# How many observations and what's the mean?
+n <- length(loons$count)
+sum_y <- sum(loons$count)
+mean_y <- mean(loons$count)
+
+n
+mean_y # average count
+
+# update to posterior parameters:
+s_post <- s + sum_y
+r_post <- r + n
+
+curve(dgamma(x, s_post, r_post), 
+      from = 0, to = 10, 
+      main = "Posterior for lambda", 
+      xlab = expression(lambda), 
+      ylab = expression(p(lambda)),
+      lwd = 3, col = "orange", bty = "n")
+
+```
+
+**e.** Simulate from the posterior distribution of \( \lambda \) and:
+
+- Estimate a 95% middle posterior credible interval
+- Estimate the posterior probability that \( \lambda < 1 \)
+
+#### Solution
+
+```{r}
+postLambdas <- rgamma(10000, shape = s_post, rate = r_post)
+
+# 95% posterior credible interval (middle)
+quantile(postLambdas, c(0.025, 0.975))
+
+# P(lambda < 1)
+mean(postLambdas < 1)     # sampling solution 
+pgamma(1, s_post, r_post) # analytic solution
+
+```
+
+**f.** Simulate the posterior predictive distribution of loon sightings \( Y^{\prime} \) in a new 100-hour period.
+
+1. Generate 10,000 draws of \( Y^{\prime} \) by simulating from \( \text{Poisson}(\lambda) \), where each \( \lambda \) is drawn from the posterior.
+2. Plot the posterior predictive distribution of \( Y^{\prime} \)
+3. Approximate \( P(Y^{\prime} = 0) \) and interpret it
+
+### Solution
+
+**Note:** the histogram below can look misleading if not tweaking the breaks argument (see what happens when you set `breaks = 20`). For a more objective overview of the predicted frequencies, also use the `table()` function on the predictions to get an exact overview of the distribution.
+
+```{r}
+# Simulate predictive loon counts from posterior
+y_pred_post <- rpois(1e5, lambda = postLambdas)
+
+# Plot posterior predictive distribution
+hist(y_pred_post, col = rainbow(5), breaks = 20,
+     main = "Posterior Predictive Distribution",
+     xlab = "Predicted Loon Counts", freq = FALSE)
+
+# Probability of 0 loons
+mean(y_pred_post == 0)
+```
+
+**g.** Based on your posterior and predictive summaries, what can you say about loon sightings in future observation periods? Should birdwatchers expect to see loons often, or rarely?
+
+### Solution
+There seems to be about a 6% probability to not see any loons in future observation periods. The posterior prediction summary shows us that there are typically between 2 and 4 loons spotted in the time period.
+
+
+
+## Bayesian Reporting Exercise 1 - Mindfulness & Memory
+
+Below are two reports of a Bayesian analysis. For each text, give 3 errors that are made in the reporting.
+**Note:** These two exercises are just for fun and to already give a bit of practice for the group assignment. The exam questions for this lecture will focus on Ch8.3.
+
+We conducted a Bayesian analysis to investigate whether a brief mindfulness intervention improves working memory scores. Fifteen participants took part in the intervention, and their working memory performance was compared to the general population average using a Bayesian t-test. We used the default prior in JASP for this analysis. The analysis produced a posterior mean score of 41.2 for the intervention group, and a Bayes Factor of 4.3 was calculated using JASP. Based on this Bayes Factor, we concluded that the null hypothesis is false and that the mindfulness intervention clearly improves memory performance. In support of this, we also reported a 95% credible interval for the mean score ranging from 39.8 to 42.6, which we interpreted as definitive evidence that the intervention is effective. No robustness analysis was necessary since the results are clear and convincing. Based on these findings, we conclude that the mindfulness intervention is an effective method for enhancing working memory.
+
+### Solution
+1. **Lack of Prior Specification**  
+   The report states that the "default prior in JASP" was used, but does not specify the type or parameters of this prior. Researchers should explicitly state what prior was used; in this case, that would be the width of the Cauchy distribution.
+
+2. **Misinterpretation of the Bayes Factor**  
+   The authors conclude that "the null hypothesis is false" based on a Bayes factor of 4.3. This is a common misunderstanding: Bayes factors provide relative evidence between models, but they do not confirm or reject hypotheses in the binary way that p-values are sometimes used. A BF of 4.3 only suggests moderate evidence in favor of the alternative hypothesis.
+
+3. **Lack of Robustness Analysis**  
+   The report dismisses the need for robustness checks, claiming the results are "clear and convincing." However, even if the results seem stable, it's important to assess how sensitive the conclusions are to different plausible prior settings so the readers can judge for themselves.
+
+
+---
+
+## Bayesian Reporting Exercise 2 - Facial Feedback
+We conducted a Bayesian reanalysis of one lab’s data from the multi-site replication of the facial feedback hypothesis, which posits that smiling can modulate emotional experience. Participants rated the funniness of cartoons after holding a pen between either their lips or their teeth. We tested the directional hypothesis that participants in the ''teeth" condition would give higher ratings. Our analysis used a one-sided Bayesian t-test with an informed prior, modeled as a t-distribution with location 0.35, scale 0.102, and 3 degrees of freedom. This prior was consistent with prior literature and expert intuition. The data yielded a t-value of -0.896 ($n_1$ = 53, $n_2$ = 57), resulting in a Bayes factor of $BF_{0-}$ = 11.5. This means that the null hypothesis is 11.5 times more probable than the alternative hypothesis. Such a Bayes factor indicates strong evidence in favor of the null. While full data and code are stored privately, our summary reflects the key statistical outcome: that there is no support for the facial feedback effect under the conditions tested.
+
+### Solution
+
+1. **Weak Justification of Informed Prior**  
+   Although an informed prior was used, the justification is vague, stating it was "consistent with prior literature and expert intuition." Best practices require transparency in how the prior was elicited (e.g., include specific literature or what process the expert followed to arrive at the distribution).
+
+2. **Confusing Bayes factor and posterior odds**  
+   The Bayes factor is interpreted as if it were posterior odds (e.g., H0 more x times more likely than H1); the Bayes factor ought to be interpreted as "the data are 11.5 times more likely under H0 than under H1" - the emphasis here is how likely the **data** are under the hypotheses.
+
+3. **Lack of Reproducibility**  
+   The authors state that data and code are "stored privately," which violates open science principles. While there are good examples where sharing is not possible, there is no justification here. 
+

@@ -1,0 +1,104 @@
+
+---
+title: "Bayes Rules! – Chapter 2 Solutions"
+output: html_document
+---
+
+# 📘 Chapter 2: Solutions
+
+## ✏️ Exercise 2.2
+
+Define the following events for a resident of a fictional town:  
+A = drives 10 miles per hour above the speed limit,  
+B = gets a speeding ticket,  
+C = took statistics at the local college,  
+D = has used R,  
+E = likes the music of Prince, and  
+F = is a Minnesotan.
+
+Several facts about these events are listed below. Specify each of these facts using probability notation, paying special attention to whether it’s a marginal, conditional, or joint probability.
+
+(a) 73% of people that drive 10 miles per hour above the speed limit get a speeding ticket.  
+(b) 20% of residents drive 10 miles per hour above the speed limit.  
+(c) 15% of residents have used R.  
+(d) 91% of statistics students at the local college have used R.  
+(e) 38% of residents are Minnesotans that like the music of Prince.  
+(f) 95% of the Minnesotan residents like the music of Prince.
+
+**Solutions:**
+
+(a) \( P(B \mid A) = 0.73 \)
+(b) \( P(A) = 0.20 \)
+(c) \( P(D) = 0.15 \)
+(d) \( P(D \mid C) = 0.91 \)
+(e) \( P(F \cap E) = 0.38 \)
+(f) \( P(E \mid F) = 0.95 \)
+
+---
+
+## ✏️ Exercise 2.5
+
+A local arboretum contains a variety of tree species, including elms, maples, and others. Unfortunately, 18% of all trees in the arboretum are infected with mold. Among the infected trees, 15% are elms, 80% are maples, and 5% are other species. Among the uninfected trees, 20% are elms, 10% are maples, and 70% are other species. In monitoring the spread of mold, an arboretum employee randomly selects a tree to test.
+
+**Questions:**
+
+(a) What’s the prior probability that the selected tree has mold?
+(b) The tree happens to be a maple. What’s the probability that the employee would have selected a maple?
+(c) What’s the posterior probability that the selected maple tree has mold?
+(d) Compare the prior and posterior probability of the tree having mold. How did your understanding change in light of the fact that the tree is a maple?
+
+**Solutions:**
+
+
+(a) \( P(\text{mold}) = 0.18 \)
+
+(b)  
+\[
+\begin{aligned}
+P(\text{maple}) &= P(\text{maple} \mid \text{mold}) \cdot P(\text{mold}) + P(\text{maple} \mid \text{no mold}) \cdot P(\text{no mold}) \\
+&= 0.80 \cdot 0.18 + 0.10 \cdot 0.82 = 0.226
+\end{aligned}
+\]
+
+(c)  
+\[
+\begin{aligned}
+P(\text{mold} \mid \text{maple}) &= \frac{0.80 \cdot 0.18}{0.226} \approx 0.637
+\end{aligned}
+\]
+
+(d)  
+The posterior probability (0.637) is noticeably higher than the prior (0.18), showing how the observation (tree is a maple) increased our belief that the tree has mold.
+
+---
+
+## ✏️ Exercise 2.17
+
+Repeat Exercise 2.5 utilizing simulation to approximate the posterior probability that a randomly selected maple tree has mold. Specifically, simulate data for 10,000 trees and remember to set your random number seed.
+
+```{r}
+# Load necessary libraries
+library(dplyr)
+library(ggplot2)
+
+set.seed(123)
+
+# Simulate mold status
+mold_status <- sample(c("mold", "no_mold"), size = 10000, replace = TRUE, prob = c(0.18, 0.82))
+
+# Assign species based on mold status
+tree_species <- ifelse(mold_status == "mold",
+                       sample(c("maple", "not_maple"), 10000, replace = TRUE, prob = c(0.80, 0.20)),
+                       sample(c("maple", "not_maple"), 10000, replace = TRUE, prob = c(0.10, 0.90)))
+
+# Create data frame
+tree_data <- data.frame(mold_status, tree_species)
+
+# Estimate posterior
+posterior <- mean(tree_data$mold_status[tree_data$tree_species == "maple"] == "mold")
+posterior
+```
+
+**Interpretation:**  
+The estimated posterior probability using simulation confirms our earlier analytical result: close to 62.5% of maple trees are moldy, given prior information and conditional distributions. Why is the number not exactly 63.7?
+

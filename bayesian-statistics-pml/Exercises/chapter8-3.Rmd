@@ -1,0 +1,141 @@
+---
+title: "Chapter 8.3 Exercises"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+## Exercise 8.5
+
+**a.** What two types of variability do posterior predictive models incorporate? Define each type such that your non-Bayesian statistics friends could understand.
+
+**b.** Describe a real-life situation in which it would be helpful to carry out posterior prediction.
+
+**c.** Is a posterior predictive model conditional on just the data, just the parameter, or on both the data and the parameter?
+
+
+
+---
+
+## Exercise 8.11 (Simulation Version)
+
+**a.** Suppose you observed y=14 successes out of n=100 trials and used a Beta(4, 6) prior. What is the posterior distribution of $\pi$?
+
+**b.** Use the simulated posterior to generate 10,000 predictions for $Y' \sim Binomial(n'=20, \pi)$ where $\pi$ is drawn from the posterior.
+
+**c.** Plot the posterior predictive distribution of Y' 
+
+**d.** Use the simulated predictive distribution to estimate:
+
+- The expected number of successes in 20 new trials
+- The probability of observing 5 or more successes
+
+
+
+
+## Exercise 8.12 (Simulation Version)
+
+### Posterior Predictive Gamma-Poisson 
+
+**a.** Suppose you observed y=7 events and used a Gamma(50, 50) prior. Simulate the posterior distribution of $\lambda$.
+
+**b.** Simulate 10,000 new draws from $Y' \sim Poisson(\lambda)$ where $\lambda$ is drawn from the posterior.
+
+**c.** Use this predictive distribution to estimate:
+
+- The expected number of new events
+- The probability of seeing at least 10 events
+
+**d.** Plot the distribution and describe its shape.
+
+
+
+**e.** 
+The prior is so strong that this single observation of 7 is not doing much, so it is just very unlikely to occur given the prior/posterior
+
+
+
+
+---
+
+## Exercise 8.13 (Simulation Version)
+
+**a.** Given single observation \( y = -10 \), \( \sigma = 3 \), \( \theta = 0 \), and \( \tau^2 = 1 \), simulate 10,000 draws from the posterior distribution of \( \mu \).
+
+**b.** For each posterior draw of $\mu$, simulate a new observation Y' from $N(\mu, \sigma^2)$. 
+
+**c.** Use this posterior predictive distribution to estimate:
+
+- The expected value of \( Y' \)
+- The posterior predictive probability that \( Y' > -8 \)
+
+**d.** Plot the posterior predictive distribution and interpret it.
+
+**Bonus.** How would you rewrite your code so that $n$ can be tweaked? What happens when you increase $n$?
+
+
+## Exercise 8.21 - 8.24 (Simulation Version)
+
+You're investigating the number of loons (a type of bird) typically observed in a 100-hour birdwatching period in Ontario. 
+Let \( \lambda \) denote the average number of loons observed in such a period. 
+Use the `loons` dataset from the `bayesrules` package, which contains loon counts from previous observation periods.
+
+**a.** Given that the data are counts of events in fixed time periods, which Bayesian model is most appropriate here:
+
+- Beta-Binomial  
+- Gamma-Poisson  
+- Normal-Normal?
+
+
+
+**b.** Prior studies suggest that birdwatchers tend to observe 2 loons on average in 100 hours, with a standard deviation of 1. Specify a prior distribution for \( \lambda \), clearly stating its form and parameters.  
+
+
+
+**c.** Simulate 10,000 values from the prior predictive distribution of loon counts:
+
+- Simulate 10,000 values of \( \lambda \) from the prior.
+- For each value, simulate \( Y^{\prime} \sim \text{Poisson}(\lambda) \).
+- Plot and interpret a histogram of the simulated \( Y^{\prime} \).
+
+What range of loon counts would you expect before seeing any data?
+
+
+
+**d.**  Use the `loons` dataset:
+
+- How many observations are there?
+- What is the observed average count?
+- Use these data to update your prior and specify the posterior model for \( \lambda \).
+
+
+
+**e.** Simulate from the posterior distribution of \( \lambda \) and:
+
+- Estimate a 95% middle posterior credible interval
+- Estimate the posterior probability that \( \lambda < 1 \)
+
+
+**f.** Simulate the posterior predictive distribution of loon sightings \( Y^{\prime} \) in a new 100-hour period.
+
+1. Generate 10,000 draws of \( Y^{\prime} \) by simulating from \( \text{Poisson}(\lambda) \), where each \( \lambda \) is drawn from the posterior.
+2. Plot the posterior predictive distribution of \( Y^{\prime} \)
+3. Approximate \( P(Y^{\prime} = 0) \) and interpret it
+
+
+**g.** Based on your posterior and predictive summaries, what can you say about loon sightings in future observation periods? Should birdwatchers expect to see loons often, or rarely?
+
+
+## Bayesian Reporting Exercise 1 - Mindfulness & Memory
+
+Below are two reports of a Bayesian analysis. For each text, give 3 errors that are made in the reporting.
+**Note:** These two exercises are just for fun and to already give a bit of practice for the group assignment. The exam questions for this lecture will focus on Ch8.3.
+
+We conducted a Bayesian analysis to investigate whether a brief mindfulness intervention improves working memory scores. Fifteen participants took part in the intervention, and their working memory performance was compared to the general population average using a Bayesian t-test. We used the default prior in JASP for this analysis. The analysis produced a posterior mean score of 41.2 for the intervention group, and a Bayes Factor of 4.3 was calculated using JASP. Based on this Bayes Factor, we concluded that the null hypothesis is false and that the mindfulness intervention clearly improves memory performance. In support of this, we also reported a 95% credible interval for the mean score ranging from 39.8 to 42.6, which we interpreted as definitive evidence that the intervention is effective. No robustness analysis was necessary since the results are clear and convincing. Based on these findings, we conclude that the mindfulness intervention is an effective method for enhancing working memory.
+
+
+---
+
+## Bayesian Reporting Exercise 2 - Facial Feedback
+We conducted a Bayesian reanalysis of one lab’s data from the multi-site replication of the facial feedback hypothesis, which posits that smiling can modulate emotional experience. Participants rated the funniness of cartoons after holding a pen between either their lips or their teeth. We tested the directional hypothesis that participants in the ''teeth" condition would give higher ratings. Our analysis used a one-sided Bayesian t-test with an informed prior, modeled as a t-distribution with location 0.35, scale 0.102, and 3 degrees of freedom. This prior was consistent with prior literature and expert intuition. The data yielded a t-value of -0.896 ($n_1$ = 53, $n_2$ = 57), resulting in a Bayes factor of $BF_{0-}$ = 11.5. This means that the null hypothesis is 11.5 times more probable than the alternative hypothesis. Such a Bayes factor indicates strong evidence in favor of the null. While full data and code are stored privately, our summary reflects the key statistical outcome: that there is no support for the facial feedback effect under the conditions tested.
+

@@ -1,0 +1,489 @@
+---
+title: "Lecture 6 — Reporting Guidelines & Exam Preparation"
+author: "Johnny van Doorn"
+date: "2026-06-17"
+format:
+  html:
+    css: ajohnson.css
+    code-fold: true
+    theme: cosmo
+    toc: true
+    toc-depth: 3
+    number-sections: false
+    df-print: paged
+    self-contained: true
+engine: knitr
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(bayesrules)
+library(ggplot2)
+```
+
+<div class="goals">
+By the end of this lecture, you will be able to:
+
+- Apply the van Doorn et al. (2021) reporting checklist to a Bayesian analysis
+- Use calibrated language when describing BFs and posteriors
+- Identify common errors in written Bayesian reports
+- Demonstrate the full analysis pipeline on exam-style questions
+</div>
+
+<div class="note">
+**Reading:** van Doorn et al. (2021), *Psychonomic Bulletin & Review*. doi: [10.3758/s13423-020-01798-5](https://doi.org/10.3758/s13423-020-01798-5)
+
+**Exam:** Friday, June 19, 09:00–11:00, IWO 4.04C (Blauw). One A4 cheat sheet allowed.
+</div>
+
+---
+
+# Reporting Guidelines (van Doorn et al., 2021)
+
+## Why Reporting Matters
+
+A Bayesian analysis is only as good as its communication. Two researchers with the same data but different priors can legitimately reach different conclusions — that's fine, but readers must be able to evaluate and reproduce the analysis.
+
+Van Doorn et al. identify **four stages** of a Bayesian study:
+
+$$\text{Planning} \;\rightarrow\; \text{Executing} \;\rightarrow\; \text{Interpreting} \;\rightarrow\; \text{Reporting}$$
+
+## Stage 1: Planning
+
+<div class="describe">
+
+**What to decide before you see the data**
+
+- Specify the **goal**: estimation, hypothesis testing, or both?
+- If testing: one-sided or two-sided? Justify *theoretically* (before seeing data).
+- Choose a **statistical model**: likelihood + prior family + prior parameters.
+- Plan a **robustness check**: which alternative priors will you report?
+- Specify a **sampling plan** (optional for Bayesians, but transparent).
+- **Pre-register** for confirmatory research.
+
+</div>
+
+## Stage 2: Executing
+
+- Check assumptions before running (outliers, distributional fit).
+- Run the pre-registered analysis; **annotate any deviations**.
+- Conduct the robustness check — vary the prior and report how the BF changes.
+
+<div class="note">
+A Bayesian analysis does not safeguard against model misspecification. Anscombe's quartet applies here too — always inspect your data.
+</div>
+
+## Stage 3: Interpreting
+
+<div class="describe">
+
+**For hypothesis testing (BF):**
+
+- BF is a *relative* measure: data are $x$ times more likely under $H_1$ than $H_0$
+- $BF_{10} = 1/BF_{01}$ — always use the subscript to be unambiguous
+- BF does **not** equal posterior probability of $H_1$; that requires prior odds:
+$$\frac{P(H_1 \mid y)}{P(H_0 \mid y)} = BF_{10} \times \frac{P(H_1)}{P(H_0)}$$
+
+**For estimation (posterior):**
+
+- Report posterior median (or mean) and a credible interval (ETI or HDI — specify which)
+- The CI has a direct probability interpretation: $P(\theta \in [L,U] \mid y) = 0.95$
+
+</div>
+
+## Stage 4: Reporting — The Complete Checklist
+
+**Model specification**
+
+- [ ] State the likelihood explicitly
+- [ ] State the prior with all parameters; justify the choice
+- [ ] Report the prior ESS
+
+**Checking**
+
+- [ ] Prior predictive check: are the prior predictions plausible?
+- [ ] Posterior predictive check: does the model fit the data?
+
+**Results**
+
+- [ ] Posterior median/mean and credible interval (ETI or HDI; state which)
+- [ ] If testing: report $BF_{10}$ (or $BF_{01}$) with both hypotheses written out explicitly
+- [ ] Sensitivity analysis: repeat under 2–3 alternative priors
+
+**Transparency**
+
+- [ ] Share data, code, and prior specification (OSF, GitHub, or supplementary)
+- [ ] Use calibrated language (see below)
+
+## Language Guide
+
+<div style="display: flex; gap: 2em;">
+
+<div style="flex: 1;">
+
+**Use these**
+
+- "Moderate evidence for $H_1$ ($BF_{10} = 7.2$)"
+- "The data are $x$ times more likely under $H_1$"
+- "The posterior mean is 0.65 (95% ETI: [0.51, 0.78])"
+- "Evidence against the null ($BF_{01} = 12$)"
+- "Anecdotal support for $H_1$"
+
+</div>
+
+<div style="flex: 1;">
+
+**Avoid these**
+
+- "The null hypothesis is false / rejected"
+- "We have proven that the effect exists"
+- "$\theta$ is definitely in [0.51, 0.78]"
+- "No evidence, so the null is true"
+- "The BF confirms our hypothesis"
+- "The CI shows significance"
+
+</div>
+
+</div>
+
+## A Specimen Paragraph
+
+> We modelled the probability of correct beer identification ($\theta$) with prior $\text{Beta}(6, 6)$ (ESS = 12, symmetric, no directional expectation). After observing $y = 42$ correct identifications out of $n = 57$, the posterior was $\text{Beta}(48, 21)$, with median 0.696 (95% ETI: [0.578, 0.806]). A Bayes factor of $BF_{10} = 58.3$ indicated very strong evidence that performance exceeds chance ($\theta = 0.5$). A sensitivity analysis under $\text{Beta}(1,1)$ yielded $BF_{10} = 43.1$, supporting the robustness of this conclusion. Data and analysis code are available at [OSF link].
+
+---
+
+# Five Common Exam Mistakes
+
+## Mistake 1: Misreading the Credible Interval
+
+<div class="note">
+
+**Wrong:** "There is a 95% probability that the true $\theta$ is between 0.51 and 0.78 *in repeated sampling*."
+
+**Correct:** "**Given the data and the prior**, there is a 95% probability that $\theta$ is between 0.51 and 0.78."
+
+The frequentist "repeated sampling" clause belongs to the confidence interval, not the Bayesian credible interval.
+
+</div>
+
+## Mistake 2: BF = Posterior Probability
+
+<div class="note">
+
+**Wrong:** "$BF_{10} = 9$ means there is a 90% chance that $H_1$ is true."
+
+**Correct:** "$BF_{10} = 9$ means the data are 9 times more likely under $H_1$ than under $H_0$. Converting to posterior probability requires specifying the prior odds."
+
+$$P(H_1 \mid y) = \frac{BF_{10} \times P(H_1)}{BF_{10} \times P(H_1) + P(H_0)}$$
+
+</div>
+
+## Mistake 3: No Evidence ≠ Evidence for the Null
+
+<div class="note">
+
+**Wrong:** "$BF_{10} = 1.2$ — there is no effect."
+
+**Correct:** "$BF_{10} = 1.2$ is anecdotal. The data were **uninformative**: they did not substantially shift beliefs in either direction."
+
+Contrast with $BF_{01} = 14$: *this* is positive evidence for $H_0$.
+
+</div>
+
+## Mistake 4: Using the CI to Test a Hypothesis
+
+<div class="note">
+
+**Wrong:** "The 95% CI excludes 0.5, so $H_0: \theta = 0.5$ is rejected."
+
+**Correct:** Credible intervals are for estimation. Use the Bayes factor for hypothesis testing. The CI and the BF answer different questions.
+
+| Question | Tool |
+|---|---|
+| Does an effect exist? | Bayes factor |
+| How large is the effect? | Posterior + CI |
+| What data should we expect next? | Posterior predictive |
+
+</div>
+
+## Mistake 5: "No Justification Needed" for a Flat Prior
+
+<div class="note">
+
+**Wrong:** "We used Beta(1,1) since it is objective and requires no justification."
+
+**Correct:** Beta(1,1) has ESS = 2 — it asserts that a success rate of 0.001 is just as plausible as 0.999. For a well-studied phenomenon, this is a real and often implausible modelling assumption. All priors require justification.
+
+</div>
+
+---
+
+# Error-Spotting Exercises
+
+## Report 1: Mindfulness & Memory
+
+> We tested a mindfulness intervention on working memory ($n = 15$). $BF_{10} = 4.3$, so **we conclude the null is false**. The CI [39.8, 42.6] **proves the intervention is effective**. No robustness analysis was needed since results are clear.
+
+::: {.panel-tabset}
+
+### Exercise
+
+Find **3 errors** in this report.
+
+### Solution
+
+1. **"Null is false"**: $BF_{10} = 4.3$ is moderate evidence; it cannot falsify $H_0$. Report as "moderate evidence in favour of $H_1$."
+2. **"CI proves effectiveness"**: credible intervals summarise uncertainty, they cannot "prove" anything. We would also need to compare the CI to a meaningful null value.
+3. **"No robustness needed"**: robustness checks are especially important when making strong claims, not an optional extra.
+
+:::
+
+## Report 2: Facial Feedback
+
+> One-sided Bayesian $t$-test ($n_1 = 53$, $n_2 = 57$). Informed prior: $t(0.35, 0.102, 3)$. Result: $BF_{0-} = 11.5$. **This means $H_0$ is 11.5× more probable than $H_-$.** Data and code stored privately.
+
+::: {.panel-tabset}
+
+### Exercise
+
+Find **2 errors** in this report.
+
+### Solution
+
+1. **"$H_0$ is 11.5× more probable"**: $BF_{01}$ is a likelihood ratio, not a probability ratio. Converting to probability ratios requires specifying prior odds.
+2. **"Stored privately"**: Bayesian results depend critically on prior specification. Without access to data and code, readers cannot evaluate or reproduce the analysis.
+
+:::
+
+---
+
+# Mock Exam
+
+<div class="note">
+Close laptops. Work in pairs. 20 minutes for all 5 questions. Solutions follow each question.
+</div>
+
+## Mock Q1: Identify the Model
+
+A memory researcher measures the proportion of words correctly recalled from a list of 30. She expects recall to be around 60%, based on prior studies.
+
+**a.** Which Bayesian model is appropriate? Write the data model and prior.
+
+**b.** A participant recalls 21 words. Write the posterior.
+
+**c.** Compute the posterior mean and interpret it relative to the prior mean.
+
+::: {.panel-tabset}
+
+### Question
+
+Attempt before looking at the solution.
+
+### Solution
+
+**a.** $Y \mid \theta \sim \text{Binomial}(30, \theta)$; prior $\theta \sim \text{Beta}(12, 8)$ (ESS = 20, mean = 0.60).
+
+**b.** $\theta \mid y = 21 \;\sim\; \text{Beta}(12 + 21,\; 8 + 9) = \text{Beta}(33, 17)$.
+
+**c.**
+
+```{r q1}
+alpha_post <- 33; beta_post <- 17
+post_mean <- alpha_post / (alpha_post + beta_post)
+cat("Posterior mean:", round(post_mean, 3), "\n")
+cat("Prior mean: 0.60 | Sample proportion: 21/30 =", round(21/30, 3), "\n")
+```
+
+The posterior mean (0.66) is between the prior mean (0.60) and the observed proportion (0.70). With ESS = 20 and $n = 30$, the data have slightly more weight than the prior.
+
+:::
+
+## Mock Q2: Posterior Summaries
+
+Using $\theta \mid y \sim \text{Beta}(33, 17)$:
+
+**a.** R code for the 95% ETI.
+
+**b.** $P(\theta > 0.70 \mid y)$.
+
+**c.** Correct this statement: *"We're 95% confident the true recall rate falls in this interval in repeated experiments."*
+
+::: {.panel-tabset}
+
+### Question
+
+Attempt before looking at the solution.
+
+### Solution
+
+**a.**
+```{r q2a}
+qbeta(c(0.025, 0.975), shape1 = 33, shape2 = 17)
+```
+
+**b.**
+```{r q2b}
+pbeta(0.70, shape1 = 33, shape2 = 17, lower.tail = FALSE)
+```
+
+**c.** "Given the data and the prior, there is a 95% probability that $\theta$ is in this interval." The repeated-experiments clause belongs to frequentist confidence intervals, not Bayesian credible intervals.
+
+:::
+
+## Mock Q3: Bayes Factor
+
+Prior Beta(12, 8); posterior Beta(33, 17).
+
+**a.** Compute $BF_{10}$ for $H_0: \theta = 0.5$ using the Savage–Dickey density ratio.
+
+**b.** Interpret using the Jeffreys scale.
+
+**c.** Compute the one-sided $BF_{+0}$ for $H_+: \theta > 0.5$.
+
+::: {.panel-tabset}
+
+### Question
+
+Attempt before looking at the solution.
+
+### Solution
+
+**a.**
+```{r q3a}
+prior_dens <- dbeta(0.5, 12, 8)
+post_dens  <- dbeta(0.5, 33, 17)
+BF10 <- prior_dens / post_dens
+cat("BF_10 =", round(BF10, 2), "\n")
+```
+
+**b.** Using the Jeffreys scale: BF 10–30 is "strong evidence," 3–10 is "moderate." Report accordingly.
+
+**c.**
+```{r q3c}
+p_prior  <- pbeta(0.5, 12, 8,  lower.tail = FALSE)
+p_post   <- pbeta(0.5, 33, 17, lower.tail = FALSE)
+BF_plus0 <- (p_post / (1 - p_post)) / (p_prior / (1 - p_prior))
+cat("BF(+,0) =", round(BF_plus0, 2), "\n")
+```
+
+The one-sided BF is larger because it concentrates prior probability on the side supported by the data.
+
+:::
+
+## Mock Q4: Posterior Prediction
+
+Using posterior Beta(33, 17), predict recall for a new participant (30 words).
+
+**a.** Simulation code.
+
+**b.** $E(Y' \mid y)$ and $P(Y' \geq 25 \mid y)$.
+
+**c.** Posterior predictive check on the original $y = 21$. Does the model fit?
+
+::: {.panel-tabset}
+
+### Question
+
+Attempt before looking at the solution.
+
+### Solution
+
+**a & b.**
+```{r q4ab}
+set.seed(1)
+N <- 10000
+theta_post <- rbeta(N, shape1 = 33, shape2 = 17)
+y_pred     <- rbinom(N, size = 30, prob = theta_post)
+
+cat("E(Y' | y) =", round(mean(y_pred), 2), "\n")
+cat("P(Y' >= 25 | y) =", round(mean(y_pred >= 25), 3), "\n")
+```
+
+**c.**
+```{r q4c}
+pp_pval <- mean(y_pred >= 21)
+cat("PP p-value =", round(pp_pval, 3), "\n")
+```
+
+A pp p-value near 0.5 indicates good fit — $y_\text{obs} = 21$ falls near the centre of the predictive distribution.
+
+:::
+
+## Mock Q5: Spot the Errors
+
+> We used Beta(1,1) — no justification needed since it is uninformative. We observed $y = 18$, $n = 25$, yielding posterior Beta(19, 8). The 95% credible interval [0.54, 0.89] **shows the null ($\theta = 0.5$) is rejected**. With $BF_{10} = 6.1$, **we are confident $H_1$ is true**. Strong evidence makes sensitivity analysis unnecessary.
+
+::: {.panel-tabset}
+
+### Question
+
+Find **4 errors**.
+
+### Solution
+
+1. **"No justification needed"**: Beta(1,1) has ESS = 2 — a real modelling assumption with real consequences.
+2. **"CI shows the null is rejected"**: use the BF for testing; the CI is for estimation.
+3. **"Confident $H_1$ is true"**: $BF_{10} = 6.1$ is moderate evidence. It does not mean $H_1$ is true.
+4. **"Sensitivity analysis not needed"**: sensitivity analysis is *especially* important for strong claims. One prior is never enough.
+
+:::
+
+---
+
+# Exam Tips
+
+## What to Expect
+
+- **Duration:** 2 hours · **Format:** closed-book (one A4 cheat sheet)
+
+**Typical question types:**
+
+- Identify the appropriate model and write the prior + posterior
+- Compute posterior summaries (mean, ETI) by hand or describe the R code
+- Interpret a Bayes factor and posterior predictive
+- Spot errors in a written Bayesian report
+- Short conceptual questions (credible interval vs CI, BF vs posterior probability)
+
+## Practical Tips
+
+- **Show your reasoning**: partial credit is available. A correct setup with a computation error still earns marks.
+- **Use the conjugate update rules**: memorise Beta→Beta, Gamma→Gamma, Normal→Normal.
+- **Read the question carefully**: it will say whether to compute analytically, in R, or conceptually.
+- **For BF questions**: state both hypotheses explicitly, then apply Savage–Dickey.
+- **For reporting questions**: use the van Doorn et al. checklist as a scaffold.
+
+## Suggested Cheat Sheet Contents
+
+<div class="describe">
+
+**Conjugate updates**
+
+$\theta \mid y \sim \text{Beta}(\alpha+y,\;\beta+n-y)$
+
+$\lambda \mid \mathbf{y} \sim \text{Gamma}(s+\sum y_i,\;r+n)$
+
+$\mu_\text{post} = w_\text{pr}\,\mu_0 + w_\text{d}\,\bar{y}$
+
+**Testing**
+
+$\text{Post odds} = BF_{10} \times \text{Prior odds}$
+
+$BF_{10} = f(\theta_0)\,/\,f(\theta_0 \mid y)$ (Savage–Dickey)
+
+$BF_{+0} = \dfrac{P(\theta > \theta_0 \mid y)}{P(\theta > \theta_0)}$
+
+**Credible interval:** direct probability statement — $P(\theta \in [L,U] \mid y) = 0.95$.
+
+**ETI:** `qbeta(c(0.025, 0.975), a, b)` · **HDI:** `HPDinterval(as.mcmc(samples))`
+
+</div>
+
+---
+
+<div class="note">
+Open Q&A — any topic from the past three weeks. Exam is **Friday, June 19, 09:00–11:00, IWO 4.04C (Blauw)**. Good luck!
+</div>

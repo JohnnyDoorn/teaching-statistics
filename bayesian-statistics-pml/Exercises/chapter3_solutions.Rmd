@@ -1,0 +1,309 @@
+
+---
+title: "Bayes Rules! – Chapter 3 Solutions"
+output: html_document
+---
+
+# 📘 Chapter 3: Solutions
+
+---
+
+## ✏️ Exercise 3.3
+
+You want to specify a Beta prior for a situation in which you have no idea about some parameter \( \pi \). You think \( \pi \) is equally likely to be anywhere between 0 and 1.
+
+a. Specify and plot the appropriate Beta prior model.  
+b. What is the mean of the Beta prior that you specified? Explain why that does or does not align with having no clue.  
+c. What is the standard deviation of the Beta prior that you specified?  
+d. Specify and plot an example of a Beta prior that has a smaller standard deviation than the one you specified.  
+e. Specify and plot an example of a Beta prior that has a larger standard deviation than the one you specified.
+
+**Solutions:**
+
+a.  
+```r
+plot_beta(alpha = 1, beta = 1)
+```
+
+b.  
+\[
+E(\pi) = \frac{\alpha}{\alpha + \beta} = \frac{1}{1 + 1} = 0.5
+\]
+
+c.  
+\[
+\text{Var}(\pi) = \frac{\alpha \beta}{(\alpha + \beta)^2(\alpha + \beta + 1)} = \frac{1 \cdot 1}{(1 + 1)^2(1 + 1 + 1)} = \frac{1}{12}
+\]  
+\[
+\text{SD}(\pi) \approx 0.289
+\]
+
+d.  
+If \( \alpha = 2 \), \( \beta = 2 \), then:  
+\[
+\text{Var}(\pi) = \frac{2 \cdot 2}{(2 + 2)^2(2 + 2 + 1)} = \frac{4}{80} = \frac{1}{20}
+\]  
+\[
+\text{SD}(\pi) \approx 0.224
+\]
+
+e.  
+If \( \alpha = 0.5 \), \( \beta = 0.5 \), then:  
+\[
+\text{Var}(\pi) = \frac{0.5 \cdot 0.5}{(0.5 + 0.5)^2(0.5 + 0.5 + 1)} = \frac{0.25}{1^2 \cdot 2} = \frac{1}{8}
+\]  
+\[
+\text{SD}(\pi) \approx 0.354
+\]
+
+---
+
+## ✏️ Exercise 3.4
+
+Six Beta probability density functions (pdfs) are plotted below. Match each to one of the following models:  
+Beta(0.5,0.5), Beta(1,1), Beta(2,2), Beta(6,6), Beta(6,2), Beta(0.5,6).
+
+**Solutions:**
+
+a. Beta(0.5, 0.5)  
+b. Beta(2, 2)  
+c. Beta(6, 2)  
+d. Beta(1, 1)  
+e. Beta(0.5, 6)  
+f. Beta(6, 6)
+
+---
+
+## ✏️ Exercise 3.6
+
+Examine the properties of the Beta models in Exercise 3.4.
+
+a. Which Beta model has the smallest mean? The biggest? Provide visual evidence and calculate the corresponding means.  
+b. Which Beta model has the smallest mode? The biggest? Provide visual evidence and calculate the corresponding modes.  
+c. Which Beta model has the smallest standard deviation? The biggest? Provide visual evidence and calculate the corresponding standard deviations.
+
+**Solutions:**
+
+a.  
+Smallest mean: Beta(0.5, 6)  
+\[
+E(\pi) = \frac{0.5}{0.5 + 6} \approx 0.077
+\]  
+Largest mean: Beta(6, 2)  
+\[
+E(\pi) = \frac{6}{6 + 2} = 0.75
+\]
+
+b.  
+Smallest mode: Beta(2, 2), because the mode for Beta (0.5, 6) is ill-defined.  
+Largest mode: Beta(6, 2)
+
+c.  
+Standard deviations can be computed using `summarize_beta()`, values not explicitly listed.
+
+---
+
+## ✏️ Exercise 3.7
+
+a. Use `plot_beta()` to plot the six Beta models in Exercise 3.4.  
+b. Use `summarize_beta()` to confirm your answers to Exercise 3.6.
+
+**Solutions:**
+
+a.  
+```r
+plot_beta(alpha = x, beta = y)
+```
+
+b.  
+```r
+summarize_beta(alpha = x, beta = y)
+```
+
+---
+
+## ✏️ Exercise 3.8
+
+Let π follow a Beta(α, β) model. Formulas for the mean, mode, and variance of π are given by (3.2) and (3.3). Confirm these properties by applying the following definitions of mean, mode, and variance directly to the Beta pdf f(π), (3.1):*
+
+(a)
+\[
+E(π) = \int \pi f(\pi)d\pi
+\]
+
+(b)
+\[
+\text{Mode}(\pi) = \arg\max_\pi f(\pi)
+\]
+
+(c)
+\[
+\text{Var}(\pi) = E[(\pi − E(\pi))^2] = E(\pi^2) − [E(\pi)]^2
+\]
+
+**Solutions:**
+
+(a) We are tasked to show that
+\[
+E(\pi) = \int_0^1 \pi \cdot f(\pi) \, d\pi = \frac{\alpha}{\alpha + \beta},
+\]
+for a Beta distribution with parameters \( \alpha \) and \( \beta \),
+where the Beta probability density function is defined in Equation (3.1):
+\[
+f(\pi) = \frac{1}{B(\alpha, \beta)} \pi^{\alpha - 1}(1 - \pi)^{\beta - 1}
+\]
+Substituting this into the expression for the expectation:
+\[
+E(\pi) = \frac{1}{B(\alpha, \beta)} \int_0^1 \pi^\alpha (1 - \pi)^{\beta - 1} d\pi
+\]
+The integral above matches the form of a Beta function with parameters \\( \alpha + 1 \\) and \\( \beta \\). So using the property from Section 3.1:
+\[
+E(\pi) = \frac{B(\alpha + 1, \beta)}{B(\alpha, \beta)}.
+\]
+From Section 3.1 we find the properties \(B(\alpha, \beta) = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}\) and \(\Gamma(x + 1) = x \cdot \Gamma(x)\). Applying these to simplify:
+\[
+\frac{B(\alpha + 1, \beta)}{B(\alpha, \beta)} = 
+\frac{\Gamma(\alpha + 1)\Gamma(\beta)}{\Gamma(\alpha + \beta + 1)} \cdot \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)}
+= \frac{\alpha}{\alpha + \beta}
+\]
+That is, we have just proved that:
+\[
+E(\pi) = \frac{\alpha}{\alpha + \beta}
+\]
+
+(b) We are tasked to show that for a Beta(\\( \alpha, \beta \\)) distribution with \\( \alpha > 1 \\) and \\( \beta > 1 \\), the mode is:
+\[
+\text{Mode}(\pi) = \frac{\alpha - 1}{\alpha + \beta - 2}
+\]
+To find the mode, we need to maximize the Beta pdf \( f(\pi) \):
+\[
+f(\pi) \propto \pi^{\alpha - 1}(1 - \pi)^{\beta - 1}.
+\]
+To maximize \( f(\pi) \), we can take the derivative and then set it to zero:
+\[
+\frac{d}{d\pi} \log f(\pi) = \frac{\alpha - 1}{\pi} - \frac{\beta - 1}{1 - \pi}
+\]
+Set this equal to zero and solve:
+\[
+\frac{\alpha - 1}{\pi} = \frac{\beta - 1}{1 - \pi} \Rightarrow \pi = \frac{\alpha - 1}{\alpha + \beta - 2}
+\]
+This confirms the result in Equation (3.2) of *Bayes Rules!*.
+
+(c) We are tasked to show that for a Beta(\( \alpha, \beta \)) distribution, the variance is \(
+\text{Var}(\pi) = \frac{\alpha \beta}{(\alpha + \beta)^2 (\alpha + \beta + 1)}
+\). The variance is formally defined as
+\[
+\text{Var}(\pi) = E(\pi^2) - [E(\pi)]^2.
+\]
+We already know from earlier results that:
+\[
+E(\pi) = \frac{\alpha}{\alpha + \beta}
+\]
+We can now compute \( E(\pi^2) \) using the integral definition:
+\[
+E(\pi^2) = \frac{1}{B(\alpha, \beta)} \int_0^1 \pi^{\alpha + 1}(1 - \pi)^{\beta - 1} d\pi = \frac{B(\alpha + 2, \beta)}{B(\alpha, \beta)}
+\]
+Using the the properties \(B(\alpha, \beta) = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}\) and \(\Gamma(x + 1) = x \cdot \Gamma(x)\) from Section 3.1:
+\[
+\frac{B(\alpha + 2, \beta)}{B(\alpha, \beta)} = \frac{\alpha(\alpha + 1)}{(\alpha + \beta)(\alpha + \beta + 1)}
+\]
+Thus,
+\[
+\text{Var}(\pi) = \frac{\alpha(\alpha + 1)}{(\alpha + \beta)(\alpha + \beta + 1)} - \left( \frac{\alpha}{\alpha + \beta} \right)^2
+= \frac{\alpha \beta}{(\alpha + \beta)^2 (\alpha + \beta + 1)}
+\]
+This matches Equation (3.3) in *Bayes Rules!*.
+
+---
+
+## ✏️ Exercise 3.11
+
+A university wants to know what proportion of students are regular bike riders, \(\pi\), so that they can install an appropriate number of bike racks. Since the university is in sunny Southern California, staff think that \(\pi\) has a mean of 1 in 4 students, and a mode of 5/22.
+
+a. Specify and plot a Beta model that reflects the staff’s prior ideas about \(\pi\).  
+b. Among 50 surveyed students, 15 are regular bike riders. What is the posterior model for \(\pi\)?  
+c. What is the mean, mode, and standard deviation of the posterior model?  
+d. Does the posterior model more closely reflect the prior information or the data? Explain your reasoning.
+
+**Solutions:**
+
+a.  
+```r
+summarize_beta(alpha = 6, beta = 18)
+```
+
+b.  
+\[
+\text{Posterior: } \text{Beta}(6 + 15, 18 + 35) = \text{Beta}(21, 53)
+\]
+
+c.  
+\[
+\text{Mean} \approx 0.284, \text{Mode} \approx 0.278, \text{SD} \approx 0.052
+\]
+
+d.  
+The posterior more closely reflects the prior distribution.
+
+```r
+summarize_beta_binomial(alpha = 6, beta = 18, y = 15, n = 50)
+```
+
+
+---
+
+## ✏️ Exercise 3.14
+
+Write the corresponding input code for the `summarize_beta_binomial()` output below.
+
+```
+      model alpha beta   mean   mode      var      sd
+1     prior    2    3 0.4000 0.3333 0.040000 0.20000
+2 posterior   11   24 0.3143 0.3030 0.005986 0.07737
+```
+
+**Solution:**
+```r
+summarize_beta_binomial(alpha = 2, beta = 3, y = 9, n = 30)
+```
+
+---
+
+## ✏️ Exercise 3.15
+
+Use `summarize_beta_binomial()` to construct the prior and posterior models that match the output below. Then summarize both models in words.*
+
+```
+      model alpha beta   mean   mode      var      sd
+1     prior    20   20 0.5000 0.4872 0.006012 0.07753
+2 posterior    25   40 0.3846 0.3729 0.003407 0.05837
+```
+
+**Solution:**
+
+```r
+summarize_beta_binomial(alpha = 1, beta = 2, y = 99, n = 100)
+```
+
+---
+
+## ✏️ Exercise 3.16
+
+Below is output from the `plot_beta_binomial()` function.
+
+a. Describe and compare both the prior model and likelihood function in words.  
+b. Describe the posterior model in words. Does it more closely agree with the data (as reflected by the likelihood function) or the prior?  
+c. Provide the specific `plot_beta_binomial()` code you would use to produce a similar plot.
+
+**Solutions:**
+
+a.  
+The prior has most of its mass near 1, indicating a strong belief in a high proportion. The likelihood has most of its mass around 0.25.
+
+b.  
+The posterior is in between, with a mode around 0.75. It is closer to the prior, indicating prior influence.
+
+c.  
+```r
+plot_beta_binomial(alpha = 20, beta = 0.1, y = 5, n = 20)
+```
