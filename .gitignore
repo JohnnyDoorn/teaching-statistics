@@ -10,4 +10,8 @@
 # Matches any directory named "Exam" anywhere in the tree (current and future course years).
 Exam/
 
+# Personal revealjs lecture decks — rendered locally for presenting, not for students.
+# The continuous-page .html is what gets linked from the overview pages.
+*_slides.html
+
 /.quarto/
