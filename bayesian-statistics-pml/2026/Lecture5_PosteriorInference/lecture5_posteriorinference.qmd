@@ -15,6 +15,18 @@ format:
     number-sections: false
     df-print: paged
     self-contained: true
+  revealjs:
+    output-file: lecture5_posteriorinference_slides.html
+    theme: simple
+    css: ajohnson.css
+    include-in-header:
+      - text: |
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    slide-number: true
+    scrollable: true
+    smaller: true
+    df-print: kable
+    embed-resources: true
 engine: knitr
 execute:
   warning: false

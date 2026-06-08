@@ -12,6 +12,15 @@ format:
     number-sections: false
     df-print: paged
     self-contained: true
+  revealjs:
+    output-file: lecture6_examprep_slides.html
+    theme: simple
+    css: ajohnson.css
+    slide-number: true
+    scrollable: true
+    smaller: true
+    df-print: kable
+    embed-resources: true
 engine: knitr
 execute:
   echo: true
