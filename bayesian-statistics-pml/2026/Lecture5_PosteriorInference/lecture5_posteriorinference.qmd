@@ -1411,6 +1411,58 @@ As you can see, the sequential Bayes factor (`BF_seq`) and the direct computatio
 
 ---
 
+# Posterior Analysis from MCMC Draws (Ch. 8.4)
+
+Everything above used the **closed-form** Gamma(8, 4.5) posterior. But from Chapter 9 onward — and in most real research — the posterior has no clean formula to read summaries off. The reassuring message of Chapter 8.4 is that **none of today's tools actually require one**. Given a sample of posterior draws (from MCMC — Lecture 4), we approximate any posterior feature by the *corresponding feature of the draws*.
+
+<div class="describe">
+
+**The recipe — same questions, computed from draws**
+
+| Posterior quantity | From the closed form | From MCMC draws |
+|---|---|---|
+| Mean / median | $s/r$, `qgamma(.5, …)` | `mean(draws)`, `median(draws)` |
+| Mode | $(s-1)/r$ | peak of `density(draws)` |
+| 95% credible interval | `qgamma(c(.025, .975), …)` | `quantile(draws, c(.025, .975))` |
+| Interval hypothesis $P(\lambda < c \mid y)$ | `pgamma(c, …)` | `mean(draws < c)` |
+
+</div>
+
+Let's check it on the Dutch Railways posterior. We take 50,000 draws from a short Metropolis sampler (exactly the kind we built in Lecture 4) and compare every summary to its analytic Gamma(8, 4.5) value.
+
+```{r mcmc-analysis}
+set.seed(84735)
+y <- c(2, 0, 3, 1)
+
+# Short Metropolis sampler for the Dutch Railways posterior (cf. Lecture 4)
+log_post <- function(lambda) {
+  if (lambda <= 0) return(-Inf)
+  dgamma(lambda, 2, 0.5, log = TRUE) + sum(dpois(y, lambda, log = TRUE))
+}
+n_iter <- 60000
+lam <- numeric(n_iter); lam[1] <- 2
+for (t in 2:n_iter) {
+  prop <- rnorm(1, lam[t - 1], 0.7)
+  if (log(runif(1)) < log_post(prop) - log_post(lam[t - 1])) lam[t] <- prop else lam[t] <- lam[t - 1]
+}
+draws <- lam[10001:n_iter]            # discard 10,000 burn-in -> 50,000 draws
+
+# Mode estimate: peak of the kernel density of the draws
+dmode <- function(x) { d <- density(x); d$x[which.max(d$y)] }
+
+data.frame(
+  Feature  = c("Mean", "Median", "Mode", "2.5th pct", "97.5th pct", "P(lambda < 2)"),
+  Analytic = round(c(8/4.5, qgamma(.5, 8, 4.5), 7/4.5,
+                     qgamma(.025, 8, 4.5), qgamma(.975, 8, 4.5), pgamma(2, 8, 4.5)), 3),
+  MCMC     = round(c(mean(draws), median(draws), dmode(draws),
+                     quantile(draws, .025), quantile(draws, .975), mean(draws < 2)), 3)
+)
+```
+
+The MCMC column lands right on top of the analytic values — **MCMC works**. (The mode is the fussiest to recover, as it depends on the kernel-density bandwidth, but even it is close.) This is exactly what `brms`/Stan compute for you automatically, and it is why we can trust the more complex models of the coming weeks even though we can never write their posteriors down — *provided the Lecture 4 diagnostics check out*.
+
+---
+
 # What We Learned Today
 
 In this lecture, we put the posterior to work — summarising it, predicting future observations from it, and using it to test specific scientific claims.
@@ -1421,6 +1473,7 @@ In this lecture, we put the posterior to work — summarising it, predicting fut
 * The **posterior predictive distribution** propagates parameter uncertainty into predictions for new data — and is always wider than the credible interval for the parameter alone.
 * **Posterior probabilities** answer interval claims like "the rate is below 2/month" directly from the posterior.
 * **Bayes factors** quantify the evidence in the data for one hypothesis over another, computed either from prior + posterior odds or directly via the **Savage–Dickey** density ratio for point hypotheses.
+* **MCMC draws** deliver every one of these summaries via the corresponding feature of the sample (`mean`, `quantile`, `mean(draws < c)`), so the same toolkit carries over to models with no closed-form posterior (Ch. 8.4).
 
 ::: nextsteps
 To consolidate your understanding and prepare for the **exam** and **group assignment**:
