@@ -183,6 +183,38 @@ Long-run time spent on each island $\propto$ population — without ever needing
 
 </div>
 
+### The politician and the unknown total
+
+The metaphor maps exactly onto the posterior:
+
+| Island world | Posterior |
+|---|---|
+| an island | a parameter value $\lambda$ |
+| island **population** | plausibility $f(\lambda)\,L(\lambda \mid y)$ (prior × likelihood) |
+| **total** population of all islands | normalising constant $f(y)$ |
+
+The politician can only **count the people on his current island and on the neighbour he proposes**. He never takes a world census — that would mean visiting *every* island and summing them, i.e. computing $f(y) = \int f(\lambda)\,L(\lambda \mid y)\,d\lambda$, the intractable integral.
+
+And he doesn't need it. Standing on an island of **1,000**, proposing one of **600**:
+
+$$\alpha = \frac{600}{1000} = 0.6 .$$
+
+The "true" population shares are $600/T$ and $1000/T$ (with $T$ the world total), but their ratio is $\tfrac{600/T}{1000/T} = 0.6$ — the unknown total $T$ **cancels**. Two local head-counts are all he needs.
+
+### Why he still visits the small islands
+
+His rule: a **bigger** neighbour → always go; a **smaller** neighbour → go with probability equal to the size ratio.
+
+Why not just "always move to the bigger island"? Then he would climb to the single **largest** island and never leave — reporting only the posterior's **peak (the mode)** and missing its entire spread.
+
+Accepting smaller islands *in proportion to their size* is what fixes this:
+
+- big islands → visited **often**
+- a neighbour 60% as big → visited about **60% as often**
+- tiny islands → **rarely, but not never**
+
+**The payoff:** over a long tour, the time spent on each island is proportional to its population — i.e. to the posterior plausibility. So the **histogram of where he has been reconstructs the whole posterior**, in correct proportions, without his ever knowing the total.
+
 ### The acceptance rule
 
 The metaphor becomes exact through the **acceptance probability**. Standing at the current value $\mu$, we propose a new value $\mu'$ from a (symmetric) proposal model and then accept the move with probability
