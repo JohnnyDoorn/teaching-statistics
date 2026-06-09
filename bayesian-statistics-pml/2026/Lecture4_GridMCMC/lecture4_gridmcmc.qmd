@@ -14,7 +14,7 @@ format:
     self-contained: true
   revealjs:
     output-file: lecture4_gridmcmc_slides.html
-    theme: simple
+    theme: [simple, slides.scss]
     css: ajohnson.css
     slide-number: true
     scrollable: true
@@ -403,6 +403,27 @@ grid.arrange(
 ```
 
 On the left the autocorrelation falls away within a handful of lags — the draws quickly become "effectively independent," giving a high effective sample size. On the right the tiny proposal width keeps consecutive draws almost identical, so the autocorrelation stays near 1 for many lags: lots of iterations, very little independent information. This is the visual signature behind a low $N_{\text{eff}}/N$ ratio.
+
+### Full `bayesplot` parity: trace & density plots
+
+`mcmc_acf()` above already accepted our hand-rolled chains; the book's other two workhorses — `mcmc_trace()` and `mcmc_dens_overlay()` — take the same input. This one-liner packs any set of `run_mh()` chains into the iterations × chains × parameter array that `bayesplot` expects:
+
+```{r bayesplot-helper, fig.width=9, fig.height=3.2}
+# Convert run_mh() chains into the array bayesplot wants
+as_draws <- function(width, starts, n_iter = 6000, burnin = 1000, seed = 2026) {
+  set.seed(seed)
+  chains <- lapply(starts, function(s) run_mh(width, s, n_iter)[(burnin + 1):n_iter])
+  array(unlist(chains), dim = c(n_iter - burnin, length(starts), 1),
+        dimnames = list(NULL, paste0("chain", seq_along(starts)), "lambda"))
+}
+
+draws <- as_draws(width = 0.8, starts = c(0.5, 2, 5, 8))
+
+mcmc_trace(draws, pars = "lambda")          # overlaid trace plots (book Fig 6.8)
+mcmc_dens_overlay(draws, pars = "lambda")   # per-chain density overlay (book Fig 6.13)
+```
+
+These are exactly the diagnostics from *Bayes Rules!*: overlaid traces that should look like uniform noise, and per-chain densities that should sit on top of one another. Swap in any `width`/`starts` to contrast healthy vs. problematic runs live — e.g. `as_draws(width = 0.05, starts = c(0.5, 2, 5, 8))` gives chains whose densities visibly disagree.
 
 ---
 

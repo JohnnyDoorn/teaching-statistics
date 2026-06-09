@@ -1,0 +1,63 @@
+/*-- scss:rules --*/
+
+/* Slides-only tweaks to fit verbose content. Applied to the revealjs deck only,
+   layered on top of ajohnson.css. Does not touch the continuous HTML page. */
+
+/* Reclaim vertical space: drop the heavy top/bottom border that ajohnson.css
+   puts on h1/h2 (fine on a scrolling page, too bulky on a slide). */
+.reveal h1,
+.reveal h2,
+.reveal h3 {
+  border: none;
+  padding: 0;
+  margin-top: 0.1em;
+  margin-bottom: 0.25em;
+}
+
+/* Code blocks are the main overflow culprit: smaller font, tighter line height,
+   and scroll within the block if a chunk is still long. */
+.reveal pre {
+  margin: 0.25em 0;
+  box-shadow: none;
+}
+.reveal pre code {
+  font-size: 0.6em;
+  line-height: 1.25;
+  max-height: 460px;
+  padding: 0.4em 0.6em;
+}
+
+/* R output (printed results) a touch smaller still. */
+.reveal .cell-output pre code {
+  font-size: 0.58em;
+}
+
+/* Compact tables. */
+.reveal table {
+  font-size: 0.62em;
+  margin: 0.4em 0;
+}
+.reveal table th,
+.reveal table td {
+  padding: 0.15em 0.4em;
+}
+
+/* Tighten the callout boxes (.note / .describe / .goals / .warning / .quiz)
+   so a single box does not fill the slide. */
+.reveal .note,
+.reveal .describe,
+.reveal .goals,
+.reveal .warning,
+.reveal .quiz {
+  padding: 0.5em 0.8em;
+  margin: 0.5em 0;
+  font-size: 0.85em;
+}
+
+/* Tighter paragraphs and lists. */
+.reveal section p {
+  margin: 0.35em 0;
+}
+.reveal section li {
+  margin-bottom: 0.12em;
+}
