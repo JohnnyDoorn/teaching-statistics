@@ -50,7 +50,8 @@ By the end of this lecture, you will be able to:
 
 <div class="note">
 **Recommended Reading:** *Bayes Rules!* Chapters 6 (approximating the posterior) and 7 (MCMC under the hood). Suggested exercises: Ch. 6 — 2, 3, 8; Ch. 7 — 4, 9.
-** On the exam you don't need to implement samplers by hand or use Stan, but you should understand the intuition and be able to interpret diagnostics.**
+
+**On the exam you don't need to implement samplers by hand or use Stan, but you should understand the intuition and be able to interpret diagnostics.**
 </div>
 
 ---
@@ -181,14 +182,111 @@ Long-run time spent on each island $\propto$ population — without ever needing
 
 </div>
 
-In practice, use `brms` (which calls Stan). Key diagnostics to check:
+### The acceptance rule
 
-| Term | Meaning |
-|---|---|
-| **Trace plot** | $\theta^{(t)}$ vs. $t$ — should look like a "hairy caterpillar" |
-| **Burn-in** | Early samples discarded while chain finds the posterior |
-| **$\hat{R}$** | Convergence — should be near 1.00 |
-| **Effective N** | Consecutive samples are correlated; effective N < actual N |
+The metaphor becomes exact through the **acceptance probability**. Standing at the current value $\mu$, we propose a new value $\mu'$ from a (symmetric) proposal model and then accept the move with probability
+
+$$\alpha = \min\!\left\{1,\; \frac{f(\mu')\,L(\mu' \mid y)}{f(\mu)\,L(\mu \mid y)}\right\}.$$
+
+Here is the crucial trick. Divide the numerator and denominator by the intractable normalising constant $f(y)$ — it cancels:
+
+$$\alpha = \min\!\left\{1,\; \frac{f(\mu' \mid y)}{f(\mu \mid y)}\right\}.$$
+
+So the accept/reject decision depends only on the **ratio of (unnormalised) posterior plausibilities**, which is exactly what we *can* evaluate as $f(\mu)\,L(\mu \mid y)$. This is the whole reason MCMC escapes the normalising-constant problem that broke conjugacy.
+
+<div class="describe">
+
+**Two scenarios** — the "bigger / smaller island" rules made precise
+
+- **Proposal at least as plausible** ($f(\mu' \mid y) \ge f(\mu \mid y)$): $\alpha = 1$, so we *always* move.
+- **Proposal less plausible** ($f(\mu' \mid y) < f(\mu \mid y)$): move with probability $\alpha = f(\mu' \mid y) / f(\mu \mid y) < 1$. Bolder downhill jumps are accepted less often, so the chain still visits the tails occasionally but spends most of its time where the posterior mass is.
+
+</div>
+
+With a **symmetric** proposal — like the Uniform $\mu' \mid \mu \sim \text{Unif}(\mu - w, \mu + w)$ used in Exercises 7.4 and 7.9 — the proposal terms cancel and we get exactly the **Metropolis** rule above. Asymmetric proposals carry an extra factor $q(\mu \mid \mu')/q(\mu' \mid \mu)$ (the full Metropolis–**Hastings** rule).
+
+---
+
+## Diagnosing the Chain
+
+In practice you let `brms` (which calls Stan) run the sampler and report the diagnostics automatically — but the ideas are identical whether the draws come from Stan or from the by-hand Metropolis sampler we build below. A Markov chain only *approximates* the posterior, so we must check that the approximation is trustworthy.
+
+| Diagnostic | What it checks | Healthy sign |
+|---|---|---|
+| **Trace plot** | does a single chain explore stably? | "hairy caterpillar": white noise, no trends or flat runs |
+| **Burn-in / warm-up** | early samples while the chain finds the posterior | discard them before summarising |
+| **Parallel chains** | do independent chains agree? | several chains from different starts overlap |
+| **Effective sample size** $N_{\text{eff}}$ | how many *independent* draws the dependent draws are worth | ratio $N_{\text{eff}}/N$ not too small (suspect if $< 0.1$) |
+| **Autocorrelation** | how fast dependence between draws fades | drops to ~0 within a few lags |
+| **$\hat R$ (R-hat)** | between-chain vs. within-chain variability | $\approx 1$; a value $> 1.05$ is a red flag |
+
+### Visual diagnostics: trace plots & parallel chains
+
+A good trace plot looks like featureless white noise. Two classic pathologies (Ch. 6.3): a **slow-mixing** chain shows a slow drift — it has not explored the whole posterior yet — while a **stuck** chain shows flat horizontal runs. The usual cures are to (1) check the model and (2) run longer. Running *several* chains from different starting values adds confidence: if they all converge to and agree on the same posterior, the simulation is stable.
+
+```{r mcmc-diagnostics, fig.width=9, fig.height=4}
+library(coda)
+set.seed(2026)
+y <- c(2, 0, 3, 1)
+
+log_post <- function(lambda) {
+  if (lambda <= 0) return(-Inf)
+  dgamma(lambda, shape = 2, rate = 0.5, log = TRUE) + sum(dpois(y, lambda, log = TRUE))
+}
+mh_chain <- function(n_iter, sd, start) {
+  l <- numeric(n_iter); l[1] <- start
+  for (t in 2:n_iter) {
+    prop <- rnorm(1, l[t - 1], sd)
+    if (log(runif(1)) < log_post(prop) - log_post(l[t - 1])) l[t] <- prop else l[t] <- l[t - 1]
+  }
+  l
+}
+
+# Four parallel chains deliberately started far apart
+starts <- c(0.5, 2, 5, 8)
+raw    <- lapply(starts, function(s) mh_chain(6000, sd = 0.8, start = s))
+cols   <- c("#01426A", "#D44420", "darkgreen", "purple")
+
+par(mfrow = c(1, 2), mar = c(4, 4, 2.6, 1), mgp = c(2.2, 0.7, 0))
+
+# (left) trace of the first 300 iterations: convergence from different starts
+plot(NULL, xlim = c(1, 300), ylim = c(0, 9), xlab = "iteration",
+     ylab = expression(lambda), main = "Four chains converging")
+for (k in 1:4) lines(raw[[k]][1:300], col = cols[k])
+
+# (right) per-chain posterior after burn-in vs. the analytic Gamma(8, 4.5)
+post <- lapply(raw, function(ch) ch[1001:6000])
+plot(density(post[[1]]), col = cols[1], lwd = 2, xlim = c(0, 6),
+     main = "Per-chain posteriors agree", xlab = expression(lambda))
+for (k in 2:4) lines(density(post[[k]]), col = cols[k], lwd = 2)
+curve(dgamma(x, 8, 4.5), add = TRUE, col = "black", lwd = 2, lty = 2)
+legend("topright", legend = "analytic Gamma(8, 4.5)", lty = 2, bty = "n")
+```
+
+The four chains start at $\lambda \in \{0.5, 2, 5, 8\}$ but quickly forget where they began (left) and produce essentially identical posterior approximations that match the analytic Gamma(8, 4.5) (right).
+
+### Numerical diagnostics: effective sample size & R-hat
+
+The numbers back up the picture. The `coda` package returns the effective sample size and the R-hat ratio directly:
+
+```{r mcmc-numeric}
+mc   <- mcmc.list(lapply(raw, function(ch) mcmc(ch[1001:6000])))  # post burn-in
+N    <- 4 * 5000                       # total retained draws
+ess  <- sum(effectiveSize(mc))         # effective sample size
+rhat <- gelman.diag(mc)$psrf[1, 1]     # split-chain R-hat
+
+cat("Total retained draws   :", N, "\n")
+cat("Effective sample size  :", round(ess), "\n")
+cat("Eff. sample-size ratio :", round(ess / N, 3), "  (suspect if < 0.1)\n")
+cat("R-hat                  :", round(rhat, 4), "  (red flag if > 1.05)\n")
+cat("Lag-1 autocorrelation  :", round(acf(raw[[1]][1001:6000], plot = FALSE)$acf[2], 3), "\n")
+```
+
+Here the ratio sits above 0.1 and $\hat R \approx 1$, so we trust the approximation. The moderate lag-1 autocorrelation is expected for a random-walk Metropolis sampler — it is exactly what a better-tuned proposal (Exercise 7.4) or a smarter sampler such as Stan's would reduce, raising the effective sample size.
+
+---
+
+## Using the Posterior Samples
 
 Once you have MCMC draws, all posterior summaries work exactly the same as with conjugate samples:
 
