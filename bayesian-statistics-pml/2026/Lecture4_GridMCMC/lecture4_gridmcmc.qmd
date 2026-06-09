@@ -49,7 +49,8 @@ By the end of this lecture, you will be able to:
 </div>
 
 <div class="note">
-**Recommended Reading:** *Bayes Rules!* Chapters 6 (approximating the posterior) and 7 (MCMC under the hood). Suggested exercises: Ch. 6 — 2, 4, 6, 8, 10; Ch. 7 — 2, 4, 6.
+**Recommended Reading:** *Bayes Rules!* Chapters 6 (approximating the posterior) and 7 (MCMC under the hood). Suggested exercises: Ch. 6 — 2, 3, 8; Ch. 7 — 4, 9.
+** On the exam you don't need to implement samplers by hand or use Stan, but you should understand the intuition and be able to interpret diagnostics.**
 </div>
 
 ---
