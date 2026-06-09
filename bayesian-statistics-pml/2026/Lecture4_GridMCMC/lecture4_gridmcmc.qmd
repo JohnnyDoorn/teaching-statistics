@@ -15,6 +15,7 @@ format:
   revealjs:
     output-file: lecture4_gridmcmc_slides.html
     theme: [simple, slides.scss]
+    slide-level: 3
     css: ajohnson.css
     slide-number: true
     scrollable: true
