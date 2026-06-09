@@ -207,6 +207,117 @@ With a **symmetric** proposal — like the Uniform $\mu' \mid \mu \sim \text{Uni
 
 ---
 
+## The Algorithm, Step by Step (Dutch Railways)
+
+Let's run the algorithm on our signal-failure data $y = (2, 0, 3, 1)$ with the Gamma(2, 0.5) prior. We already know the posterior is Gamma(8, 4.5), so we can hold the sampler up against the truth. The only ingredient we need is the **unnormalised** log-posterior, $\log\!\big[f(\lambda)\,L(\lambda \mid y)\big]$:
+
+```{r mh-logpost}
+y <- c(2, 0, 3, 1)
+
+# Unnormalised log-posterior for the NS rate lambda
+# (prior Gamma(2, 0.5)  x  Poisson likelihood)
+log_post_ns <- function(lambda) {
+  if (lambda <= 0) return(-Inf)                      # lambda must be positive
+  dgamma(lambda, shape = 2, rate = 0.5, log = TRUE) +
+    sum(dpois(y, lambda, log = TRUE))
+}
+```
+
+### One iteration
+
+Suppose the chain currently sits at $\lambda = 2$. One Metropolis step is exactly the three moves from the acceptance rule: **propose**, **score**, **decide**.
+
+```{r mh-one-step}
+set.seed(13)
+current <- 2        # current chain location
+width   <- 0.8      # proposal SD (symmetric Normal proposal -> Metropolis)
+
+# STEP 1 — propose a nearby value
+proposal <- rnorm(1, mean = current, sd = width)
+
+# STEP 2 — acceptance probability = min(1, ratio of unnormalised posteriors)
+alpha <- min(1, exp(log_post_ns(proposal) - log_post_ns(current)))
+
+# STEP 3 — flip a coin: move with probability alpha, otherwise stay put
+u        <- runif(1)
+next_val <- if (u < alpha) proposal else current
+
+cat("current    :", round(current, 3), "\n")
+cat("proposal   :", round(proposal, 3), "\n")
+cat("alpha      :", round(alpha, 3), "\n")
+cat("coin u     :", round(u, 3), if (u < alpha) " -> ACCEPT" else " -> reject", "\n")
+cat("next value :", round(next_val, 3), "\n")
+```
+
+In this draw the proposal is a little *less* plausible than the current value, so $\alpha < 1$ — we only *might* move (Scenario 2 from the acceptance rule). The coin flip happens to fall below $\alpha$, so we accept. Had it landed above $\alpha$, the chain would have stayed at $\lambda = 2$ and recorded that value again.
+
+### ...and keep going
+
+A full sampler just repeats that step a few thousand times, each iteration starting from wherever the previous one landed:
+
+```{r mh-runner}
+run_mh <- function(width, start, n_iter) {
+  lam <- numeric(n_iter)
+  lam[1] <- start
+  accepts <- 0
+  for (t in 2:n_iter) {
+    proposal <- rnorm(1, mean = lam[t - 1], sd = width)
+    if (log(runif(1)) < log_post_ns(proposal) - log_post_ns(lam[t - 1])) {
+      lam[t] <- proposal; accepts <- accepts + 1
+    } else {
+      lam[t] <- lam[t - 1]                            # rejected: stay put
+    }
+  }
+  attr(lam, "accept_rate") <- accepts / (n_iter - 1)
+  lam
+}
+
+set.seed(13)
+chain <- run_mh(width = 0.8, start = 2, n_iter = 2000)
+round(head(chain, 10), 3)        # the chain's first ten stops
+```
+
+See how some values repeat? Those are the iterations where the proposal was rejected and the chain stayed where it was.
+
+### A reusable trace-plot tool
+
+To explore how the sampler behaves under different settings, here is a small helper. Vary the **proposal width**, the **starting value(s)**, the **number of chains**, and the **chain length**, and it returns the trace plot (the dashed line marks the true posterior mean, $8/4.5 \approx 1.78$):
+
+```{r mh-trace-tool}
+trace_demo <- function(width = 0.8, starts = 2, n_chains = 1,
+                       n_iter = 2000, seed = 1, title = NULL) {
+  set.seed(seed)
+  starts <- rep_len(starts, n_chains)                 # one start per chain
+  chains <- lapply(starts, function(s) run_mh(width = width, start = s, n_iter = n_iter))
+  acc    <- mean(sapply(chains, attr, "accept_rate"))
+
+  df <- data.frame(
+    iteration = rep(seq_len(n_iter), times = n_chains),
+    lambda    = unlist(chains),
+    chain     = factor(rep(seq_len(n_chains), each = n_iter))
+  )
+  if (is.null(title))
+    title <- sprintf("width = %g | start(s) = %s | %d chain%s | accept = %.0f%%",
+                     width, paste(round(starts, 2), collapse = ", "),
+                     n_chains, if (n_chains > 1) "s" else "", 100 * acc)
+
+  ggplot(df, aes(iteration, lambda, colour = chain)) +
+    geom_line(linewidth = 0.3, alpha = 0.85) +
+    geom_hline(yintercept = 8 / 4.5, linetype = "dashed") +
+    labs(title = title, x = "iteration", y = expression(lambda)) +
+    theme_minimal(base_size = 12) +
+    theme(legend.position = if (n_chains > 1) "right" else "none",
+          plot.title = element_text(size = 10))
+}
+
+# A healthy run
+trace_demo(width = 0.8, starts = 2)
+```
+
+A well-tuned chain like this is the **"hairy caterpillar"**: it wanders rapidly around the dashed posterior mean with no trends and no long flat stretches.
+
+---
+
 ## Diagnosing the Chain
 
 In practice you let `brms` (which calls Stan) run the sampler and report the diagnostics automatically — but the ideas are identical whether the draws come from Stan or from the by-hand Metropolis sampler we build below. A Markov chain only *approximates* the posterior, so we must check that the approximation is trustworthy.
@@ -220,57 +331,43 @@ In practice you let `brms` (which calls Stan) run the sampler and report the dia
 | **Autocorrelation** | how fast dependence between draws fades | drops to ~0 within a few lags |
 | **$\hat R$ (R-hat)** | between-chain vs. within-chain variability | $\approx 1$; a value $> 1.05$ is a red flag |
 
-### Visual diagnostics: trace plots & parallel chains
+### Visual diagnostics: trace plots
 
-A good trace plot looks like featureless white noise. Two classic pathologies (Ch. 6.3): a **slow-mixing** chain shows a slow drift — it has not explored the whole posterior yet — while a **stuck** chain shows flat horizontal runs. The usual cures are to (1) check the model and (2) run longer. Running *several* chains from different starting values adds confidence: if they all converge to and agree on the same posterior, the simulation is stable.
+Now we can *see* the pathologies from Chapter 6.3 just by handing different settings to `trace_demo()`. A good trace plot looks like featureless white noise around the posterior mean; the troublesome ones drift slowly or stick.
 
-```{r mcmc-diagnostics, fig.width=9, fig.height=4}
-library(coda)
-set.seed(2026)
-y <- c(2, 0, 3, 1)
-
-log_post <- function(lambda) {
-  if (lambda <= 0) return(-Inf)
-  dgamma(lambda, shape = 2, rate = 0.5, log = TRUE) + sum(dpois(y, lambda, log = TRUE))
-}
-mh_chain <- function(n_iter, sd, start) {
-  l <- numeric(n_iter); l[1] <- start
-  for (t in 2:n_iter) {
-    prop <- rnorm(1, l[t - 1], sd)
-    if (log(runif(1)) < log_post(prop) - log_post(l[t - 1])) l[t] <- prop else l[t] <- l[t - 1]
-  }
-  l
-}
-
-# Four parallel chains deliberately started far apart
-starts <- c(0.5, 2, 5, 8)
-raw    <- lapply(starts, function(s) mh_chain(6000, sd = 0.8, start = s))
-cols   <- c("#01426A", "#D44420", "darkgreen", "purple")
-
-par(mfrow = c(1, 2), mar = c(4, 4, 2.6, 1), mgp = c(2.2, 0.7, 0))
-
-# (left) trace of the first 300 iterations: convergence from different starts
-plot(NULL, xlim = c(1, 300), ylim = c(0, 9), xlab = "iteration",
-     ylab = expression(lambda), main = "Four chains converging")
-for (k in 1:4) lines(raw[[k]][1:300], col = cols[k])
-
-# (right) per-chain posterior after burn-in vs. the analytic Gamma(8, 4.5)
-post <- lapply(raw, function(ch) ch[1001:6000])
-plot(density(post[[1]]), col = cols[1], lwd = 2, xlim = c(0, 6),
-     main = "Per-chain posteriors agree", xlab = expression(lambda))
-for (k in 2:4) lines(density(post[[k]]), col = cols[k], lwd = 2)
-curve(dgamma(x, 8, 4.5), add = TRUE, col = "black", lwd = 2, lty = 2)
-legend("topright", legend = "analytic Gamma(8, 4.5)", lty = 2, bty = "n")
+```{r trace-gallery, fig.width=11, fig.height=7}
+library(gridExtra)
+grid.arrange(
+  trace_demo(width = 0.8,  starts = 2,            n_chains = 1,
+             title = "(a) Healthy: width = 0.8"),
+  trace_demo(width = 0.02, starts = 2,            n_chains = 1,
+             title = "(b) Width too small (0.02): slow mixing"),
+  trace_demo(width = 20,   starts = 2,            n_chains = 1,
+             title = "(c) Width too large (20): gets stuck"),
+  trace_demo(width = 0.8,  starts = c(0.3, 4, 9), n_chains = 3,
+             title = "(d) Three chains from different starts"),
+  ncol = 2
+)
 ```
 
-The four chains start at $\lambda \in \{0.5, 2, 5, 8\}$ but quickly forget where they began (left) and produce essentially identical posterior approximations that match the analytic Gamma(8, 4.5) (right).
+- **(a)** mixes well — rapid exploration around the posterior mean (~61% of proposals accepted).
+- **(b)** a *too-small* width takes tiny steps: nearly every proposal is accepted (~99%), but the chain only inches along and is strongly autocorrelated — it has barely explored after 2,000 iterations.
+- **(c)** a *too-large* width proposes wild values (often negative, always rejected), so only ~4% are accepted and the chain **sticks** for long stretches — the flat horizontal runs.
+- **(d)** three chains launched from $\lambda \in \{0.3, 4, 9\}$ all migrate to the same band within a few dozen iterations (the **burn-in**) and then agree — strong evidence of convergence.
+
+::: {.note}
+Try it live: call `trace_demo(width = ..., starts = ..., n_chains = ..., n_iter = ...)` with your own settings and watch the mixing — and the acceptance rate in each title — respond.
+:::
 
 ### Numerical diagnostics: effective sample size & R-hat
 
-The numbers back up the picture. The `coda` package returns the effective sample size and the R-hat ratio directly:
+The numbers back up the picture. We run four longer parallel chains with `run_mh()` and hand them to `coda`:
 
 ```{r mcmc-numeric}
-mc   <- mcmc.list(lapply(raw, function(ch) mcmc(ch[1001:6000])))  # post burn-in
+set.seed(2026)
+raw <- lapply(c(0.5, 2, 5, 8), function(s) run_mh(width = 0.8, start = s, n_iter = 6000))
+mc  <- mcmc.list(lapply(raw, function(ch) mcmc(ch[1001:6000])))   # drop 1,000 burn-in
+
 N    <- 4 * 5000                       # total retained draws
 ess  <- sum(effectiveSize(mc))         # effective sample size
 rhat <- gelman.diag(mc)$psrf[1, 1]     # split-chain R-hat
@@ -282,7 +379,7 @@ cat("R-hat                  :", round(rhat, 4), "  (red flag if > 1.05)\n")
 cat("Lag-1 autocorrelation  :", round(acf(raw[[1]][1001:6000], plot = FALSE)$acf[2], 3), "\n")
 ```
 
-Here the ratio sits above 0.1 and $\hat R \approx 1$, so we trust the approximation. The moderate lag-1 autocorrelation is expected for a random-walk Metropolis sampler — it is exactly what a better-tuned proposal (Exercise 7.4) or a smarter sampler such as Stan's would reduce, raising the effective sample size.
+Here the ratio sits above 0.1 and $\hat R \approx 1$, so we trust the approximation. The moderate lag-1 autocorrelation is expected for a random-walk Metropolis sampler — exactly what a better-tuned proposal (Exercise 7.4) or a smarter sampler such as Stan's would reduce, raising the effective sample size.
 
 ---
 
