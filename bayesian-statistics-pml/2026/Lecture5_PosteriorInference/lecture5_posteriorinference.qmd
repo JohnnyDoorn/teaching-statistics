@@ -18,6 +18,7 @@ format:
   revealjs:
     output-file: lecture5_posteriorinference_slides.html
     theme: simple
+    slide-level: 3
     css: ajohnson.css
     include-in-header:
       - text: |

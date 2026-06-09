@@ -15,6 +15,7 @@ format:
   revealjs:
     output-file: lecture6_examprep_slides.html
     theme: simple
+    slide-level: 3
     css: ajohnson.css
     slide-number: true
     scrollable: true
