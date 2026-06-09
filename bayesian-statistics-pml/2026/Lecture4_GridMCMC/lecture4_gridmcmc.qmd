@@ -566,5 +566,5 @@ The MCMC mean and ETI should sit very close to the analytic Gamma(8, 4.5) values
 ---
 
 <div class="note">
-**Next lecture (June 15):** Lecture 5 puts the posterior to work — point estimates, credible intervals, posterior prediction, prior + posterior predictive checks, and Bayes factors for hypothesis testing (Ch. 8 + Etz et al. 2018).
+**Next lecture (June 15):** Lecture 5 puts the posterior to work: point estimates, credible intervals, posterior prediction, prior + posterior predictive checks, and Bayes factors for hypothesis testing (Ch. 8 + Etz et al. 2018).
 </div>
