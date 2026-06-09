@@ -301,13 +301,13 @@ trace_demo <- function(width = 0.8, starts = 2, n_chains = 1,
                      width, paste(round(starts, 2), collapse = ", "),
                      n_chains, if (n_chains > 1) "s" else "", 100 * acc)
 
-  ggplot(df, aes(iteration, lambda, colour = chain)) +
-    geom_line(linewidth = 0.3, alpha = 0.85) +
-    geom_hline(yintercept = 8 / 4.5, linetype = "dashed") +
-    labs(title = title, x = "iteration", y = expression(lambda)) +
-    theme_minimal(base_size = 12) +
-    theme(legend.position = if (n_chains > 1) "right" else "none",
-          plot.title = element_text(size = 10))
+  ggplot2::ggplot(df, ggplot2::aes(iteration, lambda, colour = chain)) +
+    ggplot2::geom_line(linewidth = 0.3, alpha = 0.85) +
+    ggplot2::geom_hline(yintercept = 8 / 4.5, linetype = "dashed") +
+    ggplot2::labs(title = title, x = "iteration", y = expression(lambda)) +
+    ggplot2::theme_minimal(base_size = 12) +
+    ggplot2::theme(legend.position = if (n_chains > 1) "right" else "none",
+          plot.title = ggplot2::element_text(size = 10))
 }
 
 # A healthy run
@@ -380,6 +380,29 @@ cat("Lag-1 autocorrelation  :", round(acf(raw[[1]][1001:6000], plot = FALSE)$acf
 ```
 
 Here the ratio sits above 0.1 and $\hat R \approx 1$, so we trust the approximation. The moderate lag-1 autocorrelation is expected for a random-walk Metropolis sampler — exactly what a better-tuned proposal (Exercise 7.4) or a smarter sampler such as Stan's would reduce, raising the effective sample size.
+
+### The autocorrelation plot
+
+*Bayes Rules!* inspects chains with the **`bayesplot`** package — `mcmc_trace()` for trace plots, `mcmc_dens_overlay()` for the parallel-chain densities, and **`mcmc_acf()`** for the autocorrelation plot (the book's Figures 6.15–6.16). The autocorrelation plot shows the correlation between chain values that are 1, 2, 3, … steps apart: in a healthy chain it drops to ~0 within a few lags; in a slow-mixing chain it lingers near 1. The same functions work on our hand-rolled draws, not just Stan output:
+
+```{r mcmc-acf, fig.width=10, fig.height=4}
+library(bayesplot)
+
+# One chain at each setting, packaged as a single-column "draws" matrix
+acf_mat <- function(width, seed = 2026) {
+  set.seed(seed)
+  draws <- run_mh(width = width, start = 2, n_iter = 6000)[1001:6000]
+  matrix(draws, ncol = 1, dimnames = list(NULL, "lambda"))
+}
+
+grid.arrange(
+  mcmc_acf(acf_mat(0.8))  + ggtitle("Well-mixed (width = 0.8): decays fast"),
+  mcmc_acf(acf_mat(0.05)) + ggtitle("Slow-mixing (width = 0.05): lingers near 1"),
+  ncol = 2
+)
+```
+
+On the left the autocorrelation falls away within a handful of lags — the draws quickly become "effectively independent," giving a high effective sample size. On the right the tiny proposal width keeps consecutive draws almost identical, so the autocorrelation stays near 1 for many lags: lots of iterations, very little independent information. This is the visual signature behind a low $N_{\text{eff}}/N$ ratio.
 
 ---
 
