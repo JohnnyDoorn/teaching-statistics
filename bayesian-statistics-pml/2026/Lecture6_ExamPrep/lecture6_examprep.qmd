@@ -56,7 +56,7 @@ By the end of this lecture, you will be able to:
 
 ## Why Reporting Matters
 
-A Bayesian analysis is only as good as its communication. Two researchers with the same data but different priors can legitimately reach different conclusions — that's fine, but readers must be able to evaluate and reproduce the analysis.
+A Bayesian analysis is only as good as its communication. Two researchers with the same data but different priors can legitimately reach different conclusions. That's fine, but readers must be able to evaluate and reproduce the analysis.
 
 Van Doorn et al. identify **four stages** of a Bayesian study:
 
@@ -81,10 +81,10 @@ $$\text{Planning} \;\rightarrow\; \text{Executing} \;\rightarrow\; \text{Interpr
 
 - Check assumptions before running (outliers, distributional fit).
 - Run the pre-registered analysis; **annotate any deviations**.
-- Conduct the robustness check — vary the prior and report how the BF changes.
+- Conduct the robustness check: vary the prior and report how the BF changes.
 
 <div class="note">
-A Bayesian analysis does not safeguard against model misspecification. Anscombe's quartet applies here too — always inspect your data.
+A Bayesian analysis does not safeguard against model misspecification. Anscombe's quartet applies here too; always inspect your data.
 </div>
 
 ## Stage 3: Interpreting
@@ -94,18 +94,18 @@ A Bayesian analysis does not safeguard against model misspecification. Anscombe'
 **For hypothesis testing (BF):**
 
 - BF is a *relative* measure: data are $x$ times more likely under $H_1$ than $H_0$
-- $BF_{10} = 1/BF_{01}$ — always use the subscript to be unambiguous
+- $BF_{10} = 1/BF_{01}$; always use the subscript to be unambiguous
 - BF does **not** equal posterior probability of $H_1$; that requires prior odds:
 $$\frac{P(H_1 \mid y)}{P(H_0 \mid y)} = BF_{10} \times \frac{P(H_1)}{P(H_0)}$$
 
 **For estimation (posterior):**
 
-- Report posterior median (or mean) and a credible interval (ETI or HDI — specify which)
+- Report posterior median (or mean) and a credible interval (ETI or HDI, specify which)
 - The CI has a direct probability interpretation: $P(\theta \in [L,U] \mid y) = 0.95$
 
 </div>
 
-## Stage 4: Reporting — The Complete Checklist
+## Stage 4: Reporting (The Complete Checklist)
 
 **Model specification**
 
@@ -196,7 +196,7 @@ $$P(H_1 \mid y) = \frac{BF_{10} \times P(H_1)}{BF_{10} \times P(H_1) + P(H_0)}$$
 
 <div class="note">
 
-**Wrong:** "$BF_{10} = 1.2$ — there is no effect."
+**Wrong:** "$BF_{10} = 1.2$, there is no effect."
 
 **Correct:** "$BF_{10} = 1.2$ is anecdotal. The data were **uninformative**: they did not substantially shift beliefs in either direction."
 
@@ -226,7 +226,7 @@ Contrast with $BF_{01} = 14$: *this* is positive evidence for $H_0$.
 
 **Wrong:** "We used Beta(1,1) since it is objective and requires no justification."
 
-**Correct:** Beta(1,1) has ESS = 2 — it asserts that a success rate of 0.001 is just as plausible as 0.999. For a well-studied phenomenon, this is a real and often implausible modelling assumption. All priors require justification.
+**Correct:** Beta(1,1) has ESS = 2; it asserts that a success rate of 0.001 is just as plausible as 0.999. For a well-studied phenomenon, this is a real and often implausible modelling assumption. All priors require justification.
 
 </div>
 
@@ -274,53 +274,21 @@ Find **2 errors** in this report.
 # Mock Exam
 
 <div class="note">
-Close laptops. Work in pairs. 20 minutes for all 5 questions. Solutions follow each question.
+Close laptops. Work in pairs. 20 minutes for all 3 questions. Solutions follow each question.
 </div>
 
-## Mock Q1: Identify the Model
+## Mock Q1: Conjugacy & Prior Choice (3.5 pts)
+*(Lecture 3 / Ch. 5; cf. Beta–Binomial exercises)*
 
-A memory researcher measures the proportion of words correctly recalled from a list of 30. She expects recall to be around 60%, based on prior studies.
+A food-delivery app wants to estimate $\theta$, the proportion of customers who tip their driver. Based on a pilot study, they adopt a $\text{Beta}(5, 5)$ prior. In the new cohort, **42 out of 60 customers** tip.
 
-**a.** Which Bayesian model is appropriate? Write the data model and prior.
+**a.** [1] Identify the data model and conjugate prior family. Write the posterior update rule and state the resulting posterior.
 
-**b.** A participant recalls 21 words. Write the posterior.
+**b.** [1] Compute the prior mean, observed proportion, and posterior mean. Explain the influence of the prior vs data.
 
-**c.** Compute the posterior mean and interpret it relative to the prior mean.
+**c.** [0.75] Compute the 95% equal-tailed credible interval and interpret it.
 
-::: {.panel-tabset}
-
-### Question
-
-Attempt before looking at the solution.
-
-### Solution
-
-**a.** $Y \mid \theta \sim \text{Binomial}(30, \theta)$; prior $\theta \sim \text{Beta}(12, 8)$ (ESS = 20, mean = 0.60).
-
-**b.** $\theta \mid y = 21 \;\sim\; \text{Beta}(12 + 21,\; 8 + 9) = \text{Beta}(33, 17)$.
-
-**c.**
-
-```{r q1}
-alpha_post <- 33; beta_post <- 17
-post_mean <- alpha_post / (alpha_post + beta_post)
-cat("Posterior mean:", round(post_mean, 3), "\n")
-cat("Prior mean: 0.60 | Sample proportion: 21/30 =", round(21/30, 3), "\n")
-```
-
-The posterior mean (0.66) is between the prior mean (0.60) and the observed proportion (0.70). With ESS = 20 and $n = 30$, the data have slightly more weight than the prior.
-
-:::
-
-## Mock Q2: Posterior Summaries
-
-Using $\theta \mid y \sim \text{Beta}(33, 17)$:
-
-**a.** R code for the 95% ETI.
-
-**b.** $P(\theta > 0.70 \mid y)$.
-
-**c.** Correct this statement: *"We're 95% confident the true recall rate falls in this interval in repeated experiments."*
+**d.** [0.75] Compute $P(\theta > 0.70 \mid y)$.
 
 ::: {.panel-tabset}
 
@@ -330,29 +298,50 @@ Attempt before looking at the solution.
 
 ### Solution
 
-**a.**
-```{r q2a}
-qbeta(c(0.025, 0.975), shape1 = 33, shape2 = 17)
+**a.** $Y \mid \theta \sim \text{Binomial}(60, \theta)$; conjugate prior $\theta \sim \text{Beta}(\alpha,\beta)$. Update: $\theta \mid y \sim \text{Beta}(\alpha + y,\ \beta + n - y)$.
+
+```{r m1a}
+alpha <- 5; beta <- 5; y <- 42; n <- 60
+ap <- alpha + y; bp <- beta + n - y
+cat("Posterior: Beta(", ap, ",", bp, ")\n")
 ```
 
 **b.**
-```{r q2b}
-pbeta(0.70, shape1 = 33, shape2 = 17, lower.tail = FALSE)
+```{r m1b}
+cat("Prior mean:     ", round(alpha/(alpha+beta), 3), "\n")
+cat("Observed prop:  ", round(y/n, 3), "\n")
+cat("Posterior mean: ", round(ap/(ap+bp), 3), "\n")
+cat("Prior ESS:      ", alpha + beta, "\n")
 ```
 
-**c.** "Given the data and the prior, there is a 95% probability that $\theta$ is in this interval." The repeated-experiments clause belongs to frequentist confidence intervals, not Bayesian credible intervals.
+The posterior mean (0.70) is a weighted average of the prior mean (0.50) and observed proportion (0.70). With prior ESS = 10 vs n = 60, the data dominate.
+
+**c.**
+```{r m1c}
+round(qbeta(c(0.025, 0.975), ap, bp), 3)
+```
+
+Given the data and prior, there is a 95% probability that $\theta$ lies in this interval.
+
+**d.**
+```{r m1d}
+pbeta(0.70, ap, bp, lower.tail = FALSE)
+```
 
 :::
 
-## Mock Q3: Bayes Factor
+## Mock Q2: Grid Approximation (3 pts)
+*(Lecture 4 / Ch. 6–7; cf. grid approximation exercises)*
 
-Prior Beta(12, 8); posterior Beta(33, 17).
+A researcher models $\theta$, the probability of a new drug being effective. They use a $\text{Beta}(2, 2)$ prior **truncated to $[0.3, 0.7]$**. In a trial of **20 patients, 12 show improvement**.
 
-**a.** Compute $BF_{10}$ for $H_0: \theta = 0.5$ using the Savage–Dickey density ratio.
+**a.** [0.75] Explain why this truncated prior has no closed-form conjugate posterior, and outline the grid-approximation recipe.
 
-**b.** Interpret using the Jeffreys scale.
+**b.** [1] Implement the grid approximation (5,000 points on $[0,1]$) and report the posterior mean. Compare to the untruncated conjugate posterior mean.
 
-**c.** Compute the one-sided $BF_{+0}$ for $H_+: \theta > 0.5$.
+**c.** [0.75] A random-walk Metropolis sampler on the **untruncated** model is at $\theta_c = 0.55$ and proposes $\theta_p = 0.60$. Using the unnormalised posterior, compute the Metropolis acceptance probability $\alpha$. Is the move accepted with certainty?
+
+**d.** [0.5] What step size pathology causes: (i) a flat caterpillar trace plot; (ii) a drifting chain; (iii) a stuck chain?
 
 ::: {.panel-tabset}
 
@@ -362,37 +351,44 @@ Attempt before looking at the solution.
 
 ### Solution
 
-**a.**
-```{r q3a}
-prior_dens <- dbeta(0.5, 12, 8)
-post_dens  <- dbeta(0.5, 33, 17)
-BF10 <- prior_dens / post_dens
-cat("BF_10 =", round(BF10, 2), "\n")
+**a.** The conjugate update requires a proper Beta prior on $[0,1]$. Truncation leaves the Beta family, so the posterior has no closed form. Grid approximation evaluates $u_i = f(\theta_i)L(y\mid\theta_i)$ on a fine grid, normalises to $u_i/\sum_j u_j$, and samples grid points proportional to those weights.
+
+**b.**
+```{r m2b}
+y <- 12; n <- 20; grid <- seq(0, 1, length.out = 5000)
+prior <- dbeta(grid, 2, 2) * (grid >= 0.3 & grid <= 0.7)
+lik   <- dbinom(y, n, grid)
+post  <- prior * lik; post <- post / sum(post)
+cat("Grid posterior mean:        ", round(sum(grid * post), 3), "\n")
+cat("Untruncated conjugate mean: ", round((2+y)/(4+n), 3), "\n")
 ```
 
-**b.** Using the Jeffreys scale: BF 10–30 is "strong evidence," 3–10 is "moderate." Report accordingly.
+Both ≈0.60. The truncation barely matters since data concentrate $\theta$ inside $[0.3, 0.7]$.
 
 **c.**
-```{r q3c}
-p_prior  <- pbeta(0.5, 12, 8,  lower.tail = FALSE)
-p_post   <- pbeta(0.5, 33, 17, lower.tail = FALSE)
-BF_plus0 <- (p_post / (1 - p_post)) / (p_prior / (1 - p_prior))
-cat("BF(+,0) =", round(BF_plus0, 2), "\n")
+```{r m2c}
+logpost <- function(t) dbeta(t, 2, 2, log = TRUE) + dbinom(y, n, t, log = TRUE)
+cat("Acceptance probability:", round(min(1, exp(logpost(0.60) - logpost(0.55))), 3), "\n")
 ```
 
-The one-sided BF is larger because it concentrates prior probability on the side supported by the data.
+$\alpha \approx$ [value]. If < 1, accept with that probability; if = 1, accept with certainty.
+
+**d.** (i) Flat caterpillar = good mixing (optimal step size). (ii) Slow drift = step size **too small** (high autocorrelation). (iii) Stuck plateaus = step size **too large** (proposals overshoot and are rejected).
 
 :::
 
-## Mock Q4: Posterior Prediction
+## Mock Q3: Inference, Prediction & Testing (3.5 pts)
+*(Lecture 5 / Ch. 8; cf. posterior-summary, prediction & Bayes-factor exercises)*
 
-Using posterior Beta(33, 17), predict recall for a new participant (30 words).
+A clinic models $\lambda$, the mean number of emergency calls per hour, with a $\text{Gamma}(3, 1)$ prior. Over **8 hours** they record **15 calls**.
 
-**a.** Simulation code.
+**a.** [0.75] Give the posterior distribution, its mean, and a 95% equal-tailed credible interval.
 
-**b.** $E(Y' \mid y)$ and $P(Y' \geq 25 \mid y)$.
+**b.** [1] Predict calls next hour. Compute $E(Y' \mid y)$ and $P(Y' \ge 2 \mid y)$ using the posterior-predictive (Negative-Binomial) distribution.
 
-**c.** Posterior predictive check on the original $y = 21$. Does the model fit?
+**c.** [1] Test $H_+: \lambda > 2$ vs $H_-: \lambda < 2$. Compute $BF_{+-}$ from prior and posterior odds and interpret.
+
+**d.** [0.75] Test $H_0: \lambda = 2$ using Savage–Dickey. What does $BF_{01}$ say about $\lambda = 2$?
 
 ::: {.panel-tabset}
 
@@ -402,43 +398,40 @@ Attempt before looking at the solution.
 
 ### Solution
 
-**a & b.**
-```{r q4ab}
-set.seed(1)
-N <- 10000
-theta_post <- rbeta(N, shape1 = 33, shape2 = 17)
-y_pred     <- rbinom(N, size = 30, prob = theta_post)
+**a.** $Y_i\mid\lambda \overset{iid}{\sim}\text{Poisson}(\lambda)$; posterior $\lambda\mid y \sim \text{Gamma}(s+\sum y,\ r+n)$.
 
-cat("E(Y' | y) =", round(mean(y_pred), 2), "\n")
-cat("P(Y' >= 25 | y) =", round(mean(y_pred >= 25), 3), "\n")
+```{r m3a}
+s <- 3; r <- 1; sumy <- 15; nobs <- 8
+sp <- s + sumy; rp <- r + nobs
+cat("Posterior: Gamma(", sp, ",", rp, "),  mean =", round(sp/rp, 3), "\n")
+cat("95% ETI:", round(qgamma(c(0.025, 0.975), sp, rp), 3), "\n")
 ```
+
+**b.**
+```{r m3b}
+cat("E(Y' | y) =",       round(sp/rp, 3), "\n")
+cat("P(Y' >= 2 | y) =",  round(1 - pnbinom(1, size = sp, prob = rp/(rp+1)), 3), "\n")
+```
+
+The posterior-predictive marginalises over uncertainty in $\lambda$. Plugging in a point estimate ignores this uncertainty.
 
 **c.**
-```{r q4c}
-pp_pval <- mean(y_pred >= 21)
-cat("PP p-value =", round(pp_pval, 3), "\n")
+```{r m3c}
+prior_p <- pgamma(2, s, r); post_p <- pgamma(2, sp, rp)
+BF_plusminus <- (post_p/(1-post_p)) / (prior_p/(1-prior_p))
+cat("Prior P(l>2):", round(prior_p,3), " Posterior P(l>2):", round(post_p,3), "\n")
+cat("BF(+, -) =", round(BF_plusminus, 2), "\n")
 ```
 
-A pp p-value near 0.5 indicates good fit — $y_\text{obs} = 21$ falls near the centre of the predictive distribution.
+Interpret using Kass & Raftery scale.
 
-:::
+**d.**
+```{r m3d}
+cat("BF01 =", round(dgamma(2, sp, rp) / dgamma(2, s, r), 3), "\n")
+cat("BF10 =", round(dgamma(2, s, r) / dgamma(2, sp, rp), 3), "\n")
+```
 
-## Mock Q5: Spot the Errors
-
-> We used Beta(1,1) — no justification needed since it is uninformative. We observed $y = 18$, $n = 25$, yielding posterior Beta(19, 8). The 95% credible interval [0.54, 0.89] **shows the null ($\theta = 0.5$) is rejected**. With $BF_{10} = 6.1$, **we are confident $H_1$ is true**. Strong evidence makes sensitivity analysis unnecessary.
-
-::: {.panel-tabset}
-
-### Question
-
-Find **4 errors**.
-
-### Solution
-
-1. **"No justification needed"**: Beta(1,1) has ESS = 2 — a real modelling assumption with real consequences.
-2. **"CI shows the null is rejected"**: use the BF for testing; the CI is for estimation.
-3. **"Confident $H_1$ is true"**: $BF_{10} = 6.1$ is moderate evidence. It does not mean $H_1$ is true.
-4. **"Sensitivity analysis not needed"**: sensitivity analysis is *especially* important for strong claims. One prior is never enough.
+$BF_{01} > 1$ means posterior density at $\lambda=2$ exceeds prior density. Data support $\lambda=2$.
 
 :::
 
@@ -449,14 +442,15 @@ Find **4 errors**.
 ## What to Expect
 
 - **Duration:** 2 hours · **Format:** closed-book (one A4 cheat sheet)
+- **Content:** Questions are re-skinned versions of *Bayes Rules!* end-of-chapter exercises, covering Lectures 3–5 (Ch. 5–8).
 
 **Typical question types:**
 
-- Identify the appropriate model and write the prior + posterior
-- Compute posterior summaries (mean, ETI) by hand or describe the R code
-- Interpret a Bayes factor and posterior predictive
-- Spot errors in a written Bayesian report
-- Short conceptual questions (credible interval vs CI, BF vs posterior probability)
+- **Conjugate models** (Beta-Binomial, Gamma-Poisson, Normal-Normal): identify model, write prior and posterior, compute summaries
+- **Grid approximation & MCMC**: implement grid approximation for non-conjugate priors, compute Metropolis acceptance probability, diagnose chain mixing
+- **Posterior inference & prediction**: compute ETI/HDI, posterior predictive distribution, prediction intervals
+- **Hypothesis testing**: Bayes factors (Savage-Dickey, prior/posterior odds), one-sided and two-sided tests, BF interpretation
+- **Reporting & error-spotting**: identify common Bayesian reporting errors, apply van Doorn et al. checklist
 
 ## Practical Tips
 
@@ -486,7 +480,7 @@ $BF_{10} = f(\theta_0)\,/\,f(\theta_0 \mid y)$ (Savage–Dickey)
 
 $BF_{+0} = \dfrac{P(\theta > \theta_0 \mid y)}{P(\theta > \theta_0)}$
 
-**Credible interval:** direct probability statement — $P(\theta \in [L,U] \mid y) = 0.95$.
+**Credible interval:** direct probability statement, $P(\theta \in [L,U] \mid y) = 0.95$.
 
 **ETI:** `qbeta(c(0.025, 0.975), a, b)` · **HDI:** `HPDinterval(as.mcmc(samples))`
 
@@ -495,5 +489,5 @@ $BF_{+0} = \dfrac{P(\theta > \theta_0 \mid y)}{P(\theta > \theta_0)}$
 ---
 
 <div class="note">
-Open Q&A — any topic from the past three weeks. Exam is **Friday, June 19, 09:00–11:00, IWO 4.04C (Blauw)**. Good luck!
+Open Q&A: any topic from the past three weeks. Exam is **Friday, June 19, 09:00–11:00, IWO 4.04C (Blauw)**. Good luck!
 </div>

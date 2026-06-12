@@ -1,6 +1,6 @@
 ---
 title: "Lecture 5 — Using the Posterior: Inference, Prediction & Hypothesis Testing (Ch. 8)"
-author: "Johnny van Doorn (adapted from Maarten Marsman, 2025)"
+author: "Johnny van Doorn"
 date: "2026-06-15"
 format:
   html:
@@ -60,7 +60,7 @@ By the end of this lecture, you will be able to:
 ::: setup
 **Recommended Reading**
 
-- *Bayes Rules!* — Chapter 8 (Posterior inference; posterior estimation; hypothesis testing)
+- *Bayes Rules!*, Chapter 8 (Posterior inference; posterior estimation; hypothesis testing)
 - Course addendum: *Testing Point Hypotheses* (Bayes factors and Savage–Dickey)
 
 **R Environment**
@@ -80,21 +80,21 @@ library(tidyr)
 
 So far, we've laid the groundwork for making principled inferences under uncertainty:
 
-- **Bayesian Foundations (Ch. 1–3)** — prior, likelihood, posterior, and Bayes' Rule:
+- **Bayesian Foundations (Ch. 1–3):** prior, likelihood, posterior, and Bayes' Rule:
   $${\text{Posterior}} \propto {\text{Likelihood}} \times {\text{Prior}}$$
-- **Sequential Updating & Prior Sensitivity (Ch. 4)** — incorporating new data over time and seeing how the prior shapes the posterior.
-- **Conjugate Models (Ch. 5)** — Beta–Binomial, Gamma–Poisson, and Normal–Normal pairs that give closed-form posteriors.
-- **Obtaining the Posterior (Ch. 6 & 7 — last lecture)** — grid approximation and MCMC for the (very common) case where conjugacy isn't available.
+- **Sequential Updating & Prior Sensitivity (Ch. 4):** incorporating new data over time and seeing how the prior shapes the posterior.
+- **Conjugate Models (Ch. 5):** Beta–Binomial, Gamma–Poisson, and Normal–Normal pairs that give closed-form posteriors.
+- **Obtaining the Posterior (Ch. 6 & 7, last lecture):** grid approximation and MCMC for the (very common) case where conjugacy isn't available.
 
 ---
 
-**Today**, we put posteriors to work — turning a distribution over the parameter into the kind of answer you'd actually report in a paper:
+**Today**, we put posteriors to work, turning a distribution over the parameter into the kind of answer you'd actually report in a paper:
 
 - Summarise the posterior with **point estimates** and **credible intervals**
 - Generate forecasts via the **posterior predictive distribution**
 - Test interval and point **hypotheses** using **Bayes factors** and the **Savage–Dickey** shortcut
 
-Every code chunk below uses the **Dutch Railways** running example from last lecture — same NS signal-failure rate $\lambda$, same prior Gamma(2, 0.5), same data.
+Every code chunk below uses the **Dutch Railways** running example from last lecture (same NS signal-failure rate $\lambda$, same prior Gamma(2, 0.5), same data).
 :::
 
 
@@ -109,7 +109,7 @@ Let’s revisit the key ideas from Chapters 1–5: the Bayesian toolkit we’re 
 Every Bayesian model is built on four fundamental components:
 
 1. **Prior Model**  
-   We begin with a parameter of interest — say, $\pi$ — and specify what we believe about it *before* seeing any data:  
+   We begin with a parameter of interest (say, $\pi$) and specify what we believe about it *before* seeing any data:
    $$
    f(\pi)
    $$  
@@ -130,7 +130,7 @@ Every Bayesian model is built on four fundamental components:
    $$
    L(\pi \mid y) \propto \pi^y (1 - \pi)^{n - y}
    $$  
-   *(Note: the data are fixed here — it’s $\pi$ that varies.)*
+   *(Note: the data are fixed here, it’s $\pi$ that varies.)*
 
 4. **Posterior Model**  
    Finally, we update our beliefs using Bayes’ Rule:  
@@ -143,7 +143,7 @@ Every Bayesian model is built on four fundamental components:
 The **posterior distribution** is the heart of Bayesian analysis. It tells us what we believe about $\pi$ *after* seeing data, and it's the foundation for all the inferential tools we'll build today.
 
 But there’s a catch:  
-Computing the posterior **can be hard**. Bayes' Rule is conceptually simple, but that denominator — the **marginal likelihood** $f(y)$ — is often intractable.
+Computing the posterior **can be hard**. Bayes' Rule is conceptually simple, but that denominator (the **marginal likelihood** $f(y)$) is often intractable.
 
 ---
 
@@ -181,7 +181,7 @@ Where:
 
 You’re a data scientist for the Dutch Railway Service. Your task: analyze the rate of monthly signal failures on a 10 km stretch of track.
 
-Failures are recorded monthly. Your goal is to estimate the **average failure rate** — and eventually assess whether the situation is improving.
+Failures are recorded monthly. Your goal is to estimate the **average failure rate**, and eventually assess whether the situation is improving.
 :::
 
 ::: {.panel-tabset}
@@ -375,7 +375,7 @@ summarize_gamma_poisson(
 These two exercises reinforce two key ideas:
 
 - **Conjugate models** simplify posterior computation
-- **Bayesian updating is coherent** — results are consistent whether we learn all at once or in stages
+- **Bayesian updating is coherent:** results are consistent whether we learn all at once or in stages
 
 With that foundation in place, we now turn to the next question:  
 **What can we do with the posterior?**  
@@ -661,7 +661,7 @@ gridExtra::grid.arrange(p1, p2, ncol = 2)
 
 ## Posterior Prediction
 
-Summarising the posterior is one thing; **predicting future observations** is another. The posterior tells us about $\lambda$, the latent rate — but if you're standing in front of an NS engineer, the question they actually care about is:
+Summarising the posterior is one thing; **predicting future observations** is another. The posterior tells us about $\lambda$, the latent rate, but if you're standing in front of an NS engineer, the question they actually care about is:
 
 > *How many signal failures should we plan for next month?*
 
@@ -679,7 +679,7 @@ Read this as: "the predictive probability of $\tilde y$ is its sampling probabil
 
 :::
 
-For the Gamma–Poisson model, this integral has a closed-form solution: $\tilde Y \mid y \sim \text{Negative Binomial}\!\bigl(\text{size} = s_{\text{post}}, \text{prob} = r_{\text{post}}/(r_{\text{post}}+1)\bigr)$. But we can also just simulate — and the simulation works for **any** model, conjugate or not.
+For the Gamma–Poisson model, this integral has a closed-form solution: $\tilde Y \mid y \sim \text{Negative Binomial}\!\bigl(\text{size} = s_{\text{post}}, \text{prob} = r_{\text{post}}/(r_{\text{post}}+1)\bigr)$. But we can also just simulate, and the simulation works for **any** model, conjugate or not.
 
 ```{r posterior-predictive}
 set.seed(2026)
@@ -1041,7 +1041,7 @@ The Bayes factor based on the full dataset is approximately **14.3**, indicating
 
 Notably, this **strengthens** the conclusion we reached after just 4 months of data, when the Bayes factor already modestly favored $H_a$. 
 
-In this case, the full dataset provides **substantial to strong** evidence that the failure rate is indeed below the target threshold. We now turn to a different type of hypothesis — one that asks whether a parameter equals a *specific value*.
+In this case, the full dataset provides **substantial to strong** evidence that the failure rate is indeed below the target threshold. We now turn to a different type of hypothesis: one that asks whether a parameter equals a *specific value*.
 
 
 ### Testing Point Hypotheses
@@ -1307,7 +1307,7 @@ BF_01
 
 In our example, the Bayes factor computed via the Savage–Dickey method is approximately **3**, indicating **modest evidence in favor of the point hypothesis** $\lambda = 2$ over the continuous alternative.
 
-Thus, we can assess **point hypotheses** by comparing the posterior and prior **densities** at a specific parameter value. The Savage–Dickey method provides a direct, interpretable way to quantify evidence for precise claims — all without computing full marginal likelihoods.
+Thus, we can assess **point hypotheses** by comparing the posterior and prior **densities** at a specific parameter value. The Savage–Dickey method provides a direct, interpretable way to quantify evidence for precise claims, all without computing full marginal likelihoods.
 
 Bayes factors, whether for interval or point hypotheses, offer a unified framework for evaluating claims in light of data. As always, interpreting them requires context, not just a threshold, but an understanding of the models and prior assumptions involved.
 
@@ -1336,13 +1336,13 @@ To interpret Bayes factors in practice, we often use this scale from Kass & Raft
 
 These are guidelines, not rules. The strength of evidence needed to shift beliefs can vary by context and domain. Bayesian inference gives us a **continuous scale of evidence**; these categories help us summarize that evidence clearly.
 
-But context matters. A Bayes factor of 10 might offer compelling evidence in a routine analysis — yet barely register when prior odds are extremely low. In extraordinary claims like precognition, even a seemingly strong BF may be overwhelmed by a skeptical prior. Inference depends on **posterior odds**, and the Bayes factor is just one part of that update.
+But context matters. A Bayes factor of 10 might offer compelling evidence in a routine analysis, yet barely register when prior odds are extremely low. In extraordinary claims like precognition, even a seemingly strong BF may be overwhelmed by a skeptical prior. Inference depends on **posterior odds**, and the Bayes factor is just one part of that update.
 
 ---
 
 ### Coherence: Sequential Bayes Factors
 
-Bayes factors not only offer a measure of evidence — they also maintain **coherence** when applied in stages. This means we can accumulate evidence gradually and consistently over time.
+Bayes factors not only offer a measure of evidence, they also maintain **coherence** when applied in stages. This means we can accumulate evidence gradually and consistently over time.
 
 Suppose we observe data in two batches and update our beliefs sequentially. The total Bayes factor from the full data is then the product of:
 
@@ -1408,17 +1408,17 @@ cat("Direct full Bayes Factor (BF_full):", round(BF_full, 3), "\n")
 # Direct full Bayes Factor (BF_full): 14.306 
 ```
 
-As you can see, the sequential Bayes factor (`BF_seq`) and the direct computation from the full data (`BF_full`) match. This confirms that **Bayesian inference is coherent** — both in terms of belief updating and the accumulation of evidence.
+As you can see, the sequential Bayes factor (`BF_seq`) and the direct computation from the full data (`BF_full`) match. This confirms that **Bayesian inference is coherent**, both in terms of belief updating and the accumulation of evidence.
 
 ---
 
 # Posterior Analysis from MCMC Draws (Ch. 8.4)
 
-Everything above used the **closed-form** Gamma(8, 4.5) posterior. But from Chapter 9 onward — and in most real research — the posterior has no clean formula to read summaries off. The reassuring message of Chapter 8.4 is that **none of today's tools actually require one**. Given a sample of posterior draws (from MCMC — Lecture 4), we approximate any posterior feature by the *corresponding feature of the draws*.
+Everything above used the **closed-form** Gamma(8, 4.5) posterior. But from Chapter 9 onward (and in most real research), the posterior has no clean formula to read summaries off. The reassuring message of Chapter 8.4 is that **none of today's tools actually require one**. Given a sample of posterior draws (from MCMC, Lecture 4), we approximate any posterior feature by the *corresponding feature of the draws*.
 
 <div class="describe">
 
-**The recipe — same questions, computed from draws**
+**The recipe: same questions, computed from draws**
 
 | Posterior quantity | From the closed form | From MCMC draws |
 |---|---|---|
@@ -1460,18 +1460,18 @@ data.frame(
 )
 ```
 
-The MCMC column lands right on top of the analytic values — **MCMC works**. (The mode is the fussiest to recover, as it depends on the kernel-density bandwidth, but even it is close.) This is exactly what `brms`/Stan compute for you automatically, and it is why we can trust the more complex models of the coming weeks even though we can never write their posteriors down — *provided the Lecture 4 diagnostics check out*.
+The MCMC column lands right on top of the analytic values: **MCMC works**. (The mode is the fussiest to recover, as it depends on the kernel-density bandwidth, but even it is close.) This is exactly what `brms`/Stan compute for you automatically, and it is why we can trust the more complex models of the coming weeks even though we can never write their posteriors down, *provided the Lecture 4 diagnostics check out*.
 
 ---
 
 # What We Learned Today
 
-In this lecture, we put the posterior to work — summarising it, predicting future observations from it, and using it to test specific scientific claims.
+In this lecture, we put the posterior to work: summarising it, predicting future observations from it, and using it to test specific scientific claims.
 
 ### Summary
 
 * **Posterior summaries** (mean, median, mode, ETI, HPD) describe what we have learned about the parameter; each highlights a different aspect of the posterior.
-* The **posterior predictive distribution** propagates parameter uncertainty into predictions for new data — and is always wider than the credible interval for the parameter alone.
+* The **posterior predictive distribution** propagates parameter uncertainty into predictions for new data, and is always wider than the credible interval for the parameter alone.
 * **Posterior probabilities** answer interval claims like "the rate is below 2/month" directly from the posterior.
 * **Bayes factors** quantify the evidence in the data for one hypothesis over another, computed either from prior + posterior odds or directly via the **Savage–Dickey** density ratio for point hypotheses.
 * **MCMC draws** deliver every one of these summaries via the corresponding feature of the sample (`mean`, `quantile`, `mean(draws < c)`), so the same toolkit carries over to models with no closed-form posterior (Ch. 8.4).
@@ -1488,12 +1488,9 @@ To consolidate your understanding and prepare for the **exam** and **group assig
 
 * Try the **Savage–Dickey** shortcut with different models and priors
 * Cross-check your results using JASP
-* Compare your predictive intervals to credible intervals on a few different datasets — when does the gap widen?
+* Compare your predictive intervals to credible intervals on a few different datasets. When does the gap widen?
 
 **Extra Resources**:
 
-* Office hour: Wednesday 10:00–11:00, G0.36
-* [Alicia Johnson's course material](https://ajohns24.github.io/454_Fall_21/index.html) — examples + exercises
+* [Alicia Johnson's course material](https://ajohns24.github.io/454_Fall_21/index.html): examples + exercises
 :::
-
-As always, drop by during office hours if you want to explore these ideas further — and see you for **Lecture 7 (Reporting Guidelines & Exam Prep)** on June 17.

@@ -492,7 +492,7 @@ quantile(theta_mcmc, c(0.025, 0.975))   # 95% ETI
 
 ### Solution
 
-```{r ex4-solution}
+```{r ex1-solution}
 theta_grid <- seq(0, 1, length.out = 5000)
 y_obs <- 18; n_obs <- 25
 
