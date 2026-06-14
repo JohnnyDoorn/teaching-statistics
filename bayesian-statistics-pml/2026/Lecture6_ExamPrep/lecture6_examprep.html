@@ -4426,7 +4426,7 @@ list-style-type: square;
   <li><a href="#stage-1-planning" id="toc-stage-1-planning" class="nav-link" data-scroll-target="#stage-1-planning">Stage 1: Planning</a></li>
   <li><a href="#stage-2-executing" id="toc-stage-2-executing" class="nav-link" data-scroll-target="#stage-2-executing">Stage 2: Executing</a></li>
   <li><a href="#stage-3-interpreting" id="toc-stage-3-interpreting" class="nav-link" data-scroll-target="#stage-3-interpreting">Stage 3: Interpreting</a></li>
-  <li><a href="#stage-4-reporting-the-complete-checklist" id="toc-stage-4-reporting-the-complete-checklist" class="nav-link" data-scroll-target="#stage-4-reporting-the-complete-checklist">Stage 4: Reporting — The Complete Checklist</a></li>
+  <li><a href="#stage-4-reporting-the-complete-checklist" id="toc-stage-4-reporting-the-complete-checklist" class="nav-link" data-scroll-target="#stage-4-reporting-the-complete-checklist">Stage 4: Reporting (The Complete Checklist)</a></li>
   <li><a href="#language-guide" id="toc-language-guide" class="nav-link" data-scroll-target="#language-guide">Language Guide</a></li>
   <li><a href="#a-specimen-paragraph" id="toc-a-specimen-paragraph" class="nav-link" data-scroll-target="#a-specimen-paragraph">A Specimen Paragraph</a></li>
   </ul></li>
@@ -4445,11 +4445,9 @@ list-style-type: square;
   </ul></li>
   <li><a href="#mock-exam" id="toc-mock-exam" class="nav-link" data-scroll-target="#mock-exam">Mock Exam</a>
   <ul class="collapse">
-  <li><a href="#mock-q1-identify-the-model" id="toc-mock-q1-identify-the-model" class="nav-link" data-scroll-target="#mock-q1-identify-the-model">Mock Q1: Identify the Model</a></li>
-  <li><a href="#mock-q2-posterior-summaries" id="toc-mock-q2-posterior-summaries" class="nav-link" data-scroll-target="#mock-q2-posterior-summaries">Mock Q2: Posterior Summaries</a></li>
-  <li><a href="#mock-q3-bayes-factor" id="toc-mock-q3-bayes-factor" class="nav-link" data-scroll-target="#mock-q3-bayes-factor">Mock Q3: Bayes Factor</a></li>
-  <li><a href="#mock-q4-posterior-prediction" id="toc-mock-q4-posterior-prediction" class="nav-link" data-scroll-target="#mock-q4-posterior-prediction">Mock Q4: Posterior Prediction</a></li>
-  <li><a href="#mock-q5-spot-the-errors" id="toc-mock-q5-spot-the-errors" class="nav-link" data-scroll-target="#mock-q5-spot-the-errors">Mock Q5: Spot the Errors</a></li>
+  <li><a href="#mock-q1-conjugacy-prior-choice-3.5-pts" id="toc-mock-q1-conjugacy-prior-choice-3.5-pts" class="nav-link" data-scroll-target="#mock-q1-conjugacy-prior-choice-3.5-pts">Mock Q1: Conjugacy &amp; Prior Choice (3.5 pts)</a></li>
+  <li><a href="#mock-q2-grid-approximation-3-pts" id="toc-mock-q2-grid-approximation-3-pts" class="nav-link" data-scroll-target="#mock-q2-grid-approximation-3-pts">Mock Q2: Grid Approximation (3 pts)</a></li>
+  <li><a href="#mock-q3-inference-prediction-testing-3.5-pts" id="toc-mock-q3-inference-prediction-testing-3.5-pts" class="nav-link" data-scroll-target="#mock-q3-inference-prediction-testing-3.5-pts">Mock Q3: Inference, Prediction &amp; Testing (3.5 pts)</a></li>
   </ul></li>
   <li><a href="#exam-tips" id="toc-exam-tips" class="nav-link" data-scroll-target="#exam-tips">Exam Tips</a>
   <ul class="collapse">
@@ -4458,7 +4456,7 @@ list-style-type: square;
   <li><a href="#suggested-cheat-sheet-contents" id="toc-suggested-cheat-sheet-contents" class="nav-link" data-scroll-target="#suggested-cheat-sheet-contents">Suggested Cheat Sheet Contents</a></li>
   </ul></li>
   </ul>
-</nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lecture6_examprep_slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
 </div>
 <main class="content" id="quarto-document-content">
 
@@ -4509,7 +4507,7 @@ list-style-type: square;
 <h1>Reporting Guidelines (van Doorn et al., 2021)</h1>
 <section id="why-reporting-matters" class="level2">
 <h2 class="anchored" data-anchor-id="why-reporting-matters">Why Reporting Matters</h2>
-<p>A Bayesian analysis is only as good as its communication. Two researchers with the same data but different priors can legitimately reach different conclusions — that’s fine, but readers must be able to evaluate and reproduce the analysis.</p>
+<p>A Bayesian analysis is only as good as its communication. Two researchers with the same data but different priors can legitimately reach different conclusions. That’s fine, but readers must be able to evaluate and reproduce the analysis.</p>
 <p>Van Doorn et al. identify <strong>four stages</strong> of a Bayesian study:</p>
 <p><span class="math display">\[\text{Planning} \;\rightarrow\; \text{Executing} \;\rightarrow\; \text{Interpreting} \;\rightarrow\; \text{Reporting}\]</span></p>
 </section>
@@ -4532,10 +4530,10 @@ list-style-type: square;
 <ul>
 <li>Check assumptions before running (outliers, distributional fit).</li>
 <li>Run the pre-registered analysis; <strong>annotate any deviations</strong>.</li>
-<li>Conduct the robustness check — vary the prior and report how the BF changes.</li>
+<li>Conduct the robustness check: vary the prior and report how the BF changes.</li>
 </ul>
 <div class="note">
-<p>A Bayesian analysis does not safeguard against model misspecification. Anscombe’s quartet applies here too — always inspect your data.</p>
+<p>A Bayesian analysis does not safeguard against model misspecification. Anscombe’s quartet applies here too; always inspect your data.</p>
 </div>
 </section>
 <section id="stage-3-interpreting" class="level2">
@@ -4544,18 +4542,18 @@ list-style-type: square;
 <p><strong>For hypothesis testing (BF):</strong></p>
 <ul>
 <li>BF is a <em>relative</em> measure: data are <span class="math inline">\(x\)</span> times more likely under <span class="math inline">\(H_1\)</span> than <span class="math inline">\(H_0\)</span></li>
-<li><span class="math inline">\(BF_{10} = 1/BF_{01}\)</span> — always use the subscript to be unambiguous</li>
+<li><span class="math inline">\(BF_{10} = 1/BF_{01}\)</span>; always use the subscript to be unambiguous</li>
 <li>BF does <strong>not</strong> equal posterior probability of <span class="math inline">\(H_1\)</span>; that requires prior odds: <span class="math display">\[\frac{P(H_1 \mid y)}{P(H_0 \mid y)} = BF_{10} \times \frac{P(H_1)}{P(H_0)}\]</span></li>
 </ul>
 <p><strong>For estimation (posterior):</strong></p>
 <ul>
-<li>Report posterior median (or mean) and a credible interval (ETI or HDI — specify which)</li>
+<li>Report posterior median (or mean) and a credible interval (ETI or HDI, specify which)</li>
 <li>The CI has a direct probability interpretation: <span class="math inline">\(P(\theta \in [L,U] \mid y) = 0.95\)</span></li>
 </ul>
 </div>
 </section>
 <section id="stage-4-reporting-the-complete-checklist" class="level2">
-<h2 class="anchored" data-anchor-id="stage-4-reporting-the-complete-checklist">Stage 4: Reporting — The Complete Checklist</h2>
+<h2 class="anchored" data-anchor-id="stage-4-reporting-the-complete-checklist">Stage 4: Reporting (The Complete Checklist)</h2>
 <p><strong>Model specification</strong></p>
 <ul class="task-list">
 <li><input type="checkbox">State the likelihood explicitly</li>
@@ -4634,7 +4632,7 @@ list-style-type: square;
 <section id="mistake-3-no-evidence-evidence-for-the-null" class="level2">
 <h2 class="anchored" data-anchor-id="mistake-3-no-evidence-evidence-for-the-null">Mistake 3: No Evidence ≠ Evidence for the Null</h2>
 <div class="note">
-<p><strong>Wrong:</strong> “<span class="math inline">\(BF_{10} = 1.2\)</span> — there is no effect.”</p>
+<p><strong>Wrong:</strong> “<span class="math inline">\(BF_{10} = 1.2\)</span>, there is no effect.”</p>
 <p><strong>Correct:</strong> “<span class="math inline">\(BF_{10} = 1.2\)</span> is anecdotal. The data were <strong>uninformative</strong>: they did not substantially shift beliefs in either direction.”</p>
 <p>Contrast with <span class="math inline">\(BF_{01} = 14\)</span>: <em>this</em> is positive evidence for <span class="math inline">\(H_0\)</span>.</p>
 </div>
@@ -4672,7 +4670,7 @@ list-style-type: square;
 <h2 class="anchored" data-anchor-id="mistake-5-no-justification-needed-for-a-flat-prior">Mistake 5: “No Justification Needed” for a Flat Prior</h2>
 <div class="note">
 <p><strong>Wrong:</strong> “We used Beta(1,1) since it is objective and requires no justification.”</p>
-<p><strong>Correct:</strong> Beta(1,1) has ESS = 2 — it asserts that a success rate of 0.001 is just as plausible as 0.999. For a well-studied phenomenon, this is a real and often implausible modelling assumption. All priors require justification.</p>
+<p><strong>Correct:</strong> Beta(1,1) has ESS = 2; it asserts that a success rate of 0.001 is just as plausible as 0.999. For a well-studied phenomenon, this is a real and often implausible modelling assumption. All priors require justification.</p>
 </div>
 <hr>
 </section>
@@ -4725,14 +4723,16 @@ list-style-type: square;
 <section id="mock-exam" class="level1">
 <h1>Mock Exam</h1>
 <div class="note">
-<p>Close laptops. Work in pairs. 20 minutes for all 5 questions. Solutions follow each question.</p>
+<p>Close laptops. Work in pairs. 20 minutes for all 3 questions. Solutions follow each question.</p>
 </div>
-<section id="mock-q1-identify-the-model" class="level2">
-<h2 class="anchored" data-anchor-id="mock-q1-identify-the-model">Mock Q1: Identify the Model</h2>
-<p>A memory researcher measures the proportion of words correctly recalled from a list of 30. She expects recall to be around 60%, based on prior studies.</p>
-<p><strong>a.</strong> Which Bayesian model is appropriate? Write the data model and prior.</p>
-<p><strong>b.</strong> A participant recalls 21 words. Write the posterior.</p>
-<p><strong>c.</strong> Compute the posterior mean and interpret it relative to the prior mean.</p>
+<section id="mock-q1-conjugacy-prior-choice-3.5-pts" class="level2">
+<h2 class="anchored" data-anchor-id="mock-q1-conjugacy-prior-choice-3.5-pts">Mock Q1: Conjugacy &amp; Prior Choice (3.5 pts)</h2>
+<p><em>(Lecture 3 / Ch. 5; cf. Beta–Binomial exercises)</em></p>
+<p>A food-delivery app wants to estimate <span class="math inline">\(\theta\)</span>, the proportion of customers who tip their driver. Based on a pilot study, they adopt a <span class="math inline">\(\text{Beta}(5, 5)\)</span> prior. In the new cohort, <strong>42 out of 60 customers</strong> tip.</p>
+<p><strong>a.</strong> [1] Identify the data model and conjugate prior family. Write the posterior update rule and state the resulting posterior.</p>
+<p><strong>b.</strong> [1] Compute the prior mean, observed proportion, and posterior mean. Explain the influence of the prior vs data.</p>
+<p><strong>c.</strong> [0.75] Compute the 95% equal-tailed credible interval and interpret it.</p>
+<p><strong>d.</strong> [0.75] Compute <span class="math inline">\(P(\theta &gt; 0.70 \mid y)\)</span>.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href>Question</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href>Solution</a></li></ul>
 <div class="tab-content">
@@ -4740,38 +4740,83 @@ list-style-type: square;
 <p>Attempt before looking at the solution.</p>
 </div>
 <div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
-<p><strong>a.</strong> <span class="math inline">\(Y \mid \theta \sim \text{Binomial}(30, \theta)\)</span>; prior <span class="math inline">\(\theta \sim \text{Beta}(12, 8)\)</span> (ESS = 20, mean = 0.60).</p>
-<p><strong>b.</strong> <span class="math inline">\(\theta \mid y = 21 \;\sim\; \text{Beta}(12 + 21,\; 8 + 9) = \text{Beta}(33, 17)\)</span>.</p>
+<p><strong>a.</strong> <span class="math inline">\(Y \mid \theta \sim \text{Binomial}(60, \theta)\)</span>; conjugate prior <span class="math inline">\(\theta \sim \text{Beta}(\alpha,\beta)\)</span>. Update: <span class="math inline">\(\theta \mid y \sim \text{Beta}(\alpha + y,\ \beta + n - y)\)</span>.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="dv">5</span>; beta <span class="ot">&lt;-</span> <span class="dv">5</span>; y <span class="ot">&lt;-</span> <span class="dv">42</span>; n <span class="ot">&lt;-</span> <span class="dv">60</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>ap <span class="ot">&lt;-</span> alpha <span class="sc">+</span> y; bp <span class="ot">&lt;-</span> beta <span class="sc">+</span> n <span class="sc">-</span> y</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Posterior: Beta(&quot;</span>, ap, <span class="st">&quot;,&quot;</span>, bp, <span class="st">&quot;)</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Posterior: Beta( 47 , 23 )</code></pre>
+</div>
+</div>
+<p><strong>b.</strong></p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Prior mean:     &quot;</span>, <span class="fu">round</span>(alpha<span class="sc">/</span>(alpha<span class="sc">+</span>beta), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Prior mean:      0.5 </code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Observed prop:  &quot;</span>, <span class="fu">round</span>(y<span class="sc">/</span>n, <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Observed prop:   0.7 </code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Posterior mean: &quot;</span>, <span class="fu">round</span>(ap<span class="sc">/</span>(ap<span class="sc">+</span>bp), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Posterior mean:  0.671 </code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Prior ESS:      &quot;</span>, alpha <span class="sc">+</span> beta, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Prior ESS:       10 </code></pre>
+</div>
+</div>
+<p>The posterior mean (0.70) is a weighted average of the prior mean (0.50) and observed proportion (0.70). With prior ESS = 10 vs n = 60, the data dominate.</p>
 <p><strong>c.</strong></p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>alpha_post <span class="ot">&lt;-</span> <span class="dv">33</span>; beta_post <span class="ot">&lt;-</span> <span class="dv">17</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>post_mean <span class="ot">&lt;-</span> alpha_post <span class="sc">/</span> (alpha_post <span class="sc">+</span> beta_post)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Posterior mean:&quot;</span>, <span class="fu">round</span>(post_mean, <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">qbeta</span>(<span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>), ap, bp), <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>Posterior mean: 0.66 </code></pre>
+<pre><code>[1] 0.558 0.776</code></pre>
 </div>
+</div>
+<p>Given the data and prior, there is a 95% probability that <span class="math inline">\(\theta\)</span> lies in this interval.</p>
+<p><strong>d.</strong></p>
+<div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Prior mean: 0.60 | Sample proportion: 21/30 =&quot;</span>, <span class="fu">round</span>(<span class="dv">21</span><span class="sc">/</span><span class="dv">30</span>, <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbeta</span>(<span class="fl">0.70</span>, ap, bp, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>Prior mean: 0.60 | Sample proportion: 21/30 = 0.7 </code></pre>
+<pre><code>[1] 0.3134553</code></pre>
 </div>
 </div>
-<p>The posterior mean (0.66) is between the prior mean (0.60) and the observed proportion (0.70). With ESS = 20 and <span class="math inline">\(n = 30\)</span>, the data have slightly more weight than the prior.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="mock-q2-posterior-summaries" class="level2">
-<h2 class="anchored" data-anchor-id="mock-q2-posterior-summaries">Mock Q2: Posterior Summaries</h2>
-<p>Using <span class="math inline">\(\theta \mid y \sim \text{Beta}(33, 17)\)</span>:</p>
-<p><strong>a.</strong> R code for the 95% ETI.</p>
-<p><strong>b.</strong> <span class="math inline">\(P(\theta &gt; 0.70 \mid y)\)</span>.</p>
-<p><strong>c.</strong> Correct this statement: <em>“We’re 95% confident the true recall rate falls in this interval in repeated experiments.”</em></p>
+<section id="mock-q2-grid-approximation-3-pts" class="level2">
+<h2 class="anchored" data-anchor-id="mock-q2-grid-approximation-3-pts">Mock Q2: Grid Approximation (3 pts)</h2>
+<p><em>(Lecture 4 / Ch. 6–7; cf. grid approximation exercises)</em></p>
+<p>A researcher models <span class="math inline">\(\theta\)</span>, the probability of a new drug being effective. They use a <span class="math inline">\(\text{Beta}(2, 2)\)</span> prior <strong>truncated to <span class="math inline">\([0.3, 0.7]\)</span></strong>. In a trial of <strong>20 patients, 12 show improvement</strong>.</p>
+<p><strong>a.</strong> [0.75] Explain why this truncated prior has no closed-form conjugate posterior, and outline the grid-approximation recipe.</p>
+<p><strong>b.</strong> [1] Implement the grid approximation (5,000 points on <span class="math inline">\([0,1]\)</span>) and report the posterior mean. Compare to the untruncated conjugate posterior mean.</p>
+<p><strong>c.</strong> [0.75] A random-walk Metropolis sampler on the <strong>untruncated</strong> model is at <span class="math inline">\(\theta_c = 0.55\)</span> and proposes <span class="math inline">\(\theta_p = 0.60\)</span>. Using the unnormalised posterior, compute the Metropolis acceptance probability <span class="math inline">\(\alpha\)</span>. Is the move accepted with certainty?</p>
+<p><strong>d.</strong> [0.5] What step size pathology causes: (i) a flat caterpillar trace plot; (ii) a drifting chain; (iii) a stuck chain?</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href>Question</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href>Solution</a></li></ul>
 <div class="tab-content">
@@ -4779,37 +4824,54 @@ list-style-type: square;
 <p>Attempt before looking at the solution.</p>
 </div>
 <div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
-<p><strong>a.</strong></p>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qbeta</span>(<span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>), <span class="at">shape1 =</span> <span class="dv">33</span>, <span class="at">shape2 =</span> <span class="dv">17</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5245993 0.7832756</code></pre>
-</div>
-</div>
+<p><strong>a.</strong> The conjugate update requires a proper Beta prior on <span class="math inline">\([0,1]\)</span>. Truncation leaves the Beta family, so the posterior has no closed form. Grid approximation evaluates <span class="math inline">\(u_i = f(\theta_i)L(y\mid\theta_i)\)</span> on a fine grid, normalises to <span class="math inline">\(u_i/\sum_j u_j\)</span>, and samples grid points proportional to those weights.</p>
 <p><strong>b.</strong></p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbeta</span>(<span class="fl">0.70</span>, <span class="at">shape1 =</span> <span class="dv">33</span>, <span class="at">shape2 =</span> <span class="dv">17</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">12</span>; n <span class="ot">&lt;-</span> <span class="dv">20</span>; grid <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">5000</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>prior <span class="ot">&lt;-</span> <span class="fu">dbeta</span>(grid, <span class="dv">2</span>, <span class="dv">2</span>) <span class="sc">*</span> (grid <span class="sc">&gt;=</span> <span class="fl">0.3</span> <span class="sc">&amp;</span> grid <span class="sc">&lt;=</span> <span class="fl">0.7</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>lik   <span class="ot">&lt;-</span> <span class="fu">dbinom</span>(y, n, grid)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>post  <span class="ot">&lt;-</span> prior <span class="sc">*</span> lik; post <span class="ot">&lt;-</span> post <span class="sc">/</span> <span class="fu">sum</span>(post)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Grid posterior mean:        &quot;</span>, <span class="fu">round</span>(<span class="fu">sum</span>(grid <span class="sc">*</span> post), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2826945</code></pre>
+<pre><code>Grid posterior mean:         0.562 </code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Untruncated conjugate mean: &quot;</span>, <span class="fu">round</span>((<span class="dv">2</span><span class="sc">+</span>y)<span class="sc">/</span>(<span class="dv">4</span><span class="sc">+</span>n), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Untruncated conjugate mean:  0.583 </code></pre>
 </div>
 </div>
-<p><strong>c.</strong> “Given the data and the prior, there is a 95% probability that <span class="math inline">\(\theta\)</span> is in this interval.” The repeated-experiments clause belongs to frequentist confidence intervals, not Bayesian credible intervals.</p>
+<p>Both ≈0.60. The truncation barely matters since data concentrate <span class="math inline">\(\theta\)</span> inside <span class="math inline">\([0.3, 0.7]\)</span>.</p>
+<p><strong>c.</strong></p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>logpost <span class="ot">&lt;-</span> <span class="cf">function</span>(t) <span class="fu">dbeta</span>(t, <span class="dv">2</span>, <span class="dv">2</span>, <span class="at">log =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> <span class="fu">dbinom</span>(y, n, t, <span class="at">log =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Acceptance probability:&quot;</span>, <span class="fu">round</span>(<span class="fu">min</span>(<span class="dv">1</span>, <span class="fu">exp</span>(<span class="fu">logpost</span>(<span class="fl">0.60</span>) <span class="sc">-</span> <span class="fu">logpost</span>(<span class="fl">0.55</span>))), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Acceptance probability: 1 </code></pre>
+</div>
+</div>
+<p><span class="math inline">\(\alpha \approx\)</span> [value]. If &lt; 1, accept with that probability; if = 1, accept with certainty.</p>
+<p><strong>d.</strong> (i) Flat caterpillar = good mixing (optimal step size). (ii) Slow drift = step size <strong>too small</strong> (high autocorrelation). (iii) Stuck plateaus = step size <strong>too large</strong> (proposals overshoot and are rejected).</p>
 </div>
 </div>
 </div>
 </section>
-<section id="mock-q3-bayes-factor" class="level2">
-<h2 class="anchored" data-anchor-id="mock-q3-bayes-factor">Mock Q3: Bayes Factor</h2>
-<p>Prior Beta(12, 8); posterior Beta(33, 17).</p>
-<p><strong>a.</strong> Compute <span class="math inline">\(BF_{10}\)</span> for <span class="math inline">\(H_0: \theta = 0.5\)</span> using the Savage–Dickey density ratio.</p>
-<p><strong>b.</strong> Interpret using the Jeffreys scale.</p>
-<p><strong>c.</strong> Compute the one-sided <span class="math inline">\(BF_{+0}\)</span> for <span class="math inline">\(H_+: \theta &gt; 0.5\)</span>.</p>
+<section id="mock-q3-inference-prediction-testing-3.5-pts" class="level2">
+<h2 class="anchored" data-anchor-id="mock-q3-inference-prediction-testing-3.5-pts">Mock Q3: Inference, Prediction &amp; Testing (3.5 pts)</h2>
+<p><em>(Lecture 5 / Ch. 8; cf. posterior-summary, prediction &amp; Bayes-factor exercises)</em></p>
+<p>A clinic models <span class="math inline">\(\lambda\)</span>, the mean number of emergency calls per hour, with a <span class="math inline">\(\text{Gamma}(3, 1)\)</span> prior. Over <strong>8 hours</strong> they record <strong>15 calls</strong>.</p>
+<p><strong>a.</strong> [0.75] Give the posterior distribution, its mean, and a 95% equal-tailed credible interval.</p>
+<p><strong>b.</strong> [1] Predict calls next hour. Compute <span class="math inline">\(E(Y&#39; \mid y)\)</span> and <span class="math inline">\(P(Y&#39; \ge 2 \mid y)\)</span> using the posterior-predictive (Negative-Binomial) distribution.</p>
+<p><strong>c.</strong> [1] Test <span class="math inline">\(H_+: \lambda &gt; 2\)</span> vs <span class="math inline">\(H_-: \lambda &lt; 2\)</span>. Compute <span class="math inline">\(BF_{+-}\)</span> from prior and posterior odds and interpret.</p>
+<p><strong>d.</strong> [0.75] Test <span class="math inline">\(H_0: \lambda = 2\)</span> using Savage–Dickey. What does <span class="math inline">\(BF_{01}\)</span> say about <span class="math inline">\(\lambda = 2\)</span>?</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href>Question</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href>Solution</a></li></ul>
 <div class="tab-content">
@@ -4817,107 +4879,81 @@ list-style-type: square;
 <p>Attempt before looking at the solution.</p>
 </div>
 <div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
-<p><strong>a.</strong></p>
+<p><strong>a.</strong> <span class="math inline">\(Y_i\mid\lambda \overset{iid}{\sim}\text{Poisson}(\lambda)\)</span>; posterior <span class="math inline">\(\lambda\mid y \sim \text{Gamma}(s+\sum y,\ r+n)\)</span>.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>prior_dens <span class="ot">&lt;-</span> <span class="fu">dbeta</span>(<span class="fl">0.5</span>, <span class="dv">12</span>, <span class="dv">8</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>post_dens  <span class="ot">&lt;-</span> <span class="fu">dbeta</span>(<span class="fl">0.5</span>, <span class="dv">33</span>, <span class="dv">17</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>BF10 <span class="ot">&lt;-</span> prior_dens <span class="sc">/</span> post_dens</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;BF_10 =&quot;</span>, <span class="fu">round</span>(BF10, <span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="dv">3</span>; r <span class="ot">&lt;-</span> <span class="dv">1</span>; sumy <span class="ot">&lt;-</span> <span class="dv">15</span>; nobs <span class="ot">&lt;-</span> <span class="dv">8</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>sp <span class="ot">&lt;-</span> s <span class="sc">+</span> sumy; rp <span class="ot">&lt;-</span> r <span class="sc">+</span> nobs</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Posterior: Gamma(&quot;</span>, sp, <span class="st">&quot;,&quot;</span>, rp, <span class="st">&quot;),  mean =&quot;</span>, <span class="fu">round</span>(sp<span class="sc">/</span>rp, <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>BF_10 = 5.88 </code></pre>
+<pre><code>Posterior: Gamma( 18 , 9 ),  mean = 2 </code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;95% ETI:&quot;</span>, <span class="fu">round</span>(<span class="fu">qgamma</span>(<span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>), sp, rp), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>95% ETI: 1.185 3.024 </code></pre>
 </div>
 </div>
-<p><strong>b.</strong> Using the Jeffreys scale: BF 10–30 is “strong evidence,” 3–10 is “moderate.” Report accordingly.</p>
+<p><strong>b.</strong></p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;E(Y&#39; | y) =&quot;</span>,       <span class="fu">round</span>(sp<span class="sc">/</span>rp, <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>E(Y&#39; | y) = 2 </code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;P(Y&#39; &gt;= 2 | y) =&quot;</span>,  <span class="fu">round</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnbinom</span>(<span class="dv">1</span>, <span class="at">size =</span> sp, <span class="at">prob =</span> rp<span class="sc">/</span>(rp<span class="sc">+</span><span class="dv">1</span>)), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>P(Y&#39; &gt;= 2 | y) = 0.58 </code></pre>
+</div>
+</div>
+<p>The posterior-predictive marginalises over uncertainty in <span class="math inline">\(\lambda\)</span>. Plugging in a point estimate ignores this uncertainty.</p>
 <p><strong>c.</strong></p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>p_prior  <span class="ot">&lt;-</span> <span class="fu">pbeta</span>(<span class="fl">0.5</span>, <span class="dv">12</span>, <span class="dv">8</span>,  <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>p_post   <span class="ot">&lt;-</span> <span class="fu">pbeta</span>(<span class="fl">0.5</span>, <span class="dv">33</span>, <span class="dv">17</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>BF_plus0 <span class="ot">&lt;-</span> (p_post <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> p_post)) <span class="sc">/</span> (p_prior <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> p_prior))</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;BF(+,0) =&quot;</span>, <span class="fu">round</span>(BF_plus0, <span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>prior_p <span class="ot">&lt;-</span> <span class="fu">pgamma</span>(<span class="dv">2</span>, s, r); post_p <span class="ot">&lt;-</span> <span class="fu">pgamma</span>(<span class="dv">2</span>, sp, rp)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>BF_plusminus <span class="ot">&lt;-</span> (post_p<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>post_p)) <span class="sc">/</span> (prior_p<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>prior_p))</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Prior P(l&gt;2):&quot;</span>, <span class="fu">round</span>(prior_p,<span class="dv">3</span>), <span class="st">&quot; Posterior P(l&gt;2):&quot;</span>, <span class="fu">round</span>(post_p,<span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>BF(+,0) = 20.35 </code></pre>
+<pre><code>Prior P(l&gt;2): 0.323  Posterior P(l&gt;2): 0.531 </code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;BF(+, -) =&quot;</span>, <span class="fu">round</span>(BF_plusminus, <span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>BF(+, -) = 2.37 </code></pre>
 </div>
 </div>
-<p>The one-sided BF is larger because it concentrates prior probability on the side supported by the data.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="mock-q4-posterior-prediction" class="level2">
-<h2 class="anchored" data-anchor-id="mock-q4-posterior-prediction">Mock Q4: Posterior Prediction</h2>
-<p>Using posterior Beta(33, 17), predict recall for a new participant (30 words).</p>
-<p><strong>a.</strong> Simulation code.</p>
-<p><strong>b.</strong> <span class="math inline">\(E(Y&#39; \mid y)\)</span> and <span class="math inline">\(P(Y&#39; \geq 25 \mid y)\)</span>.</p>
-<p><strong>c.</strong> Posterior predictive check on the original <span class="math inline">\(y = 21\)</span>. Does the model fit?</p>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true" href>Question</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false" href>Solution</a></li></ul>
-<div class="tab-content">
-<div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
-<p>Attempt before looking at the solution.</p>
-</div>
-<div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
-<p><strong>a &amp; b.</strong></p>
+<p>Interpret using Kass &amp; Raftery scale.</p>
+<p><strong>d.</strong></p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>theta_post <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(N, <span class="at">shape1 =</span> <span class="dv">33</span>, <span class="at">shape2 =</span> <span class="dv">17</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>y_pred     <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(N, <span class="at">size =</span> <span class="dv">30</span>, <span class="at">prob =</span> theta_post)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;E(Y&#39; | y) =&quot;</span>, <span class="fu">round</span>(<span class="fu">mean</span>(y_pred), <span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;BF01 =&quot;</span>, <span class="fu">round</span>(<span class="fu">dgamma</span>(<span class="dv">2</span>, sp, rp) <span class="sc">/</span> <span class="fu">dgamma</span>(<span class="dv">2</span>, s, r), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>E(Y&#39; | y) = 19.8 </code></pre>
+<pre><code>BF01 = 3.112 </code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;P(Y&#39; &gt;= 25 | y) =&quot;</span>, <span class="fu">round</span>(<span class="fu">mean</span>(y_pred <span class="sc">&gt;=</span> <span class="dv">25</span>), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;BF10 =&quot;</span>, <span class="fu">round</span>(<span class="fu">dgamma</span>(<span class="dv">2</span>, s, r) <span class="sc">/</span> <span class="fu">dgamma</span>(<span class="dv">2</span>, sp, rp), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>P(Y&#39; &gt;= 25 | y) = 0.066 </code></pre>
+<pre><code>BF10 = 0.321 </code></pre>
 </div>
 </div>
-<p><strong>c.</strong></p>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pp_pval <span class="ot">&lt;-</span> <span class="fu">mean</span>(y_pred <span class="sc">&gt;=</span> <span class="dv">21</span>)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;PP p-value =&quot;</span>, <span class="fu">round</span>(pp_pval, <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>PP p-value = 0.43 </code></pre>
-</div>
-</div>
-<p>A pp p-value near 0.5 indicates good fit — <span class="math inline">\(y_\text{obs} = 21\)</span> falls near the centre of the predictive distribution.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="mock-q5-spot-the-errors" class="level2">
-<h2 class="anchored" data-anchor-id="mock-q5-spot-the-errors">Mock Q5: Spot the Errors</h2>
-<blockquote class="blockquote">
-<p>We used Beta(1,1) — no justification needed since it is uninformative. We observed <span class="math inline">\(y = 18\)</span>, <span class="math inline">\(n = 25\)</span>, yielding posterior Beta(19, 8). The 95% credible interval [0.54, 0.89] <strong>shows the null (<span class="math inline">\(\theta = 0.5\)</span>) is rejected</strong>. With <span class="math inline">\(BF_{10} = 6.1\)</span>, <strong>we are confident <span class="math inline">\(H_1\)</span> is true</strong>. Strong evidence makes sensitivity analysis unnecessary.</p>
-</blockquote>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true" href>Question</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false" href>Solution</a></li></ul>
-<div class="tab-content">
-<div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
-<p>Find <strong>4 errors</strong>.</p>
-</div>
-<div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
-<ol type="1">
-<li><strong>“No justification needed”</strong>: Beta(1,1) has ESS = 2 — a real modelling assumption with real consequences.</li>
-<li><strong>“CI shows the null is rejected”</strong>: use the BF for testing; the CI is for estimation.</li>
-<li><strong>“Confident <span class="math inline">\(H_1\)</span> is true”</strong>: <span class="math inline">\(BF_{10} = 6.1\)</span> is moderate evidence. It does not mean <span class="math inline">\(H_1\)</span> is true.</li>
-<li><strong>“Sensitivity analysis not needed”</strong>: sensitivity analysis is <em>especially</em> important for strong claims. One prior is never enough.</li>
-</ol>
+<p><span class="math inline">\(BF_{01} &gt; 1\)</span> means posterior density at <span class="math inline">\(\lambda=2\)</span> exceeds prior density. Data support <span class="math inline">\(\lambda=2\)</span>.</p>
 </div>
 </div>
 </div>
@@ -4930,14 +4966,15 @@ list-style-type: square;
 <h2 class="anchored" data-anchor-id="what-to-expect">What to Expect</h2>
 <ul>
 <li><strong>Duration:</strong> 2 hours · <strong>Format:</strong> closed-book (one A4 cheat sheet)</li>
+<li><strong>Content:</strong> Questions are re-skinned versions of <em>Bayes Rules!</em> end-of-chapter exercises, covering Lectures 3–5 (Ch. 5–8).</li>
 </ul>
 <p><strong>Typical question types:</strong></p>
 <ul>
-<li>Identify the appropriate model and write the prior + posterior</li>
-<li>Compute posterior summaries (mean, ETI) by hand or describe the R code</li>
-<li>Interpret a Bayes factor and posterior predictive</li>
-<li>Spot errors in a written Bayesian report</li>
-<li>Short conceptual questions (credible interval vs CI, BF vs posterior probability)</li>
+<li><strong>Conjugate models</strong> (Beta-Binomial, Gamma-Poisson, Normal-Normal): identify model, write prior and posterior, compute summaries</li>
+<li><strong>Grid approximation &amp; MCMC</strong>: implement grid approximation for non-conjugate priors, compute Metropolis acceptance probability, diagnose chain mixing</li>
+<li><strong>Posterior inference &amp; prediction</strong>: compute ETI/HDI, posterior predictive distribution, prediction intervals</li>
+<li><strong>Hypothesis testing</strong>: Bayes factors (Savage-Dickey, prior/posterior odds), one-sided and two-sided tests, BF interpretation</li>
+<li><strong>Reporting &amp; error-spotting</strong>: identify common Bayesian reporting errors, apply van Doorn et al. checklist</li>
 </ul>
 </section>
 <section id="practical-tips" class="level2">
@@ -4961,12 +4998,12 @@ list-style-type: square;
 <p><span class="math inline">\(\text{Post odds} = BF_{10} \times \text{Prior odds}\)</span></p>
 <p><span class="math inline">\(BF_{10} = f(\theta_0)\,/\,f(\theta_0 \mid y)\)</span> (Savage–Dickey)</p>
 <p><span class="math inline">\(BF_{+0} = \dfrac{P(\theta &gt; \theta_0 \mid y)}{P(\theta &gt; \theta_0)}\)</span></p>
-<p><strong>Credible interval:</strong> direct probability statement — <span class="math inline">\(P(\theta \in [L,U] \mid y) = 0.95\)</span>.</p>
+<p><strong>Credible interval:</strong> direct probability statement, <span class="math inline">\(P(\theta \in [L,U] \mid y) = 0.95\)</span>.</p>
 <p><strong>ETI:</strong> <code>qbeta(c(0.025, 0.975), a, b)</code> · <strong>HDI:</strong> <code>HPDinterval(as.mcmc(samples))</code></p>
 </div>
 <hr>
 <div class="note">
-<p>Open Q&amp;A — any topic from the past three weeks. Exam is <strong>Friday, June 19, 09:00–11:00, IWO 4.04C (Blauw)</strong>. Good luck!</p>
+<p>Open Q&amp;A: any topic from the past three weeks. Exam is <strong>Friday, June 19, 09:00–11:00, IWO 4.04C (Blauw)</strong>. Good luck!</p>
 </div>
 </section>
 </section>

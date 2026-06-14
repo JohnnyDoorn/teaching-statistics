@@ -1,0 +1,32 @@
+project:
+  type: default
+
+format:
+  # html:
+    # css: ajohnson.css
+    # include-in-header:
+    #   - text: |
+    #       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    # code-fold: true
+    # theme: cosmo
+    # toc: true
+    # toc-depth: 3
+    # number-sections: false
+    # df-print: paged
+    # self-contained: true
+    # cite-method: citeproc
+    # csl: apa.csl
+
+  pdf:
+    documentclass: article
+    pdf-engine: xelatex
+    include-in-header: bayesrules.sty
+    listings: true
+    code-block: true
+    number-sections: false
+    top-level-division: section
+    toc: false
+    cite-method: natbib
+    filters: [hide-html.lua]
+    title-block: false
+    csl: apa.csl

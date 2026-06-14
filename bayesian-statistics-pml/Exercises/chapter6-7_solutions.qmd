@@ -24,12 +24,12 @@ knitr::opts_chunk$set(echo = TRUE, fig.align = "center")
 ```
 
 <div class="note">
-These solutions accompany **Lecture 4 — Obtaining the Posterior: Grid Approximation & MCMC**. They cover the suggested exercises from *Bayes Rules!* Chapter 6 (approximating the posterior) and Chapter 7 (MCMC under the hood). The exercise prompts are quoted from the book; the worked solutions, code, and figures are our own.
+These solutions accompany **Lecture 4 (Obtaining the Posterior: Grid Approximation & MCMC)**. They cover the suggested exercises from *Bayes Rules!* Chapter 6 (approximating the posterior) and Chapter 7 (MCMC under the hood). The exercise prompts are quoted from the book; the worked solutions, code, and figures are our own.
 
 Remember the exam scope: you do **not** need to implement samplers by hand or use Stan, but you should understand the intuition and be able to read and interpret the diagnostics shown below.
 </div>
 
-# Chapter 6 — Approximating the Posterior
+# Chapter 6: Approximating the Posterior
 
 ## Exercise 6.2 (Trace plot diagnostics)
 
@@ -40,7 +40,7 @@ Remember the exam scope: you do **not** need to implement samplers by hand or us
 > c) The chain has a tendency to get "stuck."
 > d) The chain has no problems!
 
-**Solution.** A trace plot shows the chain value $\theta^{(t)}$ on the $y$-axis against the iteration $t$ on the $x$-axis. Rather than sketch by hand, we simulate four chains that each exhibit one of these behaviours. The healthy chain (d) is the benchmark — the so-called "hairy caterpillar."
+**Solution.** A trace plot shows the chain value $\theta^{(t)}$ on the $y$-axis against the iteration $t$ on the $x$-axis. Rather than sketch by hand, we simulate four chains that each exhibit one of these behaviours. The healthy chain (d) is the benchmark, the so-called "hairy caterpillar."
 
 ```{r ex62-traces, fig.width=9, fig.height=6}
 set.seed(1)
@@ -82,10 +82,10 @@ plot(healthy, type = "l", col = "#01426A", main = "(d) No problems!",
      xlab = "iteration", ylab = expression(theta))
 ```
 
-- **(a) Mixing too slowly** — the trace drifts in long, slow waves and takes many iterations to wander from one part of the space to another. It looks like a meandering river rather than rapid back-and-forth.
-- **(b) High correlation** — consecutive values are nearly identical, giving a smooth, "snake-like" line. Neighbouring draws carry almost no new information.
-- **(c) Gets stuck** — the trace shows flat horizontal plateaus where the chain rejected many proposals and stayed put, interrupted by occasional jumps.
-- **(d) No problems!** — a dense, fuzzy band oscillating rapidly around a stable level, with no trends and no flat spots: the "hairy caterpillar" we hope to see.
+- **(a) Mixing too slowly:** the trace drifts in long, slow waves and takes many iterations to wander from one part of the space to another. It looks like a meandering river rather than rapid back-and-forth.
+- **(b) High correlation:** consecutive values are nearly identical, giving a smooth, "snake-like" line. Neighbouring draws carry almost no new information.
+- **(c) Gets stuck:** the trace shows flat horizontal plateaus where the chain rejected many proposals and stayed put, interrupted by occasional jumps.
+- **(d) No problems!** A dense, fuzzy band oscillating rapidly around a stable level, with no trends and no flat spots: the "hairy caterpillar" we hope to see.
 
 ---
 
@@ -99,9 +99,9 @@ plot(healthy, type = "l", col = "#01426A", main = "(d) No problems!",
 
 **Solution.**
 
-**(a) Mixing too slowly.** Within a fixed number of iterations the chain has not visited the whole posterior, so the approximation is *incomplete and biased*: regions the chain has not reached yet are under-represented. Posterior summaries (mean, credible intervals, tail probabilities) computed from such a chain are unreliable, and we would need a far longer run — or a better sampler — before trusting them.
+**(a) Mixing too slowly.** Within a fixed number of iterations the chain has not visited the whole posterior, so the approximation is *incomplete and biased*: regions the chain has not reached yet are under-represented. Posterior summaries (mean, credible intervals, tail probabilities) computed from such a chain are unreliable, and we would need a far longer run (or a better sampler) before trusting them.
 
-**(b) High correlation.** Strongly autocorrelated draws contain a lot of redundant information, so the **effective sample size** is much smaller than the nominal number of iterations $N$. The Monte Carlo error on any posterior estimate is therefore larger than $N$ would suggest — our summaries are noisier and less precise. Running the chain longer (or thinning) is needed to recover precision.
+**(b) High correlation.** Strongly autocorrelated draws contain a lot of redundant information, so the **effective sample size** is much smaller than the nominal number of iterations $N$. The Monte Carlo error on any posterior estimate is therefore larger than $N$ would suggest. Our summaries are noisier and less precise. Running the chain longer (or thinning) is needed to recover precision.
 
 **(c) Gets stuck.** A chain that lingers too long at particular values *over-represents* that region and *under-explores* the rest of the posterior. If it gets stuck at an unrepresentative value, the approximation is biased and posterior summaries are skewed toward wherever the chain stalled. Sticking is often a symptom of a poorly tuned proposal (steps too large) or of multimodality.
 
@@ -118,9 +118,9 @@ In all three cases the underlying issue is the same: the simulated draws are **n
 
 **Solution.**
 
-**(a) A multi-parameter situation.** Almost any realistic model has more than one unknown. For example, in a **Normal model** where *neither* the mean $\mu$ *nor* the standard deviation $\sigma$ is known, we already need joint inference for two parameters $(\mu, \sigma)$. A **regression** of, say, exam score on hours studied *and* test anxiety has four unknowns — an intercept, two slopes, and the residual standard deviation $(\beta_0, \beta_1, \beta_2, \sigma)$. **Hierarchical models** (e.g., a separate ability parameter for each of many participants) can have dozens or hundreds of parameters. In all of these we want the *joint* posterior over every parameter at once.
+**(a) A multi-parameter situation.** Almost any realistic model has more than one unknown. For example, in a **Normal model** where *neither* the mean $\mu$ *nor* the standard deviation $\sigma$ is known, we already need joint inference for two parameters $(\mu, \sigma)$. A **regression** of, say, exam score on hours studied *and* test anxiety has four unknowns: an intercept, two slopes, and the residual standard deviation $(\beta_0, \beta_1, \beta_2, \sigma)$. **Hierarchical models** (e.g., a separate ability parameter for each of many participants) can have dozens or hundreds of parameters. In all of these we want the *joint* posterior over every parameter at once.
 
-**(b) Why dimensionality is a curse.** Grid approximation evaluates the (unnormalised) posterior at every point of a grid that spans each parameter's range. If we use $K$ grid points per parameter and have $p$ parameters, the grid contains $K^p$ points — the cost grows **exponentially** in the number of parameters. Even with a modest $K = 100$:
+**(b) Why dimensionality is a curse.** Grid approximation evaluates the (unnormalised) posterior at every point of a grid that spans each parameter's range. If we use $K$ grid points per parameter and have $p$ parameters, the grid contains $K^p$ points; the cost grows **exponentially** in the number of parameters. Even with a modest $K = 100$:
 
 ```{r ex68-grid}
 K <- 100
@@ -130,11 +130,11 @@ data.frame(
 )
 ```
 
-With ten parameters we already need $100^{10} = 10^{20}$ evaluations — utterly infeasible. Worse, in high dimensions almost all of those grid points fall in regions of negligible posterior density, so the effort is largely wasted. This exponential blow-up is the "curse," and it is exactly why we turn to **MCMC**, whose cost scales far more gently with dimension because it spends its time where the posterior mass actually is.
+With ten parameters we already need $100^{10} = 10^{20}$ evaluations, utterly infeasible. Worse, in high dimensions almost all of those grid points fall in regions of negligible posterior density, so the effort is largely wasted. This exponential blow-up is the "curse," and it is exactly why we turn to **MCMC**, whose cost scales far more gently with dimension because it spends its time where the posterior mass actually is.
 
 ---
 
-# Chapter 7 — MCMC Under the Hood
+# Chapter 7: MCMC Under the Hood
 
 ## Exercise 7.4 (Tuning the Metropolis-Hastings)
 
@@ -181,20 +181,20 @@ tour_good  <- mh_tour(N = 1000, w = 1)      # (e) well-tuned w
 ```{r ex74-traces, fig.width=8, fig.height=7}
 par(mfrow = c(3, 1), mar = c(3.6, 3.8, 2.4, 1), mgp = c(2.2, 0.7, 0))
 plot(tour_small, type = "l", col = "#01426A",
-     main = "(a) w = 0.01 — too small", xlab = "iteration", ylab = expression(mu))
+     main = "(a) w = 0.01: too small", xlab = "iteration", ylab = expression(mu))
 plot(tour_big, type = "l", col = "#01426A",
-     main = "(c) w = 100 — too large", xlab = "iteration", ylab = expression(mu))
+     main = "(c) w = 100: too large", xlab = "iteration", ylab = expression(mu))
 plot(tour_good, type = "l", col = "#01426A",
-     main = "(e) w = 1 — well tuned", xlab = "iteration", ylab = expression(mu))
+     main = "(e) w = 1: well tuned", xlab = "iteration", ylab = expression(mu))
 ```
 
-**(b) Why too small $w$ is problematic.** When $w$ is tiny the proposed value is almost identical to the current one, so it is nearly always accepted — but each step is minuscule. The chain *creeps*: it explores the posterior extremely slowly, produces highly correlated draws, and may not even reach the bulk of the posterior (around $\mu \approx 4$) within the run. High acceptance, but terrible mixing and a tiny effective sample size.
+**(b) Why too small $w$ is problematic.** When $w$ is tiny the proposed value is almost identical to the current one, so it is nearly always accepted, but each step is minuscule. The chain *creeps*: it explores the posterior extremely slowly, produces highly correlated draws, and may not even reach the bulk of the posterior (around $\mu \approx 4$) within the run. High acceptance, but terrible mixing and a tiny effective sample size.
 
-**(d) Why too large $w$ is problematic.** When $w$ is huge, most proposals land far out in the tails where the posterior plausibility is minute, so the acceptance probability $\alpha$ is almost zero and the proposals are rejected. The chain therefore *stays put* for long stretches — the trace shows long flat plateaus. Again mixing is poor and the effective sample size is small, just for the opposite reason.
+**(d) Why too large $w$ is problematic.** When $w$ is huge, most proposals land far out in the tails where the posterior plausibility is minute, so the acceptance probability $\alpha$ is almost zero and the proposals are rejected. The chain therefore *stays put* for long stretches. The trace shows long flat plateaus. Again mixing is poor and the effective sample size is small, just for the opposite reason.
 
 **(e) A well-tuned $w$** strikes a balance: proposals are far enough to make real progress but close enough to be accepted reasonably often. The trace becomes a healthy "hairy caterpillar" exploring the posterior around $\mu \approx 4$.
 
-**(f) How to find an appropriate $w$.** Tune it empirically: run short pilot tours over a range of $w$ values and inspect (i) the **acceptance rate** — a common rule of thumb for random-walk Metropolis is to aim for roughly 0.2–0.5, avoiding both ~1 (steps too small) and ~0 (steps too large); (ii) the **trace plots** — look for the hairy caterpillar rather than a slow snake or flat plateaus; and (iii) the **effective sample size / autocorrelation**, choosing the $w$ that maximises effective samples per iteration. Exercise 7.9 makes the mechanism concrete by showing how $\alpha$ changes with $w$ for a single step.
+**(f) How to find an appropriate $w$.** Tune it empirically: run short pilot tours over a range of $w$ values and inspect (i) the **acceptance rate**, a common rule of thumb for random-walk Metropolis is to aim for roughly 0.2–0.5, avoiding both ~1 (steps too small) and ~0 (steps too large); (ii) the **trace plots**, look for the hairy caterpillar rather than a slow snake or flat plateaus; and (iii) the **effective sample size / autocorrelation**, choosing the $w$ that maximises effective samples per iteration. Exercise 7.9 makes the mechanism concrete by showing how $\alpha$ changes with $w$ for a single step.
 
 ---
 
@@ -207,7 +207,7 @@ plot(tour_good, type = "l", col = "#01426A",
 > c) `one_mh_iteration(w = 1, current = 3)`
 > d) `one_mh_iteration(w = 3, current = 3)`
 
-**Solution.** Using `set.seed(1)` before each call, the first `runif()` draw is the same (0.2655), so each proposal equals $3 - w + 2w(0.2655) = 3 - 0.469\,w$ — i.e. a step of the *same shape* scaled by $w$. Larger $w$ therefore lands further below the current value of 3 and further from the posterior's high-density region near $\mu \approx 4$, which is why $\alpha$ collapses as $w$ grows.
+**Solution.** Using `set.seed(1)` before each call, the first `runif()` draw is the same (0.2655), so each proposal equals $3 - w + 2w(0.2655) = 3 - 0.469\,w$, i.e. a step of the *same shape* scaled by $w$. Larger $w$ therefore lands further below the current value of 3 and further from the posterior's high-density region near $\mu \approx 4$, which is why $\alpha$ collapses as $w$ grows.
 
 ```{r ex79-run}
 for (w in c(0.01, 0.5, 1, 3)) {
@@ -220,12 +220,12 @@ for (w in c(0.01, 0.5, 1, 3)) {
 
 **Comments.**
 
-- **(a) $w = 0.01$** — `proposal` $\approx 2.995$, essentially on top of the current value. Its plausibility is almost identical, so $\alpha \approx 0.99$ and the proposal is **accepted** (`next_stop` $\approx 2.995$). Tiny, near-certain steps — the "too small $w$" behaviour of Exercise 7.4(b).
-- **(b) $w = 0.5$** — `proposal` $\approx 2.766$, a bit further from the posterior mode, giving $\alpha \approx 0.48$. Here the coin flip lands on **reject**, so `next_stop` $= 3$.
-- **(c) $w = 1$** — `proposal` $\approx 2.531$, further still, so $\alpha \approx 0.20$ and the move is again **rejected** (`next_stop` $= 3$).
-- **(d) $w = 3$** — `proposal` $\approx 1.593$, far out in the low-density tail, so $\alpha \approx 0.001$ and the proposal is almost surely **rejected** (`next_stop` $= 3$).
+- **(a) $w = 0.01$:** `proposal` $\approx 2.995$, essentially on top of the current value. Its plausibility is almost identical, so $\alpha \approx 0.99$ and the proposal is **accepted** (`next_stop` $\approx 2.995$). Tiny, near-certain steps, the "too small $w$" behaviour of Exercise 7.4(b).
+- **(b) $w = 0.5$:** `proposal` $\approx 2.766$, a bit further from the posterior mode, giving $\alpha \approx 0.48$. Here the coin flip lands on **reject**, so `next_stop` $= 3$.
+- **(c) $w = 1$:** `proposal` $\approx 2.531$, further still, so $\alpha \approx 0.20$ and the move is again **rejected** (`next_stop` $= 3$).
+- **(d) $w = 3$:** `proposal` $\approx 1.593$, far out in the low-density tail, so $\alpha \approx 0.001$ and the proposal is almost surely **rejected** (`next_stop` $= 3$).
 
-The trend is exactly the tuning story: as $w$ grows the proposals reach further from the current location, but because they move *away* from the bulk of this posterior the acceptance probability $\alpha$ falls steeply — from $\approx 0.99$ down to $\approx 0.001$. Too-small $w$ accepts everything but barely moves; too-large $w$ proposes bold jumps that are nearly always rejected. A well-chosen $w$ lives in between.
+The trend is exactly the tuning story: as $w$ grows the proposals reach further from the current location, but because they move *away* from the bulk of this posterior the acceptance probability $\alpha$ falls steeply, from $\approx 0.99$ down to $\approx 0.001$. Too-small $w$ accepts everything but barely moves; too-large $w$ proposes bold jumps that are nearly always rejected. A well-chosen $w$ lives in between.
 
 ---
 

@@ -1,0 +1,163 @@
+% bayesrules.sty
+\ProvidesPackage{bayesrules}
+
+
+% -------------------------------------------------------
+% FONTS & GENERAL TYPOGRAPHY
+% -------------------------------------------------------
+
+\renewcommand{\familydefault}{\sfdefault}
+\setlength{\abovedisplayskip}{0.6em}
+\setlength{\belowdisplayskip}{0.6em}
+\setlength{\parskip}{0.3em plus 0.1em minus 0.1em}
+\usepackage{float}
+\usepackage{enumitem}
+
+
+% -------------------------------------------------------
+% COLOR DEFINITIONS
+% -------------------------------------------------------
+
+\usepackage{xcolor}
+\definecolor{bayespurple}{RGB}{85,46,107}
+\definecolor{bookgray}{RGB}{236,236,236}
+\definecolor{commentblue}{rgb}{0.44, 0.62, 0.69}
+\definecolor{functionblue}{rgb}{0.06, 0.15, 0.47}
+\definecolor{numbergreen}{rgb}{0.36, 0.62, 0.45}
+\definecolor{argolive}{rgb}{0.51, 0.56, 0.23}
+\definecolor{codebrown}{rgb}{0.2, 0.2, 0.2}
+\definecolor{assigngreen}{rgb}{0.051, 0.392, 0.031}
+\definecolor{assignblue}{rgb}{0.294, 0.435, 0.612}
+
+% -------------------------------------------------------
+% SECTION HEADINGS
+% -------------------------------------------------------
+
+\newcommand{\authorline}{%
+  \par\vspace{-0.2em}%
+  {\bfseries Addendum by Maarten Marsman}%
+  \par\vspace{0em}%
+}
+
+\usepackage{titlesec}
+
+\titleformat{\section}
+  {\color{bayespurple}\sffamily\large\bfseries}
+  {}{0pt}{%
+    \vspace{0.3em}
+    \color{bayespurple}\rule{\textwidth}{2pt} \\[0.1em]
+    \color{bayespurple}\sffamily\large\bfseries
+  }
+  [\vspace{-0.7em}\color{bayespurple}\rule{\textwidth}{2pt}]
+
+\titleformat{\subsection}[hang]
+  {\color{bayespurple}\sffamily\large\bfseries}
+  {}{0pt}{%
+    \vspace{0.3em}
+    \color{bayespurple}\rule{\textwidth}{2pt} \\[0.1em]
+    \color{bayespurple}\sffamily\large\bfseries
+  }
+  [\vspace{-0.7em}\color{bayespurple}\rule{\textwidth}{2pt}]
+
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries\color{bayespurple}}
+  {\thesubsubsection}{0.5em}{}
+
+% -------------------------------------------------------
+% CUSTOM BOX STYLE
+% -------------------------------------------------------
+
+\usepackage[most]{tcolorbox}
+
+\tcbset{
+  bookgraybox/.style={
+    colback=bookgray,
+    colframe=bayespurple,
+    coltitle=black,
+    colbacktitle=bookgray,
+    fonttitle=\bfseries,
+    boxrule=0.4pt,
+    left=6pt,
+    right=6pt,
+    top=6pt,
+    bottom=6pt,
+    enhanced,
+    breakable,
+    arc=6pt,
+    outer arc=6pt,
+    titlerule=0pt,
+    toptitle=0pt,
+    bottomtitle=0pt,
+    after title=\vspace{0pt},
+    before upper={\setlength{\parskip}{0.5em}\setlength{\parindent}{0pt}}
+  }
+}
+
+% -------------------------------------------------------
+% CODE HIGHLIGHTING
+% -------------------------------------------------------
+
+\usepackage{listings}
+\usepackage{fontspec}
+
+\lstdefinelanguage{Rbook}{
+  alsoletter=._,
+  sensitive=true,
+  morekeywords={library, dbinom, choose, dbeta, seq, tibble, ggplot, aes,
+    geom_area, geom_point, scale_fill_manual, labs, theme_minimal, theme,
+    element_blank, element_text, sqrt, dnorm, rnorm},
+  morekeywords=[2]{function},
+  keywordstyle=\color{functionblue}\bfseries,          % default keywords
+  keywordstyle=[2]\color{numbergreen}\bfseries         % just for `function`
+}
+
+
+\newcommand{\argocolor}[1]{\textcolor{argolive}{\texttt{#1}}}
+
+\lstset{
+  language=Rbook,
+  backgroundcolor=\color{white},
+basicstyle=\ttfamily\bfseries\small,
+  comment=[l]\#,
+  frame=single,
+  rulecolor=\color{black},
+  commentstyle=\color{commentblue}\itshape,
+  keywordstyle=\color{functionblue}\bfseries,
+  stringstyle=\color{numbergreen},
+  identifierstyle=\color{codebrown},
+  showstringspaces=false,
+  breaklines=true,
+  tabsize=2,
+  captionpos=b,
+  keepspaces=true,
+  numbers=none,
+  columns=flexible,
+  alsoletter=._,
+  moredelim=**[is][\color{assigngreen}]{±}{±},
+  moredelim=**[is][\color{argolive}]{@}{@},
+  moredelim=**[is][\color{numbergreen}]{§}{§},
+  moredelim=**[is][\color{functionblue}\ttfamily]{@§}{@§},
+  moredelim=**[is][\color{codebrown}\ttfamily]{@&}{@&},
+  literate={<-}{{\textcolor{assigngreen}{\texttt{<-}}}}2
+           {/}{{\textcolor{assignblue}{\texttt{/}}}}1
+           {+}{{\textcolor{assignblue}{\texttt{+}}}}1
+           {-}{{\textcolor{assignblue}{\texttt{-}}}}1
+           {*}{{\textcolor{assignblue}{\texttt{*}}}}1
+           {\%>\%}{{\textcolor{assignblue}{\texttt{\%>\%}}}}3
+}
+
+
+% -------------------------------------------------------
+% QUARTO .exercise SUPPORT
+% -------------------------------------------------------
+
+% Link Quarto .exercise divs to a tcolorbox using the bookgraybox style
+\ExplSyntaxOn
+\cs_new:Npn \quarto_exercise_begin:nn #1 #2 {
+  \begin{tcolorbox}[bookgraybox, title={#2}]
+}
+\cs_new:Npn \quarto_exercise_end:nn #1 #2 {
+  \end{tcolorbox}
+}
+\ExplSyntaxOff
+

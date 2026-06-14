@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
+
+:root {
+  --bayespurple: #552E6B;
+  --quizgray: #ECECEC;
+}
+
+/* Base font and layout */
+body {
+  font-family: 'EB Garamond', serif;
+  font-size: 1em;
+  line-height: 1.25;
+  color: #222;
+  background: white;
+  padding: 1em;
+}
+
+/* Constrain text width */
+#bookdown-content {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* Paragraph spacing */
+p {
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+}
+
+/* List spacing */
+ul, ol {
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+}
+
+li {
+  margin-bottom: 0.3em;
+}
+
+/* Chapter heading (h1) */
+h1 {
+  font-weight: bold;
+  font-size: 1.4em;
+  color: var(--bayespurple);
+  margin-top: 1.5em;
+  margin-bottom: 0.6em;
+  padding: 0.2em 0;
+  line-height: 1.1;
+  text-align: left;
+  border-top: 3px solid var(--bayespurple);
+  border-bottom: 3px solid var(--bayespurple);
+}
+
+/* Section heading (h2) */
+h2 {
+  font-weight: bold;
+  font-size: 1.3em;
+  color: var(--bayespurple);
+  margin-top: 1.5em;
+  margin-bottom: 0.6em;
+  padding: 0.2em 0;
+  line-height: 1.1;
+  border-top: 3px solid var(--bayespurple);
+  border-bottom: 3px solid var(--bayespurple);
+}
+
+/* Subsection heading (h3) */
+h3 {
+  font-weight: bold;
+  font-size: 1.15em;
+  color: var(--bayespurple);
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+}
+
+/* References heading */
+#refs h2 {
+  font-weight: bold;
+  font-size: 1.3em;
+  color: var(--bayespurple);
+  border-top: 3px solid var(--bayespurple);
+  border-bottom: 3px solid var(--bayespurple);
+  padding: 0.4em 0;
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+
+/* Individual reference entries */
+div.csl-entry {
+  font-family: 'Crimson Text', serif;
+  font-size: 1em;
+  line-height: 1.4;
+  margin-bottom: 0.6em;
+  padding-left: 1.5em;
+  text-indent: -1.5em;
+}
+
+/* Quizboxes */
+.bookgraybox {
+  background-color: var(--quizgray);
+  border: 1px solid var(--bayespurple);
+  border-radius: 8px;
+  padding: 0.4em 0.6em 0.3em 0.6em;
+  margin: 1.2em 0;
+  font-family: 'Crimson Text', serif;
+  font-weight: 400;
+  font-size: 1.15em;
+  line-height: 1.3;
+  color: #333333;
+}
+
+.bookgraybox * {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.bookgraybox .title {
+  font-weight: bold;
+  font-size: 1em;
+  color: #333333;
+  margin-top: 0;
+  margin-bottom: 0.7em;
+  line-height: 1.2;
+}
+
+.bookgraybox p {
+  margin: 0.4em 0;
+  font-size: inherit !important;
+  font-family: inherit;
+}
+
+.bookgraybox strong {
+  font-weight: bold;
+  font-size: inherit;
+  font-family: inherit;
+}
+
+/* Inline math */
+.math.inline {
+  font-size: 1em;
+  line-height: 1.1;
+}
+
+/* Style the R code block box */
+pre.sourceCode.r code {
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 0px;                /* Square corners */
+  padding: 0.75em;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 0.95em;
+  line-height: 1.4;
+  color: black;
+  box-shadow: none;                 /* No drop shadow */
+}
+
+/* Downlit token styles */
+.sourceCode.r .co { color: #719FAF; }                    /* Comments */
+.sourceCode.r .kw { color: #102779; font-weight: bold; } /* Keywords / functions */
+.sourceCode.r .st,
+.sourceCode.r .dv { color: #5B9E74; }                    /* Strings and numbers */
+
