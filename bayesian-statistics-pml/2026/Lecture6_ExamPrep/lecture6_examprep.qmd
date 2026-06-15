@@ -330,18 +330,28 @@ pbeta(0.70, ap, bp, lower.tail = FALSE)
 
 :::
 
-## Mock Q2: Grid Approximation (3 pts)
-*(Lecture 4 / Ch. 6–7; cf. grid approximation exercises)*
+## Mock Q2: Grid Approximation & MCMC (3 pts)
+*(Lecture 4 / Ch. 6–7; cf. grid + Metropolis exercises)*
 
 A researcher models $\theta$, the probability of a new drug being effective. They use a $\text{Beta}(2, 2)$ prior **truncated to $[0.3, 0.7]$**. In a trial of **20 patients, 12 show improvement**.
 
-**a.** [0.75] Explain why this truncated prior has no closed-form conjugate posterior, and outline the grid-approximation recipe.
+**a.** [0.5] Explain why this truncated prior has no closed-form conjugate posterior.
 
-**b.** [1] Implement the grid approximation (5,000 points on $[0,1]$) and report the posterior mean. Compare to the untruncated conjugate posterior mean.
+**b.** [1] The researcher writes the following recipe on the whiteboard:
 
-**c.** [0.75] A random-walk Metropolis sampler on the **untruncated** model is at $\theta_c = 0.55$ and proposes $\theta_p = 0.60$. Using the unnormalised posterior, compute the Metropolis acceptance probability $\alpha$. Is the move accepted with certainty?
+> 1. Build a fine grid $\theta_1, \ldots, \theta_K$ on $[0, 1]$.
+> 2. At each $\theta_i$, compute $u_i = f(\theta_i)\, L(y \mid \theta_i)$ using the truncated Beta prior and Binomial likelihood.
+> 3. Normalise: $w_i = u_i / \sum_k u_k$.
+> 4. Report posterior summaries as weighted averages over the grid.
 
-**d.** [0.5] What step size pathology causes: (i) a flat caterpillar trace plot; (ii) a drifting chain; (iii) a stuck chain?
+(i) [0.5] Which numerical method does this describe? Pick **one** and justify in one sentence:
+*(A) Metropolis–Hastings MCMC · (B) Grid approximation · (C) Conjugate Beta–Binomial update · (D) Posterior-predictive Monte Carlo.*
+
+(ii) [0.5] Applying the recipe gives a posterior mean of $\bar\theta \approx 0.562$. The *untruncated* conjugate posterior $\text{Beta}(2 + 12,\; 2 + 8) = \text{Beta}(14, 10)$ has mean $\approx 0.583$. What does the comparison tell you about the truncation here?
+
+**c.** [1] A random-walk Metropolis sampler on the **untruncated** model is at $\theta_c = 0.55$ and proposes $\theta_p = 0.60$. Using the unnormalised posterior, compute the Metropolis acceptance probability $\alpha$. Is the move accepted with certainty?
+
+**d.** [0.5] You rerun the sampler with three step sizes. One trace plot is a flat caterpillar around the mode; one drifts slowly and never settles; one gets "stuck" on long plateaus. Match each pattern to the diagnosis: **good mixing**, **step size too small**, **step size too large**.
 
 ::: {.panel-tabset}
 
@@ -351,29 +361,23 @@ Attempt before looking at the solution.
 
 ### Solution
 
-**a.** The conjugate update requires a proper Beta prior on $[0,1]$. Truncation leaves the Beta family, so the posterior has no closed form. Grid approximation evaluates $u_i = f(\theta_i)L(y\mid\theta_i)$ on a fine grid, normalises to $u_i/\sum_j u_j$, and samples grid points proportional to those weights.
+**a.** The Beta–Binomial conjugate update needs a proper Beta prior on $[0, 1]$. Truncating to $[0.3, 0.7]$ takes the prior out of the Beta family, so the posterior is no longer Beta and has no closed form.
 
-**b.**
-```{r m2b}
-y <- 12; n <- 20; grid <- seq(0, 1, length.out = 5000)
-prior <- dbeta(grid, 2, 2) * (grid >= 0.3 & grid <= 0.7)
-lik   <- dbinom(y, n, grid)
-post  <- prior * lik; post <- post / sum(post)
-cat("Grid posterior mean:        ", round(sum(grid * post), 3), "\n")
-cat("Untruncated conjugate mean: ", round((2+y)/(4+n), 3), "\n")
-```
+**b.** (i) **(B) Grid approximation.** No accept/reject step (so not MCMC), no analytical update (so not the conjugate Beta–Binomial), and the recipe produces posterior samples for $\theta$ rather than predictions for future $y$ (so not posterior-predictive Monte Carlo).
 
-Both ≈0.60. The truncation barely matters since data concentrate $\theta$ inside $[0.3, 0.7]$.
+(ii) The two means differ by about 0.02 (0.562 vs 0.583). With only $n = 20$, the conjugate posterior $\text{Beta}(14, 10)$ still has noticeable mass above 0.7, which the truncation cuts off — that pulls the truncated posterior mean slightly downward. The truncation is doing real work here, unlike in cases with larger $n$ where the data already concentrate $\theta$ well inside the truncation bounds.
 
 **c.**
+
 ```{r m2c}
+y <- 12; n <- 20
 logpost <- function(t) dbeta(t, 2, 2, log = TRUE) + dbinom(y, n, t, log = TRUE)
 cat("Acceptance probability:", round(min(1, exp(logpost(0.60) - logpost(0.55))), 3), "\n")
 ```
 
-$\alpha \approx$ [value]. If < 1, accept with that probability; if = 1, accept with certainty.
+$\alpha = 1$: the proposed value $\theta_p = 0.60$ is *more* plausible than the current $\theta_c = 0.55$ (the MLE sits exactly at $12/20 = 0.60$), so the unnormalised posterior ratio exceeds 1 and the move is accepted **with certainty**.
 
-**d.** (i) Flat caterpillar = good mixing (optimal step size). (ii) Slow drift = step size **too small** (high autocorrelation). (iii) Stuck plateaus = step size **too large** (proposals overshoot and are rejected).
+**d.** Flat caterpillar around the mode = **good mixing**. Slow drift that never settles = **step size too small** (high autocorrelation, the chain barely explores). Long stuck plateaus = **step size too large** (proposals overshoot into low-probability regions and are repeatedly rejected).
 
 :::
 
@@ -446,10 +450,10 @@ $BF_{01} > 1$ means posterior density at $\lambda=2$ exceeds prior density. Data
 
 **Typical question types:**
 
-- **Conjugate models** (Beta-Binomial, Gamma-Poisson, Normal-Normal): identify model, write prior and posterior, compute summaries
-- **Grid approximation & MCMC**: implement grid approximation for non-conjugate priors, compute Metropolis acceptance probability, diagnose chain mixing
+- **Conjugate models** (Beta–Binomial, Gamma–Poisson, Normal–Normal): identify model, write prior and posterior, compute summaries
+- **Grid approximation & MCMC**: identify a sampling recipe described on the page, explain why a non-conjugate posterior has no closed form, compute a one-step Metropolis acceptance probability, diagnose chain mixing from trace plots
 - **Posterior inference & prediction**: compute ETI/HDI, posterior predictive distribution, prediction intervals
-- **Hypothesis testing**: Bayes factors (Savage-Dickey, prior/posterior odds), one-sided and two-sided tests, BF interpretation
+- **Hypothesis testing**: Bayes factors (Savage–Dickey, prior/posterior odds), one-sided and two-sided tests, BF interpretation
 - **Reporting & error-spotting**: identify common Bayesian reporting errors, apply van Doorn et al. checklist
 
 ## Practical Tips

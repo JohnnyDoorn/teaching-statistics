@@ -4446,7 +4446,7 @@ list-style-type: square;
   <li><a href="#mock-exam" id="toc-mock-exam" class="nav-link" data-scroll-target="#mock-exam">Mock Exam</a>
   <ul class="collapse">
   <li><a href="#mock-q1-conjugacy-prior-choice-3.5-pts" id="toc-mock-q1-conjugacy-prior-choice-3.5-pts" class="nav-link" data-scroll-target="#mock-q1-conjugacy-prior-choice-3.5-pts">Mock Q1: Conjugacy &amp; Prior Choice (3.5 pts)</a></li>
-  <li><a href="#mock-q2-grid-approximation-3-pts" id="toc-mock-q2-grid-approximation-3-pts" class="nav-link" data-scroll-target="#mock-q2-grid-approximation-3-pts">Mock Q2: Grid Approximation (3 pts)</a></li>
+  <li><a href="#mock-q2-grid-approximation-mcmc-3-pts" id="toc-mock-q2-grid-approximation-mcmc-3-pts" class="nav-link" data-scroll-target="#mock-q2-grid-approximation-mcmc-3-pts">Mock Q2: Grid Approximation &amp; MCMC (3 pts)</a></li>
   <li><a href="#mock-q3-inference-prediction-testing-3.5-pts" id="toc-mock-q3-inference-prediction-testing-3.5-pts" class="nav-link" data-scroll-target="#mock-q3-inference-prediction-testing-3.5-pts">Mock Q3: Inference, Prediction &amp; Testing (3.5 pts)</a></li>
   </ul></li>
   <li><a href="#exam-tips" id="toc-exam-tips" class="nav-link" data-scroll-target="#exam-tips">Exam Tips</a>
@@ -4809,14 +4809,26 @@ list-style-type: square;
 </div>
 </div>
 </section>
-<section id="mock-q2-grid-approximation-3-pts" class="level2">
-<h2 class="anchored" data-anchor-id="mock-q2-grid-approximation-3-pts">Mock Q2: Grid Approximation (3 pts)</h2>
-<p><em>(Lecture 4 / Ch. 6–7; cf. grid approximation exercises)</em></p>
+<section id="mock-q2-grid-approximation-mcmc-3-pts" class="level2">
+<h2 class="anchored" data-anchor-id="mock-q2-grid-approximation-mcmc-3-pts">Mock Q2: Grid Approximation &amp; MCMC (3 pts)</h2>
+<p><em>(Lecture 4 / Ch. 6–7; cf. grid + Metropolis exercises)</em></p>
 <p>A researcher models <span class="math inline">\(\theta\)</span>, the probability of a new drug being effective. They use a <span class="math inline">\(\text{Beta}(2, 2)\)</span> prior <strong>truncated to <span class="math inline">\([0.3, 0.7]\)</span></strong>. In a trial of <strong>20 patients, 12 show improvement</strong>.</p>
-<p><strong>a.</strong> [0.75] Explain why this truncated prior has no closed-form conjugate posterior, and outline the grid-approximation recipe.</p>
-<p><strong>b.</strong> [1] Implement the grid approximation (5,000 points on <span class="math inline">\([0,1]\)</span>) and report the posterior mean. Compare to the untruncated conjugate posterior mean.</p>
-<p><strong>c.</strong> [0.75] A random-walk Metropolis sampler on the <strong>untruncated</strong> model is at <span class="math inline">\(\theta_c = 0.55\)</span> and proposes <span class="math inline">\(\theta_p = 0.60\)</span>. Using the unnormalised posterior, compute the Metropolis acceptance probability <span class="math inline">\(\alpha\)</span>. Is the move accepted with certainty?</p>
-<p><strong>d.</strong> [0.5] What step size pathology causes: (i) a flat caterpillar trace plot; (ii) a drifting chain; (iii) a stuck chain?</p>
+<p><strong>a.</strong> [0.5] Explain why this truncated prior has no closed-form conjugate posterior.</p>
+<p><strong>b.</strong> [1] The researcher writes the following recipe on the whiteboard:</p>
+<blockquote class="blockquote">
+<ol type="1">
+<li>Build a fine grid <span class="math inline">\(\theta_1, \ldots, \theta_K\)</span> on <span class="math inline">\([0, 1]\)</span>.</li>
+<li>At each <span class="math inline">\(\theta_i\)</span>, compute <span class="math inline">\(u_i = f(\theta_i)\, L(y \mid \theta_i)\)</span> using the truncated Beta prior and Binomial likelihood.</li>
+<li>Normalise: <span class="math inline">\(w_i = u_i / \sum_k u_k\)</span>.</li>
+<li>Report posterior summaries as weighted averages over the grid.</li>
+</ol>
+</blockquote>
+<ol type="i">
+<li><p>[0.5] Which numerical method does this describe? Pick <strong>one</strong> and justify in one sentence: <em>(A) Metropolis–Hastings MCMC · (B) Grid approximation · (C) Conjugate Beta–Binomial update · (D) Posterior-predictive Monte Carlo.</em></p></li>
+<li><p>[0.5] Applying the recipe gives a posterior mean of <span class="math inline">\(\bar\theta \approx 0.562\)</span>. The <em>untruncated</em> conjugate posterior <span class="math inline">\(\text{Beta}(2 + 12,\; 2 + 8) = \text{Beta}(14, 10)\)</span> has mean <span class="math inline">\(\approx 0.583\)</span>. What does the comparison tell you about the truncation here?</p></li>
+</ol>
+<p><strong>c.</strong> [1] A random-walk Metropolis sampler on the <strong>untruncated</strong> model is at <span class="math inline">\(\theta_c = 0.55\)</span> and proposes <span class="math inline">\(\theta_p = 0.60\)</span>. Using the unnormalised posterior, compute the Metropolis acceptance probability <span class="math inline">\(\alpha\)</span>. Is the move accepted with certainty?</p>
+<p><strong>d.</strong> [0.5] You rerun the sampler with three step sizes. One trace plot is a flat caterpillar around the mode; one drifts slowly and never settles; one gets “stuck” on long plateaus. Match each pattern to the diagnosis: <strong>good mixing</strong>, <strong>step size too small</strong>, <strong>step size too large</strong>.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href>Question</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href>Solution</a></li></ul>
 <div class="tab-content">
@@ -4824,42 +4836,25 @@ list-style-type: square;
 <p>Attempt before looking at the solution.</p>
 </div>
 <div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
-<p><strong>a.</strong> The conjugate update requires a proper Beta prior on <span class="math inline">\([0,1]\)</span>. Truncation leaves the Beta family, so the posterior has no closed form. Grid approximation evaluates <span class="math inline">\(u_i = f(\theta_i)L(y\mid\theta_i)\)</span> on a fine grid, normalises to <span class="math inline">\(u_i/\sum_j u_j\)</span>, and samples grid points proportional to those weights.</p>
-<p><strong>b.</strong></p>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">12</span>; n <span class="ot">&lt;-</span> <span class="dv">20</span>; grid <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">5000</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>prior <span class="ot">&lt;-</span> <span class="fu">dbeta</span>(grid, <span class="dv">2</span>, <span class="dv">2</span>) <span class="sc">*</span> (grid <span class="sc">&gt;=</span> <span class="fl">0.3</span> <span class="sc">&amp;</span> grid <span class="sc">&lt;=</span> <span class="fl">0.7</span>)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>lik   <span class="ot">&lt;-</span> <span class="fu">dbinom</span>(y, n, grid)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>post  <span class="ot">&lt;-</span> prior <span class="sc">*</span> lik; post <span class="ot">&lt;-</span> post <span class="sc">/</span> <span class="fu">sum</span>(post)</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Grid posterior mean:        &quot;</span>, <span class="fu">round</span>(<span class="fu">sum</span>(grid <span class="sc">*</span> post), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Grid posterior mean:         0.562 </code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Untruncated conjugate mean: &quot;</span>, <span class="fu">round</span>((<span class="dv">2</span><span class="sc">+</span>y)<span class="sc">/</span>(<span class="dv">4</span><span class="sc">+</span>n), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Untruncated conjugate mean:  0.583 </code></pre>
-</div>
-</div>
-<p>Both ≈0.60. The truncation barely matters since data concentrate <span class="math inline">\(\theta\)</span> inside <span class="math inline">\([0.3, 0.7]\)</span>.</p>
+<p><strong>a.</strong> The Beta–Binomial conjugate update needs a proper Beta prior on <span class="math inline">\([0, 1]\)</span>. Truncating to <span class="math inline">\([0.3, 0.7]\)</span> takes the prior out of the Beta family, so the posterior is no longer Beta and has no closed form.</p>
+<p><strong>b.</strong> (i) <strong>(B) Grid approximation.</strong> No accept/reject step (so not MCMC), no analytical update (so not the conjugate Beta–Binomial), and the recipe produces posterior samples for <span class="math inline">\(\theta\)</span> rather than predictions for future <span class="math inline">\(y\)</span> (so not posterior-predictive Monte Carlo).</p>
+<ol start="2" type="i">
+<li>The two means differ by about 0.02 (0.562 vs 0.583). With only <span class="math inline">\(n = 20\)</span>, the conjugate posterior <span class="math inline">\(\text{Beta}(14, 10)\)</span> still has noticeable mass above 0.7, which the truncation cuts off — that pulls the truncated posterior mean slightly downward. The truncation is doing real work here, unlike in cases with larger <span class="math inline">\(n\)</span> where the data already concentrate <span class="math inline">\(\theta\)</span> well inside the truncation bounds.</li>
+</ol>
 <p><strong>c.</strong></p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>logpost <span class="ot">&lt;-</span> <span class="cf">function</span>(t) <span class="fu">dbeta</span>(t, <span class="dv">2</span>, <span class="dv">2</span>, <span class="at">log =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> <span class="fu">dbinom</span>(y, n, t, <span class="at">log =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Acceptance probability:&quot;</span>, <span class="fu">round</span>(<span class="fu">min</span>(<span class="dv">1</span>, <span class="fu">exp</span>(<span class="fu">logpost</span>(<span class="fl">0.60</span>) <span class="sc">-</span> <span class="fu">logpost</span>(<span class="fl">0.55</span>))), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">12</span>; n <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>logpost <span class="ot">&lt;-</span> <span class="cf">function</span>(t) <span class="fu">dbeta</span>(t, <span class="dv">2</span>, <span class="dv">2</span>, <span class="at">log =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> <span class="fu">dbinom</span>(y, n, t, <span class="at">log =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Acceptance probability:&quot;</span>, <span class="fu">round</span>(<span class="fu">min</span>(<span class="dv">1</span>, <span class="fu">exp</span>(<span class="fu">logpost</span>(<span class="fl">0.60</span>) <span class="sc">-</span> <span class="fu">logpost</span>(<span class="fl">0.55</span>))), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Acceptance probability: 1 </code></pre>
 </div>
 </div>
-<p><span class="math inline">\(\alpha \approx\)</span> [value]. If &lt; 1, accept with that probability; if = 1, accept with certainty.</p>
-<p><strong>d.</strong> (i) Flat caterpillar = good mixing (optimal step size). (ii) Slow drift = step size <strong>too small</strong> (high autocorrelation). (iii) Stuck plateaus = step size <strong>too large</strong> (proposals overshoot and are rejected).</p>
+<p><span class="math inline">\(\alpha = 1\)</span>: the proposed value <span class="math inline">\(\theta_p = 0.60\)</span> is <em>more</em> plausible than the current <span class="math inline">\(\theta_c = 0.55\)</span> (the MLE sits exactly at <span class="math inline">\(12/20 = 0.60\)</span>), so the unnormalised posterior ratio exceeds 1 and the move is accepted <strong>with certainty</strong>.</p>
+<p><strong>d.</strong> Flat caterpillar around the mode = <strong>good mixing</strong>. Slow drift that never settles = <strong>step size too small</strong> (high autocorrelation, the chain barely explores). Long stuck plateaus = <strong>step size too large</strong> (proposals overshoot into low-probability regions and are repeatedly rejected).</p>
 </div>
 </div>
 </div>
@@ -4883,16 +4878,16 @@ list-style-type: square;
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="dv">3</span>; r <span class="ot">&lt;-</span> <span class="dv">1</span>; sumy <span class="ot">&lt;-</span> <span class="dv">15</span>; nobs <span class="ot">&lt;-</span> <span class="dv">8</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>sp <span class="ot">&lt;-</span> s <span class="sc">+</span> sumy; rp <span class="ot">&lt;-</span> r <span class="sc">+</span> nobs</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Posterior: Gamma(&quot;</span>, sp, <span class="st">&quot;,&quot;</span>, rp, <span class="st">&quot;),  mean =&quot;</span>, <span class="fu">round</span>(sp<span class="sc">/</span>rp, <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="dv">3</span>; r <span class="ot">&lt;-</span> <span class="dv">1</span>; sumy <span class="ot">&lt;-</span> <span class="dv">15</span>; nobs <span class="ot">&lt;-</span> <span class="dv">8</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>sp <span class="ot">&lt;-</span> s <span class="sc">+</span> sumy; rp <span class="ot">&lt;-</span> r <span class="sc">+</span> nobs</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Posterior: Gamma(&quot;</span>, sp, <span class="st">&quot;,&quot;</span>, rp, <span class="st">&quot;),  mean =&quot;</span>, <span class="fu">round</span>(sp<span class="sc">/</span>rp, <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Posterior: Gamma( 18 , 9 ),  mean = 2 </code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;95% ETI:&quot;</span>, <span class="fu">round</span>(<span class="fu">qgamma</span>(<span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>), sp, rp), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;95% ETI:&quot;</span>, <span class="fu">round</span>(<span class="fu">qgamma</span>(<span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>), sp, rp), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>95% ETI: 1.185 3.024 </code></pre>
@@ -4902,14 +4897,14 @@ list-style-type: square;
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;E(Y&#39; | y) =&quot;</span>,       <span class="fu">round</span>(sp<span class="sc">/</span>rp, <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;E(Y&#39; | y) =&quot;</span>,       <span class="fu">round</span>(sp<span class="sc">/</span>rp, <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>E(Y&#39; | y) = 2 </code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;P(Y&#39; &gt;= 2 | y) =&quot;</span>,  <span class="fu">round</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnbinom</span>(<span class="dv">1</span>, <span class="at">size =</span> sp, <span class="at">prob =</span> rp<span class="sc">/</span>(rp<span class="sc">+</span><span class="dv">1</span>)), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;P(Y&#39; &gt;= 2 | y) =&quot;</span>,  <span class="fu">round</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnbinom</span>(<span class="dv">1</span>, <span class="at">size =</span> sp, <span class="at">prob =</span> rp<span class="sc">/</span>(rp<span class="sc">+</span><span class="dv">1</span>)), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>P(Y&#39; &gt;= 2 | y) = 0.58 </code></pre>
@@ -4920,16 +4915,16 @@ list-style-type: square;
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>prior_p <span class="ot">&lt;-</span> <span class="fu">pgamma</span>(<span class="dv">2</span>, s, r); post_p <span class="ot">&lt;-</span> <span class="fu">pgamma</span>(<span class="dv">2</span>, sp, rp)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>BF_plusminus <span class="ot">&lt;-</span> (post_p<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>post_p)) <span class="sc">/</span> (prior_p<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>prior_p))</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Prior P(l&gt;2):&quot;</span>, <span class="fu">round</span>(prior_p,<span class="dv">3</span>), <span class="st">&quot; Posterior P(l&gt;2):&quot;</span>, <span class="fu">round</span>(post_p,<span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>prior_p <span class="ot">&lt;-</span> <span class="fu">pgamma</span>(<span class="dv">2</span>, s, r); post_p <span class="ot">&lt;-</span> <span class="fu">pgamma</span>(<span class="dv">2</span>, sp, rp)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>BF_plusminus <span class="ot">&lt;-</span> (post_p<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>post_p)) <span class="sc">/</span> (prior_p<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>prior_p))</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Prior P(l&gt;2):&quot;</span>, <span class="fu">round</span>(prior_p,<span class="dv">3</span>), <span class="st">&quot; Posterior P(l&gt;2):&quot;</span>, <span class="fu">round</span>(post_p,<span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Prior P(l&gt;2): 0.323  Posterior P(l&gt;2): 0.531 </code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;BF(+, -) =&quot;</span>, <span class="fu">round</span>(BF_plusminus, <span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;BF(+, -) =&quot;</span>, <span class="fu">round</span>(BF_plusminus, <span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>BF(+, -) = 2.37 </code></pre>
@@ -4940,14 +4935,14 @@ list-style-type: square;
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;BF01 =&quot;</span>, <span class="fu">round</span>(<span class="fu">dgamma</span>(<span class="dv">2</span>, sp, rp) <span class="sc">/</span> <span class="fu">dgamma</span>(<span class="dv">2</span>, s, r), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;BF01 =&quot;</span>, <span class="fu">round</span>(<span class="fu">dgamma</span>(<span class="dv">2</span>, sp, rp) <span class="sc">/</span> <span class="fu">dgamma</span>(<span class="dv">2</span>, s, r), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>BF01 = 3.112 </code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;BF10 =&quot;</span>, <span class="fu">round</span>(<span class="fu">dgamma</span>(<span class="dv">2</span>, s, r) <span class="sc">/</span> <span class="fu">dgamma</span>(<span class="dv">2</span>, sp, rp), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;BF10 =&quot;</span>, <span class="fu">round</span>(<span class="fu">dgamma</span>(<span class="dv">2</span>, s, r) <span class="sc">/</span> <span class="fu">dgamma</span>(<span class="dv">2</span>, sp, rp), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>BF10 = 0.321 </code></pre>
@@ -4970,10 +4965,10 @@ list-style-type: square;
 </ul>
 <p><strong>Typical question types:</strong></p>
 <ul>
-<li><strong>Conjugate models</strong> (Beta-Binomial, Gamma-Poisson, Normal-Normal): identify model, write prior and posterior, compute summaries</li>
-<li><strong>Grid approximation &amp; MCMC</strong>: implement grid approximation for non-conjugate priors, compute Metropolis acceptance probability, diagnose chain mixing</li>
+<li><strong>Conjugate models</strong> (Beta–Binomial, Gamma–Poisson, Normal–Normal): identify model, write prior and posterior, compute summaries</li>
+<li><strong>Grid approximation &amp; MCMC</strong>: identify a sampling recipe described on the page, explain why a non-conjugate posterior has no closed form, compute a one-step Metropolis acceptance probability, diagnose chain mixing from trace plots</li>
 <li><strong>Posterior inference &amp; prediction</strong>: compute ETI/HDI, posterior predictive distribution, prediction intervals</li>
-<li><strong>Hypothesis testing</strong>: Bayes factors (Savage-Dickey, prior/posterior odds), one-sided and two-sided tests, BF interpretation</li>
+<li><strong>Hypothesis testing</strong>: Bayes factors (Savage–Dickey, prior/posterior odds), one-sided and two-sided tests, BF interpretation</li>
 <li><strong>Reporting &amp; error-spotting</strong>: identify common Bayesian reporting errors, apply van Doorn et al. checklist</li>
 </ul>
 </section>
