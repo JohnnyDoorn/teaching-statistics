@@ -720,10 +720,8 @@ ggplot(df_pred, aes(x = y_tilde)) +
 
 **Why predict, not estimate?**
 
-- A **credible interval for $\lambda$** tells you about the long-run *mean* rate of failures. It's narrow when you have lots of data.
+- A **credible interval for $\lambda$** tells you about our knowledge of the *mean* rate of failures. It's narrow when you have lots of data.
 - A **predictive interval for $\tilde Y$** tells you about the *next single month*. It is always wider, because it folds Poisson sampling noise on top of posterior uncertainty.
-
-Reporting the credible interval for $\lambda$ when stakeholders want the predictive interval for $\tilde Y$ is a classic Bayesian-communication mistake.
 
 :::
 
@@ -854,7 +852,7 @@ BF <- post_odds / prior_odds
 
 This tells us how strongly the data have shifted our beliefs in favor of $H_a$ over $H_0$. A Bayes factor of **5.81** means the observed data have made $H_a$ nearly **six times more plausible** than it was under our prior beliefs.
 
-This represents **substantial evidence** in favor of the alternative hypothesis, according to conventional interpretive scales.
+This represents **substantial evidence** ([Example](https://johnnydoorn.github.io/IntroductionBayesianInference/02-models.html#fig-bayes-factor-classification)) in favor of the alternative hypothesis, according to conventional interpretive scales.
 
 
 ::: {.describe}
@@ -1332,7 +1330,7 @@ To interpret Bayes factors in practice, we often use this scale from Kass & Raft
 | 30 to 100         | Very strong             |
 | > 100             | Decisive                |
 
-> 📚 **Reference**: Kass, R. E., & Raftery, A. E. (1995). *Bayes Factors*. Journal of the American Statistical Association, 90(430), 773–795.
+> **Reference**: Kass, R. E., & Raftery, A. E. (1995). *Bayes Factors*. Journal of the American Statistical Association, 90(430), 773–795.
 
 These are guidelines, not rules. The strength of evidence needed to shift beliefs can vary by context and domain. Bayesian inference gives us a **continuous scale of evidence**; these categories help us summarize that evidence clearly.
 
@@ -1487,7 +1485,6 @@ To consolidate your understanding and prepare for the **exam** and **group assig
 **Explore**:
 
 * Try the **Savage–Dickey** shortcut with different models and priors
-* Cross-check your results using JASP
 * Compare your predictive intervals to credible intervals on a few different datasets. When does the gap widen?
 
 **Extra Resources**:
