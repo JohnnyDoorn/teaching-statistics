@@ -164,6 +164,10 @@ where $w_\text{prior} = \frac{\sigma^2}{n\tau^2 + \sigma^2}$ and $w_\text{data} 
 
 As $n$ grows, $w_\text{data} \to 1$ and the posterior concentrates on $\bar{y}$.
 
+<div class="note">
+**Notation convention.** Throughout this lecture and Formula 5.12 in the book, $\mathcal{N}(\cdot, \cdot)$ uses **(mean, variance)**. The textbook occasionally writes the second slot as SD instead — when it does, square it before plugging into the update formulas. (R is the opposite: `dnorm` and the `bayesrules` functions take `sd =`, not variance.)
+</div>
+
 ## R Code
 
 ```{r normal-normal}
