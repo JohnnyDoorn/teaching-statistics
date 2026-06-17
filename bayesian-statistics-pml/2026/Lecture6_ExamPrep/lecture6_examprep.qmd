@@ -47,7 +47,7 @@ By the end of this lecture, you will be able to:
 <div class="note">
 **Reading:** van Doorn et al. (2021), *Psychonomic Bulletin & Review*. doi: [10.3758/s13423-020-01798-5](https://doi.org/10.3758/s13423-020-01798-5)
 
-**Exam:** Friday, June 19, 09:00–11:00, IWO 4.04C (Blauw). One A4 cheat sheet allowed.
+**Exam:** Friday, June 19, 09:00–11:00, IWO 4.04C (Blauw). Open-book ANS exam with R (no internet); the textbook is provided as a PDF and you may bring one A4 cheat sheet (both sides). Covers all lecture material (L1–L5).
 </div>
 
 ---
@@ -166,7 +166,7 @@ $$\frac{P(H_1 \mid y)}{P(H_0 \mid y)} = BF_{10} \times \frac{P(H_1)}{P(H_0)}$$
 
 ---
 
-# Five Common Exam Mistakes
+# Four Common Exam Mistakes
 
 ## Mistake 1: Misreading the Credible Interval
 
@@ -220,15 +220,6 @@ Contrast with $BF_{01} = 14$: *this* is positive evidence for $H_0$.
 
 </div>
 
-## Mistake 5: "No Justification Needed" for a Flat Prior
-
-<div class="note">
-
-**Wrong:** "We used Beta(1,1) since it is objective and requires no justification."
-
-**Correct:** Beta(1,1) has ESS = 2; it asserts that a success rate of 0.001 is just as plausible as 0.999. For a well-studied phenomenon, this is a real and often implausible modelling assumption. All priors require justification.
-
-</div>
 
 ---
 
@@ -236,13 +227,13 @@ Contrast with $BF_{01} = 14$: *this* is positive evidence for $H_0$.
 
 ## Report 1: Mindfulness & Memory
 
-> We tested a mindfulness intervention on working memory ($n = 15$). $BF_{10} = 4.3$, so **we conclude the null is false**. The CI [39.8, 42.6] **proves the intervention is effective**. No robustness analysis was needed since results are clear.
+> We tested a mindfulness intervention on working memory ($n = 15$). $BF_{10} = 4.3$, so we conclude the null is false. The CI [39.8, 42.6] proves the intervention is effective. No robustness analysis was needed since results are clear.
 
 ::: {.panel-tabset}
 
 ### Exercise
 
-Find **3 errors** in this report.
+Find 3 errors in this report.
 
 ### Solution
 
@@ -254,19 +245,17 @@ Find **3 errors** in this report.
 
 ## Report 2: Facial Feedback
 
-> One-sided Bayesian $t$-test ($n_1 = 53$, $n_2 = 57$). Informed prior: $t(0.35, 0.102, 3)$. Result: $BF_{0-} = 11.5$. **This means $H_0$ is 11.5× more probable than $H_-$.** Data and code stored privately.
+> One-sided Bayesian $t$-test ($n_1 = 53$, $n_2 = 57$). Informed prior: $t(0.35, 0.102, 3)$. Result: $BF_{0-} = 11.5$. This means $H_0$ is 11.5× more probable than $H_-$. 
 
 ::: {.panel-tabset}
 
 ### Exercise
 
-Find **2 errors** in this report.
+Find 1 error in this report.
 
 ### Solution
 
 1. **"$H_0$ is 11.5× more probable"**: $BF_{01}$ is a likelihood ratio, not a probability ratio. Converting to probability ratios requires specifying prior odds.
-2. **"Stored privately"**: Bayesian results depend critically on prior specification. Without access to data and code, readers cannot evaluate or reproduce the analysis.
-
 :::
 
 ---
@@ -274,13 +263,17 @@ Find **2 errors** in this report.
 # Mock Exam
 
 <div class="note">
-Close laptops. Work in pairs. 20 minutes for all 3 questions. Solutions follow each question.
+A full practice paper (18 pts) in the style of last year's exam. It is deliberately longer than the real exam (10 pts, 3 questions) to give you more to work through, and it covers Lectures 3–5 plus a model-checking simulation. (Lectures 1–2 are examinable too; see the study checklist under Exam Tips.)
+
+Q1–Q3 are by-hand computational questions; Q4 is a with-R simulation question. 
+
+Attempt each question under exam conditions before opening its solution.
 </div>
 
-## Mock Q1: Conjugacy & Prior Choice (3.5 pts)
+## Mock Q1: Conjugacy & Prior Choice (4.5 pts)
 *(Lecture 3 / Ch. 5; cf. Beta–Binomial exercises)*
 
-A food-delivery app wants to estimate $\theta$, the proportion of customers who tip their driver. Based on a pilot study, they adopt a $\text{Beta}(5, 5)$ prior. In the new cohort, **42 out of 60 customers** tip.
+A food-delivery app wants to estimate $\theta$, the proportion of customers who tip their driver. Based on a pilot study, they adopt a $\text{Beta}(5, 5)$ prior. In the new cohort, 42 out of 60 customers tip.
 
 **a.** [1] Identify the data model and conjugate prior family. Write the posterior update rule and state the resulting posterior.
 
@@ -289,6 +282,8 @@ A food-delivery app wants to estimate $\theta$, the proportion of customers who 
 **c.** [0.75] Compute the 95% equal-tailed credible interval and interpret it.
 
 **d.** [0.75] Compute $P(\theta > 0.70 \mid y)$.
+
+**e.** [1] *(Describe, max 90 words.)* Describe how the posterior has shifted relative to the prior — in terms of its mean, mode, and standard deviation, and explain what this shift indicates about how the data updated your beliefs about $\theta$.
 
 ::: {.panel-tabset}
 
@@ -314,7 +309,7 @@ cat("Posterior mean: ", round(ap/(ap+bp), 3), "\n")
 cat("Prior ESS:      ", alpha + beta, "\n")
 ```
 
-The posterior mean (0.70) is a weighted average of the prior mean (0.50) and observed proportion (0.70). With prior ESS = 10 vs n = 60, the data dominate.
+The posterior mean (0.671) is a weighted average of the prior mean (0.50) and the observed proportion (0.70). With prior ESS = 10 vs n = 60, the data carry ~6× the weight, so the posterior sits close to $\bar y$, only slightly pulled toward the prior.
 
 **c.**
 ```{r m1c}
@@ -328,12 +323,28 @@ Given the data and prior, there is a 95% probability that $\theta$ lies in this 
 pbeta(0.70, ap, bp, lower.tail = FALSE)
 ```
 
+About a 31% posterior probability that more than 70% of customers tip.
+
+**e.**
+```{r m1e}
+prior_mode <- (alpha - 1) / (alpha + beta - 2)
+post_mode  <- (ap - 1) / (ap + bp - 2)
+prior_sd <- sqrt(alpha*beta / ((alpha+beta)^2 * (alpha+beta+1)))
+post_sd  <- sqrt(ap*bp / ((ap+bp)^2 * (ap+bp+1)))
+cat("Prior:     mean", round(alpha/(alpha+beta),3), " mode", round(prior_mode,3), " sd", round(prior_sd,3), "\n")
+cat("Posterior: mean", round(ap/(ap+bp),3),         " mode", round(post_mode,3),  " sd", round(post_sd,3),  "\n")
+```
+
+The posterior has shifted upward — both the mean (0.50 → 0.671) and the mode (0.50 → 0.677) move about 0.17 toward the observed proportion of 0.70 — and tightened sharply, with the SD falling roughly threefold (0.151 → 0.056). The 60 observations have refined a fairly diffuse, symmetric Beta(5, 5) prior into a much more precise, slightly right-leaning posterior: our belief about the tipping rate has moved from "around half, very uncertain" to "about two-thirds, fairly precisely."
+
+> **Marking:** upward shift in mean *and* mode (0.25); reduced SD / increased precision (0.25); state the actual prior and posterior values (0.25); interpret the shift as the data sharpening a diffuse prior toward the observed proportion (0.25).
+
 :::
 
 ## Mock Q2: Grid Approximation & MCMC (3 pts)
 *(Lecture 4 / Ch. 6–7; cf. grid + Metropolis exercises)*
 
-A researcher models $\theta$, the probability of a new drug being effective. They use a $\text{Beta}(2, 2)$ prior **truncated to $[0.3, 0.7]$**. In a trial of **20 patients, 12 show improvement**.
+A researcher models $\theta$, the probability of a new drug being effective. They use a $\text{Beta}(2, 2)$ prior truncated to $[0.3, 0.7]$. In a trial of 20 patients, 12 show improvement.
 
 **a.** [0.5] Explain why this truncated prior has no closed-form conjugate posterior.
 
@@ -344,14 +355,14 @@ A researcher models $\theta$, the probability of a new drug being effective. The
 > 3. Normalise: $w_i = u_i / \sum_k u_k$.
 > 4. Report posterior summaries as weighted averages over the grid.
 
-(i) [0.5] Which numerical method does this describe? Pick **one** and justify in one sentence:
+(i) [0.5] Which numerical method does this describe? Pick one and justify in one sentence:
 *(A) Metropolis–Hastings MCMC · (B) Grid approximation · (C) Conjugate Beta–Binomial update · (D) Posterior-predictive Monte Carlo.*
 
 (ii) [0.5] Applying the recipe gives a posterior mean of $\bar\theta \approx 0.562$. The *untruncated* conjugate posterior $\text{Beta}(2 + 12,\; 2 + 8) = \text{Beta}(14, 10)$ has mean $\approx 0.583$. What does the comparison tell you about the truncation here?
 
-**c.** [1] A random-walk Metropolis sampler on the **untruncated** model is at $\theta_c = 0.55$ and proposes $\theta_p = 0.60$. Using the unnormalised posterior, compute the Metropolis acceptance probability $\alpha$. Is the move accepted with certainty?
+**c.** [1] A random-walk Metropolis sampler on the untruncated model is at $\theta_c = 0.55$ and proposes $\theta_p = 0.60$. Using the unnormalised posterior, compute the Metropolis acceptance probability $\alpha$. Is the move accepted with certainty?
 
-**d.** [0.5] You rerun the sampler with three step sizes. One trace plot is a flat caterpillar around the mode; one drifts slowly and never settles; one gets "stuck" on long plateaus. Match each pattern to the diagnosis: **good mixing**, **step size too small**, **step size too large**.
+**d.** [0.5] You rerun the sampler with three step sizes. One trace plot is a flat caterpillar around the mode; one drifts slowly and never settles; one gets "stuck" on long plateaus. Match each pattern to the diagnosis: good mixing, step size too small, step size too large.
 
 ::: {.panel-tabset}
 
@@ -363,7 +374,7 @@ Attempt before looking at the solution.
 
 **a.** The Beta–Binomial conjugate update needs a proper Beta prior on $[0, 1]$. Truncating to $[0.3, 0.7]$ takes the prior out of the Beta family, so the posterior is no longer Beta and has no closed form.
 
-**b.** (i) **(B) Grid approximation.** No accept/reject step (so not MCMC), no analytical update (so not the conjugate Beta–Binomial), and the recipe produces posterior samples for $\theta$ rather than predictions for future $y$ (so not posterior-predictive Monte Carlo).
+**b.** (i) (B) Grid approximation. No accept/reject step (so not MCMC), no analytical update (so not the conjugate Beta–Binomial), and the recipe produces posterior samples for $\theta$ rather than predictions for future $y$ (so not posterior-predictive Monte Carlo).
 
 (ii) The two means differ by about 0.02 (0.562 vs 0.583). With only $n = 20$, the conjugate posterior $\text{Beta}(14, 10)$ still has noticeable mass above 0.7, which the truncation cuts off — that pulls the truncated posterior mean slightly downward. The truncation is doing real work here, unlike in cases with larger $n$ where the data already concentrate $\theta$ well inside the truncation bounds.
 
@@ -375,24 +386,26 @@ logpost <- function(t) dbeta(t, 2, 2, log = TRUE) + dbinom(y, n, t, log = TRUE)
 cat("Acceptance probability:", round(min(1, exp(logpost(0.60) - logpost(0.55))), 3), "\n")
 ```
 
-$\alpha = 1$: the proposed value $\theta_p = 0.60$ is *more* plausible than the current $\theta_c = 0.55$ (the MLE sits exactly at $12/20 = 0.60$), so the unnormalised posterior ratio exceeds 1 and the move is accepted **with certainty**.
+$\alpha = 1$: the proposed value $\theta_p = 0.60$ is *more* plausible than the current $\theta_c = 0.55$ (the MLE sits exactly at $12/20 = 0.60$), so the unnormalised posterior ratio exceeds 1 and the move is accepted with certainty.
 
-**d.** Flat caterpillar around the mode = **good mixing**. Slow drift that never settles = **step size too small** (high autocorrelation, the chain barely explores). Long stuck plateaus = **step size too large** (proposals overshoot into low-probability regions and are repeatedly rejected).
+**d.** Flat caterpillar around the mode = good mixing. Slow drift that never settles = step size too small (high autocorrelation, the chain barely explores). Long stuck plateaus = step size too large (proposals overshoot into low-probability regions and are repeatedly rejected).
 
 :::
 
-## Mock Q3: Inference, Prediction & Testing (3.5 pts)
+## Mock Q3: Inference, Prediction & Testing (5 pts)
 *(Lecture 5 / Ch. 8; cf. posterior-summary, prediction & Bayes-factor exercises)*
 
-A clinic models $\lambda$, the mean number of emergency calls per hour, with a $\text{Gamma}(3, 1)$ prior. Over **8 hours** they record **15 calls**.
+A clinic models $\lambda$, the mean number of emergency calls per hour, with a $\text{Gamma}(3, 1)$ prior. Over 8 hours they record 15 calls.
 
 **a.** [0.75] Give the posterior distribution, its mean, and a 95% equal-tailed credible interval.
 
-**b.** [1] Predict calls next hour. Compute $E(Y' \mid y)$ and $P(Y' \ge 2 \mid y)$ using the posterior-predictive (Negative-Binomial) distribution.
+**b.** [1] Predict the number of calls next hour. Compute $E(Y' \mid y)$ and $P(Y' \ge 2 \mid y)$ using the posterior-predictive (Negative-Binomial) distribution. Why is this wider than plugging the posterior mean into a single Poisson?
 
-**c.** [1] Test $H_+: \lambda > 2$ vs $H_-: \lambda < 2$. Compute $BF_{+-}$ from prior and posterior odds and interpret.
+**c.** [1] Test $H_+: \lambda > 2$ vs $H_-: \lambda < 2$. Compute $BF_{+-}$ from the prior and posterior odds.
 
-**d.** [0.75] Test $H_0: \lambda = 2$ using Savage–Dickey. What does $BF_{01}$ say about $\lambda = 2$?
+**d.** [0.75] Test $H_0: \lambda = 2$ using the Savage–Dickey density ratio. What does $BF_{01}$ say about the value $\lambda = 2$?
+
+**e.** [1.5] *(Interpret, max 70 words.)* State in words what the Bayes factor from (c) tells you about the call rate, using calibrated language. What does it license you to conclude, and what does it not?
 
 ::: {.panel-tabset}
 
@@ -417,17 +430,19 @@ cat("E(Y' | y) =",       round(sp/rp, 3), "\n")
 cat("P(Y' >= 2 | y) =",  round(1 - pnbinom(1, size = sp, prob = rp/(rp+1)), 3), "\n")
 ```
 
-The posterior-predictive marginalises over uncertainty in $\lambda$. Plugging in a point estimate ignores this uncertainty.
+The posterior-predictive marginalises over the full posterior uncertainty in $\lambda$. Plugging the posterior mean into a single $\text{Poisson}(\hat\lambda)$ fixes $\lambda$ at one value and ignores that uncertainty, so it is too narrow and over-confident; the Negative-Binomial is correctly wider.
 
 **c.**
 ```{r m3c}
-prior_p <- pgamma(2, s, r); post_p <- pgamma(2, sp, rp)
-BF_plusminus <- (post_p/(1-post_p)) / (prior_p/(1-prior_p))
-cat("Prior P(l>2):", round(prior_p,3), " Posterior P(l>2):", round(post_p,3), "\n")
-cat("BF(+, -) =", round(BF_plusminus, 2), "\n")
+prior_above <- pgamma(2, s, r, lower.tail = FALSE)    # P(lambda > 2)
+post_above  <- pgamma(2, sp, rp, lower.tail = FALSE)   # P(lambda > 2 | y)
+BF_plusminus <- (post_above/(1 - post_above)) / (prior_above/(1 - prior_above))
+cat("Prior P(l>2):", round(prior_above,3), " Posterior P(l>2):", round(post_above,3), "\n")
+cat("BF(+, -) =", round(BF_plusminus, 3),
+    "  (equivalently BF(-, +) =", round(1/BF_plusminus, 2), ")\n")
 ```
 
-Interpret using Kass & Raftery scale.
+$BF_{+-} \approx 0.42 < 1$, so the data favour $H_-$ (rate below 2) over $H_+$. Equivalently $BF_{-+} \approx 2.4$ — only anecdotal evidence for $\lambda < 2$ on the Kass & Raftery scale. The data nudged $P(\lambda > 2)$ down from 0.68 to 0.47, but not decisively.
 
 **d.**
 ```{r m3d}
@@ -435,7 +450,103 @@ cat("BF01 =", round(dgamma(2, sp, rp) / dgamma(2, s, r), 3), "\n")
 cat("BF10 =", round(dgamma(2, s, r) / dgamma(2, sp, rp), 3), "\n")
 ```
 
-$BF_{01} > 1$ means posterior density at $\lambda=2$ exceeds prior density. Data support $\lambda=2$.
+$BF_{01} \approx 3.1$: the posterior density at $\lambda = 2$ is about three times the prior density there, so the data are ~3× more consistent with $\lambda = 2$ than the diffuse alternative expected — moderate evidence for the value 2, not against it. Note that (c) and (d) answer different questions: a one-sided *direction* test versus a *point* test.
+
+**e.** *Model answer (≤70 words).* The Bayes factor $BF_{+-} \approx 0.42$ means the observed data are about 2.4 times more likely under $H_-$ ($\lambda < 2$) than under $H_+$ ($\lambda > 2$) — anecdotal, not compelling, evidence for a call rate below 2 per hour. It licenses a tentative lean toward the lower rate; it does not prove $\lambda < 2$, nor give the probability that $H_-$ is true (that would need the prior odds).
+
+> **Marking:** correct direction — evidence favours $H_-$ (0.5); translates 0.42 into "~2.4× more likely under $H_-$" (0.5); uses calibrated/probabilistic language (not "reject"/"significant") and notes BF $\neq$ posterior probability (0.5).
+
+:::
+
+## Mock Q4: Simulation — Posterior Predictive & Model Checking (5.5 pts)
+*(Lecture 5 / Ch. 8; cf. posterior-predictive check exercises, with-R question)*
+
+A marine ecologist models $\lambda$, the mean number of whale sightings per one-hour boat survey, with a $\text{Gamma}(2, 1)$ prior. Over 10 surveys the counts are
+
+$$y = (2,\; 0,\; 3,\; 1,\; 2,\; 4,\; 1,\; 0,\; 3,\; 2).$$
+
+**a.** [0.5] Derive the posterior analytically.
+
+**b.** [1.5] Write R code to simulate 50,000 draws from the posterior-predictive distribution for a single future survey. Plot it, and compute $E(Y' \mid y)$ and $P(Y' = 0 \mid y)$. Confirm $P(Y'=0\mid y)$ against the analytic Negative-Binomial value.
+
+**c.** [1] The team plans a block of 5 future surveys. Simulate the total number of sightings across the block and estimate $E(Y_\text{total} \mid y)$ and $P(Y_\text{total} \ge 10 \mid y)$.
+
+**d.** [1.5] Run a posterior-predictive check. Simulate 1,000 replicated datasets of 10 surveys under the fitted model; for each, record the number of zero-sighting surveys. Plot the distribution of this statistic, mark the observed value, and compute the posterior-predictive p-value. Does the Poisson model capture the frequency of zeros well?
+
+**e.** [1] *(Interpret, max 70 words.)* A colleague wants to report only the predictive mean from (b) as "the" forecast for the next survey, with no uncertainty. What is wrong with this, and what should they report instead?
+
+::: {.panel-tabset}
+
+### Question
+
+Attempt before looking at the solution.
+
+### Solution
+
+**a.** $Y_i \mid \lambda \overset{iid}{\sim} \text{Poisson}(\lambda)$; conjugate update $\lambda \mid y \sim \text{Gamma}(s + \sum y_i,\ r + n)$.
+
+```{r q4a}
+y  <- c(2, 0, 3, 1, 2, 4, 1, 0, 3, 2)
+s0 <- 2; r0 <- 1                          # prior Gamma(2, 1)
+sp <- s0 + sum(y); rp <- r0 + length(y)
+cat("Posterior: Gamma(", sp, ",", rp, "),  mean =", round(sp/rp, 3), "\n")
+```
+
+$\sum y_i = 18$, $n = 10$, so $\lambda \mid y \sim \text{Gamma}(20, 11)$ with mean $20/11 \approx 1.82$.
+
+**b.** Draw $\lambda^{(s)}$ from the posterior, then $Y'^{(s)} \sim \text{Poisson}(\lambda^{(s)})$ — this propagates posterior uncertainty into the prediction.
+
+```{r q4b}
+set.seed(2026)
+N <- 50000
+lambda_post <- rgamma(N, shape = sp, rate = rp)
+y_next      <- rpois(N, lambda = lambda_post)
+
+cat("E(Y' | y)     =", round(mean(y_next), 3), "\n")
+cat("P(Y' = 0 | y) =", round(mean(y_next == 0), 3),
+    "  (analytic NB:", round(dnbinom(0, size = sp, prob = rp/(rp + 1)), 3), ")\n")
+
+hist(y_next, breaks = -0.5:(max(y_next) + 0.5), probability = TRUE,
+     main = "Posterior predictive: next survey",
+     xlab = "Whale sightings", col = "steelblue", border = "white")
+```
+
+The predictive distribution is right-skewed over 0–6 sightings. $E(Y' \mid y) \approx 1.82$ (it equals the posterior mean of $\lambda$), and $P(Y' = 0 \mid y) \approx 0.17$ — the simulation matches the analytic Negative-Binomial value (0.175).
+
+**c.**
+
+```{r q4c}
+y_block <- replicate(N, sum(rpois(5, lambda = rgamma(1, sp, rp))))
+cat("E(Y_total | y)       =", round(mean(y_block), 2), "\n")
+cat("P(Y_total >= 10 | y) =", round(mean(y_block >= 10), 3), "\n")
+```
+
+About 9.1 sightings expected over the 5-survey block ($5 \times$ the per-survey mean), with roughly a 42% chance of 10 or more.
+
+**d.**
+
+```{r q4d}
+n_obs     <- length(y)
+obs_zeros <- sum(y == 0)                  # observed = 2
+zeros_rep <- replicate(1000, {
+  lam <- rgamma(1, shape = sp, rate = rp)
+  sum(rpois(n_obs, lambda = lam) == 0)
+})
+
+hist(zeros_rep, breaks = -0.5:(max(zeros_rep) + 0.5), probability = TRUE,
+     main = "PP check: # zero-sighting surveys (out of 10)",
+     xlab = "Number of zeros", col = "steelblue", border = "white")
+abline(v = obs_zeros, col = "tomato", lwd = 3)
+legend("topright", legend = "observed = 2", col = "tomato", lwd = 3, bty = "n")
+
+cat("PP p-value  P(zeros_rep >= 2 | y) =", round(mean(zeros_rep >= obs_zeros), 3), "\n")
+```
+
+The observed count of 2 zero-sighting surveys sits near the centre of the replicated distribution (which averages ~1.8 zeros), so the posterior-predictive p-value is $\approx 0.5$. The model reproduces the frequency of zeros well — no sign of excess zeros (zero-inflation). A pp p-value near 0 or 1 would instead flag a feature the model systematically fails to capture. (Consistent with this, $\text{var}(y) \approx \bar y$, as the Poisson assumes.)
+
+**e.** *Model answer (≤70 words).* Reporting only the mean (≈1.8) discards all predictive *uncertainty* — and 1.8 is not even an observable count. They should report the full posterior-predictive distribution, or at least a predictive interval (here a 90% interval is roughly $[0, 4]$ sightings) plus informative summaries such as $P(Y' = 0 \mid y)$. A bare point estimate cannot distinguish a confident forecast from a highly uncertain one.
+
+> **Marking:** identifies that a point estimate discards predictive uncertainty (0.5); proposes reporting the predictive distribution or a predictive interval / tail probabilities instead (0.5).
 
 :::
 
@@ -445,26 +556,62 @@ $BF_{01} > 1$ means posterior density at $\lambda=2$ exceeds prior density. Data
 
 ## What to Expect
 
-- **Duration:** 2 hours · **Format:** closed-book (one A4 cheat sheet)
-- **Content:** Questions are re-skinned versions of *Bayes Rules!* end-of-chapter exercises, covering Lectures 3–5 (Ch. 5–8).
+- **Duration:** 2 hours (09:00–11:00) · **Format:** open-book ANS exam with R, no internet. The textbook is provided as a PDF, and you may bring one A4 cheat sheet (written on both sides).
+- **Content:** All lecture material (Lectures 1–5, *Bayes Rules!* Ch. 1–8). Questions are re-skinned versions of the end-of-chapter exercises.
 
-**Typical question types:**
+## Study Checklist (Lectures 1–5)
 
-- **Conjugate models** (Beta–Binomial, Gamma–Poisson, Normal–Normal): identify model, write prior and posterior, compute summaries
-- **Grid approximation & MCMC**: identify a sampling recipe described on the page, explain why a non-conjugate posterior has no closed form, compute a one-step Metropolis acceptance probability, diagnose chain mixing from trace plots
-- **Posterior inference & prediction**: compute ETI/HDI, posterior predictive distribution, prediction intervals
-- **Hypothesis testing**: Bayes factors (Savage–Dickey, prior/posterior odds), one-sided and two-sided tests, BF interpretation
-- **Reporting & error-spotting**: identify common Bayesian reporting errors, apply van Doorn et al. checklist
+The exam covers **all lecture material**. The mock above drills Lectures 3–5, but Lectures 1–2 are equally examinable, so work through every box.
 
-## Practical Tips
+**Lecture 1: Introduction & Bayes' Rule (Ch. 1–2)**
 
-- **Show your reasoning**: partial credit is available. A correct setup with a computation error still earns marks.
-- **Use the conjugate update rules**: memorise Beta→Beta, Gamma→Gamma, Normal→Normal.
-- **Read the question carefully**: it will say whether to compute analytically, in R, or conceptually.
-- **For BF questions**: state both hypotheses explicitly, then apply Savage–Dickey.
-- **For reporting questions**: use the van Doorn et al. checklist as a scaffold.
+- [ ] Bayesian vs frequentist knowledge-building; the two interpretations of probability (long-run frequency vs plausibility)
+- [ ] What the prior, likelihood, and posterior each represent
+- [ ] Conditional vs unconditional probability; why order matters ($P(A\mid B)\neq P(B\mid A)$); independence ($P(A\mid B)=P(A)$)
+- [ ] Likelihood vs conditional probability: the $L(B\mid A)$ notation, and why a likelihood need not sum to 1
+- [ ] Joint probability $P(A\cap B)=P(A\mid B)\,P(B)$ and marginal probability (law of total probability)
+- [ ] Bayes' rule for events, $P(B\mid A)=\dfrac{P(A\mid B)\,P(B)}{P(A)}$, and getting a posterior from a prior-and-likelihood table
 
-## Suggested Cheat Sheet Contents
+**Lecture 2: The Beta-Binomial Model & Sequential Testing (Ch. 3–4)**
+
+- [ ] From a single number to a continuous prior; properties of a pdf $f(\pi)$ (integrates to 1, area = probability, $P(\pi=\pi_0)=0$, may exceed 1)
+- [ ] The Beta prior: tuning $\alpha,\beta$ (successes/failures + 1; $\alpha=\beta=1$ uniform; below 1 gives a U-shape); reading Beta shapes
+- [ ] Beta summaries: mean $\alpha/(\alpha+\beta)$, mode $(\alpha-1)/(\alpha+\beta-2)$, variance
+- [ ] Choosing and justifying a prior; the Binomial data model $Y\mid\pi\sim\text{Binomial}(n,\pi)$ and its likelihood
+- [ ] The Beta posterior (conjugacy): $\pi\mid y\sim\text{Beta}(\alpha+y,\ \beta+n-y)$
+- [ ] Sequential updating: adding data in batches or one point at a time gives the same final posterior
+- [ ] R: `plot_beta()`, `plot_beta_binomial()`, `summarize_beta_binomial()`
+
+**Lecture 3: Conjugate Models & Choosing Your Prior (Ch. 5)**
+
+- [ ] What conjugacy means and why it yields a closed-form posterior
+- [ ] The three conjugate update rules: Beta-Binomial, Gamma-Poisson ($\lambda\mid y\sim\text{Gamma}(s+\sum y_i,\ r+n)$), Normal-Normal
+- [ ] Prior effective sample size (ESS) and how prior vs data weight the posterior
+- [ ] Prior predictive check; prior sensitivity analysis
+
+**Lecture 4: Grid Approximation & MCMC (Ch. 6–7)**
+
+- [ ] Why a non-conjugate posterior (e.g., a truncated prior) has no closed form
+- [ ] Grid approximation: evaluate the unnormalised posterior on a grid, normalise, then summarise or sample
+- [ ] Metropolis MCMC: the intuition and the one-step acceptance probability $\alpha=\min(1,\text{ratio of unnormalised posteriors})$
+- [ ] Chain diagnostics: trace plots (good mixing vs step size too small or too large), effective sample size, $\hat R$, autocorrelation
+- [ ] Using posterior samples for summaries (the workflow is the same however the samples were obtained)
+
+**Lecture 5: Inference, Prediction & Hypothesis Testing (Ch. 8)**
+
+- [ ] Posterior estimation: location (mean/median/mode) and spread; credible intervals, central/ETI vs HPD/HDI
+- [ ] Posterior prediction: the posterior-predictive distribution (Beta-Binomial; Negative-Binomial for Gamma-Poisson) and why it is wider than a plug-in
+- [ ] Posterior-predictive checks: simulate replicated data and compare a test statistic to the observed value
+- [ ] Hypothesis testing: interval (one- and two-sided) hypotheses via prior and posterior odds Bayes factors
+- [ ] Point hypotheses via the Savage-Dickey density ratio; the Jeffreys-Lindley paradox
+
+**Lecture 6: Reporting Guidelines**
+
+- [ ] The van Doorn et al. (2021) reporting checklist; calibrated language; spotting common reporting errors
+
+
+
+## Key Formulas to Have at Hand
 
 <div class="describe">
 
@@ -486,7 +633,7 @@ $BF_{+0} = \dfrac{P(\theta > \theta_0 \mid y)}{P(\theta > \theta_0)}$
 
 **Credible interval:** direct probability statement, $P(\theta \in [L,U] \mid y) = 0.95$.
 
-**ETI:** `qbeta(c(0.025, 0.975), a, b)` · **HDI:** `HPDinterval(as.mcmc(samples))`
+**ETI:** `qbeta(c(0.025, 0.975), a, b)` 
 
 </div>
 

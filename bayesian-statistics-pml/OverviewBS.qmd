@@ -16,6 +16,8 @@ The slides are on 1 continuous page. To get a pdf, I recommend you use the print
 
 | Date | Lecture | Topics | Slides |
 |---|---|---|---|
+| 1 Jun  | **Lecture 1** — Introduction & Bayes' Rule *(Alexandra Sarafoglou)* | Bayesian vs frequentist; probability; Bayes' rule (Ch. 1–2) | [pdf](https://johnnydoorn.github.io/teaching-statistics/bayesian-statistics-pml/2026/Canvas_Lecture_1_Introduction_and_Bayes_Rule.pdf) |
+| 3 Jun  | **Lecture 2** — The Beta-Binomial Model & Sequential Testing *(Alexandra Sarafoglou)* | Beta prior; Binomial likelihood; conjugacy; sequential updating (Ch. 3–4) | [pdf](https://johnnydoorn.github.io/teaching-statistics/bayesian-statistics-pml/2026/Canvas_Lecture_2_The_Beta_Binomial_Model-1.pdf) |
 | 8 Jun  | **Lecture 3** — Conjugate Models & Choosing Your Prior | Conjugacy; prior selection (Ch. 5) | [link](https://johnnydoorn.github.io/teaching-statistics/bayesian-statistics-pml/2026/Lecture3_Conjugacy/lecture3_conjugacy.html) |
 | 10 Jun | **Lecture 4** — Obtaining the Posterior: Grid Approximation & MCMC | Grid + MCMC (Ch. 6 & 7) | [link](https://johnnydoorn.github.io/teaching-statistics/bayesian-statistics-pml/2026/Lecture4_GridMCMC/lecture4_gridmcmc.html) |
 | 15 Jun | **Lecture 5** — Using the Posterior: Inference, Prediction & Hypothesis Testing | Estimation; prediction; Bayes factors (Ch. 8) | [link](https://johnnydoorn.github.io/teaching-statistics/bayesian-statistics-pml/2026/Lecture5_PosteriorInference/lecture5_posteriorinference.html) |
