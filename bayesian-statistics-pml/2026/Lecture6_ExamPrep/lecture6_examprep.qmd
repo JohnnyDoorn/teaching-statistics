@@ -260,10 +260,10 @@ Find 1 error in this report.
 
 ---
 
-# Mock Exam
+# Mock Exam 1
 
 <div class="note">
-A full practice paper (18 pts) in the style of last year's exam. It is deliberately longer than the real exam (10 pts, 3 questions) to give you more to work through, and it covers Lectures 3–5 plus a model-checking simulation. (Lectures 1–2 are examinable too; see the study checklist under Exam Tips.)
+A full practice paper (18 pts) in the style of last year's exam. It is deliberately longer than the real exam (10 pts, 3 questions) to give you more to work through, and it covers Lectures 3–5 plus a model-checking simulation. (Lectures 1–2 are covered in Mock Exam 2 below.)
 
 Q1–Q3 are by-hand computational questions; Q4 is a with-R simulation question. 
 
@@ -550,6 +550,254 @@ The observed count of 2 zero-sighting surveys sits near the centre of the replic
 
 ---
 
+# Mock Exam 2 (Last Year's Resit)
+
+<div class="note">
+Last year's digital resit (8 July 2025), reproduced as a practice paper. Six exercises, 18 points, spanning Lectures 1–5. Same open-book ANS-with-R format as your exam.
+</div>
+
+## Q1: Bayes' Rule (1 pt)
+*(Lecture 1 / Ch. 2)*
+
+Sophie is trying to guess where a friend spent a particular summer day. She remembers that 40% of her friends stayed in the Netherlands and 60% went on holiday to southern Europe, but not who went where. The chance of a great beach day is only 0.10 in the Netherlands, but 0.90 in southern Europe. One day the friend texts: "Today was a perfect beach day!"
+
+Given the friend had a great beach day, what is the probability they spent the day in the Netherlands?
+
+::: {.panel-tabset}
+
+### Question
+
+Attempt before looking at the solution.
+
+### Solution
+
+By Bayes' rule, with $B$ = "stayed in the Netherlands" and $A$ = "great beach day":
+
+$$P(B \mid A) = \frac{P(A \mid B)\,P(B)}{P(A \mid B)\,P(B) + P(A \mid B^c)\,P(B^c)}.$$
+
+```{r mb1}
+(0.10 * 0.40) / (0.10 * 0.40 + 0.90 * 0.60)
+```
+
+So $P(\text{Netherlands} \mid \text{beach day}) \approx 0.069$: even though beach days are far more common abroad, hearing about a great beach day makes the Netherlands quite unlikely.
+
+:::
+
+## Q2: The Beta-Binomial Model (4.25 pts)
+*(Lecture 2 / Ch. 3)*
+
+A researcher models a success probability with a $\text{Beta}(3, 10)$ prior and collects $n = 100$ trials. The Beta-Binomial update gives the posterior $\text{Beta}(24, 89)$.
+
+**a.** [0.25] How many successes and how many failures were observed?
+
+**b.** [0.5] Write the `summarize_beta_binomial()` call that produces this prior-to-posterior summary.
+
+**c.** [0.5] Write the code that plots the prior and posterior in one figure, without the scaled likelihood.
+
+**d.** [3] *(Describe, max 130 words.)* Describe how the posterior has shifted relative to the prior in terms of its mean, mode, and standard deviation, and what this shift says about how the data updated your beliefs.
+
+::: {.panel-tabset}
+
+### Question
+
+Attempt before looking at the solution.
+
+### Solution
+
+**a.** The update is $\text{Beta}(\alpha+y,\ \beta+n-y) = \text{Beta}(3+y,\ 10+n-y) = \text{Beta}(24, 89)$, so $y = 21$ successes and $n - y = 79$ failures.
+
+**b.**
+```{r mb2b}
+summarize_beta_binomial(alpha = 3, beta = 10, y = 21, n = 100)
+```
+
+**c.**
+```{r mb2c}
+plot_beta_binomial(alpha = 3, beta = 10, y = 21, n = 100, likelihood = FALSE)
+```
+
+**d.** The posterior mean falls slightly (0.23 to 0.21) while the posterior mode rises slightly (0.18 to 0.21). The two move in opposite directions because the prior is right-skewed, and updating pulls the mean and mode together. The posterior is also far more concentrated: the standard deviation drops from about 0.11 to about 0.04, reflecting much greater certainty. In short the data broadly agreed with the prior; rather than overturning our beliefs, they sharpened them, leaving the estimate near 0.21 but with much less uncertainty.
+
+> **Marking:** mean shifts down and mode shifts up, with the opposite directions attributed to the prior's skewness; SD shrinks (greater precision); actual prior/posterior values stated; data seen to reinforce rather than overturn the prior.
+
+:::
+
+## Q3: Match the Beta Posteriors (2.75 pts)
+*(Lecture 2 / Ch. 3)*
+
+You are modelling a success probability. In each case you start with a Beta prior and observe some successes and failures:
+
+| Case | Prior | Observed data |
+|---|---|---|
+| A | Beta(1, 1) | 3 successes, 6 failures |
+| B | Beta(2, 2) | 6 successes, 4 failures |
+| C | Beta(1, 4) | 4 successes, 2 failures |
+
+**a.** [0.75] Determine the posterior distribution for each case.
+
+**b.** [1.5] Compute the standard deviation of each posterior.
+
+**c.** [0.5] Rank the posteriors from highest to lowest confidence about the success probability.
+
+::: {.panel-tabset}
+
+### Question
+
+Attempt before looking at the solution.
+
+### Solution
+
+**a.** Update each with $\text{Beta}(\alpha + s,\ \beta + f)$:
+
+- A: $\text{Beta}(1+3,\ 1+6) = \text{Beta}(4, 7)$
+- B: $\text{Beta}(2+6,\ 2+4) = \text{Beta}(8, 6)$
+- C: $\text{Beta}(1+4,\ 4+2) = \text{Beta}(5, 6)$
+
+**b.**
+```{r mb3b}
+post_sd <- function(a, b) sqrt(a * b / ((a + b)^2 * (a + b + 1)))
+round(c(A = post_sd(4, 7), B = post_sd(8, 6), C = post_sd(5, 6)), 3)
+```
+
+**c.** Higher confidence means a smaller posterior SD, so the ranking is B (SD 0.128, highest confidence), then A (SD 0.139), then C (SD 0.144, lowest confidence).
+
+:::
+
+## Q4: Sequential Updating with the Bechdel Data (2.5 pts)
+*(Lecture 2 / Ch. 4)*
+
+The `bechdel` data in **bayesrules** records whether films pass the Bechdel test. John models $\pi$, the proportion of films that pass, with a symmetric $\text{Beta}(2, 2)$ prior and analyses one year at a time.
+
+**a.** [0.5] John analyses the 1995 films. Give the posterior, its mean, and its mode.
+
+**b.** [0.5] The next day he analyses the 2005 films, building on the previous day's posterior. Give the posterior, mean, and mode.
+
+**c.** [0.5] On the third day he analyses the 2013 films, building on the previous two analyses. Give the posterior, mean, and mode.
+
+**d.** [1] *(Explain, max 70 words.)* Jenna instead analyses 1995, 2005 and 2013 jointly, all at once. Under what conditions will her posterior be identical to John's?
+
+::: {.panel-tabset}
+
+### Question
+
+Attempt before looking at the solution.
+
+### Solution
+
+**a.–c.** Each year adds its passes and failures, and yesterday's posterior becomes today's prior. Starting from $\text{Beta}(2, 2)$:
+
+```{r mb4}
+data(bechdel, package = "bayesrules")
+a <- 2; b <- 2
+for (yr in c(1995, 2005, 2013)) {
+  d <- bechdel[bechdel$year == yr, ]
+  y <- sum(d$binary == "PASS"); n <- nrow(d)
+  a <- a + y; b <- b + (n - y)
+  cat(yr, ": Beta(", a, ",", b, ")  mean =", round(a/(a+b), 3),
+      " mode =", round((a-1)/(a+b-2), 3), "\n")
+}
+```
+
+So 1995 gives $\text{Beta}(20, 20)$ (mean and mode 0.50), 2005 gives $\text{Beta}(74, 66)$ (mean 0.529), and 2013 gives $\text{Beta}(120, 119)$ (mean 0.502).
+
+**d.** *Model answer (≤70 words).* If Jenna uses the same $\text{Beta}(2, 2)$ prior and the same combined data, the two posteriors are identical. In Bayesian updating, processing the data sequentially or all at once gives the same posterior, as long as the prior and the total data are the same.
+
+> **Marking:** states the conditions (same prior and same data) and recognises that sequential and batch updating coincide.
+
+:::
+
+## Q5: Tuning a Gamma Prior (2 pts)
+*(Lecture 3 / Ch. 5)*
+
+Analysts model $\lambda$, the average number of three-pointers made per NBA game.
+
+**a.** [1] Based on past seasons they expect a mean of 30 with a variance of 60. Construct a Gamma prior for $\lambda$.
+
+**b.** [1] Using the current season (284 games, 858 three-pointers in total), compute the posterior mean.
+
+::: {.panel-tabset}
+
+### Question
+
+Attempt before looking at the solution.
+
+### Solution
+
+**a.** Moment-matching for $\text{Gamma}(s, r)$ uses mean $= s/r$ and variance $= s/r^2$, so $r = \text{mean}/\text{variance} = 30/60 = 0.5$ and $s = \text{mean} \times r = 15$. The prior is $\text{Gamma}(15, 0.5)$.
+
+**b.** The Gamma-Poisson update is $\text{Gamma}(s + \sum y_i,\ r + n)$ with $\sum y_i = 858$ and $n = 284$ games:
+
+```{r mb5}
+s <- 15; r <- 0.5
+sp <- s + 858; rp <- r + 284
+cat("Posterior: Gamma(", sp, ",", rp, "),  mean =", round(sp/rp, 4), "\n")
+```
+
+The posterior mean is about 3.07.
+
+:::
+
+## Q6: Customer Complaints (5.5 pts)
+*(Lecture 5 / Ch. 8)*
+
+A call centre evaluates its complaint rate $\lambda$ (average complaints per hour) using a $\text{Gamma}(2, 1)$ prior (shape-rate). After observing $y = 12$ complaints in $t = 4$ hours, they update to the posterior $\text{Gamma}(14, 5)$.
+
+**a.** [1] The centre aims to keep the rate below 3 per hour. Compute $P(\lambda < 3 \mid y)$.
+
+**b.** [1] Compute the prior odds and posterior odds for $H_0: \lambda \geq 3$ versus $H_1: \lambda < 3$.
+
+**c.** [1] Use part (b) to compute $BF_{10}$.
+
+**d.** [1.5] *(Interpret, max 70 words.)* What does this Bayes factor say about the strength of evidence in the data?
+
+**e.** [1] Test the point hypothesis $H_0: \lambda = 3$ versus $H_1: \lambda \neq 3$ with the Savage-Dickey density ratio. Compute $BF_{01}$.
+
+::: {.panel-tabset}
+
+### Question
+
+Attempt before looking at the solution.
+
+### Solution
+
+**a.**
+```{r mb6a}
+pgamma(3, shape = 14, rate = 5)
+```
+
+$P(\lambda < 3 \mid y) \approx 0.637$.
+
+**b.**
+```{r mb6b}
+prior_p <- pgamma(3, 2, 1)    # P(lambda < 3) under the prior
+post_p  <- pgamma(3, 14, 5)   # P(lambda < 3 | y)
+cat("Prior odds  (H1/H0):", round(prior_p/(1 - prior_p), 3), "\n")
+cat("Posterior odds (H1/H0):", round(post_p/(1 - post_p), 3), "\n")
+```
+
+Prior odds of $H_1$ over $H_0$ are about 4.02; posterior odds about 1.75. (Equivalently, $H_0$ over $H_1$: 0.25 and 0.57.)
+
+**c.**
+```{r mb6c}
+BF10 <- (post_p/(1 - post_p)) / (prior_p/(1 - prior_p))
+cat("BF10 =", round(BF10, 3), "\n")
+```
+
+**d.** *Model answer (≤70 words).* $BF_{10} \approx 0.44$ is below 1, so the data favour $H_0$ ($\lambda \geq 3$) over $H_1$ ($\lambda < 3$): the observed data are about $1/0.44 \approx 2.3$ times more likely under $H_0$ than under $H_1$. The observed rate of 3 per hour pulled belief toward higher rates, so this is only weak evidence, and it points away from the "below 3" hypothesis.
+
+> **Marking:** states that the evidence favours $H_0$; translates 0.44 into "about 2.3 times more likely under $H_0$"; uses probabilistic language rather than "reject" or "significant".
+
+**e.**
+```{r mb6e}
+cat("BF01 (Savage-Dickey) =", round(dgamma(3, 14, 5) / dgamma(3, 2, 1), 3), "\n")
+```
+
+$BF_{01} \approx 3.20$: the posterior density at $\lambda = 3$ is about three times the prior density there, so the data are about three times more consistent with exactly $\lambda = 3$ than the diffuse alternative expected. Moderate evidence for the point value 3.
+
+:::
+
+---
+
 # Exam Tips
 
 ## What to Expect
@@ -559,7 +807,7 @@ The observed count of 2 zero-sighting surveys sits near the centre of the replic
 
 ## Study Checklist (Lectures 1–5)
 
-The exam covers **all lecture material**. The mock above drills Lectures 3–5, but Lectures 1–2 are equally examinable, so work through every box.
+The exam covers **all lecture material**. Mock Exam 1 focuses on Lectures 3–5 and Mock Exam 2 (last year's paper) spans Lectures 1–5; work through every box below regardless.
 
 **Lecture 1: Introduction & Bayes' Rule (Ch. 1–2)**
 
