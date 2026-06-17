@@ -471,7 +471,7 @@ $$y = (2,\; 0,\; 3,\; 1,\; 2,\; 4,\; 1,\; 0,\; 3,\; 2).$$
 
 **c.** [1] The team plans a block of 5 future surveys. Simulate the total number of sightings across the block and estimate $E(Y_\text{total} \mid y)$ and $P(Y_\text{total} \ge 10 \mid y)$.
 
-**d.** [1.5] Run a posterior-predictive check. Simulate 1,000 replicated datasets of 10 surveys under the fitted model; for each, record the number of zero-sighting surveys. Plot the distribution of this statistic, mark the observed value, and compute the posterior-predictive p-value. Does the Poisson model capture the frequency of zeros well?
+**d.** [1.5] Run a posterior-predictive check. Simulate 1,000 replicated datasets of 10 surveys under the fitted model; for each, record the number of zero-sighting surveys. Plot the distribution of this statistic and mark the observed value. Does the Poisson model capture the frequency of zeros well?
 
 **e.** [1] *(Interpret, max 70 words.)* A colleague wants to report only the predictive mean from (b) as "the" forecast for the next survey, with no uncertainty. What is wrong with this, and what should they report instead?
 
@@ -538,11 +538,9 @@ hist(zeros_rep, breaks = -0.5:(max(zeros_rep) + 0.5), probability = TRUE,
      xlab = "Number of zeros", col = "steelblue", border = "white")
 abline(v = obs_zeros, col = "tomato", lwd = 3)
 legend("topright", legend = "observed = 2", col = "tomato", lwd = 3, bty = "n")
-
-cat("PP p-value  P(zeros_rep >= 2 | y) =", round(mean(zeros_rep >= obs_zeros), 3), "\n")
 ```
 
-The observed count of 2 zero-sighting surveys sits near the centre of the replicated distribution (which averages ~1.8 zeros), so the posterior-predictive p-value is $\approx 0.5$. The model reproduces the frequency of zeros well — no sign of excess zeros (zero-inflation). A pp p-value near 0 or 1 would instead flag a feature the model systematically fails to capture. (Consistent with this, $\text{var}(y) \approx \bar y$, as the Poisson assumes.)
+The observed count of 2 zero-sighting surveys sits near the centre of the replicated distribution (which averages about 1.8 zeros), so the model reproduces the frequency of zeros well, with no sign of excess zeros (zero-inflation). If the observed value fell in the far tail of the replicated distribution, that would flag a feature the model fails to capture. (Consistent with this, $\text{var}(y) \approx \bar y$, as the Poisson assumes.)
 
 **e.** *Model answer (≤70 words).* Reporting only the mean (≈1.8) discards all predictive *uncertainty* — and 1.8 is not even an observable count. They should report the full posterior-predictive distribution, or at least a predictive interval (here a 90% interval is roughly $[0, 4]$ sightings) plus informative summaries such as $P(Y' = 0 \mid y)$. A bare point estimate cannot distinguish a confident forecast from a highly uncertain one.
 
@@ -603,12 +601,7 @@ The exam covers **all lecture material**. The mock above drills Lectures 3–5, 
 - [ ] Posterior prediction: the posterior-predictive distribution (Beta-Binomial; Negative-Binomial for Gamma-Poisson) and why it is wider than a plug-in
 - [ ] Posterior-predictive checks: simulate replicated data and compare a test statistic to the observed value
 - [ ] Hypothesis testing: interval (one- and two-sided) hypotheses via prior and posterior odds Bayes factors
-- [ ] Point hypotheses via the Savage-Dickey density ratio; the Jeffreys-Lindley paradox
-
-**Lecture 6: Reporting Guidelines**
-
-- [ ] The van Doorn et al. (2021) reporting checklist; calibrated language; spotting common reporting errors
-
+- [ ] Point hypotheses via the Savage-Dickey density ratio
 
 
 ## Key Formulas to Have at Hand
