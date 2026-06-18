@@ -263,7 +263,7 @@ Find 1 error in this report.
 # Mock Exam 1
 
 <div class="note">
-A full practice paper (18 pts) in the style of last year's exam. It is deliberately longer than the real exam (10 pts, 3 questions) to give you more to work through, and it covers Lectures 3–5 plus a model-checking simulation. (Lectures 1–2 are covered in Mock Exam 2 below.)
+A full practice paper (16.5 pts) in the style of last year's exam. It is deliberately longer than the real exam (10 pts, 3 questions) to give you more to work through, and it covers Lectures 3–5 plus a model-checking simulation. (Lectures 1–2 are covered in Mock Exam 2 below.)
 
 Q1–Q3 are by-hand computational questions; Q4 is a with-R simulation question. 
 
@@ -458,8 +458,8 @@ $BF_{01} \approx 3.1$: the posterior density at $\lambda = 2$ is about three tim
 
 :::
 
-## Mock Q4: Simulation — Posterior Predictive & Model Checking (5.5 pts)
-*(Lecture 5 / Ch. 8; cf. posterior-predictive check exercises, with-R question)*
+## Mock Q4: Posterior Prediction by Simulation (4 pts)
+*(Lecture 5 / Ch. 8; cf. posterior-prediction exercises, with-R question)*
 
 A marine ecologist models $\lambda$, the mean number of whale sightings per one-hour boat survey, with a $\text{Gamma}(2, 1)$ prior. Over 10 surveys the counts are
 
@@ -471,9 +471,7 @@ $$y = (2,\; 0,\; 3,\; 1,\; 2,\; 4,\; 1,\; 0,\; 3,\; 2).$$
 
 **c.** [1] The team plans a block of 5 future surveys. Simulate the total number of sightings across the block and estimate $E(Y_\text{total} \mid y)$ and $P(Y_\text{total} \ge 10 \mid y)$.
 
-**d.** [1.5] Run a posterior-predictive check. Simulate 1,000 replicated datasets of 10 surveys under the fitted model; for each, record the number of zero-sighting surveys. Plot the distribution of this statistic and mark the observed value. Does the Poisson model capture the frequency of zeros well?
-
-**e.** [1] *(Interpret, max 70 words.)* A colleague wants to report only the predictive mean from (b) as "the" forecast for the next survey, with no uncertainty. What is wrong with this, and what should they report instead?
+**d.** [1] *(Interpret, max 70 words.)* A colleague wants to report only the predictive mean from (b) as "the" forecast for the next survey, with no uncertainty. What is wrong with this, and what should they report instead?
 
 ::: {.panel-tabset}
 
@@ -523,26 +521,7 @@ cat("P(Y_total >= 10 | y) =", round(mean(y_block >= 10), 3), "\n")
 
 About 9.1 sightings expected over the 5-survey block ($5 \times$ the per-survey mean), with roughly a 42% chance of 10 or more.
 
-**d.**
-
-```{r q4d}
-n_obs     <- length(y)
-obs_zeros <- sum(y == 0)                  # observed = 2
-zeros_rep <- replicate(1000, {
-  lam <- rgamma(1, shape = sp, rate = rp)
-  sum(rpois(n_obs, lambda = lam) == 0)
-})
-
-hist(zeros_rep, breaks = -0.5:(max(zeros_rep) + 0.5), probability = TRUE,
-     main = "PP check: # zero-sighting surveys (out of 10)",
-     xlab = "Number of zeros", col = "steelblue", border = "white")
-abline(v = obs_zeros, col = "tomato", lwd = 3)
-legend("topright", legend = "observed = 2", col = "tomato", lwd = 3, bty = "n")
-```
-
-The observed count of 2 zero-sighting surveys sits near the centre of the replicated distribution (which averages about 1.8 zeros), so the model reproduces the frequency of zeros well, with no sign of excess zeros (zero-inflation). If the observed value fell in the far tail of the replicated distribution, that would flag a feature the model fails to capture. (Consistent with this, $\text{var}(y) \approx \bar y$, as the Poisson assumes.)
-
-**e.** *Model answer (≤70 words).* Reporting only the mean (≈1.8) discards all predictive *uncertainty* — and 1.8 is not even an observable count. They should report the full posterior-predictive distribution, or at least a predictive interval (here a 90% interval is roughly $[0, 4]$ sightings) plus informative summaries such as $P(Y' = 0 \mid y)$. A bare point estimate cannot distinguish a confident forecast from a highly uncertain one.
+**d.** *Model answer (≤70 words).* Reporting only the mean (≈1.8) discards all predictive *uncertainty* — and 1.8 is not even an observable count. They should report the full posterior-predictive distribution, or at least a predictive interval (here a 90% interval is roughly $[0, 4]$ sightings) plus informative summaries such as $P(Y' = 0 \mid y)$. A bare point estimate cannot distinguish a confident forecast from a highly uncertain one.
 
 > **Marking:** identifies that a point estimate discards predictive uncertainty (0.5); proposes reporting the predictive distribution or a predictive interval / tail probabilities instead (0.5).
 
@@ -847,7 +826,6 @@ The exam covers **all lecture material**. Mock Exam 1 focuses on Lectures 3–5 
 
 - [ ] Posterior estimation: location (mean/median/mode) and spread; credible intervals, central/ETI vs HPD/HDI
 - [ ] Posterior prediction: the posterior-predictive distribution (Beta-Binomial; Negative-Binomial for Gamma-Poisson) and why it is wider than a plug-in
-- [ ] Posterior-predictive checks: simulate replicated data and compare a test statistic to the observed value
 - [ ] Hypothesis testing: interval (one- and two-sided) hypotheses via prior and posterior odds Bayes factors
 - [ ] Point hypotheses via the Savage-Dickey density ratio
 
