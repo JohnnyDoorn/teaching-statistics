@@ -1,5 +1,5 @@
 ---
-title: "DSUJ Workshop 2025 - Select Smart Alex Tasks"
+title: "DSUJ Workshop - Select Smart Alex Tasks"
 bibliography: references.yaml
 csl: apa.csl
 toc-depth: 2  # Optional: controls how many heading levels to include

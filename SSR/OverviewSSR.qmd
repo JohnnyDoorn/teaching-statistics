@@ -1,14 +1,26 @@
 ---
-title: "SSR - Overview"
+title: "Scientific & Statistical Reasoning"
+subtitle: "Statistics track · course overview: slides, applets, datasets & extra explanations"
 author: "Johnny van Doorn"
 date: today
 format:
   html:
+    theme:
+      light: [cosmo, overview-styles.scss]
+      dark: [darkly, overview-styles.scss]
     toc: true
     toc-location: left
+    toc-title: "On this page"
+    title-block-banner: "#C34A5E"
+    title-block-banner-color: white
+    smooth-scroll: true
+    anchor-sections: true
+    link-external-newwindow: true
 ---
 
-This page will be continuously updated to feature slides and extra materials, such as applets, data sets, and additional explanations.
+::: {.lead-intro}
+This page is continuously updated with everything you need for the course: the lecture slides and handouts, interactive applets, the JASP datasets and result files, and extra written explanations. Use the toggle in the sidebar to switch between light and dark mode.
+:::
 
 ## Slides
 
