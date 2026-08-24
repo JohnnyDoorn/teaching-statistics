@@ -1,44 +1,111 @@
 ---
-title: "RMS - Overview"
+title: "Research Methods & Statistics"
+subtitle: "Statistics track · course overview: slides & exam practice"
 author: "Johnny van Doorn"
 date: today
 format:
   html:
+    theme:
+      light: [cosmo, overview-styles.scss]
+      dark: [darkly, overview-styles.scss]
     toc: true
     toc-location: left
+    toc-title: "On this page"
+    title-block-banner: "#C34A5E"
+    title-block-banner-color: white
+    smooth-scroll: true
+    anchor-sections: true
+    link-external-newwindow: true
 ---
 
-This page will be continuously updated to feature slides and extra materials for the Research Methods & Statistics course.
+::: {.lead-intro}
+This page is continuously updated throughout the semester with the lecture slides and exam-practice materials for Research Methods &amp; Statistics. New lectures appear here automatically as they are added. Use the toggle in the sidebar to switch between light and dark mode.
+:::
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(stringr)
+library(dplyr)
+library(kableExtra)
+
+# The page monitors this year's slide folder; drop new PDFs into it and they
+# appear on the next render. Bump this one line each academic year.
+year_dir  <- "2026"
+slide_dir <- file.path("slides", year_dir)
+base_url  <- sprintf("https://johnnydoorn.github.io/teaching-statistics/RMS/slides/%s", year_dir)
+
+# CamelCase / underscore file stems -> readable titles
+beautify <- function(stem) {
+  s <- gsub("_", " ", stem)
+  s <- gsub("([a-z0-9])([A-Z])", "\\1 \\2", s)  # split camelCase
+  s <- gsub("\\s*&\\s*", " & ", s)              # tidy ampersands
+  s <- gsub("\\s+", " ", s)
+  trimws(s)
+}
+
+url_for <- function(files, sub = "") {
+  enc <- vapply(files, utils::URLencode, character(1), reserved = TRUE)
+  sprintf("%s%s/%s", base_url, sub, enc)
+}
+pill <- function(url, label = "slides") {
+  sprintf('<a href="%s" target="_blank" class="external">%s</a>', url, label)
+}
+```
 
 ## Slides
 
-- [Lecture 1 - What Is Science](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_1_WhatIsScience.pdf)
-- [Lecture 2 - Measurement](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_2_Measurement.pdf)
-- [Lecture 3 - Why Statistics](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_3_WhyStatistics.pdf)
-- [Lecture 4 - Variability & Association](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_4_VariabilityAssociation.pdf)
-- [Lecture 5 - Probability I](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_5_ProbabilityI.pdf)
-- [Lecture 6 - Conditional Probability](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_6_ConditionalProbability.pdf)
-- [Lecture 7 - Frequency & Association Claims](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_7_Frequency%26AssociationClaims.pdf)
-- [Lecture 8 - Experimental Research](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_8_ExperimentalResearch.pdf)
-- [Lecture 9 - Probability Distributions](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_9_ProbabilityDistributions.pdf)
-- [Lecture 10 - Sampling Distributions](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_10_SamplingDistributions.pdf)
-- [Lecture 11 - Confidence Intervals I](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_11_ConfidenceIntervals_I.pdf)
-- [Lecture 12 - Confidence Intervals (Mean)](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_12_ConfidenceIntervalsMean.pdf)
-- [Lecture 13 - Factorial Design](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_13_FactorialDesign.pdf)
-- [Lecture 14 - Clinical Trials](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_14_ClinicalTrials.pdf)
-- [Lecture 15 - Hypothesis Test](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_15_HypothesisTest.pdf)
-- [Lecture 16 - Comparing Means](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_16_ComparingMeans.pdf)
-- [Lecture 17 - Comparing Groups II](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_17_ComparingGroupsII.pdf)
-- [Lecture 18 - Categorical Associations](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_18_CategoricalAssociations.pdf)
-- [Lecture 19 - ANOVA](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_19_ANOVA.pdf)
-- [Lecture 20 - Bayesian Estimation](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_20_BayesianEstimation.pdf)
-- [Lecture 21 - Regression](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_21_Regression.pdf)
-- [Lecture 22 - Bayesian Testing](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_22_BayesianTesting.pdf)
-- [Lecture 24 - More Bayes](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/RMS2526_24_MoreBayes.pdf)
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+pdfs <- list.files(slide_dir, pattern = "\\.pdf$", full.names = FALSE)
 
-## OEQ Practice
+if (length(pdfs) == 0) {
+  knitr::asis_output('<p class="text-muted fst-italic">Slides will appear here as the semester progresses.</p>')
+} else {
+  m     <- str_match(pdfs, "^RMS\\d+_(\\d+)_(.+)\\.pdf$")
+  num   <- suppressWarnings(as.numeric(m[, 2]))
+  title <- ifelse(is.na(m[, 3]), beautify(sub("\\.pdf$", "", pdfs)), beautify(m[, 3]))
+  ord   <- order(ifelse(is.na(num), Inf, num), title)
 
-Practice with the open-ended (trial) exam questions below. The accompanying data file is linked alongside.
+  df <- data.frame(
+    `#`       = ifelse(is.na(num[ord]), "", as.character(num[ord])),
+    Lecture   = title[ord],
+    Slides    = pill(url_for(pdfs[ord])),
+    check.names = FALSE, stringsAsFactors = FALSE
+  )
+  knitr::kable(df, escape = FALSE, format = "html", row.names = FALSE) %>%
+    kable_styling(full_width = TRUE)
+}
+```
 
-- [Trial Exam Question 2](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/OEQs/OE_MockExam2.pdf) — [data file (xlsx)](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/OEQs/Data_OE_TrialExam2.xlsx)
-- [Trial Exam Question 4 (Bayes)](https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2025/OEQs/OE_MockExam4_Bayes.pdf)
+## Exam Practice (OEQ)
+
+Practice with the open-ended (trial) exam questions below; any accompanying data files are linked alongside.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+oeq_dir <- file.path(slide_dir, "OEQs")
+oeq     <- if (dir.exists(oeq_dir))
+  list.files(oeq_dir, pattern = "\\.(pdf|xlsx|csv)$", full.names = FALSE) else character(0)
+
+if (length(oeq) == 0) {
+  knitr::asis_output('<p class="text-muted fst-italic">Trial exam questions will appear here once they are available.</p>')
+} else {
+  is_pdf <- grepl("\\.pdf$", oeq)
+  df <- data.frame(
+    Material = beautify(sub("\\.(pdf|xlsx|csv)$", "", oeq)),
+    Type     = ifelse(is_pdf, "question", "data"),
+    Link     = pill(url_for(oeq, sub = "/OEQs"), ifelse(is_pdf, "open", "download")),
+    stringsAsFactors = FALSE
+  )
+  df <- df[order(df$Type, df$Material), ]
+  knitr::kable(df, escape = FALSE, format = "html", row.names = FALSE) %>%
+    kable_styling(full_width = TRUE)
+}
+```
+
+## Extra Materials
+
+- [One-sided vs. two-sided tests](https://johnnydoorn.github.io/teaching-statistics/RMS/OneSidedVsTwoSided.html)
+- [Which significance test to use (decision tree)](https://johnnydoorn.github.io/teaching-statistics/RMS/WhichSignificanceTestToUse.pdf)
+- [Tail decision tree](https://johnnydoorn.github.io/teaching-statistics/RMS/TailDecisionTree.pdf)
+
+## JASP Help
+
+The [JASP Video Library](https://jasp-stats.github.io/jasp-video-library/) offers screen-recordings that demonstrate all sorts of analyses and features in JASP.

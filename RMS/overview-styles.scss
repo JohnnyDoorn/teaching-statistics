@@ -1,0 +1,164 @@
+/*-- scss:defaults --*/
+
+// SSR overview theme. Structure mirrors discoverjasp's html/styles.scss,
+// but the palette keeps the UvA / SSR red identity (#BC0031) instead of JASP blue.
+
+$white:    #ffffff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #868e96 !default;
+$gray-700: #495057 !default;
+$gray-800: #373a3c !default;
+$gray-900: #212529 !default;
+$black:    #000000 !default;
+
+// SSR / UvA brand — softened crimson so the hero reads as warm, not loud.
+$uva-red:      #C34A5E !default;   // primary (muted UvA red)
+$uva-red-dark: #9E3A4C !default;   // hover / active
+$uva-blue:     #01426A !default;   // secondary accent (from the extra-texts style)
+$uva-sand:     #E6AB46 !default;   // warm accent for callouts
+
+$primary:   $uva-red !default;
+$secondary: $uva-blue !default;
+$success:   #4a9d5b !default;
+$info:      $uva-blue !default;
+$warning:   $uva-sand !default;
+$danger:    $uva-red !default;
+
+// Links
+$link-color:           $uva-red !default;
+$link-decoration:      none !default;
+$link-hover-color:     $uva-red-dark !default;
+$link-hover-decoration: underline !default;
+
+// Inline code
+$code-color: $uva-red-dark !default;
+
+// TOC
+$toc-color: $secondary !default;
+$toc-font-size: 0.95em !default;
+
+// Code copy button
+$btn-code-copy-color-active: $uva-red !default;
+
+/*-- scss:rules --*/
+
+// ---- Title banner ("hero") -------------------------------------------------
+// Quarto renders the title block as a banner (title-block-banner in the yaml).
+// Give it a subtle diagonal gradient so it reads as a designed header, not a
+// flat bar, in both light and dark mode.
+.quarto-title-block .quarto-title-banner {
+  background: linear-gradient(115deg, $uva-red 0%, $uva-red-dark 60%, darken($uva-red-dark, 8%) 100%);
+}
+
+.quarto-title-banner {
+  .title {
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+  .subtitle {
+    opacity: 0.9;
+    font-weight: 400;
+  }
+}
+
+// ---- Headings --------------------------------------------------------------
+h2 {
+  border-bottom: 2px solid rgba($uva-red, 0.25);
+  padding-bottom: 0.25rem;
+  margin-top: 2rem;
+  font-weight: 700;
+}
+
+h2::before {
+  content: "";
+  display: inline-block;
+  width: 0.55em;
+  height: 0.55em;
+  margin-right: 0.5em;
+  border-radius: 2px;
+  background-color: $uva-red;
+  vertical-align: middle;
+}
+
+h3 {
+  font-weight: 600;
+}
+
+// ---- Tables (the kable output for applets / datasets / links) --------------
+.table {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+
+  thead th {
+    background-color: $uva-red;
+    color: $white;
+    border-bottom: none;
+    font-weight: 600;
+  }
+
+  tbody tr {
+    transition: background-color 0.12s ease-in-out;
+  }
+  tbody tr:hover {
+    background-color: rgba($uva-red, 0.06);
+  }
+}
+
+// Dark mode: soften the row-hover and lift table contrast a touch.
+.quarto-dark {
+  .table tbody tr:hover {
+    background-color: rgba($uva-sand, 0.10);
+  }
+  h2 {
+    border-bottom-color: rgba($uva-sand, 0.30);
+  }
+  h2::before {
+    background-color: $uva-sand;
+  }
+}
+
+// ---- "link" pills in the tables --------------------------------------------
+// The generated tables use <a class="external">link</a>; make them feel like
+// buttons rather than raw underlined text.
+.table a.external {
+  display: inline-block;
+  padding: 0.1em 0.7em;
+  border: 1px solid rgba($uva-red, 0.5);
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 0.9em;
+  line-height: 1.5;
+  transition: all 0.12s ease-in-out;
+}
+.table a.external:hover {
+  background-color: $uva-red;
+  color: $white;
+  border-color: $uva-red;
+}
+.quarto-dark .table a.external {
+  border-color: rgba($uva-sand, 0.6);
+  color: $uva-sand;
+}
+.quarto-dark .table a.external:hover {
+  background-color: $uva-sand;
+  color: $gray-900;
+  border-color: $uva-sand;
+}
+
+// ---- Intro lead paragraph --------------------------------------------------
+.lead-intro {
+  font-size: 1.15rem;
+  color: $gray-700;
+  border-left: 4px solid $uva-red;
+  padding-left: 1rem;
+  margin: 1.5rem 0 2rem;
+}
+.quarto-dark .lead-intro {
+  color: $gray-400;
+  border-left-color: $uva-sand;
+}
