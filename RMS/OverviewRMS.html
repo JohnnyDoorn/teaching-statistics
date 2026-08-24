@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Johnny van Doorn">
-<meta name="dcterms.date" content="2026-07-09">
+<meta name="dcterms.date" content="2026-08-24">
 
 <title>Research Methods &amp; Statistics</title>
 <style>
@@ -56,6 +56,9 @@ background: #C34A5E;
       }
 </style>
 
+<script src="OverviewRMS_files/libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="OverviewRMS_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
 
 </head>
 
@@ -65,7 +68,7 @@ background: #C34A5E;
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Research Methods &amp; Statistics</h1>
-            <p class="subtitle lead">Statistics track · course overview: slides &amp; exam practice</p>
+            <p class="subtitle lead">Course materials</p>
                       </div>
   </div>
     
@@ -82,7 +85,7 @@ background: #C34A5E;
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">July 9, 2026</p>
+        <p class="date">August 24, 2026</p>
       </div>
     </div>
     
@@ -97,9 +100,7 @@ background: #C34A5E;
    
   <ul>
   <li><a href="#slides" id="toc-slides" class="nav-link active" data-scroll-target="#slides">Slides</a></li>
-  <li><a href="#exam-practice-oeq" id="toc-exam-practice-oeq" class="nav-link" data-scroll-target="#exam-practice-oeq">Exam Practice (OEQ)</a></li>
-  <li><a href="#extra-materials" id="toc-extra-materials" class="nav-link" data-scroll-target="#extra-materials">Extra Materials</a></li>
-  <li><a href="#jasp-help" id="toc-jasp-help" class="nav-link" data-scroll-target="#jasp-help">JASP Help</a></li>
+  <li><a href="#extra-reading" id="toc-extra-reading" class="nav-link" data-scroll-target="#extra-reading">Extra Reading</a></li>
   </ul>
 </nav>
 </div>
@@ -111,36 +112,67 @@ background: #C34A5E;
 
 
 <div class="lead-intro">
-<p>This page is continuously updated throughout the semester with the lecture slides and exam-practice materials for Research Methods &amp; Statistics. New lectures appear here automatically as they are added. Use the toggle in the sidebar to switch between light and dark mode.</p>
+<p>This page is continuously updated with the lecture slides and other practice materials for Research Methods &amp; Statistics. Use the toggle in the sidebar to switch between light and dark mode.</p>
 </div>
 <section id="slides" class="level2">
 <h2 class="anchored" data-anchor-id="slides">Slides</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p class="text-muted fst-italic">Slides will appear here as the semester progresses.</p>
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">#</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Lecture</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Slides</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">Why Statistics</td>
+<td style="text-align: left;"><a href="https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2026/RMS2627_3_WhyStatistics.pdf" class="external" target="_blank">slides</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">Variability Association</td>
+<td style="text-align: left;"><a href="https://johnnydoorn.github.io/teaching-statistics/RMS/slides/2026/RMS2627_4_VariabilityAssociation.pdf" class="external" target="_blank">slides</a></td>
+</tr>
+</tbody>
+</table>
+
+
 </div>
 </div>
+<!-- ## Exam Practice (OEQ) -->
+<!-- Practice with the open-ended (trial) exam questions below; any accompanying data files are linked alongside. -->
+<!-- ```{r, echo=FALSE, warning=FALSE, message=FALSE} -->
+<!-- oeq_dir <- file.path(slide_dir, "OEQs") -->
+<!-- oeq     <- if (dir.exists(oeq_dir)) -->
+<!--   list.files(oeq_dir, pattern = "\\.(pdf|xlsx|csv)$", full.names = FALSE) else character(0) -->
+<!-- if (length(oeq) == 0) { -->
+<!--   knitr::asis_output('<p class="text-muted fst-italic">Trial exam questions will appear here once they are available.</p>') -->
+<!-- } else { -->
+<!--   is_pdf <- grepl("\\.pdf$", oeq) -->
+<!--   df <- data.frame( -->
+<!--     Material = beautify(sub("\\.(pdf|xlsx|csv)$", "", oeq)), -->
+<!--     Type     = ifelse(is_pdf, "question", "data"), -->
+<!--     Link     = pill(url_for(oeq, sub = "/OEQs"), ifelse(is_pdf, "open", "download")), -->
+<!--     stringsAsFactors = FALSE -->
+<!--   ) -->
+<!--   df <- df[order(df$Type, df$Material), ] -->
+<!--   knitr::kable(df, escape = FALSE, format = "html", row.names = FALSE) %>% -->
+<!--     kable_styling(full_width = TRUE) -->
+<!-- } -->
+<!-- ``` -->
 </section>
-<section id="exam-practice-oeq" class="level2">
-<h2 class="anchored" data-anchor-id="exam-practice-oeq">Exam Practice (OEQ)</h2>
-<p>Practice with the open-ended (trial) exam questions below; any accompanying data files are linked alongside.</p>
-<div class="cell">
-<div class="cell-output-display">
-<p class="text-muted fst-italic">Trial exam questions will appear here once they are available.</p>
-</div>
-</div>
-</section>
-<section id="extra-materials" class="level2">
-<h2 class="anchored" data-anchor-id="extra-materials">Extra Materials</h2>
-<ul>
-<li><a href="https://johnnydoorn.github.io/teaching-statistics/RMS/OneSidedVsTwoSided.html">One-sided vs.&nbsp;two-sided tests</a></li>
-<li><a href="https://johnnydoorn.github.io/teaching-statistics/RMS/WhichSignificanceTestToUse.pdf">Which significance test to use (decision tree)</a></li>
-<li><a href="https://johnnydoorn.github.io/teaching-statistics/RMS/TailDecisionTree.pdf">Tail decision tree</a></li>
-</ul>
-</section>
-<section id="jasp-help" class="level2">
-<h2 class="anchored" data-anchor-id="jasp-help">JASP Help</h2>
-<p>The <a href="https://jasp-stats.github.io/jasp-video-library/">JASP Video Library</a> offers screen-recordings that demonstrate all sorts of analyses and features in JASP.</p>
+<section id="extra-reading" class="level2">
+<h2 class="anchored" data-anchor-id="extra-reading">Extra Reading</h2>
+<p>Nothing here for now…</p>
+<!-- - [One-sided vs. two-sided tests](https://johnnydoorn.github.io/teaching-statistics/RMS/OneSidedVsTwoSided.html) -->
+<!-- - [Which significance test to use (decision tree)](https://johnnydoorn.github.io/teaching-statistics/RMS/WhichSignificanceTestToUse.pdf) -->
+<!-- - [Tail decision tree](https://johnnydoorn.github.io/teaching-statistics/RMS/TailDecisionTree.pdf) -->
+<!-- ## JASP Help -->
+<!-- The [JASP Video Library](https://jasp-stats.github.io/jasp-video-library/) offers screen-recordings that demonstrate all sorts of analyses and features in JASP. -->
 </section>
 
 </main>

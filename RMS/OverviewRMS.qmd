@@ -1,6 +1,6 @@
 ---
 title: "Research Methods & Statistics"
-subtitle: "Statistics track · course overview: slides & exam practice"
+subtitle: "Course materials"
 author: "Johnny van Doorn"
 date: today
 format:
@@ -19,7 +19,7 @@ format:
 ---
 
 ::: {.lead-intro}
-This page is continuously updated throughout the semester with the lecture slides and exam-practice materials for Research Methods &amp; Statistics. New lectures appear here automatically as they are added. Use the toggle in the sidebar to switch between light and dark mode.
+This page is continuously updated with the lecture slides and  other practice materials for Research Methods & Statistics. Use the toggle in the sidebar to switch between light and dark mode.
 :::
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
@@ -75,37 +75,40 @@ if (length(pdfs) == 0) {
 }
 ```
 
-## Exam Practice (OEQ)
+<!-- ## Exam Practice (OEQ) -->
 
-Practice with the open-ended (trial) exam questions below; any accompanying data files are linked alongside.
+<!-- Practice with the open-ended (trial) exam questions below; any accompanying data files are linked alongside. -->
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-oeq_dir <- file.path(slide_dir, "OEQs")
-oeq     <- if (dir.exists(oeq_dir))
-  list.files(oeq_dir, pattern = "\\.(pdf|xlsx|csv)$", full.names = FALSE) else character(0)
+<!-- ```{r, echo=FALSE, warning=FALSE, message=FALSE} -->
+<!-- oeq_dir <- file.path(slide_dir, "OEQs") -->
+<!-- oeq     <- if (dir.exists(oeq_dir)) -->
+<!--   list.files(oeq_dir, pattern = "\\.(pdf|xlsx|csv)$", full.names = FALSE) else character(0) -->
 
-if (length(oeq) == 0) {
-  knitr::asis_output('<p class="text-muted fst-italic">Trial exam questions will appear here once they are available.</p>')
-} else {
-  is_pdf <- grepl("\\.pdf$", oeq)
-  df <- data.frame(
-    Material = beautify(sub("\\.(pdf|xlsx|csv)$", "", oeq)),
-    Type     = ifelse(is_pdf, "question", "data"),
-    Link     = pill(url_for(oeq, sub = "/OEQs"), ifelse(is_pdf, "open", "download")),
-    stringsAsFactors = FALSE
-  )
-  df <- df[order(df$Type, df$Material), ]
-  knitr::kable(df, escape = FALSE, format = "html", row.names = FALSE) %>%
-    kable_styling(full_width = TRUE)
-}
-```
+<!-- if (length(oeq) == 0) { -->
+<!--   knitr::asis_output('<p class="text-muted fst-italic">Trial exam questions will appear here once they are available.</p>') -->
+<!-- } else { -->
+<!--   is_pdf <- grepl("\\.pdf$", oeq) -->
+<!--   df <- data.frame( -->
+<!--     Material = beautify(sub("\\.(pdf|xlsx|csv)$", "", oeq)), -->
+<!--     Type     = ifelse(is_pdf, "question", "data"), -->
+<!--     Link     = pill(url_for(oeq, sub = "/OEQs"), ifelse(is_pdf, "open", "download")), -->
+<!--     stringsAsFactors = FALSE -->
+<!--   ) -->
+<!--   df <- df[order(df$Type, df$Material), ] -->
+<!--   knitr::kable(df, escape = FALSE, format = "html", row.names = FALSE) %>% -->
+<!--     kable_styling(full_width = TRUE) -->
+<!-- } -->
+<!-- ``` -->
 
-## Extra Materials
+## Extra Reading
 
-- [One-sided vs. two-sided tests](https://johnnydoorn.github.io/teaching-statistics/RMS/OneSidedVsTwoSided.html)
-- [Which significance test to use (decision tree)](https://johnnydoorn.github.io/teaching-statistics/RMS/WhichSignificanceTestToUse.pdf)
-- [Tail decision tree](https://johnnydoorn.github.io/teaching-statistics/RMS/TailDecisionTree.pdf)
+Nothing here for now... 
 
-## JASP Help
+<!-- - [One-sided vs. two-sided tests](https://johnnydoorn.github.io/teaching-statistics/RMS/OneSidedVsTwoSided.html) -->
+<!-- - [Which significance test to use (decision tree)](https://johnnydoorn.github.io/teaching-statistics/RMS/WhichSignificanceTestToUse.pdf) -->
+<!-- - [Tail decision tree](https://johnnydoorn.github.io/teaching-statistics/RMS/TailDecisionTree.pdf) -->
 
-The [JASP Video Library](https://jasp-stats.github.io/jasp-video-library/) offers screen-recordings that demonstrate all sorts of analyses and features in JASP.
+
+<!-- ## JASP Help -->
+
+<!-- The [JASP Video Library](https://jasp-stats.github.io/jasp-video-library/) offers screen-recordings that demonstrate all sorts of analyses and features in JASP. -->
