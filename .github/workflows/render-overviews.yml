@@ -56,11 +56,13 @@ jobs:
             /SSR/_quarto.yml
             /SSR/OverviewSSR.qmd
             /SSR/overview-styles.scss
+            /SSR/OverviewSSR.html
             /SSR/OverviewSSR_files/**
             /SSR/2026/**/*.qmd
             /RMS/_quarto.yml
             /RMS/OverviewRMS.qmd
             /RMS/overview-styles.scss
+            /RMS/OverviewRMS.html
             /RMS/OverviewRMS_files/**
             /RMS/slides/2026/**
             /extra-texts/*.qmd
