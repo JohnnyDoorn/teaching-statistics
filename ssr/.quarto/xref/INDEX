@@ -379,5 +379,11 @@
   },
   "2026/SSR.qmd": {
     "SSR.html": "d9cee70d"
+  },
+  "overview-ssr.qmd": {
+    "overview-ssr.html": "c7d2a64e"
+  },
+  "2026/ssr.qmd": {
+    "ssr.html": "b93f73da"
   }
 }
