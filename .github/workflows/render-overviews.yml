@@ -1,0 +1,119 @@
+name: Render course overviews
+
+# Re-renders the SSR and RMS overview pages whenever their inputs change, and
+# commits the resulting HTML back to main. GitHub Pages serves this repo in
+# "legacy" mode (branch main, path /), so it publishes whatever HTML is
+# committed here; it never runs Quarto itself.
+on:
+  push:
+    branches: [main]
+    paths:
+      # SSR: the overview itself, the listing chunk, and the lecture qmds it reads
+      - 'SSR/OverviewSSR.qmd'
+      - 'SSR/2026/SSR.qmd'
+      - 'SSR/2026/**/*.qmd'
+      - 'SSR/overview-styles.scss'
+      - 'SSR/_quarto.yml'
+      # RMS: the overview itself and the slide/OEQ folder it monitors
+      - 'RMS/OverviewRMS.qmd'
+      - 'RMS/slides/2026/**'
+      - 'RMS/overview-styles.scss'
+      - 'RMS/_quarto.yml'
+      # shared inputs
+      - '_quarto.yml'
+      - 'extra-texts/*.qmd'
+      - 'datasets/2025/**'
+      - '.github/workflows/render-overviews.yml'
+  workflow_dispatch:
+
+# Never let two renders race for the same commit.
+concurrency:
+  group: render-overviews
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    # Don't re-trigger on this workflow's own commit.
+    if: github.actor != 'github-actions[bot]'
+
+    steps:
+      # The repo is ~4 GB. A blobless, sparse checkout pulls only the paths the
+      # two overview pages actually read (a few tens of MB) instead of the lot.
+      - name: Checkout (sparse)
+        uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /_quarto.yml
+            /style.scss
+            /footer.html
+            /footer.qmd
+            /SSR/_quarto.yml
+            /SSR/OverviewSSR.qmd
+            /SSR/overview-styles.scss
+            /SSR/OverviewSSR_files/**
+            /SSR/2026/**/*.qmd
+            /RMS/_quarto.yml
+            /RMS/OverviewRMS.qmd
+            /RMS/overview-styles.scss
+            /RMS/OverviewRMS_files/**
+            /RMS/slides/2026/**
+            /extra-texts/*.qmd
+            /datasets/2025/**
+
+      # Pinned to the version Johnny renders with locally, so CI and local
+      # renders produce byte-identical HTML instead of fighting over the diff.
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: 1.3.340
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - name: Install R packages
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          packages: |
+            any::rmarkdown
+            any::knitr
+            any::stringr
+            any::dplyr
+            any::lubridate
+            any::kableExtra
+
+      - name: Render SSR overview
+        run: quarto render SSR/OverviewSSR.qmd --to html
+
+      - name: Render RMS overview
+        run: quarto render RMS/OverviewRMS.qmd --to html
+
+      - name: Commit rendered pages
+        run: |
+          set -euo pipefail
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Stage ONLY the generated pages. Never `git add -A`: the sparse
+          # checkout makes every unlisted path look deleted, and a blanket add
+          # would commit those deletions.
+          git add -- \
+            SSR/OverviewSSR.html \
+            SSR/OverviewSSR_files \
+            RMS/OverviewRMS.html \
+            RMS/OverviewRMS_files
+
+          if git diff --cached --quiet; then
+            echo "Overview pages unchanged - nothing to commit."
+            exit 0
+          fi
+
+          git commit -m "chore: re-render SSR and RMS overview pages [skip ci]"
+          git push
