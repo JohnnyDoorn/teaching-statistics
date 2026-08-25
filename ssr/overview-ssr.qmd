@@ -24,7 +24,7 @@ This page is continuously updated with everything you need for the course: the l
 
 ## Slides
 
-```{r child="../ssr/2026/SSR.qmd"}
+```{r child="../ssr/2026/ssr.qmd"}
 ```
 
 

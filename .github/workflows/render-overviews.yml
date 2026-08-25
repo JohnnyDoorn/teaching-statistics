@@ -10,7 +10,7 @@ on:
     paths:
       # SSR: the overview itself, the listing chunk, and the lecture qmds it reads
       - 'ssr/overview-ssr.qmd'
-      - 'ssr/2026/SSR.qmd'
+      - 'ssr/2026/ssr.qmd'
       - 'ssr/2026/**/*.qmd'
       - 'ssr/overview-styles.scss'
       - 'ssr/_quarto.yml'
