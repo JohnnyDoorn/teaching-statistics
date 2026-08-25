@@ -9,10 +9,10 @@ The handouts are 1 continuous page, while the slides are spread across multiple 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # One knob per academic year: bump this and everything below follows.
 year_dir    <- "2026"
-course.path <- paste0("SSR/", year_dir, "/")
+course.path <- paste0("ssr/", year_dir, "/")
 
 # Resolve the lecture folder whether this file is knit standalone (wd is already
-# SSR/<year>) or as a child of OverviewSSR.qmd (wd is SSR/). Keep it relative:
+# ssr/<year>) or as a child of overview-ssr.qmd (wd is ssr/). Keep it relative:
 # an absolute path breaks the GitHub Actions render.
 if (basename(getwd()) != year_dir) setwd(year_dir)
 

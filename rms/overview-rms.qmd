@@ -31,7 +31,7 @@ library(kableExtra)
 # appear on the next render. Bump this one line each academic year.
 year_dir  <- "2026"
 slide_dir <- file.path("slides", year_dir)
-base_url  <- sprintf("https://johnnydoorn.github.io/teaching-statistics/RMS/slides/%s", year_dir)
+base_url  <- sprintf("https://johnnydoorn.github.io/teaching-statistics/rms/slides/%s", year_dir)
 
 # CamelCase / underscore file stems -> readable titles
 beautify <- function(stem) {
@@ -104,9 +104,9 @@ if (length(pdfs) == 0) {
 
 Nothing here for now... 
 
-<!-- - [One-sided vs. two-sided tests](https://johnnydoorn.github.io/teaching-statistics/RMS/OneSidedVsTwoSided.html) -->
-<!-- - [Which significance test to use (decision tree)](https://johnnydoorn.github.io/teaching-statistics/RMS/WhichSignificanceTestToUse.pdf) -->
-<!-- - [Tail decision tree](https://johnnydoorn.github.io/teaching-statistics/RMS/TailDecisionTree.pdf) -->
+<!-- - [One-sided vs. two-sided tests](https://johnnydoorn.github.io/teaching-statistics/rms/OneSidedVsTwoSided.html) -->
+<!-- - [Which significance test to use (decision tree)](https://johnnydoorn.github.io/teaching-statistics/rms/WhichSignificanceTestToUse.pdf) -->
+<!-- - [Tail decision tree](https://johnnydoorn.github.io/teaching-statistics/rms/TailDecisionTree.pdf) -->
 
 
 <!-- ## JASP Help -->

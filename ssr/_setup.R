@@ -1,7 +1,7 @@
 # Shared setup for SSR slides
 # Source this from topic files: source("../../_setup.R")
-# Working directory is the lecture folder (e.g., SSR/2026/11. t_test/)
-# so ../../ points to SSR/
+# Working directory is the lecture folder (e.g., ssr/2026/11. t_test/)
+# so ../../ points to ssr/
 
 # --- Libraries ---
 if (!"DT" %in% installed.packages())      install.packages("DT")

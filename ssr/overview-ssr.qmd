@@ -24,7 +24,7 @@ This page is continuously updated with everything you need for the course: the l
 
 ## Slides
 
-```{r child="../SSR/2026/SSR.qmd"}
+```{r child="../ssr/2026/SSR.qmd"}
 ```
 
 
@@ -62,7 +62,7 @@ lectures <- data.frame()
 n <- length(files)
 
 files <- files[order(as.numeric(gsub("\\..*", "", files)))]
-files <- files[files!= "OverviewSSR.qmd"]
+files <- files[files!= "overview-ssr.qmd"]
 htmlFiles <- gsub(x =files, pattern = ".qmd", replacement = ".html")
 htmlFiles <- htmlFiles[htmlFiles %in% c("OneSidedVsTwoSided.html","Heteroscedasticity.html", "EffSizeVsTestStat.html", "ViolatingAssumptionsANOVA.html", "PredictingWithDummies_1Variable.html", "PredictingWithDummies_2Variables.html")]
 
@@ -84,7 +84,7 @@ files <- list.files(full.names = FALSE, pattern = "\\jasp", recursive = FALSE,
 
 
 files <- files[order(as.numeric(gsub("\\..*", "", files)))]
-files <- files[files!= "OverviewSSR.qmd"]
+files <- files[files!= "overview-ssr.qmd"]
 resultFiles <- files[grepl("-result", files)]
 files <- files[!grepl("-result", files)]
 

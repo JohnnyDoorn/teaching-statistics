@@ -1,4 +1,4 @@
-setwd("/Users/johnny/GitHubStuff/teaching-statistics/SSR/2026/")
+setwd("/Users/johnny/GitHubStuff/teaching-statistics/ssr/2026/")
 
 files <- list.files(full.names = TRUE, pattern = "^[0-9]+\\..+\\.qmd$", recursive = TRUE)
 

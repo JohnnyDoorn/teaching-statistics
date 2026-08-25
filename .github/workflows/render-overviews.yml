@@ -9,16 +9,16 @@ on:
     branches: [main]
     paths:
       # SSR: the overview itself, the listing chunk, and the lecture qmds it reads
-      - 'SSR/OverviewSSR.qmd'
-      - 'SSR/2026/SSR.qmd'
-      - 'SSR/2026/**/*.qmd'
-      - 'SSR/overview-styles.scss'
-      - 'SSR/_quarto.yml'
+      - 'ssr/overview-ssr.qmd'
+      - 'ssr/2026/SSR.qmd'
+      - 'ssr/2026/**/*.qmd'
+      - 'ssr/overview-styles.scss'
+      - 'ssr/_quarto.yml'
       # RMS: the overview itself and the slide/OEQ folder it monitors
-      - 'RMS/OverviewRMS.qmd'
-      - 'RMS/slides/2026/**'
-      - 'RMS/overview-styles.scss'
-      - 'RMS/_quarto.yml'
+      - 'rms/overview-rms.qmd'
+      - 'rms/slides/2026/**'
+      - 'rms/overview-styles.scss'
+      - 'rms/_quarto.yml'
       # shared inputs
       - '_quarto.yml'
       - 'extra-texts/*.qmd'
@@ -53,18 +53,18 @@ jobs:
             /style.scss
             /footer.html
             /footer.qmd
-            /SSR/_quarto.yml
-            /SSR/OverviewSSR.qmd
-            /SSR/overview-styles.scss
-            /SSR/OverviewSSR.html
-            /SSR/OverviewSSR_files/**
-            /SSR/2026/**/*.qmd
-            /RMS/_quarto.yml
-            /RMS/OverviewRMS.qmd
-            /RMS/overview-styles.scss
-            /RMS/OverviewRMS.html
-            /RMS/OverviewRMS_files/**
-            /RMS/slides/2026/**
+            /ssr/_quarto.yml
+            /ssr/overview-ssr.qmd
+            /ssr/overview-styles.scss
+            /ssr/overview-ssr.html
+            /ssr/overview-ssr_files/**
+            /ssr/2026/**/*.qmd
+            /rms/_quarto.yml
+            /rms/overview-rms.qmd
+            /rms/overview-styles.scss
+            /rms/overview-rms.html
+            /rms/overview-rms_files/**
+            /rms/slides/2026/**
             /extra-texts/*.qmd
             /datasets/2025/**
 
@@ -92,10 +92,10 @@ jobs:
             any::kableExtra
 
       - name: Render SSR overview
-        run: quarto render SSR/OverviewSSR.qmd --to html
+        run: quarto render ssr/overview-ssr.qmd --to html
 
       - name: Render RMS overview
-        run: quarto render RMS/OverviewRMS.qmd --to html
+        run: quarto render rms/overview-rms.qmd --to html
 
       - name: Commit rendered pages
         run: |
@@ -107,10 +107,10 @@ jobs:
           # checkout makes every unlisted path look deleted, and a blanket add
           # would commit those deletions.
           git add -- \
-            SSR/OverviewSSR.html \
-            SSR/OverviewSSR_files \
-            RMS/OverviewRMS.html \
-            RMS/OverviewRMS_files
+            ssr/overview-ssr.html \
+            ssr/overview-ssr_files \
+            rms/overview-rms.html \
+            rms/overview-rms_files
 
           if git diff --cached --quiet; then
             echo "Overview pages unchanged - nothing to commit."
