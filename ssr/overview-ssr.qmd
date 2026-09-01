@@ -1,6 +1,6 @@
 ---
 title: "Scientific & Statistical Reasoning"
-subtitle: "Statistics track · course overview: slides, applets, datasets & extra explanations"
+subtitle: "Statistics materials: slides, applets, datasets & extra explanations"
 author: "Johnny van Doorn"
 date: today
 format:
@@ -34,16 +34,17 @@ library(stringr)
 library("lubridate")
 library("dplyr")
 library('kableExtra')
-allLinks <- c("https://statisticalreasoning-uva.shinyapps.io/NHST_Binomial",
-              "https://statisticalreasoning-uva.shinyapps.io/NHST_Continuous",
-              "https://statisticalreasoning-uva.shinyapps.io/NHST_Fdistribution",
-              "https://statisticalreasoning-uva.shinyapps.io/onewayANOVA",
-              "https://statisticalreasoning-uva.shinyapps.io/ANCOVA",
-              "https://statisticalreasoning-uva-2.shinyapps.io/Multi-ANOVA",
-              "https://statisticalreasoning-uva-2.shinyapps.io/RM_ANOVA",
-               "https://statisticalreasoning-uva-2.shinyapps.io/SimpleRegression",
-              "https://statisticalreasoning-uva-2.shinyapps.io/MultiRegression"
-
+allLinks <- c(
+   "https://statisticalreasoning-uva.shinyapps.io/NHST_Binomial",
+   "https://statisticalreasoning-uva.shinyapps.io/NHST_Continuous"
+  # "https://statisticalreasoning-uva.shinyapps.io/NHST_Fdistribution",
+  # "https://statisticalreasoning-uva.shinyapps.io/onewayANOVA",
+  # "https://statisticalreasoning-uva.shinyapps.io/ANCOVA",
+  # "https://statisticalreasoning-uva-2.shinyapps.io/Multi-ANOVA",
+  # "https://statisticalreasoning-uva-2.shinyapps.io/RM_ANOVA",
+  # "https://statisticalreasoning-uva-2.shinyapps.io/SimpleRegression",
+  # "https://statisticalreasoning-uva-2.shinyapps.io/MultiRegression"
+  
 )
 
 topics <- gsub("shinyapps.io/", "", gsub("shinyapps.io/", "", str_extract(allLinks, "shinyapps.io/(.*)")))
@@ -54,7 +55,7 @@ knitr::kable(dplyr::arrange(data.frame(Topic = topics, Link = allLinks)), escape
   kable_styling(full_width = TRUE)
 ```
 
-## Additional Explanations
+## Additional explanations
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 files <- list.files(full.names = FALSE, pattern = "\\qmd", recursive = FALSE, path = "../extra-texts")
 
@@ -64,7 +65,11 @@ n <- length(files)
 files <- files[order(as.numeric(gsub("\\..*", "", files)))]
 files <- files[files!= "overview-ssr.qmd"]
 htmlFiles <- gsub(x =files, pattern = ".qmd", replacement = ".html")
-htmlFiles <- htmlFiles[htmlFiles %in% c("OneSidedVsTwoSided.html","Heteroscedasticity.html", "EffSizeVsTestStat.html", "ViolatingAssumptionsANOVA.html", "PredictingWithDummies_1Variable.html", "PredictingWithDummies_2Variables.html")]
+htmlFiles <- htmlFiles[htmlFiles %in% c(
+  # "OneSidedVsTwoSided.html","Heteroscedasticity.html", "EffSizeVsTestStat.html",
+  #"ViolatingAssumptionsANOVA.html", "PredictingWithDummies_1Variable.html",
+  #"PredictingWithDummies_2Variables.html"
+  )]
 
 allLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistics/extra-texts/%s" target="_blank" class="external">link</a>',htmlFiles) 
 
@@ -77,10 +82,10 @@ knitr::kable(dplyr::arrange(linkList), escape = FALSE, format = "html"  ) %>%
 
 ```
 
-## Data + results Files
+## Data + results files
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 files <- list.files(full.names = FALSE, pattern = "\\jasp", recursive = FALSE, 
-                    path = "../datasets/2025")
+                    path = "../datasets/2026")
 
 
 files <- files[order(as.numeric(gsub("\\..*", "", files)))]
@@ -91,29 +96,29 @@ files <- files[!grepl("-result", files)]
 htmlFiles <- gsub(x =files, pattern = ".jasp", replacement = ".html")
 
 htmlFound <- list.files(full.names = FALSE, pattern = "\\html", recursive = FALSE, 
-                    path = "../datasets/2025")
+                    path = "../datasets/2026")
 jaspResultsFound <- list.files(full.names = FALSE, pattern = "result.jasp", recursive = FALSE, 
-                    path = "../datasets/2025")
+                    path = "../datasets/2026")
 csvFound  <- list.files(full.names = FALSE, pattern = "\\csv", recursive = FALSE, 
-                    path = "../datasets/2025")
+                    path = "../datasets/2026")
   
-htmlLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistics/datasets/2025/%s" target="_blank" class="external">link</a>',htmlFiles) 
+htmlLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistics/datasets/2026/%s" target="_blank" class="external">link</a>',htmlFiles) 
 htmlLinks[!(htmlFiles %in% htmlFound)] <- "-"
 
-jaspLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistics/datasets/2025/%s" target="_blank" 
+jaspLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistics/datasets/2026/%s" target="_blank" 
                      class="external">link</a>',files) 
-jaspResultsLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistics/datasets/2025/%s" target="_blank" 
+jaspResultsLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistics/datasets/2026/%s" target="_blank" 
                      class="external">link</a>',resultFiles) 
 # jaspResultsLinks[!(resultFiles %in% jaspResultsFound)] <- "-"
 
 titles <- gsub(htmlFiles, pattern = ".html", replacement = "")
 
 csvFiles <- gsub(x =files, pattern = ".jasp", replacement = ".csv")
-csvLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistics/datasets/2025/%s" target="_blank" class="external">link</a>',csvFiles) 
+csvLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistics/datasets/2026/%s" target="_blank" class="external">link</a>',csvFiles) 
 csvLinks[!(csvFiles %in% csvFound)] <- "-"
 
 
-linkList <- data.frame(Topic = titles, Data = jaspLinks, HtmlResults = htmlLinks)
+linkList <- data.frame(Topic = titles, Data = jaspLinks, Results = htmlLinks)
 
 knitr::kable(dplyr::arrange(linkList), escape = FALSE, format = "html"  ) %>%
   kable_styling(full_width = TRUE)
@@ -121,7 +126,7 @@ knitr::kable(dplyr::arrange(linkList), escape = FALSE, format = "html"  ) %>%
 ```
 
 
-## JASP Help
+## JASP help
 
 The [JASP Video Library](https://jasp-stats.github.io/jasp-video-library/) offers screen-recordings that demonstrate all sorts of cool analyses and features in JASP.
 
