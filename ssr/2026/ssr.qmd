@@ -60,7 +60,7 @@ data.frame(Date    = lectures$date,
            Lecture = lectures$title,
            Handout = handoutLinks,
            Slides  = slideLinks,
-           View    = viewLinks
+           Watch   = viewLinks
           ) -> lecture.list
 
 # Sort on date
