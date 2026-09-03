@@ -30,7 +30,7 @@ Not just how to compute the right number. Statistics education distinguishes thr
 
 Source: [ARTIST](http://web.archive.org/web/20221018074534/http://apps3.cehd.umn.edu/artist/glossary.html)
 
-## The book {.smaller}
+## Book {.smaller}
 
 Field, *Discovering Statistics Using JASP*.
 
@@ -40,7 +40,7 @@ Field, *Discovering Statistics Using JASP*.
 
 So the goal is not to memorize the book, but to know your way around it.
 
-## Sections are lettered A to D {.smaller}
+### Sections A to D {.smaller}
 
 Field flags every section with a letter for difficulty, and for each letter lists what it does to your brain:
 
@@ -51,7 +51,7 @@ Field flags every section with a letter for difficulty, and for each letter list
 
 In this course we primarily live in **A** and **B**, so focus on those sections while reading.
 
-## Faces in the margins {.smaller}
+### Characters {.smaller}
 
 The book is full of little characters. The ones worth looking out for:
 
