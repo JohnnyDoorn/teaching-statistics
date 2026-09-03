@@ -15,9 +15,9 @@ $$\text{outcome} = \text{model} + \text{error}$$
 </div>
 
 
-$\mathcal{H}_0:  \text{model} = 120$
+$H_0:  \text{model} = 120$
 
-$\mathcal{H}_A:  \text{model} = \bar{x}$
+$H_A:  \text{model} = \bar{x}$
 
 ## Hypotheses {.subsection .smaller}
 
@@ -31,14 +31,14 @@ $\mathcal{H}_A:  \text{model} = \bar{x}$
 * $H_A: \mu > 120$
 * $H_A: \mu < 120$
 
-Can you phrase research questions that would lead you to each of these three versions of $\mathcal{H}_A$?
+Can you phrase research questions that would lead you to each of these three versions of $H_A$?
 
 
 
 ## Compare sample mean to 120
 
 <small>
-We use the one-sample t-test to compare the sample mean $\bar{x}$ to the mean that is hypothesized by $\mathcal{H}_0$: $\mu = 120$. Let's take a look at our sample:
+We use the one-sample t-test to compare the sample mean $\bar{x}$ to the mean that is hypothesized by $H_0$: $\mu = 120$. Let's take a look at our sample:
 </small>
 
 ```{r, message=FALSE, eval=TRUE, echo=FALSE}
@@ -59,7 +59,7 @@ cbind(n, mean_x, sd_x)
 ```
 
 <small>
-Does this mean differ significantly from $\mathcal{H}_0:$ $\mu = `r mu`$?
+Does this mean differ significantly from $H_0:$ $\mu = `r mu`$?
 </small>
 
 ## Assumptions
@@ -87,7 +87,7 @@ To determine if this t-value significantly differs from the population mean we h
 ## P-value two sided {.subsection .smaller}
 Finally we have to calculate our $p$-value for which we need the degrees of freedom $df = n - 1$ to determine the shape of the t-distribution.
 
-$$ \mathcal{H}_A: \mu \neq 120 \rightarrow t \neq 0 $$ 
+$$ H_A: \mu \neq 120 \rightarrow t \neq 0 $$ 
 
 ```{r, echo=FALSE, fig.align = 'center'}
 df <- n-1
@@ -97,7 +97,7 @@ plotTstatSamplingDistribution(tVal = tStat, myDF = df, yAxisMod = 1.5)
 ## P-value one sided {.subsection}
 
 
-$$ \mathcal{H}_A: \mu > 120 \rightarrow t > 0 $$ 
+$$ H_A: \mu > 120 \rightarrow t > 0 $$ 
 
 
 ```{r, echo=FALSE, fig.align = 'center'}
@@ -110,7 +110,7 @@ plotTstatSamplingDistribution(tVal = tStat, myDF = df, yAxisMod = 1.5, altHyp = 
 ### P-value one sided
 
 
-$$ \mathcal{H}_A: \mu < 120 \rightarrow t < 0 $$ 
+$$ H_A: \mu < 120 \rightarrow t < 0 $$ 
 
 
 ```{r, echo=FALSE, fig.align = 'center'}

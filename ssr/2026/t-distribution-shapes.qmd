@@ -1,0 +1,21 @@
+## The t-distribution family {.smaller}
+
+```{r, echo=FALSE}
+myTs <- seq(-4, 4, .01)
+
+multiple.n  <- c(5, 15, 30, 75, 1000)
+multiple.df <- multiple.n - 1
+col         <- rainbow(length(multiple.df))
+
+plot(myTs,  dt(myTs, multiple.df[1]), type = "l", 
+     xlim = c(-4,4), ylim = c(0,.45), 
+     xlab = "t", ylab = "density", las = 1, bty = "n",
+     col = col[1], main = "t-distributions by degrees of freedom")
+
+for (i in 2:length(multiple.df)) { 
+  lines(myTs, dt(myTs, multiple.df[i]), type = "l", col = col[i], lwd = 1)
+} 
+legend("topright", legend = paste("n =", multiple.n), lty = 1, col = col)
+```
+
+Fatter tails for small $n$ (few degrees of freedom); converges to the standard normal as $n$ grows.

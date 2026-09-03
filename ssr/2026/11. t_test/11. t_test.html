@@ -95,7 +95,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul class="collapse">
-  <li><a href="#block-2-life-is-mean" id="toc-block-2-life-is-mean" class="nav-link active" data-scroll-target="#block-2-life-is-mean">Block 2: Life is Mean</a></li>
+  <li><a href="#block-2-life-is-mean" id="toc-block-2-life-is-mean" class="nav-link active" data-scroll-target="#block-2-life-is-mean">Block 2: Life is Mean</a>
+  <ul class="collapse">
+  <li><a href="#remember-this-shape" id="toc-remember-this-shape" class="nav-link" data-scroll-target="#remember-this-shape">Remember this shape?</a></li>
+  <li><a href="#the-t-distribution-family" id="toc-the-t-distribution-family" class="nav-link" data-scroll-target="#the-t-distribution-family">The t-distribution family</a></li>
+  </ul></li>
   <li><a href="#one-sample-t-test" id="toc-one-sample-t-test" class="nav-link" data-scroll-target="#one-sample-t-test">One-sample t-test</a>
   <ul class="collapse">
   <li><a href="#measuring-iq" id="toc-measuring-iq" class="nav-link" data-scroll-target="#measuring-iq">Measuring IQ</a></li>
@@ -216,6 +220,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p><strong>Reading:</strong> Chapter 9 (§9.1–9.14)</p>
 </div>
+<section id="remember-this-shape" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="remember-this-shape">Remember this shape?</h2>
+<p>Back in lecture 3 (and lecture 6) we saw that standardizing a sample statistic gives us a t-distribution, shaped by its degrees of freedom.</p>
+</section>
+<section id="the-t-distribution-family" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="the-t-distribution-family">The t-distribution family</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="11.-t_test_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Fatter tails for small <span class="math inline">\(n\)</span> (few degrees of freedom); converges to the standard normal as <span class="math inline">\(n\)</span> grows.</p>
+<p>Today we finally put it to use on a single sample mean.</p>
+</section>
 </section>
 <section id="one-sample-t-test" class="level1 section">
 <h1 class="section">One-sample t-test</h1>
@@ -230,8 +248,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div style="font-size:200%;;">
 <p><span class="math display">\[\text{outcome} = \text{model} + \text{error}\]</span></p>
 </div>
-<p><span class="math inline">\(\mathcal{H}_0: \text{model} = 120\)</span></p>
-<p><span class="math inline">\(\mathcal{H}_A: \text{model} = \bar{x}\)</span></p>
+<p><span class="math inline">\(H_0: \text{model} = 120\)</span></p>
+<p><span class="math inline">\(H_A: \text{model} = \bar{x}\)</span></p>
 </section>
 <section id="hypotheses" class="level2 subsection smaller">
 <h2 class="subsection smaller anchored" data-anchor-id="hypotheses">Hypotheses</h2>
@@ -248,12 +266,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><span class="math inline">\(H_A: \mu &gt; 120\)</span></li>
 <li><span class="math inline">\(H_A: \mu &lt; 120\)</span></li>
 </ul>
-<p>Can you phrase research questions that would lead you to each of these three versions of <span class="math inline">\(\mathcal{H}_A\)</span>?</p>
+<p>Can you phrase research questions that would lead you to each of these three versions of <span class="math inline">\(H_A\)</span>?</p>
 </section>
 </section>
 <section id="compare-sample-mean-to-120" class="level2">
 <h2 class="anchored" data-anchor-id="compare-sample-mean-to-120">Compare sample mean to 120</h2>
-<p><small> We use the one-sample t-test to compare the sample mean <span class="math inline">\(\bar{x}\)</span> to the mean that is hypothesized by <span class="math inline">\(\mathcal{H}_0\)</span>: <span class="math inline">\(\mu = 120\)</span>. Let’s take a look at our sample: </small></p>
+<p><small> We use the one-sample t-test to compare the sample mean <span class="math inline">\(\bar{x}\)</span> to the mean that is hypothesized by <span class="math inline">\(H_0\)</span>: <span class="math inline">\(\mu = 120\)</span>. Let’s take a look at our sample: </small></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mu     <span class="ot">&lt;-</span> <span class="dv">120</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>n      <span class="ot">&lt;-</span> <span class="fu">length</span>(IQ.next.to.you)</span>
@@ -266,7 +284,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 [1,] 96 117.8854 19.73288</code></pre>
 </div>
 </div>
-<p><small> Does this mean differ significantly from <span class="math inline">\(\mathcal{H}_0:\)</span> <span class="math inline">\(\mu = 120\)</span>? </small></p>
+<p><small> Does this mean differ significantly from <span class="math inline">\(H_0:\)</span> <span class="math inline">\(\mu = 120\)</span>? </small></p>
 </section>
 <section id="assumptions" class="level2">
 <h2 class="anchored" data-anchor-id="assumptions">Assumptions</h2>
@@ -296,12 +314,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="p-value-two-sided" class="level2 subsection smaller">
 <h2 class="subsection smaller anchored" data-anchor-id="p-value-two-sided">P-value two sided</h2>
 <p>Finally we have to calculate our <span class="math inline">\(p\)</span>-value for which we need the degrees of freedom <span class="math inline">\(df = n - 1\)</span> to determine the shape of the t-distribution.</p>
-<p><span class="math display">\[ \mathcal{H}_A: \mu \neq 120 \rightarrow t \neq 0 \]</span></p>
+<p><span class="math display">\[ H_A: \mu \neq 120 \rightarrow t \neq 0 \]</span></p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="11.-t_test_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="11.-t_test_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -309,12 +327,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="p-value-one-sided" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="p-value-one-sided">P-value one sided</h2>
-<p><span class="math display">\[ \mathcal{H}_A: \mu &gt; 120 \rightarrow t &gt; 0 \]</span></p>
+<p><span class="math display">\[ H_A: \mu &gt; 120 \rightarrow t &gt; 0 \]</span></p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="11.-t_test_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="11.-t_test_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -322,12 +340,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 <section id="p-value-one-sided-1" class="level3">
 <h3 class="anchored" data-anchor-id="p-value-one-sided-1">P-value one sided</h3>
-<p><span class="math display">\[ \mathcal{H}_A: \mu &lt; 120 \rightarrow t &lt; 0 \]</span></p>
+<p><span class="math display">\[ H_A: \mu &lt; 120 \rightarrow t &lt; 0 \]</span></p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="11.-t_test_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="11.-t_test_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -440,8 +458,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-806b4b824f7cbf0092a8" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-806b4b824f7cbf0092a8">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96"],[120,108,122,115,130,100,110,110,116,100,115,100,115,122,115,112,120,180,125,110,110,128,115,110,130,125,120,120,72,100,101,120,110,110,110,100,110,100,130,128,120,110,110,100,120,120,105,105,110,130,200,120,115,130,130,180,120,98,105,200,115,130,135,115,120,120,110,131,200,110,140,125,126,115,110,120,120,100,103,125,136,128,112,138,110,125,100,120,138,130,110,90,141,132,125,120],[120,115,128,115,120,100,130,120,130,115,120,100,110,115,115,130,110,181,72,110,140,120,120,80,110,120,120,120,105,110,150,130,105,110,140,120,115,110,132,130,120,105,112,120,120,140,125,105,120,125,50,129,115,130,110,200,130,125,120,50,140,110,125,120,110,120,100,131,100,119,80,123,120,120,110,110,124,100,105,110,140,130,120,130,90,115,110,115,128,130,110,92,135,138,125,138]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ownIQ<\/th>\n      <th>nextIQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ownIQ","targets":1},{"name":"nextIQ","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-085749c984ed793499c5" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-085749c984ed793499c5">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96"],[120,108,122,115,130,100,110,110,116,100,115,100,115,122,115,112,120,180,125,110,110,128,115,110,130,125,120,120,72,100,101,120,110,110,110,100,110,100,130,128,120,110,110,100,120,120,105,105,110,130,200,120,115,130,130,180,120,98,105,200,115,130,135,115,120,120,110,131,200,110,140,125,126,115,110,120,120,100,103,125,136,128,112,138,110,125,100,120,138,130,110,90,141,132,125,120],[120,115,128,115,120,100,130,120,130,115,120,100,110,115,115,130,110,181,72,110,140,120,120,80,110,120,120,120,105,110,150,130,105,110,140,120,115,110,132,130,120,105,112,120,120,140,125,105,120,125,50,129,115,130,110,200,130,125,120,50,140,110,125,120,110,120,100,131,100,119,80,123,120,120,110,110,124,100,105,110,140,130,120,130,90,115,110,115,128,130,110,92,135,138,125,138]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ownIQ<\/th>\n      <th>nextIQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ownIQ","targets":1},{"name":"nextIQ","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -453,8 +471,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-ee1d69b575366ee5b89e" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-ee1d69b575366ee5b89e">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96"],[120,108,122,115,130,100,110,110,116,100,115,100,115,122,115,112,120,180,125,110,110,128,115,110,130,125,120,120,72,100,101,120,110,110,110,100,110,100,130,128,120,110,110,100,120,120,105,105,110,130,200,120,115,130,130,180,120,98,105,200,115,130,135,115,120,120,110,131,200,110,140,125,126,115,110,120,120,100,103,125,136,128,112,138,110,125,100,120,138,130,110,90,141,132,125,120],[120,115,128,115,120,100,130,120,130,115,120,100,110,115,115,130,110,181,72,110,140,120,120,80,110,120,120,120,105,110,150,130,105,110,140,120,115,110,132,130,120,105,112,120,120,140,125,105,120,125,50,129,115,130,110,200,130,125,120,50,140,110,125,120,110,120,100,131,100,119,80,123,120,120,110,110,124,100,105,110,140,130,120,130,90,115,110,115,128,130,110,92,135,138,125,138],[0,7,6,0,-10,0,20,10,14,15,5,0,-5,-7,0,18,-10,1,-53,0,30,-8,5,-30,-20,-5,0,0,33,10,49,10,-5,0,30,20,5,10,2,2,0,-5,2,20,0,20,20,0,10,-5,-150,9,0,0,-20,20,10,27,15,-150,25,-20,-10,5,-10,0,-10,0,-100,9,-60,-2,-6,5,0,-10,4,0,2,-15,4,2,8,-8,-20,-10,10,-5,-10,0,0,2,-6,6,0,18]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ownIQ<\/th>\n      <th>nextIQ<\/th>\n      <th>diffScores<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":315,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ownIQ","targets":1},{"name":"nextIQ","targets":2},{"name":"diffScores","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-16fd683ad8e1782debed" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-16fd683ad8e1782debed">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96"],[120,108,122,115,130,100,110,110,116,100,115,100,115,122,115,112,120,180,125,110,110,128,115,110,130,125,120,120,72,100,101,120,110,110,110,100,110,100,130,128,120,110,110,100,120,120,105,105,110,130,200,120,115,130,130,180,120,98,105,200,115,130,135,115,120,120,110,131,200,110,140,125,126,115,110,120,120,100,103,125,136,128,112,138,110,125,100,120,138,130,110,90,141,132,125,120],[120,115,128,115,120,100,130,120,130,115,120,100,110,115,115,130,110,181,72,110,140,120,120,80,110,120,120,120,105,110,150,130,105,110,140,120,115,110,132,130,120,105,112,120,120,140,125,105,120,125,50,129,115,130,110,200,130,125,120,50,140,110,125,120,110,120,100,131,100,119,80,123,120,120,110,110,124,100,105,110,140,130,120,130,90,115,110,115,128,130,110,92,135,138,125,138],[0,7,6,0,-10,0,20,10,14,15,5,0,-5,-7,0,18,-10,1,-53,0,30,-8,5,-30,-20,-5,0,0,33,10,49,10,-5,0,30,20,5,10,2,2,0,-5,2,20,0,20,20,0,10,-5,-150,9,0,0,-20,20,10,27,15,-150,25,-20,-10,5,-10,0,-10,0,-100,9,-60,-2,-6,5,0,-10,4,0,2,-15,4,2,8,-8,-20,-10,10,-5,-10,0,0,2,-6,6,0,18]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ownIQ<\/th>\n      <th>nextIQ<\/th>\n      <th>diffScores<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":315,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ownIQ","targets":1},{"name":"nextIQ","targets":2},{"name":"diffScores","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -503,7 +521,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="11.-t_test_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="11.-t_test_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -597,8 +615,8 @@ H_A &amp;: t &lt; 0 \\
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-b4023946d25d0722ec1c" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-b4023946d25d0722ec1c">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150","151","152","153","154","155","156","157","158","159","160","161","162","163","164","165"],["2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025"],[115,120,110,108,115,140,110,90,109,140,120,108,110,140,109,119,98,125,125,135,100,120,115,109,125,120,128,125,115,83,125,125,130,105,130,85,110,109,103,70,100,135,106,108,120,120,125,122,180,100,113,115,130,115,125,135,130,130,140,120,125,115,118,130,110,105,125,95,95,120,115,128,115,120,100,130,120,130,115,120,100,110,115,115,130,110,181,72,110,140,120,120,80,110,120,120,120,105,110,150,130,105,110,140,120,115,110,132,130,120,105,112,120,120,140,125,105,120,125,50,129,115,130,110,200,130,125,120,50,140,110,125,120,110,120,100,131,100,119,80,123,120,120,110,110,124,100,105,110,140,130,120,130,90,115,110,115,128,130,110,92,135,138,125,138]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>year<\/th>\n      <th>IQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"year","targets":1},{"name":"IQ","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-f89c743fda7a53432193" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-f89c743fda7a53432193">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150","151","152","153","154","155","156","157","158","159","160","161","162","163","164","165"],["2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025"],[115,120,110,108,115,140,110,90,109,140,120,108,110,140,109,119,98,125,125,135,100,120,115,109,125,120,128,125,115,83,125,125,130,105,130,85,110,109,103,70,100,135,106,108,120,120,125,122,180,100,113,115,130,115,125,135,130,130,140,120,125,115,118,130,110,105,125,95,95,120,115,128,115,120,100,130,120,130,115,120,100,110,115,115,130,110,181,72,110,140,120,120,80,110,120,120,120,105,110,150,130,105,110,140,120,115,110,132,130,120,105,112,120,120,140,125,105,120,125,50,129,115,130,110,200,130,125,120,50,140,110,125,120,110,120,100,131,100,119,80,123,120,120,110,110,124,100,105,110,140,130,120,130,90,115,110,115,128,130,110,92,135,138,125,138]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>year<\/th>\n      <th>IQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"year","targets":1},{"name":"IQ","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -694,7 +712,7 @@ iq2025.n   96</code></pre>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="11.-t_test_files/figure-html/unnamed-chunk-48-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="11.-t_test_files/figure-html/unnamed-chunk-53-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>

@@ -108,9 +108,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#correlation-2" id="toc-correlation-2" class="nav-link" data-scroll-target="#correlation-2">Correlation</a></li>
   <li><a href="#plot-correlation-3" id="toc-plot-correlation-3" class="nav-link" data-scroll-target="#plot-correlation-3">Plot correlation</a></li>
   <li><a href="#significance-testing-using-t" id="toc-significance-testing-using-t" class="nav-link" data-scroll-target="#significance-testing-using-t">Significance testing using <span class="math inline">\(t\)</span></a></li>
+  <li><a href="#the-t-distribution-family" id="toc-the-t-distribution-family" class="nav-link" data-scroll-target="#the-t-distribution-family">The t-distribution family</a></li>
   <li><a href="#significance-of-a-correlation" id="toc-significance-of-a-correlation" class="nav-link" data-scroll-target="#significance-of-a-correlation">Significance of a correlation</a></li>
   <li><a href="#hypotheses-for-t" id="toc-hypotheses-for-t" class="nav-link" data-scroll-target="#hypotheses-for-t">Hypotheses for <span class="math inline">\(t\)</span></a></li>
   <li><a href="#r-to-t" id="toc-r-to-t" class="nav-link" data-scroll-target="#r-to-t"><span class="math inline">\(r\)</span> to <span class="math inline">\(t\)</span></a></li>
+  <li><a href="#one-sided-vs-two-sided" id="toc-one-sided-vs-two-sided" class="nav-link" data-scroll-target="#one-sided-vs-two-sided">One-sided vs two-sided</a></li>
   <li><a href="#visualize" id="toc-visualize" class="nav-link" data-scroll-target="#visualize">Visualize</a></li>
   </ul></li>
   <li><a href="#partial-correlation" id="toc-partial-correlation" class="nav-link" data-scroll-target="#partial-correlation">Partial correlation</a>
@@ -332,11 +334,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="significance-testing-using-t" class="level2">
 <h2 class="anchored" data-anchor-id="significance-testing-using-t">Significance testing using <span class="math inline">\(t\)</span></h2>
+<p>Recall from lecture 3: a sample statistic has its own sampling distribution, and for many familiar statistics that turns out to be a t-distribution.</p>
 <blockquote class="blockquote">
 <p>A test statistic with a known probability distribution (the t-distribution).</p>
 </blockquote>
-<p>It’s a standardized measure of how closely our observed statistic matches the value claimed by <span class="math inline">\(\mathcal{H}_0\)</span>:</p>
-<p><span class="math display">\[t = \frac{\text{estimate} - \mathcal{H}_0 \text{ value}}{\text{SE}(\text{estimate})}\]</span></p>
+<p>It’s a standardized measure of how closely our observed statistic matches the value claimed by <span class="math inline">\(H_0\)</span>:</p>
+<p><span class="math display">\[t = \frac{\text{estimate} - H_0 \text{ value}}{\text{SE}(\text{estimate})}\]</span></p>
+</section>
+<section id="the-t-distribution-family" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="the-t-distribution-family">The t-distribution family</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="6.-correlation_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Fatter tails for small <span class="math inline">\(n\)</span> (few degrees of freedom); converges to the standard normal as <span class="math inline">\(n\)</span> grows.</p>
+<p>This shape, indexed by degrees of freedom, is what we get whenever we standardize a sample statistic this way. Today’s statistic is <span class="math inline">\(r\)</span>.</p>
 </section>
 <section id="significance-of-a-correlation" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="significance-of-a-correlation">Significance of a correlation</h2>
@@ -373,12 +386,22 @@ H_A &amp;: t_r &lt; 0 \\
 </div>
 </div>
 </section>
+<section id="one-sided-vs-two-sided" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="one-sided-vs-two-sided">One-sided vs two-sided</h2>
+<p>The hypotheses above translate into where we shade the rejection region:</p>
+<p><a href="https://johnnydoorn.github.io/teaching-statistics/extra-texts/one-sided-vs-two-sided.html">Additional text here</a></p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="6.-correlation_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
 <section id="visualize" class="level2">
 <h2 class="anchored" data-anchor-id="visualize">Visualize</h2>
 <p>Locate in <span class="math inline">\(t\)</span>-distribution</p>
 <div class="cell" data-output-location="slide">
 <div class="cell-output-display">
-<p><img src="6.-correlation_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+<p><img src="6.-correlation_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -389,7 +412,7 @@ H_A &amp;: t_r &lt; 0 \\
 <h2 class="anchored" data-anchor-id="venn-diagram-of-variance">Venn diagram of Variance</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="6.-correlation_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid" width="672"></p>
+<p><img src="6.-correlation_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -439,7 +462,7 @@ H_A &amp;: t_r &lt; 0 \\
 <h2 class="anchored" data-anchor-id="p-value">p-value</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="6.-correlation_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="672"></p>
+<p><img src="6.-correlation_files/figure-html/unnamed-chunk-45-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>

@@ -124,6 +124,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#standardize-1" id="toc-standardize-1" class="nav-link" data-scroll-target="#standardize-1">Standardize</a></li>
   <li><a href="#standardize-2" id="toc-standardize-2" class="nav-link" data-scroll-target="#standardize-2">Standardize</a></li>
   </ul></li>
+  <li><a href="#standard-error-and-confidence-intervals" id="toc-standard-error-and-confidence-intervals" class="nav-link" data-scroll-target="#standard-error-and-confidence-intervals">Standard Error and<br>Confidence Intervals</a>
+  <ul class="collapse">
+  <li><a href="#standard-error" id="toc-standard-error" class="nav-link" data-scroll-target="#standard-error">Standard Error</a></li>
+  <li><a href="#standard-error-1" id="toc-standard-error-1" class="nav-link" data-scroll-target="#standard-error-1">Standard Error</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  </ul></li>
   <li><a href="#closing" id="toc-closing" class="nav-link" data-scroll-target="#closing">Closing</a>
   <ul class="collapse">
   <li><a href="#next-week" id="toc-next-week" class="nav-link" data-scroll-target="#next-week">Next Week</a></li>
@@ -185,8 +191,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Standardizing, so that variables become comparable</li>
 </ul></li>
+<li>Standard error and confidence intervals
+<ul>
+<li>How far off is a sample mean, typically?</li>
+</ul></li>
 </ul>
-<p><strong>Reading:</strong> Chapters 4 (§4.1–4.10), 5 (§5.1–5.6)</p>
+<p><strong>Reading:</strong> Chapters 4 (§4.1–4.10), 5 (§5.1–5.6), 2.8–2.9 (Standard error &amp; confidence intervals)</p>
 </div>
 <section id="jasp" class="level1 section">
 <h1 class="section">JASP</h1>
@@ -354,7 +364,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="critically-assess-graphs-1">Critically Assess Graphs</h3>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="5.-jasp_visualization_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+<p><img src="5.-jasp_visualization_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -363,7 +373,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="scale-matters">Scale Matters</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="5.-jasp_visualization_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<p><img src="5.-jasp_visualization_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -371,7 +381,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="error-bars">Error Bars!</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="5.-jasp_visualization_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+<p><img src="5.-jasp_visualization_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -396,7 +406,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="subsection anchored" data-anchor-id="variance">Variance</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="5.-jasp_visualization_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+<p><img src="5.-jasp_visualization_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -412,7 +422,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="smaller anchored" data-anchor-id="standardize-1">Standardize</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="5.-jasp_visualization_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+<p><img src="5.-jasp_visualization_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -420,7 +430,166 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="smaller anchored" data-anchor-id="standardize-2">Standardize</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="5.-jasp_visualization_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+<p><img src="5.-jasp_visualization_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="standard-error-and-confidence-intervals" class="level1 section">
+<h1 class="section">Standard Error and<br>Confidence Intervals</h1>
+<p>You already know how to standardize a single value into a z-score. A sample <em>mean</em> varies from sample to sample too, so the same question applies: how far off is it, typically?</p>
+<section id="standard-error" class="level2">
+<h2 class="anchored" data-anchor-id="standard-error">Standard Error</h2>
+<blockquote class="blockquote">
+<p>95% confidence interval</p>
+</blockquote>
+<p><span class="math display">\[SE = \frac{\text{Standard deviation}}{\text{Square root of sample size}} = \frac{s}{\sqrt{n}}\]</span></p>
+<ul>
+<li>Lowerbound = <span class="math inline">\(\bar{x} - 1.96 \times SE\)</span></li>
+<li>Upperbound = <span class="math inline">\(\bar{x} + 1.96 \times SE\)</span></li>
+</ul>
+</section>
+<section id="standard-error-1" class="level2 flexbox vcenter">
+<h2 class="flexbox vcenter anchored" data-anchor-id="standard-error-1">Standard Error</h2>
+<style>
+ul#menu li {
+    display:inline;
+}
+</style>
+<div onload="execute(10,10)">
+<ul id="menu">
+<li>
+n₁ = <input type="number" name="n_x1" id="n_x1" min="10" max="100" value="10" onclick="execute(document.getElementById('n_x1').value,document.getElementById('n_x2').value)" onchange="execute(document.getElementById('n_x1').value,document.getElementById('n_x2').value)">
+</li>
+<li>
+n₂ = <input type="number" name="n_x2" id="n_x2" min="10" max="100" value="10" onclick="execute(document.getElementById('n_x1').value,document.getElementById('n_x2').value)" onchange="execute(document.getElementById('n_x1').value,document.getElementById('n_x2').value)">
+</li>
+</ul>
+<canvas id="myCanvas" width="600" height="400" style="border:1px solid #c3c3c3;">
+Your browser does not support the canvas element.
+</canvas>
+<script type="text/javascript" charset="utf-8">
+
+function execute(n_x1, n_x2) {
+    
+var c         = document.getElementById("myCanvas");
+var ctx       = c.getContext("2d");
+
+// clear canvas
+//ctx.clearRect(0,0,600,400);
+
+// Store the current transformation matrix
+ctx.save();
+
+// Use the identity matrix while clearing the canvas
+ctx.setTransform(1, 0, 0, 1, 0, 0);
+ctx.clearRect(0, 0, 600, 400);
+ctx.beginPath();
+
+// Restore the transform
+ctx.restore();
+
+
+
+ctx.font      = "20pt Calibri";
+ctx.fillStyle = "#000000"; // text color
+ctx.fillText("The influence of n on the confidence interval", 50, 50);
+
+
+
+var mean_x1 = 5;
+var mean_x2 = 7;
+var   sd_x1 = 2.6;
+var   sd_x2 = 2.7;
+var    n_x1 = n_x1;
+var    n_x2 = n_x2;
+var   se_x1 = sd_x1/Math.sqrt(n_x1);
+var   se_x2 = sd_x2/Math.sqrt(n_x2);
+
+var text_x_pos = 50;
+var text_y_pos = 210;
+var text_guter = 20;
+
+ctx.font      = "14pt Calibri";
+ctx.fillStyle = "#000000"; // text color
+ctx.fillText("x̄₁ = "+mean_x1, text_x_pos, text_y_pos);
+ctx.fillText("x̄₂ = "+mean_x2, text_x_pos, text_y_pos+1*text_guter);
+ctx.fillText("σ₁ = "+sd_x1,  text_x_pos, text_y_pos+2*text_guter);
+ctx.fillText("σ₂ = "+sd_x2,  text_x_pos, text_y_pos+3*text_guter);
+ctx.fillText("n₁ = "+n_x1,    text_x_pos, text_y_pos+4*text_guter);
+ctx.fillText("n₂ = "+n_x2,    text_x_pos, text_y_pos+5*text_guter);
+ctx.fillText("se₁ = σ₁/√n₁ = "+sd_x1+"/√"+n_x1+" = "+se_x1.toFixed(2), text_x_pos, text_y_pos+6*text_guter);
+ctx.fillText("se₂ = σ₂/√n₂ = "+sd_x2+"/√"+n_x2+" = "+se_x2.toFixed(2), text_x_pos, text_y_pos+7*text_guter);
+
+var hight_x1 = (250/10)*mean_x1;
+var hight_x2 = (250/10)*mean_x2;
+
+var   sd_x1 = (250/10)*sd_x1;
+var   sd_x2 = (250/10)*sd_x2;
+
+var   se_x1 = 1.96*sd_x1/Math.sqrt(n_x1);
+var   se_x2 = 1.96*sd_x2/Math.sqrt(n_x2);
+
+var bar_x_pos  = 315;
+var bar_y_pos  = 350;
+var bar_width  = 100;
+var bar_gutter = 35;
+
+ctx.fillStyle = "#87ceeb";
+ctx.fillRect(bar_x_pos, bar_y_pos-hight_x1,  bar_width,hight_x1);
+
+ctx.fillStyle = "#87ceeb";
+ctx.fillRect(bar_x_pos+bar_width+bar_gutter, bar_y_pos-hight_x2,  bar_width,hight_x2);
+
+
+ctx.moveTo(bar_x_pos+(bar_width/2), bar_y_pos-hight_x1+se_x1);
+ctx.lineTo(bar_x_pos+(bar_width/2), bar_y_pos-hight_x1-se_x1);
+ctx.stroke();
+
+ctx.moveTo(bar_x_pos+(bar_width/4),   bar_y_pos-hight_x1-se_x1); // upper bound 
+ctx.lineTo(bar_x_pos+(bar_width/4*3), bar_y_pos-hight_x1-se_x1); // upper bound
+ctx.stroke();
+
+ctx.moveTo(bar_x_pos+(bar_width/4),   bar_y_pos-hight_x1+se_x1); // lower bound 
+ctx.lineTo(bar_x_pos+(bar_width/4*3), bar_y_pos-hight_x1+se_x1); // lower bound
+ctx.stroke();
+
+ctx.moveTo(bar_x_pos+bar_width+bar_gutter+(bar_width/2), bar_y_pos-hight_x2+se_x2);
+ctx.lineTo(bar_x_pos+bar_width+bar_gutter+(bar_width/2), bar_y_pos-hight_x2-se_x2);
+ctx.stroke();
+
+ctx.moveTo(bar_x_pos+bar_width+bar_gutter+(bar_width/4),   bar_y_pos-hight_x2-se_x2); // upper bound 
+ctx.lineTo(bar_x_pos+bar_width+bar_gutter+(bar_width/4*3), bar_y_pos-hight_x2-se_x2); // upper bound
+ctx.stroke();
+
+ctx.moveTo(bar_x_pos+bar_width+bar_gutter+(bar_width/4),   bar_y_pos-hight_x2+se_x2); // lower bound 
+ctx.lineTo(bar_x_pos+bar_width+bar_gutter+(bar_width/4*3), bar_y_pos-hight_x2+se_x2); // lower bound
+ctx.stroke();
+
+// X in bar
+ctx.fillStyle = "#000";
+ctx.font      = "20pt Calibri";
+ctx.fillText("x₁", bar_x_pos+10,                      bar_y_pos-hight_x1+hight_x1-10);
+ctx.fillText("x₂", bar_x_pos+bar_width+bar_gutter+10, bar_y_pos-hight_x2+hight_x2-10);
+
+// upper and lower bound text
+ctx.fillStyle = "#000";
+ctx.font      = "10pt Calibri";
+ctx.fillText("1.96se₁+x̄₁", bar_x_pos+(bar_width/4*3), bar_y_pos-hight_x1-se_x1+2);
+ctx.fillText("1.96se₁-x̄₁", bar_x_pos+(bar_width/4*3), bar_y_pos-hight_x1+se_x1+2);
+
+ctx.fillText("1.96se₂+x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3), bar_y_pos-hight_x2-se_x2+2);
+ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3), bar_y_pos-hight_x2+se_x2+2);
+
+}
+</script>
+</div>
+</section>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section"></h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="5.-jasp_visualization_files/figure-html/unnamed-chunk-35-1.png" width="672" height="600"></p>
 </div>
 </div>
 </section>

@@ -210,11 +210,18 @@ text(mean.sales-xMargin, mean.airplay+yMargin, "- * +", cex = 2, col = "red")
 
 ## Significance testing using $t$
 
+Recall from lecture 3: a sample statistic has its own sampling distribution, and for many familiar statistics that turns out to be a t-distribution.
+
 > A test statistic with a known probability distribution (the t-distribution).
 
-It's a standardized measure of how closely our observed statistic matches the value claimed by $\mathcal{H}_0$:
+It's a standardized measure of how closely our observed statistic matches the value claimed by $H_0$:
 
-$$t = \frac{\text{estimate} - \mathcal{H}_0 \text{ value}}{\text{SE}(\text{estimate})}$$
+$$t = \frac{\text{estimate} - H_0 \text{ value}}{\text{SE}(\text{estimate})}$$
+
+```{r child="../t-distribution-shapes.qmd"}
+```
+
+This shape, indexed by degrees of freedom, is what we get whenever we standardize a sample statistic this way. Today's statistic is $r$.
 
 ## Significance of a correlation {.subsection}
 
@@ -243,6 +250,50 @@ t.r <- ( correlation*sqrt(df) ) / sqrt(1-correlation^2)
 
 t.r
 df
+```
+
+## One-sided vs two-sided {.smaller}
+
+The hypotheses above translate into where we shade the rejection region:
+
+[Additional text here](https://johnnydoorn.github.io/teaching-statistics/extra-texts/one-sided-vs-two-sided.html)
+
+```{r, echo=FALSE}
+layout(matrix(1:2, 1, 2))
+
+plot(function(x) dt(x, df = df), -4, 4,
+     main=paste0("t-distribution (df=", df, ") with two-sided alpha"),
+     cex.main = .7,
+     xlab="T-value",
+     ylab="",
+     bty="n",
+     lwd=1.5)
+
+tp95  = qt(.95, df)
+tp975 = qt(.975, df)
+tp25  = qt(.025, df)
+
+pol_left = seq(-4,tp25,length=20)
+polygon(c(pol_left,rev(pol_left)),  c(rep(0,20), dt( rev(pol_left),  df = df)), col="red", angle=-45, density=15, lwd=2)
+
+pol_left = seq(tp975,4,length=20)
+polygon(c(pol_left,rev(pol_left)),  c(rep(0,20), dt( rev(pol_left),  df = df)), col="red", angle=-45, density=15, lwd=2)
+
+text(-2.8,dt(tp25 , df = df),expression(paste("½",alpha," = 2.5%",sep="")),pos=3, col='red')
+text( 2.8,dt(tp975, df = df),expression(paste("½",alpha," = 2.5%",sep="")),pos=3, col='red')
+
+plot(function(x) dt(x, df = df), -4, 4,
+     main=paste0("t-distribution (df=", df, ") with one-sided alpha"),
+     cex.main = .7,
+     xlab="T-value",
+     ylab="",
+     bty="n", 
+     lwd=1.5)
+
+pol_left = seq(tp95,4,length=20)
+polygon(c(pol_left,rev(pol_left)),  c(rep(0,20), dt( rev(pol_left),  df = df)), col="red", angle=-45, density=15, lwd=2)
+
+text( 2.8,dt(tp95 , df = df),expression(paste(alpha[right]," = 5%"  ,sep="")),pos=3, col='red')
 ```
 
 ## Visualize

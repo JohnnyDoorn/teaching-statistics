@@ -560,11 +560,18 @@ Johnny van Doorn
 <img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"></section>
 <section id="significance-testing-using-t" class="slide level2">
 <h2>Significance testing using <span class="math inline">\(t\)</span></h2>
+<p>Recall from lecture 3: a sample statistic has its own sampling distribution, and for many familiar statistics that turns out to be a t-distribution.</p>
 <blockquote>
 <p>A test statistic with a known probability distribution (the t-distribution).</p>
 </blockquote>
-<p>It’s a standardized measure of how closely our observed statistic matches the value claimed by <span class="math inline">\(\mathcal{H}_0\)</span>:</p>
-<p><span class="math display">\[t = \frac{\text{estimate} - \mathcal{H}_0 \text{ value}}{\text{SE}(\text{estimate})}\]</span></p>
+<p>It’s a standardized measure of how closely our observed statistic matches the value claimed by <span class="math inline">\(H_0\)</span>:</p>
+<p><span class="math display">\[t = \frac{\text{estimate} - H_0 \text{ value}}{\text{SE}(\text{estimate})}\]</span></p>
+</section>
+<section id="the-t-distribution-family" class="slide level2 smaller">
+<h2>The t-distribution family</h2>
+
+<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-32-1.png" width="960" class="r-stretch"><p>Fatter tails for small <span class="math inline">\(n\)</span> (few degrees of freedom); converges to the standard normal as <span class="math inline">\(n\)</span> grows.</p>
+<p>This shape, indexed by degrees of freedom, is what we get whenever we standardize a sample statistic this way. Today’s statistic is <span class="math inline">\(r\)</span>.</p>
 </section>
 <section id="significance-of-a-correlation" class="slide level2 subsection">
 <h2>Significance of a correlation</h2>
@@ -601,11 +608,17 @@ H_A &amp;: t_r &lt; 0 \\
 </div>
 </div>
 </section>
+<section id="one-sided-vs-two-sided" class="slide level2 smaller">
+<h2>One-sided vs two-sided</h2>
+<p>The hypotheses above translate into where we shade the rejection region:</p>
+<p><a href="https://johnnydoorn.github.io/teaching-statistics/extra-texts/one-sided-vs-two-sided.html">Additional text here</a></p>
+
+<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch"></section>
 <section id="visualize" class="slide level2">
 <h2>Visualize</h2>
 <p>Locate in <span class="math inline">\(t\)</span>-distribution</p>
 
-<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section></section>
+<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-19-1.png" width="960" class="r-stretch"></section></section>
 <section>
 <section id="partial-correlation" class="title-slide slide level1 section center">
 <h1>Partial correlation</h1>
@@ -614,7 +627,7 @@ H_A &amp;: t_r &lt; 0 \\
 <section id="venn-diagram-of-variance" class="slide level2">
 <h2>Venn diagram of Variance</h2>
 
-<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-34-1.png" width="960" class="r-stretch"></section>
+<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-41-1.png" width="960" class="r-stretch"></section>
 <section id="partial-correlation-1" class="slide level2 smaller">
 <h2>Partial correlation</h2>
 <p><span class="math display">\[\LARGE{r_{xy \cdot z} = \frac{r_{xy} - r_{xz} r_{yz}}{\sqrt{(1 - r_{xz}^2)(1 - r_{yz}^2)}}}\]</span></p>
@@ -662,7 +675,7 @@ H_A &amp;: t_r &lt; 0 \\
 <section id="p-value" class="slide level2">
 <h2>p-value</h2>
 
-<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-38-1.png" width="960" class="r-stretch"></section></section>
+<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-45-1.png" width="960" class="r-stretch"></section></section>
 <section>
 <section id="closing" class="title-slide slide level1 center">
 <h1>Closing</h1>

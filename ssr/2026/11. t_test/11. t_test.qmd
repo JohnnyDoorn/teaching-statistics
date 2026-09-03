@@ -33,6 +33,15 @@ In this lecture we aim to:
 Chapter 9 (§9.1–9.14)
 </div>
 
+## Remember this shape? {.smaller}
+
+Back in lecture 3 (and lecture 6) we saw that standardizing a sample statistic gives us a t-distribution, shaped by its degrees of freedom.
+
+```{r child="../t-distribution-shapes.qmd"}
+```
+
+Today we finally put it to use on a single sample mean.
+
 ```{r child="One-sample_t-test.qmd"}
 ```
 

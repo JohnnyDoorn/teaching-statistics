@@ -1,6 +1,6 @@
 # Standard Error and<br>Confidence Intervals {.section}
 
-A sample mean is not the population mean. How far off is it, typically?
+You already know how to standardize a single value into a z-score. A sample *mean* varies from sample to sample too, so the same question applies: how far off is it, typically?
 
 ## Standard Error
 

@@ -36,7 +36,7 @@ Field, *Discovering Statistics Using JASP*.
 
 - Block 1: Chapters 1 through 8.8 (skipping Chapter 6)
 - Companion website: [discoverjasp.com](https://discoverjasp.com/pages/exercises)
-- You have the book, glossary included, **during the exam**
+- You have the book, glossary included, during the exam
 
 So the goal is not to memorize the book, but to know your way around it.
 
@@ -61,6 +61,16 @@ The book is full of little characters. The ones worth looking out for:
 - **Oliver Twisted**: "Please, Sir, can I have some more?" Extra material on the website
 - **Jane Superbrain**: advanced tangents, for a deeper understanding
 
+## Software
+- JASP
+    - Download the latest version (0.98.1) from [the website](https://jasp-stats.org/download/)
+    - Your main tool in SSR for handling data and conducting analyses
+    - Also available in the virtual [UvA desktop](apps.uva.nl) and at any UvA computer
+- R
+    - Statistical programming language, under the hood of JASP and my SSR slides
+    - Very optional, sometimes included in the slide for those interested
+    - R ([language pack](https://www.r-project.org/)) and Rstudio ([coding environment](https://posit.co/downloads)) available on the exam computers
+
 ## Study tips {.smaller}
 
 - Read the chapter *before* the lecture. The lecture is then your second pass, not your first
@@ -73,6 +83,6 @@ The book is full of little characters. The ones worth looking out for:
 ::: {.incremental}
 - Statistics proportional to lectures (IE1: 40%, IE2: 60%, IE3: 50%)
 - MC, OEQ, Fill-in-the-blank
-- You have JASP and the book, glossary included, **during the exam**
+- You have JASP and the book, glossary included, during the exam
 - See the trial exam in Ans during the exam week
 :::
