@@ -1,0 +1,73 @@
+---
+title: "3. Statistical Reasoning"
+subtitle: "NHST and sampling distributions"
+author: "Johnny van Doorn"
+date: "4 September 2026"
+view: "https://teams.microsoft.com/meet/330874021866475?p=QMChUAKXBz9m28zZWL"
+footer: "Scientific & Statistical Reasoning"
+format:
+  revealjs:
+    output-ext: slide.html
+    css: ../../ajohnson.css
+  html: default
+css: ../../ajohnson.css
+---
+
+<div class="goals">
+In block 1 we aim to:
+
+* Discuss NHST concepts
+* Introduce JASP
+* Correlation
+* Linear model (regression)
+    
+<strong>Reading:</strong>
+Chapters 1–8.8
+</div>
+
+--- 
+
+<div class="goals">
+In this lecture we aim to:
+
+* Introduce the S in SSR
+    * The book, the course, and how to study for it
+* Repeat some stats concepts from RMS
+    * "Logic" behind common hypothesis testing
+    * Four scenario's in statistical decision making
+* Sampling distributions
+    * Discrete: the binomial distribution
+    * Continuous: the t-distribution
+    
+<strong>Reading:</strong>
+Chapters 1, 2, 3 (§1.1–1.8, §2.1–2.9, §3.1–3.8)
+</div>
+
+```{r child="course-intro.qmd"}
+```
+
+```{r child="NHST_2.qmd"}
+```
+
+```{r child="t-distribution.qmd"}
+```
+
+# Closing
+
+## Next Time
+
+- JASP
+  * Descriptive statistics
+  * Data visualizations
+- Variance and z-scores
+
+## Bored?
+
+::: {}
+- [Exercise 1.1](https://discoverjasp.com/pages/smart_alex#task-1.1), [Exercise 1.2](https://discoverjasp.com/pages/smart_alex#task-1.2)
+- [Exercise 2.3](https://discoverjasp.com/pages/smart_alex#task-2.3), [Exercise 2.6](https://discoverjasp.com/pages/smart_alex#task-2.6), [Exercise 2.7](https://discoverjasp.com/pages/smart_alex#task-2.7)
+- [Exercise 3.4](https://discoverjasp.com/pages/smart_alex#task-3.4)
+:::
+
+```{r child="../../footer.qmd"}
+```

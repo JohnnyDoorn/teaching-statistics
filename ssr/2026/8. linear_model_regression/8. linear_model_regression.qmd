@@ -1,0 +1,48 @@
+---
+title: "8. Linear Model (Regression)"
+subtitle: "One predictor"
+author: "Johnny van Doorn"
+date: "16 September 2026"
+footer: "Scientific & Statistical Reasoning"
+format:
+  revealjs:
+    output-ext: slide.html
+    css: ../../ajohnson.css
+  html: default
+css: ../../ajohnson.css
+---
+
+<div class="goals">
+In this lecture we discuss:
+
+* Linear model
+  * Theory
+  * Assumptions
+  * In JASP
+* Predictions and model fit
+* Wrapping up: how many ways do we have for assessing an association?
+    
+<strong>Reading:</strong>
+Chapter 8 (§8.1–8.8)
+</div>
+
+
+```{r child="regression_one_predictor.qmd"}
+```
+
+
+# Closing
+
+## Next Week
+
+- Exam!
+  - Mix of using JASP/interpreting output/conceptual understanding
+  - Field book available (like in this weeks WA), including glossary
+  - WA will contain old exam questions
+
+## Recommended Exercises
+
+- [Exercise 8.1](https://discoverjasp.com/pages/exercises#chapter-8)
+
+```{r child="../../footer.qmd"}
+```

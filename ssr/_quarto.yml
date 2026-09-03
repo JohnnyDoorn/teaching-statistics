@@ -1,7 +1,10 @@
 # project:
 #   output-dir: ../slides/
-author: Johnny van Doorn"
+author: "Johnny van Doorn"
 institute: "University of Amsterdam"
+# Pin the date rendering so the handout, the slides and the overview table all
+# show the same thing as the front-matter string (e.g. "4 September 2026").
+date-format: "D MMMM YYYY"
 format:
   html:
     toc: true

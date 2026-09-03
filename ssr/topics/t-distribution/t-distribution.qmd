@@ -186,7 +186,7 @@ One sided
 -   $H_A: \bar{x} > \mu$
 -   $H_A: \bar{x} < \mu$
 
-[Additional text here](https://johnnydoorn.github.io/teaching-statistics/extra-texts/OneSidedVsTwoSided.html)
+[Additional text here](https://johnnydoorn.github.io/teaching-statistics/extra-texts/one-sided-vs-two-sided.html)
 
 ## 
 

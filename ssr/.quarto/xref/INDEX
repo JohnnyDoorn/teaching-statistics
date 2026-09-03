@@ -385,5 +385,49 @@
   },
   "2026/ssr.qmd": {
     "ssr.html": "b93f73da"
+  },
+  "2026/4. reasoning_nhst/4. reasoning_nhst.qmd": {
+    "4. reasoning_nhst.slide.html": "1fbeb554",
+    "4. reasoning_nhst.html": "fdd70601"
+  },
+  "2026/5. jasp_visualization/5. jasp_visualization.qmd": {
+    "5. jasp_visualization.slide.html": "169dcc0b",
+    "5. jasp_visualization.html": "25276770"
+  },
+  "2026/6. correlation/6. correlation.qmd": {
+    "6. correlation.slide.html": "a0450764",
+    "6. correlation.html": "104472c9"
+  },
+  "2026/7. linear_model_regression/7. linear_model_regression.qmd": {
+    "7. linear_model_regression.slide.html": "b08a4776",
+    "7. linear_model_regression.html": "08524e1d"
+  },
+  "2026/3. reasoning_nhst/3. reasoning_nhst.qmd": {
+    "3. reasoning_nhst.slide.html": "5eb43024",
+    "3. reasoning_nhst.html": "cfed0417"
+  },
+  "2026/8. linear_model_regression/8. linear_model_regression.qmd": {
+    "8. linear_model_regression.slide.html": "d54948ae",
+    "8. linear_model_regression.html": "ee5d4c9e"
+  },
+  "2026/13. ANCOVA/13. ANCOVA.qmd": {
+    "13. ANCOVA.slide.html": "5396b4a9",
+    "13. ANCOVA.html": "ce538de8"
+  },
+  "2026/17. ANOVA_independent_factorial/17. ANOVA_independent_factorial.qmd": {
+    "17. ANOVA_independent_factorial.slide.html": "5ad70560",
+    "17. ANOVA_independent_factorial.html": "c208ce74"
+  },
+  "2026/19. chi_squared_test/19. chi_squared_test.qmd": {
+    "19. chi_squared_test.slide.html": "945bd73c",
+    "19. chi_squared_test.html": "b67cb9ab"
+  },
+  "2026/21. multiple_regression/21. multiple_regression.qmd": {
+    "21. multiple_regression.slide.html": "c61268e0",
+    "21. multiple_regression.html": "da27a7c9"
+  },
+  "2026/23. mediation/23. mediation.qmd": {
+    "23. mediation.slide.html": "a9eb0635",
+    "23. mediation.html": "52ca06ac"
   }
 }

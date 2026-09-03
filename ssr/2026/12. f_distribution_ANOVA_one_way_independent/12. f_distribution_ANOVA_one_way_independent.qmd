@@ -2,7 +2,7 @@
 title: "12. ANOVA"
 subtitle: "One-way independent ANOVA"
 author: "Johnny van Doorn"
-date: "TODO 2026"
+date: "30 September 2026"
 footer: "Scientific & Statistical Reasoning"
 format:
   revealjs:

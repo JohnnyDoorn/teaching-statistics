@@ -124,7 +124,7 @@ plotTstatSamplingDistribution(tVal = tStat, myDF = df, yAxisMod = 1.5, altHyp = 
 
 - $t$-statistic can be significant because of a big effect and/or a high sample size
 - Effect-size Cohen's $d$ is unaffected by sample size
-- See [here](https://johnnydoorn.github.io/teaching-statistics/extra-texts/EffSizeVsTestStat.html) for additional ramblings
+- See [here](https://johnnydoorn.github.io/teaching-statistics/extra-texts/eff-size-vs-test-stat.html) for additional ramblings
 
 $$d = \frac{t}{\sqrt{n}}$$
 
@@ -133,6 +133,16 @@ d <- tStat / sqrt(n)
 
 d
 ```
+
+Cohen (1988)
+
+-   Small: $\approx .3$
+-   Medium: $\approx .5$
+-   Large: $\approx .8$
+
+See Tukey (1969) and Section 3.7.4 of Field: 
+
+> being so disinterested in our variables that we do not care about their units can hardly be desirable.
 
 ## Applet
 

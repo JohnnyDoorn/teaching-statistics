@@ -1,7 +1,7 @@
 ---
 title: "26. Moderation"
 author: "Johnny van Doorn"
-date: "TODO 2026"
+date: "6 November 2026"
 footer: "Scientific & Statistical Reasoning"
 format:
   revealjs:

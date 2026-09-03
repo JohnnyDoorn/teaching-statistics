@@ -1,0 +1,51 @@
+# Statistics in SSR {.section}
+
+## The stats half of SSR {.smaller}
+
+SSR has two halves that run side by side: **reasoning** (arguments, rationality, critical thinking) and **statistics**. These are the statistics lectures.
+
+::: {.incremental}
+- **Block 1**: getting back into statistics
+    - NHST, correlation, regression
+- **Block 2**: comparing means
+    - t-tests, ANOVA, chi-square, non-parametric tests
+- **Block 3**: multiple predictors
+    - multiple regression, mediation, moderation
+:::
+
+Each block closes with an interim exam.
+
+## What will you learn? {.smaller}
+
+Not just how to compute the right number. Statistics education distinguishes three levels, and we want all three:
+
+::: {.incremental}
+- Statistical **literacy**: knowing the concepts and working the tools
+    - Identify, describe, translate, interpret, read, compute
+- Statistical **reasoning**: understanding *why* and *how* a method does what it does
+- Statistical **thinking**: using it in the wild
+    - Apply: what method fits this situation?
+    - Critique: reflect on the work of others
+    - Evaluate: assign value to that work
+    - Generalize: what does variation mean in the large scheme of life?
+:::
+
+Source: [ARTIST](http://web.archive.org/web/20221018074534/http://apps3.cehd.umn.edu/artist/glossary.html)
+
+## The book {.smaller}
+
+Field, *Discovering Statistics Using JASP*.
+
+- Block 1: Chapters 1 through 8.8 (skipping Chapter 6)
+- Companion website: [discoverjasp.com](https://discoverjasp.com/pages/exercises)
+- You have the book, glossary included, **during the exam**
+
+So the goal is not to memorize the book, but to know your way around it.
+
+## Study tips {.smaller}
+
+::: {.incremental}
+- Read the chapter *before* the lecture. The lecture is then your second pass, not your first
+- Practice in JASP yourself: WA, [Smart Alex tasks](https://discoverjasp.com/pages/smart_alex), and [Labcoat Leni examples](https://discoverjasp.com/pages/labcoat_leni)
+- For a deeper dive, play with the [applets](https://johnnydoorn.github.io/teaching-statistics/ssr/overview-ssr.html#applets), consult the [JASP Video Library](https://jasp-stats.github.io/jasp-video-library/), ask questions on the Discussion Board or have a chat with Roenny
+:::

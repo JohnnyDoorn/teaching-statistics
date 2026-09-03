@@ -1,0 +1,53 @@
+---
+title: "5. JASP: Describing and Visualizing Data"
+author: "Johnny van Doorn"
+date: "9 September 2026"
+footer: "Scientific & Statistical Reasoning"
+format:
+  revealjs:
+    output-ext: slide.html
+    css: ../../ajohnson.css
+  html: default
+css: ../../ajohnson.css
+---
+
+<div class="goals">
+In this lecture we aim to:
+
+* Introduce JASP
+  * Descriptive statistics
+  * Data visualizations
+* Variance and z-scores
+  * Standardizing, so that variables become comparable
+  
+<strong>Reading:</strong>
+Chapters 4 (§4.1–4.10), 5 (§5.1–5.6)
+</div>
+
+
+```{r child="JASP.qmd", eval=TRUE}
+```
+
+
+```{r child="visualization.qmd", eval=TRUE}
+```
+
+
+```{r child="variance-standardization.qmd", eval=TRUE}
+```
+
+
+# Closing
+
+## Next Week
+
+- Correlation
+  - How it works
+  - Controlling for a third variable
+
+## Recommended Exercises
+
+- [Exercise 5.1](https://discoverjasp.com/pages/exercises#chapter-5)
+
+```{r child="../../footer.qmd"}
+```

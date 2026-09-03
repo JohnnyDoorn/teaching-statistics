@@ -42,7 +42,7 @@ For simple regression
 
 * Sensitivity
 * Homoscedasticity
-  * See [here](https://johnnydoorn.github.io/teaching-statistics/extra-texts/Heteroscedasticity.html) for further illustration
+  * See [here](https://johnnydoorn.github.io/teaching-statistics/extra-texts/heteroscedasticity.html) for further illustration
 * Linearity
 * Normality
 

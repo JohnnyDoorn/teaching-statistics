@@ -66,9 +66,9 @@ files <- files[order(as.numeric(gsub("\\..*", "", files)))]
 files <- files[files!= "overview-ssr.qmd"]
 htmlFiles <- gsub(x =files, pattern = ".qmd", replacement = ".html")
 htmlFiles <- htmlFiles[htmlFiles %in% c(
-  # "OneSidedVsTwoSided.html","Heteroscedasticity.html", "EffSizeVsTestStat.html",
-  #"ViolatingAssumptionsANOVA.html", "PredictingWithDummies_1Variable.html",
-  #"PredictingWithDummies_2Variables.html"
+  # "one-sided-vs-two-sided.html","heteroscedasticity.html", "eff-size-vs-test-stat.html",
+  #"violating-assumptions-anova.html", "predicting-with-dummies-1-variable.html",
+  #"predicting-with-dummies-2-variables.html"
   )]
 
 allLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistics/extra-texts/%s" target="_blank" class="external">link</a>',htmlFiles) 

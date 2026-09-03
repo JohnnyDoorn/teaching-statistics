@@ -9,6 +9,10 @@ The handouts are 1 continuous page, while the slides are spread across multiple 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # One knob per academic year: bump this and everything below follows.
 year_dir    <- "2026"
+
+# How many lectures to list, counting from the first one of the year. Bump it by
+# one as each lecture is given; set it to Inf to show the whole year at once.
+n_lectures_shown <- 1
 course.path <- paste0("ssr/", year_dir, "/")
 
 # Resolve the lecture folder whether this file is knit standalone (wd is already
@@ -39,32 +43,36 @@ for (i in 1:n) {
   lectures[i , 'title'] = yaml$title
   lectures[i , 'date'] = yaml$date
   lectures[i , 'file_name'] = files[i]
+  # Optional per-lecture "view" link in the front matter: the Teams link while the
+  # lecture is live, the recording afterwards. Absent -> a dash in the table.
+  lectures[i , 'view'] = if (is.null(yaml$view)) NA_character_ else yaml$view
 
 }
 
 handoutLinks <- sprintf('<a href="https://JohnnyDoorn.github.io/teaching-statistics/%s" target="_blank" class="external">link</a>', gsub("qmd", "html", lectures$url))
 slideLinks <- sprintf('<a href="https://JohnnyDoorn.github.io/teaching-statistics/%s" target="_blank" class="external">link</a>', gsub("qmd", "slide.html", lectures$url))
+viewLinks <- sprintf('<a href="%s" target="_blank" class="external">link</a>', lectures$view)
+viewLinks[is.na(lectures$view)] <- "-"
 
 # handoutLinks[grepl(lectures$date, pattern = "2025")] <- slideLinks[grepl(lectures$date, pattern = "2025")] <- "-"
 
 data.frame(Date    = lectures$date, 
            Lecture = lectures$title,
            Handout = handoutLinks,
-           Slides  = slideLinks
+           Slides  = slideLinks,
+           View    = viewLinks
           ) -> lecture.list
 
-# Only list a lecture once its date has actually been set for this year; a date
-# still marked "TODO" means the lecture is not ready to be shown yet.
-ready <- grepl(year_dir, lectures$date) & !grepl("TODO", lectures$date, ignore.case = TRUE)
-lecture.list <- lecture.list[ready, ]
 # Sort on date
 library("lubridate")
 library("dplyr")
 # Extract the numeric part from the "Lecture" column
 lecture.list$LectureNumber <- as.numeric(sub("^([0-9]+).*", "\\1", lecture.list$Lecture))
 
-# Sort the data frame by the extracted lecture number
+# Sort the data frame by the extracted lecture number, then keep only the first
+# n_lectures_shown of them (see the knob at the top).
 lecture.list <- lecture.list[order(lecture.list$LectureNumber), ]
+lecture.list <- head(lecture.list, n_lectures_shown)
 # lecture.list$Date <- lubridate::dmy(lecture.list$Date)
 # lubridate::mdy(lecture.list$Date)
 lecture.list <- lecture.list[, -(ncol(lecture.list))]

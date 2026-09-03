@@ -2,7 +2,7 @@
 title: "18. RM ANOVA"
 subtitle: "Repeated & Mixed"
 author: "Johnny van Doorn"
-date: "TODO 2026"
+date: "14 October 2026"
 footer: "Scientific & Statistical Reasoning"
 format:
   revealjs:

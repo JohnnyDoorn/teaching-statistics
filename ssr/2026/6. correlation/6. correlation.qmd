@@ -1,0 +1,56 @@
+---
+title: "6. Correlation"
+subtitle: "From covariance to r"
+author: "Johnny van Doorn"
+date: "11 September 2026"
+footer: "Scientific & Statistical Reasoning"
+format:
+  revealjs:
+    output-ext: slide.html
+    css: ../../ajohnson.css
+  html: default
+css: ../../ajohnson.css
+---
+
+<div class="goals">
+In this lecture we discuss:
+
+* Correlation
+  * From variance to covariance to $r$
+  * In JASP
+* Significance of a correlation
+  * Using the t-distribution from lecture 3
+* Control for a third variable
+  * Partial correlation
+    
+<strong>Reading:</strong>
+Chapter 7 (§7.1–7.11)
+</div>
+
+
+```{r child="correlation.qmd"}
+```
+
+
+```{r child="correlation-partial.qmd"}
+```
+
+
+# Closing
+
+## Next Week
+
+- The linear model
+  - Predictions
+  - Assumptions
+  - Fun
+
+## Recommended Exercises
+
+- [Exercise 7.1](https://discoverjasp.com/pages/exercises#chapter-7)
+  - Note: `pets.jasp` can be downloaded from the JASP data library
+- [Exercise 7.6](https://discoverjasp.com/pages/exercises#chapter-7)
+- [Exercise 7.7](https://discoverjasp.com/pages/exercises#chapter-7)
+
+```{r child="../../footer.qmd"}
+```
