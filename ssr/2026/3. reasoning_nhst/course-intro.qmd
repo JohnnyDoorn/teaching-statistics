@@ -4,14 +4,12 @@
 
 SSR has two halves that run side by side: **reasoning** (arguments, rationality, critical thinking) and **statistics**. These are the statistics lectures.
 
-::: {.incremental}
 - **Block 1**: getting back into statistics
     - NHST, correlation, regression
 - **Block 2**: comparing means
     - t-tests, ANOVA, chi-square, non-parametric tests
 - **Block 3**: multiple predictors
     - multiple regression, mediation, moderation
-:::
 
 Each block closes with an interim exam.
 
@@ -42,10 +40,39 @@ Field, *Discovering Statistics Using JASP*.
 
 So the goal is not to memorize the book, but to know your way around it.
 
+## Sections are lettered A to D {.smaller}
+
+Field flags every section with a letter for difficulty, and for each letter lists what it does to your brain:
+
+- **A** is for brain *Attain*: everyone should get something out of these
+- **B** is for brain *Bane*: a bit more statistical knowledge needed, and at times a source of unhappiness
+- **C** is for brain *Complain*: final-year or master's material
+- **D** is for brain *Drain*: difficult enough to drain Field's own brain
+
+In this course we primarily live in **A** and **B**, so focus on those sections while reading.
+
+## Faces in the margins {.smaller}
+
+The book is full of little characters. The ones worth looking out for:
+
+- **Cramming Sam**: the key points of a chapter, summarized. Your friend the night before an exam
+- **Smart Alex**: the end-of-chapter tasks, with answers on the website
+- **Labcoat Leni**: real data from real studies, instead of Field's invented ones
+- **Oliver Twisted**: "Please, Sir, can I have some more?" Extra material on the website
+- **Jane Superbrain**: advanced tangents, for a deeper understanding
+
 ## Study tips {.smaller}
 
-::: {.incremental}
 - Read the chapter *before* the lecture. The lecture is then your second pass, not your first
-- Practice in JASP yourself: WA, [Smart Alex tasks](https://discoverjasp.com/pages/smart_alex), and [Labcoat Leni examples](https://discoverjasp.com/pages/labcoat_leni)
+- Practice statistics in JASP yourself: WA, [Smart Alex tasks](https://discoverjasp.com/pages/smart_alex), and [Labcoat Leni examples](https://discoverjasp.com/pages/labcoat_leni)
 - For a deeper dive, play with the [applets](https://johnnydoorn.github.io/teaching-statistics/ssr/overview-ssr.html#applets), consult the [JASP Video Library](https://jasp-stats.github.io/jasp-video-library/), ask questions on the Discussion Board or have a chat with Roenny
+
+
+## Exam {.smaller}
+
+::: {.incremental}
+- Statistics proportional to lectures (IE1: 40%, IE2: 60%, IE3: 50%)
+- MC, OEQ, Fill-in-the-blank
+- You have JASP and the book, glossary included, **during the exam**
+- See the trial exam in Ans during the exam week
 :::

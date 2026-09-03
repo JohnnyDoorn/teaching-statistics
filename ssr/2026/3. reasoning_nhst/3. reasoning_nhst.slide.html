@@ -453,22 +453,20 @@ Johnny van Doorn
 <section id="the-stats-half-of-ssr" class="slide level2 smaller">
 <h2>The stats half of SSR</h2>
 <p>SSR has two halves that run side by side: <strong>reasoning</strong> (arguments, rationality, critical thinking) and <strong>statistics</strong>. These are the statistics lectures.</p>
-<div>
 <ul>
-<li class="fragment"><strong>Block 1</strong>: getting back into statistics
+<li><strong>Block 1</strong>: getting back into statistics
 <ul>
-<li class="fragment">NHST, correlation, regression</li>
+<li>NHST, correlation, regression</li>
 </ul></li>
-<li class="fragment"><strong>Block 2</strong>: comparing means
+<li><strong>Block 2</strong>: comparing means
 <ul>
-<li class="fragment">t-tests, ANOVA, chi-square, non-parametric tests</li>
+<li>t-tests, ANOVA, chi-square, non-parametric tests</li>
 </ul></li>
-<li class="fragment"><strong>Block 3</strong>: multiple predictors
+<li><strong>Block 3</strong>: multiple predictors
 <ul>
-<li class="fragment">multiple regression, mediation, moderation</li>
+<li>multiple regression, mediation, moderation</li>
 </ul></li>
 </ul>
-</div>
 <p>Each block closes with an interim exam.</p>
 </section>
 <section id="what-will-you-learn" class="slide level2 smaller">
@@ -502,31 +500,87 @@ Johnny van Doorn
 </ul>
 <p>So the goal is not to memorize the book, but to know your way around it.</p>
 </section>
+<section id="sections-are-lettered-a-to-d" class="slide level2 smaller">
+<h2>Sections are lettered A to D</h2>
+<p>Field flags every section with a letter for difficulty, and for each letter lists what it does to your brain:</p>
+<ul>
+<li><strong>A</strong> is for brain <em>Attain</em>: everyone should get something out of these</li>
+<li><strong>B</strong> is for brain <em>Bane</em>: a bit more statistical knowledge needed, and at times a source of unhappiness</li>
+<li><strong>C</strong> is for brain <em>Complain</em>: final-year or master’s material</li>
+<li><strong>D</strong> is for brain <em>Drain</em>: difficult enough to drain Field’s own brain</li>
+</ul>
+<p>In this course we primarily live in <strong>A</strong> and <strong>B</strong>, so focus on those sections while reading.</p>
+</section>
+<section id="faces-in-the-margins" class="slide level2 smaller">
+<h2>Faces in the margins</h2>
+<p>The book is full of little characters. The ones worth looking out for:</p>
+<ul>
+<li><strong>Cramming Sam</strong>: the key points of a chapter, summarized. Your friend the night before an exam</li>
+<li><strong>Smart Alex</strong>: the end-of-chapter tasks, with answers on the website</li>
+<li><strong>Labcoat Leni</strong>: real data from real studies, instead of Field’s invented ones</li>
+<li><strong>Oliver Twisted</strong>: “Please, Sir, can I have some more?” Extra material on the website</li>
+<li><strong>Jane Superbrain</strong>: advanced tangents, for a deeper understanding</li>
+</ul>
+</section>
 <section id="study-tips" class="slide level2 smaller">
 <h2>Study tips</h2>
+<ul>
+<li>Read the chapter <em>before</em> the lecture. The lecture is then your second pass, not your first</li>
+<li>Practice statistics in JASP yourself: WA, <a href="https://discoverjasp.com/pages/smart_alex">Smart Alex tasks</a>, and <a href="https://discoverjasp.com/pages/labcoat_leni">Labcoat Leni examples</a></li>
+<li>For a deeper dive, play with the <a href="https://johnnydoorn.github.io/teaching-statistics/ssr/overview-ssr.html#applets">applets</a>, consult the <a href="https://jasp-stats.github.io/jasp-video-library/">JASP Video Library</a>, ask questions on the Discussion Board or have a chat with Roenny</li>
+</ul>
+</section>
+<section id="exam" class="slide level2 smaller">
+<h2>Exam</h2>
 <div>
 <ul>
-<li class="fragment">Read the chapter <em>before</em> the lecture. The lecture is then your second pass, not your first</li>
-<li class="fragment">Practice in JASP yourself: WA, <a href="https://discoverjasp.com/pages/smart_alex">Smart Alex tasks</a>, and <a href="https://discoverjasp.com/pages/labcoat_leni">Labcoat Leni examples</a></li>
-<li class="fragment">For a deeper dive, play with the <a href="https://johnnydoorn.github.io/teaching-statistics/ssr/overview-ssr.html#applets">applets</a>, consult the <a href="https://jasp-stats.github.io/jasp-video-library/">JASP Video Library</a>, ask questions on the Discussion Board or have a chat with Roenny</li>
+<li class="fragment">Statistics proportional to lectures (IE1: 40%, IE2: 60%, IE3: 50%)</li>
+<li class="fragment">MC, OEQ, Fill-in-the-blank</li>
+<li class="fragment">You have JASP and the book, glossary included, <strong>during the exam</strong></li>
+<li class="fragment">See the trial exam in Ans during the exam week</li>
 </ul>
 </div>
+<!-- Restructured version of NHST_2.qmd: the physics-expert experiment drives the
+narrative, and standard error / confidence intervals have moved to the
+t-distribution half of the lecture (standard-error-ci.qmd). -->
 </section></section>
 <section>
 <section id="null-hypothesis-significance-testing" class="title-slide slide level1 section center">
 <h1>Null Hypothesis<br>Significance Testing</h1>
 
 </section>
-<section id="neyman-pearson-paradigm" class="slide level2">
-<h2>Neyman-Pearson Paradigm</h2>
-<div style="display: flex; justify-content: center; gap: 2em;">
-<div>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Jerzy_Neyman2.jpg" height="300"> <a href="https://en.wikipedia.org/wiki/Jerzy_Neyman">Neyman</a></p>
+<section id="are-you-a-physics-expert" class="slide level2 smaller">
+<h2>Are you a physics expert?</h2>
+<p>Before we do any theory, let’s collect some data. Take the test:</p>
+<div style="text-align:center;">
+<p><img src="../../topics/physics_experiment/QR_Physics.png" style="width:40%;"></p>
+<p style="font-size: 30px;">
+edu.nl/fn3r3
+</p>
 </div>
-<div>
-<p><img src="https://upload.wikimedia.org/wikipedia/en/a/a2/Egon_Pearson.jpg" height="300"> <a href="https://en.wikipedia.org/wiki/Egon_Pearson">Pearson</a></p>
-</div>
-</div>
+</section>
+<section id="measurement-tool" class="slide level2 section">
+<h2>Measurement Tool</h2>
+<ul>
+<li>Multiple choice test true/false
+<ul>
+<li>Q1: The vacuum state in quantum field theory is not actually empty but contains fluctuations of virtual particles.</li>
+</ul></li>
+<li>10 items/questions</li>
+<li>When do we decide someone is an expert?</li>
+</ul>
+</section>
+<section id="empirical-cycle" class="slide level2 section">
+<h2>Empirical Cycle</h2>
+<ul>
+<li><strong>Observation</strong> Someone seems to be very knowledgeable on physics</li>
+<li><strong>Induction</strong> They could be an expert in the field</li>
+<li><strong>Deduction</strong> <span class="math inline">\(H_0\)</span>: P: <span class="math inline">\(\theta = 0.5\)</span> → C: I was guessing</li>
+<li><strong>Deduction</strong> <span class="math inline">\(H_A\)</span>: P: <span class="math inline">\(\theta &gt; 0.5\)</span> → C: I have knowledge</li>
+<li><strong>Deduction</strong> <span class="math inline">\(H_A\)</span>: P: data <span class="math inline">\(\neq\)</span> EV → C: candidate is expert</li>
+<li><strong>Testing</strong> Choose <span class="math inline">\(\alpha\)</span> and Power</li>
+<li><strong>Evaluation</strong> Make a decision</li>
+</ul>
 </section>
 <section id="two-hypotheses" class="slide level2">
 <h2>Two hypotheses</h2>
@@ -551,13 +605,295 @@ Johnny van Doorn
 </ul>
 </div>
 </div>
+</section></section>
+<section>
+<section id="what-if-they-were-just-guessing" class="title-slide slide level1 section center">
+<h1>What if they were just guessing?</h1>
+
 </section>
-<section id="frequentist-probability" class="slide level2">
-<h2>Frequentist probability</h2>
+<section id="what-happens-if-they-are-guessing" class="slide level2">
+<h2>What happens if they are guessing?</h2>
+</section>
+<section id="your-scores" class="slide level2 subsection">
+<h2>Your scores</h2>
+<p>Let’s analyse the null distribution of the results.</p>
+<iframe style="height:400px; width:100%;" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRQKRokJO9sF_AaCx_4oJhuI7mSzkRpksqTYmlR1UbCYDhejFfUIC4WRnUmywnNrNyv7cEgCHP-Zw9O/pubhtml?gid=1921457865&amp;single=true">
+</iframe>
+
+<!-- [Google sheet](https://docs.google.com/spreadsheets/d/150iSLUXqZbsetzDMjYlY5CAcjIzTanTm2tOFfn_ConA/edit?usp=sharing) -->
+<p><a href="https://docs.google.com/spreadsheets/d/1BXVnt8yRDvzzzAsP1RkaTgPrwWkBTAQE16U1nD2nuNg/edit?usp=sharing">Google sheet</a></p>
+<!--
+
+
+-->
+</section>
+<section id="the-scores-in-this-room" class="slide level2 smaller">
+<h2>The scores in this room</h2>
+
+<img data-src="3.-reasoning_nhst_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
+<section id="binomial-distribution" class="slide level2">
+<h2>Binomial distribution</h2>
+<p><span class="math display">\[P(k \text{ success out of } n \text{ trials} \mid \text{probability } p) = {n\choose k}p^k(1-p)^{n-k}\]</span> where <span class="math display">\[ {n\choose k} = \frac{n!}{k!(n-k)!} \]</span></p>
+<p>With values:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span>   <span class="co"># Sample size</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>k <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span> <span class="co"># Discrete probability space (numbers 0, 1, ..., 9, 10)</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>p <span class="ot">&lt;-</span> .<span class="dv">5</span>   <span class="co"># Probability of correct guess</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="the-null-distribution" class="slide level2">
+<h2>The null distribution</h2>
+
+<img data-src="3.-reasoning_nhst_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
+<section id="what-we-just-did-has-a-name" class="slide level2 smaller">
+<h2>What we just did has a name</h2>
+<p>The number of correct answers is a <strong>test statistic</strong>.</p>
+<blockquote>
+<p>A statistic that summarizes the data and is used for hypothesis testing, because we know how it’s distributed under different hypotheses</p>
+</blockquote>
+<p>Common test statistics:</p>
+<ul>
+<li>Number of heads</li>
+<li>Sum of dice</li>
+<li><span class="math inline">\(t\)</span>-statistic</li>
+<li><span class="math inline">\(F\)</span>-statistic</li>
+<li><span class="math inline">\(\chi^2\)</span>-statistic</li>
+<li>etc…</li>
+</ul>
+</section>
+<section id="what-do-those-bar-heights-mean" class="slide level2 smaller">
+<h2>What do those bar heights mean?</h2>
 <ul>
 <li>Objective Probability</li>
 <li>Relative frequency in the long run</li>
 </ul>
+</section></section>
+<section>
+<section id="how-surprising-is-the-data" class="title-slide slide level1 section center">
+<h1>How surprising is the data?</h1>
+
+</section>
+<section id="testing" class="slide level2">
+<h2>Testing</h2>
+<p>The candidate had 8 items correct. Can we conclude they are a physics expert?</p>
+<ul>
+<li>As you can see from the distribution of novice scores, we cannot conclude that by definition.</li>
+<li>What we can do is indicate how rare 8 is in a novice.</li>
+</ul>
+</section>
+<section id="testing-1" class="slide level2 smaller">
+<h2>Testing</h2>
+<p><small></small></p><small>
+<ul>
+<li class="fragment">Based on the null distribution we can see that the expected value (EV) is 5</li>
+<li class="fragment">We can now define the <span class="math inline">\(H_0\)</span> hypothesis: <span class="math inline">\(H_0: EV = 5\)</span></li>
+<li class="fragment">What is the alternative hypothesis?</li>
+<li class="fragment">The alternative hypothesis describes a situation where the candidate is expert</li>
+<li class="fragment">We could say that the alternative hypothesis is not 5
+<ul>
+<li class="fragment"><span class="math inline">\(H_A: EV \ne 5\)</span></li>
+</ul></li>
+<li class="fragment">We could also formulate our <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_A\)</span> more abstract:
+<ul>
+<li class="fragment"><span class="math inline">\(H_0:\)</span> the candidate is novice</li>
+<li class="fragment"><span class="math inline">\(H_A:\)</span> the candidate is expert</li>
+</ul></li>
+<li class="fragment">What criterion should we use to conclude that one would be expert?</li>
+<li class="fragment">In the social sciences this <span class="math inline">\(\alpha\)</span> criteria is often 5%.</li>
+<li class="fragment">Candidate scored 8 items correct. That is more frequent than 5%.</li>
+<li class="fragment">Therefore, we conclude that our candidate is probably novice but we can never be sure.</li>
+</ul>
+</small><p><small></small></p>
+</section>
+<section id="p-value" class="slide level2">
+<h2>P-value</h2>
+<blockquote>
+<p>Conditional probability of the observed test statistic or more extreme assuming the null hypothesis is true.</p>
+</blockquote>
+<p>Reject <span class="math inline">\(H_0\)</span> when:</p>
+<ul>
+<li><span class="math inline">\(p\)</span>-value <span class="math inline">\(\leq\)</span> <span class="math inline">\(\alpha\)</span></li>
+</ul>
+</section>
+<section id="p-value-in-h_0-distribution" class="slide level2">
+<h2>P-value in <span class="math inline">\(H_{0}\)</span> distribution</h2>
+
+<img data-src="3.-reasoning_nhst_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section>
+<section id="p-value-and-alpha" class="slide level2">
+<h2>P-value and <span class="math inline">\(\alpha\)</span></h2>
+<p>Alpha determines how willingly we reject the null hypothesis:</p>
+<ul>
+<li>Increase <span class="math inline">\(\alpha\)</span> = reject null hypothesis more often
+<ul>
+<li>Increases Type I error rate</li>
+<li>Decreases Type II error rate</li>
+</ul></li>
+<li>Historically set to 0.05, but widely criticized (see Jane Superbrain 3.1)</li>
+</ul>
+<blockquote>
+<p>No scientific worker has a fixed level of significance at which from year to year, and in all circumstances, he rejects hypotheses; he rather gives his mind to each particular case in the light of his evidence and his ideas. (Fisher, 1956)</p>
+</blockquote>
+</section>
+<section id="misconceptions-about-the-p-value" class="slide level2">
+<h2>Misconceptions about the p-value</h2>
+<ul>
+<li>A significant result means that the effect is important
+<ul>
+<li>Significance = effect size + sample size</li>
+</ul></li>
+<li>A non-significant result means that the null hypothesis is true</li>
+<li>A significant result means that the null hypothesis is false</li>
+</ul>
+</section></section>
+<section>
+<section id="what-can-go-wrong" class="title-slide slide level1 section center">
+<h1>What can go wrong?</h1>
+
+</section>
+<section id="neyman-pearson-paradigm" class="slide level2">
+<h2>Neyman-Pearson Paradigm</h2>
+<div style="display: flex; justify-content: center; gap: 2em;">
+<div>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Jerzy_Neyman2.jpg" height="300"> <a href="https://en.wikipedia.org/wiki/Jerzy_Neyman">Neyman</a></p>
+</div>
+<div>
+<p><img src="https://upload.wikimedia.org/wikipedia/en/a/a2/Egon_Pearson.jpg" height="300"> <a href="https://en.wikipedia.org/wiki/Egon_Pearson">Pearson</a></p>
+</div>
+</div>
+<p>Fisher asked <em>how surprising is this data?</em> Neyman and Pearson asked a different question: <em>which mistakes am I willing to make, and how often?</em></p>
+</section>
+<section id="alternative-distribution" class="slide level2 smaller build subsection">
+<h2>Alternative Distribution</h2>
+<p>But we have no clue what this distribution could look like.</p>
+<p>For now let’s assume the probability of answering an item correctly is .75</p>
+
+<img data-src="3.-reasoning_nhst_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"></section>
+<section id="both-distributions-at-once" class="slide level2 smaller">
+<h2>Both distributions at once</h2>
+
+<img data-src="3.-reasoning_nhst_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"><p>Everything that can go wrong lives in the <strong>overlap</strong>.</p>
+</section>
+<section id="decision-table" class="slide level2">
+<h2>Decision table</h2>
+
+<style>
+#dectable > svg { transform: scale(1.4);}
+</style>
+<div id="dectable" class="r-stack r-stretch">
+<svg width="600" height="370" xmlns="http://www.w3.org/2000/svg" style="font-size: 30px; color:white;">
+<text x="220" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = TRUE</text> <text x="420" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = FALSE</text> <text x="30" y="120">Decide to</text> <text x="30" y="170">reject H<tspan dy="3" font-size=".7em">0</tspan></text> <text x="30" y="270">Decide to</text> <text x="30" y="320">not reject H<tspan dy="3" font-size=".7em">0</tspan></text> <g id="boxes" style="stroke:white; stroke-width:5px;"> <rect width="200" height="150" x="200" y="70" fill="red"></rect> <rect width="200" height="150" x="200" y="220" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="70" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="220" fill="red"></rect> </g> <g id="border" style="stroke:none; stroke-width:5px;"> <rect class="alpha" width="190" height="140" x="205" y="75" fill="none"></rect> <rect class="oneminalpha" width="190" height="140" x="205" y="225" fill="none"></rect> <rect class="power" width="190" height="140" x="405" y="75" fill="none"></rect> <rect class="beta" width="190" height="140" x="405" y="225" fill="none"></rect> </g> <g style="fill:white;"> <text x="220" y="120">Alpha</text> <text x="220" y="170">α</text> <text x="420" y="270">Beta</text> <text x="420" y="320">β</text> </g> <g style="fill:black;"> <text x="220" y="270">1 - α</text> <text x="420" y="120">Power</text> <text x="420" y="170">1 - β</text> </g>
+</svg>
+</div>
+</section>
+<section id="alpha-alpha" class="slide level2">
+<h2>Alpha <span class="math inline">\(\alpha\)</span></h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li>Incorrectly reject <span class="math inline">\(H_0\)</span></li>
+<li>Type I error</li>
+<li>False Positive</li>
+<li>Threshold for “significance”</li>
+<li>Criteria often 5% but heavily criticized</li>
+</ul>
+</div><div id="alpha" class="column" style="width:60%;">
+<style>
+#alpha .alpha { stroke: black;}
+#alpha > svg { transform: scale(.8);}
+</style>
+<svg width="600" height="370" xmlns="http://www.w3.org/2000/svg" style="font-size: 30px; color:white;">
+<text x="220" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = TRUE</text> <text x="420" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = FALSE</text> <text x="30" y="120">Decide to</text> <text x="30" y="170">reject H<tspan dy="3" font-size=".7em">0</tspan></text> <text x="30" y="270">Decide to</text> <text x="30" y="320">not reject H<tspan dy="3" font-size=".7em">0</tspan></text> <g id="boxes" style="stroke:white; stroke-width:5px;"> <rect width="200" height="150" x="200" y="70" fill="red"></rect> <rect width="200" height="150" x="200" y="220" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="70" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="220" fill="red"></rect> </g> <g id="border" style="stroke:none; stroke-width:5px;"> <rect class="alpha" width="190" height="140" x="205" y="75" fill="none"></rect> <rect class="oneminalpha" width="190" height="140" x="205" y="225" fill="none"></rect> <rect class="power" width="190" height="140" x="405" y="75" fill="none"></rect> <rect class="beta" width="190" height="140" x="405" y="225" fill="none"></rect> </g> <g style="fill:white;"> <text x="220" y="120">Alpha</text> <text x="220" y="170">α</text> <text x="420" y="270">Beta</text> <text x="420" y="320">β</text> </g> <g style="fill:black;"> <text x="220" y="270">1 - α</text> <text x="420" y="120">Power</text> <text x="420" y="170">1 - β</text> </g>
+</svg>
+</div>
+</div>
+</section>
+<section id="power" class="slide level2">
+<h2>Power</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li>Correctly reject <span class="math inline">\(H_0\)</span></li>
+<li>True positive</li>
+<li>Power equal to: 1 - Beta</li>
+<li>Beta is Type II error</li>
+<li>Criteria often 80%</li>
+<li>Depends on sample size</li>
+</ul>
+</div><div id="power" class="column" style="width:60%;">
+<style>
+#power .power { stroke: black; }
+#power > svg { transform: scale(.8);}
+</style>
+<svg width="600" height="370" xmlns="http://www.w3.org/2000/svg" style="font-size: 30px; color:white;">
+<text x="220" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = TRUE</text> <text x="420" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = FALSE</text> <text x="30" y="120">Decide to</text> <text x="30" y="170">reject H<tspan dy="3" font-size=".7em">0</tspan></text> <text x="30" y="270">Decide to</text> <text x="30" y="320">not reject H<tspan dy="3" font-size=".7em">0</tspan></text> <g id="boxes" style="stroke:white; stroke-width:5px;"> <rect width="200" height="150" x="200" y="70" fill="red"></rect> <rect width="200" height="150" x="200" y="220" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="70" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="220" fill="red"></rect> </g> <g id="border" style="stroke:none; stroke-width:5px;"> <rect class="alpha" width="190" height="140" x="205" y="75" fill="none"></rect> <rect class="oneminalpha" width="190" height="140" x="205" y="225" fill="none"></rect> <rect class="power" width="190" height="140" x="405" y="75" fill="none"></rect> <rect class="beta" width="190" height="140" x="405" y="225" fill="none"></rect> </g> <g style="fill:white;"> <text x="220" y="120">Alpha</text> <text x="220" y="170">α</text> <text x="420" y="270">Beta</text> <text x="420" y="320">β</text> </g> <g style="fill:black;"> <text x="220" y="270">1 - α</text> <text x="420" y="120">Power</text> <text x="420" y="170">1 - β</text> </g>
+</svg>
+</div>
+</div>
+</section>
+<section id="one-minus-alpha" class="slide level2">
+<h2>One minus alpha</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li>Correctly accept <span class="math inline">\(H_0\)</span></li>
+<li>True negative</li>
+</ul>
+</div><div id="oneminalpha" class="column" style="width:60%;">
+<style>
+#oneminalpha .oneminalpha { stroke: black; }
+#oneminalpha > svg { transform: scale(.8);}
+</style>
+<svg width="600" height="370" xmlns="http://www.w3.org/2000/svg" style="font-size: 30px; color:white;">
+<text x="220" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = TRUE</text> <text x="420" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = FALSE</text> <text x="30" y="120">Decide to</text> <text x="30" y="170">reject H<tspan dy="3" font-size=".7em">0</tspan></text> <text x="30" y="270">Decide to</text> <text x="30" y="320">not reject H<tspan dy="3" font-size=".7em">0</tspan></text> <g id="boxes" style="stroke:white; stroke-width:5px;"> <rect width="200" height="150" x="200" y="70" fill="red"></rect> <rect width="200" height="150" x="200" y="220" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="70" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="220" fill="red"></rect> </g> <g id="border" style="stroke:none; stroke-width:5px;"> <rect class="alpha" width="190" height="140" x="205" y="75" fill="none"></rect> <rect class="oneminalpha" width="190" height="140" x="205" y="225" fill="none"></rect> <rect class="power" width="190" height="140" x="405" y="75" fill="none"></rect> <rect class="beta" width="190" height="140" x="405" y="225" fill="none"></rect> </g> <g style="fill:white;"> <text x="220" y="120">Alpha</text> <text x="220" y="170">α</text> <text x="420" y="270">Beta</text> <text x="420" y="320">β</text> </g> <g style="fill:black;"> <text x="220" y="270">1 - α</text> <text x="420" y="120">Power</text> <text x="420" y="170">1 - β</text> </g>
+</svg>
+</div>
+</div>
+</section>
+<section id="beta" class="slide level2">
+<h2>Beta</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li>Incorrectly accept <span class="math inline">\(H_0\)</span></li>
+<li>Type II error</li>
+<li>False Negative</li>
+<li>Criteria often 20%</li>
+<li>Distribution depends on sample size</li>
+</ul>
+</div><div id="beta" class="column" style="width:60%;">
+<style>
+#beta .beta { stroke: black; }
+#beta > svg { transform: scale(.8);}
+</style>
+<svg width="600" height="370" xmlns="http://www.w3.org/2000/svg" style="font-size: 30px; color:white;">
+<text x="220" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = TRUE</text> <text x="420" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = FALSE</text> <text x="30" y="120">Decide to</text> <text x="30" y="170">reject H<tspan dy="3" font-size=".7em">0</tspan></text> <text x="30" y="270">Decide to</text> <text x="30" y="320">not reject H<tspan dy="3" font-size=".7em">0</tspan></text> <g id="boxes" style="stroke:white; stroke-width:5px;"> <rect width="200" height="150" x="200" y="70" fill="red"></rect> <rect width="200" height="150" x="200" y="220" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="70" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="220" fill="red"></rect> </g> <g id="border" style="stroke:none; stroke-width:5px;"> <rect class="alpha" width="190" height="140" x="205" y="75" fill="none"></rect> <rect class="oneminalpha" width="190" height="140" x="205" y="225" fill="none"></rect> <rect class="power" width="190" height="140" x="405" y="75" fill="none"></rect> <rect class="beta" width="190" height="140" x="405" y="225" fill="none"></rect> </g> <g style="fill:white;"> <text x="220" y="120">Alpha</text> <text x="220" y="170">α</text> <text x="420" y="270">Beta</text> <text x="420" y="320">β</text> </g> <g style="fill:black;"> <text x="220" y="270">1 - α</text> <text x="420" y="120">Power</text> <text x="420" y="170">1 - β</text> </g>
+</svg>
+</div>
+</div>
+</section>
+<section id="play-with-it" class="slide level2 flexbox vcenter smaller">
+<h2>Play with it</h2>
+<p><a href="https://statisticalreasoning-uva.shinyapps.io/NHST_Binomial/">Play around with this app to get an idea of the probabilities</a></p>
+</section>
+<section id="nhst-reasoning-scheme" class="slide level2 subsection flexbox vcenter">
+<h2>NHST Reasoning Scheme</h2>
+
+<!-- ## R\<-PSYCHOLOGIST {.smaller} -->
+<!-- [Interactive distributions app by Kristoffer Magnusson](http://rpsychologist.com/d3/NHST/){preview-link="false"} -->
+<img data-src="../../images/NHST_decision_scheme.png" class="r-stretch"></section>
+<section id="up-next-three-distributions" class="slide level2 smaller">
+<h2>Up next: three distributions</h2>
+<p>What is the difference between</p>
+<ul>
+<li>Population distribution</li>
+<li>Sample distribution</li>
+<li>Sampling distribution</li>
+</ul>
+</section></section>
+<section>
+<section id="standard-error-and-confidence-intervals" class="title-slide slide level1 section center">
+<h1>Standard Error and<br>Confidence Intervals</h1>
+<p>A sample mean is not the population mean. How far off is it, typically?</p>
 </section>
 <section id="standard-error" class="slide level2">
 <h2>Standard Error</h2>
@@ -710,235 +1046,10 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <h2></h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="3.-reasoning_nhst_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" height="600"></p>
+<p><img data-src="3.-reasoning_nhst_files/figure-revealjs/unnamed-chunk-41-1.png" width="960" height="600"></p>
 </div>
 </div>
-</section>
-<section id="binomial-h_0-distribution" class="slide level2">
-<h2>Binomial <span class="math inline">\(H_0\)</span> distribution</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span>   <span class="co"># Sample size</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>k <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span>n  <span class="co"># Discrete probability space</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>p <span class="ot">&lt;-</span> .<span class="dv">5</span>   <span class="co"># Probability of head</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a>coin <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a></span>
-<span id="cb1-7"><a href="#cb1-7"></a>permutations <span class="ot">&lt;-</span> <span class="fu">factorial</span>(n) <span class="sc">/</span> ( <span class="fu">factorial</span>(k) <span class="sc">*</span> <span class="fu">factorial</span>(n<span class="sc">-</span>k) )</span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="co"># permutations</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a></span>
-<span id="cb1-10"><a href="#cb1-10"></a>p_k  <span class="ot">&lt;-</span> p<span class="sc">^</span>k <span class="sc">*</span> (<span class="dv">1</span><span class="sc">-</span>p)<span class="sc">^</span>(n<span class="sc">-</span>k)  <span class="co"># Probability of single event</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a>p_kp <span class="ot">&lt;-</span> p_k <span class="sc">*</span> permutations <span class="co"># Probability of event times </span></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="co"># the occurrence of that event</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a></span>
-<span id="cb1-14"><a href="#cb1-14"></a>title <span class="ot">&lt;-</span> <span class="st">"Binomial Null distribution"</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a></span>
-<span id="cb1-16"><a href="#cb1-16"></a><span class="co"># col=c(rep("red",2),rep("beige",7),rep("red",2))</span></span>
-<span id="cb1-17"><a href="#cb1-17"></a></span>
-<span id="cb1-18"><a href="#cb1-18"></a><span class="fu">barplot</span>( p_kp, </span>
-<span id="cb1-19"><a href="#cb1-19"></a>         <span class="at">main=</span>title, </span>
-<span id="cb1-20"><a href="#cb1-20"></a>         <span class="at">names.arg=</span><span class="dv">0</span><span class="sc">:</span>n, </span>
-<span id="cb1-21"><a href="#cb1-21"></a>         <span class="at">xlab=</span><span class="st">"number of heads"</span>, </span>
-<span id="cb1-22"><a href="#cb1-22"></a>         <span class="at">ylab=</span><span class="st">"P(%)"</span>, </span>
-<span id="cb1-23"><a href="#cb1-23"></a>         <span class="at">col=</span><span class="st">'beige'</span>,</span>
-<span id="cb1-24"><a href="#cb1-24"></a>         <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,.<span class="dv">3</span>) )</span>
-<span id="cb1-25"><a href="#cb1-25"></a></span>
-<span id="cb1-26"><a href="#cb1-26"></a><span class="co"># abline(v = c(2.5,10.9), lty=2, col='red')</span></span>
-<span id="cb1-27"><a href="#cb1-27"></a></span>
-<span id="cb1-28"><a href="#cb1-28"></a><span class="fu">text</span>(.<span class="dv">6</span><span class="sc">:</span><span class="fl">10.6</span><span class="sc">*</span><span class="fl">1.2</span>,p_kp,<span class="fu">round</span>(p_kp,<span class="dv">3</span>),<span class="at">pos=</span><span class="dv">3</span>,<span class="at">cex=</span>.<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-
-</section>
-<section id="binomial-h_0-distribution-output" class="slide level2 output-location-slide"><h2>Binomial <span class="math inline">\(H_0\)</span> distribution</h2><div class="cell output-location-slide">
-<div class="cell-output-display">
-<p><img data-src="3.-reasoning_nhst_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></p>
-</div>
-</div></section><section id="binomial-h_a-distributions" class="slide level2">
-<h2>Binomial <span class="math inline">\(H_A\)</span> distributions</h2>
-
-<img data-src="3.-reasoning_nhst_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
-<section id="decision-table" class="slide level2">
-<h2>Decision table</h2>
-
-<style>
-#dectable > svg { transform: scale(1.4);}
-</style>
-<div id="dectable" class="r-stack r-stretch">
-<svg width="600" height="370" xmlns="http://www.w3.org/2000/svg" style="font-size: 30px; color:white;">
-<text x="220" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = TRUE</text> <text x="420" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = FALSE</text> <text x="30" y="120">Decide to</text> <text x="30" y="170">reject H<tspan dy="3" font-size=".7em">0</tspan></text> <text x="30" y="270">Decide to</text> <text x="30" y="320">not reject H<tspan dy="3" font-size=".7em">0</tspan></text> <g id="boxes" style="stroke:white; stroke-width:5px;"> <rect width="200" height="150" x="200" y="70" fill="red"></rect> <rect width="200" height="150" x="200" y="220" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="70" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="220" fill="red"></rect> </g> <g id="border" style="stroke:none; stroke-width:5px;"> <rect class="alpha" width="190" height="140" x="205" y="75" fill="none"></rect> <rect class="oneminalpha" width="190" height="140" x="205" y="225" fill="none"></rect> <rect class="power" width="190" height="140" x="405" y="75" fill="none"></rect> <rect class="beta" width="190" height="140" x="405" y="225" fill="none"></rect> </g> <g style="fill:white;"> <text x="220" y="120">Alpha</text> <text x="220" y="170">α</text> <text x="420" y="270">Beta</text> <text x="420" y="320">β</text> </g> <g style="fill:black;"> <text x="220" y="270">1 - α</text> <text x="420" y="120">Power</text> <text x="420" y="170">1 - β</text> </g>
-</svg>
-</div>
-</section>
-<section id="alpha-alpha" class="slide level2">
-<h2>Alpha <span class="math inline">\(\alpha\)</span></h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<ul>
-<li>Incorrectly reject <span class="math inline">\(H_0\)</span></li>
-<li>Type I error</li>
-<li>False Positive</li>
-<li>Threshold for “significance”</li>
-<li>Criteria often 5% but heavily criticized</li>
-</ul>
-</div><div id="alpha" class="column" style="width:60%;">
-<style>
-#alpha .alpha { stroke: black;}
-#alpha > svg { transform: scale(.8);}
-</style>
-<svg width="600" height="370" xmlns="http://www.w3.org/2000/svg" style="font-size: 30px; color:white;">
-<text x="220" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = TRUE</text> <text x="420" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = FALSE</text> <text x="30" y="120">Decide to</text> <text x="30" y="170">reject H<tspan dy="3" font-size=".7em">0</tspan></text> <text x="30" y="270">Decide to</text> <text x="30" y="320">not reject H<tspan dy="3" font-size=".7em">0</tspan></text> <g id="boxes" style="stroke:white; stroke-width:5px;"> <rect width="200" height="150" x="200" y="70" fill="red"></rect> <rect width="200" height="150" x="200" y="220" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="70" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="220" fill="red"></rect> </g> <g id="border" style="stroke:none; stroke-width:5px;"> <rect class="alpha" width="190" height="140" x="205" y="75" fill="none"></rect> <rect class="oneminalpha" width="190" height="140" x="205" y="225" fill="none"></rect> <rect class="power" width="190" height="140" x="405" y="75" fill="none"></rect> <rect class="beta" width="190" height="140" x="405" y="225" fill="none"></rect> </g> <g style="fill:white;"> <text x="220" y="120">Alpha</text> <text x="220" y="170">α</text> <text x="420" y="270">Beta</text> <text x="420" y="320">β</text> </g> <g style="fill:black;"> <text x="220" y="270">1 - α</text> <text x="420" y="120">Power</text> <text x="420" y="170">1 - β</text> </g>
-</svg>
-</div>
-</div>
-</section>
-<section id="section-1" class="slide level2">
-<h2></h2>
-
-<img data-src="3.-reasoning_nhst_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"></section>
-<section id="power" class="slide level2">
-<h2>Power</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<ul>
-<li>Correctly reject <span class="math inline">\(H_0\)</span></li>
-<li>True positive</li>
-<li>Power equal to: 1 - Beta</li>
-<li>Beta is Type II error</li>
-<li>Criteria often 80%</li>
-<li>Depends on sample size</li>
-</ul>
-</div><div id="power" class="column" style="width:60%;">
-<style>
-#power .power { stroke: black; }
-#power > svg { transform: scale(.8);}
-</style>
-<svg width="600" height="370" xmlns="http://www.w3.org/2000/svg" style="font-size: 30px; color:white;">
-<text x="220" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = TRUE</text> <text x="420" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = FALSE</text> <text x="30" y="120">Decide to</text> <text x="30" y="170">reject H<tspan dy="3" font-size=".7em">0</tspan></text> <text x="30" y="270">Decide to</text> <text x="30" y="320">not reject H<tspan dy="3" font-size=".7em">0</tspan></text> <g id="boxes" style="stroke:white; stroke-width:5px;"> <rect width="200" height="150" x="200" y="70" fill="red"></rect> <rect width="200" height="150" x="200" y="220" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="70" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="220" fill="red"></rect> </g> <g id="border" style="stroke:none; stroke-width:5px;"> <rect class="alpha" width="190" height="140" x="205" y="75" fill="none"></rect> <rect class="oneminalpha" width="190" height="140" x="205" y="225" fill="none"></rect> <rect class="power" width="190" height="140" x="405" y="75" fill="none"></rect> <rect class="beta" width="190" height="140" x="405" y="225" fill="none"></rect> </g> <g style="fill:white;"> <text x="220" y="120">Alpha</text> <text x="220" y="170">α</text> <text x="420" y="270">Beta</text> <text x="420" y="320">β</text> </g> <g style="fill:black;"> <text x="220" y="270">1 - α</text> <text x="420" y="120">Power</text> <text x="420" y="170">1 - β</text> </g>
-</svg>
-</div>
-</div>
-</section>
-<section id="section-2" class="slide level2">
-<h2></h2>
-
-<img data-src="3.-reasoning_nhst_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch"></section>
-<section id="one-minus-alpha" class="slide level2">
-<h2>One minus alpha</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<ul>
-<li>Correctly accept <span class="math inline">\(H_0\)</span></li>
-<li>True negative</li>
-</ul>
-</div><div id="oneminalpha" class="column" style="width:60%;">
-<style>
-#oneminalpha .oneminalpha { stroke: black; }
-#oneminalpha > svg { transform: scale(.8);}
-</style>
-<svg width="600" height="370" xmlns="http://www.w3.org/2000/svg" style="font-size: 30px; color:white;">
-<text x="220" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = TRUE</text> <text x="420" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = FALSE</text> <text x="30" y="120">Decide to</text> <text x="30" y="170">reject H<tspan dy="3" font-size=".7em">0</tspan></text> <text x="30" y="270">Decide to</text> <text x="30" y="320">not reject H<tspan dy="3" font-size=".7em">0</tspan></text> <g id="boxes" style="stroke:white; stroke-width:5px;"> <rect width="200" height="150" x="200" y="70" fill="red"></rect> <rect width="200" height="150" x="200" y="220" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="70" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="220" fill="red"></rect> </g> <g id="border" style="stroke:none; stroke-width:5px;"> <rect class="alpha" width="190" height="140" x="205" y="75" fill="none"></rect> <rect class="oneminalpha" width="190" height="140" x="205" y="225" fill="none"></rect> <rect class="power" width="190" height="140" x="405" y="75" fill="none"></rect> <rect class="beta" width="190" height="140" x="405" y="225" fill="none"></rect> </g> <g style="fill:white;"> <text x="220" y="120">Alpha</text> <text x="220" y="170">α</text> <text x="420" y="270">Beta</text> <text x="420" y="320">β</text> </g> <g style="fill:black;"> <text x="220" y="270">1 - α</text> <text x="420" y="120">Power</text> <text x="420" y="170">1 - β</text> </g>
-</svg>
-</div>
-</div>
-</section>
-<section id="section-3" class="slide level2">
-<h2></h2>
-
-<img data-src="3.-reasoning_nhst_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch"></section>
-<section id="beta" class="slide level2">
-<h2>Beta</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<ul>
-<li>Incorrectly accept <span class="math inline">\(H_0\)</span></li>
-<li>Type II error</li>
-<li>False Negative</li>
-<li>Criteria often 20%</li>
-<li>Distribution depends on sample size</li>
-</ul>
-</div><div id="beta" class="column" style="width:60%;">
-<style>
-#beta .beta { stroke: black; }
-#beta > svg { transform: scale(.8);}
-</style>
-<svg width="600" height="370" xmlns="http://www.w3.org/2000/svg" style="font-size: 30px; color:white;">
-<text x="220" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = TRUE</text> <text x="420" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = FALSE</text> <text x="30" y="120">Decide to</text> <text x="30" y="170">reject H<tspan dy="3" font-size=".7em">0</tspan></text> <text x="30" y="270">Decide to</text> <text x="30" y="320">not reject H<tspan dy="3" font-size=".7em">0</tspan></text> <g id="boxes" style="stroke:white; stroke-width:5px;"> <rect width="200" height="150" x="200" y="70" fill="red"></rect> <rect width="200" height="150" x="200" y="220" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="70" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="220" fill="red"></rect> </g> <g id="border" style="stroke:none; stroke-width:5px;"> <rect class="alpha" width="190" height="140" x="205" y="75" fill="none"></rect> <rect class="oneminalpha" width="190" height="140" x="205" y="225" fill="none"></rect> <rect class="power" width="190" height="140" x="405" y="75" fill="none"></rect> <rect class="beta" width="190" height="140" x="405" y="225" fill="none"></rect> </g> <g style="fill:white;"> <text x="220" y="120">Alpha</text> <text x="220" y="170">α</text> <text x="420" y="270">Beta</text> <text x="420" y="320">β</text> </g> <g style="fill:black;"> <text x="220" y="270">1 - α</text> <text x="420" y="120">Power</text> <text x="420" y="170">1 - β</text> </g>
-</svg>
-</div>
-</div>
-</section>
-<section id="section-4" class="slide level2">
-<h2></h2>
-
-<img data-src="3.-reasoning_nhst_files/figure-revealjs/unnamed-chunk-20-1.png" width="960" class="r-stretch"></section>
-<section id="section-5" class="slide level2">
-<h2></h2>
-
-<img data-src="3.-reasoning_nhst_files/figure-revealjs/unnamed-chunk-21-1.png" width="960" class="r-stretch"></section>
-<section id="p-value" class="slide level2">
-<h2>P-value</h2>
-<blockquote>
-<p>Conditional probability of the observed test statistic or more extreme assuming the null hypothesis is true.</p>
-</blockquote>
-<p>Reject <span class="math inline">\(H_0\)</span> when:</p>
-<ul>
-<li><span class="math inline">\(p\)</span>-value <span class="math inline">\(\leq\)</span> <span class="math inline">\(\alpha\)</span></li>
-</ul>
-</section>
-<section id="test-statistics" class="slide level2">
-<h2>Test statistics</h2>
-<blockquote>
-<p>A statistic that summarizes the data and is used for hypothesis testing, because we know how it’s distributed under different hypotheses</p>
-</blockquote>
-<p>Common test statistics:</p>
-<ul>
-<li>Number of heads</li>
-<li>Sum of dice</li>
-<li><span class="math inline">\(t\)</span>-statistic</li>
-<li><span class="math inline">\(F\)</span>-statistic</li>
-<li><span class="math inline">\(\chi^2\)</span>-statistic</li>
-<li>etc…</li>
-</ul>
-</section>
-<section id="p-value-in-h_0-distribution" class="slide level2">
-<h2>P-value in <span class="math inline">\(H_{0}\)</span> distribution</h2>
-
-<img data-src="3.-reasoning_nhst_files/figure-revealjs/unnamed-chunk-22-1.png" width="960" class="r-stretch"></section>
-<section id="p-value-and-alpha" class="slide level2">
-<h2>P-value and <span class="math inline">\(\alpha\)</span></h2>
-<p>Alpha determines how willingly we reject the null hypothesis:</p>
-<ul>
-<li>Increase <span class="math inline">\(\alpha\)</span> = reject null hypothesis more often
-<ul>
-<li>Increases Type I error rate</li>
-<li>Decreases Type II error rate</li>
-</ul></li>
-<li>Historically set to 0.05, but widely criticized (see Jane Superbrain 3.1)</li>
-</ul>
-<blockquote>
-<p>No scientific worker has a fixed level of significance at which from year to year, and in all circumstances, he rejects hypotheses; he rather gives his mind to each particular case in the light of his evidence and his ideas. (Fisher, 1956)</p>
-</blockquote>
-</section>
-<section id="misconceptions-about-the-p-value" class="slide level2">
-<h2>Misconceptions about the p-value</h2>
-<ul>
-<li>A significant result means that the effect is important
-<ul>
-<li>Significance = effect size + sample size</li>
-</ul></li>
-<li>A non-significant result means that the null hypothesis is true</li>
-<li>A significant result means that the null hypothesis is false</li>
-</ul>
-</section>
-<section id="decision-table-1" class="slide level2 flexbox vcenter smaller">
-<h2>Decision Table</h2>
-<p><a href="https://statisticalreasoning-uva.shinyapps.io/NHST_Binomial/">Play around with this app to get an idea of the probabilities</a></p>
-</section>
-<section id="nhst-reasoning-scheme" class="slide level2 subsection flexbox vcenter">
-<h2>NHST Reasoning Scheme</h2>
-
-<!-- ## R\<-PSYCHOLOGIST {.smaller} -->
-<!-- [Interactive distributions app by Kristoffer Magnusson](http://rpsychologist.com/d3/NHST/){preview-link="false"} -->
-<img data-src="../../images/NHST_decision_scheme.png" class="r-stretch"></section></section>
+</section></section>
 <section>
 <section id="t-distribution" class="title-slide slide level1 section center">
 <h1>T-distribution</h1>
@@ -950,7 +1061,7 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <div class="column" style="width:20%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/William_Sealy_Gosset.jpg/800px-William_Sealy_Gosset.jpg"></p>
+<p><img data-src="https://en.wikipedia.org/wiki/File:William_Sealy_Gosset.jpg"></p>
 <figcaption>William Sealy Gosset (aka Student) in 1908 (age 32)</figcaption>
 </figure>
 </div>
@@ -995,7 +1106,7 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 </section>
 <section id="population-distribution-output" class="slide level2 smaller subsection output-location-slide"><h2>Population distribution</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
-<p><img data-src="3.-reasoning_nhst_files/figure-revealjs/unnamed-chunk-46-1.png" width="960"></p>
+<p><img data-src="3.-reasoning_nhst_files/figure-revealjs/unnamed-chunk-47-1.png" width="960"></p>
 </div>
 </div></section><section id="a-sample" class="slide level2 smaller">
 <h2>A sample</h2>
@@ -1021,7 +1132,7 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 </section>
 <section id="a-sample-output" class="slide level2 smaller output-location-slide"><h2>A sample</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
-<p><img data-src="3.-reasoning_nhst_files/figure-revealjs/unnamed-chunk-48-1.png" width="960"></p>
+<p><img data-src="3.-reasoning_nhst_files/figure-revealjs/unnamed-chunk-49-1.png" width="960"></p>
 </div>
 </div></section><section id="more-samples" class="slide level2">
 <h2>More samples</h2>
@@ -1066,7 +1177,7 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 </section>
 <section id="sampling-distribution-output" class="slide level2 output-location-slide"><h2>Sampling distribution</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
-<p><img data-src="3.-reasoning_nhst_files/figure-revealjs/unnamed-chunk-51-1.png" width="960"></p>
+<p><img data-src="3.-reasoning_nhst_files/figure-revealjs/unnamed-chunk-52-1.png" width="960"></p>
 </div>
 </div></section><section id="t-statistic" class="slide level2 subsection">
 <h2>T-statistic</h2>
@@ -1120,7 +1231,7 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 </section>
 <section id="sampled-t-values-output" class="slide level2 output-location-slide"><h2>Sampled t-values</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
-<p><img data-src="3.-reasoning_nhst_files/figure-revealjs/unnamed-chunk-54-1.png" width="960"></p>
+<p><img data-src="3.-reasoning_nhst_files/figure-revealjs/unnamed-chunk-55-1.png" width="960"></p>
 </div>
 </div></section><section id="t-distribution-1" class="slide level2">
 <h2>T-distribution</h2>
@@ -1132,10 +1243,10 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <p>Source: <a href="https://en.wikipedia.org/wiki/Student%27s_t-distribution">wikipedia</a></p>
 </small><p><small></small></p>
 </section>
-<section id="section-6" class="slide level2">
+<section id="section-1" class="slide level2">
 <h2></h2>
 
-<img data-src="3.-reasoning_nhst_files/figure-revealjs/unnamed-chunk-55-1.png" width="960" class="r-stretch"></section>
+<img data-src="3.-reasoning_nhst_files/figure-revealjs/unnamed-chunk-56-1.png" width="960" class="r-stretch"></section>
 <section id="one-or-two-sided" class="slide level2 subsection">
 <h2>One or two sided</h2>
 <p>Two sided</p>
@@ -1149,10 +1260,10 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 </ul>
 <p><a href="https://johnnydoorn.github.io/teaching-statistics/extra-texts/one-sided-vs-two-sided.html">Additional text here</a></p>
 </section>
-<section id="section-7" class="slide level2">
+<section id="section-2" class="slide level2">
 <h2></h2>
 
-<img data-src="3.-reasoning_nhst_files/figure-revealjs/unnamed-chunk-56-1.png" width="960" class="r-stretch"></section>
+<img data-src="3.-reasoning_nhst_files/figure-revealjs/unnamed-chunk-57-1.png" width="960" class="r-stretch"></section>
 <section id="power-in-practice" class="slide level2 subsection">
 <h2>Power in practice</h2>
 <ul>

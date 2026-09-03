@@ -4,7 +4,7 @@
 
 ::: {.columns}
 ::: {.column width="20%"}
-![William Sealy Gosset (aka Student) in 1908 (age 32)](https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/William_Sealy_Gosset.jpg/800px-William_Sealy_Gosset.jpg)
+![William Sealy Gosset (aka Student) in 1908 (age 32)](https://en.wikipedia.org/wiki/File:William_Sealy_Gosset.jpg)
 :::
 
 ::: {.column width="70%"}
