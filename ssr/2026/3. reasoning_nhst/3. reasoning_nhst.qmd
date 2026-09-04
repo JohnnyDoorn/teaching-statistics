@@ -3,7 +3,7 @@ title: "3. Statistical Reasoning"
 subtitle: "NHST and sampling distributions"
 author: "Johnny van Doorn"
 date: "4 September 2026"
-view: "https://teams.microsoft.com/meet/330874021866475?p=QMChUAKXBz9m28zZWL"
+view: "https://amsuni-my.sharepoint.com/:v:/g/personal/j_b_vandoorn_uva_nl/IQA_GS9r9axwT7gDtDgvIoLxAR2fPa9kkI88Tpdg5JfyHMk?e=KV1BIX&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D"
 footer: "Scientific & Statistical Reasoning"
 format:
   revealjs:
