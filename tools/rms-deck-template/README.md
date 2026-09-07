@@ -27,6 +27,25 @@ it twice on the same `work/` silently produces a deck with no titles.
   placeholders, and fixes Cantarell (a Linux-only font that falls back
   unpredictably on macOS/Windows).
 
+## Fonts
+
+Theme major (titles) is **Cantarell**, minor (body) is **PT Sans**. Cantarell is
+user-installed in `~/Library/Fonts`; PT Sans is a macOS system font. Both embed on
+PDF export, so distributed PDFs are safe anywhere; presenting the `.pptx` from
+another machine would substitute.
+
+To change the pair across every deck:
+
+```sh
+for f in RMS2627_*.pptx; do
+  python3 fontpair.py "$f" "Cantarell" "PT Sans" tmp.pptx && mv tmp.pptx "$f"
+done
+```
+
+That works only because `rebase.py` strips direct `<a:latin>` overrides, so runs
+actually inherit `+mj-lt` / `+mn-lt`. Symbol faces (Wingdings, Symbol) are left
+alone deliberately.
+
 ## The house title box
 
 `838080, 365040` + `10512720 x 1322640` EMU (0.92", 0.40", 11.50" x 1.45"),

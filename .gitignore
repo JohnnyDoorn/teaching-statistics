@@ -15,3 +15,8 @@ Exam/
 *_slides.html
 
 /.quarto/
+
+# Private working notes on the lecture decks (review notes, things to improve).
+# The leading underscore keeps Quarto from rendering them; this keeps git from
+# publishing them. The repo is public, so these must stay local.
+_lecture-notes*.md

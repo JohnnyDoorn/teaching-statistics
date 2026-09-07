@@ -10,13 +10,13 @@ NS = ('xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" '
 CLRSCHEME = """<a:clrScheme name="RMS 2627"><a:dk1><a:srgbClr val="000000"/></a:dk1>\
 <a:lt1><a:srgbClr val="FFFFFF"/></a:lt1><a:dk2><a:srgbClr val="404040"/></a:dk2>\
 <a:lt2><a:srgbClr val="F2F2F2"/></a:lt2><a:accent1><a:srgbClr val="ED7D31"/></a:accent1>\
-<a:accent2><a:srgbClr val="2A6099"/></a:accent2><a:accent3><a:srgbClr val="800080"/></a:accent3>\
-<a:accent4><a:srgbClr val="00B050"/></a:accent4><a:accent5><a:srgbClr val="C00000"/></a:accent5>\
-<a:accent6><a:srgbClr val="8B8B8B"/></a:accent6><a:hlink><a:srgbClr val="2A6099"/></a:hlink>\
+<a:accent2><a:srgbClr val="4472C4"/></a:accent2><a:accent3><a:srgbClr val="C00000"/></a:accent3>\
+<a:accent4><a:srgbClr val="00B050"/></a:accent4><a:accent5><a:srgbClr val="A3238E"/></a:accent5>\
+<a:accent6><a:srgbClr val="FFC000"/></a:accent6><a:hlink><a:srgbClr val="2A6099"/></a:hlink>\
 <a:folHlink><a:srgbClr val="800080"/></a:folHlink></a:clrScheme>"""
 
-FONTSCHEME = """<a:fontScheme name="RMS 2627"><a:majorFont><a:latin typeface="Calibri Light"/>\
-<a:ea typeface=""/><a:cs typeface=""/></a:majorFont><a:minorFont><a:latin typeface="Calibri"/>\
+FONTSCHEME = """<a:fontScheme name="RMS 2627"><a:majorFont><a:latin typeface="Cantarell"/>\
+<a:ea typeface=""/><a:cs typeface=""/></a:majorFont><a:minorFont><a:latin typeface="PT Sans"/>\
 <a:ea typeface=""/><a:cs typeface=""/></a:minorFont></a:fontScheme>"""
 
 # --- geometry lifted verbatim from the 45 slides that already agree ---
