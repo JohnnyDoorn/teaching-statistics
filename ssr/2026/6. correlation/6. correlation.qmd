@@ -15,17 +15,23 @@ css: ../../ajohnson.css
 <div class="goals">
 In this lecture we discuss:
 
+* The t-distribution
+  * Sampling distributions, continued
 * Correlation
   * From variance to covariance to $r$
   * In JASP
 * Significance of a correlation
-  * Using the t-distribution from lecture 3
+  * Converting $r$ to a $t$-statistic
 * Control for a third variable
   * Partial correlation
     
 <strong>Reading:</strong>
 Chapter 7 (§7.1–7.11)
 </div>
+
+
+```{r child="t-distribution.qmd"}
+```
 
 
 ```{r child="correlation.qmd"}

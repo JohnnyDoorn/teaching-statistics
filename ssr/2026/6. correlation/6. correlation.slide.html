@@ -425,6 +425,10 @@ Johnny van Doorn
 <div class="goals">
 <p>In this lecture we discuss:</p>
 <ul>
+<li>The t-distribution
+<ul>
+<li>Sampling distributions, continued</li>
+</ul></li>
 <li>Correlation
 <ul>
 <li>From variance to covariance to <span class="math inline">\(r\)</span></li>
@@ -432,7 +436,7 @@ Johnny van Doorn
 </ul></li>
 <li>Significance of a correlation
 <ul>
-<li>Using the t-distribution from lecture 3</li>
+<li>Converting <span class="math inline">\(r\)</span> to a <span class="math inline">\(t\)</span>-statistic</li>
 </ul></li>
 <li>Control for a third variable
 <ul>
@@ -442,6 +446,161 @@ Johnny van Doorn
 <p><strong>Reading:</strong> Chapter 7 (§7.1–7.11)</p>
 </div>
 </section>
+<section>
+<section id="t-distribution" class="title-slide slide level1 section center">
+<h1>T-distribution</h1>
+
+</section>
+<section id="three-distributions" class="slide level2 smaller">
+<h2>Three distributions</h2>
+<p>What is the difference between</p>
+<ul>
+<li>Population distribution</li>
+<li>Sample distribution</li>
+<li>Sampling distribution</li>
+</ul>
+</section>
+<section id="gosset" class="slide level2 smaller">
+<h2>Gosset</h2>
+<div class="columns">
+<div class="column" style="width:20%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="https://upload.wikimedia.org/wikipedia/commons/4/42/William_Sealy_Gosset.jpg"></p>
+<figcaption>William Sealy Gosset (aka Student) in 1908 (age 32)</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:70%;">
+<p>In probability and statistics, Student’s t-distribution (or simply the t-distribution) is any member of a family of continuous probability distributions that arises when estimating the mean of a normally distributed population in situations where the sample size is small and population standard deviation is unknown.</p>
+<p>In the English-language literature it takes its name from William Sealy Gosset’s 1908 paper in Biometrika under the pseudonym “Student”. Gosset worked at the Guinness Brewery in Dublin, Ireland, and was interested in the problems of small samples, for example the chemical properties of barley where sample sizes might be as low as 3.</p>
+<p>Source: <a href="https://en.wikipedia.org/wiki/Student%27s_t-distribution">Wikipedia</a></p>
+</div>
+</div>
+</section>
+<section id="population-distribution" class="slide level2 smaller subsection">
+<h2>Population distribution</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" data-code-line-numbers="3-4|6-7|14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">7</span><span class="sc">:</span><span class="dv">8</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">9</span><span class="sc">:</span><span class="dv">13</span>), <span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a>n  <span class="ot">&lt;-</span> <span class="dv">50</span>    <span class="co"># Sample size</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>df <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span> <span class="co"># Degrees of freedom</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a>mu    <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>sigma <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a>IQ <span class="ot">&lt;-</span> <span class="fu">seq</span>(mu<span class="dv">-45</span>, mu<span class="sc">+</span><span class="dv">45</span>, <span class="dv">1</span>)</span>
+<span id="cb1-11"><a href="#cb1-11"></a></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">0</span>))  </span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="fu">plot</span>(IQ, <span class="fu">dnorm</span>(IQ, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma), <span class="at">type=</span><span class="st">'l'</span>, <span class="at">col=</span><span class="st">"black"</span>, <span class="at">main =</span> <span class="st">"Population Distribution"</span>, </span>
+<span id="cb1-14"><a href="#cb1-14"></a>     <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">bty=</span> <span class="st">"n"</span>, <span class="at">axes =</span> <span class="cn">FALSE</span>, <span class="at">xlab =</span> <span class="fu">c</span>(<span class="dv">60</span>, <span class="dv">140</span>))</span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="fu">axis</span>(<span class="dv">1</span>)</span>
+<span id="cb1-16"><a href="#cb1-16"></a></span>
+<span id="cb1-17"><a href="#cb1-17"></a>n.samples <span class="ot">&lt;-</span> <span class="dv">12</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a></span>
+<span id="cb1-19"><a href="#cb1-19"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n.samples) {</span>
+<span id="cb1-20"><a href="#cb1-20"></a>  </span>
+<span id="cb1-21"><a href="#cb1-21"></a>  <span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">0</span>))  </span>
+<span id="cb1-22"><a href="#cb1-22"></a>  <span class="fu">hist</span>(<span class="fu">rnorm</span>(n, mu, sigma), <span class="at">main=</span><span class="st">"Sample Distribution"</span>, <span class="at">xlab =</span> <span class="fu">c</span>(<span class="dv">60</span>, <span class="dv">140</span>),</span>
+<span id="cb1-23"><a href="#cb1-23"></a>       <span class="at">cex.axis=</span>.<span class="dv">5</span>, <span class="at">col=</span><span class="fu">rainbow</span>(<span class="dv">12</span>)[i], <span class="at">cex.main =</span> .<span class="dv">75</span>, <span class="at">las =</span> <span class="dv">1</span>, <span class="at">axes =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-24"><a href="#cb1-24"></a><span class="fu">axis</span>(<span class="dv">1</span>)</span>
+<span id="cb1-25"><a href="#cb1-25"></a>  </span>
+<span id="cb1-26"><a href="#cb1-26"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="population-distribution-output" class="slide level2 smaller subsection output-location-slide"><h2>Population distribution</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<p><img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
+</div>
+</div></section><section id="a-sample" class="slide level2 smaller">
+<h2>A sample</h2>
+<p>Let’s take one sample from our normal population.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma); x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 116.11018  99.58980  99.50004  77.25899 111.85578  96.83899  90.14886
+ [8]  78.81961  95.50356  87.26408  94.04454  81.73600 125.31384  99.75996
+[15] 116.12418  60.97450  93.20203  89.86777  81.65611 123.19914  78.77077
+[22] 104.77585 112.69654 102.67285  86.87117 114.11749 102.55882  84.04753
+[29]  79.17926 131.30076  89.82245  72.16643 107.99889 104.65345  79.69248
+[36]  70.85565  98.25546 117.09094 109.54186  92.60594  87.48718 104.06600
+[43] 102.36030 109.44568  94.06303 113.49031  87.53783  95.04183 111.11222
+[50] 114.84957</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">hist</span>(x, <span class="at">main =</span> <span class="st">"Sample distribution"</span>, <span class="at">col =</span> <span class="fu">rainbow</span>(<span class="dv">12</span>)[<span class="dv">6</span>], <span class="at">breaks =</span> <span class="dv">15</span>, <span class="at">las =</span><span class="dv">1</span>)</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">text</span>(<span class="dv">125</span>, <span class="dv">7</span>, <span class="fu">bquote</span>(<span class="fu">bar</span>(x) <span class="sc">~</span> <span class="st">" = "</span> <span class="sc">~</span> .(<span class="fu">round</span>(<span class="fu">mean</span>(x),<span class="dv">2</span>))), <span class="at">cex =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="a-sample-output" class="slide level2 smaller output-location-slide"><h2>A sample</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<p><img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
+</div>
+</div></section><section id="more-samples" class="slide level2">
+<h2>More samples</h2>
+<p>Every sample gives a slightly different mean. Let’s take a lot more samples, and keep track of <span class="math inline">\(\bar{x}\)</span> each time.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>n.samples     <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>mean.x.values <span class="ot">&lt;-</span> <span class="fu">vector</span>()</span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n.samples) {</span>
+<span id="cb5-5"><a href="#cb5-5"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma)</span>
+<span id="cb5-6"><a href="#cb5-6"></a>  mean.x.values[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb5-7"><a href="#cb5-7"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="sampling-distribution" class="slide level2">
+<h2>Sampling distribution</h2>
+<p>The means themselves have a distribution.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">hist</span>(mean.x.values, </span>
+<span id="cb6-2"><a href="#cb6-2"></a>     <span class="at">col  =</span> <span class="fu">rainbow</span>(<span class="dv">12</span>),</span>
+<span id="cb6-3"><a href="#cb6-3"></a>     <span class="at">main =</span> <span class="st">"Sampling distribution of the mean"</span>, </span>
+<span id="cb6-4"><a href="#cb6-4"></a>     <span class="at">xlab =</span> <span class="st">"1,000 sample means"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="sampling-distribution-output" class="slide level2 output-location-slide"><h2>Sampling distribution</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<p><img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></p>
+</div>
+</div></section><section id="t-distribution-1" class="slide level2">
+<h2>T-distribution</h2>
+<p><small> So if the population is normaly distributed (assumption of normality) the t-distribution represents the deviation of sample means from the population mean (<span class="math inline">\(\mu\)</span>), given a certain sample size (<span class="math inline">\(df = n - 1\)</span>).</small></p><small>
+<p>The t-distibution therefore is different for different sample sizes and converges to a standard normal distribution if sample size is large enough.</p>
+<p>The t-distribution is defined by:</p>
+<p><span class="math display">\[\textstyle\frac{\Gamma \left(\frac{\nu+1}{2} \right)} {\sqrt{\nu\pi}\,\Gamma \left(\frac{\nu}{2} \right)} \left(1+\frac{x^2}{\nu} \right)^{-\frac{\nu+1}{2}}\!\]</span></p>
+<p>where <span class="math inline">\(\nu\)</span> is the number of degrees of freedom and <span class="math inline">\(\Gamma\)</span> is the gamma function.</p>
+<p>Source: <a href="https://en.wikipedia.org/wiki/Student%27s_t-distribution">wikipedia</a></p>
+</small><p><small></small></p>
+</section>
+<section id="the-t-distribution-family" class="slide level2 smaller">
+<h2>The t-distribution family</h2>
+
+<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch"><p>Fatter tails for small <span class="math inline">\(n\)</span> (few degrees of freedom); converges to the standard normal as <span class="math inline">\(n\)</span> grows.</p>
+</section>
+<section id="applet-a-continuous-sampling-distribution" class="slide level2 smaller">
+<h2>Applet: a continuous sampling distribution</h2>
+<p>The same reasoning as the binomial applet, now for a continuous outcome.</p>
+<p><a href="https://statisticalreasoning-uva.shinyapps.io/NHST_Continuous/">Play around with this app to see how the t-distribution, <span class="math inline">\(\alpha\)</span>, and power hang together</a></p>
+</section>
+<section id="power-in-practice" class="slide level2 subsection">
+<h2>Power in practice</h2>
+<ul>
+<li>Strive for 80%</li>
+<li>Based on know effect size</li>
+<li>Calculate number of subjects needed</li>
+<li>Use JASP (Power module), <a href="http://www.gpower.hhu.de">G*Power</a>, or SPSS to calculate</li>
+</ul>
+
+<img data-src="https://www.psychologie.hhu.de/fileadmin/_processed_/f/d/csm_GPowerIcon_b6bfb17f0c.png" class="r-stretch"></section>
+<section id="alpha-power" class="slide level2 smaller">
+<h2>Alpha Power</h2>
+<p><a href="http://rpsychologist.com/d3/NHST/#viz">R-Psychologist</a></p>
+</section></section>
 <section>
 <section id="correlation" class="title-slide slide level1 section center">
 <h1>Correlation</h1>
@@ -461,15 +620,15 @@ Johnny van Doorn
 <section id="plot-correlation" class="slide level2">
 <h2>Plot correlation</h2>
 
-<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-6-1.png" width="480" class="r-stretch quarto-figure-center"></section>
+<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-24-1.png" width="480" class="r-stretch quarto-figure-center"></section>
 <section id="plot-correlation-1" class="slide level2">
 <h2>Plot correlation</h2>
 
-<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-7-1.png" width="480" class="r-stretch quarto-figure-center"></section>
+<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-25-1.png" width="480" class="r-stretch quarto-figure-center"></section>
 <section id="plot-correlation-2" class="slide level2">
 <h2>Plot correlation</h2>
 
-<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-8-1.png" width="480" class="r-stretch quarto-figure-center"><p><span class="math display">\[(x_i - \bar{x})(y_i - \bar{y})\]</span></p>
+<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-26-1.png" width="480" class="r-stretch quarto-figure-center"><p><span class="math display">\[(x_i - \bar{x})(y_i - \bar{y})\]</span></p>
 <!-- ## Guess the correlation -->
 <!-- [Guess the correlation](http://guessthecorrelation.com) -->
 <!-- <img src="qrcodeqtc.png"> -->
@@ -477,10 +636,10 @@ Johnny van Doorn
 <section id="load-data" class="slide level2">
 <h2>Load data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>n     <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">datasetsPath</span>(<span class="st">"Album Sales.csv"</span>))[, <span class="sc">-</span><span class="dv">4</span>]</span>
-<span id="cb1-3"><a href="#cb1-3"></a>data <span class="ot">&lt;-</span> data[<span class="dv">1</span><span class="sc">:</span>n, ] <span class="co"># take the first 10 rows of the album sales data set from Field</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">ssrTable</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>n     <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">datasetsPath</span>(<span class="st">"Album Sales.csv"</span>))[, <span class="sc">-</span><span class="dv">4</span>]</span>
+<span id="cb7-3"><a href="#cb7-3"></a>data <span class="ot">&lt;-</span> data[<span class="dv">1</span><span class="sc">:</span>n, ] <span class="co"># take the first 10 rows of the album sales data set from Field</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="fu">ssrTable</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <div class="datatables html-widget html-fill-item" id="htmlwidget-2d16c451fb8eb535c725" style="width:100%;height:auto;"></div>
@@ -492,16 +651,16 @@ Johnny van Doorn
 <h2>Covariance</h2>
 <p><span class="math display">\[{COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>mean.sales      <span class="ot">&lt;-</span> <span class="fu">mean</span>(sales, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
-<span id="cb2-2"><a href="#cb2-2"></a>mean.airplay    <span class="ot">&lt;-</span> <span class="fu">mean</span>(airplay, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
-<span id="cb2-3"><a href="#cb2-3"></a></span>
-<span id="cb2-4"><a href="#cb2-4"></a>delta.sales     <span class="ot">&lt;-</span> sales <span class="sc">-</span> mean.sales</span>
-<span id="cb2-5"><a href="#cb2-5"></a>delta.airplay   <span class="ot">&lt;-</span> airplay <span class="sc">-</span> mean.airplay</span>
-<span id="cb2-6"><a href="#cb2-6"></a></span>
-<span id="cb2-7"><a href="#cb2-7"></a>prod <span class="ot">&lt;-</span> (sales <span class="sc">-</span> mean.sales) <span class="sc">*</span> (airplay <span class="sc">-</span> mean.airplay)</span>
-<span id="cb2-8"><a href="#cb2-8"></a></span>
-<span id="cb2-9"><a href="#cb2-9"></a>covariance <span class="ot">&lt;-</span> <span class="fu">sum</span>(prod) <span class="sc">/</span> (N <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb2-10"><a href="#cb2-10"></a>covariance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>mean.sales      <span class="ot">&lt;-</span> <span class="fu">mean</span>(sales, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb8-2"><a href="#cb8-2"></a>mean.airplay    <span class="ot">&lt;-</span> <span class="fu">mean</span>(airplay, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a>delta.sales     <span class="ot">&lt;-</span> sales <span class="sc">-</span> mean.sales</span>
+<span id="cb8-5"><a href="#cb8-5"></a>delta.airplay   <span class="ot">&lt;-</span> airplay <span class="sc">-</span> mean.airplay</span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a>prod <span class="ot">&lt;-</span> (sales <span class="sc">-</span> mean.sales) <span class="sc">*</span> (airplay <span class="sc">-</span> mean.airplay)</span>
+<span id="cb8-8"><a href="#cb8-8"></a></span>
+<span id="cb8-9"><a href="#cb8-9"></a>covariance <span class="ot">&lt;-</span> <span class="fu">sum</span>(prod) <span class="sc">/</span> (N <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb8-10"><a href="#cb8-10"></a>covariance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 618.3333</code></pre>
 </div>
@@ -523,11 +682,11 @@ Johnny van Doorn
 <h2>Correlation</h2>
 <p><span class="math display">\[r_{xy} = \frac{{COV}_{xy}}{S_xS_y}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>correlation <span class="ot">&lt;-</span> covariance <span class="sc">/</span> ( <span class="fu">sd</span>(sales) <span class="sc">*</span> <span class="fu">sd</span>(airplay) ); correlation</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>correlation <span class="ot">&lt;-</span> covariance <span class="sc">/</span> ( <span class="fu">sd</span>(sales) <span class="sc">*</span> <span class="fu">sd</span>(airplay) ); correlation</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.6864408</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>correlation</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>correlation</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.6864408</code></pre>
 </div>
@@ -537,18 +696,18 @@ Johnny van Doorn
 <h2>Correlation</h2>
 <p><span class="math display">\[r_{xy} = \frac{{COV}_{xy}}{S_xS_y}\]</span> <span class="math display">\[{COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">cor</span>(  sales,   airplay) <span class="co"># correlation</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">cor</span>(  sales,   airplay) <span class="co"># correlation</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.6864408</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">cor</span>(z.sales, z.airplay) <span class="co"># correlation of z-scores</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">cor</span>(z.sales, z.airplay) <span class="co"># correlation of z-scores</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.6864408</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># covariance of z-scores</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="fu">sum</span>(z.sales <span class="sc">*</span> z.airplay ) <span class="sc">/</span> (N <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># covariance of z-scores</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="fu">sum</span>(z.sales <span class="sc">*</span> z.airplay ) <span class="sc">/</span> (N <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.6864408</code></pre>
 </div>
@@ -557,21 +716,15 @@ Johnny van Doorn
 <section id="plot-correlation-3" class="slide level2">
 <h2>Plot correlation</h2>
 
-<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"></section>
+<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-33-1.png" width="960" class="r-stretch"></section>
 <section id="significance-testing-using-t" class="slide level2">
 <h2>Significance testing using <span class="math inline">\(t\)</span></h2>
-<p>Recall from lecture 3: a sample statistic has its own sampling distribution, and for many familiar statistics that turns out to be a t-distribution.</p>
+<p>We just built that shape for sample means. The same trick works for any statistic we can standardize, and today’s is <span class="math inline">\(r\)</span>.</p>
 <blockquote>
 <p>A test statistic with a known probability distribution (the t-distribution).</p>
 </blockquote>
 <p>It’s a standardized measure of how closely our observed statistic matches the value claimed by <span class="math inline">\(H_0\)</span>:</p>
 <p><span class="math display">\[t = \frac{\text{estimate} - H_0 \text{ value}}{\text{SE}(\text{estimate})}\]</span></p>
-</section>
-<section id="the-t-distribution-family" class="slide level2 smaller">
-<h2>The t-distribution family</h2>
-
-<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-32-1.png" width="960" class="r-stretch"><p>Fatter tails for small <span class="math inline">\(n\)</span> (few degrees of freedom); converges to the standard normal as <span class="math inline">\(n\)</span> grows.</p>
-<p>This shape, indexed by degrees of freedom, is what we get whenever we standardize a sample statistic this way. Today’s statistic is <span class="math inline">\(r\)</span>.</p>
 </section>
 <section id="significance-of-a-correlation" class="slide level2 subsection">
 <h2>Significance of a correlation</h2>
@@ -595,14 +748,14 @@ H_A &amp;: t_r &lt; 0 \\
 <section id="r-to-t" class="slide level2">
 <h2><span class="math inline">\(r\)</span> to <span class="math inline">\(t\)</span></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>df  <span class="ot">&lt;-</span> N<span class="dv">-2</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a>t.r <span class="ot">&lt;-</span> ( correlation<span class="sc">*</span><span class="fu">sqrt</span>(df) ) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">-</span>correlation<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb14-3"><a href="#cb14-3"></a></span>
-<span id="cb14-4"><a href="#cb14-4"></a>t.r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>df  <span class="ot">&lt;-</span> N<span class="dv">-2</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>t.r <span class="ot">&lt;-</span> ( correlation<span class="sc">*</span><span class="fu">sqrt</span>(df) ) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">-</span>correlation<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb20-3"><a href="#cb20-3"></a></span>
+<span id="cb20-4"><a href="#cb20-4"></a>t.r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.669948</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 8</code></pre>
 </div>
@@ -613,12 +766,12 @@ H_A &amp;: t_r &lt; 0 \\
 <p>The hypotheses above translate into where we shade the rejection region:</p>
 <p><a href="https://johnnydoorn.github.io/teaching-statistics/extra-texts/one-sided-vs-two-sided.html">Additional text here</a></p>
 
-<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch"></section>
+<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-35-1.png" width="960" class="r-stretch"></section>
 <section id="visualize" class="slide level2">
 <h2>Visualize</h2>
 <p>Locate in <span class="math inline">\(t\)</span>-distribution</p>
 
-<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-19-1.png" width="960" class="r-stretch"></section></section>
+<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-36-1.png" width="960" class="r-stretch"></section></section>
 <section>
 <section id="partial-correlation" class="title-slide slide level1 section center">
 <h1>Partial correlation</h1>
@@ -627,18 +780,18 @@ H_A &amp;: t_r &lt; 0 \\
 <section id="venn-diagram-of-variance" class="slide level2">
 <h2>Venn diagram of Variance</h2>
 
-<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-41-1.png" width="960" class="r-stretch"></section>
+<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-54-1.png" width="960" class="r-stretch"></section>
 <section id="partial-correlation-1" class="slide level2 smaller">
 <h2>Partial correlation</h2>
 <p><span class="math display">\[\LARGE{r_{xy \cdot z} = \frac{r_{xy} - r_{xz} r_{yz}}{\sqrt{(1 - r_{xz}^2)(1 - r_{yz}^2)}}}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>adverts <span class="ot">&lt;-</span> data<span class="sc">$</span>adverts</span>
-<span id="cb18-2"><a href="#cb18-2"></a></span>
-<span id="cb18-3"><a href="#cb18-3"></a>cor.sales.airplay    <span class="ot">&lt;-</span> <span class="fu">cor</span>(sales,airplay)</span>
-<span id="cb18-4"><a href="#cb18-4"></a>cor.sales.adverts    <span class="ot">&lt;-</span> <span class="fu">cor</span>(sales,adverts)</span>
-<span id="cb18-5"><a href="#cb18-5"></a>cor.airplay.adverts  <span class="ot">&lt;-</span> <span class="fu">cor</span>(airplay,adverts)</span>
-<span id="cb18-6"><a href="#cb18-6"></a></span>
-<span id="cb18-7"><a href="#cb18-7"></a><span class="fu">data.frame</span>(cor.sales.airplay, cor.sales.adverts, cor.airplay.adverts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>adverts <span class="ot">&lt;-</span> data<span class="sc">$</span>adverts</span>
+<span id="cb24-2"><a href="#cb24-2"></a></span>
+<span id="cb24-3"><a href="#cb24-3"></a>cor.sales.airplay    <span class="ot">&lt;-</span> <span class="fu">cor</span>(sales,airplay)</span>
+<span id="cb24-4"><a href="#cb24-4"></a>cor.sales.adverts    <span class="ot">&lt;-</span> <span class="fu">cor</span>(sales,adverts)</span>
+<span id="cb24-5"><a href="#cb24-5"></a>cor.airplay.adverts  <span class="ot">&lt;-</span> <span class="fu">cor</span>(airplay,adverts)</span>
+<span id="cb24-6"><a href="#cb24-6"></a></span>
+<span id="cb24-7"><a href="#cb24-7"></a><span class="fu">data.frame</span>(cor.sales.airplay, cor.sales.adverts, cor.airplay.adverts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  cor.sales.airplay cor.sales.adverts cor.airplay.adverts
 1         0.6864408        0.08531506          -0.1130884</code></pre>
@@ -648,12 +801,12 @@ H_A &amp;: t_r &lt; 0 \\
 <section class="slide level2">
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>numerator   <span class="ot">&lt;-</span> cor.sales.airplay <span class="sc">-</span> (cor.sales.adverts <span class="sc">*</span> cor.airplay.adverts)</span>
-<span id="cb20-2"><a href="#cb20-2"></a>denominator <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( (<span class="dv">1</span><span class="sc">-</span>cor.sales.adverts<span class="sc">^</span><span class="dv">2</span>)<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>cor.airplay.adverts<span class="sc">^</span><span class="dv">2</span>) )</span>
-<span id="cb20-3"><a href="#cb20-3"></a></span>
-<span id="cb20-4"><a href="#cb20-4"></a>partial.correlation <span class="ot">&lt;-</span> numerator <span class="sc">/</span> denominator</span>
-<span id="cb20-5"><a href="#cb20-5"></a></span>
-<span id="cb20-6"><a href="#cb20-6"></a>partial.correlation</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>numerator   <span class="ot">&lt;-</span> cor.sales.airplay <span class="sc">-</span> (cor.sales.adverts <span class="sc">*</span> cor.airplay.adverts)</span>
+<span id="cb26-2"><a href="#cb26-2"></a>denominator <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( (<span class="dv">1</span><span class="sc">-</span>cor.sales.adverts<span class="sc">^</span><span class="dv">2</span>)<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>cor.airplay.adverts<span class="sc">^</span><span class="dv">2</span>) )</span>
+<span id="cb26-3"><a href="#cb26-3"></a></span>
+<span id="cb26-4"><a href="#cb26-4"></a>partial.correlation <span class="ot">&lt;-</span> numerator <span class="sc">/</span> denominator</span>
+<span id="cb26-5"><a href="#cb26-5"></a></span>
+<span id="cb26-6"><a href="#cb26-6"></a>partial.correlation</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.7031469</code></pre>
 </div>
@@ -663,10 +816,10 @@ H_A &amp;: t_r &lt; 0 \\
 <h2>Significance of partial correlation</h2>
 <p>Locate in t-distribution</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>df <span class="ot">&lt;-</span> N <span class="sc">-</span> <span class="dv">3</span></span>
-<span id="cb22-2"><a href="#cb22-2"></a></span>
-<span id="cb22-3"><a href="#cb22-3"></a>t.pr <span class="ot">&lt;-</span> ( partial.correlation<span class="sc">*</span><span class="fu">sqrt</span>(df) ) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">-</span>partial.correlation<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb22-4"><a href="#cb22-4"></a>t.pr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>df <span class="ot">&lt;-</span> N <span class="sc">-</span> <span class="dv">3</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a></span>
+<span id="cb28-3"><a href="#cb28-3"></a>t.pr <span class="ot">&lt;-</span> ( partial.correlation<span class="sc">*</span><span class="fu">sqrt</span>(df) ) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">-</span>partial.correlation<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb28-4"><a href="#cb28-4"></a>t.pr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.616364</code></pre>
 </div>
@@ -675,7 +828,7 @@ H_A &amp;: t_r &lt; 0 \\
 <section id="p-value" class="slide level2">
 <h2>p-value</h2>
 
-<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-45-1.png" width="960" class="r-stretch"></section></section>
+<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-58-1.png" width="960" class="r-stretch"></section></section>
 <section>
 <section id="closing" class="title-slide slide level1 center">
 <h1>Closing</h1>

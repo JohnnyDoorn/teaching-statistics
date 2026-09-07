@@ -126,3 +126,83 @@ arrows(x0 = bp, y0 = means - ses*tcrit, x1 = bp, y1 = means + ses*tcrit,
 ```
 
 
+
+
+# Leaving Data Out {.section}
+
+## 28 January 1986 {.smaller}
+
+The night before the *Challenger* launch, engineers argued about whether the cold would damage the rubber O-ring seals on the booster rockets.
+
+They reviewed the damage recorded on previous flights, plotted against the temperature at launch.
+
+Tomorrow's forecast: **31°F (-0.5°C)**. Should they launch?
+
+## The evidence they reviewed {.smaller}
+
+```{r, echo=FALSE}
+source("../../_setup.R")
+challenger <- read.csv(datasetsPath("2026/Challenger.csv"))
+damaged    <- subset(challenger, Any_Damage == "Yes")
+
+par(cex = 1.0, cex.lab = 1.1)
+plot(damaged$Temperature_F, damaged$Damaged_ORings,
+     pch = 19, cex = 2, col = "darkred", las = 1, bty = "n",
+     xlab = "Temperature at launch (F)", ylab = "Damaged O-rings",
+     xlim = c(50, 85), ylim = c(0, 6),
+     main = "Flights that suffered O-ring damage")
+```
+
+Seven flights, no obvious pattern. Cold does not look dangerous.
+
+## The flights that were left off {.smaller}
+
+```{r, echo=FALSE}
+par(cex = 1.0, cex.lab = 1.1)
+cols <- ifelse(challenger$Any_Damage == "Yes", "darkred", "darkgreen")
+
+plot(challenger$Temperature_F, challenger$Damaged_ORings,
+     pch = 19, cex = 2, col = cols, las = 1, bty = "n",
+     xlab = "Temperature at launch (F)", ylab = "Damaged O-rings",
+     xlim = c(50, 85), ylim = c(0, 6),
+     main = "All 23 previous flights")
+
+legend("topright", legend = c("damage", "no damage"),
+       pch = 19, col = c("darkred", "darkgreen"), bty = "n", cex = 0.9)
+```
+
+The sixteen flights with **no** damage were the whole argument: they were the warm ones.
+
+## Off the edge of the data {.smaller}
+
+```{r, echo=FALSE}
+par(cex = 1.0, cex.lab = 1.1)
+fit <- glm(cbind(Damaged_ORings, 6 - Damaged_ORings) ~ Temperature_F,
+           family = binomial, data = challenger)
+
+tempGrid <- seq(30, 85, 0.5)
+pred     <- predict(fit, newdata = data.frame(Temperature_F = tempGrid),
+                    type = "response")
+
+plot(tempGrid, pred, type = "l", lwd = 3, col = "darkblue", las = 1, bty = "n",
+     xlab = "Temperature at launch (F)", ylab = "P(O-ring damaged)",
+     ylim = c(0, 1), main = "Fitted model, extrapolated to launch day")
+
+points(challenger$Temperature_F, challenger$Damaged_ORings / 6,
+       pch = 19, cex = 1.5, col = cols)
+
+abline(v = 31, lwd = 3, lty = 2, col = "darkred")
+text(31, 0.55, "launch day\n31 F", pos = 4, col = "darkred", cex = 0.9)
+abline(v = min(challenger$Temperature_F), lwd = 2, lty = 3)
+text(min(challenger$Temperature_F), 0.15, "coldest\nprior flight", pos = 4, cex = 0.8)
+```
+
+## What the plot could not say {.smaller}
+
+::: {.incremental}
+- With only the damaged flights: $r = -0.58$, $p = .17$. With all of them: $r = -0.64$, $p = .001$
+- The correlation barely changes. What changes is whether you can *see* it
+- Launch day was 22°F colder than anything in the data. No plot can tell you what happens out there
+:::
+
+<small>The engineers did recommend against launching; they were overruled. Tufte's well-known "the chart caused the disaster" reading (*Visual Explanations*, 1997) is disputed, see Robison et al. (2002). Data: Dalal, Fowlkes & Hoadley (1989), via `faraway::orings`.</small>

@@ -422,13 +422,3 @@ legend("topright", legend = c("H0", "HA"), fill = c(colh0, colha), cex = 0.8, bt
 
 
 <!-- [Interactive distributions app by Kristoffer Magnusson](http://rpsychologist.com/d3/NHST/){preview-link="false"} -->
-
-<!-- ## Up next: three distributions {.smaller}
-
-What is the difference between
-
--   Population distribution
--   Sample distribution
--   Sampling distribution -->
-
-

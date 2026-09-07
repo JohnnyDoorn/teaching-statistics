@@ -116,6 +116,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#scale-matters" id="toc-scale-matters" class="nav-link" data-scroll-target="#scale-matters">Scale Matters</a></li>
   <li><a href="#error-bars" id="toc-error-bars" class="nav-link" data-scroll-target="#error-bars">Error Bars!</a></li>
   </ul></li>
+  <li><a href="#leaving-data-out" id="toc-leaving-data-out" class="nav-link" data-scroll-target="#leaving-data-out">Leaving Data Out</a>
+  <ul class="collapse">
+  <li><a href="#january-1986" id="toc-january-1986" class="nav-link" data-scroll-target="#january-1986">28 January 1986</a></li>
+  <li><a href="#the-evidence-they-reviewed" id="toc-the-evidence-they-reviewed" class="nav-link" data-scroll-target="#the-evidence-they-reviewed">The evidence they reviewed</a></li>
+  <li><a href="#the-flights-that-were-left-off" id="toc-the-flights-that-were-left-off" class="nav-link" data-scroll-target="#the-flights-that-were-left-off">The flights that were left off</a></li>
+  <li><a href="#off-the-edge-of-the-data" id="toc-off-the-edge-of-the-data" class="nav-link" data-scroll-target="#off-the-edge-of-the-data">Off the edge of the data</a></li>
+  <li><a href="#what-the-plot-could-not-say" id="toc-what-the-plot-could-not-say" class="nav-link" data-scroll-target="#what-the-plot-could-not-say">What the plot could not say</a></li>
+  </ul></li>
   <li><a href="#variance-and-z-scores" id="toc-variance-and-z-scores" class="nav-link" data-scroll-target="#variance-and-z-scores">Variance and z-scores</a>
   <ul class="collapse">
   <li><a href="#load-data" id="toc-load-data" class="nav-link" data-scroll-target="#load-data">Load data</a></li>
@@ -386,6 +394,52 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
+<section id="leaving-data-out" class="level1 section">
+<h1 class="section">Leaving Data Out</h1>
+<section id="january-1986" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="january-1986">28 January 1986</h2>
+<p>The night before the <em>Challenger</em> launch, engineers argued about whether the cold would damage the rubber O-ring seals on the booster rockets.</p>
+<p>They reviewed the damage recorded on previous flights, plotted against the temperature at launch.</p>
+<p>Tomorrow’s forecast: <strong>31°F (-0.5°C)</strong>. Should they launch?</p>
+</section>
+<section id="the-evidence-they-reviewed" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="the-evidence-they-reviewed">The evidence they reviewed</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="5.-jasp_visualization_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Seven flights, no obvious pattern. Cold does not look dangerous.</p>
+</section>
+<section id="the-flights-that-were-left-off" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="the-flights-that-were-left-off">The flights that were left off</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="5.-jasp_visualization_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The sixteen flights with <strong>no</strong> damage were the whole argument: they were the warm ones.</p>
+</section>
+<section id="off-the-edge-of-the-data" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="off-the-edge-of-the-data">Off the edge of the data</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="5.-jasp_visualization_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="what-the-plot-could-not-say" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="what-the-plot-could-not-say">What the plot could not say</h2>
+<div class="incremental">
+<ul class="incremental">
+<li>With only the damaged flights: <span class="math inline">\(r = -0.58\)</span>, <span class="math inline">\(p = .17\)</span>. With all of them: <span class="math inline">\(r = -0.64\)</span>, <span class="math inline">\(p = .001\)</span></li>
+<li>The correlation barely changes. What changes is whether you can <em>see</em> it</li>
+<li>Launch day was 22°F colder than anything in the data. No plot can tell you what happens out there</li>
+</ul>
+</div>
+<p><small>The engineers did recommend against launching; they were overruled. Tufte’s well-known “the chart caused the disaster” reading (<em>Visual Explanations</em>, 1997) is disputed, see Robison et al.&nbsp;(2002). Data: Dalal, Fowlkes &amp; Hoadley (1989), via <code>faraway::orings</code>.</small></p>
+</section>
+</section>
 <section id="variance-and-z-scores" class="level1 section">
 <h1 class="section">Variance and z-scores</h1>
 <section id="load-data" class="level2">
@@ -406,7 +460,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="subsection anchored" data-anchor-id="variance">Variance</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="5.-jasp_visualization_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+<p><img src="5.-jasp_visualization_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -422,7 +476,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="smaller anchored" data-anchor-id="standardize-1">Standardize</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="5.-jasp_visualization_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+<p><img src="5.-jasp_visualization_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -430,7 +484,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="smaller anchored" data-anchor-id="standardize-2">Standardize</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="5.-jasp_visualization_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
+<p><img src="5.-jasp_visualization_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -589,7 +643,7 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <h2 class="anchored" data-anchor-id="section"></h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="5.-jasp_visualization_files/figure-html/unnamed-chunk-35-1.png" width="672" height="600"></p>
+<p><img src="5.-jasp_visualization_files/figure-html/unnamed-chunk-41-1.png" width="672" height="600"></p>
 </div>
 </div>
 </section>

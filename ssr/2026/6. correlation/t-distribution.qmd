@@ -1,5 +1,14 @@
 # T-distribution {.section}
 
+## Three distributions {.smaller}
+
+What is the difference between
+
+-   Population distribution
+-   Sample distribution
+-   Sampling distribution
+
+
 ## Gosset {.smaller}
 
 ::: {.columns}

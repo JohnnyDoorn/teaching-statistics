@@ -35,7 +35,7 @@ Chapter 9 (§9.1–9.14)
 
 ## Remember this shape? {.smaller}
 
-Back in lecture 3 (and lecture 6) we saw that standardizing a sample statistic gives us a t-distribution, shaped by its degrees of freedom.
+Back in lecture 6 we saw that standardizing a sample statistic gives us a t-distribution, shaped by its degrees of freedom.
 
 ```{r child="../t-distribution-shapes.qmd"}
 ```

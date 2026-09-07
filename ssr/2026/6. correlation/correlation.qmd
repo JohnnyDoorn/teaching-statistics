@@ -210,18 +210,13 @@ text(mean.sales-xMargin, mean.airplay+yMargin, "- * +", cex = 2, col = "red")
 
 ## Significance testing using $t$
 
-Recall from lecture 3: a sample statistic has its own sampling distribution, and for many familiar statistics that turns out to be a t-distribution.
+We just built that shape for sample means. The same trick works for any statistic we can standardize, and today's is $r$.
 
 > A test statistic with a known probability distribution (the t-distribution).
 
 It's a standardized measure of how closely our observed statistic matches the value claimed by $H_0$:
 
 $$t = \frac{\text{estimate} - H_0 \text{ value}}{\text{SE}(\text{estimate})}$$
-
-```{r child="../t-distribution-shapes.qmd"}
-```
-
-This shape, indexed by degrees of freedom, is what we get whenever we standardize a sample statistic this way. Today's statistic is $r$.
 
 ## Significance of a correlation {.subsection}
 

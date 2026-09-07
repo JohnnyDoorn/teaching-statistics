@@ -602,6 +602,42 @@ Johnny van Doorn
 
 <img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"></section></section>
 <section>
+<section id="leaving-data-out" class="title-slide slide level1 section center">
+<h1>Leaving Data Out</h1>
+
+</section>
+<section id="january-1986" class="slide level2 smaller">
+<h2>28 January 1986</h2>
+<p>The night before the <em>Challenger</em> launch, engineers argued about whether the cold would damage the rubber O-ring seals on the booster rockets.</p>
+<p>They reviewed the damage recorded on previous flights, plotted against the temperature at launch.</p>
+<p>Tomorrow’s forecast: <strong>31°F (-0.5°C)</strong>. Should they launch?</p>
+</section>
+<section id="the-evidence-they-reviewed" class="slide level2 smaller">
+<h2>The evidence they reviewed</h2>
+
+<img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"><p>Seven flights, no obvious pattern. Cold does not look dangerous.</p>
+</section>
+<section id="the-flights-that-were-left-off" class="slide level2 smaller">
+<h2>The flights that were left off</h2>
+
+<img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch"><p>The sixteen flights with <strong>no</strong> damage were the whole argument: they were the warm ones.</p>
+</section>
+<section id="off-the-edge-of-the-data" class="slide level2 smaller">
+<h2>Off the edge of the data</h2>
+
+<img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section>
+<section id="what-the-plot-could-not-say" class="slide level2 smaller">
+<h2>What the plot could not say</h2>
+<div>
+<ul>
+<li class="fragment">With only the damaged flights: <span class="math inline">\(r = -0.58\)</span>, <span class="math inline">\(p = .17\)</span>. With all of them: <span class="math inline">\(r = -0.64\)</span>, <span class="math inline">\(p = .001\)</span></li>
+<li class="fragment">The correlation barely changes. What changes is whether you can <em>see</em> it</li>
+<li class="fragment">Launch day was 22°F colder than anything in the data. No plot can tell you what happens out there</li>
+</ul>
+</div>
+<p><small>The engineers did recommend against launching; they were overruled. Tufte’s well-known “the chart caused the disaster” reading (<em>Visual Explanations</em>, 1997) is disputed, see Robison et al.&nbsp;(2002). Data: Dalal, Fowlkes &amp; Hoadley (1989), via <code>faraway::orings</code>.</small></p>
+</section></section>
+<section>
 <section id="variance-and-z-scores" class="title-slide slide level1 section center">
 <h1>Variance and z-scores</h1>
 
@@ -623,7 +659,7 @@ Johnny van Doorn
 <section id="variance" class="slide level2 subsection">
 <h2>Variance</h2>
 
-<img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-23-1.png" width="960" class="r-stretch"></section>
+<img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-29-1.png" width="960" class="r-stretch"></section>
 <section id="standardize" class="slide level2">
 <h2>Standardize</h2>
 <p><span class="math display">\[z = \frac{x_i - \bar{x}}{{sd}_x}\]</span></p>
@@ -635,11 +671,11 @@ Johnny van Doorn
 <section id="standardize-1" class="slide level2 smaller">
 <h2>Standardize</h2>
 
-<img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-25-1.png" width="960" class="r-stretch"></section>
+<img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-31-1.png" width="960" class="r-stretch"></section>
 <section id="standardize-2" class="slide level2 smaller">
 <h2>Standardize</h2>
 
-<img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-26-1.png" width="960" class="r-stretch"></section></section>
+<img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-32-1.png" width="960" class="r-stretch"></section></section>
 <section>
 <section id="standard-error-and-confidence-intervals" class="title-slide slide level1 section center">
 <h1>Standard Error and<br>Confidence Intervals</h1>
@@ -796,7 +832,7 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <h2></h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-35-1.png" width="960" height="600"></p>
+<p><img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-41-1.png" width="960" height="600"></p>
 </div>
 </div>
 </section></section>
