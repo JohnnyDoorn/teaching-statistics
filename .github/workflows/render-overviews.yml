@@ -14,15 +14,15 @@ on:
       - 'ssr/2026/**/*.qmd'
       - 'ssr/overview-styles.scss'
       - 'ssr/_quarto.yml'
-      # RMS: the overview itself and the slide/OEQ folder it monitors
+      # RMS: the overview itself and the slide/OEQ folder it monitors.
+      # There is no rms/_quarto.yml; rms/ inherits the root one.
       - 'rms/overview-rms.qmd'
       - 'rms/slides/2026/**'
       - 'rms/overview-styles.scss'
-      - 'rms/_quarto.yml'
       # shared inputs
       - '_quarto.yml'
       - 'extra-texts/*.qmd'
-      - 'datasets/2025/**'
+      - 'datasets/2026/**'
       - '.github/workflows/render-overviews.yml'
   workflow_dispatch:
 
@@ -59,14 +59,13 @@ jobs:
             /ssr/overview-ssr.html
             /ssr/overview-ssr_files/**
             /ssr/2026/**/*.qmd
-            /rms/_quarto.yml
             /rms/overview-rms.qmd
             /rms/overview-styles.scss
             /rms/overview-rms.html
             /rms/overview-rms_files/**
             /rms/slides/2026/**
             /extra-texts/*.qmd
-            /datasets/2025/**
+            /datasets/2026/**
 
       # Pinned to the version Johnny renders with locally, so CI and local
       # renders produce byte-identical HTML instead of fighting over the diff.
