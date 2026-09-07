@@ -37,7 +37,12 @@ base_url  <- sprintf("https://johnnydoorn.github.io/teaching-statistics/rms/slid
 beautify <- function(stem) {
   s <- gsub("_", " ", stem)
   s <- gsub("([a-z0-9])([A-Z])", "\\1 \\2", s)  # split camelCase
-  s <- gsub("\\s*&\\s*", " & ", s)              # tidy ampersands
+  # Filenames spell it "And" so they stay shell- and URL-safe; display it as
+  # "&". This runs after the camelCase split, so "And" is already a standalone
+  # token; the word boundaries then keep Anderson / Grand / Random intact.
+  # Case-sensitive on purpose, so a lowercase "and" is left alone.
+  s <- gsub("\\bAnd\\b", "&", s, perl = TRUE)
+  s <- gsub("\\s*&\\s*", " & ", s)              # tidy ampersands (also 2025 files)
   s <- gsub("\\s+", " ", s)
   trimws(s)
 }
