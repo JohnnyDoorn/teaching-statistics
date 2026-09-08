@@ -6,24 +6,101 @@ rm(list=ls())
 ```
 
 
-## Data visualization
-
-![](../../images/nightingale.jpg){height="300"}
-
-[Florence Nightingale](https://en.wikipedia.org/wiki/Florence_Nightingale)
-
-
 ## Why Visualize Data?
 
 - Quick overview of the data
 - Spot patterns, outliers, or errors
 - Invite the reader
 
----
+
 
 ### Why Visualize Data?
 
 ![Figure 5.15 Catterplot](../../images/catterplot.jpg) 
+
+---
+
+## Scutari, 1854 {.smaller}
+
+::: columns
+::: {.column width="38%"}
+![](../../images/nightingale.jpg){height="260"}
+
+[Florence Nightingale](https://en.wikipedia.org/wiki/Florence_Nightingale)
+:::
+
+::: {.column width="62%"}
+- Military hospital, Crimean War
+- Recorded every death and its cause
+- Two years of counting:
+
+```{r, echo=FALSE}
+data(Nightingale, package = "HistData")
+knitr::kable(data.frame(
+  Cause  = c("Preventable disease", "Wounds", "Other"),
+  Deaths = c(sum(Nightingale$Disease), sum(Nightingale$Wounds), sum(Nightingale$Other))
+))
+```
+
+- Infection killed far more than the enemy did
+- Sanitary Commission arrived March 1855
+- Later the first woman elected to the Statistical Society
+:::
+:::
+
+---
+
+### The diagram {.smaller}
+
+```{r, echo=FALSE, fig.width=11, fig.height=5.6}
+N    <- Nightingale
+cols <- c(Disease = "#7BA7BC", Wounds = "#C1483A", Other = "#4A4A4A")
+
+# Area is proportional to the death rate, so the radius is its square root.
+# Both years share one scale, otherwise the drop between them disappears.
+rmax <- sqrt(max(N[, c("Disease.rate", "Wounds.rate", "Other.rate")]))
+
+coxcomb <- function(d, title) {
+  plot(NA, xlim = c(-rmax, rmax) * 1.2, ylim = c(-rmax, rmax) * 1.2, asp = 1,
+       axes = FALSE, xlab = "", ylab = "", main = title, cex.main = 1.1)
+  wedge <- function(i, r, col) {
+    a <- seq((i - 1) * pi/6, i * pi/6, length.out = 30) - pi/2
+    polygon(c(0, r * cos(a)), c(0, r * sin(a)), col = col, border = "white", lwd = .5)
+  }
+  # largest area first, so the smaller ones stay visible on top
+  for (i in 1:12) wedge(i, sqrt(d$Disease.rate[i]), cols["Disease"])
+  for (i in 1:12) wedge(i, sqrt(d$Other.rate[i]),   cols["Other"])
+  for (i in 1:12) wedge(i, sqrt(d$Wounds.rate[i]),  cols["Wounds"])
+  for (i in 1:12) {
+    a <- (i - 0.5) * pi/6 - pi/2
+    text(rmax * 1.1 * cos(a), rmax * 1.1 * sin(a), d$Month[i], cex = .7, col = "grey30")
+  }
+}
+
+layout(matrix(c(1, 2, 3, 3), 2, 2, byrow = TRUE), heights = c(5, 0.8))
+par(mar = c(1, 1, 3, 1))
+coxcomb(N[1:12, ],  "Before: April 1854 - March 1855")
+coxcomb(N[13:24, ], "After: April 1855 - March 1856")
+par(mar = c(0, 0, 0, 0)); plot.new()
+legend("center", horiz = TRUE, bty = "n", cex = 1.3, pt.cex = 2.4, pch = 15,
+       col = cols, legend = c("Preventable disease", "Wounds", "Other causes"))
+```
+
+Each wedge is a month; its area is the death rate.
+
+<!-- --- -->
+
+<!-- ### What the picture says {.smaller} -->
+
+<!-- ::: {.incremental} -->
+<!-- - Blue dwarfs red: disease, not wounds -->
+<!-- - Same scale for both years, so the second rose being so much smaller *is* the finding -->
+<!-- - The panels split at March 1855, when the sanitary reforms began -->
+<!-- - Drawn in 1858, two years after the war: evidence, not a plea for rescue -->
+<!-- - Her case: the deaths were preventable, sanitation proved it, so reform army health permanently -->
+<!-- ::: -->
+
+
 
 
 ---
@@ -132,11 +209,11 @@ arrows(x0 = bp, y0 = means - ses*tcrit, x1 = bp, y1 = means + ses*tcrit,
 
 ## 28 January 1986 {.smaller}
 
-The night before the *Challenger* launch, engineers argued about whether the cold would damage the rubber O-ring seals on the booster rockets.
+- Night before the *Challenger* launch
+- Would the cold damage the O-ring seals?
+- Evidence: damage on previous flights, by launch temperature
 
-They reviewed the damage recorded on previous flights, plotted against the temperature at launch.
-
-Tomorrow's forecast: **31°F (-0.5°C)**. Should they launch?
+Tomorrow's forecast: -0.5°C. Should they launch?
 
 ## The evidence they reviewed {.smaller}
 
@@ -146,14 +223,14 @@ challenger <- read.csv(datasetsPath("2026/Challenger.csv"))
 damaged    <- subset(challenger, Any_Damage == "Yes")
 
 par(cex = 1.0, cex.lab = 1.1)
-plot(damaged$Temperature_F, damaged$Damaged_ORings,
+plot(damaged$Temperature_C, damaged$Damaged_ORings,
      pch = 19, cex = 2, col = "darkred", las = 1, bty = "n",
-     xlab = "Temperature at launch (F)", ylab = "Damaged O-rings",
-     xlim = c(50, 85), ylim = c(0, 6),
+     xlab = "Temperature at launch (°C)", ylab = "Damaged O-rings",
+     xlim = c(-5, 30), ylim = c(0, 6),
      main = "Flights that suffered O-ring damage")
 ```
 
-Seven flights, no obvious pattern. Cold does not look dangerous.
+Seven flights. No obvious pattern.
 
 ## The flights that were left off {.smaller}
 
@@ -161,48 +238,28 @@ Seven flights, no obvious pattern. Cold does not look dangerous.
 par(cex = 1.0, cex.lab = 1.1)
 cols <- ifelse(challenger$Any_Damage == "Yes", "darkred", "darkgreen")
 
-plot(challenger$Temperature_F, challenger$Damaged_ORings,
+plot(challenger$Temperature_C, challenger$Damaged_ORings,
      pch = 19, cex = 2, col = cols, las = 1, bty = "n",
-     xlab = "Temperature at launch (F)", ylab = "Damaged O-rings",
-     xlim = c(50, 85), ylim = c(0, 6),
+     xlab = "Temperature at launch (°C)", ylab = "Damaged O-rings",
+     xlim = c(-5, 30), ylim = c(0, 6),
      main = "All 23 previous flights")
+
+abline(v = -0.5, lwd = 3, lty = 2, col = "darkred")
+text(-0.5, 4.5, "launch day\n-0.5°C", pos = 4, col = "darkred", cex = 0.85)
 
 legend("topright", legend = c("damage", "no damage"),
        pch = 19, col = c("darkred", "darkgreen"), bty = "n", cex = 0.9)
 ```
 
-The sixteen flights with **no** damage were the whole argument: they were the warm ones.
-
-## Off the edge of the data {.smaller}
-
-```{r, echo=FALSE}
-par(cex = 1.0, cex.lab = 1.1)
-fit <- glm(cbind(Damaged_ORings, 6 - Damaged_ORings) ~ Temperature_F,
-           family = binomial, data = challenger)
-
-tempGrid <- seq(30, 85, 0.5)
-pred     <- predict(fit, newdata = data.frame(Temperature_F = tempGrid),
-                    type = "response")
-
-plot(tempGrid, pred, type = "l", lwd = 3, col = "darkblue", las = 1, bty = "n",
-     xlab = "Temperature at launch (F)", ylab = "P(O-ring damaged)",
-     ylim = c(0, 1), main = "Fitted model, extrapolated to launch day")
-
-points(challenger$Temperature_F, challenger$Damaged_ORings / 6,
-       pch = 19, cex = 1.5, col = cols)
-
-abline(v = 31, lwd = 3, lty = 2, col = "darkred")
-text(31, 0.55, "launch day\n31 F", pos = 4, col = "darkred", cex = 0.9)
-abline(v = min(challenger$Temperature_F), lwd = 2, lty = 3)
-text(min(challenger$Temperature_F), 0.15, "coldest\nprior flight", pos = 4, cex = 0.8)
-```
+The sixteen flights with *no* damage were the warm ones. Launch day sat 12°C below all of them.
 
 ## What the plot could not say {.smaller}
 
 ::: {.incremental}
-- With only the damaged flights: $r = -0.58$, $p = .17$. With all of them: $r = -0.64$, $p = .001$
-- The correlation barely changes. What changes is whether you can *see* it
-- Launch day was 22°F colder than anything in the data. No plot can tell you what happens out there
+- 7 damaged flights only: $r = -0.58$, $p = .17$
+- All 23 flights: $r = -0.64$, $p = .001$
+- The correlation barely moves; what moves is whether you can *see* it
+- Launch day: 12°C colder than any data point
 :::
 
 <small>The engineers did recommend against launching; they were overruled. Tufte's well-known "the chart caused the disaster" reading (*Visual Explanations*, 1997) is disputed, see Robison et al. (2002). Data: Dalal, Fowlkes & Hoadley (1989), via `faraway::orings`.</small>

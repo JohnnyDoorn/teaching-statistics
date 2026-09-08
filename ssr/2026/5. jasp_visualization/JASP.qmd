@@ -34,7 +34,32 @@ rm(list=ls())
 2. Open JASP, load your dataset (.jasp, .csv, .sav, etc.)
 3. Familiarize with the interface: Data view, Input panel, Output panel
 
-![Figure 4.3](../../images/figure-4-3.png){height="300"}
+JASP has two modes: the data editor (view and edit your data) and the analysis mode (conduct your analyses).
+
+---
+
+### The start-up window
+
+![Figure 4.2: The JASP start-up window](../../images/figure-4-2.png){height="330"}
+
+---
+
+### Two buttons
+
+The hamburger button ![](../../images/hamburger.png){height="25"}:
+
+- Open files (from computer, [the Open Science Framework](https://osf.io), or the [JASP data library](https://jasp-stats.github.io/jasp-data-library/))
+- Adjust settings (e.g., dark mode, language, how to display results)
+- Save/export data/results
+
+The module button ![](../../images/blueplus.png){height="25"}:
+
+- Add modules to the top ribbon bar
+- Update modules 
+
+### The data library
+
+![Figure 4.3: Opening the Sleep data from the JASP data library](../../images/figure-4-3.png){height="330"}
 
 ---
 
@@ -42,12 +67,61 @@ rm(list=ls())
 ## Loading Data in JASP
 
 
-- Click **Open** > select your file
+- Click Open > select your file
 - Data appears in spreadsheet view
 
-![Figure 4.4](../../images/figure-4-4.png){height="300"}
+![Figure 4.4: The JASP data editor](../../images/figure-4-4.png){height="300"}
 
+---
 
+### Two file formats {.smaller}
+
+::: columns
+::: {.column width="50%"}
+**`.csv`**
+
+A lightweight file format that contains only the raw data.
+
+Opens in virtually anything: Excel, R, SPSS
+:::
+
+::: {.column width="50%"}
+**`.jasp`**
+
+Contains the original data, the results, and the settings that created them.
+
+Ideal for sharing your research.
+:::
+:::
+
+Sometimes you'll see a `.sav` file, previously used in SPSS. 
+---
+
+### Variable settings {.smaller}
+
+Doubleclick a column name to open its settings. The measurement level you set here decides how JASP treats your variable.
+
+![Figure 4.6: Variable settings menu](../../images/figure-4-6.png){height="280"}
+
+---
+
+### Ordinal variables
+
+![Figure 4.7: Specifying the values for an ordinal variable](../../images/figure-4-7.png){height="330"}
+
+---
+
+### Computing a new variable
+
+Drag and drop, no syntax required.
+
+![Figure 4.8: The drag-and-drop interface for computing a new variable](../../images/figure-4-8.png){height="300"}
+
+---
+
+### Missing values
+
+![Figure 4.9: Defining missing values](../../images/figure-4-9.png){height="300"}
 
 ---
 
@@ -55,7 +129,7 @@ rm(list=ls())
 ## Descriptive Statistics in JASP
 
 
-- Go to **Descriptives** > select variables
+- Go to Descriptives > select variables
 - Options: mean, median, SD, min, max, quartiles
 - Output updates instantly
 
@@ -63,13 +137,58 @@ rm(list=ls())
 
 
 
-## Some special operations
+## The output window {.smaller}
 
-- Filtering data
-  - [For scale data](https://jasp-stats.github.io/jasp-video-library/assets/videos/Getting-Started/Getting_Started_07_Filter-Drag-and-Drop-Scale.mp4)
-  - [For categorical data](https://jasp-stats.github.io/jasp-video-library/assets/videos/Getting-Started/Getting_Started_07_Filter-Drag-and-Drop-Categorical.mp4)
-  - [Using variable settings](https://jasp-stats.github.io/jasp-video-library/assets/videos/Getting-Started/Getting_Started_06_Filter-by-Group.mp4)
-- Split variable in Descriptives
+- Updates in real time
+- Tables already in APA format, so publication ready
+- ▼ dropdown: copy to Word/PowerPoint, save a plot, open the plot editor
+- Annotate your own output
+
+
+---
+
+### Annotated output
+
+![Figure 4.11: Example of annotated output](../../images/figure-4-11.png){height="330"}
+
+---
+
+## Saving and exporting {.smaller}
+
+- Save (`Ctrl/Cmd + S`) writes a `.jasp` file: data, output and settings
+- Export Data writes a plain `.csv`
+- Export Results writes `.html` or `.pdf`, which anyone can open without JASP
+
+See [discoverjasp.com](https://discoverjasp.com/pages/data) for examples.
+
+## Filtering your data {.smaller}
+
+Two routes to analysing only part of your data.
+
+::: columns
+::: {.column width="50%"}
+Using the filter
+
+- Funnel icon above the row numbers
+- Drag variables and operators into the box
+- [Scale data](https://jasp-stats.github.io/jasp-video-library/assets/videos/Getting-Started/Getting_Started_07_Filter-Drag-and-Drop-Scale.mp4)
+- [Categorical data](https://jasp-stats.github.io/jasp-video-library/assets/videos/Getting-Started/Getting_Started_07_Filter-Drag-and-Drop-Categorical.mp4)
+:::
+
+::: {.column width="50%"}
+Using variable settings
+
+- Doubleclick the column name
+- Untick values to leave out
+- [Filter by group](https://jasp-stats.github.io/jasp-video-library/assets/videos/Getting-Started/Getting_Started_06_Filter-by-Group.mp4)
+:::
+:::
+
+- Filtered rows struck through, analyses update immediately
+- Nothing is deleted
+
+---
+
 
 
 
@@ -78,7 +197,6 @@ rm(list=ls())
 - [JASP Video Library](https://jasp-stats.github.io/jasp-video-library/)
 - The book
 - ![](../../images/info-button.png){height="40"}
-
 
 
 ---

@@ -14,9 +14,12 @@ Exam/
 # The continuous-page .html is what gets linked from the overview pages.
 *_slides.html
 
-/.quarto/
+.quarto/
 
 # Private working notes on the lecture decks (review notes, things to improve).
 # The leading underscore keeps Quarto from rendering them; this keeps git from
 # publishing them. The repo is public, so these must stay local.
 _lecture-notes*.md
+
+# Lecture recordings/transcripts: large, and not for the public repo.
+transcripts/

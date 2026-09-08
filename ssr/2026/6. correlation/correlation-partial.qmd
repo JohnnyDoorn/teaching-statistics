@@ -5,13 +5,13 @@
 source("../../_setup.R")
 if(!"VennDiagram" %in% installed.packages()) { install.packages("VennDiagram") };
 library("VennDiagram")
-n     <- 10
-data <- read.csv(datasetsPath("Album Sales.csv"))[, -4]
-data <- data[1:n, ] # take the first 10 rows of the album sales data set from Field
-sales         <- data$sales
-airplay       <- data$airplay
-adverts       <- data$adverts
-N             <- length(sales)
+n       <- 10
+allData <- read.csv(datasetsPath("2026/ExamAnxiety.csv"))
+data    <- allData[1:n, c("revise", "exam_grade", "anxiety")] # first 10 students
+exam_grade <- data$exam_grade
+anxiety    <- data$anxiety
+revise     <- data$revise
+N          <- length(exam_grade)
 ```
 
 ```{r, echo=FALSE, results='hide'}
@@ -31,26 +31,28 @@ draw.triple.venn(area1 = 100, area2 = 100, area3 = 100,
 
 $$\LARGE{r_{xy \cdot z} = \frac{r_{xy} - r_{xz} r_{yz}}{\sqrt{(1 - r_{xz}^2)(1 - r_{yz}^2)}}}$$
 
+Does anxiety really hurt performance, or do anxious students simply revise less?
+
 ```{r, echo=TRUE}
-adverts <- data$adverts
+cor.exam.anxiety    <- cor(exam_grade, anxiety)
+cor.exam.revise     <- cor(exam_grade, revise)
+cor.anxiety.revise  <- cor(anxiety,    revise)
 
-cor.sales.airplay    <- cor(sales,airplay)
-cor.sales.adverts    <- cor(sales,adverts)
-cor.airplay.adverts  <- cor(airplay,adverts)
-
-data.frame(cor.sales.airplay, cor.sales.adverts, cor.airplay.adverts)
+data.frame(cor.exam.anxiety, cor.exam.revise, cor.anxiety.revise)
 ```
 
 ------
 
 ```{r, echo=TRUE}
-numerator   <- cor.sales.airplay - (cor.sales.adverts * cor.airplay.adverts)
-denominator <- sqrt( (1-cor.sales.adverts^2)*(1-cor.airplay.adverts^2) )
+numerator   <- cor.exam.anxiety - (cor.exam.revise * cor.anxiety.revise)
+denominator <- sqrt( (1-cor.exam.revise^2)*(1-cor.anxiety.revise^2) )
 
 partial.correlation <- numerator / denominator
 
 partial.correlation
 ```
+
+Holding revision time constant, the link between anxiety and performance shrinks considerably: a good part of it ran through how much students revised.
 
 ## Significance of partial correlation {.subsection}
 

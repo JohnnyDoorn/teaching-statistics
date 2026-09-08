@@ -1,0 +1,87 @@
+# Variance and z-scores {.section}
+
+```{r, eval=TRUE, echo=FALSE}
+source("../../_setup.R")
+```
+
+## Load data {.smaller}
+
+A psychologist wanted to know how exam **anxiety** relates to exam **performance**. She measured anxiety before the exam with the Exam Anxiety Questionnaire (scored out of 100), and recorded each student's percentage mark. She also asked how many hours they had spent revising.
+
+```{r, eval=TRUE, echo=TRUE}
+n    <- 10
+data <- read.csv(datasetsPath("2026/ExamAnxiety.csv"))
+data <- data[1:n, c("revise", "exam_grade", "anxiety")] # first 10 students
+ssrTable(data)
+```
+
+## Three different units {.smaller}
+
+Revision is in **hours**, performance in **percent**, anxiety in **EAQ points**. A deviation of 5 does not mean the same thing in each.
+
+```{r, echo = FALSE}
+exam_grade   <- data$exam_grade
+anxiety      <- data$anxiety
+mean.exam    <- mean(exam_grade)
+mean.anxiety <- mean(anxiety)
+N            <- length(exam_grade)
+
+plot(exam_grade,
+     bg='orange', pch = 21, bty = "n", ylim = c(0, 100),
+     ylab="Variables", las = 1,
+     xlab="Student nr.")
+points(anxiety, bg='blue', pch = 21)
+legend("bottomright", legend = c("Anxiety", "Exam performance"),
+       fill = c("blue", "orange"), bty = "n")
+lines(rep(mean.exam, N), col='orange')
+lines(rep(mean.anxiety, N), col='blue', lt=1)
+```
+
+## Standardize 
+
+$$z = \frac{x_i - \bar{x}}{{sd}_x}$$
+
+```{r, echo=TRUE}
+z.exam    <- (data$exam_grade - mean(data$exam_grade)) / sd(data$exam_grade)
+z.anxiety <- (data$anxiety    - mean(data$anxiety))    / sd(data$anxiety)
+```
+
+## Standardize {.smaller}
+
+```{r, echo= FALSE}
+mean.z.exam    <- mean(z.exam)
+mean.z.anxiety <- mean(z.anxiety)
+
+plot(z.exam,
+     bg  = 'orange', pch = 21, bty = "n", ylim = c(-2.5, 2.5),
+     ylab = "z-scores", xlab="Student nr.", las = 1)
+
+points(z.anxiety, pch = 21, bg='blue')
+legend("bottomright", legend = c("z-anxiety", "z-exam performance"),
+       fill = c("blue", "orange"), bty = "n")
+
+lines(rep(mean.z.exam, N), col='orange')
+lines(rep(mean.z.anxiety, N), col='blue', lt=2)
+```
+
+Both now have mean 0 and standard deviation 1.
+
+## Standardize {.smaller}
+
+```{r, echo= FALSE}
+plot(z.exam,
+     bg  = 'orange', pch = 21, bty = "n", ylim = c(-2.5, 2.5),
+     ylab = "z-scores", xlab="Student nr.", las = 1)
+
+points(z.anxiety, pch = 21, bg='blue')
+legend("bottomright", legend = c("z-anxiety", "z-exam performance"),
+       fill = c("blue", "orange"), bty = "n")
+
+lines(rep(mean.z.exam, N), col='orange')
+lines(rep(mean.z.anxiety, N), col='blue', lty = 2)
+
+segments(1:N, mean.z.exam, 1:N, z.exam, col='orange')
+segments(1:N, mean.z.anxiety, 1:N, z.anxiety, col='blue', lty = 2)
+```
+
+Notice how the two tend to sit on *opposite* sides of their means.

@@ -22,14 +22,13 @@ $${COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}$$
 ## Plot correlation
 
 ```{r,echo=FALSE, fig.width=5, fig.height=5, fig.align='center'}
-set.seed(565433)
-data <- read.csv(datasetsPath("Album Sales.csv"))[, -4]
+data <- read.csv(datasetsPath("2026/ExamAnxiety.csv"))
 tinydat <- data[1:5, ]
-x <- tinydat$airplay
-y <- tinydat$sales
-myLimsX <- c(25, 50)
-myLimsY <- c(100, 400)
-plot(x, y, las = 1, xlab = "Airplay", ylab = "Album Sales", 
+x <- tinydat$anxiety
+y <- tinydat$exam_grade
+myLimsX <- c(55, 95)
+myLimsY <- c(30, 90)
+plot(x, y, las = 1, xlab = "Anxiety (EAQ)", ylab = "Exam performance (%)", 
      xlim = myLimsX, ylim = myLimsY)
 
 m.x <- mean(x)
@@ -44,7 +43,7 @@ corners <- par("usr")
 ## Plot correlation
 
 ```{r,echo=FALSE, fig.width=5, fig.height=5, fig.align='center'}
-plot(x, y, las = 1, xlab = "Airplay", ylab = "Album Sales", 
+plot(x, y, las = 1, xlab = "Anxiety (EAQ)", ylab = "Exam performance (%)", 
      xlim = myLimsX, ylim = myLimsY)
 
 m.x <- mean(x)
@@ -68,8 +67,8 @@ abline(v = m.x, lwd = 3)
 # segments(x, m.y, x, y, col = "darkorange",    lwd = 2)
 # segments(x, y, m.x, y, col = "purple", lwd = 2)
 
-mtext(side = 3, bquote(bar(x) ~ "= 840"), cex = 1.5)
-mtext(side = 4, bquote(bar(y) ~ "= 260"), cex = 1.5, padj = 0.5, srt=180)
+mtext(side = 3, bquote(bar(x) ~ "=" ~ .(round(m.x, 1))), cex = 1.5)
+mtext(side = 4, bquote(bar(y) ~ "=" ~ .(round(m.y, 1))), cex = 1.5, padj = 0.5, srt=180)
 # mtext("Text to the Right", side = 4, line = 1, las = 3)
 
 ```
@@ -77,7 +76,7 @@ mtext(side = 4, bquote(bar(y) ~ "= 260"), cex = 1.5, padj = 0.5, srt=180)
 ## Plot correlation
 
 ```{r,echo=FALSE, fig.width=5, fig.height=5, fig.align='center'}
-plot(x, y, las = 1, xlab = "Airplay", ylab = "Album Sales", 
+plot(x, y, las = 1, xlab = "Anxiety (EAQ)", ylab = "Exam performance (%)", 
      xlim = myLimsX, ylim = myLimsY)
 
 m.x <- mean(x)
@@ -96,8 +95,8 @@ abline(v = m.x, lwd = 3)
 segments(x, m.y, x, y, col = "darkorange",    lwd = 2)
 segments(x, y, m.x, y, col = "purple", lwd = 2)
 
-mtext(side = 3, bquote(bar(x) ~ "= 36.6"), cex = 1.5)
-mtext(side = 4, bquote(bar(y) ~ "= 260"), cex = 1.5, padj = 0.5, srt=180)
+mtext(side = 3, bquote(bar(x) ~ "=" ~ .(round(m.x, 1))), cex = 1.5)
+mtext(side = 4, bquote(bar(y) ~ "=" ~ .(round(m.y, 1))), cex = 1.5, padj = 0.5, srt=180)
 ```
 
 $$(x_i - \bar{x})(y_i - \bar{y})$$
@@ -111,21 +110,21 @@ $$(x_i - \bar{x})(y_i - \bar{y})$$
 ## Load data
 
 ```{r, eval=TRUE, echo=TRUE}
-n     <- 10
-data <- read.csv(datasetsPath("Album Sales.csv"))[, -4]
-data <- data[1:n, ] # take the first 10 rows of the album sales data set from Field
+n       <- 10
+allData <- read.csv(datasetsPath("2026/ExamAnxiety.csv"))
+data    <- allData[1:n, c("revise", "exam_grade", "anxiety")] # first 10 students
 ssrTable(data)
 ```
 
 ```{r, eval=TRUE, echo=FALSE}
-# The variables and z-scores we made in the previous lecture
-sales         <- data$sales
-airplay       <- data$airplay
-N             <- length(sales)
-mean.sales    <- mean(sales)
-mean.airplay  <- mean(airplay)
-z.sales       <- (sales   - mean(sales))   / sd(sales)
-z.airplay     <- (airplay - mean(airplay)) / sd(airplay)
+# The variables and z-scores from earlier in the lecture
+exam_grade   <- data$exam_grade
+anxiety      <- data$anxiety
+N            <- length(exam_grade)
+mean.exam    <- mean(exam_grade)
+mean.anxiety <- mean(anxiety)
+z.exam       <- (exam_grade - mean(exam_grade)) / sd(exam_grade)
+z.anxiety    <- (anxiety    - mean(anxiety))    / sd(anxiety)
 ```
 
 ## Covariance {.subsection}
@@ -133,13 +132,13 @@ z.airplay     <- (airplay - mean(airplay)) / sd(airplay)
 $${COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}$$
 
 ```{r, echo=TRUE}
-mean.sales      <- mean(sales, na.rm=TRUE)
-mean.airplay    <- mean(airplay, na.rm=TRUE)
+mean.exam    <- mean(exam_grade, na.rm=TRUE)
+mean.anxiety <- mean(anxiety,    na.rm=TRUE)
 
-delta.sales     <- sales - mean.sales
-delta.airplay   <- airplay - mean.airplay
+delta.exam    <- exam_grade - mean.exam
+delta.anxiety <- anxiety    - mean.anxiety
 
-prod <- (sales - mean.sales) * (airplay - mean.airplay)
+prod <- delta.exam * delta.anxiety
 
 covariance <- sum(prod) / (N - 1)
 covariance
@@ -163,8 +162,7 @@ covariance
 $$r_{xy} = \frac{{COV}_{xy}}{S_xS_y}$$
 
 ```{r, echo=TRUE}
-correlation <- covariance / ( sd(sales) * sd(airplay) ); correlation
-correlation
+correlation <- covariance / ( sd(exam_grade) * sd(anxiety) ); correlation
 ```
 
 ## Correlation
@@ -173,39 +171,52 @@ $${COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}$$
 
 
 ```{r, echo=TRUE}
-cor(  sales,   airplay) # correlation
+cor(exam_grade, anxiety) # correlation
 
-cor(z.sales, z.airplay) # correlation of z-scores
+cor(z.exam,     z.anxiety) # correlation of z-scores
 ```
 
 ```{r, echo=TRUE}
 # covariance of z-scores
-sum(z.sales * z.airplay ) / (N - 1)
+sum(z.exam * z.anxiety ) / (N - 1)
 ```
+
+## These were only 10 students {.smaller}
+
+We used 10 students so we could do the sums by hand. The psychologist actually tested **103**:
+
+```{r, echo=TRUE}
+cor(allData$exam_grade, allData$anxiety)
+```
+
+Same story, weaker: small samples wobble more than large ones. This is the value the book reports.
 
 
 ## Plot correlation
 
 ```{r, echo=FALSE}
-plot(airplay, sales, las = 1, pch = 21, bg = "turquoise", ylab = "Album Sales", xlab ="Airplay")
-abline(h = mean.sales,   col = "black", lwd = 2)
-abline(v = mean.airplay, col = "black", lwd = 2)
+plot(anxiety, exam_grade, las = 1, pch = 21, bg = "turquoise",
+     ylab = "Exam performance (%)", xlab = "Anxiety (EAQ)")
+abline(h = mean.exam,    col = "black", lwd = 2)
+abline(v = mean.anxiety, col = "black", lwd = 2)
 corners <- par("usr")
 xTop <- corners[2]
 xBot <- corners[1]
 yTop <- corners[4]
 yBot <- corners[3]
-polygon(c(mean.airplay,xTop,xTop,mean.airplay),c(mean.sales,mean.sales,yTop,yTop), col = rgb(0,0.8,0,.2))
-polygon(c(mean.airplay,xBot,xBot,mean.airplay),c(mean.sales,mean.sales,yBot,yBot), col = rgb(0,0.8,0,.2))
+polygon(c(mean.anxiety,xTop,xTop,mean.anxiety),c(mean.exam,mean.exam,yTop,yTop), col = rgb(0,0.8,0,.2))
+polygon(c(mean.anxiety,xBot,xBot,mean.anxiety),c(mean.exam,mean.exam,yBot,yBot), col = rgb(0,0.8,0,.2))
 
-polygon(c(mean.airplay,xBot,xBot,mean.airplay),c(mean.sales,mean.sales,yTop,yTop), col = rgb(0.8,0,0,alpha = 0.2))
-polygon(c(mean.airplay,xTop,xTop,mean.airplay),c(mean.sales,mean.sales,yBot,yBot), col = rgb(0.8,0,0,alpha= 0.2))
-xMargin <- 20
-yMargin <- 100
-text(mean.sales+xMargin, mean.airplay+yMargin, "+ * +", cex = 2, col = "red")
-text(mean.sales-xMargin, mean.airplay-yMargin, "- * -", cex = 2, col = "red")
-text(mean.sales+xMargin, mean.airplay-yMargin, "+ * -", cex = 2, col = "red")
-text(mean.sales-xMargin, mean.airplay+yMargin, "- * +", cex = 2, col = "red")
+polygon(c(mean.anxiety,xBot,xBot,mean.anxiety),c(mean.exam,mean.exam,yTop,yTop), col = rgb(0.8,0,0,alpha = 0.2))
+polygon(c(mean.anxiety,xTop,xTop,mean.anxiety),c(mean.exam,mean.exam,yBot,yBot), col = rgb(0.8,0,0,alpha= 0.2))
+
+# x is anxiety, y is exam performance
+xMargin <- 6
+yMargin <- 12
+text(mean.anxiety+xMargin, mean.exam+yMargin, "+ * +", cex = 2, col = "red")
+text(mean.anxiety-xMargin, mean.exam-yMargin, "- * -", cex = 2, col = "red")
+text(mean.anxiety+xMargin, mean.exam-yMargin, "+ * -", cex = 2, col = "red")
+text(mean.anxiety-xMargin, mean.exam+yMargin, "- * +", cex = 2, col = "red")
 ```
 
 ## Significance testing using $t$

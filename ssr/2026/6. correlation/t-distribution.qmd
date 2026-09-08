@@ -99,6 +99,9 @@ hist(mean.x.values,
      xlab = "1,000 sample means")
 ```
 
+```{r child="standard-error-ci.qmd"}
+```
+
 ## T-distribution
 
 <small> So if the population is normaly distributed (assumption of normality) the t-distribution represents the deviation of sample means from the population mean ($\mu$), given a certain sample size ($df = n - 1$).

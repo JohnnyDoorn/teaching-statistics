@@ -3,6 +3,7 @@ title: "6. Correlation"
 subtitle: "From covariance to r"
 author: "Johnny van Doorn"
 date: "11 September 2026"
+view: "https://teams.microsoft.com/meet/330874021866475?p=QMChUAKXBz9m28zZWL"
 footer: "Scientific & Statistical Reasoning"
 format:
   revealjs:
@@ -15,8 +16,11 @@ css: ../../ajohnson.css
 <div class="goals">
 In this lecture we discuss:
 
+* Variance and z-scores
+  * Standardizing, so that variables become comparable
 * The t-distribution
   * Sampling distributions, continued
+  * Standard error and confidence intervals
 * Correlation
   * From variance to covariance to $r$
   * In JASP
@@ -26,8 +30,12 @@ In this lecture we discuss:
   * Partial correlation
     
 <strong>Reading:</strong>
-Chapter 7 (§7.1–7.11)
+Chapter 7 (§7.1–7.11), 2.8–2.9 (Standard error &amp; confidence intervals)
 </div>
+
+
+```{r child="variance-standardization.qmd"}
+```
 
 
 ```{r child="t-distribution.qmd"}

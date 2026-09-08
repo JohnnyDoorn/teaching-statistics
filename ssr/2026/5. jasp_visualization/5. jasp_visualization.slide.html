@@ -12,7 +12,7 @@
 
   <meta name="author" content="Johnny van Doorn">
   <meta name="dcterms.date" content="2026-09-09">
-  <title>5. JASP: Describing and Visualizing Data</title>
+  <title>5. JASP &amp; Visualization</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -30,71 +30,6 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      { color: #003b4f; background-color: #f1f3f5; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #003b4f; } /* Normal */
-    code span.al { color: #ad0000; } /* Alert */
-    code span.an { color: #5e5e5e; } /* Annotation */
-    code span.at { color: #657422; } /* Attribute */
-    code span.bn { color: #ad0000; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; } /* ControlFlow */
-    code span.ch { color: #20794d; } /* Char */
-    code span.cn { color: #8f5902; } /* Constant */
-    code span.co { color: #5e5e5e; } /* Comment */
-    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
-    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
-    code span.dt { color: #ad0000; } /* DataType */
-    code span.dv { color: #ad0000; } /* DecVal */
-    code span.er { color: #ad0000; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #ad0000; } /* Float */
-    code span.fu { color: #4758ab; } /* Function */
-    code span.im { color: #00769e; } /* Import */
-    code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; } /* Keyword */
-    code span.op { color: #5e5e5e; } /* Operator */
-    code span.ot { color: #003b4f; } /* Other */
-    code span.pp { color: #ad0000; } /* Preprocessor */
-    code span.sc { color: #5e5e5e; } /* SpecialChar */
-    code span.ss { color: #20794d; } /* SpecialString */
-    code span.st { color: #20794d; } /* String */
-    code span.va { color: #111111; } /* Variable */
-    code span.vs { color: #20794d; } /* VerbatimString */
-    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="5. jasp_visualization_files/libs/revealjs/dist/theme/quarto.css" id="theme">
   <link rel="stylesheet" href="../../uva_reveal.css">
@@ -387,24 +322,13 @@
       margin-right: 0; 
     }
   </style>
-  
-  <link href="5. jasp_visualization_files/libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
-  <script src="5. jasp_visualization_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-  <link href="5. jasp_visualization_files/libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-  <script src="5. jasp_visualization_files/libs/datatables-binding-0.33/datatables.js"></script>
-  <script src="5. jasp_visualization_files/libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-  <link href="5. jasp_visualization_files/libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
-  <link href="5. jasp_visualization_files/libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
-  <script src="5. jasp_visualization_files/libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
-  <link href="5. jasp_visualization_files/libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
-  <script src="5. jasp_visualization_files/libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
 <section id="title-slide" data-background-image="../../images/bikes.jpg" data-background-position="bottom" data-background-size="contain" class="quarto-title-block center">
-  <h1 class="title">5. JASP: Describing and Visualizing Data</h1>
+  <h1 class="title">5. JASP &amp; Visualization</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -429,16 +353,8 @@ Johnny van Doorn
 <li>Descriptive statistics</li>
 <li>Data visualizations</li>
 </ul></li>
-<li>Variance and z-scores
-<ul>
-<li>Standardizing, so that variables become comparable</li>
-</ul></li>
-<li>Standard error and confidence intervals
-<ul>
-<li>How far off is a sample mean, typically?</li>
-</ul></li>
 </ul>
-<p><strong>Reading:</strong> Chapters 4 (§4.1–4.10), 5 (§5.1–5.6), 2.8–2.9 (Standard error &amp; confidence intervals)</p>
+<p><strong>Reading:</strong> Chapters 4 (§4.1–4.10), 5 (§5.1–5.6)</p>
 </div>
 </section>
 <section>
@@ -466,30 +382,115 @@ Johnny van Doorn
 <li>Open JASP, load your dataset (.jasp, .csv, .sav, etc.)</li>
 <li>Familiarize with the interface: Data view, Input panel, Output panel</li>
 </ol>
+<p>JASP has two modes: the data editor (view and edit your data) and the analysis mode (conduct your analyses).</p>
+</section>
+<section class="slide level2">
+
+<h3 id="the-start-up-window">The start-up window</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="../../images/figure-4-3.png" height="300"></p>
-<figcaption>Figure 4.3</figcaption>
+<p><img data-src="../../images/figure-4-2.png" height="330"></p>
+<figcaption>Figure 4.2: The JASP start-up window</figcaption>
+</figure>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="two-buttons">Two buttons</h3>
+<p>The hamburger button <img data-src="../../images/hamburger.png" height="25">:</p>
+<ul>
+<li>Open files (from computer, <a href="https://osf.io">the Open Science Framework</a>, or the <a href="https://jasp-stats.github.io/jasp-data-library/">JASP data library</a>)</li>
+<li>Adjust settings (e.g., dark mode, language, how to display results)</li>
+<li>Save/export data/results</li>
+</ul>
+<p>The module button <img data-src="../../images/blueplus.png" height="25">:</p>
+<ul>
+<li>Add modules to the top ribbon bar</li>
+<li>Update modules</li>
+</ul>
+<h3 id="the-data-library">The data library</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../images/figure-4-3.png" height="330"></p>
+<figcaption>Figure 4.3: Opening the Sleep data from the JASP data library</figcaption>
 </figure>
 </div>
 </section>
 <section id="loading-data-in-jasp" class="slide level2">
 <h2>Loading Data in JASP</h2>
 <ul>
-<li>Click <strong>Open</strong> &gt; select your file</li>
+<li>Click Open &gt; select your file</li>
 <li>Data appears in spreadsheet view</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="../../images/figure-4-4.png" height="300"></p>
-<figcaption>Figure 4.4</figcaption>
+<figcaption>Figure 4.4: The JASP data editor</figcaption>
+</figure>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 class="smaller" id="two-file-formats">Two file formats</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong><code>.csv</code></strong></p>
+<p>A lightweight file format that contains only the raw data.</p>
+<p>Opens in virtually anything: Excel, R, SPSS</p>
+</div><div class="column" style="width:50%;">
+<p><strong><code>.jasp</code></strong></p>
+<p>Contains the original data, the results, and the settings that created them.</p>
+<p>Ideal for sharing your research.</p>
+</div>
+</div>
+<p>Sometimes you’ll see a <code>.sav</code> file, previously used in SPSS.</p>
+</section>
+<section class="slide level2">
+
+<h3 class="smaller" id="variable-settings">Variable settings</h3>
+<p>Doubleclick a column name to open its settings. The measurement level you set here decides how JASP treats your variable.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../images/figure-4-6.png" height="280"></p>
+<figcaption>Figure 4.6: Variable settings menu</figcaption>
+</figure>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="ordinal-variables">Ordinal variables</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../images/figure-4-7.png" height="330"></p>
+<figcaption>Figure 4.7: Specifying the values for an ordinal variable</figcaption>
+</figure>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="computing-a-new-variable">Computing a new variable</h3>
+<p>Drag and drop, no syntax required.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../images/figure-4-8.png" height="300"></p>
+<figcaption>Figure 4.8: The drag-and-drop interface for computing a new variable</figcaption>
+</figure>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="missing-values">Missing values</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../images/figure-4-9.png" height="300"></p>
+<figcaption>Figure 4.9: Defining missing values</figcaption>
 </figure>
 </div>
 </section>
 <section id="descriptive-statistics-in-jasp" class="slide level2">
 <h2>Descriptive Statistics in JASP</h2>
 <ul>
-<li>Go to <strong>Descriptives</strong> &gt; select variables</li>
+<li>Go to Descriptives &gt; select variables</li>
 <li>Options: mean, median, SD, min, max, quartiles</li>
 <li>Output updates instantly</li>
 </ul>
@@ -500,16 +501,58 @@ Johnny van Doorn
 </figure>
 </div>
 </section>
-<section id="some-special-operations" class="slide level2">
-<h2>Some special operations</h2>
+<section id="the-output-window" class="slide level2 smaller">
+<h2>The output window</h2>
 <ul>
-<li>Filtering data
+<li>Updates in real time</li>
+<li>Tables already in APA format, so publication ready</li>
+<li>▼ dropdown: copy to Word/PowerPoint, save a plot, open the plot editor</li>
+<li>Annotate your own output</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="annotated-output">Annotated output</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../images/figure-4-11.png" height="330"></p>
+<figcaption>Figure 4.11: Example of annotated output</figcaption>
+</figure>
+</div>
+</section>
+<section id="saving-and-exporting" class="slide level2 smaller">
+<h2>Saving and exporting</h2>
 <ul>
-<li><a href="https://jasp-stats.github.io/jasp-video-library/assets/videos/Getting-Started/Getting_Started_07_Filter-Drag-and-Drop-Scale.mp4">For scale data</a></li>
-<li><a href="https://jasp-stats.github.io/jasp-video-library/assets/videos/Getting-Started/Getting_Started_07_Filter-Drag-and-Drop-Categorical.mp4">For categorical data</a></li>
-<li><a href="https://jasp-stats.github.io/jasp-video-library/assets/videos/Getting-Started/Getting_Started_06_Filter-by-Group.mp4">Using variable settings</a></li>
-</ul></li>
-<li>Split variable in Descriptives</li>
+<li>Save (<code>Ctrl/Cmd + S</code>) writes a <code>.jasp</code> file: data, output and settings</li>
+<li>Export Data writes a plain <code>.csv</code></li>
+<li>Export Results writes <code>.html</code> or <code>.pdf</code>, which anyone can open without JASP</li>
+</ul>
+<p>See <a href="https://discoverjasp.com/pages/data">discoverjasp.com</a> for examples.</p>
+</section>
+<section id="filtering-your-data" class="slide level2 smaller">
+<h2>Filtering your data</h2>
+<p>Two routes to analysing only part of your data.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Using the filter</p>
+<ul>
+<li>Funnel icon above the row numbers</li>
+<li>Drag variables and operators into the box</li>
+<li><a href="https://jasp-stats.github.io/jasp-video-library/assets/videos/Getting-Started/Getting_Started_07_Filter-Drag-and-Drop-Scale.mp4">Scale data</a></li>
+<li><a href="https://jasp-stats.github.io/jasp-video-library/assets/videos/Getting-Started/Getting_Started_07_Filter-Drag-and-Drop-Categorical.mp4">Categorical data</a></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p>Using variable settings</p>
+<ul>
+<li>Doubleclick the column name</li>
+<li>Untick values to leave out</li>
+<li><a href="https://jasp-stats.github.io/jasp-video-library/assets/videos/Getting-Started/Getting_Started_06_Filter-by-Group.mp4">Filter by group</a></li>
+</ul>
+</div>
+</div>
+<ul>
+<li>Filtered rows struck through, analyses update immediately</li>
+<li>Nothing is deleted</li>
 </ul>
 </section>
 <section id="getting-help" class="slide level2">
@@ -528,11 +571,6 @@ Johnny van Doorn
 <h1>Visualization</h1>
 
 </section>
-<section id="data-visualization" class="slide level2">
-<h2>Data visualization</h2>
-<p><img data-src="../../images/nightingale.jpg" height="300"></p>
-<p><a href="https://en.wikipedia.org/wiki/Florence_Nightingale">Florence Nightingale</a></p>
-</section>
 <section id="why-visualize-data" class="slide level2">
 <h2>Why Visualize Data?</h2>
 <ul>
@@ -540,12 +578,71 @@ Johnny van Doorn
 <li>Spot patterns, outliers, or errors</li>
 <li>Invite the reader</li>
 </ul>
-</section>
-<section class="slide level2">
-
 <h3 id="why-visualize-data-1">Why Visualize Data?</h3>
 
 <img data-src="../../images/catterplot.jpg" class="r-stretch quarto-figure-center"><p class="caption">Figure 5.15 Catterplot</p></section>
+<section id="scutari-1854" class="slide level2 smaller">
+<h2>Scutari, 1854</h2>
+<div class="columns">
+<div class="column" style="width:38%;">
+<p><img data-src="../../images/nightingale.jpg" height="260"></p>
+<p><a href="https://en.wikipedia.org/wiki/Florence_Nightingale">Florence Nightingale</a></p>
+</div><div class="column" style="width:62%;">
+<ul>
+<li>Military hospital, Crimean War</li>
+<li>Recorded every death and its cause</li>
+<li>Two years of counting:</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Cause</th>
+<th style="text-align: right;">Deaths</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Preventable disease</td>
+<td style="text-align: right;">14476</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Wounds</td>
+<td style="text-align: right;">1758</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Other</td>
+<td style="text-align: right;">1748</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li>Infection killed far more than the enemy did</li>
+<li>Sanitary Commission arrived March 1855</li>
+<li>Later the first woman elected to the Statistical Society</li>
+</ul>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 class="smaller" id="the-diagram">The diagram</h3>
+
+<img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-11-1.png" width="1056" class="r-stretch"><p>Each wedge is a month; its area is the death rate.</p>
+<!-- --- -->
+<!-- ### What the picture says {.smaller} -->
+<!-- ::: {.incremental} -->
+<!-- - Blue dwarfs red: disease, not wounds -->
+<!-- - Same scale for both years, so the second rose being so much smaller *is* the finding -->
+<!-- - The panels split at March 1855, when the sanitary reforms began -->
+<!-- - Drawn in 1858, two years after the war: evidence, not a plea for rescue -->
+
+<!-- - Her case: the deaths were preventable, sanitation proved it, so reform army health permanently -->
+<!-- ::: -->
+</section>
 <section id="different-types-of-graphs-in-jasp" class="slide level2">
 <h2>Different types of graphs in JASP</h2>
 <ul>
@@ -608,233 +705,34 @@ Johnny van Doorn
 </section>
 <section id="january-1986" class="slide level2 smaller">
 <h2>28 January 1986</h2>
-<p>The night before the <em>Challenger</em> launch, engineers argued about whether the cold would damage the rubber O-ring seals on the booster rockets.</p>
-<p>They reviewed the damage recorded on previous flights, plotted against the temperature at launch.</p>
-<p>Tomorrow’s forecast: <strong>31°F (-0.5°C)</strong>. Should they launch?</p>
+<ul>
+<li>Night before the <em>Challenger</em> launch</li>
+<li>Would the cold damage the O-ring seals?</li>
+<li>Evidence: damage on previous flights, by launch temperature</li>
+</ul>
+<p>Tomorrow’s forecast: -0.5°C. Should they launch?</p>
 </section>
 <section id="the-evidence-they-reviewed" class="slide level2 smaller">
 <h2>The evidence they reviewed</h2>
 
-<img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"><p>Seven flights, no obvious pattern. Cold does not look dangerous.</p>
+<img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"><p>Seven flights. No obvious pattern.</p>
 </section>
 <section id="the-flights-that-were-left-off" class="slide level2 smaller">
 <h2>The flights that were left off</h2>
 
-<img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch"><p>The sixteen flights with <strong>no</strong> damage were the whole argument: they were the warm ones.</p>
+<img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch"><p>The sixteen flights with <em>no</em> damage were the warm ones. Launch day sat 12°C below all of them.</p>
 </section>
-<section id="off-the-edge-of-the-data" class="slide level2 smaller">
-<h2>Off the edge of the data</h2>
-
-<img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section>
 <section id="what-the-plot-could-not-say" class="slide level2 smaller">
 <h2>What the plot could not say</h2>
 <div>
 <ul>
-<li class="fragment">With only the damaged flights: <span class="math inline">\(r = -0.58\)</span>, <span class="math inline">\(p = .17\)</span>. With all of them: <span class="math inline">\(r = -0.64\)</span>, <span class="math inline">\(p = .001\)</span></li>
-<li class="fragment">The correlation barely changes. What changes is whether you can <em>see</em> it</li>
-<li class="fragment">Launch day was 22°F colder than anything in the data. No plot can tell you what happens out there</li>
+<li class="fragment">7 damaged flights only: <span class="math inline">\(r = -0.58\)</span>, <span class="math inline">\(p = .17\)</span></li>
+<li class="fragment">All 23 flights: <span class="math inline">\(r = -0.64\)</span>, <span class="math inline">\(p = .001\)</span></li>
+<li class="fragment">The correlation barely moves; what moves is whether you can <em>see</em> it</li>
+<li class="fragment">Launch day: 12°C colder than any data point</li>
 </ul>
 </div>
 <p><small>The engineers did recommend against launching; they were overruled. Tufte’s well-known “the chart caused the disaster” reading (<em>Visual Explanations</em>, 1997) is disputed, see Robison et al.&nbsp;(2002). Data: Dalal, Fowlkes &amp; Hoadley (1989), via <code>faraway::orings</code>.</small></p>
-</section></section>
-<section>
-<section id="variance-and-z-scores" class="title-slide slide level1 section center">
-<h1>Variance and z-scores</h1>
-
-</section>
-<section id="load-data" class="slide level2">
-<h2>Load data</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>n     <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">datasetsPath</span>(<span class="st">"Album Sales.csv"</span>))[, <span class="sc">-</span><span class="dv">4</span>]</span>
-<span id="cb1-3"><a href="#cb1-3"></a>data <span class="ot">&lt;-</span> data[<span class="dv">1</span><span class="sc">:</span>n, ] <span class="co"># take the first 10 rows of the album sales data set from Field</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">ssrTable</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-
-<div class="datatables html-widget html-fill-item" id="htmlwidget-8e1fe96c0688a849169a" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-8e1fe96c0688a849169a">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[10.256,985.6849999999999,1445.563,1188.193,574.513,568.954,471.814,537.352,514.068,174.093],[330,120,360,270,220,170,70,210,200,300],[43,28,35,33,44,19,20,22,21,40]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>adverts<\/th>\n      <th>sales<\/th>\n      <th>airplay<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"adverts","targets":1},{"name":"sales","targets":2},{"name":"airplay","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
-</div>
-</div>
-</section>
-<section id="variance" class="slide level2 subsection">
-<h2>Variance</h2>
-
-<img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-29-1.png" width="960" class="r-stretch"></section>
-<section id="standardize" class="slide level2">
-<h2>Standardize</h2>
-<p><span class="math display">\[z = \frac{x_i - \bar{x}}{{sd}_x}\]</span></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>z.sales      <span class="ot">&lt;-</span> (data<span class="sc">$</span>sales   <span class="sc">-</span> <span class="fu">mean</span>(data<span class="sc">$</span>sales))   <span class="sc">/</span> <span class="fu">sd</span>(data<span class="sc">$</span>sales)</span>
-<span id="cb2-2"><a href="#cb2-2"></a>z.airplay    <span class="ot">&lt;-</span> (data<span class="sc">$</span>airplay <span class="sc">-</span> <span class="fu">mean</span>(data<span class="sc">$</span>airplay)) <span class="sc">/</span> <span class="fu">sd</span>(data<span class="sc">$</span>airplay)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="standardize-1" class="slide level2 smaller">
-<h2>Standardize</h2>
-
-<img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-31-1.png" width="960" class="r-stretch"></section>
-<section id="standardize-2" class="slide level2 smaller">
-<h2>Standardize</h2>
-
-<img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-32-1.png" width="960" class="r-stretch"></section></section>
-<section>
-<section id="standard-error-and-confidence-intervals" class="title-slide slide level1 section center">
-<h1>Standard Error and<br>Confidence Intervals</h1>
-<p>You already know how to standardize a single value into a z-score. A sample <em>mean</em> varies from sample to sample too, so the same question applies: how far off is it, typically?</p>
-</section>
-<section id="standard-error" class="slide level2">
-<h2>Standard Error</h2>
-<blockquote>
-<p>95% confidence interval</p>
-</blockquote>
-<p><span class="math display">\[SE = \frac{\text{Standard deviation}}{\text{Square root of sample size}} = \frac{s}{\sqrt{n}}\]</span></p>
-<ul>
-<li>Lowerbound = <span class="math inline">\(\bar{x} - 1.96 \times SE\)</span></li>
-<li>Upperbound = <span class="math inline">\(\bar{x} + 1.96 \times SE\)</span></li>
-</ul>
-</section>
-<section id="standard-error-1" class="slide level2 flexbox vcenter">
-<h2>Standard Error</h2>
-<style>
-ul#menu li {
-    display:inline;
-}
-</style>
-<div onload="execute(10,10)">
-<ul id="menu">
-<li>
-n₁ = <input type="number" name="n_x1" id="n_x1" min="10" max="100" value="10" onclick="execute(document.getElementById('n_x1').value,document.getElementById('n_x2').value)" onchange="execute(document.getElementById('n_x1').value,document.getElementById('n_x2').value)">
-</li>
-<li>
-n₂ = <input type="number" name="n_x2" id="n_x2" min="10" max="100" value="10" onclick="execute(document.getElementById('n_x1').value,document.getElementById('n_x2').value)" onchange="execute(document.getElementById('n_x1').value,document.getElementById('n_x2').value)">
-</li>
-</ul>
-<canvas id="myCanvas" width="600" height="400" style="border:1px solid #c3c3c3;">
-Your browser does not support the canvas element.
-</canvas>
-<script type="text/javascript" charset="utf-8">
-
-function execute(n_x1, n_x2) {
-    
-var c         = document.getElementById("myCanvas");
-var ctx       = c.getContext("2d");
-
-// clear canvas
-//ctx.clearRect(0,0,600,400);
-
-// Store the current transformation matrix
-ctx.save();
-
-// Use the identity matrix while clearing the canvas
-ctx.setTransform(1, 0, 0, 1, 0, 0);
-ctx.clearRect(0, 0, 600, 400);
-ctx.beginPath();
-
-// Restore the transform
-ctx.restore();
-
-
-
-ctx.font      = "20pt Calibri";
-ctx.fillStyle = "#000000"; // text color
-ctx.fillText("The influence of n on the confidence interval", 50, 50);
-
-
-
-var mean_x1 = 5;
-var mean_x2 = 7;
-var   sd_x1 = 2.6;
-var   sd_x2 = 2.7;
-var    n_x1 = n_x1;
-var    n_x2 = n_x2;
-var   se_x1 = sd_x1/Math.sqrt(n_x1);
-var   se_x2 = sd_x2/Math.sqrt(n_x2);
-
-var text_x_pos = 50;
-var text_y_pos = 210;
-var text_guter = 20;
-
-ctx.font      = "14pt Calibri";
-ctx.fillStyle = "#000000"; // text color
-ctx.fillText("x̄₁ = "+mean_x1, text_x_pos, text_y_pos);
-ctx.fillText("x̄₂ = "+mean_x2, text_x_pos, text_y_pos+1*text_guter);
-ctx.fillText("σ₁ = "+sd_x1,  text_x_pos, text_y_pos+2*text_guter);
-ctx.fillText("σ₂ = "+sd_x2,  text_x_pos, text_y_pos+3*text_guter);
-ctx.fillText("n₁ = "+n_x1,    text_x_pos, text_y_pos+4*text_guter);
-ctx.fillText("n₂ = "+n_x2,    text_x_pos, text_y_pos+5*text_guter);
-ctx.fillText("se₁ = σ₁/√n₁ = "+sd_x1+"/√"+n_x1+" = "+se_x1.toFixed(2), text_x_pos, text_y_pos+6*text_guter);
-ctx.fillText("se₂ = σ₂/√n₂ = "+sd_x2+"/√"+n_x2+" = "+se_x2.toFixed(2), text_x_pos, text_y_pos+7*text_guter);
-
-var hight_x1 = (250/10)*mean_x1;
-var hight_x2 = (250/10)*mean_x2;
-
-var   sd_x1 = (250/10)*sd_x1;
-var   sd_x2 = (250/10)*sd_x2;
-
-var   se_x1 = 1.96*sd_x1/Math.sqrt(n_x1);
-var   se_x2 = 1.96*sd_x2/Math.sqrt(n_x2);
-
-var bar_x_pos  = 315;
-var bar_y_pos  = 350;
-var bar_width  = 100;
-var bar_gutter = 35;
-
-ctx.fillStyle = "#87ceeb";
-ctx.fillRect(bar_x_pos, bar_y_pos-hight_x1,  bar_width,hight_x1);
-
-ctx.fillStyle = "#87ceeb";
-ctx.fillRect(bar_x_pos+bar_width+bar_gutter, bar_y_pos-hight_x2,  bar_width,hight_x2);
-
-
-ctx.moveTo(bar_x_pos+(bar_width/2), bar_y_pos-hight_x1+se_x1);
-ctx.lineTo(bar_x_pos+(bar_width/2), bar_y_pos-hight_x1-se_x1);
-ctx.stroke();
-
-ctx.moveTo(bar_x_pos+(bar_width/4),   bar_y_pos-hight_x1-se_x1); // upper bound 
-ctx.lineTo(bar_x_pos+(bar_width/4*3), bar_y_pos-hight_x1-se_x1); // upper bound
-ctx.stroke();
-
-ctx.moveTo(bar_x_pos+(bar_width/4),   bar_y_pos-hight_x1+se_x1); // lower bound 
-ctx.lineTo(bar_x_pos+(bar_width/4*3), bar_y_pos-hight_x1+se_x1); // lower bound
-ctx.stroke();
-
-ctx.moveTo(bar_x_pos+bar_width+bar_gutter+(bar_width/2), bar_y_pos-hight_x2+se_x2);
-ctx.lineTo(bar_x_pos+bar_width+bar_gutter+(bar_width/2), bar_y_pos-hight_x2-se_x2);
-ctx.stroke();
-
-ctx.moveTo(bar_x_pos+bar_width+bar_gutter+(bar_width/4),   bar_y_pos-hight_x2-se_x2); // upper bound 
-ctx.lineTo(bar_x_pos+bar_width+bar_gutter+(bar_width/4*3), bar_y_pos-hight_x2-se_x2); // upper bound
-ctx.stroke();
-
-ctx.moveTo(bar_x_pos+bar_width+bar_gutter+(bar_width/4),   bar_y_pos-hight_x2+se_x2); // lower bound 
-ctx.lineTo(bar_x_pos+bar_width+bar_gutter+(bar_width/4*3), bar_y_pos-hight_x2+se_x2); // lower bound
-ctx.stroke();
-
-// X in bar
-ctx.fillStyle = "#000";
-ctx.font      = "20pt Calibri";
-ctx.fillText("x₁", bar_x_pos+10,                      bar_y_pos-hight_x1+hight_x1-10);
-ctx.fillText("x₂", bar_x_pos+bar_width+bar_gutter+10, bar_y_pos-hight_x2+hight_x2-10);
-
-// upper and lower bound text
-ctx.fillStyle = "#000";
-ctx.font      = "10pt Calibri";
-ctx.fillText("1.96se₁+x̄₁", bar_x_pos+(bar_width/4*3), bar_y_pos-hight_x1-se_x1+2);
-ctx.fillText("1.96se₁-x̄₁", bar_x_pos+(bar_width/4*3), bar_y_pos-hight_x1+se_x1+2);
-
-ctx.fillText("1.96se₂+x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3), bar_y_pos-hight_x2-se_x2+2);
-ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3), bar_y_pos-hight_x2+se_x2+2);
-
-}
-</script>
-</div>
-</section>
-<section id="section" class="slide level2">
-<h2></h2>
-<div class="cell">
-<div class="cell-output-display">
-<p><img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-41-1.png" width="960" height="600"></p>
-</div>
-</div>
 </section></section>
 <section>
 <section id="closing" class="title-slide slide level1 center">
@@ -844,6 +742,8 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <section id="next-week" class="slide level2">
 <h2>Next Week</h2>
 <ul>
+<li>Variance and z-scores</li>
+<li>The t-distribution</li>
 <li>Correlation
 <ul>
 <li>How it works</li>
