@@ -230,9 +230,7 @@ plot(damaged$Temperature_C, damaged$Damaged_ORings,
      main = "Flights that suffered O-ring damage")
 ```
 
-Seven flights. No obvious pattern.
-
-## The flights that were left off {.smaller}
+## The flights that were excluded {.smaller}
 
 ```{r, echo=FALSE}
 par(cex = 1.0, cex.lab = 1.1)
@@ -251,15 +249,11 @@ legend("topright", legend = c("damage", "no damage"),
        pch = 19, col = c("darkred", "darkgreen"), bty = "n", cex = 0.9)
 ```
 
-The sixteen flights with *no* damage were the warm ones. Launch day sat 12°C below all of them.
 
 ## What the plot could not say {.smaller}
 
 ::: {.incremental}
 - 7 damaged flights only: $r = -0.58$, $p = .17$
 - All 23 flights: $r = -0.64$, $p = .001$
-- The correlation barely moves; what moves is whether you can *see* it
-- Launch day: 12°C colder than any data point
+- Launch day: 12°C colder than any data point, so can you realistically extrapolate??
 :::
-
-<small>The engineers did recommend against launching; they were overruled. Tufte's well-known "the chart caused the disaster" reading (*Visual Explanations*, 1997) is disputed, see Robison et al. (2002). Data: Dalal, Fowlkes & Hoadley (1989), via `faraway::orings`.</small>
