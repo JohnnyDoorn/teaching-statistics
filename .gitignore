@@ -23,3 +23,9 @@ _lecture-notes*.md
 
 # Lecture recordings/transcripts: large, and not for the public repo.
 transcripts/
+
+# Course textbooks, whatever the format. Copyrighted, and this repo is public
+# via GitHub Pages, so publishing them would be straightforward infringement.
+# They are also 342 MB, which alone would push the site past the 1 GB Pages
+# limit. Nothing here is tracked or referenced by any page.
+statbooks/
