@@ -3,7 +3,7 @@ title: "6. Correlation"
 subtitle: "From covariance to r"
 author: "Johnny van Doorn"
 date: "11 September 2026"
-view: "https://teams.microsoft.com/meet/330874021866475?p=QMChUAKXBz9m28zZWL"
+view: "https://teams.microsoft.com/meet/374905797863700?p=MCS3ehSHf2yVIN9YVq"
 footer: "Scientific & Statistical Reasoning"
 format:
   revealjs:
@@ -61,10 +61,10 @@ Chapter 7 (§7.1–7.11), 2.8–2.9 (Standard error &amp; confidence intervals)
 
 ## Recommended Exercises
 
-- [Exercise 7.1](https://discoverjasp.com/pages/exercises#chapter-7)
+- [Exercise 7.1](https://discoverjasp.com/pages/smart_alex#task-7.1)
   - Note: `pets.jasp` can be downloaded from the JASP data library
-- [Exercise 7.6](https://discoverjasp.com/pages/exercises#chapter-7)
-- [Exercise 7.7](https://discoverjasp.com/pages/exercises#chapter-7)
+- [Exercise 7.6](https://discoverjasp.com/pages/smart_alex#task-7.6)
+- [Exercise 7.7](https://discoverjasp.com/pages/smart_alex#task-7.7)
 
 ```{r child="../../footer.qmd"}
 ```

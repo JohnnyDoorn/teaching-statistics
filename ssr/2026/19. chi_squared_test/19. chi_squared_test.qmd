@@ -38,9 +38,9 @@ Chapter 16 (§16.1–16.10)
 
 ## Recommended Exercises
 
-- [Exercise 16.1](https://discoverjasp.com/pages/exercises#chapter-16)
-- [Exercise 16.6](https://discoverjasp.com/pages/exercises#chapter-16)
-- [Exercise 16.7](https://discoverjasp.com/pages/exercises#chapter-16)
+- [Exercise 16.1](https://discoverjasp.com/pages/smart_alex#task-16.1)
+- [Exercise 16.6](https://discoverjasp.com/pages/smart_alex#task-16.6)
+- [Exercise 16.7](https://discoverjasp.com/pages/smart_alex#task-16.7)
 
 ```{r child="../../footer.qmd"}
 ```

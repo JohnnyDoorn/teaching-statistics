@@ -2,7 +2,7 @@
 title: "5. JASP & Visualization"
 author: "Johnny van Doorn"
 date: "9 September 2026"
-view: "https://teams.microsoft.com/meet/330874021866475?p=QMChUAKXBz9m28zZWL"
+view: "https://amsuni-my.sharepoint.com/:v:/g/personal/j_b_vandoorn_uva_nl/IQDaPkBoQ_zPS4_dOuu2SBRtAc1rvdfbynvEMivsu7bgLrY?e=saUTQ9&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D"
 footer: "Scientific & Statistical Reasoning"
 format:
   revealjs:
@@ -44,7 +44,7 @@ Chapters 4 (§4.1–4.10), 5 (§5.1–5.6)
 
 ## Recommended Exercises
 
-- [Exercise 5.1](https://discoverjasp.com/pages/exercises#chapter-5)
+- [Exercise 5.1](https://discoverjasp.com/pages/smart_alex#task-5.1)
 
 ```{r child="../../footer.qmd"}
 ```

@@ -40,9 +40,9 @@ Chapter 11 (§11.1–11.13)
 
 ## Recommended Exercises
 
-- [Exercise 11.1](https://discoverjasp.com/pages/exercises#chapter-11)
-- [Exercise 11.2](https://discoverjasp.com/pages/exercises#chapter-11)
-- [Exercise 11.4](https://discoverjasp.com/pages/exercises#chapter-11)
+- [Exercise 11.1](https://discoverjasp.com/pages/smart_alex#task-11.1)
+- [Exercise 11.2](https://discoverjasp.com/pages/smart_alex#task-11.2)
+- [Exercise 11.4](https://discoverjasp.com/pages/smart_alex#task-11.4)
 - How would conclusions/interpretations differ for α = 0.01?
 - How are the assumptions looking for these data sets?
 

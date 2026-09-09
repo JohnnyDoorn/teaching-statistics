@@ -42,9 +42,9 @@ With multiple predictor variables:
 
 ## Recommended Exercises
 
-- [Exercise 13.1](https://discoverjasp.com/pages/exercises#chapter-13)
-- [Exercise 13.3](https://discoverjasp.com/pages/exercises#chapter-13)
-- [Exercise 13.6](https://discoverjasp.com/pages/exercises#chapter-13)
+- [Exercise 13.1](https://discoverjasp.com/pages/smart_alex#task-13.1)
+- [Exercise 13.3](https://discoverjasp.com/pages/smart_alex#task-13.3)
+- [Exercise 13.6](https://discoverjasp.com/pages/smart_alex#task-13.6)
 - You do not need to compute effects sizes by hand!
 
 ```{r child="../../footer.qmd"}

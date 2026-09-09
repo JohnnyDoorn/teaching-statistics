@@ -55,9 +55,9 @@ Today we finally put it to use on a single sample mean.
 
 ## Recommended Exercises
 
-- [Exercise 9.1](https://discoverjasp.com/pages/exercises#chapter-9)
-- [Exercise 9.3](https://discoverjasp.com/pages/exercises#chapter-9)
-- [Exercise 9.4](https://discoverjasp.com/pages/exercises#chapter-9)
+- [Exercise 9.1](https://discoverjasp.com/pages/smart_alex#task-9.1)
+- [Exercise 9.3](https://discoverjasp.com/pages/smart_alex#task-9.3)
+- [Exercise 9.4](https://discoverjasp.com/pages/smart_alex#task-9.4)
 - How would conclusions/interpretations differ for α = 0.01?
 - How are the assumptions looking for these data sets?
 

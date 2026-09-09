@@ -35,7 +35,7 @@ Source: [ARTIST](http://web.archive.org/web/20221018074534/http://apps3.cehd.umn
 Field, *Discovering Statistics Using JASP*.
 
 - Block 1: Chapters 1 through 8.8 (skipping Chapter 6)
-- Companion website: [discoverjasp.com](https://discoverjasp.com/pages/exercises)
+- Companion website: [discoverjasp.com](https://discoverjasp.com)
 - You have the book, glossary included, during the exam
 
 ### Sections A to D {.smaller}

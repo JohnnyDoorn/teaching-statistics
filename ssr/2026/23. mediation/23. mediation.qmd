@@ -37,8 +37,8 @@ Chapter 10 (§10.4–10.7)
 
 ## Recommended Exercises
 
-- [Exercise 10.4](https://discoverjasp.com/pages/exercises#chapter-10)
-- [Exercise 10.5](https://discoverjasp.com/pages/exercises#chapter-10)
+- [Exercise 10.4](https://discoverjasp.com/pages/smart_alex#task-10.4)
+- [Exercise 10.5](https://discoverjasp.com/pages/smart_alex#task-10.5)
 
 ```{r child="../../footer.qmd"}
 ```

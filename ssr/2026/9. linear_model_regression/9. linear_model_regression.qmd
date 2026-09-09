@@ -43,7 +43,7 @@ Chapter 8 (§8.1–8.8)
 
 ## Recommended Exercises
 
-- [Exercise 8.1](https://discoverjasp.com/pages/exercises#chapter-8)
+- [Exercise 8.1](https://discoverjasp.com/pages/smart_alex#task-8.1)
 
 ```{r child="../../footer.qmd"}
 ```

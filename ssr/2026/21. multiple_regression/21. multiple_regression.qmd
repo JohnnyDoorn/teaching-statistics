@@ -48,8 +48,8 @@ Chapter 8 (§8.9–8.16)
 
 ## Recommended Exercises
 
-- [Exercise 8.4](https://discoverjasp.com/pages/exercises#chapter-8)
-- [Exercise 8.7](https://discoverjasp.com/pages/exercises#chapter-8)
+- [Exercise 8.4](https://discoverjasp.com/pages/smart_alex#task-8.4)
+- [Exercise 8.7](https://discoverjasp.com/pages/smart_alex#task-8.7)
 
 ```{r child="../../footer.qmd"}
 ```

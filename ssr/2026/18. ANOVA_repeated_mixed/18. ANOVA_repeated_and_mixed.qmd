@@ -49,9 +49,9 @@ Chapter 14 (§14.1–14.18)
 
 ## Recommended Exercises
 
-- [Exercise 14.4](https://discoverjasp.com/pages/exercises#chapter-14)
-- [Exercise 14.5](https://discoverjasp.com/pages/exercises#chapter-14)
-- To understand mechanics of RM ANOVA, [Exercise 14.1](https://discoverjasp.com/pages/exercises#chapter-14)
+- [Exercise 14.4](https://discoverjasp.com/pages/smart_alex#task-14.4)
+- [Exercise 14.5](https://discoverjasp.com/pages/smart_alex#task-14.5)
+- To understand mechanics of RM ANOVA, [Exercise 14.1](https://discoverjasp.com/pages/smart_alex#task-14.1)
 - No sums of squares or effect size calculations required for the exam
 
 ```{r child="../../footer.qmd"}

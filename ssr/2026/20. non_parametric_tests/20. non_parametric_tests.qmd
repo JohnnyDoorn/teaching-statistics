@@ -51,10 +51,10 @@ Chapter 15 (§15.1–15.9)
 
 ## Recommended Exercises
 
-- [Exercise 15.1](https://discoverjasp.com/pages/exercises#chapter-15)
-- [Exercise 15.2](https://discoverjasp.com/pages/exercises#chapter-15)
-- [Exercise 15.4](https://discoverjasp.com/pages/exercises#chapter-15)
-- [Exercise 15.11](https://discoverjasp.com/pages/exercises#chapter-15)
+- [Exercise 15.1](https://discoverjasp.com/pages/smart_alex#task-15.1)
+- [Exercise 15.2](https://discoverjasp.com/pages/smart_alex#task-15.2)
+- [Exercise 15.4](https://discoverjasp.com/pages/smart_alex#task-15.4)
+- [Exercise 15.11](https://discoverjasp.com/pages/smart_alex#task-15.11)
 
 ```{r child="../../footer.qmd"}
 ```
