@@ -272,5 +272,5 @@ legend("topright", legend = c("damage", "no damage"),
 ::: {.incremental}
 - 7 damaged flights only: $r = -0.58$, $p = .17$
 - All 23 flights: $r = -0.64$, $p = .001$
-- Launch day: 12°C colder than any data point, so can you realistically extrapolate??
+- Launch day: 12°C colder than any data point, so can you realistically [extrapolate](https://xkcd.com/605/)??
 :::
