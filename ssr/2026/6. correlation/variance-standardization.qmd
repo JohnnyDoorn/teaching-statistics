@@ -6,7 +6,11 @@ source("../../_setup.R")
 
 ## Load data {.smaller}
 
-A psychologist wanted to know how exam **anxiety** relates to exam **performance**. She measured anxiety before the exam with the Exam Anxiety Questionnaire (scored out of 100), and recorded each student's percentage mark. She also asked how many hours they had spent revising.
+Does exam anxiety hurt exam performance?
+
+- Anxiety measured before the exam (EAQ, out of 100)
+- Performance: percentage mark
+- Revision time: hours
 
 ```{r, eval=TRUE, echo=TRUE}
 n    <- 10
@@ -17,7 +21,7 @@ ssrTable(data)
 
 ## Three different units {.smaller}
 
-Revision is in **hours**, performance in **percent**, anxiety in **EAQ points**. A deviation of 5 does not mean the same thing in each.
+Revision in hours, performance in percent, anxiety in EAQ points. A deviation of 5 means something different in each.
 
 ```{r, echo = FALSE}
 exam_grade   <- data$exam_grade
@@ -64,7 +68,7 @@ lines(rep(mean.z.exam, N), col='orange')
 lines(rep(mean.z.anxiety, N), col='blue', lt=2)
 ```
 
-Both now have mean 0 and standard deviation 1.
+Both now have mean 0 and sd 1.
 
 ## Standardize {.smaller}
 
@@ -84,4 +88,4 @@ segments(1:N, mean.z.exam, 1:N, z.exam, col='orange')
 segments(1:N, mean.z.anxiety, 1:N, z.anxiety, col='blue', lty = 2)
 ```
 
-Notice how the two tend to sit on *opposite* sides of their means.
+The two tend to sit on *opposite* sides of their means.

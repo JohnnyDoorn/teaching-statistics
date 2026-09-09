@@ -68,12 +68,9 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#different-types-of-graphs-in-jasp" id="toc-different-types-of-graphs-in-jasp" class="nav-link" data-scroll-target="#different-types-of-graphs-in-jasp">Different types of graphs in JASP</a></li>
   <li><a href="#boxplots-visualizing-spread-and-outliers" id="toc-boxplots-visualizing-spread-and-outliers" class="nav-link" data-scroll-target="#boxplots-visualizing-spread-and-outliers">Boxplots: Visualizing Spread and Outliers</a></li>
   <li><a href="#raincloud-plots-boxplots-raw-data" id="toc-raincloud-plots-boxplots-raw-data" class="nav-link" data-scroll-target="#raincloud-plots-boxplots-raw-data">Raincloud plots: Boxplots + Raw Data</a></li>
-  <li><a href="#best-practices-in-data-visualization" id="toc-best-practices-in-data-visualization" class="nav-link" data-scroll-target="#best-practices-in-data-visualization">Best Practices in Data Visualization</a></li>
   <li><a href="#critically-assess-graphs" id="toc-critically-assess-graphs" class="nav-link" data-scroll-target="#critically-assess-graphs">Critically Assess Graphs</a></li>
-  <li><a href="#scale-matters" id="toc-scale-matters" class="nav-link" data-scroll-target="#scale-matters">Scale Matters</a></li>
-  <li><a href="#error-bars" id="toc-error-bars" class="nav-link" data-scroll-target="#error-bars">Error Bars!</a></li>
   </ul></li>
-  <li><a href="#leaving-data-out" id="toc-leaving-data-out" class="nav-link" data-scroll-target="#leaving-data-out">Leaving Data Out</a>
+  <li><a href="#using-plots-to-predict" id="toc-using-plots-to-predict" class="nav-link" data-scroll-target="#using-plots-to-predict">Using plots to predict</a>
   <ul class="collapse">
   <li><a href="#january-1986" id="toc-january-1986" class="nav-link" data-scroll-target="#january-1986">28 January 1986</a></li>
   <li><a href="#the-evidence-they-reviewed" id="toc-the-evidence-they-reviewed" class="nav-link" data-scroll-target="#the-evidence-they-reviewed">The evidence they reviewed</a></li>
@@ -163,7 +160,7 @@ ul.task-list li input[type="checkbox"] {
 <li>Open JASP, load your dataset (.jasp, .csv, .sav, etc.)</li>
 <li>Familiarize with the interface: Data view, Input panel, Output panel</li>
 </ol>
-<p>JASP has two modes: the data editor (view and edit your data) and the analysis mode (conduct your analyses).</p>
+<p>Two modes: data editor (view and edit) and analysis mode.</p>
 <hr>
 <section id="the-start-up-window" class="level3">
 <h3 class="anchored" data-anchor-id="the-start-up-window">The start-up window</h3>
@@ -317,7 +314,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="filtering-your-data" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="filtering-your-data">Filtering your data</h2>
-<p>Two routes to analysing only part of your data.</p>
+<p>Two routes to using only part of your data.</p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p>Using the filter</p>
@@ -476,16 +473,6 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <hr>
 </section>
-<section id="best-practices-in-data-visualization" class="level2">
-<h2 class="anchored" data-anchor-id="best-practices-in-data-visualization">Best Practices in Data Visualization</h2>
-<ul>
-<li>Use clear labels and titles</li>
-<li>Avoid unnecessary 3D effects</li>
-<li>Choose appropriate scales</li>
-<li>Check for misleading representations</li>
-</ul>
-<hr>
-</section>
 <section id="critically-assess-graphs" class="level2">
 <h2 class="anchored" data-anchor-id="critically-assess-graphs">Critically Assess Graphs</h2>
 <ul>
@@ -494,38 +481,66 @@ ul.task-list li input[type="checkbox"] {
 <li>Are error bars (e.g., confidence intervals) included where relevant?</li>
 </ul>
 <hr>
-<section id="critically-assess-graphs-1" class="level3">
-<h3 class="anchored" data-anchor-id="critically-assess-graphs-1">Critically Assess Graphs</h3>
+<section id="best-practices" class="level3">
+<h3 class="anchored" data-anchor-id="best-practices">Best practices</h3>
+<ul>
+<li>Use clear labels and titles</li>
+<li>Avoid unnecessary 3D effects</li>
+<li>Choose appropriate scales</li>
+<li>Check for misleading representations</li>
+</ul>
+<hr>
+</section>
+<section id="labels-and-axes" class="level3">
+<h3 class="anchored" data-anchor-id="labels-and-axes">Labels and axes</h3>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="5.-jasp_visualization_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
-</section>
-<section id="scale-matters" class="level2">
-<h2 class="anchored" data-anchor-id="scale-matters">Scale Matters</h2>
+<section id="scale-matters" class="level3">
+<h3 class="anchored" data-anchor-id="scale-matters">Scale Matters</h3>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="5.-jasp_visualization_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
-<section id="error-bars" class="level2">
-<h2 class="anchored" data-anchor-id="error-bars">Error Bars!</h2>
+<section id="error-bars" class="level3">
+<h3 class="anchored" data-anchor-id="error-bars">Error Bars!</h3>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="5.-jasp_visualization_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
+<section id="what-is-the-plot-for" class="level3 smaller">
+<h3 class="smaller anchored" data-anchor-id="what-is-the-plot-for">What is the plot for?</h3>
+<p>Tufte’s principles, as Field lists them:</p>
+<ul>
+<li>Show the data, and avoid distorting it</li>
+<li>Many numbers, minimum ink</li>
+<li>Encourage the reader to compare</li>
+<li>Reveal the underlying message</li>
+</ul>
+<p>In practice:</p>
+<div class="incremental">
+<ul class="incremental">
+<li>Cut the chartjunk: 3-D effects, gradients, decorative fills</li>
+<li>Colour marks the one thing you want noticed, not decoration</li>
+<li>Decide the message first, then build the plot around it</li>
+</ul>
+</div>
 </section>
-<section id="leaving-data-out" class="level1 section">
-<h1 class="section">Leaving Data Out</h1>
+</section>
+</section>
+<section id="using-plots-to-predict" class="level1 section">
+<h1 class="section">Using plots to predict</h1>
 <section id="january-1986" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="january-1986">28 January 1986</h2>
 <ul>
-<li>Night before the <em>Challenger</em> launch</li>
+<li>Night before the <a href="https://en.wikipedia.org/wiki/Space_Shuttle_Challenger_disaster"><em>Challenger</em></a> launch</li>
 <li>Would the cold damage the O-ring seals?</li>
 <li>Evidence: damage on previous flights, by launch temperature</li>
 </ul>

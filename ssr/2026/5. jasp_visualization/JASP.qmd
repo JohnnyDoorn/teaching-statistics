@@ -34,7 +34,7 @@ rm(list=ls())
 2. Open JASP, load your dataset (.jasp, .csv, .sav, etc.)
 3. Familiarize with the interface: Data view, Input panel, Output panel
 
-JASP has two modes: the data editor (view and edit your data) and the analysis mode (conduct your analyses).
+Two modes: data editor (view and edit) and analysis mode.
 
 ---
 
@@ -163,7 +163,7 @@ See [discoverjasp.com](https://discoverjasp.com/pages/data) for examples.
 
 ## Filtering your data {.smaller}
 
-Two routes to analysing only part of your data.
+Two routes to using only part of your data.
 
 ::: columns
 ::: {.column width="50%"}

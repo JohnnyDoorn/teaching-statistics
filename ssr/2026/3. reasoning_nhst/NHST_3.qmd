@@ -94,7 +94,7 @@ text(k, p_kp + yMax * 0.08, round(p_kp, 3), col = "darkgreen", cex = 0.9)
 
 ## What we just did has a name {.smaller}
 
-The number of correct answers is a **test statistic**.
+The number of correct answers is a *test statistic*.
 
 > A statistic that summarizes the data and is used for hypothesis testing, because we know how it's distributed under different hypotheses
 

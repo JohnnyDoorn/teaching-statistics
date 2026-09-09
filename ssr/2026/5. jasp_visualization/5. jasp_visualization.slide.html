@@ -382,7 +382,7 @@ Johnny van Doorn
 <li>Open JASP, load your dataset (.jasp, .csv, .sav, etc.)</li>
 <li>Familiarize with the interface: Data view, Input panel, Output panel</li>
 </ol>
-<p>JASP has two modes: the data editor (view and edit your data) and the analysis mode (conduct your analyses).</p>
+<p>Two modes: data editor (view and edit) and analysis mode.</p>
 </section>
 <section class="slide level2">
 
@@ -531,7 +531,7 @@ Johnny van Doorn
 </section>
 <section id="filtering-your-data" class="slide level2 smaller">
 <h2>Filtering your data</h2>
-<p>Two routes to analysing only part of your data.</p>
+<p>Two routes to using only part of your data.</p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p>Using the filter</p>
@@ -668,15 +668,6 @@ Johnny van Doorn
 <h2>Raincloud plots: Boxplots + Raw Data</h2>
 
 <img data-src="../../images/figure-5-11.jpg" class="r-stretch quarto-figure-center"><p class="caption">Figure 5.11 Raincloud plots</p></section>
-<section id="best-practices-in-data-visualization" class="slide level2">
-<h2>Best Practices in Data Visualization</h2>
-<ul>
-<li>Use clear labels and titles</li>
-<li>Avoid unnecessary 3D effects</li>
-<li>Choose appropriate scales</li>
-<li>Check for misleading representations</li>
-</ul>
-</section>
 <section id="critically-assess-graphs" class="slide level2">
 <h2>Critically Assess Graphs</h2>
 <ul>
@@ -687,26 +678,60 @@ Johnny van Doorn
 </section>
 <section class="slide level2">
 
-<h3 id="critically-assess-graphs-1">Critically Assess Graphs</h3>
+<h3 id="best-practices">Best practices</h3>
+<ul>
+<li>Use clear labels and titles</li>
+<li>Avoid unnecessary 3D effects</li>
+<li>Choose appropriate scales</li>
+<li>Check for misleading representations</li>
+</ul>
+</section>
+<section class="slide level2">
 
-<img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
-<section id="scale-matters" class="slide level2">
-<h2>Scale Matters</h2>
-
-<img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section>
-<section id="error-bars" class="slide level2">
-<h2>Error Bars!</h2>
-
-<img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"></section></section>
+<h3 id="labels-and-axes">Labels and axes</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
+</div>
+</div>
+<h3 id="scale-matters">Scale Matters</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
+</div>
+</div>
+<h3 id="error-bars">Error Bars!</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-14-1.png" width="960"></p>
+</div>
+</div>
+<h3 class="smaller" id="what-is-the-plot-for">What is the plot for?</h3>
+<p>Tufte’s principles, as Field lists them:</p>
+<ul>
+<li>Show the data, and avoid distorting it</li>
+<li>Many numbers, minimum ink</li>
+<li>Encourage the reader to compare</li>
+<li>Reveal the underlying message</li>
+</ul>
+<p>In practice:</p>
+<div>
+<ul>
+<li class="fragment">Cut the chartjunk: 3-D effects, gradients, decorative fills</li>
+<li class="fragment">Colour marks the one thing you want noticed, not decoration</li>
+<li class="fragment">Decide the message first, then build the plot around it</li>
+</ul>
+</div>
+</section></section>
 <section>
-<section id="leaving-data-out" class="title-slide slide level1 section center">
-<h1>Leaving Data Out</h1>
+<section id="using-plots-to-predict" class="title-slide slide level1 section center">
+<h1>Using plots to predict</h1>
 
 </section>
 <section id="january-1986" class="slide level2 smaller">
 <h2>28 January 1986</h2>
 <ul>
-<li>Night before the <em>Challenger</em> launch</li>
+<li>Night before the <a href="https://en.wikipedia.org/wiki/Space_Shuttle_Challenger_disaster"><em>Challenger</em></a> launch</li>
 <li>Would the cold damage the O-ring seals?</li>
 <li>Evidence: damage on previous flights, by launch temperature</li>
 </ul>

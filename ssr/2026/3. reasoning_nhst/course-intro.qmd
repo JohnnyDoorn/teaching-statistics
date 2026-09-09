@@ -2,26 +2,26 @@
 
 ## The stats half of SSR {.smaller}
 
-SSR has two halves that run side by side: **reasoning** (arguments, rationality, critical thinking) and **statistics**. These are the statistics lectures.
+Two halves running side by side: reasoning (arguments, rationality, critical thinking) and statistics. These are the statistics lectures.
 
-- **Block 1**: getting back into statistics
+- Block 1: getting back into statistics
     - NHST, correlation, regression
-- **Block 2**: comparing means
+- Block 2: comparing means
     - t-tests, ANOVA, chi-square, non-parametric tests
-- **Block 3**: multiple predictors
+- Block 3: multiple predictors
     - multiple regression, mediation, moderation
 
 Each block closes with an interim exam.
 
 ## What will you learn? {.smaller}
 
-Not just how to compute the right number. Statistics education distinguishes three levels, and we want all three:
+Not just computing the right number. Three levels, and we want all three:
 
 ::: {.incremental}
-- Statistical **literacy**: knowing the concepts and working the tools
+- Statistical literacy: knowing the concepts and working the tools
     - Identify, describe, translate, interpret, read, compute
-- Statistical **reasoning**: understanding *why* and *how* a method does what it does
-- Statistical **thinking**: using it in the wild
+- Statistical reasoning: understanding *why* and *how* a method works
+- Statistical thinking: using it in the wild
     - Apply: what method fits this situation?
     - Critique: reflect on the work of others
     - Evaluate: assign value to that work
@@ -38,28 +38,26 @@ Field, *Discovering Statistics Using JASP*.
 - Companion website: [discoverjasp.com](https://discoverjasp.com/pages/exercises)
 - You have the book, glossary included, during the exam
 
-So the goal is not to memorize the book, but to know your way around it.
-
 ### Sections A to D {.smaller}
 
-Field flags every section with a letter for difficulty, and for each letter lists what it does to your brain:
+Every section carries a letter for difficulty, each rhyming with what it does to your brain:
 
-- **A** is for brain *Attain*: everyone should get something out of these
-- **B** is for brain *Bane*: a bit more statistical knowledge needed, and at times a source of unhappiness
-- **C** is for brain *Complain*: final-year or master's material
-- **D** is for brain *Drain*: difficult enough to drain Field's own brain
+- A is for brain *Attain*: everyone should get something out of these
+- B is for brain *Bane*: more knowledge needed, at times a source of unhappiness
+- C is for brain *Complain*: final-year or master's material
+- D is for brain *Drain*: difficult enough to drain Field's own brain
 
-In this course we primarily live in **A** and **B**, so focus on those sections while reading.
+We live mostly in A and B.
 
 ### Characters {.smaller}
 
-The book is full of little characters. The ones worth looking out for:
+Worth looking out for:
 
-- **Cramming Sam**: the key points of a chapter, summarized. Your friend the night before an exam
-- **Smart Alex**: the end-of-chapter tasks, with answers on the website
-- **Labcoat Leni**: real data from real studies, instead of Field's invented ones
-- **Oliver Twisted**: "Please, Sir, can I have some more?" Extra material on the website
-- **Jane Superbrain**: advanced tangents, for a deeper understanding
+- Cramming Sam: key points of a chapter, summarized
+- Smart Alex: end-of-chapter tasks, answers on the website
+- Labcoat Leni: real data from real studies
+- Oliver Twisted: extra material on the website
+- Jane Superbrain: advanced tangents
 
 ## Software
 - JASP

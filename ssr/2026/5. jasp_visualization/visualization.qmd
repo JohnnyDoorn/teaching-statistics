@@ -131,7 +131,15 @@ Each wedge is a month; its area is the death rate.
 
 ---
 
-## Best Practices in Data Visualization
+## Critically Assess Graphs
+
+- Are axes labelled (variable, units)?
+- Are axes broken/equally spaced?
+- Are error bars (e.g., confidence intervals) included where relevant?
+
+---
+
+### Best practices
 
 - Use clear labels and titles
 - Avoid unnecessary 3D effects
@@ -142,15 +150,7 @@ Each wedge is a month; its area is the death rate.
 ---
 
 
-## Critically Assess Graphs
-
-- Are axes labelled (variable, units)?
-- Are axes broken/equally spaced?
-- Are error bars (e.g., confidence intervals) included where relevant?
-
----
-
-### Critically Assess Graphs
+### Labels and axes
 ```{r, echo=FALSE}
 set.seed(123)
 
@@ -169,7 +169,7 @@ bp <- barplot(means, names.arg = c("SPSS", "JASP"),
 
 
 
-## Scale Matters
+### Scale Matters
 ```{r, echo=FALSE}
 
 # Bad: no axis labels
@@ -189,7 +189,7 @@ axis(2, labels = seq(90, 100, 2), at = seq(0, 10, by =2))
 ```
 
 
-## Error Bars!
+### Error Bars!
 ```{r, echo=FALSE}
 
 # Bad: no axis labels
@@ -205,11 +205,28 @@ arrows(x0 = bp, y0 = means - ses*tcrit, x1 = bp, y1 = means + ses*tcrit,
 
 
 
-# Leaving Data Out {.section}
+### What is the plot for? {.smaller}
+
+Tufte's principles, as Field lists them:
+
+- Show the data, and avoid distorting it
+- Many numbers, minimum ink
+- Encourage the reader to compare
+- Reveal the underlying message
+
+In practice:
+
+::: {.incremental}
+- Cut the chartjunk: 3-D effects, gradients, decorative fills
+- Colour marks the one thing you want noticed, not decoration
+- Decide the message first, then build the plot around it
+:::
+
+# Using plots to predict {.section}
 
 ## 28 January 1986 {.smaller}
 
-- Night before the *Challenger* launch
+- Night before the [*Challenger*](https://en.wikipedia.org/wiki/Space_Shuttle_Challenger_disaster) launch
 - Would the cold damage the O-ring seals?
 - Evidence: damage on previous flights, by launch temperature
 

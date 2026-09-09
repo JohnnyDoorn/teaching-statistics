@@ -183,13 +183,13 @@ sum(z.exam * z.anxiety ) / (N - 1)
 
 ## These were only 10 students {.smaller}
 
-We used 10 students so we could do the sums by hand. The psychologist actually tested **103**:
+Ten students, so the sums fit on a slide. She tested 103:
 
 ```{r, echo=TRUE}
 cor(allData$exam_grade, allData$anxiety)
 ```
 
-Same story, weaker: small samples wobble more than large ones. This is the value the book reports.
+Same story, weaker. Small samples wobble more.
 
 
 ## Plot correlation
