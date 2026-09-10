@@ -1,6 +1,5 @@
 ---
 title: "6. Correlation"
-subtitle: "From covariance to r"
 author: "Johnny van Doorn"
 date: "11 September 2026"
 view: "https://teams.microsoft.com/meet/374905797863700?p=MCS3ehSHf2yVIN9YVq"
@@ -16,8 +15,6 @@ css: ../../ajohnson.css
 <div class="goals">
 In this lecture we discuss:
 
-* Variance and z-scores
-  * Standardizing, so that variables become comparable
 * The t-distribution
   * Sampling distributions, continued
   * Standard error and confidence intervals
@@ -34,7 +31,7 @@ Chapter 7 (§7.1–7.11), 2.8–2.9 (Standard error &amp; confidence intervals)
 </div>
 
 
-```{r child="variance-standardization.qmd"}
+```{r child="challenger-recap.qmd"}
 ```
 
 
@@ -48,6 +45,10 @@ Chapter 7 (§7.1–7.11), 2.8–2.9 (Standard error &amp; confidence intervals)
 
 ```{r child="correlation-partial.qmd"}
 ```
+
+
+<!-- ```{r child="variance-standardization.qmd"} -->
+<!-- ``` -->
 
 
 # Closing

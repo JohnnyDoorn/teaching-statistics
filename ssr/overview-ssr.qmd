@@ -84,45 +84,32 @@ knitr::kable(dplyr::arrange(linkList), escape = FALSE, format = "html"  ) %>%
 
 ## Data + results files
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-files <- list.files(full.names = FALSE, pattern = "\\jasp", recursive = FALSE, 
-                    path = "../datasets/2026")
+# One row per data set, driven by the .csv files: the data usually lands before
+# the worked results do, so a data set appears as soon as its csv is here and
+# the Results/HTML columns fill in later.
+dataDir <- paste0("../datasets/", year_dir)
+base    <- paste0("https://johnnydoorn.github.io/teaching-statistics/datasets/", year_dir, "/")
 
+present <- list.files(dataDir, full.names = FALSE, recursive = FALSE)
+stems   <- sort(sub("\\.csv$", "", grep("\\.csv$", present, value = TRUE)))
 
-files <- files[order(as.numeric(gsub("\\..*", "", files)))]
-files <- files[files!= "overview-ssr.qmd"]
-resultFiles <- files[grepl("-result", files)]
-files <- files[!grepl("-result", files)]
+link <- function(file) {
+  out <- sprintf('<a href="%s%s" target="_blank" class="external">link</a>', base, file)
+  out[!(file %in% present)] <- "-"
+  out
+}
 
-htmlFiles <- gsub(x =files, pattern = ".jasp", replacement = ".html")
-
-htmlFound <- list.files(full.names = FALSE, pattern = "\\html", recursive = FALSE, 
-                    path = "../datasets/2026")
-jaspResultsFound <- list.files(full.names = FALSE, pattern = "result.jasp", recursive = FALSE, 
-                    path = "../datasets/2026")
-csvFound  <- list.files(full.names = FALSE, pattern = "\\csv", recursive = FALSE, 
-                    path = "../datasets/2026")
-  
-htmlLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistics/datasets/2026/%s" target="_blank" class="external">link</a>',htmlFiles) 
-htmlLinks[!(htmlFiles %in% htmlFound)] <- "-"
-
-jaspLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistics/datasets/2026/%s" target="_blank" 
-                     class="external">link</a>',files) 
-jaspResultsLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistics/datasets/2026/%s" target="_blank" 
-                     class="external">link</a>',resultFiles) 
-# jaspResultsLinks[!(resultFiles %in% jaspResultsFound)] <- "-"
-
-titles <- gsub(htmlFiles, pattern = ".html", replacement = "")
-
-csvFiles <- gsub(x =files, pattern = ".jasp", replacement = ".csv")
-csvLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistics/datasets/2026/%s" target="_blank" class="external">link</a>',csvFiles) 
-csvLinks[!(csvFiles %in% csvFound)] <- "-"
-
-
-linkList <- data.frame(Topic = titles, Data = jaspLinks, Results = htmlLinks)
-
-knitr::kable(dplyr::arrange(linkList), escape = FALSE, format = "html"  ) %>%
-  kable_styling(full_width = TRUE)
-
+if (length(stems) == 0) {
+  knitr::asis_output('<p class="text-muted fst-italic">Data sets will appear here as the semester progresses.</p>')
+} else {
+  knitr::kable(
+    data.frame(Topic   = stems,
+               Data    = link(paste0(stems, ".csv")),
+               Results = link(paste0(stems, ".jasp")),
+               HTML    = link(paste0(stems, ".html"))),
+    escape = FALSE, format = "html") %>%
+    kable_styling(full_width = TRUE)
+}
 ```
 
 

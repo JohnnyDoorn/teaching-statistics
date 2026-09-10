@@ -1,0 +1,40 @@
+
+## Challenger {.smaller}
+
+```{r, echo=FALSE}
+source("../../_setup.R")
+challenger <- read.csv(datasetsPath("2026/challenger.csv"), check.names = FALSE)
+temperature <- challenger$`temperature-c`
+damage      <- challenger$`damaged-o-rings`
+anyDamage   <- challenger$`any-damage`
+
+damaged     <- challenger[anyDamage == "yes", ]
+damagedTemp <- damaged$`temperature-c`
+damagedOr   <- damaged$`damaged-o-rings`
+
+par(mfrow = c(1, 2), cex = 0.75, cex.lab = 1.2)
+cols <- ifelse(anyDamage == "yes", "darkred", "darkgreen")
+
+plot(damagedTemp, damagedOr, pch = 19, cex = 1.8,
+     col = "darkred", las = 1, bty = "n", xlim = c(-5, 30), ylim = c(0, 6),
+     xlab = "Temperature (°C)", ylab = "Damaged O-rings", main = "Damaged flights only")
+
+plot(temperature, damage, pch = 19, cex = 1.8,
+     col = cols, las = 1, bty = "n", xlim = c(-5, 30), ylim = c(0, 6),
+     xlab = "Temperature (°C)", ylab = "Damaged O-rings", main = "All 23 flights")
+```
+
+## The statistics {.smaller}
+
+```{r, echo=TRUE}
+cor.test(damagedTemp, damagedOr)$p.value
+cor.test(temperature, damage)$p.value
+```
+
+|                      | $r$   | $p$   |
+|----------------------|-------|-------|
+| 7 damaged flights    | -0.58 | .173  |
+| All 23 flights       | -0.64 | .001  |
+
+<small>Data: [challenger.csv](https://johnnydoorn.github.io/teaching-statistics/datasets/2026/challenger.csv), from the Presidential Commission on the Space Shuttle Challenger Accident (1986, Vol. 1: 129-131), via Dalal, Fowlkes & Hoadley (1989).</small>
+

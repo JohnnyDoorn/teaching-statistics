@@ -1,0 +1,196 @@
+# Visualization {.section}
+
+```{r, eval=FALSE, echo=FALSE}
+# Remove all objects from workspace
+rm(list=ls())
+```
+
+
+## Why Visualize Data?
+
+- Quick overview of the data
+- Spot patterns, outliers, or errors
+- Invite the reader
+
+
+
+### Why Visualize Data?
+
+![Figure 5.15 Catterplot](../../images/catterplot.jpg) 
+
+---
+
+## Different types of graphs in JASP
+- Distribution plots (basic plots)
+  - Frequency plot when nominal
+  - Histogram when scale/ordinal
+
+- Correlation plots (basic plots)
+- Scatter plots (customizable plots)
+- Raincloud plots
+
+
+---
+
+## Boxplots: Visualizing Spread and Outliers {.smaller}
+
+- Shows median, quartiles, and outliers
+- Useful for comparing groups
+
+![Figure 5.9 Boxplots](../../images/figure-5-9.jpg) 
+
+## Raincloud plots: Boxplots + Raw Data {.smaller}
+
+![Figure 5.11 Raincloud plots](../../images/figure-5-11.jpg) 
+
+---
+
+## Critically Assess Graphs
+
+- Are axes labelled (variable, units)?
+- Are axes broken/equally spaced?
+- Are error bars (e.g., confidence intervals) included where relevant?
+
+---
+
+### Best practices
+
+- Use clear labels and titles
+- Avoid unnecessary 3D effects
+- Choose appropriate scales
+- Check for misleading representations
+
+
+---
+
+
+### Labels and axes
+```{r, echo=FALSE}
+set.seed(123)
+
+A <- rnorm(10, mean = 5, sd = 3)
+B <- rnorm(10, mean = 7, sd = 3)
+means <- c(mean(A), mean(B))
+ses   <- c(sd(A)/sqrt(length(A)), sd(B)/sqrt(length(B)))
+tcrit <- qt(0.975, df = c(length(A)-1, length(B)-1))
+
+# Bad: no axis labels
+bp <- barplot(means, names.arg = c("SPSS", "JASP"),
+              ylab = "Exam performance",
+              col = c("skyblue", "orange"), ylim = c(0, 10), axes = FALSE)
+```
+
+
+
+
+### Scale Matters
+```{r, echo=FALSE}
+
+# Bad: no axis labels
+par(mfrow = c(1, 2))
+bp <- barplot(means, names.arg = c("SPSS", "JASP"),
+              ylab = "Grade (0-10)",
+              col = c("skyblue", "orange"), ylim = c(0, 10), axes = FALSE)
+axis(2)
+
+bp <- barplot(means, names.arg = c("SPSS", "JASP"),
+              ylab = "Grade (0-100)",
+              col = c("skyblue", "orange"), ylim = c(0, 10), axes = FALSE)
+# Add error bars
+# arrows(x0 = bp, y0 = means - ses, x1 = bp, y1 = means + ses,
+#        angle = 90, code = 3, length = 0.06, lwd = 1.5)
+axis(2, labels = seq(90, 100, 2), at = seq(0, 10, by =2))
+```
+
+
+### Error Bars!
+```{r, echo=FALSE}
+
+# Bad: no axis labels
+bp <- barplot(means, names.arg = c("SPSS", "JASP"),
+              ylab = "Grade (0-10)",
+              col = c("skyblue", "orange"), ylim = c(0, 10), axes = FALSE)
+axis(2)
+arrows(x0 = bp, y0 = means - ses*tcrit, x1 = bp, y1 = means + ses*tcrit,
+        angle = 90, code = 3, length = 0.06, lwd = 1.5)
+
+```
+
+
+
+
+### What is the plot for? {.smaller}
+
+Tufte's principles, as Field lists them:
+
+- Show the data, and avoid distorting it
+- Many numbers, minimum ink
+- Encourage the reader to compare
+- Reveal the underlying message
+
+In practice:
+
+::: {.incremental}
+- Cut the chartjunk: 3-D effects, gradients, decorative fills
+- Colour marks the one thing you want noticed, not decoration
+- Decide the message first, then build the plot around it
+:::
+
+# Using plots to predict {.section}
+
+## 28 January 1986 {.smaller}
+
+- Night before the [*Challenger*](https://en.wikipedia.org/wiki/Space_Shuttle_Challenger_disaster) launch
+- Would the cold damage the O-ring seals?
+- Evidence: damage on previous flights, by launch temperature
+
+Tomorrow's forecast: -0.5°C. Should they launch?
+
+## The evidence they reviewed {.smaller}
+
+```{r, echo=FALSE}
+source("../../_setup.R")
+challenger <- read.csv(datasetsPath("2026/challenger.csv"), check.names = FALSE)
+temperature <- challenger$`temperature-c`
+damage      <- challenger$`damaged-o-rings`
+anyDamage   <- challenger$`any-damage`
+
+damaged     <- challenger[anyDamage == "yes", ]
+damagedTemp <- damaged$`temperature-c`
+damagedOr   <- damaged$`damaged-o-rings`
+
+par(cex = 1.0, cex.lab = 1.1)
+plot(damagedTemp, damagedOr,
+     pch = 19, cex = 2, col = "darkred", las = 1, bty = "n",
+     xlab = "Temperature at launch (°C)", ylab = "Damaged O-rings",
+     xlim = c(-5, 30), ylim = c(0, 6),
+     main = "Flights that suffered O-ring damage")
+```
+
+## The flights that were excluded {.smaller}
+
+```{r, echo=FALSE}
+par(cex = 1.0, cex.lab = 1.1)
+cols <- ifelse(anyDamage == "yes", "darkred", "darkgreen")
+
+plot(temperature, damage,
+     pch = 19, cex = 2, col = cols, las = 1, bty = "n",
+     xlab = "Temperature at launch (°C)", ylab = "Damaged O-rings",
+     xlim = c(-5, 30), ylim = c(0, 6),
+     main = "All 23 previous flights")
+
+abline(v = -0.5, lwd = 3, lty = 2, col = "darkred")
+text(-0.5, 4.5, "launch day\n-0.5°C", pos = 4, col = "darkred", cex = 0.85)
+
+legend("topright", legend = c("damage", "no damage"),
+       pch = 19, col = c("darkred", "darkgreen"), bty = "n", cex = 0.9)
+```
+
+
+## What the plot could not say {.smaller}
+
+::: {.incremental}
+- 7 damaged flights only: $r = -0.58$, $p = .17$
+- All 23 flights: $r = -0.64$, $p = .001$
+- Launch day: 12°C colder than any data point, so can you realistically [extrapolate](https://xkcd.com/605/)??
+:::

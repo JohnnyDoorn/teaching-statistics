@@ -22,13 +22,14 @@ $${COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}$$
 ## Plot correlation
 
 ```{r,echo=FALSE, fig.width=5, fig.height=5, fig.align='center'}
-data <- read.csv(datasetsPath("2026/ExamAnxiety.csv"))
-tinydat <- data[1:5, ]
-x <- tinydat$anxiety
-y <- tinydat$exam_grade
-myLimsX <- c(55, 95)
-myLimsY <- c(30, 90)
-plot(x, y, las = 1, xlab = "Anxiety (EAQ)", ylab = "Exam performance (%)", 
+data <- read.csv(datasetsPath("2026/exam-anxiety.csv"), check.names = FALSE)
+# five students picked so that no two share a value and all four quadrants are used
+tinydat <- data[c(95, 50, 77, 54, 94), ]
+x <- tinydat$`Exam anxiety`
+y <- tinydat$`Exam performance`
+myLimsX <- c(68, 91)
+myLimsY <- c(10, 95)
+plot(x, y, las = 1, xlab = "Anxiety", ylab = "Exam performance (%)", 
      xlim = myLimsX, ylim = myLimsY)
 
 m.x <- mean(x)
@@ -43,7 +44,7 @@ corners <- par("usr")
 ## Plot correlation
 
 ```{r,echo=FALSE, fig.width=5, fig.height=5, fig.align='center'}
-plot(x, y, las = 1, xlab = "Anxiety (EAQ)", ylab = "Exam performance (%)", 
+plot(x, y, las = 1, xlab = "Anxiety", ylab = "Exam performance (%)", 
      xlim = myLimsX, ylim = myLimsY)
 
 m.x <- mean(x)
@@ -76,7 +77,7 @@ mtext(side = 4, bquote(bar(y) ~ "=" ~ .(round(m.y, 1))), cex = 1.5, padj = 0.5, 
 ## Plot correlation
 
 ```{r,echo=FALSE, fig.width=5, fig.height=5, fig.align='center'}
-plot(x, y, las = 1, xlab = "Anxiety (EAQ)", ylab = "Exam performance (%)", 
+plot(x, y, las = 1, xlab = "Anxiety", ylab = "Exam performance (%)", 
      xlim = myLimsX, ylim = myLimsY)
 
 m.x <- mean(x)
@@ -110,16 +111,14 @@ $$(x_i - \bar{x})(y_i - \bar{y})$$
 ## Load data
 
 ```{r, eval=TRUE, echo=TRUE}
-n       <- 10
-allData <- read.csv(datasetsPath("2026/ExamAnxiety.csv"))
-data    <- allData[1:n, c("revise", "exam_grade", "anxiety")] # first 10 students
+data <- read.csv(datasetsPath("2026/exam-anxiety.csv"), check.names = FALSE)
+data <- data[, c("Time spent revising", "Exam performance", "Exam anxiety")]
 ssrTable(data)
 ```
 
 ```{r, eval=TRUE, echo=FALSE}
-# The variables and z-scores from earlier in the lecture
-exam_grade   <- data$exam_grade
-anxiety      <- data$anxiety
+exam_grade   <- data$`Exam performance`
+anxiety      <- data$`Exam anxiety`
 N            <- length(exam_grade)
 mean.exam    <- mean(exam_grade)
 mean.anxiety <- mean(anxiety)
@@ -181,22 +180,11 @@ cor(z.exam,     z.anxiety) # correlation of z-scores
 sum(z.exam * z.anxiety ) / (N - 1)
 ```
 
-## These were only 10 students {.smaller}
-
-Ten students, so the sums fit on a slide. She tested 103:
-
-```{r, echo=TRUE}
-cor(allData$exam_grade, allData$anxiety)
-```
-
-Same story, weaker. Small samples wobble more.
-
-
 ## Plot correlation
 
 ```{r, echo=FALSE}
 plot(anxiety, exam_grade, las = 1, pch = 21, bg = "turquoise",
-     ylab = "Exam performance (%)", xlab = "Anxiety (EAQ)")
+     ylab = "Exam performance (%)", xlab = "Anxiety")
 abline(h = mean.exam,    col = "black", lwd = 2)
 abline(v = mean.anxiety, col = "black", lwd = 2)
 corners <- par("usr")
@@ -220,8 +208,6 @@ text(mean.anxiety-xMargin, mean.exam+yMargin, "- * +", cex = 2, col = "red")
 ```
 
 ## Significance testing using $t$
-
-We just built that shape for sample means. The same trick works for any statistic we can standardize, and today's is $r$.
 
 > A test statistic with a known probability distribution (the t-distribution).
 

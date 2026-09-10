@@ -1,0 +1,27 @@
+---
+title: "JASP & Visualization (next year draft)"
+author: "Johnny van Doorn"
+footer: "Scientific & Statistical Reasoning"
+format:
+  revealjs:
+    output-ext: slide.html
+    css: ../../ajohnson.css
+  html: default
+css: ../../ajohnson.css
+---
+
+<!-- Draft restructure for NEXT year. Nightingale opens, then JASP, then the rest
+     of the visualization material. Deliberately unnumbered so ssr.qmd does not
+     list it. The taught 2026 version is 5. jasp_visualization.qmd, untouched. -->
+
+```{r child="next-year-nightingale.qmd"}
+```
+
+```{r child="next-year-JASP.qmd"}
+```
+
+```{r child="next-year-visualization.qmd"}
+```
+
+```{r child="../../footer.qmd"}
+```

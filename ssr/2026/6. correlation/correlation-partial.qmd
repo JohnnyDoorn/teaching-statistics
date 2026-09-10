@@ -1,37 +1,26 @@
 # Partial correlation {.section}
 
-## Venn diagram of Variance
+## Shared variance {.smaller}
+
+![](../../images/figure-7-9.png){height="380"}
+
+<small>Field, *Discovering Statistics Using JASP*, Figure 7.9</small>
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, prompt=FALSE}
 source("../../_setup.R")
-if(!"VennDiagram" %in% installed.packages()) { install.packages("VennDiagram") };
-library("VennDiagram")
-n       <- 10
-allData <- read.csv(datasetsPath("2026/ExamAnxiety.csv"))
-data    <- allData[1:n, c("revise", "exam_grade", "anxiety")] # first 10 students
-exam_grade <- data$exam_grade
-anxiety    <- data$anxiety
-revise     <- data$revise
+data <- read.csv(datasetsPath("2026/exam-anxiety.csv"), check.names = FALSE)
+exam_grade <- data$`Exam performance`
+anxiety    <- data$`Exam anxiety`
+revise     <- data$`Time spent revising`
 N          <- length(exam_grade)
 ```
-
-```{r, echo=FALSE, results='hide'}
-grid.newpage()
-draw.triple.venn(area1 = 100, area2 = 100, area3 = 100, 
-                 n12  = 50, 
-                 n23  = 50, 
-                 n13  = 50, 
-                 n123 = 25, 
-                 category = c("X", "Y", "Z"), lty = "blank", 
-                 fill = c("skyblue", "pink1", "mediumorchid"), cat.prompts = F)
-```
-
 
 ## Partial correlation {.smaller}
 
 
 $$\LARGE{r_{xy \cdot z} = \frac{r_{xy} - r_{xz} r_{yz}}{\sqrt{(1 - r_{xz}^2)(1 - r_{yz}^2)}}}$$
 
-Does anxiety really hurt performance, or do anxious students simply revise less?
+Or do anxious students simply revise less?
 
 ```{r, echo=TRUE}
 cor.exam.anxiety    <- cor(exam_grade, anxiety)
@@ -52,7 +41,7 @@ partial.correlation <- numerator / denominator
 partial.correlation
 ```
 
-Holding revision time constant, the link between anxiety and performance shrinks considerably: a good part of it ran through how much students revised.
+Holding revision constant, the link shrinks.
 
 ## Significance of partial correlation {.subsection}
 
@@ -84,3 +73,7 @@ arrows(x0 = t.pr, x1 = t.pr, y0 = 0 , y1 = 0.25, col = "darkred", lwd = 2)
 text(x = t.pr, y = 0.3, paste("t =", round(t.pr, 2)), cex = 1.2)
 text(x = t.pr, y = 0.35, paste("p-val =", round(1 - pt(t.pr, df), 3)), cex = 1.2)
 ```
+
+## JASP
+
+![](../../images/JASP_logo_green.svg){width="300px"}

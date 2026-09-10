@@ -1,6 +1,6 @@
 # Standard Error and<br>Confidence Intervals {.section}
 
-That spread of sample means is not just a picture: it has a size, and a name.
+That spread has a name.
 
 ## Standard Error
 

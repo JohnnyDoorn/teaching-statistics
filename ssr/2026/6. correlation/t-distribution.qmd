@@ -74,7 +74,7 @@ text(125, 7, bquote(bar(x) ~ " = " ~ .(round(mean(x),2))), cex = 2)
 
 ## More samples
 
-Every sample gives a slightly different mean. Let's take a lot more samples, and keep track of $\bar{x}$ each time.
+More samples, keeping $\bar{x}$ each time.
 
 ```{r, echo=TRUE}
 n.samples     <- 1000
@@ -88,7 +88,7 @@ for(i in 1:n.samples) {
 
 ## Sampling distribution
 
-The means themselves have a distribution.
+The means have their own distribution.
 
 ```{r, echo=TRUE}
 #| output-location: slide

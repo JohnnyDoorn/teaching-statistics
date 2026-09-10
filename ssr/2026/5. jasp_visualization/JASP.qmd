@@ -21,13 +21,21 @@ rm(list=ls())
 ![](../../images/JASP_logo_green.svg){height="100"}
 </div>
 
+---
+
+### Origin {.smaller}
+
+![](../../images/jasp-trojan-horse.jpg){height="330"}
+
+<small>Artwork by [Viktor Beekman](https://www.instagram.com/viktordepictor), via [Bayesian Spectacles](https://www.bayesianspectacles.org/)</small>
+
 
 ---
 
 
 
 
-## Getting Started with JASP
+## Getting started with JASP
 
 
 1. Download from [jasp-stats.org](https://jasp-stats.org)

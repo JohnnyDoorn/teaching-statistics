@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.340">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Johnny van Doorn">
+
+<title>JASP &amp; Visualization (next year draft)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="next-year-lecture5_files/libs/clipboard/clipboard.min.js"></script>
+<script src="next-year-lecture5_files/libs/quarto-html/quarto.js"></script>
+<script src="next-year-lecture5_files/libs/quarto-html/popper.min.js"></script>
+<script src="next-year-lecture5_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="next-year-lecture5_files/libs/quarto-html/anchor.min.js"></script>
+<link href="next-year-lecture5_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="next-year-lecture5_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="next-year-lecture5_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="next-year-lecture5_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="next-year-lecture5_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../ajohnson.css">
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#why-visualize" id="toc-why-visualize" class="nav-link active" data-scroll-target="#why-visualize">Why visualize?</a>
+  <ul class="collapse">
+  <li><a href="#scutari-1854" id="toc-scutari-1854" class="nav-link" data-scroll-target="#scutari-1854">Scutari, 1854</a></li>
+  </ul></li>
+  <li><a href="#jasp" id="toc-jasp" class="nav-link" data-scroll-target="#jasp">JASP</a>
+  <ul class="collapse">
+  <li><a href="#why-jasp" id="toc-why-jasp" class="nav-link" data-scroll-target="#why-jasp">Why JASP?</a></li>
+  <li><a href="#getting-started-with-jasp" id="toc-getting-started-with-jasp" class="nav-link" data-scroll-target="#getting-started-with-jasp">Getting Started with JASP</a></li>
+  <li><a href="#loading-data-in-jasp" id="toc-loading-data-in-jasp" class="nav-link" data-scroll-target="#loading-data-in-jasp">Loading Data in JASP</a></li>
+  <li><a href="#descriptive-statistics-in-jasp" id="toc-descriptive-statistics-in-jasp" class="nav-link" data-scroll-target="#descriptive-statistics-in-jasp">Descriptive Statistics in JASP</a></li>
+  <li><a href="#the-output-window" id="toc-the-output-window" class="nav-link" data-scroll-target="#the-output-window">The output window</a></li>
+  <li><a href="#saving-and-exporting" id="toc-saving-and-exporting" class="nav-link" data-scroll-target="#saving-and-exporting">Saving and exporting</a></li>
+  <li><a href="#filtering-your-data" id="toc-filtering-your-data" class="nav-link" data-scroll-target="#filtering-your-data">Filtering your data</a></li>
+  <li><a href="#getting-help" id="toc-getting-help" class="nav-link" data-scroll-target="#getting-help">Getting help</a></li>
+  </ul></li>
+  <li><a href="#visualization" id="toc-visualization" class="nav-link" data-scroll-target="#visualization">Visualization</a>
+  <ul class="collapse">
+  <li><a href="#why-visualize-data" id="toc-why-visualize-data" class="nav-link" data-scroll-target="#why-visualize-data">Why Visualize Data?</a></li>
+  <li><a href="#different-types-of-graphs-in-jasp" id="toc-different-types-of-graphs-in-jasp" class="nav-link" data-scroll-target="#different-types-of-graphs-in-jasp">Different types of graphs in JASP</a></li>
+  <li><a href="#boxplots-visualizing-spread-and-outliers" id="toc-boxplots-visualizing-spread-and-outliers" class="nav-link" data-scroll-target="#boxplots-visualizing-spread-and-outliers">Boxplots: Visualizing Spread and Outliers</a></li>
+  <li><a href="#raincloud-plots-boxplots-raw-data" id="toc-raincloud-plots-boxplots-raw-data" class="nav-link" data-scroll-target="#raincloud-plots-boxplots-raw-data">Raincloud plots: Boxplots + Raw Data</a></li>
+  <li><a href="#critically-assess-graphs" id="toc-critically-assess-graphs" class="nav-link" data-scroll-target="#critically-assess-graphs">Critically Assess Graphs</a></li>
+  </ul></li>
+  <li><a href="#using-plots-to-predict" id="toc-using-plots-to-predict" class="nav-link" data-scroll-target="#using-plots-to-predict">Using plots to predict</a>
+  <ul class="collapse">
+  <li><a href="#january-1986" id="toc-january-1986" class="nav-link" data-scroll-target="#january-1986">28 January 1986</a></li>
+  <li><a href="#the-evidence-they-reviewed" id="toc-the-evidence-they-reviewed" class="nav-link" data-scroll-target="#the-evidence-they-reviewed">The evidence they reviewed</a></li>
+  <li><a href="#the-flights-that-were-excluded" id="toc-the-flights-that-were-excluded" class="nav-link" data-scroll-target="#the-flights-that-were-excluded">The flights that were excluded</a></li>
+  <li><a href="#what-the-plot-could-not-say" id="toc-what-the-plot-could-not-say" class="nav-link" data-scroll-target="#what-the-plot-could-not-say">What the plot could not say</a></li>
+  <li><a href="#contact" id="toc-contact" class="nav-link" data-scroll-target="#contact">Contact</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="next-year-lecture5.slide.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">JASP &amp; Visualization (next year draft)</h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Johnny van Doorn </p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Amsterdam
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+</header>
+
+<!-- Draft restructure for NEXT year. Nightingale opens, then JASP, then the rest
+     of the visualization material. Deliberately unnumbered so ssr.qmd does not
+     list it. The taught 2026 version is 5. jasp_visualization.qmd, untouched. -->
+<section id="why-visualize" class="level1 section">
+<h1 class="section">Why visualize?</h1>
+<section id="scutari-1854" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="scutari-1854">Scutari, 1854</h2>
+<div class="columns">
+<div class="column" style="width:38%;">
+<p><img src="../../images/nightingale.jpg" height="260"></p>
+<p><a href="https://en.wikipedia.org/wiki/Florence_Nightingale">Florence Nightingale</a></p>
+</div><div class="column" style="width:62%;">
+<ul>
+<li>Military hospital, Crimean War</li>
+<li>Recorded every death and its cause</li>
+<li>Two years of counting:</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Cause</th>
+<th style="text-align: right;">Deaths</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Preventable disease</td>
+<td style="text-align: right;">14476</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Wounds</td>
+<td style="text-align: right;">1758</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Other</td>
+<td style="text-align: right;">1748</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li>Infection killed far more than the enemy did</li>
+<li>Sanitary Commission arrived March 1855</li>
+<li>Later the first woman elected to the Statistical Society</li>
+</ul>
+</div>
+</div>
+<hr>
+<section id="the-diagram" class="level3 smaller">
+<h3 class="smaller anchored" data-anchor-id="the-diagram">The diagram</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="next-year-lecture5_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="1056"></p>
+</div>
+</div>
+<p>Each wedge is a month; its area is the death rate.</p>
+<!-- --- -->
+<!-- ### What the picture says {.smaller} -->
+<!-- ::: {.incremental} -->
+<!-- - Blue dwarfs red: disease, not wounds -->
+<!-- - Same scale for both years, so the second rose being so much smaller *is* the finding -->
+<!-- - The panels split at March 1855, when the sanitary reforms began -->
+<!-- - Drawn in 1858, two years after the war: evidence, not a plea for rescue -->
+
+<!-- - Her case: the deaths were preventable, sanitation proved it, so reform army health permanently -->
+<!-- ::: -->
+<hr>
+</section>
+</section>
+</section>
+<section id="jasp" class="level1 section">
+<h1 class="section">JASP</h1>
+<section id="why-jasp" class="level2">
+<h2 class="anchored" data-anchor-id="why-jasp">Why JASP?</h2>
+<ul>
+<li>User-friendly, intuitive interface</li>
+<li>Open-source (free)</li>
+<li>Reproducible analyses (easy to share)</li>
+<li>Better than IBM’s SPSS for transparency and workflow</li>
+<li>Integrates with R for advanced users</li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../../images/JASP_logo_green.svg" height="100"></p>
+</div>
+<hr>
+<section id="absolutely-no-bayesians-inside" class="level3 smaller">
+<h3 class="smaller anchored" data-anchor-id="absolutely-no-bayesians-inside">Absolutely no Bayesians inside</h3>
+<p><img src="../../images/jasp-trojan-horse.jpg" height="330"></p>
+<p><small>Artwork by <a href="https://www.instagram.com/viktordepictor">Viktor Beekman</a>, via <a href="https://www.bayesianspectacles.org/">Bayesian Spectacles</a></small></p>
+<hr>
+</section>
+</section>
+<section id="getting-started-with-jasp" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started-with-jasp">Getting Started with JASP</h2>
+<ol type="1">
+<li>Download from <a href="https://jasp-stats.org">jasp-stats.org</a></li>
+<li>Open JASP, load your dataset (.jasp, .csv, .sav, etc.)</li>
+<li>Familiarize with the interface: Data view, Input panel, Output panel</li>
+</ol>
+<p>Two modes: data editor (view and edit) and analysis mode.</p>
+<hr>
+<section id="the-start-up-window" class="level3">
+<h3 class="anchored" data-anchor-id="the-start-up-window">The start-up window</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/figure-4-2.png" height="330" class="figure-img"></p>
+<figcaption class="figure-caption">Figure 4.2: The JASP start-up window</figcaption>
+</figure>
+</div>
+<hr>
+</section>
+<section id="two-buttons" class="level3">
+<h3 class="anchored" data-anchor-id="two-buttons">Two buttons</h3>
+<p>The hamburger button <img src="../../images/hamburger.png" height="25">:</p>
+<ul>
+<li>Open files (from computer, <a href="https://osf.io">the Open Science Framework</a>, or the <a href="https://jasp-stats.github.io/jasp-data-library/">JASP data library</a>)</li>
+<li>Adjust settings (e.g., dark mode, language, how to display results)</li>
+<li>Save/export data/results</li>
+</ul>
+<p>The module button <img src="../../images/blueplus.png" height="25">:</p>
+<ul>
+<li>Add modules to the top ribbon bar</li>
+<li>Update modules</li>
+</ul>
+</section>
+<section id="the-data-library" class="level3">
+<h3 class="anchored" data-anchor-id="the-data-library">The data library</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/figure-4-3.png" height="330" class="figure-img"></p>
+<figcaption class="figure-caption">Figure 4.3: Opening the Sleep data from the JASP data library</figcaption>
+</figure>
+</div>
+<hr>
+</section>
+</section>
+<section id="loading-data-in-jasp" class="level2">
+<h2 class="anchored" data-anchor-id="loading-data-in-jasp">Loading Data in JASP</h2>
+<ul>
+<li>Click Open &gt; select your file</li>
+<li>Data appears in spreadsheet view</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/figure-4-4.png" height="300" class="figure-img"></p>
+<figcaption class="figure-caption">Figure 4.4: The JASP data editor</figcaption>
+</figure>
+</div>
+<hr>
+<section id="two-file-formats" class="level3 smaller">
+<h3 class="smaller anchored" data-anchor-id="two-file-formats">Two file formats</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong><code>.csv</code></strong></p>
+<p>A lightweight file format that contains only the raw data.</p>
+<p>Opens in virtually anything: Excel, R, SPSS</p>
+</div><div class="column" style="width:50%;">
+<p><strong><code>.jasp</code></strong></p>
+<p>Contains the original data, the results, and the settings that created them.</p>
+<p>Ideal for sharing your research.</p>
+</div>
+</div>
+<p>Sometimes you’ll see a <code>.sav</code> file, previously used in SPSS.</p>
+<hr>
+</section>
+<section id="variable-settings" class="level3 smaller">
+<h3 class="smaller anchored" data-anchor-id="variable-settings">Variable settings</h3>
+<p>Doubleclick a column name to open its settings. The measurement level you set here decides how JASP treats your variable.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/figure-4-6.png" height="280" class="figure-img"></p>
+<figcaption class="figure-caption">Figure 4.6: Variable settings menu</figcaption>
+</figure>
+</div>
+<hr>
+</section>
+<section id="ordinal-variables" class="level3">
+<h3 class="anchored" data-anchor-id="ordinal-variables">Ordinal variables</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/figure-4-7.png" height="330" class="figure-img"></p>
+<figcaption class="figure-caption">Figure 4.7: Specifying the values for an ordinal variable</figcaption>
+</figure>
+</div>
+<hr>
+</section>
+<section id="computing-a-new-variable" class="level3">
+<h3 class="anchored" data-anchor-id="computing-a-new-variable">Computing a new variable</h3>
+<p>Drag and drop, no syntax required.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/figure-4-8.png" height="300" class="figure-img"></p>
+<figcaption class="figure-caption">Figure 4.8: The drag-and-drop interface for computing a new variable</figcaption>
+</figure>
+</div>
+<hr>
+</section>
+<section id="missing-values" class="level3">
+<h3 class="anchored" data-anchor-id="missing-values">Missing values</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/figure-4-9.png" height="300" class="figure-img"></p>
+<figcaption class="figure-caption">Figure 4.9: Defining missing values</figcaption>
+</figure>
+</div>
+<hr>
+</section>
+</section>
+<section id="descriptive-statistics-in-jasp" class="level2">
+<h2 class="anchored" data-anchor-id="descriptive-statistics-in-jasp">Descriptive Statistics in JASP</h2>
+<ul>
+<li>Go to Descriptives &gt; select variables</li>
+<li>Options: mean, median, SD, min, max, quartiles</li>
+<li>Output updates instantly</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/figure-4-10.png" height="300" class="figure-img"></p>
+<figcaption class="figure-caption">Figure 4.10</figcaption>
+</figure>
+</div>
+</section>
+<section id="the-output-window" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="the-output-window">The output window</h2>
+<ul>
+<li>Updates in real time</li>
+<li>Tables already in APA format, so publication ready</li>
+<li>▼ dropdown: copy to Word/PowerPoint, save a plot, open the plot editor</li>
+<li>Annotate your own output</li>
+</ul>
+<hr>
+<section id="annotated-output" class="level3">
+<h3 class="anchored" data-anchor-id="annotated-output">Annotated output</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/figure-4-11.png" height="330" class="figure-img"></p>
+<figcaption class="figure-caption">Figure 4.11: Example of annotated output</figcaption>
+</figure>
+</div>
+<hr>
+</section>
+</section>
+<section id="saving-and-exporting" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="saving-and-exporting">Saving and exporting</h2>
+<ul>
+<li>Save (<code>Ctrl/Cmd + S</code>) writes a <code>.jasp</code> file: data, output and settings</li>
+<li>Export Data writes a plain <code>.csv</code></li>
+<li>Export Results writes <code>.html</code> or <code>.pdf</code>, which anyone can open without JASP</li>
+</ul>
+<p>See <a href="https://discoverjasp.com/pages/data">discoverjasp.com</a> for examples.</p>
+</section>
+<section id="filtering-your-data" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="filtering-your-data">Filtering your data</h2>
+<p>Two routes to using only part of your data.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Using the filter</p>
+<ul>
+<li>Funnel icon above the row numbers</li>
+<li>Drag variables and operators into the box</li>
+<li><a href="https://jasp-stats.github.io/jasp-video-library/assets/videos/Getting-Started/Getting_Started_07_Filter-Drag-and-Drop-Scale.mp4">Scale data</a></li>
+<li><a href="https://jasp-stats.github.io/jasp-video-library/assets/videos/Getting-Started/Getting_Started_07_Filter-Drag-and-Drop-Categorical.mp4">Categorical data</a></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p>Using variable settings</p>
+<ul>
+<li>Doubleclick the column name</li>
+<li>Untick values to leave out</li>
+<li><a href="https://jasp-stats.github.io/jasp-video-library/assets/videos/Getting-Started/Getting_Started_06_Filter-by-Group.mp4">Filter by group</a></li>
+</ul>
+</div>
+</div>
+<ul>
+<li>Filtered rows struck through, analyses update immediately</li>
+<li>Nothing is deleted</li>
+</ul>
+<hr>
+</section>
+<section id="getting-help" class="level2">
+<h2 class="anchored" data-anchor-id="getting-help">Getting help</h2>
+<ul>
+<li><a href="https://jasp-stats.github.io/jasp-video-library/">JASP Video Library</a></li>
+<li>The book</li>
+<li><img src="../../images/info-button.png" height="40"></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="visualization" class="level1 section">
+<h1 class="section">Visualization</h1>
+<section id="why-visualize-data" class="level2">
+<h2 class="anchored" data-anchor-id="why-visualize-data">Why Visualize Data?</h2>
+<ul>
+<li>Quick overview of the data</li>
+<li>Spot patterns, outliers, or errors</li>
+<li>Invite the reader</li>
+</ul>
+<section id="why-visualize-data-1" class="level3">
+<h3 class="anchored" data-anchor-id="why-visualize-data-1">Why Visualize Data?</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/catterplot.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure 5.15 Catterplot</figcaption>
+</figure>
+</div>
+<hr>
+</section>
+</section>
+<section id="different-types-of-graphs-in-jasp" class="level2">
+<h2 class="anchored" data-anchor-id="different-types-of-graphs-in-jasp">Different types of graphs in JASP</h2>
+<ul>
+<li>Distribution plots (basic plots)
+<ul>
+<li>Frequency plot when nominal</li>
+<li>Histogram when scale/ordinal</li>
+</ul></li>
+<li>Correlation plots (basic plots)</li>
+<li>Scatter plots (customizable plots)</li>
+<li>Raincloud plots</li>
+</ul>
+<hr>
+</section>
+<section id="boxplots-visualizing-spread-and-outliers" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="boxplots-visualizing-spread-and-outliers">Boxplots: Visualizing Spread and Outliers</h2>
+<ul>
+<li>Shows median, quartiles, and outliers</li>
+<li>Useful for comparing groups</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/figure-5-9.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure 5.9 Boxplots</figcaption>
+</figure>
+</div>
+</section>
+<section id="raincloud-plots-boxplots-raw-data" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="raincloud-plots-boxplots-raw-data">Raincloud plots: Boxplots + Raw Data</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/figure-5-11.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure 5.11 Raincloud plots</figcaption>
+</figure>
+</div>
+<hr>
+</section>
+<section id="critically-assess-graphs" class="level2">
+<h2 class="anchored" data-anchor-id="critically-assess-graphs">Critically Assess Graphs</h2>
+<ul>
+<li>Are axes labelled (variable, units)?</li>
+<li>Are axes broken/equally spaced?</li>
+<li>Are error bars (e.g., confidence intervals) included where relevant?</li>
+</ul>
+<hr>
+<section id="best-practices" class="level3">
+<h3 class="anchored" data-anchor-id="best-practices">Best practices</h3>
+<ul>
+<li>Use clear labels and titles</li>
+<li>Avoid unnecessary 3D effects</li>
+<li>Choose appropriate scales</li>
+<li>Check for misleading representations</li>
+</ul>
+<hr>
+</section>
+<section id="labels-and-axes" class="level3">
+<h3 class="anchored" data-anchor-id="labels-and-axes">Labels and axes</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="next-year-lecture5_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="scale-matters" class="level3">
+<h3 class="anchored" data-anchor-id="scale-matters">Scale Matters</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="next-year-lecture5_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="error-bars" class="level3">
+<h3 class="anchored" data-anchor-id="error-bars">Error Bars!</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="next-year-lecture5_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="what-is-the-plot-for" class="level3 smaller">
+<h3 class="smaller anchored" data-anchor-id="what-is-the-plot-for">What is the plot for?</h3>
+<p>Tufte’s principles, as Field lists them:</p>
+<ul>
+<li>Show the data, and avoid distorting it</li>
+<li>Many numbers, minimum ink</li>
+<li>Encourage the reader to compare</li>
+<li>Reveal the underlying message</li>
+</ul>
+<p>In practice:</p>
+<div class="incremental">
+<ul class="incremental">
+<li>Cut the chartjunk: 3-D effects, gradients, decorative fills</li>
+<li>Colour marks the one thing you want noticed, not decoration</li>
+<li>Decide the message first, then build the plot around it</li>
+</ul>
+</div>
+</section>
+</section>
+</section>
+<section id="using-plots-to-predict" class="level1 section">
+<h1 class="section">Using plots to predict</h1>
+<section id="january-1986" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="january-1986">28 January 1986</h2>
+<ul>
+<li>Night before the <a href="https://en.wikipedia.org/wiki/Space_Shuttle_Challenger_disaster"><em>Challenger</em></a> launch</li>
+<li>Would the cold damage the O-ring seals?</li>
+<li>Evidence: damage on previous flights, by launch temperature</li>
+</ul>
+<p>Tomorrow’s forecast: -0.5°C. Should they launch?</p>
+</section>
+<section id="the-evidence-they-reviewed" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="the-evidence-they-reviewed">The evidence they reviewed</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="next-year-lecture5_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="the-flights-that-were-excluded" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="the-flights-that-were-excluded">The flights that were excluded</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="next-year-lecture5_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="what-the-plot-could-not-say" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="what-the-plot-could-not-say">What the plot could not say</h2>
+<div class="incremental">
+<ul class="incremental">
+<li>7 damaged flights only: <span class="math inline">\(r = -0.58\)</span>, <span class="math inline">\(p = .17\)</span></li>
+<li>All 23 flights: <span class="math inline">\(r = -0.64\)</span>, <span class="math inline">\(p = .001\)</span></li>
+<li>Launch day: 12°C colder than any data point, so can you realistically <a href="https://xkcd.com/605/">extrapolate</a>??</li>
+</ul>
+</div>
+</section>
+<section id="contact" class="level2">
+<h2 class="anchored" data-anchor-id="contact">Contact</h2>
+<script src="https://use.fontawesome.com/23c1d38eea.js"></script>
+<ul class="fa-ul" style="color:black; list-style:none;">
+<li>
+<i class="fa-li fa fa-envelope-o"></i> <a style="unicode-bidi:bidi-override; direction: rtl; color:black" href="javascript:window.location.href = 'mailto:' + ['j.b.vandoorn','uva.nl'].join('@')">ln.AvU@nrooDnav.B.J</a>
+</li>
+<li>
+<i class="fa-li fa fa-github"></i> <a href="https://github.com/JohnnyDoorn" target="_blank" style="color:black; border-bottom:none;">JohnnyDoorn</a>
+</li>
+</ul>
+<p><small style="text-align:left;"></small></p><small style="text-align:left;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" class="img-fluid figure-img"></a></p>
+<figcaption class="figure-caption">CC BY-NC-SA 4.0</figcaption>
+</figure>
+</div>
+</small><p><small style="text-align:left;"></small></p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

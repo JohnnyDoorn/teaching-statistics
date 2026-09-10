@@ -236,11 +236,17 @@ Tomorrow's forecast: -0.5°C. Should they launch?
 
 ```{r, echo=FALSE}
 source("../../_setup.R")
-challenger <- read.csv(datasetsPath("2026/Challenger.csv"))
-damaged    <- subset(challenger, Any_Damage == "Yes")
+challenger <- read.csv(datasetsPath("2026/challenger.csv"), check.names = FALSE)
+temperature <- challenger$`temperature-c`
+damage      <- challenger$`damaged-o-rings`
+anyDamage   <- challenger$`any-damage`
+
+damaged     <- challenger[anyDamage == "yes", ]
+damagedTemp <- damaged$`temperature-c`
+damagedOr   <- damaged$`damaged-o-rings`
 
 par(cex = 1.0, cex.lab = 1.1)
-plot(damaged$Temperature_C, damaged$Damaged_ORings,
+plot(damagedTemp, damagedOr,
      pch = 19, cex = 2, col = "darkred", las = 1, bty = "n",
      xlab = "Temperature at launch (°C)", ylab = "Damaged O-rings",
      xlim = c(-5, 30), ylim = c(0, 6),
@@ -251,9 +257,9 @@ plot(damaged$Temperature_C, damaged$Damaged_ORings,
 
 ```{r, echo=FALSE}
 par(cex = 1.0, cex.lab = 1.1)
-cols <- ifelse(challenger$Any_Damage == "Yes", "darkred", "darkgreen")
+cols <- ifelse(anyDamage == "yes", "darkred", "darkgreen")
 
-plot(challenger$Temperature_C, challenger$Damaged_ORings,
+plot(temperature, damage,
      pch = 19, cex = 2, col = cols, las = 1, bty = "n",
      xlab = "Temperature at launch (°C)", ylab = "Damaged O-rings",
      xlim = c(-5, 30), ylim = c(0, 6),

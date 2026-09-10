@@ -405,7 +405,6 @@
 
 <section id="title-slide" data-background-image="../../images/bikes.jpg" data-background-position="bottom" data-background-size="contain" class="quarto-title-block center">
   <h1 class="title">6. Correlation</h1>
-  <p class="subtitle">From covariance to r</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -425,10 +424,6 @@ Johnny van Doorn
 <div class="goals">
 <p>In this lecture we discuss:</p>
 <ul>
-<li>Variance and z-scores
-<ul>
-<li>Standardizing, so that variables become comparable</li>
-</ul></li>
 <li>The t-distribution
 <ul>
 <li>Sampling distributions, continued</li>
@@ -451,54 +446,45 @@ Johnny van Doorn
 <p><strong>Reading:</strong> Chapter 7 (§7.1–7.11), 2.8–2.9 (Standard error &amp; confidence intervals)</p>
 </div>
 </section>
-<section>
-<section id="variance-and-z-scores" class="title-slide slide level1 section center">
-<h1>Variance and z-scores</h1>
+<section id="challenger" class="slide level2 smaller">
+<h2>Challenger</h2>
 
-</section>
-<section id="load-data" class="slide level2 smaller">
-<h2>Load data</h2>
-<p>Does exam anxiety hurt exam performance?</p>
-<ul>
-<li>Anxiety measured before the exam (EAQ, out of 100)</li>
-<li>Performance: percentage mark</li>
-<li>Revision time: hours</li>
-</ul>
+<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
+<section id="the-statistics" class="slide level2 smaller">
+<h2>The statistics</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>n    <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">datasetsPath</span>(<span class="st">"2026/ExamAnxiety.csv"</span>))</span>
-<span id="cb1-3"><a href="#cb1-3"></a>data <span class="ot">&lt;-</span> data[<span class="dv">1</span><span class="sc">:</span>n, <span class="fu">c</span>(<span class="st">"revise"</span>, <span class="st">"exam_grade"</span>, <span class="st">"anxiety"</span>)] <span class="co"># first 10 students</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">ssrTable</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-
-<div class="datatables html-widget html-fill-item" id="htmlwidget-1dac4156570c78f8271d" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-1dac4156570c78f8271d">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[4,11,27,53,4,22,16,21,25,18],[40,65,80,80,40,70,20,55,50,40],[86.298,88.71599999999999,70.178,61.312,89.52200000000001,60.506,81.462,75.82000000000001,69.372,82.268]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>revise<\/th>\n      <th>exam_grade<\/th>\n      <th>anxiety<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"revise","targets":1},{"name":"exam_grade","targets":2},{"name":"anxiety","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">cor.test</span>(damagedTemp, damagedOr)<span class="sc">$</span>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1731224</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">cor.test</span>(temperature, damage)<span class="sc">$</span>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.001043532</code></pre>
 </div>
 </div>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th><span class="math inline">\(r\)</span></th>
+<th><span class="math inline">\(p\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>7 damaged flights</td>
+<td>-0.58</td>
+<td>.173</td>
+</tr>
+<tr class="even">
+<td>All 23 flights</td>
+<td>-0.64</td>
+<td>.001</td>
+</tr>
+</tbody>
+</table>
+<p><small>Data: <a href="https://johnnydoorn.github.io/teaching-statistics/datasets/2026/challenger.csv">challenger.csv</a>, from the Presidential Commission on the Space Shuttle Challenger Accident (1986, Vol. 1: 129-131), via Dalal, Fowlkes &amp; Hoadley (1989).</small></p>
 </section>
-<section id="three-different-units" class="slide level2 smaller">
-<h2>Three different units</h2>
-<p>Revision in hours, performance in percent, anxiety in EAQ points. A deviation of 5 means something different in each.</p>
-
-<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
-<section id="standardize" class="slide level2">
-<h2>Standardize</h2>
-<p><span class="math display">\[z = \frac{x_i - \bar{x}}{{sd}_x}\]</span></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>z.exam    <span class="ot">&lt;-</span> (data<span class="sc">$</span>exam_grade <span class="sc">-</span> <span class="fu">mean</span>(data<span class="sc">$</span>exam_grade)) <span class="sc">/</span> <span class="fu">sd</span>(data<span class="sc">$</span>exam_grade)</span>
-<span id="cb2-2"><a href="#cb2-2"></a>z.anxiety <span class="ot">&lt;-</span> (data<span class="sc">$</span>anxiety    <span class="sc">-</span> <span class="fu">mean</span>(data<span class="sc">$</span>anxiety))    <span class="sc">/</span> <span class="fu">sd</span>(data<span class="sc">$</span>anxiety)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="standardize-1" class="slide level2 smaller">
-<h2>Standardize</h2>
-
-<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"><p>Both now have mean 0 and sd 1.</p>
-</section>
-<section id="standardize-2" class="slide level2 smaller">
-<h2>Standardize</h2>
-
-<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"><p>The two tend to sit on <em>opposite</em> sides of their means.</p>
-</section></section>
 <section>
 <section id="t-distribution" class="title-slide slide level1 section center">
 <h1>T-distribution</h1>
@@ -533,44 +519,44 @@ Johnny van Doorn
 <section id="population-distribution" class="slide level2 smaller subsection">
 <h2>Population distribution</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3" data-code-line-numbers="3-4|6-7|14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">7</span><span class="sc">:</span><span class="dv">8</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">9</span><span class="sc">:</span><span class="dv">13</span>), <span class="dv">4</span>, <span class="dv">4</span>))</span>
-<span id="cb3-3"><a href="#cb3-3"></a></span>
-<span id="cb3-4"><a href="#cb3-4"></a>n  <span class="ot">&lt;-</span> <span class="dv">50</span>    <span class="co"># Sample size</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a>df <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span> <span class="co"># Degrees of freedom</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a></span>
-<span id="cb3-7"><a href="#cb3-7"></a>mu    <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a>sigma <span class="ot">&lt;-</span> <span class="dv">15</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a></span>
-<span id="cb3-10"><a href="#cb3-10"></a>IQ <span class="ot">&lt;-</span> <span class="fu">seq</span>(mu<span class="dv">-45</span>, mu<span class="sc">+</span><span class="dv">45</span>, <span class="dv">1</span>)</span>
-<span id="cb3-11"><a href="#cb3-11"></a></span>
-<span id="cb3-12"><a href="#cb3-12"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">0</span>))  </span>
-<span id="cb3-13"><a href="#cb3-13"></a><span class="fu">plot</span>(IQ, <span class="fu">dnorm</span>(IQ, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma), <span class="at">type=</span><span class="st">'l'</span>, <span class="at">col=</span><span class="st">"black"</span>, <span class="at">main =</span> <span class="st">"Population Distribution"</span>, </span>
-<span id="cb3-14"><a href="#cb3-14"></a>     <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">bty=</span> <span class="st">"n"</span>, <span class="at">axes =</span> <span class="cn">FALSE</span>, <span class="at">xlab =</span> <span class="fu">c</span>(<span class="dv">60</span>, <span class="dv">140</span>))</span>
-<span id="cb3-15"><a href="#cb3-15"></a><span class="fu">axis</span>(<span class="dv">1</span>)</span>
-<span id="cb3-16"><a href="#cb3-16"></a></span>
-<span id="cb3-17"><a href="#cb3-17"></a>n.samples <span class="ot">&lt;-</span> <span class="dv">12</span></span>
-<span id="cb3-18"><a href="#cb3-18"></a></span>
-<span id="cb3-19"><a href="#cb3-19"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n.samples) {</span>
-<span id="cb3-20"><a href="#cb3-20"></a>  </span>
-<span id="cb3-21"><a href="#cb3-21"></a>  <span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">0</span>))  </span>
-<span id="cb3-22"><a href="#cb3-22"></a>  <span class="fu">hist</span>(<span class="fu">rnorm</span>(n, mu, sigma), <span class="at">main=</span><span class="st">"Sample Distribution"</span>, <span class="at">xlab =</span> <span class="fu">c</span>(<span class="dv">60</span>, <span class="dv">140</span>),</span>
-<span id="cb3-23"><a href="#cb3-23"></a>       <span class="at">cex.axis=</span>.<span class="dv">5</span>, <span class="at">col=</span><span class="fu">rainbow</span>(<span class="dv">12</span>)[i], <span class="at">cex.main =</span> .<span class="dv">75</span>, <span class="at">las =</span> <span class="dv">1</span>, <span class="at">axes =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb3-24"><a href="#cb3-24"></a><span class="fu">axis</span>(<span class="dv">1</span>)</span>
-<span id="cb3-25"><a href="#cb3-25"></a>  </span>
-<span id="cb3-26"><a href="#cb3-26"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5" data-code-line-numbers="3-4|6-7|14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">7</span><span class="sc">:</span><span class="dv">8</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">9</span><span class="sc">:</span><span class="dv">13</span>), <span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a>n  <span class="ot">&lt;-</span> <span class="dv">50</span>    <span class="co"># Sample size</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>df <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span> <span class="co"># Degrees of freedom</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a></span>
+<span id="cb5-7"><a href="#cb5-7"></a>mu    <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>sigma <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a></span>
+<span id="cb5-10"><a href="#cb5-10"></a>IQ <span class="ot">&lt;-</span> <span class="fu">seq</span>(mu<span class="dv">-45</span>, mu<span class="sc">+</span><span class="dv">45</span>, <span class="dv">1</span>)</span>
+<span id="cb5-11"><a href="#cb5-11"></a></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">0</span>))  </span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="fu">plot</span>(IQ, <span class="fu">dnorm</span>(IQ, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma), <span class="at">type=</span><span class="st">'l'</span>, <span class="at">col=</span><span class="st">"black"</span>, <span class="at">main =</span> <span class="st">"Population Distribution"</span>, </span>
+<span id="cb5-14"><a href="#cb5-14"></a>     <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">bty=</span> <span class="st">"n"</span>, <span class="at">axes =</span> <span class="cn">FALSE</span>, <span class="at">xlab =</span> <span class="fu">c</span>(<span class="dv">60</span>, <span class="dv">140</span>))</span>
+<span id="cb5-15"><a href="#cb5-15"></a><span class="fu">axis</span>(<span class="dv">1</span>)</span>
+<span id="cb5-16"><a href="#cb5-16"></a></span>
+<span id="cb5-17"><a href="#cb5-17"></a>n.samples <span class="ot">&lt;-</span> <span class="dv">12</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a></span>
+<span id="cb5-19"><a href="#cb5-19"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n.samples) {</span>
+<span id="cb5-20"><a href="#cb5-20"></a>  </span>
+<span id="cb5-21"><a href="#cb5-21"></a>  <span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">0</span>))  </span>
+<span id="cb5-22"><a href="#cb5-22"></a>  <span class="fu">hist</span>(<span class="fu">rnorm</span>(n, mu, sigma), <span class="at">main=</span><span class="st">"Sample Distribution"</span>, <span class="at">xlab =</span> <span class="fu">c</span>(<span class="dv">60</span>, <span class="dv">140</span>),</span>
+<span id="cb5-23"><a href="#cb5-23"></a>       <span class="at">cex.axis=</span>.<span class="dv">5</span>, <span class="at">col=</span><span class="fu">rainbow</span>(<span class="dv">12</span>)[i], <span class="at">cex.main =</span> .<span class="dv">75</span>, <span class="at">las =</span> <span class="dv">1</span>, <span class="at">axes =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb5-24"><a href="#cb5-24"></a><span class="fu">axis</span>(<span class="dv">1</span>)</span>
+<span id="cb5-25"><a href="#cb5-25"></a>  </span>
+<span id="cb5-26"><a href="#cb5-26"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
 <section id="population-distribution-output" class="slide level2 smaller subsection output-location-slide"><h2>Population distribution</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
-<p><img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-21-1.png" width="960"></p>
+<p><img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
 </div>
 </div></section><section id="a-sample" class="slide level2 smaller">
 <h2>A sample</h2>
 <p>Let’s take one sample from our normal population.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma); x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma); x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 116.11018  99.58980  99.50004  77.25899 111.85578  96.83899  90.14886
  [8]  78.81961  95.50356  87.26408  94.04454  81.73600 125.31384  99.75996
@@ -583,47 +569,47 @@ Johnny van Doorn
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">hist</span>(x, <span class="at">main =</span> <span class="st">"Sample distribution"</span>, <span class="at">col =</span> <span class="fu">rainbow</span>(<span class="dv">12</span>)[<span class="dv">6</span>], <span class="at">breaks =</span> <span class="dv">15</span>, <span class="at">las =</span><span class="dv">1</span>)</span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">text</span>(<span class="dv">125</span>, <span class="dv">7</span>, <span class="fu">bquote</span>(<span class="fu">bar</span>(x) <span class="sc">~</span> <span class="st">" = "</span> <span class="sc">~</span> .(<span class="fu">round</span>(<span class="fu">mean</span>(x),<span class="dv">2</span>))), <span class="at">cex =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">hist</span>(x, <span class="at">main =</span> <span class="st">"Sample distribution"</span>, <span class="at">col =</span> <span class="fu">rainbow</span>(<span class="dv">12</span>)[<span class="dv">6</span>], <span class="at">breaks =</span> <span class="dv">15</span>, <span class="at">las =</span><span class="dv">1</span>)</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="fu">text</span>(<span class="dv">125</span>, <span class="dv">7</span>, <span class="fu">bquote</span>(<span class="fu">bar</span>(x) <span class="sc">~</span> <span class="st">" = "</span> <span class="sc">~</span> .(<span class="fu">round</span>(<span class="fu">mean</span>(x),<span class="dv">2</span>))), <span class="at">cex =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
 <section id="a-sample-output" class="slide level2 smaller output-location-slide"><h2>A sample</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
-<p><img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-23-1.png" width="960"></p>
+<p><img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-15-1.png" width="960"></p>
 </div>
 </div></section><section id="more-samples" class="slide level2">
 <h2>More samples</h2>
-<p>Every sample gives a slightly different mean. Let’s take a lot more samples, and keep track of <span class="math inline">\(\bar{x}\)</span> each time.</p>
+<p>More samples, keeping <span class="math inline">\(\bar{x}\)</span> each time.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>n.samples     <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>mean.x.values <span class="ot">&lt;-</span> <span class="fu">vector</span>()</span>
-<span id="cb7-3"><a href="#cb7-3"></a></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n.samples) {</span>
-<span id="cb7-5"><a href="#cb7-5"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma)</span>
-<span id="cb7-6"><a href="#cb7-6"></a>  mean.x.values[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
-<span id="cb7-7"><a href="#cb7-7"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>n.samples     <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>mean.x.values <span class="ot">&lt;-</span> <span class="fu">vector</span>()</span>
+<span id="cb9-3"><a href="#cb9-3"></a></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n.samples) {</span>
+<span id="cb9-5"><a href="#cb9-5"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma)</span>
+<span id="cb9-6"><a href="#cb9-6"></a>  mean.x.values[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb9-7"><a href="#cb9-7"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="sampling-distribution" class="slide level2">
 <h2>Sampling distribution</h2>
-<p>The means themselves have a distribution.</p>
+<p>The means have their own distribution.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">hist</span>(mean.x.values, </span>
-<span id="cb8-2"><a href="#cb8-2"></a>     <span class="at">col  =</span> <span class="fu">rainbow</span>(<span class="dv">12</span>),</span>
-<span id="cb8-3"><a href="#cb8-3"></a>     <span class="at">main =</span> <span class="st">"Sampling distribution of the mean"</span>, </span>
-<span id="cb8-4"><a href="#cb8-4"></a>     <span class="at">xlab =</span> <span class="st">"1,000 sample means"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">hist</span>(mean.x.values, </span>
+<span id="cb10-2"><a href="#cb10-2"></a>     <span class="at">col  =</span> <span class="fu">rainbow</span>(<span class="dv">12</span>),</span>
+<span id="cb10-3"><a href="#cb10-3"></a>     <span class="at">main =</span> <span class="st">"Sampling distribution of the mean"</span>, </span>
+<span id="cb10-4"><a href="#cb10-4"></a>     <span class="at">xlab =</span> <span class="st">"1,000 sample means"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section><section id="sampling-distribution-output" class="slide level2 output-location-slide"><h2>Sampling distribution</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
-<p><img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-25-1.png" width="960"></p>
+<p><img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-17-1.png" width="960"></p>
 </div>
 </div></section></section>
 <section>
 <section id="standard-error-and-confidence-intervals" class="title-slide slide level1 section center">
 <h1>Standard Error and<br>Confidence Intervals</h1>
-<p>That spread of sample means is not just a picture: it has a size, and a name.</p>
+<p>That spread has a name.</p>
 </section>
 <section id="standard-error" class="slide level2">
 <h2>Standard Error</h2>
@@ -776,7 +762,7 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <h2></h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-35-1.png" width="960" height="600"></p>
+<p><img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-27-1.png" width="960" height="600"></p>
 </div>
 </div>
 </section>
@@ -793,7 +779,7 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <section id="the-t-distribution-family" class="slide level2 smaller">
 <h2>The t-distribution family</h2>
 
-<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-41-1.png" width="960" class="r-stretch"><p>Fatter tails for small <span class="math inline">\(n\)</span> (few degrees of freedom); converges to the standard normal as <span class="math inline">\(n\)</span> grows.</p>
+<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-33-1.png" width="960" class="r-stretch"><p>Fatter tails for small <span class="math inline">\(n\)</span> (few degrees of freedom); converges to the standard normal as <span class="math inline">\(n\)</span> grows.</p>
 </section>
 <section id="applet-a-continuous-sampling-distribution" class="slide level2 smaller">
 <h2>Applet: a continuous sampling distribution</h2>
@@ -833,30 +819,29 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <section id="plot-correlation" class="slide level2">
 <h2>Plot correlation</h2>
 
-<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-47-1.png" width="480" class="r-stretch quarto-figure-center"></section>
+<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-39-1.png" width="480" class="r-stretch quarto-figure-center"></section>
 <section id="plot-correlation-1" class="slide level2">
 <h2>Plot correlation</h2>
 
-<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-48-1.png" width="480" class="r-stretch quarto-figure-center"></section>
+<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-40-1.png" width="480" class="r-stretch quarto-figure-center"></section>
 <section id="plot-correlation-2" class="slide level2">
 <h2>Plot correlation</h2>
 
-<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-49-1.png" width="480" class="r-stretch quarto-figure-center"><p><span class="math display">\[(x_i - \bar{x})(y_i - \bar{y})\]</span></p>
+<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-41-1.png" width="480" class="r-stretch quarto-figure-center"><p><span class="math display">\[(x_i - \bar{x})(y_i - \bar{y})\]</span></p>
 <!-- ## Guess the correlation -->
 <!-- [Guess the correlation](http://guessthecorrelation.com) -->
 <!-- <img src="qrcodeqtc.png"> -->
 </section>
-<section id="load-data-1" class="slide level2">
+<section id="load-data" class="slide level2">
 <h2>Load data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>n       <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>allData <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">datasetsPath</span>(<span class="st">"2026/ExamAnxiety.csv"</span>))</span>
-<span id="cb9-3"><a href="#cb9-3"></a>data    <span class="ot">&lt;-</span> allData[<span class="dv">1</span><span class="sc">:</span>n, <span class="fu">c</span>(<span class="st">"revise"</span>, <span class="st">"exam_grade"</span>, <span class="st">"anxiety"</span>)] <span class="co"># first 10 students</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="fu">ssrTable</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">datasetsPath</span>(<span class="st">"2026/exam-anxiety.csv"</span>), <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb11-2"><a href="#cb11-2"></a>data <span class="ot">&lt;-</span> data[, <span class="fu">c</span>(<span class="st">"Time spent revising"</span>, <span class="st">"Exam performance"</span>, <span class="st">"Exam anxiety"</span>)]</span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="fu">ssrTable</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-17349bf1de74483817f0" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-17349bf1de74483817f0">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[4,11,27,53,4,22,16,21,25,18],[40,65,80,80,40,70,20,55,50,40],[86.298,88.71599999999999,70.178,61.312,89.52200000000001,60.506,81.462,75.82000000000001,69.372,82.268]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>revise<\/th>\n      <th>exam_grade<\/th>\n      <th>anxiety<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"revise","targets":1},{"name":"exam_grade","targets":2},{"name":"anxiety","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-066c473e991d58f078c8" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-066c473e991d58f078c8">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103"],[4,11,27,53,4,22,16,21,25,18,18,16,13,18,98,1,14,29,4,23,14,12,22,84,23,26,24,72,37,10,3,36,43,19,12,9,72,10,12,30,15,8,34,22,21,27,6,18,8,19,0,52,38,19,23,11,27,17,13,42,4,8,6,11,7,15,4,28,22,29,2,16,59,10,13,8,5,2,38,4,10,6,68,8,1,14,42,13,1,3,5,12,19,2,19,11,15,23,13,14,1,9,20],[40,65,80,80,40,70,20,55,50,40,45,85,70,50,95,70,95,95,50,60,80,75,85,90,30,60,75,75,27,20,75,90,60,30,80,10,85,7,5,85,20,45,60,70,50,25,50,40,80,50,35,80,50,49,75,25,65,80,50,70,40,80,10,20,40,40,70,52,50,60,80,60,65,15,85,20,80,100,100,80,10,70,100,70,70,65,75,85,30,5,10,90,70,20,85,35,30,70,55,75,2,40,50],[86.298,88.71599999999999,70.178,61.312,89.52200000000001,60.506,81.462,75.81999999999999,69.372,82.268,79.044,80.65600000000001,70.178,75.014,34.714,95.164,75.81999999999999,79.044,91.134,64.536,80.65600000000001,77.432,65.342,0.056,71.79000000000001,81.462,63.73,27.46,73.402,89.52200000000001,89.52200000000001,75.014,43.58,82.268,79.044,79.044,37.132,81.462,83.074,50.834,82.268,78.238,72.596,74.208,75.81999999999999,70.98399999999999,97.58199999999999,67.76000000000001,75.014,73.402,93.55200000000001,58.894,53.252,84.68600000000001,89.52200000000001,71.79000000000001,82.268,69.372,62.118,68.566,93.55200000000001,84.68600000000001,82.268,81.462,82.268,91.134,91.94,86.298,72.596,63.73,63.73,71.79000000000001,57.282,84.68600000000001,84.68600000000001,77.432,82.268,10,50.834,87.91,83.88,84.68600000000001,20.206,87.104,83.88,67.76000000000001,95.97,62.118,84.68600000000001,92.746,84.68600000000001,83.074,73.402,87.91,71.79000000000001,86.298,84.68600000000001,75.81999999999999,70.98399999999999,78.238,82.268,79.044,91.134]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Time spent revising<\/th>\n      <th>Exam performance<\/th>\n      <th>Exam anxiety<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Time spent revising","targets":1},{"name":"Exam performance","targets":2},{"name":"Exam anxiety","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -864,18 +849,18 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <h2>Covariance</h2>
 <p><span class="math display">\[{COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>mean.exam    <span class="ot">&lt;-</span> <span class="fu">mean</span>(exam_grade, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
-<span id="cb10-2"><a href="#cb10-2"></a>mean.anxiety <span class="ot">&lt;-</span> <span class="fu">mean</span>(anxiety,    <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
-<span id="cb10-3"><a href="#cb10-3"></a></span>
-<span id="cb10-4"><a href="#cb10-4"></a>delta.exam    <span class="ot">&lt;-</span> exam_grade <span class="sc">-</span> mean.exam</span>
-<span id="cb10-5"><a href="#cb10-5"></a>delta.anxiety <span class="ot">&lt;-</span> anxiety    <span class="sc">-</span> mean.anxiety</span>
-<span id="cb10-6"><a href="#cb10-6"></a></span>
-<span id="cb10-7"><a href="#cb10-7"></a>prod <span class="ot">&lt;-</span> delta.exam <span class="sc">*</span> delta.anxiety</span>
-<span id="cb10-8"><a href="#cb10-8"></a></span>
-<span id="cb10-9"><a href="#cb10-9"></a>covariance <span class="ot">&lt;-</span> <span class="fu">sum</span>(prod) <span class="sc">/</span> (N <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb10-10"><a href="#cb10-10"></a>covariance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>mean.exam    <span class="ot">&lt;-</span> <span class="fu">mean</span>(exam_grade, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb12-2"><a href="#cb12-2"></a>mean.anxiety <span class="ot">&lt;-</span> <span class="fu">mean</span>(anxiety,    <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb12-3"><a href="#cb12-3"></a></span>
+<span id="cb12-4"><a href="#cb12-4"></a>delta.exam    <span class="ot">&lt;-</span> exam_grade <span class="sc">-</span> mean.exam</span>
+<span id="cb12-5"><a href="#cb12-5"></a>delta.anxiety <span class="ot">&lt;-</span> anxiety    <span class="sc">-</span> mean.anxiety</span>
+<span id="cb12-6"><a href="#cb12-6"></a></span>
+<span id="cb12-7"><a href="#cb12-7"></a>prod <span class="ot">&lt;-</span> delta.exam <span class="sc">*</span> delta.anxiety</span>
+<span id="cb12-8"><a href="#cb12-8"></a></span>
+<span id="cb12-9"><a href="#cb12-9"></a>covariance <span class="ot">&lt;-</span> <span class="fu">sum</span>(prod) <span class="sc">/</span> (N <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb12-10"><a href="#cb12-10"></a>covariance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -135.7662</code></pre>
+<pre><code>[1] -196.554</code></pre>
 </div>
 </div>
 <!-- ## Covariance {.smaller} -->
@@ -895,9 +880,9 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <h2>Correlation</h2>
 <p><span class="math display">\[r_{xy} = \frac{{COV}_{xy}}{S_xS_y}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>correlation <span class="ot">&lt;-</span> covariance <span class="sc">/</span> ( <span class="fu">sd</span>(exam_grade) <span class="sc">*</span> <span class="fu">sd</span>(anxiety) ); correlation</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>correlation <span class="ot">&lt;-</span> covariance <span class="sc">/</span> ( <span class="fu">sd</span>(exam_grade) <span class="sc">*</span> <span class="fu">sd</span>(anxiety) ); correlation</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.6381825</code></pre>
+<pre><code>[1] -0.4409934</code></pre>
 </div>
 </div>
 </section>
@@ -905,41 +890,29 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <h2>Correlation</h2>
 <p><span class="math display">\[r_{xy} = \frac{{COV}_{xy}}{S_xS_y}\]</span> <span class="math display">\[{COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">cor</span>(exam_grade, anxiety) <span class="co"># correlation</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">cor</span>(exam_grade, anxiety) <span class="co"># correlation</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.6381825</code></pre>
+<pre><code>[1] -0.4409934</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">cor</span>(z.exam,     z.anxiety) <span class="co"># correlation of z-scores</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.6381825</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># covariance of z-scores</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a><span class="fu">sum</span>(z.exam <span class="sc">*</span> z.anxiety ) <span class="sc">/</span> (N <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.6381825</code></pre>
-</div>
-</div>
-</section>
-<section id="these-were-only-10-students" class="slide level2 smaller">
-<h2>These were only 10 students</h2>
-<p>Ten students, so the sums fit on a slide. She tested 103:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">cor</span>(allData<span class="sc">$</span>exam_grade, allData<span class="sc">$</span>anxiety)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">cor</span>(z.exam,     z.anxiety) <span class="co"># correlation of z-scores</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -0.4409934</code></pre>
 </div>
 </div>
-<p>Same story, weaker. Small samples wobble more.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># covariance of z-scores</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="fu">sum</span>(z.exam <span class="sc">*</span> z.anxiety ) <span class="sc">/</span> (N <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.4409934</code></pre>
+</div>
+</div>
 </section>
 <section id="plot-correlation-3" class="slide level2">
 <h2>Plot correlation</h2>
 
-<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-57-1.png" width="960" class="r-stretch"></section>
+<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-48-1.png" width="960" class="r-stretch"></section>
 <section id="significance-testing-using-t" class="slide level2">
 <h2>Significance testing using <span class="math inline">\(t\)</span></h2>
-<p>We just built that shape for sample means. The same trick works for any statistic we can standardize, and today’s is <span class="math inline">\(r\)</span>.</p>
 <blockquote>
 <p>A test statistic with a known probability distribution (the t-distribution).</p>
 </blockquote>
@@ -973,11 +946,11 @@ H_A &amp;: t_r &lt; 0 \\
 <span id="cb22-3"><a href="#cb22-3"></a></span>
 <span id="cb22-4"><a href="#cb22-4"></a>t.r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -2.344574</code></pre>
+<pre><code>[1] -4.938025</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 8</code></pre>
+<pre><code>[1] 101</code></pre>
 </div>
 </div>
 </section>
@@ -986,25 +959,26 @@ H_A &amp;: t_r &lt; 0 \\
 <p>The hypotheses above translate into where we shade the rejection region:</p>
 <p><a href="https://johnnydoorn.github.io/teaching-statistics/extra-texts/one-sided-vs-two-sided.html">Additional text here</a></p>
 
-<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-59-1.png" width="960" class="r-stretch"></section>
+<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-50-1.png" width="960" class="r-stretch"></section>
 <section id="visualize" class="slide level2">
 <h2>Visualize</h2>
 <p>Locate in <span class="math inline">\(t\)</span>-distribution</p>
 
-<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-60-1.png" width="960" class="r-stretch"></section></section>
+<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-51-1.png" width="960" class="r-stretch"></section></section>
 <section>
 <section id="partial-correlation" class="title-slide slide level1 section center">
 <h1>Partial correlation</h1>
 
 </section>
-<section id="venn-diagram-of-variance" class="slide level2">
-<h2>Venn diagram of Variance</h2>
-
-<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-79-1.png" width="960" class="r-stretch"></section>
+<section id="shared-variance" class="slide level2 smaller">
+<h2>Shared variance</h2>
+<p><img data-src="../../images/figure-7-9.png" height="380"></p>
+<p><small>Field, <em>Discovering Statistics Using JASP</em>, Figure 7.9</small></p>
+</section>
 <section id="partial-correlation-1" class="slide level2 smaller">
 <h2>Partial correlation</h2>
 <p><span class="math display">\[\LARGE{r_{xy \cdot z} = \frac{r_{xy} - r_{xz} r_{yz}}{\sqrt{(1 - r_{xz}^2)(1 - r_{yz}^2)}}}\]</span></p>
-<p>Does anxiety really hurt performance, or do anxious students simply revise less?</p>
+<p>Or do anxious students simply revise less?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>cor.exam.anxiety    <span class="ot">&lt;-</span> <span class="fu">cor</span>(exam_grade, anxiety)</span>
 <span id="cb26-2"><a href="#cb26-2"></a>cor.exam.revise     <span class="ot">&lt;-</span> <span class="fu">cor</span>(exam_grade, revise)</span>
@@ -1013,7 +987,7 @@ H_A &amp;: t_r &lt; 0 \\
 <span id="cb26-5"><a href="#cb26-5"></a><span class="fu">data.frame</span>(cor.exam.anxiety, cor.exam.revise, cor.anxiety.revise)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  cor.exam.anxiety cor.exam.revise cor.anxiety.revise
-1       -0.6381825       0.6281441         -0.8190722</code></pre>
+1       -0.4409934       0.3967207         -0.7092493</code></pre>
 </div>
 </div>
 </section>
@@ -1027,10 +1001,10 @@ H_A &amp;: t_r &lt; 0 \\
 <span id="cb28-5"><a href="#cb28-5"></a></span>
 <span id="cb28-6"><a href="#cb28-6"></a>partial.correlation</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.2770851</code></pre>
+<pre><code>[1] -0.2466658</code></pre>
 </div>
 </div>
-<p>Holding revision time constant, the link between anxiety and performance shrinks considerably: a good part of it ran through how much students revised.</p>
+<p>Holding revision constant, the link shrinks.</p>
 </section>
 <section id="significance-of-partial-correlation" class="slide level2 subsection">
 <h2>Significance of partial correlation</h2>
@@ -1041,14 +1015,20 @@ H_A &amp;: t_r &lt; 0 \\
 <span id="cb30-3"><a href="#cb30-3"></a>t.pr <span class="ot">&lt;-</span> ( partial.correlation<span class="sc">*</span><span class="fu">sqrt</span>(df) ) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">-</span>partial.correlation<span class="sc">^</span><span class="dv">2</span>)</span>
 <span id="cb30-4"><a href="#cb30-4"></a>t.pr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.7629722</code></pre>
+<pre><code>[1] -2.545307</code></pre>
 </div>
 </div>
 </section>
 <section id="p-value" class="slide level2">
 <h2>p-value</h2>
 
-<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-83-1.png" width="960" class="r-stretch"></section></section>
+<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-72-1.png" width="960" class="r-stretch"></section>
+<section id="jasp" class="slide level2">
+<h2>JASP</h2>
+
+<!-- ```{r child="variance-standardization.qmd"} -->
+<!-- ``` -->
+<img data-src="../../images/JASP_logo_green.svg" width="300" class="r-stretch"></section></section>
 <section>
 <section id="closing" class="title-slide slide level1 center">
 <h1>Closing</h1>
