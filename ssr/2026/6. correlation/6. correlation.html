@@ -138,6 +138,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#partial-correlation" id="toc-partial-correlation" class="nav-link" data-scroll-target="#partial-correlation">Partial correlation</a>
   <ul class="collapse">
+  <li><a href="#a-third-variable" id="toc-a-third-variable" class="nav-link" data-scroll-target="#a-third-variable">A third variable</a></li>
   <li><a href="#shared-variance" id="toc-shared-variance" class="nav-link" data-scroll-target="#shared-variance">Shared variance</a></li>
   <li><a href="#partial-correlation-1" id="toc-partial-correlation-1" class="nav-link" data-scroll-target="#partial-correlation-1">Partial correlation</a></li>
   <li><a href="#significance-of-partial-correlation" id="toc-significance-of-partial-correlation" class="nav-link" data-scroll-target="#significance-of-partial-correlation">Significance of partial correlation</a></li>
@@ -559,7 +560,7 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <h2 class="subsection anchored" data-anchor-id="power-in-practice">Power in practice</h2>
 <ul>
 <li>Strive for 80%</li>
-<li>Based on know effect size</li>
+<li>Based on known effect size</li>
 <li>Calculate number of subjects needed</li>
 <li>Use JASP (Power module), <a href="http://www.gpower.hhu.de">G*Power</a>, or SPSS to calculate</li>
 </ul>
@@ -771,6 +772,16 @@ H_A &amp;: t_r &lt; 0 \\
 </section>
 <section id="partial-correlation" class="level1 section">
 <h1 class="section">Partial correlation</h1>
+<section id="a-third-variable" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="a-third-variable">A third variable</h2>
+<p>All three are related:</p>
+<ul>
+<li>Performance and anxiety: <span class="math inline">\(r = -0.44\)</span></li>
+<li>Performance and revision: <span class="math inline">\(r = 0.40\)</span></li>
+<li>Anxiety and revision: <span class="math inline">\(r = -0.71\)</span></li>
+</ul>
+<p>How much of the association is unique to anxiety and performance?</p>
+</section>
 <section id="shared-variance" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="shared-variance">Shared variance</h2>
 <p><img src="../../images/figure-7-9.png" height="380"></p>

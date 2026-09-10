@@ -130,7 +130,7 @@ The same reasoning as the binomial applet, now for a continuous outcome.
 ## Power in practice {.subsection}
 
 -   Strive for 80%
--   Based on know effect size
+-   Based on known effect size
 -   Calculate number of subjects needed
 -   Use JASP (Power module), [G\*Power](http://www.gpower.hhu.de), or SPSS to calculate
 

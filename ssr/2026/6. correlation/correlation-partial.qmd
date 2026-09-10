@@ -1,11 +1,5 @@
 # Partial correlation {.section}
 
-## Shared variance {.smaller}
-
-![](../../images/figure-7-9.png){height="380"}
-
-<small>Field, *Discovering Statistics Using JASP*, Figure 7.9</small>
-
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, prompt=FALSE}
 source("../../_setup.R")
 data <- read.csv(datasetsPath("2026/exam-anxiety.csv"), check.names = FALSE)
@@ -14,6 +8,24 @@ anxiety    <- data$`Exam anxiety`
 revise     <- data$`Time spent revising`
 N          <- length(exam_grade)
 ```
+
+## A third variable {.smaller}
+
+All three are related:
+
+- Performance and anxiety: $r = `r sprintf("%.2f", cor(exam_grade, anxiety))`$
+- Performance and revision: $r = `r sprintf("%.2f", cor(exam_grade, revise))`$
+- Anxiety and revision: $r = `r sprintf("%.2f", cor(anxiety, revise))`$
+
+How much of the association is unique to anxiety and performance?
+
+## Shared variance {.smaller}
+
+![](../../images/figure-7-9.png){height="380"}
+
+<small>Field, *Discovering Statistics Using JASP*, Figure 7.9</small>
+
+
 
 ## Partial correlation {.smaller}
 
