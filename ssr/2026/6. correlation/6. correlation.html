@@ -96,7 +96,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul class="collapse">
   <li><a href="#challenger" id="toc-challenger" class="nav-link active" data-scroll-target="#challenger">Challenger</a></li>
-  <li><a href="#the-statistics" id="toc-the-statistics" class="nav-link" data-scroll-target="#the-statistics">The statistics</a></li>
   <li><a href="#t-distribution" id="toc-t-distribution" class="nav-link" data-scroll-target="#t-distribution">T-distribution</a>
   <ul class="collapse">
   <li><a href="#three-distributions" id="toc-three-distributions" class="nav-link" data-scroll-target="#three-distributions">Three distributions</a></li>
@@ -216,7 +215,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Partial correlation</li>
 </ul></li>
 </ul>
-<p><strong>Reading:</strong> Chapter 7 (§7.1–7.11), 2.8–2.9 (Standard error &amp; confidence intervals)</p>
+<p><strong>Reading:</strong> Chapter 7 (§7.1–7.8), 5.7 (Scatterplots), 2.8–2.9 (Standard error &amp; confidence intervals)</p>
+<p><small>Not exam material: §7.2.5, §7.4.3–7.4.5 (Spearman, Kendall, point-biserial), §7.6 (comparing correlations).</small></p>
 </div>
 <section id="challenger" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="challenger">Challenger</h2>
@@ -225,9 +225,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="6.-correlation_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-</section>
-<section id="the-statistics" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="the-statistics">The statistics</h2>
+<section id="the-statistics" class="level3 smaller">
+<h3 class="smaller anchored" data-anchor-id="the-statistics">The statistics</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(damagedTemp, damagedOr)<span class="sc">$</span>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -260,6 +259,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 <p><small>Data: <a href="https://johnnydoorn.github.io/teaching-statistics/datasets/2026/challenger.csv">challenger.csv</a>, from the Presidential Commission on the Space Shuttle Challenger Accident (1986, Vol. 1: 129-131), via Dalal, Fowlkes &amp; Hoadley (1989).</small></p>
+</section>
 </section>
 <section id="t-distribution" class="level1 section">
 <h1 class="section">T-distribution</h1>
@@ -784,8 +784,12 @@ H_A &amp;: t_r &lt; 0 \\
 </section>
 <section id="shared-variance" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="shared-variance">Shared variance</h2>
-<p><img src="../../images/figure-7-9.png" height="380"></p>
-<p><small>Field, <em>Discovering Statistics Using JASP</em>, Figure 7.9</small></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/figure-7-9.png" height="380" class="figure-img"></p>
+<figcaption class="figure-caption">Figure 7.9</figcaption>
+</figure>
+</div>
 </section>
 <section id="partial-correlation-1" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="partial-correlation-1">Partial correlation</h2>

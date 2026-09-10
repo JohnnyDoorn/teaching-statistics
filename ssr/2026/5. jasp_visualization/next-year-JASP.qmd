@@ -46,7 +46,7 @@ Two modes: data editor (view and edit) and analysis mode.
 
 ### The start-up window
 
-![Figure 4.2: The JASP start-up window](../../images/figure-4-2.png){height="330"}
+![Figure 4.2 The JASP start-up window](../../images/figure-4-2.png){height="330"}
 
 ---
 
@@ -65,7 +65,7 @@ The module button ![](../../images/blueplus.png){height="25"}:
 
 ### The data library
 
-![Figure 4.3: Opening the Sleep data from the JASP data library](../../images/figure-4-3.png){height="330"}
+![Figure 4.3 Opening the Sleep data from the JASP data library](../../images/figure-4-3.png){height="330"}
 
 ---
 
@@ -76,7 +76,7 @@ The module button ![](../../images/blueplus.png){height="25"}:
 - Click Open > select your file
 - Data appears in spreadsheet view
 
-![Figure 4.4: The JASP data editor](../../images/figure-4-4.png){height="300"}
+![Figure 4.4 The JASP data editor](../../images/figure-4-4.png){height="300"}
 
 ---
 
@@ -107,13 +107,13 @@ Sometimes you'll see a `.sav` file, previously used in SPSS.
 
 Doubleclick a column name to open its settings. The measurement level you set here decides how JASP treats your variable.
 
-![Figure 4.6: Variable settings menu](../../images/figure-4-6.png){height="280"}
+![Figure 4.6 Variable settings menu](../../images/figure-4-6.png){height="280"}
 
 ---
 
 ### Ordinal variables
 
-![Figure 4.7: Specifying the values for an ordinal variable](../../images/figure-4-7.png){height="330"}
+![Figure 4.7 Specifying the values for an ordinal variable](../../images/figure-4-7.png){height="330"}
 
 ---
 
@@ -121,13 +121,13 @@ Doubleclick a column name to open its settings. The measurement level you set he
 
 Drag and drop, no syntax required.
 
-![Figure 4.8: The drag-and-drop interface for computing a new variable](../../images/figure-4-8.png){height="300"}
+![Figure 4.8 The drag-and-drop interface for computing a new variable](../../images/figure-4-8.png){height="300"}
 
 ---
 
 ### Missing values
 
-![Figure 4.9: Defining missing values](../../images/figure-4-9.png){height="300"}
+![Figure 4.9 Defining missing values](../../images/figure-4-9.png){height="300"}
 
 ---
 
@@ -155,7 +155,7 @@ Drag and drop, no syntax required.
 
 ### Annotated output
 
-![Figure 4.11: Example of annotated output](../../images/figure-4-11.png){height="330"}
+![Figure 4.11 Example of annotated output](../../images/figure-4-11.png){height="330"}
 
 ---
 

@@ -21,9 +21,7 @@ How much of the association is unique to anxiety and performance?
 
 ## Shared variance {.smaller}
 
-![](../../images/figure-7-9.png){height="380"}
-
-<small>Field, *Discovering Statistics Using JASP*, Figure 7.9</small>
+![Figure 7.9](../../images/figure-7-9.png){height="380"}
 
 
 

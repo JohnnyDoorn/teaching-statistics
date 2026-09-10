@@ -24,7 +24,7 @@ plot(temperature, damage, pch = 19, cex = 1.8,
      xlab = "Temperature (°C)", ylab = "Damaged O-rings", main = "All 23 flights")
 ```
 
-## The statistics {.smaller}
+### The statistics {.smaller}
 
 ```{r, echo=TRUE}
 cor.test(damagedTemp, damagedOr)$p.value

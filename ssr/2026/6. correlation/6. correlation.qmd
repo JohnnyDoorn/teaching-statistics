@@ -27,7 +27,9 @@ In this lecture we discuss:
   * Partial correlation
     
 <strong>Reading:</strong>
-Chapter 7 (§7.1–7.11), 2.8–2.9 (Standard error &amp; confidence intervals)
+Chapter 7 (§7.1–7.8), 5.7 (Scatterplots), 2.8–2.9 (Standard error &amp; confidence intervals)
+
+<small>Not exam material: §7.2.5, §7.4.3–7.4.5 (Spearman, Kendall, point-biserial), §7.6 (comparing correlations).</small>
 </div>
 
 
