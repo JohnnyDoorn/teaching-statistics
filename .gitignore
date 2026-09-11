@@ -29,3 +29,7 @@ transcripts/
 # They are also 342 MB, which alone would push the site past the 1 GB Pages
 # limit. Nothing here is tracked or referenced by any page.
 statbooks/
+
+# Agent instructions for this repo. Local working notes, not course material,
+# and this repo is public — keep it out of git.
+/CLAUDE.md
