@@ -2,7 +2,7 @@
 title: "5. JASP & Visualization"
 author: "Johnny van Doorn"
 date: "9 September 2026"
-view: "https://amsuni-my.sharepoint.com/:v:/g/personal/j_b_vandoorn_uva_nl/IQDrIfwQyyl8TZPGFsiFTp7qAZjx_earKlylnJmV_gSG5eg?e=DYoMrE&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D"
+view: "https://amsuni-my.sharepoint.com/:v:/g/personal/j_b_vandoorn_uva_nl/IQDaPkBoQ_zPS4_dOuu2SBRtAc1rvdfbynvEMivsu7bgLrY?e=saUTQ9&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D"
 footer: "Scientific & Statistical Reasoning"
 format:
   revealjs:

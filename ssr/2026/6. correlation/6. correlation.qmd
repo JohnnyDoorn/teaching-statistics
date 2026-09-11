@@ -2,7 +2,7 @@
 title: "6. Correlation"
 author: "Johnny van Doorn"
 date: "11 September 2026"
-view: "https://teams.microsoft.com/meet/374905797863700?p=MCS3ehSHf2yVIN9YVq"
+view: "https://amsuni-my.sharepoint.com/:v:/g/personal/j_b_vandoorn_uva_nl/IQDrIfwQyyl8TZPGFsiFTp7qAZjx_earKlylnJmV_gSG5eg?e=DYoMrE&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D"
 footer: "Scientific & Statistical Reasoning"
 format:
   revealjs:
