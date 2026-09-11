@@ -761,7 +761,7 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <h2></h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-27-1.png" width="960" height="600"></p>
+<p><img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-28-1.png" width="960" height="600"></p>
 </div>
 </div>
 </section>
@@ -778,7 +778,12 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <section id="the-t-distribution-family" class="slide level2 smaller">
 <h2>The t-distribution family</h2>
 
-<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-33-1.png" width="960" class="r-stretch"><p>Fatter tails for small <span class="math inline">\(n\)</span> (few degrees of freedom); converges to the standard normal as <span class="math inline">\(n\)</span> grows.</p>
+<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-34-1.png" width="960" class="r-stretch"><p>Fatter tails for small <span class="math inline">\(n\)</span> (few degrees of freedom); converges to the standard normal as <span class="math inline">\(n\)</span> grows.</p>
+</section>
+<section id="alpha-dictates-the-rejection-region" class="slide level2 smaller">
+<h2><span class="math inline">\(\alpha\)</span> dictates the rejection region</h2>
+
+<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-20-1.png" width="1248" class="r-stretch"><p>Same logic as the binomial, now continuous: stricter <span class="math inline">\(\alpha\)</span>, region further into the tails.</p>
 </section>
 <section id="applet-a-continuous-sampling-distribution" class="slide level2 smaller">
 <h2>Applet: a continuous sampling distribution</h2>
@@ -818,15 +823,15 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <section id="plot-correlation" class="slide level2">
 <h2>Plot correlation</h2>
 
-<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-39-1.png" width="480" class="r-stretch quarto-figure-center"></section>
+<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-41-1.png" width="480" class="r-stretch quarto-figure-center"></section>
 <section id="plot-correlation-1" class="slide level2">
 <h2>Plot correlation</h2>
 
-<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-40-1.png" width="480" class="r-stretch quarto-figure-center"></section>
+<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-42-1.png" width="480" class="r-stretch quarto-figure-center"></section>
 <section id="plot-correlation-2" class="slide level2">
 <h2>Plot correlation</h2>
 
-<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-41-1.png" width="480" class="r-stretch quarto-figure-center"><p><span class="math display">\[(x_i - \bar{x})(y_i - \bar{y})\]</span></p>
+<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-43-1.png" width="480" class="r-stretch quarto-figure-center"><p><span class="math display">\[(x_i - \bar{x})(y_i - \bar{y})\]</span></p>
 <!-- ## Guess the correlation -->
 <!-- [Guess the correlation](http://guessthecorrelation.com) -->
 <!-- <img src="qrcodeqtc.png"> -->
@@ -909,7 +914,7 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <section id="plot-correlation-3" class="slide level2">
 <h2>Plot correlation</h2>
 
-<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-48-1.png" width="960" class="r-stretch"></section>
+<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-50-1.png" width="960" class="r-stretch"></section>
 <section id="significance-testing-using-t" class="slide level2">
 <h2>Significance testing using <span class="math inline">\(t\)</span></h2>
 <blockquote>
@@ -958,12 +963,14 @@ H_A &amp;: t_r &lt; 0 \\
 <p>The hypotheses above translate into where we shade the rejection region:</p>
 <p><a href="https://johnnydoorn.github.io/teaching-statistics/extra-texts/one-sided-vs-two-sided.html">Additional text here</a></p>
 
-<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-50-1.png" width="960" class="r-stretch"></section>
+<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-52-1.png" width="1056" class="r-stretch"><p>Same <span class="math inline">\(\alpha\)</span>, split over two tails or spent on one.</p>
+</section>
 <section id="visualize" class="slide level2">
 <h2>Visualize</h2>
 <p>Locate in <span class="math inline">\(t\)</span>-distribution</p>
 
-<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-51-1.png" width="960" class="r-stretch"></section></section>
+<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-53-1.png" width="960" class="r-stretch"><p><span class="math display">\[P(|t| \geq 4.94 \mid H_0) &lt; .001\]</span></p>
+</section></section>
 <section>
 <section id="partial-correlation" class="title-slide slide level1 section center">
 <h1>Partial correlation</h1>
@@ -1035,7 +1042,7 @@ H_A &amp;: t_r &lt; 0 \\
 <section id="p-value" class="slide level2">
 <h2>p-value</h2>
 
-<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-72-1.png" width="960" class="r-stretch"></section>
+<img data-src="6.-correlation_files/figure-revealjs/unnamed-chunk-74-1.png" width="960" class="r-stretch"></section>
 <section id="jasp" class="slide level2">
 <h2>JASP</h2>
 

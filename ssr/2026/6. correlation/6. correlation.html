@@ -112,6 +112,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
   <li><a href="#t-distribution-1" id="toc-t-distribution-1" class="nav-link" data-scroll-target="#t-distribution-1">T-distribution</a></li>
   <li><a href="#the-t-distribution-family" id="toc-the-t-distribution-family" class="nav-link" data-scroll-target="#the-t-distribution-family">The t-distribution family</a></li>
+  <li><a href="#alpha-dictates-the-rejection-region" id="toc-alpha-dictates-the-rejection-region" class="nav-link" data-scroll-target="#alpha-dictates-the-rejection-region"><span class="math inline">\(\alpha\)</span> dictates the rejection region</a></li>
   <li><a href="#applet-a-continuous-sampling-distribution" id="toc-applet-a-continuous-sampling-distribution" class="nav-link" data-scroll-target="#applet-a-continuous-sampling-distribution">Applet: a continuous sampling distribution</a></li>
   <li><a href="#power-in-practice" id="toc-power-in-practice" class="nav-link" data-scroll-target="#power-in-practice">Power in practice</a></li>
   <li><a href="#alpha-power" id="toc-alpha-power" class="nav-link" data-scroll-target="#alpha-power">Alpha Power</a></li>
@@ -528,7 +529,7 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <h2 class="anchored" data-anchor-id="section"></h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="6.-correlation_files/figure-html/unnamed-chunk-27-1.png" width="672" height="600"></p>
+<p><img src="6.-correlation_files/figure-html/unnamed-chunk-28-1.png" width="672" height="600"></p>
 </div>
 </div>
 </section>
@@ -546,10 +547,19 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <h2 class="smaller anchored" data-anchor-id="the-t-distribution-family">The t-distribution family</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="6.-correlation_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid" width="672"></p>
+<p><img src="6.-correlation_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Fatter tails for small <span class="math inline">\(n\)</span> (few degrees of freedom); converges to the standard normal as <span class="math inline">\(n\)</span> grows.</p>
+</section>
+<section id="alpha-dictates-the-rejection-region" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="alpha-dictates-the-rejection-region"><span class="math inline">\(\alpha\)</span> dictates the rejection region</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="6.-correlation_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="1248"></p>
+</div>
+</div>
+<p>Same logic as the binomial, now continuous: stricter <span class="math inline">\(\alpha\)</span>, region further into the tails.</p>
 </section>
 <section id="applet-a-continuous-sampling-distribution" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="applet-a-continuous-sampling-distribution">Applet: a continuous sampling distribution</h2>
@@ -590,7 +600,7 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="6.-correlation_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid figure-img" width="480"></p>
+<p><img src="6.-correlation_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid figure-img" width="480"></p>
 </figure>
 </div>
 </div>
@@ -602,7 +612,7 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="6.-correlation_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid figure-img" width="480"></p>
+<p><img src="6.-correlation_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid figure-img" width="480"></p>
 </figure>
 </div>
 </div>
@@ -614,7 +624,7 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="6.-correlation_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid figure-img" width="480"></p>
+<p><img src="6.-correlation_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid figure-img" width="480"></p>
 </figure>
 </div>
 </div>
@@ -703,7 +713,7 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <h2 class="anchored" data-anchor-id="plot-correlation-3">Plot correlation</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="6.-correlation_files/figure-html/unnamed-chunk-48-1.png" class="img-fluid" width="672"></p>
+<p><img src="6.-correlation_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -756,18 +766,20 @@ H_A &amp;: t_r &lt; 0 \\
 <p><a href="https://johnnydoorn.github.io/teaching-statistics/extra-texts/one-sided-vs-two-sided.html">Additional text here</a></p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="6.-correlation_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid" width="672"></p>
+<p><img src="6.-correlation_files/figure-html/unnamed-chunk-52-1.png" class="img-fluid" width="1056"></p>
 </div>
 </div>
+<p>Same <span class="math inline">\(\alpha\)</span>, split over two tails or spent on one.</p>
 </section>
 <section id="visualize" class="level2">
 <h2 class="anchored" data-anchor-id="visualize">Visualize</h2>
 <p>Locate in <span class="math inline">\(t\)</span>-distribution</p>
-<div class="cell" data-output-location="slide">
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="6.-correlation_files/figure-html/unnamed-chunk-51-1.png" class="img-fluid" width="672"></p>
+<p><img src="6.-correlation_files/figure-html/unnamed-chunk-53-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p><span class="math display">\[P(|t| \geq 4.94 \mid H_0) &lt; .001\]</span></p>
 </section>
 </section>
 <section id="partial-correlation" class="level1 section">
@@ -837,7 +849,7 @@ H_A &amp;: t_r &lt; 0 \\
 <h2 class="anchored" data-anchor-id="p-value">p-value</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="6.-correlation_files/figure-html/unnamed-chunk-72-1.png" class="img-fluid" width="672"></p>
+<p><img src="6.-correlation_files/figure-html/unnamed-chunk-74-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>

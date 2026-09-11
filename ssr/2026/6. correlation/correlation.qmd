@@ -250,67 +250,28 @@ The hypotheses above translate into where we shade the rejection region:
 
 [Additional text here](https://johnnydoorn.github.io/teaching-statistics/extra-texts/one-sided-vs-two-sided.html)
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, fig.width=11, fig.height=4.6}
 layout(matrix(1:2, 1, 2))
+par(cex = 0.8, cex.lab = 1.2, cex.main = 1.2)
 
-plot(function(x) dt(x, df = df), -4, 4,
-     main=paste0("t-distribution (df=", df, ") with two-sided alpha"),
-     cex.main = .7,
-     xlab="T-value",
-     ylab="",
-     bty="n",
-     lwd=1.5)
+tCurve(df, alpha = .05, sided = "two",
+       main = bquote("Two-sided: reject when |t| >" ~ .(round(qt(.975, df), 2))))
 
-tp95  = qt(.95, df)
-tp975 = qt(.975, df)
-tp25  = qt(.025, df)
-
-pol_left = seq(-4,tp25,length=20)
-polygon(c(pol_left,rev(pol_left)),  c(rep(0,20), dt( rev(pol_left),  df = df)), col="red", angle=-45, density=15, lwd=2)
-
-pol_left = seq(tp975,4,length=20)
-polygon(c(pol_left,rev(pol_left)),  c(rep(0,20), dt( rev(pol_left),  df = df)), col="red", angle=-45, density=15, lwd=2)
-
-text(-2.8,dt(tp25 , df = df),expression(paste("½",alpha," = 2.5%",sep="")),pos=3, col='red')
-text( 2.8,dt(tp975, df = df),expression(paste("½",alpha," = 2.5%",sep="")),pos=3, col='red')
-
-plot(function(x) dt(x, df = df), -4, 4,
-     main=paste0("t-distribution (df=", df, ") with one-sided alpha"),
-     cex.main = .7,
-     xlab="T-value",
-     ylab="",
-     bty="n", 
-     lwd=1.5)
-
-pol_left = seq(tp95,4,length=20)
-polygon(c(pol_left,rev(pol_left)),  c(rep(0,20), dt( rev(pol_left),  df = df)), col="red", angle=-45, density=15, lwd=2)
-
-text( 2.8,dt(tp95 , df = df),expression(paste(alpha[right]," = 5%"  ,sep="")),pos=3, col='red')
+tCurve(df, alpha = .05, sided = "right",
+       main = bquote("One-sided: reject when t >" ~ .(round(qt(.95, df), 2))))
 ```
+
+Same $\alpha$, split over two tails or spent on one.
 
 ## Visualize
 
 Locate in $t$-distribution
 
 ```{r, echo=FALSE}
-#| output-location: slide
+tCurve(df, sided = "two", observed = t.r, showRegion = FALSE,
+       main = "Our observed t in the null distribution")
 
-# Set up the plot for the F-distribution
-curve(dt(x, df), from = -8, to = 8, n = 1000, bty = "n", las = 1,
-      xlab = "t-value", ylab = "Density", main = "t-distribution with P-value Region")
-
-# Shade the upper tail (p-value region) using polygon
-# Define the region to fill (upper tail, greater than fStat)
-x_vals <- seq(t.r, 10, length.out = 100)
-y_vals <- dt(x_vals, df)
-
-pval <- pt(t.r, df, lower.tail = FALSE)
-# Draw the polygon to fill the area under the curve
-polygon(c(t.r, x_vals, 10), c(0, y_vals, 0), col = "lightblue", border = NA)
-
-# Optionally, add a vertical line at the F-statistic
-arrows(x0 = t.r, x1 = t.r, y0 = 0 , y1 = 0.25, col = "darkred", lwd = 2)
-text(x = t.r, y = 0.3, paste("t =", round(t.r, 2)), cex = 1.2)
-text(x = t.r, y = 0.35, paste("p =", round(pval, 2)), cex = 1.2)
+p.r <- 2 * pt(abs(t.r), df, lower.tail = FALSE)
 ```
 
+$$P(|t| \geq `r sprintf("%.2f", abs(t.r))` \mid H_0) `r if (p.r < .001) "< .001" else sprintf("= %.3f", p.r)`$$

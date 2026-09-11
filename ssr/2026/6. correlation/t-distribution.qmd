@@ -121,6 +121,74 @@ Source: [wikipedia](https://en.wikipedia.org/wiki/Student%27s_t-distribution)
 ```{r child="../t-distribution-shapes.qmd"}
 ```
 
+## $\alpha$ dictates the rejection region {.smaller}
+
+```{r, echo=FALSE, fig.width=13, fig.height=4.8}
+# Drawn the way the NHST_Continuous applet draws it: the density as a dense set
+# of vertical lines, green where we retain H0 and purple where we reject, so the
+# continuous case rhymes with the binomial spikes from lecture 3. Shared with
+# the correlation section further down.
+tCurve <- function(df, alpha = .05, sided = "two", observed = NULL, main = NULL,
+                   showRegion = TRUE) {
+
+  lim     <- max(5, ceiling(abs(c(observed, 0))) + 1)
+  xVals   <- seq(-lim, lim, length.out = 1e3)
+  twoCols <- c("darkgreen", "purple")   # retain / reject, as in the applet
+  yMax    <- .45
+
+  crit <- switch(sided,
+                 two   = c(qt(alpha / 2, df), qt(1 - alpha / 2, df)),
+                 right = c(-Inf, qt(1 - alpha, df)),
+                 left  = c(qt(alpha, df), Inf),
+                 none  = c(-Inf, Inf))
+
+  if (!showRegion) crit <- c(-Inf, Inf)   # p-value slides show no decision region
+  cols <- ifelse(xVals > crit[1] & xVals < crit[2], twoCols[1], twoCols[2])
+
+  plot(xVals, dt(xVals, df),
+       col  = cols,
+       type = "h",
+       lwd  = 2,
+       las  = 1,
+       ylab = "Density",
+       xlab = "t",
+       ylim = c(0, yMax),
+       bty  = "n",
+       main = main)
+
+  for (v in crit[is.finite(crit)]) abline(v = v, lwd = 2, lty = 2)
+
+  # The observed value and everything more extreme, in black: that area is the
+  # p-value, kept distinct from the purple decision region.
+  if (!is.null(observed)) {
+    more <- if (sided == "two") xVals[abs(xVals) >= abs(observed)] else xVals[xVals >= observed]
+    lines(more, dt(more, df), type = "h", lwd = 2)
+    arrows(x0 = observed, x1 = observed, y0 = 0, y1 = yMax * .72,
+           col = "darkred", lwd = 3, length = 0)
+
+    p    <- pt(abs(observed), df, lower.tail = FALSE) * if (sided == "two") 2 else 1
+    labX <- min(max(observed, -lim + 1.2), lim - 1.2)
+    text(labX, yMax * .82, paste("t =", round(observed, 2)), cex = .9)
+    text(labX, yMax * .92,
+         if (p < .001) "p < .001" else paste("p =", round(p, 3)), cex = .9)
+  }
+  invisible(crit)
+}
+
+dfT <- n - 1   # the n = 50 example above
+
+layout(matrix(1:3, 1, 3))
+par(cex = 0.8, cex.lab = 1.2, cex.main = 1.2)
+
+for (a in c(.10, .05, .01)) {
+  tcrit <- qt(1 - a / 2, dfT)
+  tCurve(dfT, alpha = a, sided = "two",
+         main = bquote(alpha == .(a) ~ ": reject when |t| >" ~ .(round(tcrit, 2))))
+}
+```
+
+Same logic as the binomial, now continuous: stricter $\alpha$, region further into the tails.
+
 ## Applet: a continuous sampling distribution {.smaller}
 
 The same reasoning as the binomial applet, now for a continuous outcome.
