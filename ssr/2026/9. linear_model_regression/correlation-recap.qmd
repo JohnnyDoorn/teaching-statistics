@@ -95,7 +95,7 @@ Standardizing makes a statistic universally interpretable, but you lose informat
 
 A choice in the analysis before seeing the data (i.e., informed by the research question, not the result).
 
-*  Two-sided
+* Two-sided
   * Safer choice if unsure about the direction
   * "Spending $\alpha$" on two tails needs a more extreme test statistic to reach significance
 
