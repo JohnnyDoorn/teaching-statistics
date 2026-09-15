@@ -33,3 +33,5 @@ statbooks/
 # Agent instructions for this repo. Local working notes, not course material,
 # and this repo is public — keep it out of git.
 /CLAUDE.md
+
+/.quarto/

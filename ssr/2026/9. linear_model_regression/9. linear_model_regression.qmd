@@ -21,11 +21,14 @@ In this lecture we discuss:
   * Assumptions
   * In JASP
 * Predictions and model fit
-* Wrapping up: how many ways do we have for assessing an association?
-    
+
 <strong>Reading:</strong>
 Chapter 8 (§8.1–8.8)
 </div>
+
+
+```{r child="correlation-recap.qmd"}
+```
 
 
 ```{r child="regression_one_predictor.qmd"}
@@ -34,12 +37,27 @@ Chapter 8 (§8.1–8.8)
 
 # Closing
 
+## Exam note
+
+Alternative hypothesis:
+- The question context tells you which test/alternative hypothesis to use
+- Linear regression in JASP only reports two-sided $p$, so those stay two-sided
+
+Assumptions:
+- Only assessing the assumptions, not yet how to handle violations
+- Only Sensitivity (scatterplot, casewise diagnostics), Normality (Q-Q plot), Linearity (Q-Q plot, scatterplot)
+- Don't need to study ch6; lecture and application in ch8 suffice
+
+See trial exam questions for examples of both
+
+
 ## Next Week
 
 - Exam!
   - Mix of using JASP/interpreting output/conceptual understanding
-  - Field book available (like in this weeks WA), including glossary
-  - WA will contain old exam questions
+  - WA will have trial exam with old exam questions
+  - Field book available (like in the trial exam), including glossary
+
 
 ## Recommended Exercises
 

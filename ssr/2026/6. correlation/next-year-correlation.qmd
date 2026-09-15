@@ -1,0 +1,324 @@
+# Correlation {.section}
+
+```{r, eval=TRUE, echo=FALSE}
+source("../../_setup.R")
+```
+
+## Pearson Correlation {.smaller}
+
+<img style="float:left; width:150px; margin:0 20px 20px 0px;" src="https://upload.wikimedia.org/wikipedia/commons/1/18/Karl_Pearson%2C_1912.jpg">
+
+In statistics, the Pearson correlation coefficient, also referred to as the Pearson's r, Pearson product-moment correlation coefficient (PPMCC) or bivariate correlation, is a measure of the linear correlation between two variables X and Y. It has a value between +1 and −1, where 1 is total positive linear correlation, 0 is no linear correlation, and −1 is total negative linear correlation. It is widely used in the sciences. It was developed by Karl Pearson from a related idea introduced by Francis Galton in the 1880s.
+
+Source: [Wikipedia](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient)
+
+## Pearson Correlation
+
+$$r_{xy} = \frac{{COV}_{xy}}{S_xS_y}$$
+Where $S$ is the standard deviation and $COV$ is the covariance.
+
+$${COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}$$
+
+## Plot correlation
+
+```{r,echo=FALSE, fig.width=5, fig.height=5, fig.align='center'}
+data <- read.csv(datasetsPath("2026/exam-anxiety.csv"), check.names = FALSE)
+# five students picked so that no two share a value and all four quadrants are used
+tinydat <- data[c(95, 50, 77, 54, 94), ]
+x <- tinydat$`Exam anxiety`
+y <- tinydat$`Exam performance`
+myLimsX <- c(68, 91)
+myLimsY <- c(10, 95)
+plot(x, y, las = 1, xlab = "Anxiety", ylab = "Exam performance (%)", 
+     xlim = myLimsX, ylim = myLimsY)
+
+m.x <- mean(x)
+m.y <- mean(y)
+
+
+points(x,y, pch = 21, bg = "turquoise", col = "black", lwd = 2, cex = 1.5)
+corners <- par("usr")
+
+
+```
+## Plot correlation
+
+```{r,echo=FALSE, fig.width=5, fig.height=5, fig.align='center'}
+plot(x, y, las = 1, xlab = "Anxiety", ylab = "Exam performance (%)", 
+     xlim = myLimsX, ylim = myLimsY)
+
+m.x <- mean(x)
+m.y <- mean(y)
+
+xTop <- corners[2]
+xBot <- corners[1]
+yTop <- corners[4]
+yBot <- corners[3]
+polygon(c(m.x,xTop,xTop,m.x),c(m.y,m.y,yTop,yTop), col = rgb(0,0.8,0,.2))
+polygon(c(m.x,xBot,xBot,m.x),c(m.y,m.y,yBot,yBot), col = rgb(0,0.8,0,.2))
+
+polygon(c(m.x,xBot,xBot,m.x),c(m.y,m.y,yTop,yTop), col = rgb(0.8,0,0,alpha = 0.2))
+polygon(c(m.x,xTop,xTop,m.x),c(m.y,m.y,yBot,yBot), col = rgb(0.8,0,0,alpha= 0.2))
+
+points(x,y, pch = 21, bg = "turquoise", col = "black", lwd = 2, cex = 1.5)
+
+abline(h = m.y, lwd = 3)
+abline(v = m.x, lwd = 3)
+
+# segments(x, m.y, x, y, col = "darkorange",    lwd = 2)
+# segments(x, y, m.x, y, col = "purple", lwd = 2)
+
+mtext(side = 3, bquote(bar(x) ~ "=" ~ .(round(m.x, 1))), cex = 1.5)
+mtext(side = 4, bquote(bar(y) ~ "=" ~ .(round(m.y, 1))), cex = 1.5, padj = 0.5, srt=180)
+# mtext("Text to the Right", side = 4, line = 1, las = 3)
+
+```
+
+## Plot correlation
+
+```{r,echo=FALSE, fig.width=5, fig.height=5, fig.align='center'}
+plot(x, y, las = 1, xlab = "Anxiety", ylab = "Exam performance (%)", 
+     xlim = myLimsX, ylim = myLimsY)
+
+m.x <- mean(x)
+m.y <- mean(y)
+
+polygon(c(m.x,xTop,xTop,m.x),c(m.y,m.y,yTop,yTop), col = rgb(0,0.8,0,.2))
+polygon(c(m.x,xBot,xBot,m.x),c(m.y,m.y,yBot,yBot), col = rgb(0,0.8,0,.2))
+
+polygon(c(m.x,xBot,xBot,m.x),c(m.y,m.y,yTop,yTop), col = rgb(0.8,0,0,alpha = 0.2))
+polygon(c(m.x,xTop,xTop,m.x),c(m.y,m.y,yBot,yBot), col = rgb(0.8,0,0,alpha= 0.2))
+
+points(x,y, pch = 21, bg = "turquoise", col = "black", lwd = 2, cex = 1.5)
+
+abline(h = m.y, lwd = 3)
+abline(v = m.x, lwd = 3)
+segments(x, m.y, x, y, col = "darkorange",    lwd = 2)
+segments(x, y, m.x, y, col = "purple", lwd = 2)
+
+mtext(side = 3, bquote(bar(x) ~ "=" ~ .(round(m.x, 1))), cex = 1.5)
+mtext(side = 4, bquote(bar(y) ~ "=" ~ .(round(m.y, 1))), cex = 1.5, padj = 0.5, srt=180)
+```
+
+$$(x_i - \bar{x})(y_i - \bar{y})$$
+
+<!-- ## Guess the correlation -->
+
+<!-- [Guess the correlation](http://guessthecorrelation.com) -->
+
+<!-- <img src="qrcodeqtc.png"> -->
+
+## Load data
+
+```{r, eval=TRUE, echo=TRUE}
+data <- read.csv(datasetsPath("2026/exam-anxiety.csv"), check.names = FALSE)
+data <- data[, c("Time spent revising", "Exam performance", "Exam anxiety")]
+ssrTable(data)
+```
+
+```{r, eval=TRUE, echo=FALSE}
+exam_grade   <- data$`Exam performance`
+anxiety      <- data$`Exam anxiety`
+N            <- length(exam_grade)
+mean.exam    <- mean(exam_grade)
+mean.anxiety <- mean(anxiety)
+z.exam       <- (exam_grade - mean(exam_grade)) / sd(exam_grade)
+z.anxiety    <- (anxiety    - mean(anxiety))    / sd(anxiety)
+```
+
+## Covariance {.subsection}
+
+$${COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}$$
+
+```{r, echo=TRUE}
+mean.exam    <- mean(exam_grade, na.rm=TRUE)
+mean.anxiety <- mean(anxiety,    na.rm=TRUE)
+
+delta.exam    <- exam_grade - mean.exam
+delta.anxiety <- anxiety    - mean.anxiety
+
+prod <- delta.exam * delta.anxiety
+
+covariance <- sum(prod) / (N - 1)
+covariance
+```
+
+<!-- ## Covariance {.smaller} -->
+
+<!-- ```{r, echo=FALSE} -->
+<!-- mydf <- round(data.frame(sales,  -->
+<!--                          meanSales = mean.sales,  -->
+<!--                          deltaSales = delta.sales,   -->
+<!--                          airplay = airplay,  -->
+<!--                          meanAir = mean.airplay,  -->
+<!--                          deltaAir = delta.airplay,  -->
+<!--                          deltaProduct = prod), 2) -->
+<!-- DT::datatable(mydf, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F)) -->
+<!-- ``` -->
+
+## Correlation
+
+$$r_{xy} = \frac{{COV}_{xy}}{S_xS_y}$$
+
+```{r, echo=TRUE}
+correlation <- covariance / ( sd(exam_grade) * sd(anxiety) ); correlation
+```
+
+## Correlation
+$$r_{xy} = \frac{{COV}_{xy}}{S_xS_y}$$
+$${COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}$$
+
+
+```{r, echo=TRUE}
+cor(exam_grade, anxiety) # correlation
+
+cor(z.exam,     z.anxiety) # correlation of z-scores
+```
+
+```{r, echo=TRUE}
+# covariance of z-scores
+sum(z.exam * z.anxiety ) / (N - 1)
+```
+
+## Plot correlation
+
+```{r, echo=FALSE}
+plot(anxiety, exam_grade, las = 1, pch = 21, bg = "turquoise",
+     ylab = "Exam performance (%)", xlab = "Anxiety")
+abline(h = mean.exam,    col = "black", lwd = 2)
+abline(v = mean.anxiety, col = "black", lwd = 2)
+corners <- par("usr")
+xTop <- corners[2]
+xBot <- corners[1]
+yTop <- corners[4]
+yBot <- corners[3]
+polygon(c(mean.anxiety,xTop,xTop,mean.anxiety),c(mean.exam,mean.exam,yTop,yTop), col = rgb(0,0.8,0,.2))
+polygon(c(mean.anxiety,xBot,xBot,mean.anxiety),c(mean.exam,mean.exam,yBot,yBot), col = rgb(0,0.8,0,.2))
+
+polygon(c(mean.anxiety,xBot,xBot,mean.anxiety),c(mean.exam,mean.exam,yTop,yTop), col = rgb(0.8,0,0,alpha = 0.2))
+polygon(c(mean.anxiety,xTop,xTop,mean.anxiety),c(mean.exam,mean.exam,yBot,yBot), col = rgb(0.8,0,0,alpha= 0.2))
+
+# x is anxiety, y is exam performance
+xMargin <- 6
+yMargin <- 12
+text(mean.anxiety+xMargin, mean.exam+yMargin, "+ * +", cex = 2, col = "red")
+text(mean.anxiety-xMargin, mean.exam-yMargin, "- * -", cex = 2, col = "red")
+text(mean.anxiety+xMargin, mean.exam-yMargin, "+ * -", cex = 2, col = "red")
+text(mean.anxiety-xMargin, mean.exam+yMargin, "- * +", cex = 2, col = "red")
+```
+
+## Significance testing using $t$
+
+> A test statistic with a known probability distribution (the t-distribution).
+
+It's a standardized measure of how closely our observed statistic matches the value claimed by $H_0$:
+
+$$t = \frac{\text{estimate} - H_0 \text{ value}}{\text{SE}(\text{estimate})}$$
+
+## Significance of a correlation {.subsection}
+
+> We convert $r$ to a $t$-statistic because $t$ has a sampling distribution: the $t$-distribution with df = N-2:
+
+$$t_r = \frac{r \sqrt{N-2}}{\sqrt{1 - r^2}}$$
+
+$${df} = N - 2$$
+
+## Hypotheses for $t$ 
+
+$$
+\begin{aligned}
+H_0 &: t_r = 0 \\
+H_A &: t_r \neq 0 \\
+H_A &: t_r > 0 \\
+H_A &: t_r < 0 \\
+\end{aligned}
+$$
+
+## $r$  to $t$ 
+
+```{r, echo=TRUE}
+df  <- N-2
+t.r <- ( correlation*sqrt(df) ) / sqrt(1-correlation^2)
+
+t.r
+df
+```
+
+## One-sided vs two-sided {.smaller}
+
+The hypotheses above translate into where we shade the rejection region:
+
+[Additional text here](https://johnnydoorn.github.io/teaching-statistics/extra-texts/one-sided-vs-two-sided.html)
+
+```{r, echo=FALSE, fig.width=11, fig.height=4.6}
+layout(matrix(1:2, 1, 2))
+par(cex = 0.8, cex.lab = 1.2, cex.main = 1.2)
+
+tCurve(df, alpha = .05, sided = "two",
+       main = bquote("Two-sided: reject when |t| >" ~ .(round(qt(.975, df), 2))))
+
+tCurve(df, alpha = .05, sided = "right",
+       main = bquote("One-sided: reject when t >" ~ .(round(qt(.95, df), 2))))
+```
+
+Same $\alpha$, split over two tails or spent on one.
+
+## Visualize
+
+Locate in $t$-distribution
+
+```{r, echo=FALSE}
+tCurve(df, sided = "two", observed = t.r, showRegion = FALSE,
+       main = "Our observed t in the null distribution")
+
+p.r <- 2 * pt(abs(t.r), df, lower.tail = FALSE)
+```
+
+$$P(|t| \geq `r sprintf("%.2f", abs(t.r))` \mid H_0) `r if (p.r < .001) "< .001" else sprintf("= %.3f", p.r)`$$
+
+## Back to Challenger {.smaller}
+
+The two data sets we opened with, through the same conversion.
+
+```{r, echo=FALSE, fig.width=11, fig.height=4.4}
+# tCurve() is defined in t-distribution.qmd: this child has to stay after it in
+# the wrapper. The CSV is re-read rather than reusing challenger-recap.qmd's
+# variables, so a reorder cannot silently break the slide.
+challenger  <- read.csv(datasetsPath("2026/challenger.csv"), check.names = FALSE)
+damagedOnly <- challenger[challenger$`any-damage` == "yes", ]
+
+rToT <- function(r, n) r * sqrt(n - 2) / sqrt(1 - r^2)
+
+flights <- data.frame(
+  set = c("7 damaged flights", "All 23 flights"),
+  r   = c(cor(damagedOnly$`temperature-c`, damagedOnly$`damaged-o-rings`),
+          cor(challenger$`temperature-c`,  challenger$`damaged-o-rings`)),
+  N   = c(nrow(damagedOnly), nrow(challenger))
+)
+flights$df <- flights$N - 2
+flights$t  <- rToT(flights$r, flights$N)
+flights$p  <- 2 * pt(abs(flights$t), flights$df, lower.tail = FALSE)
+
+layout(matrix(1:2, 1, 2))
+par(cex = 0.8, cex.lab = 1.2, cex.main = 1.2)
+
+for (i in seq_len(nrow(flights)))
+  tCurve(flights$df[i], sided = "two", observed = flights$t[i], showRegion = FALSE,
+         main = sprintf("%s: r = %.2f", flights$set[i], flights$r[i]))
+```
+
+```{r, echo=FALSE}
+knitr::kable(
+  data.frame(
+    Flights = flights$set,
+    r       = sprintf("%.2f", flights$r),
+    N       = flights$N,
+    df      = flights$df,
+    t       = sprintf("%.2f", flights$t),
+    p       = sprintf("%.3f", flights$p)
+  ),
+  align = "lrrrrr"
+)
+```
+
+Nearly the same $r$; the $\sqrt{N-2}$ does the rest.

@@ -2,8 +2,10 @@
 
 ```{r, echo=FALSE}
 source("../../_setup.R")
-data <- read.csv(datasetsPath("Album Sales.csv"))[, -c(3, 4)]
-data$adverts <- round(data$adverts / 100, 2)
+# Field's album sales data, mirrored from discoverjasp into datasets/2026/, so
+# the coefficients on these slides are the book's own and match the results file
+# students can download. Adverts in GBP 1,000s, sales in 1,000s of copies: no rescaling.
+data <- read.csv(datasetsPath("2026/album_sales.csv"))[, c("Adverts", "Sales")]
 ```
 
 ## Regression {.smaller}
@@ -35,14 +37,6 @@ A selection from Field (Section 8.4.1):
 > The greater the assumption violation, the less reliable your results are
 
 --- 
-
-###  Exam Note about Assumptions
-
-For exam 1:
-
-- We only focus on Sensitivity, Normality, Linearity
-- We only focus on assessing the assumptions
-- Don't need to study ch6; lecture and application in ch8 suffice
 
 ## Sensitivity
 
@@ -191,7 +185,7 @@ text(0.5, y[1], bquote("r ="~ .(r) ~ "," ~ r^2 ~ " = " ~ .(r.2)), pos = 2, col =
 ::: {.column}
 
 ```{r, fig.align='center', fig.width=5, fig.height=5, echo=FALSE}
-fit <- lm(sales ~ adverts, data = data)
+fit <- lm(Sales ~ Adverts, data = data)
 z.pred  = scale(fit$fitted.values) # convert model predictions to z-scores
 z.resid = scale(fit$residuals)     # convert model residuals to z-scores
 
@@ -207,7 +201,7 @@ draw.circle(0,0,1.7,col=rgb(1,0,0,.5))
 
 ## The data {.smaller}
 
-> Predict album sales (x 1,000 copies) based on adverts (x 100,000£).
+> Predict album sales (x 1,000 copies) based on the advertising budget (x £1,000).
 
 ```{r, echo=FALSE}
 n <- nrow(data)
@@ -218,12 +212,12 @@ ssrTable(data)
 
 ### The data {.smaller}
 ```{r, fig.align='center', fig.width=8, fig.height=6, echo=FALSE}
-plot(data$adverts, data$sales, las = 1, xlab = "adverts", ylab = "Sales (x 1,000)",
-     xlim=c(0, 20), ylim=c(0,350), cex= 1.2,
+plot(data$Adverts, data$Sales, las = 1, xlab = "Adverts (x £1,000)", ylab = "Sales (x 1,000)",
+     xlim=c(0, 2300), ylim=c(0,400), cex= 1.2,
      bty = "n",
      pch = 21,
      bg = "purple")
-text(15, 50, bquote("cor = " ~.(round(cor(data$adverts, data$sale), 3))), cex = 1.4)
+text(1750, 50, bquote("cor = " ~.(round(cor(data$Adverts, data$Sales), 3))), cex = 1.4)
 ```
 
 ## Calculate regression parameters {.subsection}
@@ -231,8 +225,8 @@ text(15, 50, bquote("cor = " ~.(round(cor(data$adverts, data$sale), 3))), cex = 
 $${sales}_i = b_0 + b_1 {adverts}_i + \epsilon_i$$
 
 ```{r, eval=TRUE}
-adverts  <- data$adverts
-sales    <- data$sales
+adverts  <- data$Adverts
+sales    <- data$Sales
 ```
 
 ## Calculate $b_1$ {.subsection}
@@ -268,12 +262,12 @@ b0
 # Extra
 
 plot(adverts,sales, las = 1, 
-     xlim=c(0, 20), ylim=c(0,350),
+     xlim=c(0, 2300), ylim=c(0,400),
      bty = "n",  cex= 1.2,
      pch = 21,
      bg = "purple")
 abline(lm(sales~adverts), lwd = 2)
-text(1500, 50, bquote(beta[1] ~ " = " ~ .(round(b1, 2))))
+text(1750, 50, bquote(beta[1] ~ " = " ~ .(round(b1, 3))))
 ```
 
 --- 
@@ -283,22 +277,25 @@ text(1500, 50, bquote(beta[1] ~ " = " ~ .(round(b1, 2))))
 ```{r, fig.align='center', fig.width=8, fig.height=6, echo=FALSE}
 # Extra
 
+runFrom <- 1000   # a GBP 1,000,000 run, so the rise is visible at full scale
+runTo   <- 2000
+
 plot(adverts,sales, las = 1, 
-     xlim=c(0, 20), ylim=c(0,350),
+     xlim=c(0, 2300), ylim=c(0,400),
      bty = "n",  cex= 1.2,
      pch = 21,
      bg = "purple")
 abline(lm(sales~adverts))
-abline(v=c(2,3),col='red')
-abline(h=b0 + b1 * c(2, 3),col='red')
-text(1500, 50, bquote(beta[1] ~ " = " ~ .(round(b1, 2))))
+abline(v=c(runFrom, runTo),col='red')
+abline(h=b0 + b1 * c(runFrom, runTo),col='red')
+text(1750, 50, bquote(beta[1] ~ " = " ~ .(round(b1, 3))))
 
-lines(c(3,3),c(b0 + b1 * 2,b0 + b1 * 3),col='green',lwd=3)
-lines(c(2,3), rep(b0 + b1 * 2, 2),col='blue',lwd=3)
+lines(c(runTo,runTo),c(b0 + b1 * runFrom, b0 + b1 * runTo),col='green',lwd=3)
+lines(c(runFrom,runTo), rep(b0 + b1 * runFrom, 2),col='blue',lwd=3)
 
-text(2.5, (b0 + b1 * 2), 1, pos=1, cex=1)
-text(3  , (b0 + b1 * 2.5),
-     round((b0 + b1 * 3)-(b0 + b1 * 2), 2), 
+text(mean(c(runFrom, runTo)), (b0 + b1 * runFrom), runTo - runFrom, pos=1, cex=1)
+text(runTo, (b0 + b1 * mean(c(runFrom, runTo))),
+     round(b1 * (runTo - runFrom), 2), 
      pos=4, 
      cex=1)
 ```
@@ -307,30 +304,35 @@ text(3  , (b0 + b1 * 2.5),
 
 ```{r, echo=FALSE, fig.align='center', fig.width=8, fig.height=6, echo=FALSE}
 # Extra
+# One unit of Adverts is GBP 1,000, worth 0.096 in sales: only visible once we
+# zoom right in on the line, which is the point of this slide.
+zoomFrom <- 1000
+zoomTo   <- 1001
+
 plot(adverts,sales, las = 1, 
-     xlim=c(1, 4), ylim=c(150,170),
+     xlim=c(zoomFrom - 0.5, zoomTo + 1), ylim=c(b0 + b1 * zoomFrom - 0.15, b0 + b1 * zoomTo + 0.15),
      bty = "n", cex= 1.2,
      pch = 21,
      bg = "purple")
 abline(lm(sales~adverts))
-abline(v=c(2,3),col='red')
-abline(h=b0 + b1 * c(2, 3),col='red')
+abline(v=c(zoomFrom, zoomTo),col='red')
+abline(h=b0 + b1 * c(zoomFrom, zoomTo),col='red')
 
-lines(c(3,3),c(b0 + b1 * 2,b0 + b1 * 3),col='green',lwd=3)
-lines(c(2,3), rep(b0 + b1 * 2, 2),col='blue',lwd=3)
-text(2.5, (b0 + b1 * 2),1, pos=1, cex=1)
-text(3  , (b0 + b1 * 2.5),
-     round((b0 + b1 * 3)-(b0 + b1 * 2), 2), 
+lines(c(zoomTo,zoomTo),c(b0 + b1 * zoomFrom, b0 + b1 * zoomTo),col='green',lwd=3)
+lines(c(zoomFrom,zoomTo), rep(b0 + b1 * zoomFrom, 2),col='blue',lwd=3)
+text(mean(c(zoomFrom, zoomTo)), (b0 + b1 * zoomFrom), zoomTo - zoomFrom, pos=1, cex=1)
+text(zoomTo, (b0 + b1 * mean(c(zoomFrom, zoomTo))),
+     round(b1 * (zoomTo - zoomFrom), 3), 
      pos=4, 
      cex=1)
 ```
 
-For every additional adverts, we predict sales to increase by `r round(b1, 2)`
+For every additional £1,000 spent on advertising, we predict sales to increase by `r round(b1, 3)` (x 1,000 copies)
 
 ## Define regression equation
 
 $$\widehat{sales} = {\text{model prediction}} = b_0 + b_1 {adverts}$$
-$$\widehat{sales} = {\text{model prediction}} = `r round(b0, 2)` + `r round(b1, 2)`\times {adverts}$$
+$$\widehat{sales} = {\text{model prediction}} = `r round(b0, 2)` + `r round(b1, 3)`\times {adverts}$$
 
 So now we can add the expected sales based on this model
 
@@ -416,7 +418,7 @@ hist(error,
        main = "Histogram of Residuals",
        xlab = "Residuals",
        freq = FALSE,
-       col = rainbow(20), bty = "n", las = 1, breaks = 20, xlim = c(-200, 200))
+       col = rainbow(20), bty = "n", las = 1, breaks = 20, xlim = c(-250, 250))
 ```
 :::
 
@@ -551,7 +553,7 @@ df.b1 <- n - p - 1
 
 
 
-## P-values of $b_1$
+## $p$-value for $b_1$
 
 ```{r, echo=FALSE}
 library("visualize")
@@ -635,3 +637,30 @@ cor(sales, prediction) # can be squared to get proportion explained variance
 
 
 
+
+## Standardized or not? {.smaller}
+
+Same data, same association, three different numbers:
+
+```{r, echo=TRUE}
+cov(sales, adverts)  # in the units we measured
+b1                   # extra sales per extra £1,000 spent
+cor(sales, adverts)  # unit-free, bounded by -1 and 1
+```
+
+* $b_1$ answers *how much*, in the units of the data
+* $r$ answers *how strong*, on a scale that never changes
+
+## Standardize, and they meet {.smaller}
+
+Put both variables in z-scores, and the slope becomes the correlation:
+
+```{r, echo=TRUE}
+coef(lm(scale(sales) ~ scale(adverts)))[2]
+
+cor(sales, adverts)
+```
+
+$$b_1 = r_{xy} \frac{s_y}{s_x}$$
+
+[Move $r$, $s_x$ and $s_y$ around and watch the covariance, the slope and $r$ respond](https://statisticalreasoning-uva-2.shinyapps.io/SimpleRegression/)

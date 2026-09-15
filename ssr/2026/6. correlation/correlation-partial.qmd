@@ -21,7 +21,10 @@ How much of the association is unique to anxiety and performance?
 
 ## Shared variance {.smaller}
 
-![Figure 7.9](../../images/figure-7-9.png){height="380"}
+![Figure 7.9](../../images/figure-7-9.png){height="300"}
+
+- Plain $r$ takes every overlap with anxiety: $A + C = 19.4\%$
+- Partial $r$ keeps only $A$, against what revision leaves: $\frac{A}{A + E} = \frac{5.1}{5.1 + 79.1} = 6.1\%$
 
 
 
@@ -52,6 +55,11 @@ partial.correlation
 ```
 
 Holding revision constant, the link shrinks.
+
+```{r, echo=TRUE}
+# Back to figure 7.9: A + C, then A / (A + E)
+round(c(cor.exam.anxiety, partial.correlation)^2, 3)
+```
 
 ## Significance of partial correlation {.subsection}
 

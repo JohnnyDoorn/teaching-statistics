@@ -432,11 +432,106 @@ Johnny van Doorn
 <li>In JASP</li>
 </ul></li>
 <li>Predictions and model fit</li>
-<li>Wrapping up: how many ways do we have for assessing an association?</li>
 </ul>
 <p><strong>Reading:</strong> Chapter 8 (§8.1–8.8)</p>
 </div>
 </section>
+<section>
+<section id="where-we-left-off" class="title-slide slide level1 section center">
+<h1>Where we left off</h1>
+
+</section>
+<section id="last-week-correlation-nhst" class="slide level2 smaller">
+<h2>Last week: correlation &amp; NHST</h2>
+<ul>
+<li><span class="math inline">\(COV_{xy}\)</span>: association between two variables, in the original measurement units</li>
+<li><span class="math inline">\(r\)</span>: completely standardized: <span class="math inline">\(r_{xy} = \frac{COV_{xy}}{s_x s_y}\)</span></li>
+<li>Get <span class="math inline">\(p\)</span> by converting to <span class="math inline">\(t\)</span>: <span class="math inline">\(t_r = \frac{r \sqrt{N-2}}{\sqrt{1 - r^2}}\)</span>
+<ul>
+<li>Use <a href="https://statisticalreasoning-uva.shinyapps.io/NHST_Continuous/">the sampling distribution</a></li>
+</ul></li>
+<li>Partial correlation: the same association, holding a third variable constant</li>
+</ul>
+</section>
+<section id="two-different-units" class="slide level2 smaller">
+<h2>Two different units</h2>
+
+<img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-6-1.png" width="768" class="r-stretch"><p>A deviation of 100 means something different in each variable</p>
+</section>
+<section id="standardize" class="slide level2 smaller">
+<h2>Standardize</h2>
+<p><span class="math display">\[z_i = \frac{x_i - \bar{x}}{sd_x}\]</span></p>
+
+<img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-7-1.png" width="768" class="r-stretch"><p>Mean = 0 and sd = 1, now the deviations are comparable.</p>
+</section>
+<section id="correlation-is-the-covariance-of-z-scores" class="slide level2 smaller">
+<h2>Correlation is the covariance of z-scores</h2>
+<p><span class="math display">\[z_i = \frac{x_i - \bar{x}}{s_x} \qquad\qquad r_{xy} = \frac{COV_{xy}}{s_x s_y} = COV_{z_x z_y}\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>z.adverts <span class="ot">&lt;-</span> (adverts <span class="sc">-</span> <span class="fu">mean</span>(adverts)) <span class="sc">/</span> <span class="fu">sd</span>(adverts)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>z.sales   <span class="ot">&lt;-</span> (sales   <span class="sc">-</span> <span class="fu">mean</span>(sales))   <span class="sc">/</span> <span class="fu">sd</span>(sales)</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">cov</span>(z.adverts, z.sales)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5784877</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">cor</span>(adverts, sales)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5784877</code></pre>
+</div>
+</div>
+<p>If we standardize both variables first, the covariance <em>is</em> the correlation.</p>
+</section>
+<section id="same-covariance-three-denominators" class="slide level2 smaller">
+<h2>Same covariance, three denominators</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">cov</span>(adverts, sales)                               <span class="co"># original scale</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 22672.02</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">cov</span>(adverts, sales) <span class="sc">/</span> (<span class="fu">sd</span>(adverts) <span class="sc">*</span> <span class="fu">sd</span>(sales))   <span class="co"># standardize x and y -&gt; the correlation</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5784877</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">cov</span>(adverts, sales) <span class="sc">/</span> <span class="fu">var</span>(adverts)                <span class="co"># only x -&gt; today's slope</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.09612449</code></pre>
+</div>
+</div>
+<p>Standardizing makes a statistic universally interpretable, but you lose information</p>
+</section>
+<section id="today" class="slide level2 smaller">
+<h2>Today</h2>
+<ul>
+<li>The regression slope <span class="math inline">\(b_1\)</span>: <span class="math inline">\(b_1 = r_{xy} \frac{s_y}{s_x}\)</span></li>
+<li>Same trick for significance: coefficient <span class="math inline">\(b\)</span> <span class="math inline">\(\rightarrow t \rightarrow p\)</span></li>
+<li>Making predictions based on a model</li>
+<li>One predictor today, multiple predictors in block 3</li>
+</ul>
+</section>
+<section id="one-sided-or-two-sided" class="slide level2 smaller">
+<h2>One-sided or two-sided?</h2>
+<p>The book reports two-sided throughout. Worth knowing why we do not stop there.</p>
+<ul>
+<li>It is a choice in the analysis, <em>before</em> you see the data
+<ul>
+<li>Informed by the research question, not by the result</li>
+</ul></li>
+<li>One-sided
+<ul>
+<li>Same <span class="math inline">\(\alpha\)</span>, but the <span class="math inline">\(\alpha \%\)</span> rejection area is in 1 tail</li>
+<li>Higher power, relevant when <span class="math inline">\(N\)</span> is small (expensive studies, rare cases)</li>
+<li>Blind to an effect in the opposite direction</li>
+</ul></li>
+<li>Two-sided</li>
+<li>Safer choice if unsure about the direction</li>
+<li>“Spending <span class="math inline">\(\alpha\)</span>” on two tails needs a more extreme test statistic to reach significance</li>
+</ul>
+<p><a href="https://johnnydoorn.github.io/teaching-statistics/extra-texts/one-sided-vs-two-sided.html">Additional rambling here</a></p>
+</section>
+<section class="slide level2">
+
+</section></section>
 <section>
 <section id="regression-one-predictor" class="title-slide slide level1 section center">
 <h1>Regression<br>(one predictor)</h1>
@@ -475,16 +570,6 @@ Johnny van Doorn
 <p>The greater the assumption violation, the less reliable your results are</p>
 </blockquote>
 </section>
-<section class="slide level2">
-
-<h3 id="exam-note-about-assumptions">Exam Note about Assumptions</h3>
-<p>For exam 1:</p>
-<ul>
-<li>We only focus on Sensitivity, Normality, Linearity</li>
-<li>We only focus on assessing the assumptions</li>
-<li>Don’t need to study ch6; lecture and application in ch8 suffice</li>
-</ul>
-</section>
 <section id="sensitivity" class="slide level2">
 <h2>Sensitivity</h2>
 <p>Outliers</p>
@@ -522,7 +607,7 @@ Johnny van Doorn
 <!-- ``` -->
 <!-- ::: -->
 <!-- ::: -->
-<img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="normality" class="slide level2 smaller">
 <h2>Normality</h2>
 <div class="columns">
@@ -581,7 +666,7 @@ Johnny van Doorn
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-6-1.png" width="480"></p>
+<p><img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-19-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -592,13 +677,13 @@ Johnny van Doorn
 <section id="the-data" class="slide level2 smaller">
 <h2>The data</h2>
 <blockquote>
-<p>Predict album sales (x 1,000 copies) based on adverts (x 100,000£).</p>
+<p>Predict album sales (x 1,000 copies) based on the advertising budget (x £1,000).</p>
 </blockquote>
 <div class="cell">
 <div class="cell-output-display">
 
 <div class="datatables html-widget html-fill-item" id="htmlwidget-fa819060c9c3a62aa268" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-fa819060c9c3a62aa268">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150","151","152","153","154","155","156","157","158","159","160","161","162","163","164","165","166","167","168","169","170","171","172","173","174","175","176","177","178","179","180","181","182","183","184","185","186","187","188","189","190","191","192","193","194","195","196","197","198","199","200"],[0.1,9.859999999999999,14.46,11.88,5.75,5.69,4.72,5.37,5.14,1.74,17.21,6.11,2.51,0.98,4.07,2.65,13.23,1.97,13.27,13.81,7.92,9.57,17.9,6.56,6.14,3.13,3.37,15.45,0.6899999999999999,7.86,1.26,3.78,2.18,7.6,11.63,8.43,1.25,2.37,6.7,6.12,9.220000000000001,0.5,20,10.54,3.85,15.08,1.03,2.05,11.71,6.9,7.84,4.06,1.8,6.07,15.42,11.12,8.57,8.359999999999999,2.37,10.78,5.79,15,7.31,0.26,3.92,2.34,2.76,0.57,2.55,5.67,1.03,2.51,0.6899999999999999,6.43,15,1.03,7.57,0.51,6.44,0.15,2.43,2.57,0.22,0.46,7.25,11.26,19.85,18.38,1.36,2.38,9.77,14.53,16,2.69,9.01,9.82,2.01,7.46,11.33,10,0.76,13.51,2.03,3.66,3.05,2.63,5.14,1.53,0.36,1.03,2.15,4.27,5.08,2.33,10.35,1.03,5.26,6.25,9.119999999999999,2.16,5.62,4.75,2.32,6.79,0.71,15.68,2.64,14.24,7.16,7.77,5.09,9.640000000000001,5.84,9.23,3.44,10.96,1,0.3,10.8,8,10.72,8.93,2.83,9.17,2.35,4.57,2.07,12.94,8.27,5.64,1.93,0.11,0.46,0.43,0.2,6.35,10.02,11.77,5.08,2.16,5.26,0.27,8.84,0.09,1.04,1.7,4.3,2.24,1.46,9.859999999999999,5.01,2.27,10.51,0.68,15.47,3.94,8.039999999999999,8.02,4.51,0.27,1.79,3.46,2.96,22.72,11.35,6.01,0.45,7.6,8.33,0.57,7.09,0.57,7.67,5.03,7.01,9.109999999999999,8.890000000000001,8.01,15,7.86],[330,120,360,270,220,170,70,210,200,300,290,70,150,190,240,100,250,210,280,230,210,230,320,210,230,250,60,330,150,150,180,80,180,130,320,280,200,130,190,150,230,310,340,240,180,220,40,190,290,340,250,190,120,230,190,210,170,310,90,140,300,340,170,100,200,80,100,70,50,240,160,290,140,210,300,230,280,160,200,110,110,70,100,190,70,360,360,300,120,150,220,280,300,140,290,180,140,210,250,250,120,290,60,140,290,160,100,160,150,140,230,230,30,80,190,90,120,150,230,150,210,180,140,360,10,240,270,290,220,230,220,240,260,170,130,270,140,60,210,210,240,210,200,140,90,120,100,360,180,150,110,90,160,230,40,60,230,230,120,150,120,60,280,120,230,230,40,140,360,210,260,250,200,150,250,100,260,210,290,220,70,110,250,320,300,180,180,200,320,140,100,120,230,150,250,190,240,250,230,110]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>adverts<\/th>\n      <th>sales<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"adverts","targets":1},{"name":"sales","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-fa819060c9c3a62aa268">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150","151","152","153","154","155","156","157","158","159","160","161","162","163","164","165","166","167","168","169","170","171","172","173","174","175","176","177","178","179","180","181","182","183","184","185","186","187","188","189","190","191","192","193","194","195","196","197","198","199","200"],[10.256,985.6849999999999,1445.563,1188.193,574.513,568.954,471.814,537.352,514.068,174.093,1720.806,611.479,251.192,97.97199999999999,406.814,265.398,1323.287,196.65,1326.598,1380.689,792.345,957.167,1789.659,656.1369999999999,613.697,313.362,336.51,1544.899,68.95399999999999,785.692,125.628,377.925,217.994,759.862,1163.444,842.957,125.179,236.598,669.811,612.234,922.019,50,2000,1054.027,385.045,1507.972,102.568,204.568,1170.918,689.547,784.22,405.913,179.778,607.258,1542.329,1112.47,856.985,836.331,236.908,1077.855,579.321,1500,731.364,25.689,391.749,233.999,275.7,56.895,255.117,566.501,102.568,250.568,68.59399999999999,642.7859999999999,1500,102.563,756.984,51.229,644.151,15.313,243.237,256.894,22.464,45.689,724.938,1126.461,1985.119,1837.516,135.986,237.703,976.641,1452.689,1600,268.598,900.889,982.063,201.356,746.024,1132.877,1000,75.896,1351.254,202.705,365.985,305.268,263.268,513.694,152.609,35.987,102.568,215.368,426.784,507.772,233.291,1035.433,102.642,526.1420000000001,624.538,912.349,215.994,561.963,474.76,231.523,678.596,70.922,1567.548,263.598,1423.568,715.678,777.237,509.43,964.11,583.627,923.373,344.392,1095.578,100.025,30.425,1080.342,799.899,1071.752,893.355,283.161,917.0170000000001,234.568,456.897,206.973,1294.099,826.859,564.158,192.607,10.652,45.689,42.568,20.456,635.192,1002.273,1177.047,507.638,215.689,526.48,26.895,883.877,9.103999999999999,103.568,169.583,429.504,223.639,145.585,985.968,500.922,226.652,1051.168,68.093,1547.159,393.774,804.282,801.577,450.562,26.598,179.061,345.687,295.84,2271.86,1134.575,601.434,45.298,759.518,832.869,56.894,709.399,56.895,767.134,503.172,700.929,910.851,888.569,800.615,1500,785.694],[330,120,360,270,220,170,70,210,200,300,290,70,150,190,240,100,250,210,280,230,210,230,320,210,230,250,60,330,150,150,180,80,180,130,320,280,200,130,190,150,230,310,340,240,180,220,40,190,290,340,250,190,120,230,190,210,170,310,90,140,300,340,170,100,200,80,100,70,50,240,160,290,140,210,300,230,280,160,200,110,110,70,100,190,70,360,360,300,120,150,220,280,300,140,290,180,140,210,250,250,120,290,60,140,290,160,100,160,150,140,230,230,30,80,190,90,120,150,230,150,210,180,140,360,10,240,270,290,220,230,220,240,260,170,130,270,140,60,210,210,240,210,200,140,90,120,100,360,180,150,110,90,160,230,40,60,230,230,120,150,120,60,280,120,230,230,40,140,360,210,260,250,200,150,250,100,260,210,290,220,70,110,250,320,300,180,180,200,320,140,100,120,230,150,250,190,240,250,230,110]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Adverts<\/th>\n      <th>Sales<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Adverts","targets":1},{"name":"Sales","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -606,7 +691,7 @@ Johnny van Doorn
 
 <h3 class="smaller" id="the-data-1">The data</h3>
 
-<img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-8-1.png" width="768" class="r-stretch quarto-figure-center"></section>
+<img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-21-1.png" width="768" class="r-stretch quarto-figure-center"></section>
 <section id="calculate-regression-parameters" class="slide level2 subsection">
 <h2>Calculate regression parameters</h2>
 <p><span class="math display">\[{sales}_i = b_0 + b_1 {adverts}_i + \epsilon_i\]</span></p>
@@ -615,16 +700,16 @@ Johnny van Doorn
 <h2>Calculate <span class="math inline">\(b_1\)</span></h2>
 <p><span class="math display">\[b_1 = r_{xy} \frac{s_y}{s_x}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Calculate b1</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a>cor.sales.adverts <span class="ot">&lt;-</span> <span class="fu">cor</span>(sales,adverts)</span>
-<span id="cb1-4"><a href="#cb1-4"></a>sd.sales          <span class="ot">&lt;-</span> <span class="fu">sd</span>(sales)</span>
-<span id="cb1-5"><a href="#cb1-5"></a>sd.adverts        <span class="ot">&lt;-</span> <span class="fu">sd</span>(adverts)</span>
-<span id="cb1-6"><a href="#cb1-6"></a></span>
-<span id="cb1-7"><a href="#cb1-7"></a>b1 <span class="ot">&lt;-</span> cor.sales.adverts <span class="sc">*</span> ( sd.sales <span class="sc">/</span> sd.adverts )</span>
-<span id="cb1-8"><a href="#cb1-8"></a>b1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Calculate b1</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a></span>
+<span id="cb11-3"><a href="#cb11-3"></a>cor.sales.adverts <span class="ot">&lt;-</span> <span class="fu">cor</span>(sales,adverts)</span>
+<span id="cb11-4"><a href="#cb11-4"></a>sd.sales          <span class="ot">&lt;-</span> <span class="fu">sd</span>(sales)</span>
+<span id="cb11-5"><a href="#cb11-5"></a>sd.adverts        <span class="ot">&lt;-</span> <span class="fu">sd</span>(adverts)</span>
+<span id="cb11-6"><a href="#cb11-6"></a></span>
+<span id="cb11-7"><a href="#cb11-7"></a>b1 <span class="ot">&lt;-</span> cor.sales.adverts <span class="sc">*</span> ( sd.sales <span class="sc">/</span> sd.adverts )</span>
+<span id="cb11-8"><a href="#cb11-8"></a>b1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 9.613511</code></pre>
+<pre><code>[1] 0.09612449</code></pre>
 </div>
 </div>
 </section>
@@ -632,37 +717,37 @@ Johnny van Doorn
 <h2>Calculate <span class="math inline">\(b_0\)</span></h2>
 <p><span class="math display">\[b_0 = \bar{y} - b_1 \bar{x}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>mean.sales    <span class="ot">&lt;-</span> <span class="fu">mean</span>(sales)</span>
-<span id="cb3-2"><a href="#cb3-2"></a>mean.adverts  <span class="ot">&lt;-</span> <span class="fu">mean</span>(adverts)</span>
-<span id="cb3-3"><a href="#cb3-3"></a></span>
-<span id="cb3-4"><a href="#cb3-4"></a>b0 <span class="ot">&lt;-</span> mean.sales <span class="sc">-</span> b1 <span class="sc">*</span> mean.adverts</span>
-<span id="cb3-5"><a href="#cb3-5"></a>b0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>mean.sales    <span class="ot">&lt;-</span> <span class="fu">mean</span>(sales)</span>
+<span id="cb13-2"><a href="#cb13-2"></a>mean.adverts  <span class="ot">&lt;-</span> <span class="fu">mean</span>(adverts)</span>
+<span id="cb13-3"><a href="#cb13-3"></a></span>
+<span id="cb13-4"><a href="#cb13-4"></a>b0 <span class="ot">&lt;-</span> mean.sales <span class="sc">-</span> b1 <span class="sc">*</span> mean.adverts</span>
+<span id="cb13-5"><a href="#cb13-5"></a>b0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 134.1274</code></pre>
+<pre><code>[1] 134.1399</code></pre>
 </div>
 </div>
 </section>
 <section id="the-slope" class="slide level2">
 <h2>The slope</h2>
 
-<img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-12-1.png" width="768" class="r-stretch quarto-figure-center"></section>
+<img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-25-1.png" width="768" class="r-stretch quarto-figure-center"></section>
 <section class="slide level2">
 
 <h3 id="the-slope-1">The slope</h3>
 
-<img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-13-1.png" width="768" class="r-stretch quarto-figure-center"></section>
+<img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-26-1.png" width="768" class="r-stretch quarto-figure-center"></section>
 <section id="the-slope---zoomed-in" class="slide level2">
 <h2>The slope - zoomed in</h2>
 
-<img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-14-1.png" width="768" class="r-stretch quarto-figure-center"><p>For every additional adverts, we predict sales to increase by 9.61</p>
+<img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-27-1.png" width="768" class="r-stretch quarto-figure-center"><p>For every additional £1,000 spent on advertising, we predict sales to increase by 0.096 (x 1,000 copies)</p>
 </section>
 <section id="define-regression-equation" class="slide level2">
 <h2>Define regression equation</h2>
-<p><span class="math display">\[\widehat{sales} = {\text{model prediction}} = b_0 + b_1 {adverts}\]</span> <span class="math display">\[\widehat{sales} = {\text{model prediction}} = 134.13 + 9.61\times {adverts}\]</span></p>
+<p><span class="math display">\[\widehat{sales} = {\text{model prediction}} = b_0 + b_1 {adverts}\]</span> <span class="math display">\[\widehat{sales} = {\text{model prediction}} = 134.14 + 0.096\times {adverts}\]</span></p>
 <p>So now we can add the expected sales based on this model</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>prediction <span class="ot">&lt;-</span> b0 <span class="sc">+</span> b1 <span class="sc">*</span> adverts</span>
-<span id="cb5-2"><a href="#cb5-2"></a>data<span class="sc">$</span>prediction <span class="ot">&lt;-</span> <span class="fu">round</span>(prediction, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>prediction <span class="ot">&lt;-</span> b0 <span class="sc">+</span> b1 <span class="sc">*</span> adverts</span>
+<span id="cb15-2"><a href="#cb15-2"></a>data<span class="sc">$</span>prediction <span class="ot">&lt;-</span> <span class="fu">round</span>(prediction, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="predicted-values" class="slide level2 smaller subsection">
@@ -672,7 +757,7 @@ Johnny van Doorn
 <div class="cell-output-display">
 
 <div class="datatables html-widget html-fill-item" id="htmlwidget-50cccb5301691c7140e0" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-50cccb5301691c7140e0">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150","151","152","153","154","155","156","157","158","159","160","161","162","163","164","165","166","167","168","169","170","171","172","173","174","175","176","177","178","179","180","181","182","183","184","185","186","187","188","189","190","191","192","193","194","195","196","197","198","199","200"],[0.1,9.859999999999999,14.46,11.88,5.75,5.69,4.72,5.37,5.14,1.74,17.21,6.11,2.51,0.98,4.07,2.65,13.23,1.97,13.27,13.81,7.92,9.57,17.9,6.56,6.14,3.13,3.37,15.45,0.6899999999999999,7.86,1.26,3.78,2.18,7.6,11.63,8.43,1.25,2.37,6.7,6.12,9.220000000000001,0.5,20,10.54,3.85,15.08,1.03,2.05,11.71,6.9,7.84,4.06,1.8,6.07,15.42,11.12,8.57,8.359999999999999,2.37,10.78,5.79,15,7.31,0.26,3.92,2.34,2.76,0.57,2.55,5.67,1.03,2.51,0.6899999999999999,6.43,15,1.03,7.57,0.51,6.44,0.15,2.43,2.57,0.22,0.46,7.25,11.26,19.85,18.38,1.36,2.38,9.77,14.53,16,2.69,9.01,9.82,2.01,7.46,11.33,10,0.76,13.51,2.03,3.66,3.05,2.63,5.14,1.53,0.36,1.03,2.15,4.27,5.08,2.33,10.35,1.03,5.26,6.25,9.119999999999999,2.16,5.62,4.75,2.32,6.79,0.71,15.68,2.64,14.24,7.16,7.77,5.09,9.640000000000001,5.84,9.23,3.44,10.96,1,0.3,10.8,8,10.72,8.93,2.83,9.17,2.35,4.57,2.07,12.94,8.27,5.64,1.93,0.11,0.46,0.43,0.2,6.35,10.02,11.77,5.08,2.16,5.26,0.27,8.84,0.09,1.04,1.7,4.3,2.24,1.46,9.859999999999999,5.01,2.27,10.51,0.68,15.47,3.94,8.039999999999999,8.02,4.51,0.27,1.79,3.46,2.96,22.72,11.35,6.01,0.45,7.6,8.33,0.57,7.09,0.57,7.67,5.03,7.01,9.109999999999999,8.890000000000001,8.01,15,7.86],[330,120,360,270,220,170,70,210,200,300,290,70,150,190,240,100,250,210,280,230,210,230,320,210,230,250,60,330,150,150,180,80,180,130,320,280,200,130,190,150,230,310,340,240,180,220,40,190,290,340,250,190,120,230,190,210,170,310,90,140,300,340,170,100,200,80,100,70,50,240,160,290,140,210,300,230,280,160,200,110,110,70,100,190,70,360,360,300,120,150,220,280,300,140,290,180,140,210,250,250,120,290,60,140,290,160,100,160,150,140,230,230,30,80,190,90,120,150,230,150,210,180,140,360,10,240,270,290,220,230,220,240,260,170,130,270,140,60,210,210,240,210,200,140,90,120,100,360,180,150,110,90,160,230,40,60,230,230,120,150,120,60,280,120,230,230,40,140,360,210,260,250,200,150,250,100,260,210,290,220,70,110,250,320,300,180,180,200,320,140,100,120,230,150,250,190,240,250,230,110],[135.09,228.92,273.14,248.34,189.41,188.83,179.5,185.75,183.54,150.85,299.58,192.87,158.26,143.55,173.25,159.6,261.31,153.07,261.7,266.89,210.27,226.13,306.21,197.19,193.15,164.22,166.52,282.66,140.76,209.69,146.24,170.47,155.08,207.19,245.93,215.17,146.14,156.91,198.54,192.96,222.76,138.93,326.4,235.45,171.14,279.1,144.03,153.84,246.7,200.46,209.5,173.16,151.43,192.48,282.37,241.03,216.52,214.5,156.91,237.76,189.79,278.33,204.4,136.63,171.81,156.62,160.66,139.61,158.64,188.64,144.03,158.26,140.76,195.94,278.33,144.03,206.9,139.03,196.04,135.57,157.49,158.83,136.24,138.55,203.83,242.38,324.96,310.82,147.2,157.01,228.05,273.81,287.94,159.99,220.75,228.53,153.45,205.84,243.05,230.26,141.43,264.01,153.64,169.31,163.45,159.41,183.54,148.84,137.59,144.03,154.8,175.18,182.96,156.53,233.63,144.03,184.69,194.21,221.8,154.89,188.16,179.79,156.43,199.4,140.95,284.87,159.51,271.02,202.96,208.82,183.06,226.8,190.27,222.86,167.2,239.49,143.74,137.01,237.95,211.04,237.18,219.98,161.33,222.28,156.72,178.06,154.03,258.53,213.63,188.35,152.68,135.18,138.55,138.26,136.05,195.17,230.45,247.28,182.96,154.89,184.69,136.72,219.11,134.99,144.13,150.47,175.47,155.66,148.16,228.92,182.29,155.95,235.17,140.66,282.85,172,211.42,211.23,177.48,136.72,151.34,167.39,162.58,352.55,243.24,191.9,138.45,207.19,214.21,139.61,202.29,139.61,207.86,182.48,201.52,221.71,219.59,211.13,278.33,209.69]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>adverts<\/th>\n      <th>sales<\/th>\n      <th>prediction<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":375,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"adverts","targets":1},{"name":"sales","targets":2},{"name":"prediction","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-50cccb5301691c7140e0">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150","151","152","153","154","155","156","157","158","159","160","161","162","163","164","165","166","167","168","169","170","171","172","173","174","175","176","177","178","179","180","181","182","183","184","185","186","187","188","189","190","191","192","193","194","195","196","197","198","199","200"],[10.256,985.6849999999999,1445.563,1188.193,574.513,568.954,471.814,537.352,514.068,174.093,1720.806,611.479,251.192,97.97199999999999,406.814,265.398,1323.287,196.65,1326.598,1380.689,792.345,957.167,1789.659,656.1369999999999,613.697,313.362,336.51,1544.899,68.95399999999999,785.692,125.628,377.925,217.994,759.862,1163.444,842.957,125.179,236.598,669.811,612.234,922.019,50,2000,1054.027,385.045,1507.972,102.568,204.568,1170.918,689.547,784.22,405.913,179.778,607.258,1542.329,1112.47,856.985,836.331,236.908,1077.855,579.321,1500,731.364,25.689,391.749,233.999,275.7,56.895,255.117,566.501,102.568,250.568,68.59399999999999,642.7859999999999,1500,102.563,756.984,51.229,644.151,15.313,243.237,256.894,22.464,45.689,724.938,1126.461,1985.119,1837.516,135.986,237.703,976.641,1452.689,1600,268.598,900.889,982.063,201.356,746.024,1132.877,1000,75.896,1351.254,202.705,365.985,305.268,263.268,513.694,152.609,35.987,102.568,215.368,426.784,507.772,233.291,1035.433,102.642,526.1420000000001,624.538,912.349,215.994,561.963,474.76,231.523,678.596,70.922,1567.548,263.598,1423.568,715.678,777.237,509.43,964.11,583.627,923.373,344.392,1095.578,100.025,30.425,1080.342,799.899,1071.752,893.355,283.161,917.0170000000001,234.568,456.897,206.973,1294.099,826.859,564.158,192.607,10.652,45.689,42.568,20.456,635.192,1002.273,1177.047,507.638,215.689,526.48,26.895,883.877,9.103999999999999,103.568,169.583,429.504,223.639,145.585,985.968,500.922,226.652,1051.168,68.093,1547.159,393.774,804.282,801.577,450.562,26.598,179.061,345.687,295.84,2271.86,1134.575,601.434,45.298,759.518,832.869,56.894,709.399,56.895,767.134,503.172,700.929,910.851,888.569,800.615,1500,785.694],[330,120,360,270,220,170,70,210,200,300,290,70,150,190,240,100,250,210,280,230,210,230,320,210,230,250,60,330,150,150,180,80,180,130,320,280,200,130,190,150,230,310,340,240,180,220,40,190,290,340,250,190,120,230,190,210,170,310,90,140,300,340,170,100,200,80,100,70,50,240,160,290,140,210,300,230,280,160,200,110,110,70,100,190,70,360,360,300,120,150,220,280,300,140,290,180,140,210,250,250,120,290,60,140,290,160,100,160,150,140,230,230,30,80,190,90,120,150,230,150,210,180,140,360,10,240,270,290,220,230,220,240,260,170,130,270,140,60,210,210,240,210,200,140,90,120,100,360,180,150,110,90,160,230,40,60,230,230,120,150,120,60,280,120,230,230,40,140,360,210,260,250,200,150,250,100,260,210,290,220,70,110,250,320,300,180,180,200,320,140,100,120,230,150,250,190,240,250,230,110],[135.13,228.89,273.09,248.35,189.36,188.83,179.49,185.79,183.55,150.87,299.55,192.92,158.29,143.56,173.24,159.65,261.34,153.04,261.66,266.86,210.3,226.15,306.17,197.21,193.13,164.26,166.49,282.64,140.77,209.66,146.22,170.47,155.09,207.18,245.98,215.17,146.17,156.88,198.53,192.99,222.77,138.95,326.39,235.46,171.15,279.09,144,153.8,246.69,200.42,209.52,173.16,151.42,192.51,282.4,241.08,216.52,214.53,156.91,237.75,189.83,278.33,204.44,136.61,171.8,156.63,160.64,139.61,158.66,188.59,144,158.23,140.73,195.93,278.33,144,206.9,139.06,196.06,135.61,157.52,158.83,136.3,138.53,203.82,242.42,324.96,310.77,147.21,156.99,228.02,273.78,287.94,159.96,220.74,228.54,153.5,205.85,243.04,230.26,141.44,264.03,153.62,169.32,163.48,159.45,183.52,148.81,137.6,144,154.84,175.16,182.95,156.56,233.67,144.01,184.72,194.17,221.84,154.9,188.16,179.78,156.39,199.37,140.96,284.82,159.48,270.98,202.93,208.85,183.11,226.81,190.24,222.9,167.24,239.45,143.75,137.06,237.99,211.03,237.16,220.01,161.36,222.29,156.69,178.06,154.04,258.53,213.62,188.37,152.65,135.16,138.53,138.23,136.11,195.2,230.48,247.28,182.94,154.87,184.75,136.73,219.1,135.02,144.1,150.44,175.43,155.64,148.13,228.92,182.29,155.93,235.18,140.69,282.86,171.99,211.45,211.19,177.45,136.7,151.35,167.37,162.58,352.52,243.2,191.95,138.49,207.15,214.2,139.61,202.33,139.61,207.88,182.51,201.52,221.7,219.55,211.1,278.33,209.66]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Adverts<\/th>\n      <th>Sales<\/th>\n      <th>prediction<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":375,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Adverts","targets":1},{"name":"Sales","targets":2},{"name":"prediction","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -680,19 +765,19 @@ Johnny van Doorn
 <h2><span class="math inline">\(y\)</span> vs <span class="math inline">\(\hat{y}\)</span></h2>
 <p>And lets have a look at this relation between model prediction and observed</p>
 
-<img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-17-1.png" width="480" class="r-stretch quarto-figure-center"></section>
+<img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-30-1.png" width="480" class="r-stretch quarto-figure-center"></section>
 <section id="error" class="slide level2 smaller">
 <h2>Error</h2>
 <p>The error (residual) is the difference between the model predictions and observed values</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>error <span class="ot">&lt;-</span> sales <span class="sc">-</span> prediction</span>
-<span id="cb6-2"><a href="#cb6-2"></a>data<span class="sc">$</span>error <span class="ot">&lt;-</span> <span class="fu">round</span>(error, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>error <span class="ot">&lt;-</span> sales <span class="sc">-</span> prediction</span>
+<span id="cb16-2"><a href="#cb16-2"></a>data<span class="sc">$</span>error <span class="ot">&lt;-</span> <span class="fu">round</span>(error, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
 
 <div class="datatables html-widget html-fill-item" id="htmlwidget-70953493dabb74e942d2" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-70953493dabb74e942d2">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150","151","152","153","154","155","156","157","158","159","160","161","162","163","164","165","166","167","168","169","170","171","172","173","174","175","176","177","178","179","180","181","182","183","184","185","186","187","188","189","190","191","192","193","194","195","196","197","198","199","200"],[0.1,9.859999999999999,14.46,11.88,5.75,5.69,4.72,5.37,5.14,1.74,17.21,6.11,2.51,0.98,4.07,2.65,13.23,1.97,13.27,13.81,7.92,9.57,17.9,6.56,6.14,3.13,3.37,15.45,0.6899999999999999,7.86,1.26,3.78,2.18,7.6,11.63,8.43,1.25,2.37,6.7,6.12,9.220000000000001,0.5,20,10.54,3.85,15.08,1.03,2.05,11.71,6.9,7.84,4.06,1.8,6.07,15.42,11.12,8.57,8.359999999999999,2.37,10.78,5.79,15,7.31,0.26,3.92,2.34,2.76,0.57,2.55,5.67,1.03,2.51,0.6899999999999999,6.43,15,1.03,7.57,0.51,6.44,0.15,2.43,2.57,0.22,0.46,7.25,11.26,19.85,18.38,1.36,2.38,9.77,14.53,16,2.69,9.01,9.82,2.01,7.46,11.33,10,0.76,13.51,2.03,3.66,3.05,2.63,5.14,1.53,0.36,1.03,2.15,4.27,5.08,2.33,10.35,1.03,5.26,6.25,9.119999999999999,2.16,5.62,4.75,2.32,6.79,0.71,15.68,2.64,14.24,7.16,7.77,5.09,9.640000000000001,5.84,9.23,3.44,10.96,1,0.3,10.8,8,10.72,8.93,2.83,9.17,2.35,4.57,2.07,12.94,8.27,5.64,1.93,0.11,0.46,0.43,0.2,6.35,10.02,11.77,5.08,2.16,5.26,0.27,8.84,0.09,1.04,1.7,4.3,2.24,1.46,9.859999999999999,5.01,2.27,10.51,0.68,15.47,3.94,8.039999999999999,8.02,4.51,0.27,1.79,3.46,2.96,22.72,11.35,6.01,0.45,7.6,8.33,0.57,7.09,0.57,7.67,5.03,7.01,9.109999999999999,8.890000000000001,8.01,15,7.86],[330,120,360,270,220,170,70,210,200,300,290,70,150,190,240,100,250,210,280,230,210,230,320,210,230,250,60,330,150,150,180,80,180,130,320,280,200,130,190,150,230,310,340,240,180,220,40,190,290,340,250,190,120,230,190,210,170,310,90,140,300,340,170,100,200,80,100,70,50,240,160,290,140,210,300,230,280,160,200,110,110,70,100,190,70,360,360,300,120,150,220,280,300,140,290,180,140,210,250,250,120,290,60,140,290,160,100,160,150,140,230,230,30,80,190,90,120,150,230,150,210,180,140,360,10,240,270,290,220,230,220,240,260,170,130,270,140,60,210,210,240,210,200,140,90,120,100,360,180,150,110,90,160,230,40,60,230,230,120,150,120,60,280,120,230,230,40,140,360,210,260,250,200,150,250,100,260,210,290,220,70,110,250,320,300,180,180,200,320,140,100,120,230,150,250,190,240,250,230,110],[135.09,228.92,273.14,248.34,189.41,188.83,179.5,185.75,183.54,150.85,299.58,192.87,158.26,143.55,173.25,159.6,261.31,153.07,261.7,266.89,210.27,226.13,306.21,197.19,193.15,164.22,166.52,282.66,140.76,209.69,146.24,170.47,155.08,207.19,245.93,215.17,146.14,156.91,198.54,192.96,222.76,138.93,326.4,235.45,171.14,279.1,144.03,153.84,246.7,200.46,209.5,173.16,151.43,192.48,282.37,241.03,216.52,214.5,156.91,237.76,189.79,278.33,204.4,136.63,171.81,156.62,160.66,139.61,158.64,188.64,144.03,158.26,140.76,195.94,278.33,144.03,206.9,139.03,196.04,135.57,157.49,158.83,136.24,138.55,203.83,242.38,324.96,310.82,147.2,157.01,228.05,273.81,287.94,159.99,220.75,228.53,153.45,205.84,243.05,230.26,141.43,264.01,153.64,169.31,163.45,159.41,183.54,148.84,137.59,144.03,154.8,175.18,182.96,156.53,233.63,144.03,184.69,194.21,221.8,154.89,188.16,179.79,156.43,199.4,140.95,284.87,159.51,271.02,202.96,208.82,183.06,226.8,190.27,222.86,167.2,239.49,143.74,137.01,237.95,211.04,237.18,219.98,161.33,222.28,156.72,178.06,154.03,258.53,213.63,188.35,152.68,135.18,138.55,138.26,136.05,195.17,230.45,247.28,182.96,154.89,184.69,136.72,219.11,134.99,144.13,150.47,175.47,155.66,148.16,228.92,182.29,155.95,235.17,140.66,282.85,172,211.42,211.23,177.48,136.72,151.34,167.39,162.58,352.55,243.24,191.9,138.45,207.19,214.21,139.61,202.29,139.61,207.86,182.48,201.52,221.71,219.59,211.13,278.33,209.69],[194.91,-108.92,86.86,21.66,30.59,-18.83,-109.5,24.25,16.46,149.15,-9.58,-122.87,-8.26,46.45,66.75,-59.6,-11.31,56.93,18.3,-36.89,-0.27,3.87,13.79,12.81,36.85,85.78,-106.52,47.34,9.24,-59.69,33.76,-90.47,24.92,-77.19,74.06999999999999,64.83,53.86,-26.91,-8.539999999999999,-42.96,7.24,171.07,13.6,4.55,8.859999999999999,-59.1,-104.03,36.16,43.3,139.54,40.5,16.84,-31.43,37.52,-92.37,-31.03,-46.52,95.5,-66.91,-97.76000000000001,110.21,61.67,-34.4,-36.63,28.19,-76.62,-60.66,-69.61,-108.64,51.36,15.97,131.74,-0.76,14.06,21.67,85.97,73.09999999999999,20.97,3.96,-25.57,-47.49,-88.83,-36.24,51.45,-133.83,117.62,35.04,-10.82,-27.2,-7.01,-8.050000000000001,6.19,12.06,-19.99,69.25,-48.53,-13.45,4.16,6.95,19.74,-21.43,25.99,-93.64,-29.31,126.55,0.59,-83.54000000000001,11.16,12.41,-4.03,75.2,54.82,-152.96,-76.53,-43.63,-54.03,-64.69,-44.21,8.199999999999999,-4.89,21.84,0.21,-16.43,160.6,-130.95,-44.87,110.49,18.98,17.04,21.18,36.94,13.2,69.73,-52.86,-37.2,30.51,-3.74,-77.01000000000001,-27.95,-1.04,2.82,-9.98,38.67,-82.28,-66.72,-58.06,-54.03,101.47,-33.63,-38.35,-42.68,-45.18,21.45,91.73999999999999,-96.05,-135.17,-0.45,-17.28,-62.96,-4.89,-64.69,-76.72,60.89,-14.99,85.87,79.53,-135.47,-15.66,211.84,-18.92,77.70999999999999,94.05,-35.17,9.34,-32.85,-72,48.58,-1.23,112.52,83.28,-81.34,-57.39,87.42,-32.55,56.76,-11.9,41.55,-7.19,105.79,0.39,-102.29,-19.61,22.14,-32.48,48.48,-31.71,20.41,38.87,-48.33,-99.69]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>adverts<\/th>\n      <th>sales<\/th>\n      <th>prediction<\/th>\n      <th>error<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":300,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"adverts","targets":1},{"name":"sales","targets":2},{"name":"prediction","targets":3},{"name":"error","targets":4}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-70953493dabb74e942d2">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150","151","152","153","154","155","156","157","158","159","160","161","162","163","164","165","166","167","168","169","170","171","172","173","174","175","176","177","178","179","180","181","182","183","184","185","186","187","188","189","190","191","192","193","194","195","196","197","198","199","200"],[10.256,985.6849999999999,1445.563,1188.193,574.513,568.954,471.814,537.352,514.068,174.093,1720.806,611.479,251.192,97.97199999999999,406.814,265.398,1323.287,196.65,1326.598,1380.689,792.345,957.167,1789.659,656.1369999999999,613.697,313.362,336.51,1544.899,68.95399999999999,785.692,125.628,377.925,217.994,759.862,1163.444,842.957,125.179,236.598,669.811,612.234,922.019,50,2000,1054.027,385.045,1507.972,102.568,204.568,1170.918,689.547,784.22,405.913,179.778,607.258,1542.329,1112.47,856.985,836.331,236.908,1077.855,579.321,1500,731.364,25.689,391.749,233.999,275.7,56.895,255.117,566.501,102.568,250.568,68.59399999999999,642.7859999999999,1500,102.563,756.984,51.229,644.151,15.313,243.237,256.894,22.464,45.689,724.938,1126.461,1985.119,1837.516,135.986,237.703,976.641,1452.689,1600,268.598,900.889,982.063,201.356,746.024,1132.877,1000,75.896,1351.254,202.705,365.985,305.268,263.268,513.694,152.609,35.987,102.568,215.368,426.784,507.772,233.291,1035.433,102.642,526.1420000000001,624.538,912.349,215.994,561.963,474.76,231.523,678.596,70.922,1567.548,263.598,1423.568,715.678,777.237,509.43,964.11,583.627,923.373,344.392,1095.578,100.025,30.425,1080.342,799.899,1071.752,893.355,283.161,917.0170000000001,234.568,456.897,206.973,1294.099,826.859,564.158,192.607,10.652,45.689,42.568,20.456,635.192,1002.273,1177.047,507.638,215.689,526.48,26.895,883.877,9.103999999999999,103.568,169.583,429.504,223.639,145.585,985.968,500.922,226.652,1051.168,68.093,1547.159,393.774,804.282,801.577,450.562,26.598,179.061,345.687,295.84,2271.86,1134.575,601.434,45.298,759.518,832.869,56.894,709.399,56.895,767.134,503.172,700.929,910.851,888.569,800.615,1500,785.694],[330,120,360,270,220,170,70,210,200,300,290,70,150,190,240,100,250,210,280,230,210,230,320,210,230,250,60,330,150,150,180,80,180,130,320,280,200,130,190,150,230,310,340,240,180,220,40,190,290,340,250,190,120,230,190,210,170,310,90,140,300,340,170,100,200,80,100,70,50,240,160,290,140,210,300,230,280,160,200,110,110,70,100,190,70,360,360,300,120,150,220,280,300,140,290,180,140,210,250,250,120,290,60,140,290,160,100,160,150,140,230,230,30,80,190,90,120,150,230,150,210,180,140,360,10,240,270,290,220,230,220,240,260,170,130,270,140,60,210,210,240,210,200,140,90,120,100,360,180,150,110,90,160,230,40,60,230,230,120,150,120,60,280,120,230,230,40,140,360,210,260,250,200,150,250,100,260,210,290,220,70,110,250,320,300,180,180,200,320,140,100,120,230,150,250,190,240,250,230,110],[135.13,228.89,273.09,248.35,189.36,188.83,179.49,185.79,183.55,150.87,299.55,192.92,158.29,143.56,173.24,159.65,261.34,153.04,261.66,266.86,210.3,226.15,306.17,197.21,193.13,164.26,166.49,282.64,140.77,209.66,146.22,170.47,155.09,207.18,245.98,215.17,146.17,156.88,198.53,192.99,222.77,138.95,326.39,235.46,171.15,279.09,144,153.8,246.69,200.42,209.52,173.16,151.42,192.51,282.4,241.08,216.52,214.53,156.91,237.75,189.83,278.33,204.44,136.61,171.8,156.63,160.64,139.61,158.66,188.59,144,158.23,140.73,195.93,278.33,144,206.9,139.06,196.06,135.61,157.52,158.83,136.3,138.53,203.82,242.42,324.96,310.77,147.21,156.99,228.02,273.78,287.94,159.96,220.74,228.54,153.5,205.85,243.04,230.26,141.44,264.03,153.62,169.32,163.48,159.45,183.52,148.81,137.6,144,154.84,175.16,182.95,156.56,233.67,144.01,184.72,194.17,221.84,154.9,188.16,179.78,156.39,199.37,140.96,284.82,159.48,270.98,202.93,208.85,183.11,226.81,190.24,222.9,167.24,239.45,143.75,137.06,237.99,211.03,237.16,220.01,161.36,222.29,156.69,178.06,154.04,258.53,213.62,188.37,152.65,135.16,138.53,138.23,136.11,195.2,230.48,247.28,182.94,154.87,184.75,136.73,219.1,135.02,144.1,150.44,175.43,155.64,148.13,228.92,182.29,155.93,235.18,140.69,282.86,171.99,211.45,211.19,177.45,136.7,151.35,167.37,162.58,352.52,243.2,191.95,138.49,207.15,214.2,139.61,202.33,139.61,207.88,182.51,201.52,221.7,219.55,211.1,278.33,209.66],[194.87,-108.89,86.91,21.65,30.64,-18.83,-109.49,24.21,16.45,149.13,-9.550000000000001,-122.92,-8.289999999999999,46.44,66.76000000000001,-59.65,-11.34,56.96,18.34,-36.86,-0.3,3.85,13.83,12.79,36.87,85.73999999999999,-106.49,47.36,9.23,-59.66,33.78,-90.47,24.91,-77.18000000000001,74.02,64.83,53.83,-26.88,-8.529999999999999,-42.99,7.23,171.05,13.61,4.54,8.85,-59.09,-104,36.2,43.31,139.58,40.48,16.84,-31.42,37.49,-92.40000000000001,-31.08,-46.52,95.47,-66.91,-97.75,110.17,61.67,-34.44,-36.61,28.2,-76.63,-60.64,-69.61,-108.66,51.41,16,131.77,-0.73,14.07,21.67,86,73.09999999999999,20.94,3.94,-25.61,-47.52,-88.83,-36.3,51.47,-133.82,117.58,35.04,-10.77,-27.21,-6.99,-8.02,6.22,12.06,-19.96,69.26000000000001,-48.54,-13.5,4.15,6.96,19.74,-21.44,25.97,-93.62,-29.32,126.52,0.55,-83.52,11.19,12.4,-4,75.16,54.84,-152.95,-76.56,-43.67,-54.01,-64.72,-44.17,8.16,-4.9,21.84,0.22,-16.39,160.63,-130.96,-44.82,110.52,19.02,17.07,21.15,36.89,13.19,69.76000000000001,-52.9,-37.24,30.55,-3.75,-77.06,-27.99,-1.03,2.84,-10.01,38.64,-82.29000000000001,-66.69,-58.06,-54.04,101.47,-33.62,-38.37,-42.65,-45.16,21.47,91.77,-96.11,-135.2,-0.48,-17.28,-62.94,-4.87,-64.75,-76.73,60.9,-15.02,85.90000000000001,79.56,-135.43,-15.64,211.87,-18.92,77.70999999999999,94.06999999999999,-35.18,9.31,-32.86,-71.98999999999999,48.55,-1.19,112.55,83.3,-81.34999999999999,-57.37,87.42,-32.52,56.8,-11.95,41.51,-7.15,105.8,0.39,-102.33,-19.61,22.12,-32.51,48.48,-31.7,20.45,38.9,-48.33,-99.66]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Adverts<\/th>\n      <th>Sales<\/th>\n      <th>prediction<\/th>\n      <th>error<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":300,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Adverts","targets":1},{"name":"Sales","targets":2},{"name":"prediction","targets":3},{"name":"error","targets":4}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <!-- ## Homoscedasticity -->
@@ -717,7 +802,7 @@ Johnny van Doorn
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-20-1.png" width="480"></p>
+<p><img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-33-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -727,7 +812,7 @@ Johnny van Doorn
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-21-1.png" width="480"></p>
+<p><img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-34-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -742,10 +827,10 @@ Johnny van Doorn
 <li>For simple regression, this is equal to the correlation between adverts and sales. For multiple regression (block 3), these will differ.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>r <span class="ot">&lt;-</span> <span class="fu">cor</span>(prediction, sales)</span>
-<span id="cb7-2"><a href="#cb7-2"></a>r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>r <span class="ot">&lt;-</span> <span class="fu">cor</span>(prediction, sales)</span>
+<span id="cb17-2"><a href="#cb17-2"></a>r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5785264</code></pre>
+<pre><code>[1] 0.5784877</code></pre>
 </div>
 </div>
 </section>
@@ -753,16 +838,16 @@ Johnny van Doorn
 <h2>Explained variance</h2>
 <p>Squaring this correlation gives the proportion of variance in sales that is explained by adverts:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>r<span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>r<span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3346928</code></pre>
+<pre><code>[1] 0.3346481</code></pre>
 </div>
 </div>
 </section>
 <section id="explained-variance-visually-n-10" class="slide level2 smaller">
 <h2>Explained variance visually (<span class="math inline">\(n = 10\)</span>)</h2>
 
-<img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-24-1.png" width="1440" class="r-stretch quarto-figure-center"><p><span class="math inline">\(r^2\)</span> is the proportion of <span style="color: blue;">blue</span> to <span style="color: orange;">orange</span>, while <span class="math inline">\(1 - r^2\)</span> is the proportion of <span style="color: red;">red</span> to <span style="color: orange;">orange</span></p>
+<img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-37-1.png" width="1440" class="r-stretch quarto-figure-center"><p><span class="math inline">\(r^2\)</span> is the proportion of <span style="color: blue;">blue</span> to <span style="color: orange;">orange</span>, while <span class="math inline">\(1 - r^2\)</span> is the proportion of <span style="color: red;">red</span> to <span style="color: orange;">orange</span></p>
 <!-- ## Test model fit -->
 <!-- Compare model to mean Y (sales) as model -->
 <!-- $$F = \frac{(n-p-1) r^2}{p (1-r^2)}$$ -->
@@ -797,26 +882,26 @@ df &amp;= n - p - 1 \\
 <section id="converting-b-to-t" class="slide level2">
 <h2>Converting b to <span class="math inline">\(t\)</span></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Get Standard error's for b (bonus)</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>se.b1 <span class="ot">&lt;-</span> <span class="fu">sqrt</span>((n<span class="sc">/</span>(n<span class="dv">-2</span>)) <span class="sc">*</span> <span class="fu">mean</span>(error<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> (<span class="fu">var</span>(adverts) <span class="sc">*</span> (n<span class="dv">-1</span>))); se.b1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># Get Standard error's for b (bonus)</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>se.b1 <span class="ot">&lt;-</span> <span class="fu">sqrt</span>((n<span class="sc">/</span>(n<span class="dv">-2</span>)) <span class="sc">*</span> <span class="fu">mean</span>(error<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> (<span class="fu">var</span>(adverts) <span class="sc">*</span> (n<span class="dv">-1</span>))); se.b1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.9632463</code></pre>
+<pre><code>[1] 0.009632366</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># Calculate t for b1</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>mu.b1 <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a>t.b1  <span class="ot">&lt;-</span> (b1 <span class="sc">-</span> mu.b1) <span class="sc">/</span> se.b1; t.b1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># Calculate t for b1</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a>mu.b1 <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a>t.b1  <span class="ot">&lt;-</span> (b1 <span class="sc">-</span> mu.b1) <span class="sc">/</span> se.b1; t.b1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 9.980326</code></pre>
+<pre><code>[1] 9.979322</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>n     <span class="ot">&lt;-</span> <span class="fu">nrow</span>(data) <span class="co"># number of rows</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a>p     <span class="ot">&lt;-</span> <span class="dv">1</span>          <span class="co"># number of predictors</span></span>
-<span id="cb15-3"><a href="#cb15-3"></a>df.b1 <span class="ot">&lt;-</span> n <span class="sc">-</span> p <span class="sc">-</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>n     <span class="ot">&lt;-</span> <span class="fu">nrow</span>(data) <span class="co"># number of rows</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>p     <span class="ot">&lt;-</span> <span class="dv">1</span>          <span class="co"># number of predictors</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a>df.b1 <span class="ot">&lt;-</span> n <span class="sc">-</span> p <span class="sc">-</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="p-values-of-b_1" class="slide level2">
-<h2>P-values of <span class="math inline">\(b_1\)</span></h2>
+<section id="p-value-for-b_1" class="slide level2">
+<h2><span class="math inline">\(p\)</span>-value for <span class="math inline">\(b_1\)</span></h2>
 
 <!-- ## Visualize -->
 <!-- Instead of obtaining the p-value by locating the t in the t-distribution, we can locate the F in the F-distribution -->
@@ -839,46 +924,91 @@ df &amp;= n - p - 1 \\
 <!-- fStat -->
 <!-- t.b1^2 -->
 <!-- ``` -->
-<img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-27-1.png" width="960" class="r-stretch"></section>
+<img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-40-1.png" width="960" class="r-stretch"></section>
 <section id="so-how-many-ways-do-we-have-for-assessing-an-association" class="slide level2 smaller">
 <h2>So how many <code>@!&amp;#$</code> ways do we have for assessing an association?!</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># the correlation between x and y, standardized (between -1, 1)</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a><span class="fu">cor</span>(sales, adverts) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># the correlation between x and y, standardized (between -1, 1)</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="fu">cor</span>(sales, adverts) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5785264</code></pre>
+<pre><code>[1] 0.5784877</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># the covariance between x and y, unstandardized </span></span>
-<span id="cb18-2"><a href="#cb18-2"></a><span class="fu">cov</span>(sales, adverts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># the covariance between x and y, unstandardized </span></span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="fu">cov</span>(sales, adverts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 226.7254</code></pre>
+<pre><code>[1] 22672.02</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># regression coefficient in linear regression, standardized (not bounded)</span></span>
-<span id="cb20-2"><a href="#cb20-2"></a><span class="co"># generalizes easily to settings with multiple predictors</span></span>
-<span id="cb20-3"><a href="#cb20-3"></a>b1 <span class="co"># how much does y-prediction increase, if we increase x by 1 unit?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="co"># regression coefficient in linear regression, standardized (not bounded)</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a><span class="co"># generalizes easily to settings with multiple predictors</span></span>
+<span id="cb30-3"><a href="#cb30-3"></a>b1 <span class="co"># how much does y-prediction increase, if we increase x by 1 unit?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 9.613511</code></pre>
+<pre><code>[1] 0.09612449</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># t-statistic: standardized difference between b1 and 0</span></span>
-<span id="cb22-2"><a href="#cb22-2"></a>t.b1 <span class="co"># used for testing the null hypothesis that b1 = 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># t-statistic: standardized difference between b1 and 0</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a>t.b1 <span class="co"># used for testing the null hypothesis that b1 = 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 9.980326</code></pre>
+<pre><code>[1] 9.979322</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># The metrics below are more indicative of an overall model's performance</span></span>
-<span id="cb24-2"><a href="#cb24-2"></a></span>
-<span id="cb24-3"><a href="#cb24-3"></a><span class="co"># the correlation between y and model prediction, standardized (between -1, 1)</span></span>
-<span id="cb24-4"><a href="#cb24-4"></a><span class="fu">cor</span>(sales, prediction) <span class="co"># can be squared to get proportion explained variance</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># The metrics below are more indicative of an overall model's performance</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a></span>
+<span id="cb34-3"><a href="#cb34-3"></a><span class="co"># the correlation between y and model prediction, standardized (between -1, 1)</span></span>
+<span id="cb34-4"><a href="#cb34-4"></a><span class="fu">cor</span>(sales, prediction) <span class="co"># can be squared to get proportion explained variance</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5785264</code></pre>
+<pre><code>[1] 0.5784877</code></pre>
 </div>
 </div>
 <!-- # F: signal/noise ratio of a model -->
 <!-- fStat  -->
+</section>
+<section id="standardized-or-not" class="slide level2 smaller">
+<h2>Standardized or not?</h2>
+<p>Same data, same association, three different numbers:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">cov</span>(sales, adverts)  <span class="co"># in the units we measured</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 22672.02</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>b1                   <span class="co"># extra sales per extra £1,000 spent</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.09612449</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">cor</span>(sales, adverts)  <span class="co"># unit-free, bounded by -1 and 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5784877</code></pre>
+</div>
+</div>
+<ul>
+<li><span class="math inline">\(b_1\)</span> answers <em>how much</em>, in the units of the data</li>
+<li><span class="math inline">\(r\)</span> answers <em>how strong</em>, on a scale that never changes</li>
+</ul>
+</section>
+<section id="standardize-and-they-meet" class="slide level2 smaller">
+<h2>Standardize, and they meet</h2>
+<p>Put both variables in z-scores, and the slope becomes the correlation:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="fu">coef</span>(<span class="fu">lm</span>(<span class="fu">scale</span>(sales) <span class="sc">~</span> <span class="fu">scale</span>(adverts)))[<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>scale(adverts) 
+     0.5784877 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">cor</span>(sales, adverts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5784877</code></pre>
+</div>
+</div>
+<p><span class="math display">\[b_1 = r_{xy} \frac{s_y}{s_x}\]</span></p>
+<p><a href="https://statisticalreasoning-uva-2.shinyapps.io/SimpleRegression/">Move <span class="math inline">\(r\)</span>, <span class="math inline">\(s_x\)</span> and <span class="math inline">\(s_y\)</span> around and watch the covariance, the slope and <span class="math inline">\(r\)</span> respond</a></p>
 </section></section>
 <section>
 <section id="closing" class="title-slide slide level1 center">
 <h1>Closing</h1>
 
+</section>
+<section id="exam-note" class="slide level2">
+<h2>Exam note</h2>
+<p>Alternative hypothesis: - The question context tells you which test/alternative hypothesis to use - Linear regression in JASP only reports two-sided <span class="math inline">\(p\)</span>, so those stay two-sided</p>
+<p>Assumptions: - Only assessing the assumptions, not yet how to handle violations - Only Sensitivity (scatterplot, casewise diagnostics), Normality (Q-Q plot), Linearity (Q-Q plot, scatterplot) - Don’t need to study ch6; lecture and application in ch8 suffice</p>
+<p>See trial exam questions for examples of both</p>
 </section>
 <section id="next-week" class="slide level2">
 <h2>Next Week</h2>
@@ -886,8 +1016,8 @@ df &amp;= n - p - 1 \\
 <li>Exam!
 <ul>
 <li>Mix of using JASP/interpreting output/conceptual understanding</li>
-<li>Field book available (like in this weeks WA), including glossary</li>
-<li>WA will contain old exam questions</li>
+<li>WA will have trial exam with old exam questions</li>
+<li>Field book available (like in the trial exam), including glossary</li>
 </ul></li>
 </ul>
 </section>

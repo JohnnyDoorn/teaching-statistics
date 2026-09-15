@@ -36,8 +36,8 @@ library("dplyr")
 library('kableExtra')
 allLinks <- c(
    "https://statisticalreasoning-uva.shinyapps.io/NHST_Binomial",
-   "https://statisticalreasoning-uva.shinyapps.io/NHST_Continuous"
-  # "https://statisticalreasoning-uva-2.shinyapps.io/SimpleRegression",
+   "https://statisticalreasoning-uva.shinyapps.io/NHST_Continuous",
+   "https://statisticalreasoning-uva-2.shinyapps.io/SimpleRegression"
   # "https://statisticalreasoning-uva.shinyapps.io/NHST_Fdistribution",
   # "https://statisticalreasoning-uva.shinyapps.io/onewayANOVA",
   # "https://statisticalreasoning-uva.shinyapps.io/ANCOVA",
@@ -57,27 +57,32 @@ knitr::kable(dplyr::arrange(data.frame(Topic = topics, Link = allLinks)), escape
 
 ## Additional explanations
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-files <- list.files(full.names = FALSE, pattern = "\\qmd", recursive = FALSE, path = "../extra-texts")
+# Same reveal-as-you-go idea as n_lectures_shown in ssr.qmd: uncomment a text
+# once the lecture that points students at it has been given. Listed in this
+# order, not alphabetically, so they follow the course.
+shownTexts <- c(
+  "one-sided-vs-two-sided.html",  # lecture 6: correlation
+  "eff-size-vs-test-stat.html",   # lecture 6: statistical vs practical significance
+  "heteroscedasticity.html"       # lecture 9: linear model assumptions
+  # "violating-assumptions-anova.html",
+  # "predicting-with-dummies-1-variable.html",
+  # "predicting-with-dummies-2-variables.html"
+)
 
-lectures <- data.frame()
-n <- length(files)
+# Titles come from each text's own YAML front matter, so the table reads as
+# prose rather than as filenames.
+textPath  <- "../extra-texts"
+htmlFiles <- shownTexts[file.exists(file.path(textPath, sub("\\.html$", ".qmd", shownTexts)))]
 
-files <- files[order(as.numeric(gsub("\\..*", "", files)))]
-files <- files[files!= "overview-ssr.qmd"]
-htmlFiles <- gsub(x =files, pattern = ".qmd", replacement = ".html")
-htmlFiles <- htmlFiles[htmlFiles %in% c(
-  # "one-sided-vs-two-sided.html","heteroscedasticity.html", "eff-size-vs-test-stat.html",
-  #"violating-assumptions-anova.html", "predicting-with-dummies-1-variable.html",
-  #"predicting-with-dummies-2-variables.html"
-  )]
+titles <- vapply(htmlFiles, function(f) {
+  rmarkdown::yaml_front_matter(file.path(textPath, sub("\\.html$", ".qmd", f)))$title
+}, character(1))
 
-allLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistics/extra-texts/%s" target="_blank" class="external">link</a>',htmlFiles) 
-
-titles <- gsub(htmlFiles, pattern = ".html", replacement = "")
+allLinks <- sprintf('<a href="https://johnnydoorn.github.io/teaching-statistics/extra-texts/%s" target="_blank" class="external">link</a>', htmlFiles)
 
 linkList <- data.frame(Topic = titles, Links = allLinks)
 
-knitr::kable(dplyr::arrange(linkList), escape = FALSE, format = "html"  ) %>%
+knitr::kable(linkList, escape = FALSE, format = "html", row.names = FALSE) %>%
   kable_styling(full_width = TRUE)
 
 ```
@@ -99,15 +104,41 @@ link <- function(file) {
   out
 }
 
-if (length(stems) == 0) {
+url <- function(href) {
+  out <- sprintf('<a href="%s" target="_blank" class="external">link</a>', href)
+  out[is.na(href) | href == ""] <- "-"
+  out
+}
+
+# Columns that live elsewhere, for the book's own data sets: album sales has its
+# csv here (the lecture reads it) but the worked results only exist on
+# discoverjasp. Named columns override the local link; a topic with no csv here
+# gets a row of its own.
+externalSets <- list(
+  "album_sales" = c(
+    Results = "https://discoverjasp.com/repository/dsj1_data/results/album_sales.jasp",
+    HTML    = "https://discoverjasp.com/repository/dsj1_data/html/album_sales"
+  )
+)
+
+dataRows <- data.frame(Topic   = stems,
+                       Data    = link(paste0(stems, ".csv")),
+                       Results = link(paste0(stems, ".jasp")),
+                       HTML    = link(paste0(stems, ".html")))
+
+for (topic in names(externalSets)) {
+  set <- externalSets[[topic]]
+  if (!topic %in% dataRows$Topic) {
+    dataRows <- rbind(dataRows, data.frame(Topic = topic, Data = "-", Results = "-", HTML = "-"))
+  }
+  dataRows[dataRows$Topic == topic, names(set)] <- as.list(url(set))
+}
+dataRows <- dataRows[order(dataRows$Topic), ]
+
+if (nrow(dataRows) == 0) {
   knitr::asis_output('<p class="text-muted fst-italic">Data sets will appear here as the semester progresses.</p>')
 } else {
-  knitr::kable(
-    data.frame(Topic   = stems,
-               Data    = link(paste0(stems, ".csv")),
-               Results = link(paste0(stems, ".jasp")),
-               HTML    = link(paste0(stems, ".html"))),
-    escape = FALSE, format = "html") %>%
+  knitr::kable(dataRows, escape = FALSE, format = "html", row.names = FALSE) %>%
     kable_styling(full_width = TRUE)
 }
 ```

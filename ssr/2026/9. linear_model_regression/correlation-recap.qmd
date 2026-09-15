@@ -1,0 +1,116 @@
+# Where we left off {.section}
+
+```{r, echo=FALSE}
+source("../../_setup.R")
+# Today's data, read here so the recap can already use it. regression_one_predictor.qmd
+# reads it again for itself, so neither child depends on the other's variables.
+album   <- read.csv(datasetsPath("2026/album_sales.csv"))
+adverts <- album$Adverts
+sales   <- album$Sales
+```
+
+## Last week: correlation & NHST {.smaller}
+* $COV_{xy}$: association between two variables, in the original measurement units
+* $r$:  completely standardized: $r_{xy} = \frac{COV_{xy}}{s_x s_y}$
+* Get $p$ by converting to $t$: $t_r = \frac{r \sqrt{N-2}}{\sqrt{1 - r^2}}$
+  * Use [the sampling distribution](https://statisticalreasoning-uva.shinyapps.io/NHST_Continuous/)
+* Partial correlation: the same association, holding a third variable constant
+
+## Two different units {.smaller}
+
+```{r, echo=FALSE, fig.width=8, fig.height=4.8}
+# Same build-up as the z-score slides in lecture 6, on this week's data: the
+# first 20 albums, so individual points stay readable.
+nAlb <- 20
+adv  <- adverts[1:nAlb]
+sal  <- sales[1:nAlb]
+
+par(cex = 1.0, cex.lab = 1.1)
+plot(adv, bg = 'orange', pch = 21, bty = "n", ylim = c(0, 1800), las = 1,
+     ylab = "Variables", xlab = "Album nr.")
+points(sal, bg = 'blue', pch = 21)
+legend("topright", legend = c("Adverts (x £1,000)", "Sales (x 1,000)"),
+       fill = c("orange", "blue"), bty = "n", cex = 0.8)
+lines(rep(mean(adv), nAlb), col = 'orange')
+lines(rep(mean(sal), nAlb), col = 'blue')
+```
+
+A deviation of 100 means something different in each variable
+
+## Standardize {.smaller}
+
+$$z_i = \frac{x_i - \bar{x}}{sd_x}$$
+
+```{r, echo=FALSE, fig.width=8, fig.height=4.4}
+z.adv <- (adv - mean(adv)) / sd(adv)
+z.sal <- (sal - mean(sal)) / sd(sal)
+
+par(cex = 1.0, cex.lab = 1.1)
+plot(z.adv, bg = 'orange', pch = 21, bty = "n", ylim = c(-2.5, 2.5), las = 1,
+     ylab = "z-scores", xlab = "Album nr.")
+points(z.sal, pch = 21, bg = 'blue')
+legend("topright", legend = c("z-adverts", "z-sales"),
+       fill = c("orange", "blue"), bty = "n", cex = 0.8)
+
+lines(rep(mean(z.adv), nAlb), col = 'orange')
+lines(rep(mean(z.sal), nAlb), col = 'blue', lty = 2)
+
+segments(1:nAlb, mean(z.adv), 1:nAlb, z.adv, col = 'orange')
+segments(1:nAlb, mean(z.sal), 1:nAlb, z.sal, col = 'blue', lty = 2)
+```
+
+Mean = 0 and sd = 1, now the deviations are comparable.
+
+## Correlation is the covariance of z-scores {.smaller}
+
+$$z_i = \frac{x_i - \bar{x}}{s_x} \qquad\qquad r_{xy} = \frac{COV_{xy}}{s_x s_y} = COV_{z_x z_y}$$
+
+```{r, echo=TRUE}
+z.adverts <- (adverts - mean(adverts)) / sd(adverts)
+z.sales   <- (sales   - mean(sales))   / sd(sales)
+
+cov(z.adverts, z.sales)
+
+cor(adverts, sales)
+```
+
+If we standardize both variables first, the covariance *is* the correlation.
+
+## Same covariance, three denominators {.smaller}
+
+```{r, echo=TRUE}
+cov(adverts, sales)                               # original scale
+
+cov(adverts, sales) / (sd(adverts) * sd(sales))   # standardize x and y -> the correlation
+
+cov(adverts, sales) / var(adverts)                # only x -> today's slope
+```
+
+Standardizing makes a statistic universally interpretable, but you lose information
+
+## Today {.smaller}
+
+* The regression slope $b_1$: $b_1 = r_{xy} \frac{s_y}{s_x}$
+* Same trick for significance: coefficient $b$ $\rightarrow t \rightarrow p$
+* Making predictions based on a model
+* One predictor today, multiple predictors in block 3
+
+## One-sided or two-sided? {.smaller}
+
+The book reports two-sided throughout. Worth knowing why we do not stop there.
+
+* It is a choice in the analysis, *before* you see the data
+  * Informed by the research question, not by the result
+* One-sided
+  * Same $\alpha$, but the $\alpha \%$ rejection area is in 1 tail
+  * Higher power, relevant when $N$ is small (expensive studies, rare cases)
+  * Blind to an effect in the opposite direction
+*  Two-sided
+  * Safer choice if unsure about the direction
+  * "Spending $\alpha$" on two tails needs a more extreme test statistic to reach significance
+
+
+[Additional rambling here](https://johnnydoorn.github.io/teaching-statistics/extra-texts/one-sided-vs-two-sided.html)
+---
+
+

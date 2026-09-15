@@ -1,0 +1,35 @@
+---
+pagetitle: "Trial exam questions"
+format:
+  html:
+    theme: none
+    toc: false
+    page-layout: custom
+    embed-resources: true
+    linkcolor: '#BC0031'
+---
+
+<!-- Deliberately bare: white ground, the two screenshots, nothing else.
+     embed-resources inlines the PNGs, so the rendered .html is self-contained
+     and can be sent on by itself without the ssr/images/ folder. -->
+
+<style>
+  body { background: #FFFFFF; color: #000000; }
+  .wrap {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-inline: 16px;
+    padding-block: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .wrap img { display: block; width: 100%; max-width: 100%; height: auto; }
+</style>
+
+<div class="wrap">
+  <img src="../ssr/images/trial-exam-a.png"
+       alt="Trial exam question 4: a t-distribution with 18 degrees of freedom, both tails shaded, an arrow at t = 1 labelled p = 0.33, followed by four checkbox statements about alpha and one- versus two-sided alternative hypotheses.">
+  <img src="../ssr/images/trial-exam-b.png"
+       alt="Trial exam question: a memory recall experiment in which a participant recalls 7 positive and 3 negative words out of 10, followed by a binomial sampling distribution over the number of positive words from 0 to 10.">
+</div>

@@ -1,0 +1,80 @@
+---
+title: "Correlation (next year draft)"
+author: "Johnny van Doorn"
+footer: "Scientific & Statistical Reasoning"
+format:
+  revealjs:
+    output-ext: slide.html
+    css: ../../ajohnson.css
+  html: default
+css: ../../ajohnson.css
+---
+
+<!-- Draft for NEXT year. The only change against the taught 2026 deck is that
+     the Challenger example, which opens the lecture, now comes back at the end
+     of the correlation section with its own r, t and p: the promise made in the
+     recap ("one of them is significant and the other is not") gets paid off in
+     the notation the lecture just built. Deliberately unnumbered so ssr.qmd
+     does not list it. The taught version is 6. correlation.qmd, untouched.
+
+     Only correlation.qmd is forked (as next-year-correlation.qmd); the other
+     children are reused as-is so they cannot drift. Wrapper order matters:
+     t-distribution.qmd defines tCurve(), which both the correlation child and
+     the new Challenger slide call. -->
+
+<div class="goals">
+In this lecture we discuss:
+
+* The t-distribution
+  * Sampling distributions, continued
+  * Standard error and confidence intervals
+* Correlation
+  * From variance to covariance to $r$
+  * In JASP
+* Significance of a correlation
+  * Converting $r$ to a $t$-statistic
+  * Back to Challenger
+* Control for a third variable
+  * Partial correlation
+
+<strong>Reading:</strong>
+Chapter 7 (§7.1–7.8), 5.7 (Scatterplots), 2.8–2.9 (Standard error &amp; confidence intervals)
+
+<small>Not exam material: §7.2.5, §7.4.3–7.4.5 (Spearman, Kendall, point-biserial), §7.6 (comparing correlations).</small>
+</div>
+
+
+```{r child="challenger-recap.qmd"}
+```
+
+
+```{r child="t-distribution.qmd"}
+```
+
+
+```{r child="next-year-correlation.qmd"}
+```
+
+
+```{r child="correlation-partial.qmd"}
+```
+
+
+# Closing
+
+## Next Week
+
+- The linear model
+  - Predictions
+  - Assumptions
+  - Fun
+
+## Recommended Exercises
+
+- [Exercise 7.1](https://discoverjasp.com/pages/smart_alex#task-7.1)
+  - Note: `pets.jasp` can be downloaded from the JASP data library
+- [Exercise 7.6](https://discoverjasp.com/pages/smart_alex#task-7.6)
+- [Exercise 7.7](https://discoverjasp.com/pages/smart_alex#task-7.7)
+
+```{r child="../../footer.qmd"}
+```
