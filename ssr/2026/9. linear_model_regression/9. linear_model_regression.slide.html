@@ -437,8 +437,8 @@ Johnny van Doorn
 </div>
 </section>
 <section>
-<section id="where-we-left-off" class="title-slide slide level1 section center">
-<h1>Where we left off</h1>
+<section id="last-week" class="title-slide slide level1 section center">
+<h1>Last week</h1>
 
 </section>
 <section id="last-week-correlation-nhst" class="slide level2 smaller">
@@ -456,13 +456,13 @@ Johnny van Doorn
 <section id="two-different-units" class="slide level2 smaller">
 <h2>Two different units</h2>
 
-<img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-6-1.png" width="768" class="r-stretch"><p>A deviation of 100 means something different in each variable</p>
+<img data-src="9.-linear_model_regression_files/figure-revealjs/recap-two-different-units-1.png" width="768" class="r-stretch"><p>A deviation of 100 means something different in each variable</p>
 </section>
 <section id="standardize" class="slide level2 smaller">
 <h2>Standardize</h2>
 <p><span class="math display">\[z_i = \frac{x_i - \bar{x}}{sd_x}\]</span></p>
 
-<img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-7-1.png" width="768" class="r-stretch"><p>Mean = 0 and sd = 1, now the deviations are comparable.</p>
+<img data-src="9.-linear_model_regression_files/figure-revealjs/recap-standardize-1.png" width="768" class="r-stretch"><p>Mean = 0 and sd = 1, now the deviations are comparable.</p>
 </section>
 <section id="correlation-is-the-covariance-of-z-scores" class="slide level2 smaller">
 <h2>Correlation is the covariance of z-scores</h2>
@@ -500,6 +500,22 @@ Johnny van Doorn
 </div>
 <p>Standardizing makes a statistic universally interpretable, but you lose information</p>
 </section>
+<section id="note-on-one-sided-vs.-two-sided-testing" class="slide level2 smaller">
+<h2>Note on one-sided vs.&nbsp;two-sided testing</h2>
+<p>A choice in the analysis before seeing the data (i.e., informed by the research question, not the result).</p>
+<ul>
+<li><p>Two-sided</p></li>
+<li><p>Safer choice if unsure about the direction</p></li>
+<li><p>“Spending <span class="math inline">\(\alpha\)</span>” on two tails needs a more extreme test statistic to reach significance</p></li>
+<li><p>One-sided</p>
+<ul>
+<li>Same <span class="math inline">\(\alpha\)</span>, but the <span class="math inline">\(\alpha \%\)</span> rejection area is in 1 tail</li>
+<li>Higher power, relevant when <span class="math inline">\(N\)</span> is small (expensive studies, rare cases)</li>
+<li>Blind to an effect in the opposite direction</li>
+</ul></li>
+</ul>
+<p><a href="https://johnnydoorn.github.io/teaching-statistics/extra-texts/one-sided-vs-two-sided.html">Additional rambling here</a></p>
+</section>
 <section id="today" class="slide level2 smaller">
 <h2>Today</h2>
 <ul>
@@ -508,26 +524,6 @@ Johnny van Doorn
 <li>Making predictions based on a model</li>
 <li>One predictor today, multiple predictors in block 3</li>
 </ul>
-</section>
-<section id="one-sided-or-two-sided" class="slide level2 smaller">
-<h2>One-sided or two-sided?</h2>
-<p>The book reports two-sided throughout. Worth knowing why we do not stop there.</p>
-<ul>
-<li>It is a choice in the analysis, <em>before</em> you see the data
-<ul>
-<li>Informed by the research question, not by the result</li>
-</ul></li>
-<li>One-sided
-<ul>
-<li>Same <span class="math inline">\(\alpha\)</span>, but the <span class="math inline">\(\alpha \%\)</span> rejection area is in 1 tail</li>
-<li>Higher power, relevant when <span class="math inline">\(N\)</span> is small (expensive studies, rare cases)</li>
-<li>Blind to an effect in the opposite direction</li>
-</ul></li>
-<li>Two-sided</li>
-<li>Safer choice if unsure about the direction</li>
-<li>“Spending <span class="math inline">\(\alpha\)</span>” on two tails needs a more extreme test statistic to reach significance</li>
-</ul>
-<p><a href="https://johnnydoorn.github.io/teaching-statistics/extra-texts/one-sided-vs-two-sided.html">Additional rambling here</a></p>
 </section>
 <section class="slide level2">
 
@@ -607,7 +603,7 @@ Johnny van Doorn
 <!-- ``` -->
 <!-- ::: -->
 <!-- ::: -->
-<img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="9.-linear_model_regression_files/figure-revealjs/reg-sensitivity-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="normality" class="slide level2 smaller">
 <h2>Normality</h2>
 <div class="columns">
@@ -666,7 +662,7 @@ Johnny van Doorn
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-19-1.png" width="480"></p>
+<p><img data-src="9.-linear_model_regression_files/figure-revealjs/reg-homoscedasticity-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -691,7 +687,7 @@ Johnny van Doorn
 
 <h3 class="smaller" id="the-data-1">The data</h3>
 
-<img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-21-1.png" width="768" class="r-stretch quarto-figure-center"></section>
+<img data-src="9.-linear_model_regression_files/figure-revealjs/reg-the-data-2-1.png" width="768" class="r-stretch quarto-figure-center"></section>
 <section id="calculate-regression-parameters" class="slide level2 subsection">
 <h2>Calculate regression parameters</h2>
 <p><span class="math display">\[{sales}_i = b_0 + b_1 {adverts}_i + \epsilon_i\]</span></p>
@@ -730,16 +726,16 @@ Johnny van Doorn
 <section id="the-slope" class="slide level2">
 <h2>The slope</h2>
 
-<img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-25-1.png" width="768" class="r-stretch quarto-figure-center"></section>
+<img data-src="9.-linear_model_regression_files/figure-revealjs/reg-the-slope-1.png" width="768" class="r-stretch quarto-figure-center"></section>
 <section class="slide level2">
 
 <h3 id="the-slope-1">The slope</h3>
 
-<img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-26-1.png" width="768" class="r-stretch quarto-figure-center"></section>
+<img data-src="9.-linear_model_regression_files/figure-revealjs/reg-the-slope-2-1.png" width="768" class="r-stretch quarto-figure-center"></section>
 <section id="the-slope---zoomed-in" class="slide level2">
 <h2>The slope - zoomed in</h2>
 
-<img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-27-1.png" width="768" class="r-stretch quarto-figure-center"><p>For every additional £1,000 spent on advertising, we predict sales to increase by 0.096 (x 1,000 copies)</p>
+<img data-src="9.-linear_model_regression_files/figure-revealjs/reg-the-slope-zoomed-in-1.png" width="768" class="r-stretch quarto-figure-center"><p>For every additional £1,000 spent on advertising, we predict sales to increase by 0.096 (x 1,000 copies)</p>
 </section>
 <section id="define-regression-equation" class="slide level2">
 <h2>Define regression equation</h2>
@@ -765,7 +761,7 @@ Johnny van Doorn
 <h2><span class="math inline">\(y\)</span> vs <span class="math inline">\(\hat{y}\)</span></h2>
 <p>And lets have a look at this relation between model prediction and observed</p>
 
-<img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-30-1.png" width="480" class="r-stretch quarto-figure-center"></section>
+<img data-src="9.-linear_model_regression_files/figure-revealjs/reg-observed-vs-predicted-1.png" width="480" class="r-stretch quarto-figure-center"></section>
 <section id="error" class="slide level2 smaller">
 <h2>Error</h2>
 <p>The error (residual) is the difference between the model predictions and observed values</p>
@@ -802,7 +798,7 @@ Johnny van Doorn
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-33-1.png" width="480"></p>
+<p><img data-src="9.-linear_model_regression_files/figure-revealjs/reg-normality-of-residuals-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -812,7 +808,7 @@ Johnny van Doorn
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-34-1.png" width="480"></p>
+<p><img data-src="9.-linear_model_regression_files/figure-revealjs/reg-normality-of-residuals-2-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -847,7 +843,7 @@ Johnny van Doorn
 <section id="explained-variance-visually-n-10" class="slide level2 smaller">
 <h2>Explained variance visually (<span class="math inline">\(n = 10\)</span>)</h2>
 
-<img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-37-1.png" width="1440" class="r-stretch quarto-figure-center"><p><span class="math inline">\(r^2\)</span> is the proportion of <span style="color: blue;">blue</span> to <span style="color: orange;">orange</span>, while <span class="math inline">\(1 - r^2\)</span> is the proportion of <span style="color: red;">red</span> to <span style="color: orange;">orange</span></p>
+<img data-src="9.-linear_model_regression_files/figure-revealjs/reg-explained-variance-visually-1.png" width="1440" class="r-stretch quarto-figure-center"><p><span class="math inline">\(r^2\)</span> is the proportion of <span style="color: blue;">blue</span> to <span style="color: orange;">orange</span>, while <span class="math inline">\(1 - r^2\)</span> is the proportion of <span style="color: red;">red</span> to <span style="color: orange;">orange</span></p>
 <!-- ## Test model fit -->
 <!-- Compare model to mean Y (sales) as model -->
 <!-- $$F = \frac{(n-p-1) r^2}{p (1-r^2)}$$ -->
@@ -924,80 +920,46 @@ df &amp;= n - p - 1 \\
 <!-- fStat -->
 <!-- t.b1^2 -->
 <!-- ``` -->
-<img data-src="9.-linear_model_regression_files/figure-revealjs/unnamed-chunk-40-1.png" width="960" class="r-stretch"></section>
+<img data-src="9.-linear_model_regression_files/figure-revealjs/reg-p-value-b1-1.png" width="960" class="r-stretch"></section>
 <section id="so-how-many-ways-do-we-have-for-assessing-an-association" class="slide level2 smaller">
 <h2>So how many <code>@!&amp;#$</code> ways do we have for assessing an association?!</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># the correlation between x and y, standardized (between -1, 1)</span></span>
-<span id="cb26-2"><a href="#cb26-2"></a><span class="fu">cor</span>(sales, adverts) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="fu">cor</span>(sales, adverts)    <span class="co"># .58: moderate and positive, whatever the units were</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.5784877</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># the covariance between x and y, unstandardized </span></span>
-<span id="cb28-2"><a href="#cb28-2"></a><span class="fu">cov</span>(sales, adverts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="fu">cov</span>(sales, adverts)    <span class="co"># same association, but only readable in GBP1,000 x 1,000 copies</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 22672.02</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="co"># regression coefficient in linear regression, standardized (not bounded)</span></span>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="co"># regression coefficient in linear regression, unstandardized </span></span>
 <span id="cb30-2"><a href="#cb30-2"></a><span class="co"># generalizes easily to settings with multiple predictors</span></span>
 <span id="cb30-3"><a href="#cb30-3"></a>b1 <span class="co"># how much does y-prediction increase, if we increase x by 1 unit?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.09612449</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># t-statistic: standardized difference between b1 and 0</span></span>
-<span id="cb32-2"><a href="#cb32-2"></a>t.b1 <span class="co"># used for testing the null hypothesis that b1 = 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>   <span class="co"># .096: one extra GBP1,000 of advertising buys about 96 extra copies</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a></span>
+<span id="cb32-3"><a href="#cb32-3"></a><span class="co"># t-statistic: standardized difference between b1 and 0</span></span>
+<span id="cb32-4"><a href="#cb32-4"></a>t.b1 <span class="co"># used for testing the null hypothesis that b1 = 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 9.979322</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># The metrics below are more indicative of an overall model's performance</span></span>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>     <span class="co"># 9.98: b1 sits about ten standard errors above zero</span></span>
 <span id="cb34-2"><a href="#cb34-2"></a></span>
-<span id="cb34-3"><a href="#cb34-3"></a><span class="co"># the correlation between y and model prediction, standardized (between -1, 1)</span></span>
-<span id="cb34-4"><a href="#cb34-4"></a><span class="fu">cor</span>(sales, prediction) <span class="co"># can be squared to get proportion explained variance</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb34-3"><a href="#cb34-3"></a><span class="co"># The metrics below are more indicative of an overall model's performance</span></span>
+<span id="cb34-4"><a href="#cb34-4"></a></span>
+<span id="cb34-5"><a href="#cb34-5"></a><span class="co"># the correlation between y and model prediction, standardized (between -1, 1)</span></span>
+<span id="cb34-6"><a href="#cb34-6"></a><span class="fu">cor</span>(sales, prediction) <span class="co"># can be squared to get proportion explained variance</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.5784877</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>                       <span class="co"># .58 here, because one predictor *is* the whole model;</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a>                       <span class="co"># squared: .33, a third of the variance in sales</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<!-- # F: signal/noise ratio of a model -->
-<!-- fStat  -->
-</section>
-<section id="standardized-or-not" class="slide level2 smaller">
-<h2>Standardized or not?</h2>
-<p>Same data, same association, three different numbers:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">cov</span>(sales, adverts)  <span class="co"># in the units we measured</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 22672.02</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>b1                   <span class="co"># extra sales per extra £1,000 spent</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.09612449</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">cor</span>(sales, adverts)  <span class="co"># unit-free, bounded by -1 and 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5784877</code></pre>
-</div>
-</div>
-<ul>
-<li><span class="math inline">\(b_1\)</span> answers <em>how much</em>, in the units of the data</li>
-<li><span class="math inline">\(r\)</span> answers <em>how strong</em>, on a scale that never changes</li>
-</ul>
-</section>
-<section id="standardize-and-they-meet" class="slide level2 smaller">
-<h2>Standardize, and they meet</h2>
-<p>Put both variables in z-scores, and the slope becomes the correlation:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="fu">coef</span>(<span class="fu">lm</span>(<span class="fu">scale</span>(sales) <span class="sc">~</span> <span class="fu">scale</span>(adverts)))[<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>scale(adverts) 
-     0.5784877 </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">cor</span>(sales, adverts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5784877</code></pre>
-</div>
-</div>
-<p><span class="math display">\[b_1 = r_{xy} \frac{s_y}{s_x}\]</span></p>
-<p><a href="https://statisticalreasoning-uva-2.shinyapps.io/SimpleRegression/">Move <span class="math inline">\(r\)</span>, <span class="math inline">\(s_x\)</span> and <span class="math inline">\(s_y\)</span> around and watch the covariance, the slope and <span class="math inline">\(r\)</span> respond</a></p>
+<p><a href="https://statisticalreasoning-uva-2.shinyapps.io/SimpleRegression/">Move <span class="math inline">\(r\)</span>, <span class="math inline">\(s_x\)</span> and <span class="math inline">\(s_y\)</span> around and watch the covariance, the slope and <span class="math inline">\(r\)</span> respond</a> <!-- # F: signal/noise ratio of a model --> <!-- fStat  --></p>
 </section></section>
 <section>
 <section id="closing" class="title-slide slide level1 center">

@@ -1,6 +1,6 @@
-# Where we left off {.section}
+# Last week {.section}
 
-```{r, echo=FALSE}
+```{r recap-where-we-left-off, echo=FALSE}
 source("../../_setup.R")
 # Today's data, read here so the recap can already use it. regression_one_predictor.qmd
 # reads it again for itself, so neither child depends on the other's variables.
@@ -16,9 +16,12 @@ sales   <- album$Sales
   * Use [the sampling distribution](https://statisticalreasoning-uva.shinyapps.io/NHST_Continuous/)
 * Partial correlation: the same association, holding a third variable constant
 
+
+
+
 ## Two different units {.smaller}
 
-```{r, echo=FALSE, fig.width=8, fig.height=4.8}
+```{r recap-two-different-units, echo=FALSE, fig.width=8, fig.height=4.8}
 # Same build-up as the z-score slides in lecture 6, on this week's data: the
 # first 20 albums, so individual points stay readable.
 nAlb <- 20
@@ -41,7 +44,7 @@ A deviation of 100 means something different in each variable
 
 $$z_i = \frac{x_i - \bar{x}}{sd_x}$$
 
-```{r, echo=FALSE, fig.width=8, fig.height=4.4}
+```{r recap-standardize, echo=FALSE, fig.width=8, fig.height=4.4}
 z.adv <- (adv - mean(adv)) / sd(adv)
 z.sal <- (sal - mean(sal)) / sd(sal)
 
@@ -65,7 +68,7 @@ Mean = 0 and sd = 1, now the deviations are comparable.
 
 $$z_i = \frac{x_i - \bar{x}}{s_x} \qquad\qquad r_{xy} = \frac{COV_{xy}}{s_x s_y} = COV_{z_x z_y}$$
 
-```{r, echo=TRUE}
+```{r recap-correlation-is-the-covariance-of-z-scores, echo=TRUE}
 z.adverts <- (adverts - mean(adverts)) / sd(adverts)
 z.sales   <- (sales   - mean(sales))   / sd(sales)
 
@@ -78,7 +81,7 @@ If we standardize both variables first, the covariance *is* the correlation.
 
 ## Same covariance, three denominators {.smaller}
 
-```{r, echo=TRUE}
+```{r recap-same-covariance-three-denominators, echo=TRUE}
 cov(adverts, sales)                               # original scale
 
 cov(adverts, sales) / (sd(adverts) * sd(sales))   # standardize x and y -> the correlation
@@ -88,6 +91,22 @@ cov(adverts, sales) / var(adverts)                # only x -> today's slope
 
 Standardizing makes a statistic universally interpretable, but you lose information
 
+## Note on one-sided vs. two-sided testing {.smaller}
+
+A choice in the analysis before seeing the data (i.e., informed by the research question, not the result).
+
+*  Two-sided
+  * Safer choice if unsure about the direction
+  * "Spending $\alpha$" on two tails needs a more extreme test statistic to reach significance
+
+* One-sided
+  * Same $\alpha$, but the $\alpha \%$ rejection area is in 1 tail
+  * Higher power, relevant when $N$ is small (expensive studies, rare cases)
+  * Blind to an effect in the opposite direction
+
+[Additional rambling here](https://johnnydoorn.github.io/teaching-statistics/extra-texts/one-sided-vs-two-sided.html)
+
+
 ## Today {.smaller}
 
 * The regression slope $b_1$: $b_1 = r_{xy} \frac{s_y}{s_x}$
@@ -95,22 +114,6 @@ Standardizing makes a statistic universally interpretable, but you lose informat
 * Making predictions based on a model
 * One predictor today, multiple predictors in block 3
 
-## One-sided or two-sided? {.smaller}
-
-The book reports two-sided throughout. Worth knowing why we do not stop there.
-
-* It is a choice in the analysis, *before* you see the data
-  * Informed by the research question, not by the result
-* One-sided
-  * Same $\alpha$, but the $\alpha \%$ rejection area is in 1 tail
-  * Higher power, relevant when $N$ is small (expensive studies, rare cases)
-  * Blind to an effect in the opposite direction
-*  Two-sided
-  * Safer choice if unsure about the direction
-  * "Spending $\alpha$" on two tails needs a more extreme test statistic to reach significance
-
-
-[Additional rambling here](https://johnnydoorn.github.io/teaching-statistics/extra-texts/one-sided-vs-two-sided.html)
 ---
 
 
