@@ -100,9 +100,9 @@ A choice in the analysis before seeing the data (i.e., informed by the research 
   * "Spending $\alpha$" on two tails needs a more extreme test statistic to reach significance
 
 * One-sided
+  * Blind to an effect in the opposite direction
   * Same $\alpha$, but the $\alpha \%$ rejection area is in 1 tail
   * Higher power, relevant when $N$ is small (expensive studies, rare cases)
-  * Blind to an effect in the opposite direction
 
 [Additional rambling here](https://johnnydoorn.github.io/teaching-statistics/extra-texts/one-sided-vs-two-sided.html)
 
