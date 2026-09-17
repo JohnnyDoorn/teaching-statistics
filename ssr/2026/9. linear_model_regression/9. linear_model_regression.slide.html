@@ -453,6 +453,24 @@ Johnny van Doorn
 <li>Partial correlation: the same association, holding a third variable constant</li>
 </ul>
 </section>
+<section id="note-on-one-sided-vs.-two-sided-testing" class="slide level2 smaller">
+<h2>Note on one-sided vs.&nbsp;two-sided testing</h2>
+<p>A choice in the analysis before seeing the data (i.e., informed by the research question, not the result).</p>
+<ul>
+<li>Two-sided
+<ul>
+<li>Safer choice if unsure about the direction</li>
+<li>“Spending <span class="math inline">\(\alpha\)</span>” on two tails needs a more extreme test statistic to reach significance</li>
+</ul></li>
+<li>One-sided
+<ul>
+<li>Blind to an effect in the opposite direction</li>
+<li>Same <span class="math inline">\(\alpha\)</span>, but the <span class="math inline">\(\alpha \%\)</span> rejection area is in 1 tail</li>
+<li>Higher power, relevant when <span class="math inline">\(N\)</span> is small (expensive studies, rare cases)</li>
+</ul></li>
+</ul>
+<p><a href="https://johnnydoorn.github.io/teaching-statistics/extra-texts/one-sided-vs-two-sided.html">Additional rambling here</a></p>
+</section>
 <section id="two-different-units" class="slide level2 smaller">
 <h2>Two different units</h2>
 
@@ -482,8 +500,8 @@ Johnny van Doorn
 </div>
 <p>If we standardize both variables first, the covariance <em>is</em> the correlation.</p>
 </section>
-<section id="same-covariance-three-denominators" class="slide level2 smaller">
-<h2>Same covariance, three denominators</h2>
+<section id="three-levels-of-standardization" class="slide level2 smaller">
+<h2>Three levels of standardization</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">cov</span>(adverts, sales)                               <span class="co"># original scale</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -499,24 +517,6 @@ Johnny van Doorn
 </div>
 </div>
 <p>Standardizing makes a statistic universally interpretable, but you lose information</p>
-</section>
-<section id="note-on-one-sided-vs.-two-sided-testing" class="slide level2 smaller">
-<h2>Note on one-sided vs.&nbsp;two-sided testing</h2>
-<p>A choice in the analysis before seeing the data (i.e., informed by the research question, not the result).</p>
-<ul>
-<li>Two-sided
-<ul>
-<li>Safer choice if unsure about the direction</li>
-<li>“Spending <span class="math inline">\(\alpha\)</span>” on two tails needs a more extreme test statistic to reach significance</li>
-</ul></li>
-<li>One-sided
-<ul>
-<li>Same <span class="math inline">\(\alpha\)</span>, but the <span class="math inline">\(\alpha \%\)</span> rejection area is in 1 tail</li>
-<li>Higher power, relevant when <span class="math inline">\(N\)</span> is small (expensive studies, rare cases)</li>
-<li>Blind to an effect in the opposite direction</li>
-</ul></li>
-</ul>
-<p><a href="https://johnnydoorn.github.io/teaching-statistics/extra-texts/one-sided-vs-two-sided.html">Additional rambling here</a></p>
 </section>
 <section id="today" class="slide level2 smaller">
 <h2>Today</h2>
@@ -551,7 +551,7 @@ Johnny van Doorn
 <ul>
 <li>Are there outliers?</li>
 </ul></li>
-<li>Normality (Section 6.7)
+<li>Normality (Section 6.8)
 <ul>
 <li>Are the model errors non-normally distributed?</li>
 </ul></li>
@@ -626,6 +626,16 @@ Johnny van Doorn
 </div>
 </div>
 </section>
+<section class="slide level2">
+
+<h3 id="when-does-normality-matter">When does normality matter?</h3>
+<ul>
+<li>Parameter estimation itself does not require normality</li>
+<li>Normality doesn’t matter in large samples (thank you <a href="https://en.wikipedia.org/wiki/Central_limit_theorem">CLT</a>).</li>
+<li>Normality doesn’t matter when residuals are normally distributed.</li>
+</ul>
+<p>Field, Section 6.8.3</p>
+</section>
 <section id="linearity" class="slide level2 smaller">
 <h2>Linearity</h2>
 <div class="columns">
@@ -649,7 +659,7 @@ Johnny van Doorn
 </div>
 </div>
 </section>
-<section id="homoscedasticity" class="slide level2">
+<section id="homoscedasticity" class="slide level2 smaller">
 <h2>Homoscedasticity</h2>
 <div class="columns">
 <div class="column">
@@ -900,7 +910,9 @@ df &amp;= n - p - 1 \\
 </section>
 <section id="p-value-for-b_1" class="slide level2">
 <h2><span class="math inline">\(p\)</span>-value for <span class="math inline">\(b_1\)</span></h2>
+<p>Locate in <span class="math inline">\(t\)</span>-distribution</p>
 
+<img data-src="9.-linear_model_regression_files/figure-revealjs/reg-p-value-b1-1.png" width="960" class="r-stretch"><p><span class="math display">\[P(|t| \geq 9.98 \mid H_0) &lt; .001\]</span></p>
 <!-- ## Visualize -->
 <!-- Instead of obtaining the p-value by locating the t in the t-distribution, we can locate the F in the F-distribution -->
 <!-- ```{r, warning=FALSE, echo=FALSE} -->
@@ -922,7 +934,7 @@ df &amp;= n - p - 1 \\
 <!-- fStat -->
 <!-- t.b1^2 -->
 <!-- ``` -->
-<img data-src="9.-linear_model_regression_files/figure-revealjs/reg-p-value-b1-1.png" width="960" class="r-stretch"></section>
+</section>
 <section id="so-how-many-ways-do-we-have-for-assessing-an-association" class="slide level2 smaller">
 <h2>So how many <code>@!&amp;#$</code> ways do we have for assessing an association?!</h2>
 <div class="cell">
@@ -932,7 +944,7 @@ df &amp;= n - p - 1 \\
 <pre><code>[1] 0.5784877</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># the covariance between x and y, unstandardized </span></span>
-<span id="cb28-2"><a href="#cb28-2"></a><span class="fu">cov</span>(sales, adverts)    <span class="co"># same association, but only readable in GBP1,000 x 1,000 copies</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="fu">cov</span>(sales, adverts)    <span class="co"># same association but original units</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 22672.02</code></pre>
 </div>
@@ -942,10 +954,8 @@ df &amp;= n - p - 1 \\
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.09612449</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>   <span class="co"># .096: one extra GBP1,000 of advertising buys about 96 extra copies</span></span>
-<span id="cb32-2"><a href="#cb32-2"></a></span>
-<span id="cb32-3"><a href="#cb32-3"></a><span class="co"># t-statistic: standardized difference between b1 and 0</span></span>
-<span id="cb32-4"><a href="#cb32-4"></a>t.b1 <span class="co"># used for testing the null hypothesis that b1 = 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># t-statistic: standardized difference between b1 and 0</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a>t.b1 <span class="co"># used for testing the null hypothesis that b1 = 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 9.979322</code></pre>
 </div>
@@ -958,8 +968,9 @@ df &amp;= n - p - 1 \\
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.5784877</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>                       <span class="co"># .58 here, because one predictor *is* the whole model;</span></span>
-<span id="cb36-2"><a href="#cb36-2"></a>                       <span class="co"># squared: .33, a third of the variance in sales</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>                       <span class="co"># same as original cor: one predictor *is* the model</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a>                       <span class="co"># squared -&gt; .33, a third of the variance in sales</span></span>
+<span id="cb36-3"><a href="#cb36-3"></a>                       <span class="co"># is explained by advertising</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><a href="https://statisticalreasoning-uva-2.shinyapps.io/SimpleRegression/">Move <span class="math inline">\(r\)</span>, <span class="math inline">\(s_x\)</span> and <span class="math inline">\(s_y\)</span> around and watch the covariance, the slope and <span class="math inline">\(r\)</span> respond</a> <!-- # F: signal/noise ratio of a model --> <!-- fStat  --></p>
 </section></section>

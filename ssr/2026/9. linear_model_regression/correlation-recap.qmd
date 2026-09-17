@@ -17,6 +17,22 @@ sales   <- album$Sales
 * Partial correlation: the same association, holding a third variable constant
 
 
+## Note on one-sided vs. two-sided testing {.smaller}
+
+A choice in the analysis before seeing the data (i.e., informed by the research question, not the result).
+
+* Two-sided
+  * Safer choice if unsure about the direction
+  * "Spending $\alpha$" on two tails needs a more extreme test statistic to reach significance
+
+* One-sided
+  * Blind to an effect in the opposite direction
+  * Same $\alpha$, but the $\alpha \%$ rejection area is in 1 tail
+  * Higher power, relevant when $N$ is small (expensive studies, rare cases)
+
+[Additional rambling here](https://johnnydoorn.github.io/teaching-statistics/extra-texts/one-sided-vs-two-sided.html)
+
+
 
 
 ## Two different units {.smaller}
@@ -79,7 +95,7 @@ cor(adverts, sales)
 
 If we standardize both variables first, the covariance *is* the correlation.
 
-## Same covariance, three denominators {.smaller}
+## Three levels of standardization {.smaller}
 
 ```{r recap-same-covariance-three-denominators, echo=TRUE}
 cov(adverts, sales)                               # original scale
@@ -90,22 +106,6 @@ cov(adverts, sales) / var(adverts)                # only x -> today's slope
 ```
 
 Standardizing makes a statistic universally interpretable, but you lose information
-
-## Note on one-sided vs. two-sided testing {.smaller}
-
-A choice in the analysis before seeing the data (i.e., informed by the research question, not the result).
-
-* Two-sided
-  * Safer choice if unsure about the direction
-  * "Spending $\alpha$" on two tails needs a more extreme test statistic to reach significance
-
-* One-sided
-  * Blind to an effect in the opposite direction
-  * Same $\alpha$, but the $\alpha \%$ rejection area is in 1 tail
-  * Higher power, relevant when $N$ is small (expensive studies, rare cases)
-
-[Additional rambling here](https://johnnydoorn.github.io/teaching-statistics/extra-texts/one-sided-vs-two-sided.html)
-
 
 ## Today {.smaller}
 

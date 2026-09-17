@@ -98,11 +98,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#last-week" id="toc-last-week" class="nav-link active" data-scroll-target="#last-week">Last week</a>
   <ul class="collapse">
   <li><a href="#last-week-correlation-nhst" id="toc-last-week-correlation-nhst" class="nav-link" data-scroll-target="#last-week-correlation-nhst">Last week: correlation &amp; NHST</a></li>
+  <li><a href="#note-on-one-sided-vs.-two-sided-testing" id="toc-note-on-one-sided-vs.-two-sided-testing" class="nav-link" data-scroll-target="#note-on-one-sided-vs.-two-sided-testing">Note on one-sided vs.&nbsp;two-sided testing</a></li>
   <li><a href="#two-different-units" id="toc-two-different-units" class="nav-link" data-scroll-target="#two-different-units">Two different units</a></li>
   <li><a href="#standardize" id="toc-standardize" class="nav-link" data-scroll-target="#standardize">Standardize</a></li>
   <li><a href="#correlation-is-the-covariance-of-z-scores" id="toc-correlation-is-the-covariance-of-z-scores" class="nav-link" data-scroll-target="#correlation-is-the-covariance-of-z-scores">Correlation is the covariance of z-scores</a></li>
-  <li><a href="#same-covariance-three-denominators" id="toc-same-covariance-three-denominators" class="nav-link" data-scroll-target="#same-covariance-three-denominators">Same covariance, three denominators</a></li>
-  <li><a href="#note-on-one-sided-vs.-two-sided-testing" id="toc-note-on-one-sided-vs.-two-sided-testing" class="nav-link" data-scroll-target="#note-on-one-sided-vs.-two-sided-testing">Note on one-sided vs.&nbsp;two-sided testing</a></li>
+  <li><a href="#three-levels-of-standardization" id="toc-three-levels-of-standardization" class="nav-link" data-scroll-target="#three-levels-of-standardization">Three levels of standardization</a></li>
   <li><a href="#today" id="toc-today" class="nav-link" data-scroll-target="#today">Today</a></li>
   </ul></li>
   <li><a href="#regression-one-predictor" id="toc-regression-one-predictor" class="nav-link" data-scroll-target="#regression-one-predictor">Regression<br>(one predictor)</a>
@@ -210,6 +210,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Partial correlation: the same association, holding a third variable constant</li>
 </ul>
 </section>
+<section id="note-on-one-sided-vs.-two-sided-testing" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="note-on-one-sided-vs.-two-sided-testing">Note on one-sided vs.&nbsp;two-sided testing</h2>
+<p>A choice in the analysis before seeing the data (i.e., informed by the research question, not the result).</p>
+<ul>
+<li>Two-sided
+<ul>
+<li>Safer choice if unsure about the direction</li>
+<li>“Spending <span class="math inline">\(\alpha\)</span>” on two tails needs a more extreme test statistic to reach significance</li>
+</ul></li>
+<li>One-sided
+<ul>
+<li>Blind to an effect in the opposite direction</li>
+<li>Same <span class="math inline">\(\alpha\)</span>, but the <span class="math inline">\(\alpha \%\)</span> rejection area is in 1 tail</li>
+<li>Higher power, relevant when <span class="math inline">\(N\)</span> is small (expensive studies, rare cases)</li>
+</ul></li>
+</ul>
+<p><a href="https://johnnydoorn.github.io/teaching-statistics/extra-texts/one-sided-vs-two-sided.html">Additional rambling here</a></p>
+</section>
 <section id="two-different-units" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="two-different-units">Two different units</h2>
 <div class="cell">
@@ -247,8 +265,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>If we standardize both variables first, the covariance <em>is</em> the correlation.</p>
 </section>
-<section id="same-covariance-three-denominators" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="same-covariance-three-denominators">Same covariance, three denominators</h2>
+<section id="three-levels-of-standardization" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="three-levels-of-standardization">Three levels of standardization</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cov</span>(adverts, sales)                               <span class="co"># original scale</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -264,24 +282,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Standardizing makes a statistic universally interpretable, but you lose information</p>
-</section>
-<section id="note-on-one-sided-vs.-two-sided-testing" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="note-on-one-sided-vs.-two-sided-testing">Note on one-sided vs.&nbsp;two-sided testing</h2>
-<p>A choice in the analysis before seeing the data (i.e., informed by the research question, not the result).</p>
-<ul>
-<li>Two-sided
-<ul>
-<li>Safer choice if unsure about the direction</li>
-<li>“Spending <span class="math inline">\(\alpha\)</span>” on two tails needs a more extreme test statistic to reach significance</li>
-</ul></li>
-<li>One-sided
-<ul>
-<li>Blind to an effect in the opposite direction</li>
-<li>Same <span class="math inline">\(\alpha\)</span>, but the <span class="math inline">\(\alpha \%\)</span> rejection area is in 1 tail</li>
-<li>Higher power, relevant when <span class="math inline">\(N\)</span> is small (expensive studies, rare cases)</li>
-</ul></li>
-</ul>
-<p><a href="https://johnnydoorn.github.io/teaching-statistics/extra-texts/one-sided-vs-two-sided.html">Additional rambling here</a></p>
 </section>
 <section id="today" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="today">Today</h2>
@@ -312,7 +312,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Are there outliers?</li>
 </ul></li>
-<li>Normality (Section 6.7)
+<li>Normality (Section 6.8)
 <ul>
 <li>Are the model errors non-normally distributed?</li>
 </ul></li>
@@ -395,6 +395,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<hr>
+<section id="when-does-normality-matter" class="level3">
+<h3 class="anchored" data-anchor-id="when-does-normality-matter">When does normality matter?</h3>
+<ul>
+<li>Parameter estimation itself does not require normality</li>
+<li>Normality doesn’t matter in large samples (thank you <a href="https://en.wikipedia.org/wiki/Central_limit_theorem">CLT</a>).</li>
+<li>Normality doesn’t matter when residuals are normally distributed.</li>
+</ul>
+<p>Field, Section 6.8.3</p>
+</section>
 </section>
 <section id="linearity" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="linearity">Linearity</h2>
@@ -419,8 +429,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="homoscedasticity" class="level2">
-<h2 class="anchored" data-anchor-id="homoscedasticity">Homoscedasticity</h2>
+<section id="homoscedasticity" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="homoscedasticity">Homoscedasticity</h2>
 <div class="columns">
 <div class="column">
 <ul>
@@ -722,11 +732,13 @@ df &amp;= n - p - 1 \\
 </section>
 <section id="p-value-for-b_1" class="level2">
 <h2 class="anchored" data-anchor-id="p-value-for-b_1"><span class="math inline">\(p\)</span>-value for <span class="math inline">\(b_1\)</span></h2>
+<p>Locate in <span class="math inline">\(t\)</span>-distribution</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="9.-linear_model_regression_files/figure-html/reg-p-value-b1-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p><span class="math display">\[P(|t| \geq 9.98 \mid H_0) &lt; .001\]</span></p>
 <!-- ## Visualize -->
 <!-- Instead of obtaining the p-value by locating the t in the t-distribution, we can locate the F in the F-distribution -->
 <!-- ```{r, warning=FALSE, echo=FALSE} -->
@@ -758,7 +770,7 @@ df &amp;= n - p - 1 \\
 <pre><code>[1] 0.5784877</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the covariance between x and y, unstandardized </span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cov</span>(sales, adverts)    <span class="co"># same association, but only readable in GBP1,000 x 1,000 copies</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cov</span>(sales, adverts)    <span class="co"># same association but original units</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 22672.02</code></pre>
 </div>
@@ -768,10 +780,8 @@ df &amp;= n - p - 1 \\
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.09612449</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>   <span class="co"># .096: one extra GBP1,000 of advertising buys about 96 extra copies</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co"># t-statistic: standardized difference between b1 and 0</span></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>t.b1 <span class="co"># used for testing the null hypothesis that b1 = 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># t-statistic: standardized difference between b1 and 0</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>t.b1 <span class="co"># used for testing the null hypothesis that b1 = 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 9.979322</code></pre>
 </div>
@@ -784,8 +794,9 @@ df &amp;= n - p - 1 \\
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.5784877</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>                       <span class="co"># .58 here, because one predictor *is* the whole model;</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>                       <span class="co"># squared: .33, a third of the variance in sales</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>                       <span class="co"># same as original cor: one predictor *is* the model</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>                       <span class="co"># squared -&gt; .33, a third of the variance in sales</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>                       <span class="co"># is explained by advertising</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><a href="https://statisticalreasoning-uva-2.shinyapps.io/SimpleRegression/">Move <span class="math inline">\(r\)</span>, <span class="math inline">\(s_x\)</span> and <span class="math inline">\(s_y\)</span> around and watch the covariance, the slope and <span class="math inline">\(r\)</span> respond</a> <!-- # F: signal/noise ratio of a model --> <!-- fStat  --></p>
 </section>

@@ -735,3 +735,58 @@ plotSumSquaresRM <- function(mydat, input, sumSq = "Total", myMain = "", stats =
     
   } 
 }
+
+
+# --- t sampling distribution, drawn the way the NHST_Continuous applet draws it ---
+# Density as a dense set of vertical lines: green where we retain H0, purple where
+# we reject, so the continuous case rhymes with the binomial spikes from lecture 3.
+# On p-value slides pass showRegion = FALSE: no alpha, no purple, and the observed
+# value plus everything more extreme goes black instead.
+# Also defined locally in "2026/6. correlation/t-distribution.qmd", which was
+# rendered before this was promoted here; that copy shadows this one identically.
+tCurve <- function(df, alpha = .05, sided = "two", observed = NULL, main = NULL,
+                   showRegion = TRUE) {
+
+  lim     <- max(5, ceiling(abs(c(observed, 0))) + 1)
+  xVals   <- seq(-lim, lim, length.out = 1e3)
+  twoCols <- c("darkgreen", "purple")   # retain / reject, as in the applet
+  yMax    <- .45
+
+  crit <- switch(sided,
+                 two   = c(qt(alpha / 2, df), qt(1 - alpha / 2, df)),
+                 right = c(-Inf, qt(1 - alpha, df)),
+                 left  = c(qt(alpha, df), Inf),
+                 none  = c(-Inf, Inf))
+
+  if (!showRegion) crit <- c(-Inf, Inf)   # p-value slides show no decision region
+  cols <- ifelse(xVals > crit[1] & xVals < crit[2], twoCols[1], twoCols[2])
+
+  plot(xVals, dt(xVals, df),
+       col  = cols,
+       type = "h",
+       lwd  = 2,
+       las  = 1,
+       ylab = "Density",
+       xlab = "t",
+       ylim = c(0, yMax),
+       bty  = "n",
+       main = main)
+
+  for (v in crit[is.finite(crit)]) abline(v = v, lwd = 2, lty = 2)
+
+  # The observed value and everything more extreme, in black: that area is the
+  # p-value, kept distinct from the purple decision region.
+  if (!is.null(observed)) {
+    more <- if (sided == "two") xVals[abs(xVals) >= abs(observed)] else xVals[xVals >= observed]
+    lines(more, dt(more, df), type = "h", lwd = 2)
+    arrows(x0 = observed, x1 = observed, y0 = 0, y1 = yMax * .72,
+           col = "darkred", lwd = 3, length = 0)
+
+    p    <- pt(abs(observed), df, lower.tail = FALSE) * if (sided == "two") 2 else 1
+    labX <- min(max(observed, -lim + 1.2), lim - 1.2)
+    text(labX, yMax * .82, paste("t =", round(observed, 2)), cex = .9)
+    text(labX, yMax * .92,
+         if (p < .001) "p < .001" else paste("p =", round(p, 3)), cex = .9)
+  }
+  invisible(crit)
+}

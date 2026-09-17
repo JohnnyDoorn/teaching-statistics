@@ -27,7 +27,7 @@ A selection from Field (Section 8.4.1):
 
 * Sensitivity (Section 6.4)
   * Are there outliers?
-* Normality (Section 6.7)
+* Normality (Section 6.8)
   * Are the model errors non-normally distributed?
 * Linearity (Section 6.6)
   * Is the association non-linear? 
@@ -149,6 +149,17 @@ text(0.5, y[1], bquote("r ="~ .(r) ~ "," ~ r^2 ~ " = " ~ .(r.2)), pos = 2, col =
 
 :::
 
+---
+
+### When does normality matter?
+
+* Parameter estimation itself does not require normality
+* Normality doesn’t matter in large samples (thank you [CLT](https://en.wikipedia.org/wiki/Central_limit_theorem)).
+* Normality doesn’t matter when residuals are normally distributed.
+
+
+Field, Section 6.8.3
+
 
 ## Linearity {.smaller}
 
@@ -170,7 +181,7 @@ text(0.5, y[1], bquote("r ="~ .(r) ~ "," ~ r^2 ~ " = " ~ .(r.2)), pos = 2, col =
 :::
 
 
-## Homoscedasticity
+## Homoscedasticity {.smaller}
 
 ::: {.columns}
 
@@ -360,7 +371,7 @@ And lets have a look at this relation between model prediction and observed
 plot(prediction,sales, xlim = c(0,360), ylim = c(0,360),
      xlab = "Predicted Sales", ylab = "Observed Sales",
      las = 1, pch = 21, bg = "lightgreen")
-abline(lm(prediction~sales), col = "red")
+abline(lm(sales~prediction), col = "red")   # slope is exactly 1 here
 text(50, 50, bquote("cor = " ~.(round(cor(prediction, sales), 3))))
 # lines(c(0,1000), c(0,1000), col='red')
 ```
@@ -555,26 +566,20 @@ df.b1 <- n - p - 1
 
 ## $p$-value for $b_1$
 
+Locate in $t$-distribution
+
 ```{r reg-p-value-b1, echo=FALSE}
-library("visualize")
-# p-value for b1
-# Set up the plot for the F-distribution
-curve(dt(x, df.b1), from = -12, to = 12, n = 1000, bty = "n", las = 1,
-      xlab = "t-value", ylab = "Density", main = "t-distribution with P-value Region")
+# tCurve() lives in ../../plotFunctionsSSR.r (sourced by _setup.R) and draws the
+# density the way the NHST_Continuous applet does. showRegion = FALSE: this is a
+# p-value slide, so no alpha and no purple, and the observed t plus everything
+# more extreme goes black. Same slide as the correlation p-value in lecture 6.
+tCurve(df.b1, sided = "two", observed = t.b1, showRegion = FALSE,
+       main = "Our observed t in the null distribution")
 
-# Shade the upper tail (p-value region) using polygon
-# Define the region to fill (upper tail, greater than fStat)
-x_vals <- seq(t.b1, 10, length.out = 100)
-y_vals <- dt(x_vals, df.b1)
-
-# Draw the polygon to fill the area under the curve
-polygon(c(t.b1, x_vals, 10), c(0, y_vals, 0), col = "lightblue", border = NA)
-
-# Optionally, add a vertical line at the F-statistic
-arrows(x0 = t.b1, x1 = t.b1, y0 = 0 , y1 = 0.25, col = "darkred", lwd = 2)
-text(x = t.b1, y = 0.3, paste("t =", round(t.b1, 2)), cex = 1.2)
-text(x = t.b1, y = 0.35, paste("p-val < 0.001"), cex = 1.2)
+p.b1 <- 2 * pt(abs(t.b1), df.b1, lower.tail = FALSE)
 ```
+
+$$P(|t| \geq `r sprintf("%.2f", abs(t.b1))` \mid H_0) `r if (p.b1 < .001) "< .001" else sprintf("= %.3f", p.b1)`$$
 
 <!-- ## Visualize -->
 
@@ -614,12 +619,11 @@ text(x = t.b1, y = 0.35, paste("p-val < 0.001"), cex = 1.2)
 cor(sales, adverts)    # .58: moderate and positive, whatever the units were
 
 # the covariance between x and y, unstandardized 
-cov(sales, adverts)    # same association, but only readable in GBP1,000 x 1,000 copies
+cov(sales, adverts)    # same association but original units
 
 # regression coefficient in linear regression, unstandardized 
 # generalizes easily to settings with multiple predictors
 b1 # how much does y-prediction increase, if we increase x by 1 unit?
-   # .096: one extra GBP1,000 of advertising buys about 96 extra copies
 
 # t-statistic: standardized difference between b1 and 0
 t.b1 # used for testing the null hypothesis that b1 = 0
@@ -629,8 +633,9 @@ t.b1 # used for testing the null hypothesis that b1 = 0
 
 # the correlation between y and model prediction, standardized (between -1, 1)
 cor(sales, prediction) # can be squared to get proportion explained variance
-                       # .58 here, because one predictor *is* the whole model;
-                       # squared: .33, a third of the variance in sales
+                       # same as original cor: one predictor *is* the model
+                       # squared -> .33, a third of the variance in sales
+                       # is explained by advertising
 ```
 
 [Move $r$, $s_x$ and $s_y$ around and watch the covariance, the slope and $r$ respond](https://statisticalreasoning-uva-2.shinyapps.io/SimpleRegression/)
