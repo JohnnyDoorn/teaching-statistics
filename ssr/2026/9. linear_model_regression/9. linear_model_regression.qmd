@@ -3,7 +3,7 @@ title: "9. Linear Model (Regression)"
 subtitle: "One predictor"
 author: "Johnny van Doorn"
 date: "18 September 2026"
-view: "https://teams.microsoft.com/meet/330874021866475?p=QMChUAKXBz9m28zZWL"
+view: "https://teams.microsoft.com/meet/325636393802968?p=auzHAfbisyVgiiLX2X"
 footer: "Scientific & Statistical Reasoning"
 format:
   revealjs:
