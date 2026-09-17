@@ -7,6 +7,11 @@ source("../../_setup.R")
 album   <- read.csv(datasetsPath("2026/album_sales.csv"))
 adverts <- album$Adverts
 sales   <- album$Sales
+# The dataset is introduced here, before anything plots it: the homoscedasticity
+# slide in the next child already uses it. regression_one_predictor.qmd re-reads
+# data and n for itself, so neither child depends on the other's variables.
+data    <- album[, c("Adverts", "Sales")]
+n       <- nrow(data)
 ```
 
 ## Last week: correlation & NHST {.smaller}
@@ -34,6 +39,26 @@ A choice in the analysis before seeing the data (i.e., informed by the research 
 
 
 
+
+## The data {.smaller}
+
+> Predict album sales (x 1,000 copies) based on the advertising budget (x £1,000).
+
+```{r recap-the-data, echo=FALSE}
+ssrTable(data)
+```
+
+--- 
+
+### The data {.smaller}
+```{r recap-the-data-scatter, fig.align='center', fig.width=8, fig.height=6, echo=FALSE}
+plot(data$Adverts, data$Sales, las = 1, xlab = "Adverts (x £1,000)", ylab = "Sales (x 1,000)",
+     xlim=c(0, 2300), ylim=c(0,400), cex= 1.2,
+     bty = "n",
+     pch = 21,
+     bg = "purple")
+text(1750, 50, bquote("cor = " ~.(round(cor(data$Adverts, data$Sales), 3))), cex = 1.4)
+```
 
 ## Two different units {.smaller}
 
@@ -97,7 +122,7 @@ If we standardize both variables first, the covariance *is* the correlation.
 
 ## Three levels of standardization {.smaller}
 
-```{r recap-same-covariance-three-denominators, echo=TRUE}
+```{r recap-three-levels-of-standardization, echo=TRUE}
 cov(adverts, sales)                               # original scale
 
 cov(adverts, sales) / (sd(adverts) * sd(sales))   # standardize x and y -> the correlation

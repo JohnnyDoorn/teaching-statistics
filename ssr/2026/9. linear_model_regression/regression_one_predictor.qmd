@@ -6,6 +6,7 @@ source("../../_setup.R")
 # the coefficients on these slides are the book's own and match the results file
 # students can download. Adverts in GBP 1,000s, sales in 1,000s of copies: no rescaling.
 data <- read.csv(datasetsPath("2026/album_sales.csv"))[, c("Adverts", "Sales")]
+n <- nrow(data)
 ```
 
 ## Regression {.smaller}
@@ -51,11 +52,11 @@ Outliers
 ### Sensitivity
 
 ```{r reg-sensitivity, fig.align='center', fig.width=10, fig.height=5, echo=FALSE}
-n <- 20
+nOut <- 20
 # x = 
 set.seed(124)
-x <- rnorm(n)
-y <- rnorm(n, x)
+x <- rnorm(nOut)
+y <- rnorm(nOut, x)
 x[1] <-  2
 y[1] <- -2
 r   <- round(cor(x,y), 2)
@@ -64,7 +65,7 @@ par(mfrow = c(1, 2))
 plot(x,y, 
      las  = 1, 
      pch = 21,
-     bg = c("orange", rep("purple", n-1)),
+     bg = c("orange", rep("purple", nOut-1)),
      cex = 1.2,
      ylab = "y", 
      xlab = "x", 
@@ -171,11 +172,11 @@ Field, Section 6.8.3
 * Inspect using plots:
     * Scatter plots (or partial plots) of predictors vs. outcome
     * Residuals vs. predicted
-* See figure 6.28
+* See also Figure 6.28
 :::
 
 ::: {.column}
-![figure 6.28](../../images/figure-6-28.png)
+![](../../images/linear-vs-nonlinear.png)
 :::
 
 :::
@@ -209,27 +210,6 @@ draw.circle(0,0,1.7,col=rgb(1,0,0,.5))
 :::
 
 :::
-
-## The data {.smaller}
-
-> Predict album sales (x 1,000 copies) based on the advertising budget (x £1,000).
-
-```{r reg-the-data, echo=FALSE}
-n <- nrow(data)
-ssrTable(data)
-```
-
---- 
-
-### The data {.smaller}
-```{r reg-the-data-2, fig.align='center', fig.width=8, fig.height=6, echo=FALSE}
-plot(data$Adverts, data$Sales, las = 1, xlab = "Adverts (x £1,000)", ylab = "Sales (x 1,000)",
-     xlim=c(0, 2300), ylim=c(0,400), cex= 1.2,
-     bty = "n",
-     pch = 21,
-     bg = "purple")
-text(1750, 50, bquote("cor = " ~.(round(cor(data$Adverts, data$Sales), 3))), cex = 1.4)
-```
 
 ## Calculate regression parameters {.subsection}
 
@@ -285,7 +265,7 @@ text(1750, 50, bquote(beta[1] ~ " = " ~ .(round(b1, 3))))
 
 ### The slope
 
-```{r reg-the-slope-2, fig.align='center', fig.width=8, fig.height=6, echo=FALSE}
+```{r reg-the-slope-rise-run, fig.align='center', fig.width=8, fig.height=6, echo=FALSE}
 # Extra
 
 runFrom <- 1000   # a GBP 1,000,000 run, so the rise is visible at full scale
@@ -410,7 +390,7 @@ ssrTable(data, height = 300)
 
 ::: {.column}
 
-```{r reg-normality-of-residuals, fig.height=5, fig.width=5, fig.align='center', echo=FALSE}
+```{r reg-residuals-qq, fig.height=5, fig.width=5, fig.align='center', echo=FALSE}
 qqnorm(error,
        main = "QQ Plot of Residuals",
        xlab = "Theoretical Quantiles",
@@ -424,7 +404,7 @@ qqline(error, col = "darkred", lwd = 2)
 
 ::: {.column}
 
-```{r reg-normality-of-residuals-2, fig.height=5, fig.width=5, fig.align='center', echo=FALSE}
+```{r reg-residuals-hist, fig.height=5, fig.width=5, fig.align='center', echo=FALSE}
 hist(error,
        main = "Histogram of Residuals",
        xlab = "Residuals",
@@ -546,13 +526,13 @@ Where $b$ is the beta coefficient, ${SE}$ is the standard error of the beta coef
 
 ## Converting b to $t$
 
-```{r reg-converting-b-to, echo=TRUE}
+```{r reg-se-b1, echo=TRUE}
 # Get Standard error's for b (bonus)
 se.b1 <- sqrt((n/(n-2)) * mean(error^2) / (var(adverts) * (n-1))); se.b1
 ```
 
 
-```{r reg-converting-b-to-2, echo=TRUE}
+```{r reg-t-b1, echo=TRUE}
 # Calculate t for b1
 mu.b1 <- 0
 t.b1  <- (b1 - mu.b1) / se.b1; t.b1
