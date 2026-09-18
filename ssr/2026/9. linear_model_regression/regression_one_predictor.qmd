@@ -154,9 +154,9 @@ text(0.5, y[1], bquote("r ="~ .(r) ~ "," ~ r^2 ~ " = " ~ .(r.2)), pos = 2, col =
 
 ### When does normality matter?
 
+* Normality doesn’t matter in large samples (thank you [CLT](https://en.wikipedia.org/wiki/Central_limit_theorem))
 * Parameter estimation itself does not require normality
-* Normality doesn’t matter in large samples (thank you [CLT](https://en.wikipedia.org/wiki/Central_limit_theorem)).
-* Normality doesn’t matter when residuals are normally distributed.
+* Small samples: check the Q-Q plot of the residuals
 
 
 Field, Section 6.8.3
@@ -515,14 +515,14 @@ $r^2$ is the proportion of <span style="color: blue;">blue</span> to <span style
 
 ## Calculate t-values for b's for hypothesis testing
 
-We can also convert each $b$ to a $t$-statistic, since that has a known sampling distribution:
+We can also convert the slope $b_1$ to a $t$-statistic, since that has a known sampling distribution:
 
 $$\begin{aligned}
-t_{n-p-1} &= \frac{b - \mu_b}{{SE}_b} \\
+t_{n-p-1} &= \frac{b_1 - \mu_{b_1}}{{SE}_{b_1}} \\
 df &= n - p - 1 \\
 \end{aligned}$$
 
-Where $b$ is the beta coefficient, ${SE}$ is the standard error of the beta coefficient, $n$ is the number of subjects and $p$ the number of predictors. $\mu_b$ is the null-hypothesized value for $b$ - usually set to 0.
+Where $b_1$ is the beta coefficient, ${SE}$ is the standard error of the beta coefficient, $n$ is the number of subjects and $p$ the number of predictors. $\mu_{b_1}$ is the null-hypothesized value for $b_1$ - usually set to 0.
 
 ## Converting b to $t$
 
