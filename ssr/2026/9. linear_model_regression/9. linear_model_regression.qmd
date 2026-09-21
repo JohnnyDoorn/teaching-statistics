@@ -3,7 +3,7 @@ title: "9. Linear Model (Regression)"
 subtitle: "One predictor"
 author: "Johnny van Doorn"
 date: "18 September 2026"
-view: "https://amsuni-my.sharepoint.com/:v:/g/personal/j_b_vandoorn_uva_nl/IQBNRXZ6Oh93QZCtf3w_nKkrAdk0Myl_joptVwd5hc7qLuM?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=eV9Yvs"
+view: "https://amsuni-my.sharepoint.com/:v:/g/personal/j_b_vandoorn_uva_nl/IQDOc-9BNhxWTa5sgatDPFlbAXDW9pv9SQ0IByvQRPH5OaE?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=oozIXI"
 footer: "Scientific & Statistical Reasoning"
 format:
   revealjs:
