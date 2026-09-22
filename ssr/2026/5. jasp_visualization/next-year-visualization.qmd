@@ -103,6 +103,16 @@ axis(2, labels = seq(90, 100, 2), at = seq(0, 10, by =2))
 ```
 
 
+---
+
+### Breaking the axis
+
+- A choice, not automatically a lie
+- Difference of interest, or absolute level?
+- [Shut up about the y-axis](https://www.youtube.com/watch?v=14VYnFhBKcY)
+
+
+
 ### Error Bars!
 ```{r, echo=FALSE}
 
