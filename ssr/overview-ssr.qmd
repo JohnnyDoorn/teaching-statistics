@@ -118,6 +118,15 @@ externalSets <- list(
   "album_sales" = c(
     Results = "https://discoverjasp.com/repository/dsj1_data/results/album_sales.jasp",
     HTML    = "https://discoverjasp.com/repository/dsj1_data/html/album_sales"
+  ),
+  # Field's data, hosted by discoverjasp in all three columns, so there is no
+  # copy of it here at all. The lecture still reads a csv (discoverjasp serves
+  # .jasp only), but that single copy lives in datasets/ and is not duplicated
+  # per year.
+  "puppies" = c(
+    Data    = "https://discoverjasp.com/repository/dsj1_data/data/puppies.jasp",
+    Results = "https://discoverjasp.com/repository/dsj1_data/results/puppies.jasp",
+    HTML    = "https://discoverjasp.com/repository/dsj1_data/html/puppies.html"
   )
 )
 

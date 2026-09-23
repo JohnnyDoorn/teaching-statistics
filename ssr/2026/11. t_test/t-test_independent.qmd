@@ -44,45 +44,49 @@ Specific for independent sample $t$-test:
 
 We are going to use the IQ estimates we collected. You had to guess the IQ of the one sitting next to you and your own IQ. Do your guesses differ from the guesses from last year??
 
-```{r, warning=FALSE, echo=FALSE, message=FALSE}
+```{r indep-load-iq-data, warning=FALSE, echo=FALSE, message=FALSE}
 source("../../_setup.R")
-data2024 <- loadIQData(2024)
-data2025 <- loadIQData(2025)
 
-iq2024 <- data2024$nextIQ
-iq2025 <- data2025$nextIQ
+# Year-driven rather than hard-coded, so this keeps working when the current
+# year's sheet fills up mid-lecture (see iqYear() in ssr/_setup.R).
+thisYear <- iqYear()
+lastYear <- thisYear - 1
 
-data <- data.frame(IQ = c(iq2024, iq2025), year = c(rep("2024", length(iq2024)), 
-                                                    rep("2025", length(iq2025))))
+iqThisYear <- loadIQData(thisYear)$nextIQ
+iqLastYear <- loadIQData(lastYear)$nextIQ
+
+data <- data.frame(IQ   = c(iqLastYear, iqThisYear),
+                   year = factor(c(rep(lastYear, length(iqLastYear)),
+                                   rep(thisYear, length(iqThisYear)))))
 ```
 
 
 ## The data
 
-```{r, echo=FALSE}
+```{r indep-the-data, echo=FALSE}
 ssrTable(data[, c('year', 'IQ')])
 ```
 
 ## Calculate means {.subsection}
 
-```{r, echo=TRUE}
-iq2024.mean <- mean(iq2024, na.rm = TRUE)
-iq2025.mean <- mean(iq2025, na.rm = TRUE)
+```{r indep-calculate-means, echo=TRUE}
+iqLastYear.mean <- mean(iqLastYear, na.rm = TRUE)
+iqThisYear.mean <- mean(iqThisYear, na.rm = TRUE)
 
-rbind(iq2024.mean, iq2025.mean)
+rbind(iqLastYear.mean, iqThisYear.mean)
 ```
 
 ## Calculate variance {.smaller .subsection}
 
-```{r, echo=TRUE}
-iq2024.var   <- var(iq2024,   na.rm = TRUE)
-iq2025.var <- var(iq2025, na.rm = TRUE)
-print(rbind(iq2024.var, iq2025.var))
+```{r indep-calculate-variance, echo=TRUE}
+iqLastYear.var <- var(iqLastYear, na.rm = TRUE)
+iqThisYear.var <- var(iqThisYear, na.rm = TRUE)
+print(rbind(iqLastYear.var, iqThisYear.var))
 
-iq2024.n   <- length(iq2024)
-iq2025.n <- length(iq2025)
-n <- iq2024.n + iq2025.n
-print(rbind(iq2024.n, iq2025.n))
+iqLastYear.n <- length(iqLastYear)
+iqThisYear.n <- length(iqThisYear)
+n <- iqLastYear.n + iqThisYear.n
+print(rbind(iqLastYear.n, iqThisYear.n))
 ```
 
 
@@ -104,9 +108,9 @@ Where $s^2$ is the variance and $n$ the sample size.
 
 $$S^2_p = \frac{(n_1-1)s^2_1+(n_2-1)s^2_2}{n_1+n_2-2}$$
 
-```{r, echo=TRUE}
-df <- iq2024.n + iq2025.n - 2
-pooledVar <- ( (iq2024.n-1)*iq2024.var + (iq2025.n-1)*iq2025.var ) / df
+```{r indep-calculate-pooled-variance, echo=TRUE}
+df <- iqLastYear.n + iqThisYear.n - 2
+pooledVar <- ( (iqLastYear.n-1)*iqLastYear.var + (iqThisYear.n-1)*iqThisYear.var ) / df
 
 df
 pooledVar
@@ -116,8 +120,8 @@ pooledVar
 
 $$ {SE}_p = \sqrt{\frac{S^2_p}{n_1}+\frac{S^2_p}{n_2}} $$
 
-```{r, echo=TRUE}
-sePooled <- sqrt( ((pooledVar/iq2024.n) + (pooledVar/iq2025.n)) )
+```{r indep-calculate-pooled-se, echo=TRUE}
+sePooled <- sqrt( ((pooledVar/iqLastYear.n) + (pooledVar/iqThisYear.n)) )
 sePooled
 ```
 
@@ -125,8 +129,8 @@ sePooled
 
 $$t_{n_1 + n_2 -2} = \frac{(\bar{X}_1 - \bar{X}_2) - \mu}{{SE}_p}$$
 
-```{r, echo=TRUE}
-tStat <- ( iq2024.mean - iq2025.mean ) / sePooled
+```{r indep-calculate-t-value, echo=TRUE}
+tStat <- ( iqLastYear.mean - iqThisYear.mean ) / sePooled
 
 tStat
 ```
@@ -136,7 +140,7 @@ tStat
 $$ \mathcal{H}_A: \mu_1 \neq \mu_2 \rightarrow t \neq 0 $$ 
 
 
-```{r, echo=FALSE, fig.align = 'center'}
+```{r indep-test-for-significance, echo=FALSE, fig.align = 'center'}
 plotTstatSamplingDistribution(tVal = tStat, myDF = df, yAxisMod = 1.5)
 ```
 
@@ -145,7 +149,7 @@ plotTstatSamplingDistribution(tVal = tStat, myDF = df, yAxisMod = 1.5)
 
 $$d = \frac{2t}{\sqrt{n_1 + n_2}}$$
 
-```{r, echo=TRUE}
+```{r indep-effect-size-d, echo=TRUE}
 d <- 2*tStat / sqrt(n)
 
 d
@@ -155,7 +159,7 @@ d
 
 There exist different hypothesis tests for this - the most used is Levene's test:
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r indep-levene-test, echo=FALSE, warning=FALSE, message=FALSE}
 
 if(!"car" %in% installed.packages()) { install.packages("car") }
 library("car")
@@ -164,7 +168,7 @@ leveneTest(y = data$IQ, group = data$year)
 ```
 
 But more nuance lies in comparing observed sd's or variances:
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r indep-observed-sds, echo=FALSE, warning=FALSE, message=FALSE}
 tapply(data$IQ, data$year, sd)
 ```
 

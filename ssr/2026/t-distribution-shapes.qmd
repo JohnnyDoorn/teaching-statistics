@@ -1,6 +1,6 @@
 ## The t-distribution family {.smaller}
 
-```{r, echo=FALSE}
+```{r tdist-shapes, echo=FALSE}
 myTs <- seq(-4, 4, .01)
 
 multiple.n  <- c(5, 15, 30, 75, 1000)

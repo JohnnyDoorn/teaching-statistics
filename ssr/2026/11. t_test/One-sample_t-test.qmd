@@ -4,9 +4,9 @@ Compare 1 group mean to a hypothesized value
 
 ## Measuring IQ
 
-<img src="../../images/qr_mxyau.png" style="width:20%;"/>
+<img src="../../images/iq-form-2026.png" style="width:20%;"/>
 
-<!-- <p style="font-size: 30px;"> https://edu.nl/mxyau</p> -->
+<!-- <p style="font-size: 30px;"> https://edu.nl/aja6j</p> -->
 
 ## Models {.center}
 
@@ -41,15 +41,16 @@ Can you phrase research questions that would lead you to each of these three ver
 We use the one-sample t-test to compare the sample mean $\bar{x}$ to the mean that is hypothesized by $H_0$: $\mu = 120$. Let's take a look at our sample:
 </small>
 
-```{r, message=FALSE, eval=TRUE, echo=FALSE}
+```{r onesample-load-iq-data, message=FALSE, eval=TRUE, echo=FALSE}
 source("../../_setup.R")
-data <- loadIQData(2025)
+iqThisYear     <- iqYear()
+data           <- loadIQData(iqThisYear)
 IQ.next.to.you <- data$nextIQ
 ```
 
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE}
+```{r onesample-sample-summary, message=FALSE, warning=FALSE, echo=TRUE}
 mu     <- 120
 n      <- length(IQ.next.to.you)
 x      <- IQ.next.to.you
@@ -73,7 +74,7 @@ $$T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}} = \fra
 
 So the t-statistic represents the deviation of the sample mean $\bar{x}$ from the population mean $\mu$, considering the sample size.
 
-```{r, echo=TRUE}
+```{r onesample-t-statistic, echo=TRUE}
 tStat <- (mean_x - mu) / (sd_x / sqrt(n)); tStat
 ```
 
@@ -89,7 +90,7 @@ Finally we have to calculate our $p$-value for which we need the degrees of free
 
 $$ H_A: \mu \neq 120 \rightarrow t \neq 0 $$ 
 
-```{r, echo=FALSE, fig.align = 'center'}
+```{r onesample-p-value-two-sided, echo=FALSE, fig.align = 'center'}
 df <- n-1
 plotTstatSamplingDistribution(tVal = tStat, myDF = df, yAxisMod = 1.5)
 ```
@@ -100,7 +101,7 @@ plotTstatSamplingDistribution(tVal = tStat, myDF = df, yAxisMod = 1.5)
 $$ H_A: \mu > 120 \rightarrow t > 0 $$ 
 
 
-```{r, echo=FALSE, fig.align = 'center'}
+```{r onesample-p-value-one-sided-positive, echo=FALSE, fig.align = 'center'}
 plotTstatSamplingDistribution(tVal = tStat, myDF = df, yAxisMod = 1.5, altHyp = "Positive only")
 ```
 
@@ -113,7 +114,7 @@ plotTstatSamplingDistribution(tVal = tStat, myDF = df, yAxisMod = 1.5, altHyp = 
 $$ H_A: \mu < 120 \rightarrow t < 0 $$ 
 
 
-```{r, echo=FALSE, fig.align = 'center'}
+```{r onesample-p-value-one-sided-negative, echo=FALSE, fig.align = 'center'}
 plotTstatSamplingDistribution(tVal = tStat, myDF = df, yAxisMod = 1.5, altHyp = "Negative only")
 ```
 
@@ -128,7 +129,7 @@ plotTstatSamplingDistribution(tVal = tStat, myDF = df, yAxisMod = 1.5, altHyp = 
 
 $$d = \frac{t}{\sqrt{n}}$$
 
-```{r, echo=TRUE}
+```{r onesample-effect-size-d, echo=TRUE}
 d <- tStat / sqrt(n)
 
 d

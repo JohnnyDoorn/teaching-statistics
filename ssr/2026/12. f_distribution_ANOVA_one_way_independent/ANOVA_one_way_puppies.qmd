@@ -4,7 +4,7 @@ Compare 2 or more independent groups.
 
 ## Assumptions
 
-Assuming th $H_0$ hypothesis to be true, the following should hold:
+Assuming the $H_0$ hypothesis to be true, the following should hold:
 
 * Continuous variable
 * Random sample
@@ -21,7 +21,7 @@ We would like to contribute to the literature on animal-assisted therapy, and st
 * Short exposure (15 minutes of puppies)
 * Long exposure (30 minutes of puppies)
 
-```{r, echo=FALSE}
+```{r anova-load-puppies-data, echo=FALSE}
 rm(list=ls())
 source("../../_setup.R")
 data <- read.csv(datasetsPath("puppies.csv"))
@@ -36,14 +36,16 @@ x.e <- x[data$Dose == "30 mins"] # Eyes
 
 ## The data
 
-```{r, echo=FALSE}
+```{r anova-the-data, echo=FALSE}
 ssrTable(data)
 
 ```
 
+[puppies.jasp](https://discoverjasp.com/repository/dsj1_data/data/puppies.jasp)
+
 ## The means
 
-```{r, echo=FALSE}
+```{r anova-the-means, echo=FALSE}
 tapply(data$Happiness, data$Dose, mean)
 ```
 
@@ -82,7 +84,7 @@ $$\hat{y} = b_0 + b_1 {dummy}_1 + b_2 {dummy}_2$$
 
 ## Data + predictions (i.e., group means)
 
-```{r, echo=FALSE}
+```{r anova-data-and-predictions, echo=FALSE}
 data$Predictions <- tapply(data$Happiness, data$Dose, mean)[data$Dose]
 ssrTable(data)
 ```
@@ -114,7 +116,7 @@ Where $N$ is the total sample size, $n_k$ is the sample size per category and $k
 
 $${SS}_{total} = \sum(x - \bar{x})^2$$
 
-```{r, echo=TRUE}
+```{r anova-total-variance, echo=TRUE}
 N <- length(x)
 
 ss.t <- sum( (x - mean(x))^2 )
@@ -127,14 +129,14 @@ ss.t / (N-1) # ms.t
 
 $${MS}_{total} = \frac{SS_{total}}{N-1} = s_x^2$$
 
-```{r, echo=FALSE}
+```{r anova-total-variance-result, echo=FALSE}
 ms.t <- var(x)
 ```
 
 
 ## Visual ${SS}_{total}  = `r round(ss.t, 3)`$
 
-```{r, echo=FALSE}
+```{r anova-visual-ss-total, echo=FALSE}
 colnames(plotData) <- c("pp", "group", "dv")
 plotData$pp <- 1:nrow(data)
 plotData$group <- as.factor(plotData$group)
@@ -154,7 +156,7 @@ Where $k$ is the number of independent groups and
 
 $${SS}_{model} = \sum_{k} n_k (\bar{X}_k - \bar{X})^2$$
 
-```{r, echo=FALSE}
+```{r anova-model-variance, echo=FALSE}
 k   <- 3
 n.c <- length(x.c)
 n.k <- length(x.k)
@@ -163,7 +165,7 @@ n.e <- length(x.e)
 
 --------
 
-```{r, echo=FALSE}
+```{r anova-model-variance-result, echo=FALSE}
 ss.m.c <- n.c * (mean(x.c) - mean(x))^2
 ss.m.k <- n.k * (mean(x.k) - mean(x))^2
 ss.m.e <- n.e * (mean(x.e) - mean(x))^2
@@ -175,7 +177,7 @@ ms.m <- ss.m / df.m
 
 ## Visual ${SS}_{model} = `r round(ss.m, 3)`$
 
-```{r, echo=FALSE}
+```{r anova-visual-ss-model, echo=FALSE}
 plotSumSquares(data = plotData, sumSq = "Model", whatPred = "Group means", myLimY = c(0, 10), whatDisplay = c("Segments"))
 ```
 
@@ -187,7 +189,7 @@ where
 
 $${SS}_{error} = \sum_{k} s_k^2 (n_k - 1) = \sum_{k} \frac{\sum (x_{ik} - \bar{x}_k)^2}{(n_k - 1)} (n_k - 1)$$
 
-```{r, echo=FALSE}
+```{r anova-error-variance, echo=FALSE}
 ss.e.c <- var(x.c) * (n.c - 1)
 ss.e.k <- var(x.k) * (n.k - 1)
 ss.e.e <- var(x.e) * (n.e - 1)
@@ -197,7 +199,7 @@ ss.e   <- sum(ss.e.c, ss.e.k, ss.e.e)
 
 $${MS}_{error} = \frac{{SS}_{error}}{{df}_{error}} \\ {df}_{error} = N - k$$
 
-```{r, echo=FALSE}
+```{r anova-error-variance-result, echo=FALSE}
 df.e <- (N - k)
 ms.e <- ss.e / df.e
 # ; ms.e
@@ -205,7 +207,7 @@ ms.e <- ss.e / df.e
 
 ## Visual ${SS}_{error}  = `r round(ss.e, 3)`$
 
-```{r, echo=FALSE}
+```{r anova-visual-ss-error, echo=FALSE}
 plotSumSquares(data = plotData, sumSq = "Error", whatPred = "Group means", myLimY = c(0, 10), whatDisplay = c("Segments"))
 ```
 
@@ -228,13 +230,13 @@ $${MS}_{error} = \frac{{SS}_{error}}{{df}_{error}} = `r round(ms.e, 3)`$$
 
 $$F = \frac{{MS}_{model}}{{MS}_{error}} = \frac{{SIGNAL}}{{NOISE}}$$
 
-```{r, echo=TRUE}
+```{r anova-f-ratio, echo=TRUE}
 fStat <- ms.m / ms.e; fStat
 ```
 
 ## Reject $H_0$?
 
-```{r, echo=FALSE}
+```{r anova-reject-h0, echo=FALSE}
 # Set up the plot for the F-distribution
 curve(df(x, df.m, df.e), from = 0, to = 10, n = 1000, bty = "n", las = 1,
       xlab = "F-value", ylab = "Density", main = "F-distribution with P-value Region")

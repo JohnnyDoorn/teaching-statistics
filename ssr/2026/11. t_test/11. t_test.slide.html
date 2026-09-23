@@ -452,7 +452,7 @@ Johnny van Doorn
 <section id="the-t-distribution-family" class="slide level2 smaller">
 <h2>The t-distribution family</h2>
 
-<img data-src="11.-t_test_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"><p>Fatter tails for small <span class="math inline">\(n\)</span> (few degrees of freedom); converges to the standard normal as <span class="math inline">\(n\)</span> grows.</p>
+<img data-src="11.-t_test_files/figure-revealjs/tdist-shapes-1.png" width="960" class="r-stretch"><p>Fatter tails for small <span class="math inline">\(n\)</span> (few degrees of freedom); converges to the standard normal as <span class="math inline">\(n\)</span> grows.</p>
 <p>Today we finally put it to use on a single sample mean.</p>
 </section></section>
 <section>
@@ -463,8 +463,8 @@ Johnny van Doorn
 <section id="measuring-iq" class="slide level2">
 <h2>Measuring IQ</h2>
 
-<!-- <p style="font-size: 30px;"> https://edu.nl/mxyau</p> -->
-<img src="../../images/qr_mxyau.png" style="width:20%;" class="r-stretch"></section>
+<!-- <p style="font-size: 30px;"> https://edu.nl/aja6j</p> -->
+<img src="../../images/iq-form-2026.png" style="width:20%;" class="r-stretch"></section>
 <section id="models" class="slide level2 center">
 <h2>Models</h2>
 <div style="font-size:200%;;">
@@ -534,18 +534,18 @@ Johnny van Doorn
 <p>Finally we have to calculate our <span class="math inline">\(p\)</span>-value for which we need the degrees of freedom <span class="math inline">\(df = n - 1\)</span> to determine the shape of the t-distribution.</p>
 <p><span class="math display">\[ H_A: \mu \neq 120 \rightarrow t \neq 0 \]</span></p>
 
-<img data-src="11.-t_test_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="11.-t_test_files/figure-revealjs/onesample-p-value-two-sided-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="p-value-one-sided" class="slide level2 subsection">
 <h2>P-value one sided</h2>
 <p><span class="math display">\[ H_A: \mu &gt; 120 \rightarrow t &gt; 0 \]</span></p>
 
-<img data-src="11.-t_test_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="11.-t_test_files/figure-revealjs/onesample-p-value-one-sided-positive-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section class="slide level2">
 
 <h3 id="p-value-one-sided-1">P-value one sided</h3>
 <p><span class="math display">\[ H_A: \mu &lt; 120 \rightarrow t &lt; 0 \]</span></p>
 
-<img data-src="11.-t_test_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="11.-t_test_files/figure-revealjs/onesample-p-value-one-sided-negative-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="effect-size-cohens-d" class="slide level2 smaller">
 <h2>Effect-size Cohen’s <span class="math inline">\(d\)</span></h2>
 <ul>
@@ -653,8 +653,8 @@ Johnny van Doorn
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-ea466f9368d7bd146893" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-ea466f9368d7bd146893">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96"],[120,108,122,115,130,100,110,110,116,100,115,100,115,122,115,112,120,180,125,110,110,128,115,110,130,125,120,120,72,100,101,120,110,110,110,100,110,100,130,128,120,110,110,100,120,120,105,105,110,130,200,120,115,130,130,180,120,98,105,200,115,130,135,115,120,120,110,131,200,110,140,125,126,115,110,120,120,100,103,125,136,128,112,138,110,125,100,120,138,130,110,90,141,132,125,120],[120,115,128,115,120,100,130,120,130,115,120,100,110,115,115,130,110,181,72,110,140,120,120,80,110,120,120,120,105,110,150,130,105,110,140,120,115,110,132,130,120,105,112,120,120,140,125,105,120,125,50,129,115,130,110,200,130,125,120,50,140,110,125,120,110,120,100,131,100,119,80,123,120,120,110,110,124,100,105,110,140,130,120,130,90,115,110,115,128,130,110,92,135,138,125,138]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ownIQ<\/th>\n      <th>nextIQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ownIQ","targets":1},{"name":"nextIQ","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-63289ce55c00ec44aa45" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-63289ce55c00ec44aa45">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96"],[120,108,122,115,130,100,110,110,116,100,115,100,115,122,115,112,120,180,125,110,110,128,115,110,130,125,120,120,72,100,101,120,110,110,110,100,110,100,130,128,120,110,110,100,120,120,105,105,110,130,200,120,115,130,130,180,120,98,105,200,115,130,135,115,120,120,110,131,200,110,140,125,126,115,110,120,120,100,103,125,136,128,112,138,110,125,100,120,138,130,110,90,141,132,125,120],[120,115,128,115,120,100,130,120,130,115,120,100,110,115,115,130,110,181,72,110,140,120,120,80,110,120,120,120,105,110,150,130,105,110,140,120,115,110,132,130,120,105,112,120,120,140,125,105,120,125,50,129,115,130,110,200,130,125,120,50,140,110,125,120,110,120,100,131,100,119,80,123,120,120,110,110,124,100,105,110,140,130,120,130,90,115,110,115,128,130,110,92,135,138,125,138]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ownIQ<\/th>\n      <th>nextIQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ownIQ","targets":1},{"name":"nextIQ","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -666,8 +666,8 @@ Johnny van Doorn
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-bfd70832502253ae47e1" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-bfd70832502253ae47e1">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96"],[120,108,122,115,130,100,110,110,116,100,115,100,115,122,115,112,120,180,125,110,110,128,115,110,130,125,120,120,72,100,101,120,110,110,110,100,110,100,130,128,120,110,110,100,120,120,105,105,110,130,200,120,115,130,130,180,120,98,105,200,115,130,135,115,120,120,110,131,200,110,140,125,126,115,110,120,120,100,103,125,136,128,112,138,110,125,100,120,138,130,110,90,141,132,125,120],[120,115,128,115,120,100,130,120,130,115,120,100,110,115,115,130,110,181,72,110,140,120,120,80,110,120,120,120,105,110,150,130,105,110,140,120,115,110,132,130,120,105,112,120,120,140,125,105,120,125,50,129,115,130,110,200,130,125,120,50,140,110,125,120,110,120,100,131,100,119,80,123,120,120,110,110,124,100,105,110,140,130,120,130,90,115,110,115,128,130,110,92,135,138,125,138],[0,7,6,0,-10,0,20,10,14,15,5,0,-5,-7,0,18,-10,1,-53,0,30,-8,5,-30,-20,-5,0,0,33,10,49,10,-5,0,30,20,5,10,2,2,0,-5,2,20,0,20,20,0,10,-5,-150,9,0,0,-20,20,10,27,15,-150,25,-20,-10,5,-10,0,-10,0,-100,9,-60,-2,-6,5,0,-10,4,0,2,-15,4,2,8,-8,-20,-10,10,-5,-10,0,0,2,-6,6,0,18]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ownIQ<\/th>\n      <th>nextIQ<\/th>\n      <th>diffScores<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":315,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ownIQ","targets":1},{"name":"nextIQ","targets":2},{"name":"diffScores","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-c256478186ca3ec503c6" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-c256478186ca3ec503c6">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96"],[120,108,122,115,130,100,110,110,116,100,115,100,115,122,115,112,120,180,125,110,110,128,115,110,130,125,120,120,72,100,101,120,110,110,110,100,110,100,130,128,120,110,110,100,120,120,105,105,110,130,200,120,115,130,130,180,120,98,105,200,115,130,135,115,120,120,110,131,200,110,140,125,126,115,110,120,120,100,103,125,136,128,112,138,110,125,100,120,138,130,110,90,141,132,125,120],[120,115,128,115,120,100,130,120,130,115,120,100,110,115,115,130,110,181,72,110,140,120,120,80,110,120,120,120,105,110,150,130,105,110,140,120,115,110,132,130,120,105,112,120,120,140,125,105,120,125,50,129,115,130,110,200,130,125,120,50,140,110,125,120,110,120,100,131,100,119,80,123,120,120,110,110,124,100,105,110,140,130,120,130,90,115,110,115,128,130,110,92,135,138,125,138],[0,7,6,0,-10,0,20,10,14,15,5,0,-5,-7,0,18,-10,1,-53,0,30,-8,5,-30,-20,-5,0,0,33,10,49,10,-5,0,30,20,5,10,2,2,0,-5,2,20,0,20,20,0,10,-5,-150,9,0,0,-20,20,10,27,15,-150,25,-20,-10,5,-10,0,-10,0,-100,9,-60,-2,-6,5,0,-10,4,0,2,-15,4,2,8,-8,-20,-10,10,-5,-10,0,0,2,-6,6,0,18]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ownIQ<\/th>\n      <th>nextIQ<\/th>\n      <th>diffScores<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":315,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ownIQ","targets":1},{"name":"nextIQ","targets":2},{"name":"diffScores","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -713,7 +713,7 @@ Johnny van Doorn
 <h2>Test for significance</h2>
 <p><span class="math display">\[ \mathcal{H}_A: \mu_D \neq 0 \rightarrow t \neq 0 \]</span></p>
 
-<img data-src="11.-t_test_files/figure-revealjs/unnamed-chunk-34-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="11.-t_test_files/figure-revealjs/paired-test-for-significance-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="effect-size-d" class="slide level2 subsection">
 <h2>Effect-size <span class="math inline">\(d\)</span></h2>
 <p><span class="math display">\[d = \frac{t}{\sqrt{n}}\]</span></p>
@@ -803,44 +803,44 @@ H_A &amp;: t &lt; 0 \\
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-702dabeace85467e8471" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-702dabeace85467e8471">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150","151","152","153","154","155","156","157","158","159","160","161","162","163","164","165"],["2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025"],[115,120,110,108,115,140,110,90,109,140,120,108,110,140,109,119,98,125,125,135,100,120,115,109,125,120,128,125,115,83,125,125,130,105,130,85,110,109,103,70,100,135,106,108,120,120,125,122,180,100,113,115,130,115,125,135,130,130,140,120,125,115,118,130,110,105,125,95,95,120,115,128,115,120,100,130,120,130,115,120,100,110,115,115,130,110,181,72,110,140,120,120,80,110,120,120,120,105,110,150,130,105,110,140,120,115,110,132,130,120,105,112,120,120,140,125,105,120,125,50,129,115,130,110,200,130,125,120,50,140,110,125,120,110,120,100,131,100,119,80,123,120,120,110,110,124,100,105,110,140,130,120,130,90,115,110,115,128,130,110,92,135,138,125,138]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>year<\/th>\n      <th>IQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"year","targets":1},{"name":"IQ","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-b781122547fe7a31a79d" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-b781122547fe7a31a79d">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150","151","152","153","154","155","156","157","158","159","160","161","162","163","164","165"],["2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2024","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025","2025"],[115,120,110,108,115,140,110,90,109,140,120,108,110,140,109,119,98,125,125,135,100,120,115,109,125,120,128,125,115,83,125,125,130,105,130,85,110,109,103,70,100,135,106,108,120,120,125,122,180,100,113,115,130,115,125,135,130,130,140,120,125,115,118,130,110,105,125,95,95,120,115,128,115,120,100,130,120,130,115,120,100,110,115,115,130,110,181,72,110,140,120,120,80,110,120,120,120,105,110,150,130,105,110,140,120,115,110,132,130,120,105,112,120,120,140,125,105,120,125,50,129,115,130,110,200,130,125,120,50,140,110,125,120,110,120,100,131,100,119,80,123,120,120,110,110,124,100,105,110,140,130,120,130,90,115,110,115,128,130,110,92,135,138,125,138]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>year<\/th>\n      <th>IQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"year","targets":1},{"name":"IQ","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
 <section id="calculate-means" class="slide level2 subsection">
 <h2>Calculate means</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>iq2024.mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(iq2024, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb16-2"><a href="#cb16-2"></a>iq2025.mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(iq2025, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>iqLastYear.mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(iqLastYear, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb16-2"><a href="#cb16-2"></a>iqThisYear.mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(iqThisYear, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb16-3"><a href="#cb16-3"></a></span>
-<span id="cb16-4"><a href="#cb16-4"></a><span class="fu">rbind</span>(iq2024.mean, iq2025.mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="fu">rbind</span>(iqLastYear.mean, iqThisYear.mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                [,1]
-iq2024.mean 116.8841
-iq2025.mean 117.8854</code></pre>
+<pre><code>                    [,1]
+iqLastYear.mean 116.8841
+iqThisYear.mean 117.8854</code></pre>
 </div>
 </div>
 </section>
 <section id="calculate-variance" class="slide level2 smaller subsection">
 <h2>Calculate variance</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>iq2024.var   <span class="ot">&lt;-</span> <span class="fu">var</span>(iq2024,   <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb18-2"><a href="#cb18-2"></a>iq2025.var <span class="ot">&lt;-</span> <span class="fu">var</span>(iq2025, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb18-3"><a href="#cb18-3"></a><span class="fu">print</span>(<span class="fu">rbind</span>(iq2024.var, iq2025.var))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>iqLastYear.var <span class="ot">&lt;-</span> <span class="fu">var</span>(iqLastYear, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb18-2"><a href="#cb18-2"></a>iqThisYear.var <span class="ot">&lt;-</span> <span class="fu">var</span>(iqThisYear, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="fu">print</span>(<span class="fu">rbind</span>(iqLastYear.var, iqThisYear.var))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>               [,1]
-iq2024.var 259.2805
-iq2025.var 389.3867</code></pre>
+<pre><code>                   [,1]
+iqLastYear.var 259.2805
+iqThisYear.var 389.3867</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>iq2024.n   <span class="ot">&lt;-</span> <span class="fu">length</span>(iq2024)</span>
-<span id="cb20-2"><a href="#cb20-2"></a>iq2025.n <span class="ot">&lt;-</span> <span class="fu">length</span>(iq2025)</span>
-<span id="cb20-3"><a href="#cb20-3"></a>n <span class="ot">&lt;-</span> iq2024.n <span class="sc">+</span> iq2025.n</span>
-<span id="cb20-4"><a href="#cb20-4"></a><span class="fu">print</span>(<span class="fu">rbind</span>(iq2024.n, iq2025.n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>iqLastYear.n <span class="ot">&lt;-</span> <span class="fu">length</span>(iqLastYear)</span>
+<span id="cb20-2"><a href="#cb20-2"></a>iqThisYear.n <span class="ot">&lt;-</span> <span class="fu">length</span>(iqThisYear)</span>
+<span id="cb20-3"><a href="#cb20-3"></a>n <span class="ot">&lt;-</span> iqLastYear.n <span class="sc">+</span> iqThisYear.n</span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="fu">print</span>(<span class="fu">rbind</span>(iqLastYear.n, iqThisYear.n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>         [,1]
-iq2024.n   69
-iq2025.n   96</code></pre>
+<pre><code>             [,1]
+iqLastYear.n   69
+iqThisYear.n   96</code></pre>
 </div>
 </div>
 </section>
@@ -857,8 +857,8 @@ iq2025.n   96</code></pre>
 <h2>Calculate pooled variance</h2>
 <p><span class="math display">\[S^2_p = \frac{(n_1-1)s^2_1+(n_2-1)s^2_2}{n_1+n_2-2}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>df <span class="ot">&lt;-</span> iq2024.n <span class="sc">+</span> iq2025.n <span class="sc">-</span> <span class="dv">2</span></span>
-<span id="cb22-2"><a href="#cb22-2"></a>pooledVar <span class="ot">&lt;-</span> ( (iq2024.n<span class="dv">-1</span>)<span class="sc">*</span>iq2024.var <span class="sc">+</span> (iq2025.n<span class="dv">-1</span>)<span class="sc">*</span>iq2025.var ) <span class="sc">/</span> df</span>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>df <span class="ot">&lt;-</span> iqLastYear.n <span class="sc">+</span> iqThisYear.n <span class="sc">-</span> <span class="dv">2</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>pooledVar <span class="ot">&lt;-</span> ( (iqLastYear.n<span class="dv">-1</span>)<span class="sc">*</span>iqLastYear.var <span class="sc">+</span> (iqThisYear.n<span class="dv">-1</span>)<span class="sc">*</span>iqThisYear.var ) <span class="sc">/</span> df</span>
 <span id="cb22-3"><a href="#cb22-3"></a></span>
 <span id="cb22-4"><a href="#cb22-4"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -874,7 +874,7 @@ iq2025.n   96</code></pre>
 <h2>Calculate pooled SE</h2>
 <p><span class="math display">\[ {SE}_p = \sqrt{\frac{S^2_p}{n_1}+\frac{S^2_p}{n_2}} \]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>sePooled <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( ((pooledVar<span class="sc">/</span>iq2024.n) <span class="sc">+</span> (pooledVar<span class="sc">/</span>iq2025.n)) )</span>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>sePooled <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( ((pooledVar<span class="sc">/</span>iqLastYear.n) <span class="sc">+</span> (pooledVar<span class="sc">/</span>iqThisYear.n)) )</span>
 <span id="cb26-2"><a href="#cb26-2"></a>sePooled</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.889183</code></pre>
@@ -885,7 +885,7 @@ iq2025.n   96</code></pre>
 <h2>Calculate t-value</h2>
 <p><span class="math display">\[t_{n_1 + n_2 -2} = \frac{(\bar{X}_1 - \bar{X}_2) - \mu}{{SE}_p}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>tStat <span class="ot">&lt;-</span> ( iq2024.mean <span class="sc">-</span> iq2025.mean ) <span class="sc">/</span> sePooled</span>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>tStat <span class="ot">&lt;-</span> ( iqLastYear.mean <span class="sc">-</span> iqThisYear.mean ) <span class="sc">/</span> sePooled</span>
 <span id="cb28-2"><a href="#cb28-2"></a></span>
 <span id="cb28-3"><a href="#cb28-3"></a>tStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -897,7 +897,7 @@ iq2025.n   96</code></pre>
 <h2>Test for significance</h2>
 <p><span class="math display">\[ \mathcal{H}_A: \mu_1 \neq \mu_2 \rightarrow t \neq 0 \]</span></p>
 
-<img data-src="11.-t_test_files/figure-revealjs/unnamed-chunk-53-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="11.-t_test_files/figure-revealjs/indep-test-for-significance-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="effect-size-d-1" class="slide level2">
 <h2>Effect-size d</h2>
 <p><span class="math display">\[d = \frac{2t}{\sqrt{n_1 + n_2}}\]</span></p>
@@ -1006,6 +1006,10 @@ group   1  0.0986  0.754
 <section id="closing" class="title-slide slide level1 center">
 <h1>Closing</h1>
 
+</section>
+<section id="next-time" class="slide level2">
+<h2>Next Time</h2>
+<!-- Placeholder - fill in before the lecture. -->
 </section>
 <section id="recommended-exercises" class="slide level2">
 <h2>Recommended Exercises</h2>

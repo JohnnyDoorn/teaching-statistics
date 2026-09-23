@@ -48,34 +48,35 @@ Let's take a look at the data.
 
 ## IQ estimates
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, eval=TRUE}
+```{r paired-load-iq-data, echo=FALSE, warning=FALSE, message=FALSE, eval=TRUE}
 source("../../_setup.R")
-data <- loadIQData(2025)
+iqThisYear     <- iqYear()
+data           <- loadIQData(iqThisYear)
 IQ.next.to.you <- data$nextIQ
 IQ.you         <- data$ownIQ
 ```
 
 
 
-```{r, echo=FALSE}
+```{r paired-iq-estimates-table, echo=FALSE}
 ssrTable(data)
 ```
 
 ## Calculate $D$ {.smaller .subsection}
 
-```{r, echo=TRUE}
+```{r paired-calculate-difference-scores, echo=TRUE}
 diffScores <- IQ.next.to.you - IQ.you
 ```
 
 
-```{r, echo=FALSE}
+```{r paired-difference-scores-table, echo=FALSE}
 data$diffScores <- diffScores
 ssrTable(data, height = 315)
 ```
 
 ## Calculate $\bar{D}$
 
-```{r, echo=TRUE}
+```{r paired-calculate-mean-difference, echo=TRUE}
 diffScores      <- na.omit(diffScores) # get rid of all missing values
 diffMean        <- mean(diffScores)
 diffMean
@@ -83,7 +84,7 @@ diffMean
 
 And we also need n.
 
-```{r, echo=TRUE}
+```{r paired-calculate-n, echo=TRUE}
 n <- length(diffScores)
 n
 ```
@@ -92,7 +93,7 @@ n
 
 $$t_{n-1} = \frac{\bar{D} - \mu}{ {SE}_D }$$
 
-```{r, echo=TRUE}
+```{r paired-calculate-t-value, echo=TRUE}
 mu <- 0                # Define mu
 
 diffSD <- sd(diffScores)   # Calculate standard deviation
@@ -109,7 +110,7 @@ tStat
 
 $$ \mathcal{H}_A: \mu_D \neq 0 \rightarrow t \neq 0 $$ 
 
-```{r, echo=FALSE, fig.align = 'center'}
+```{r paired-test-for-significance, echo=FALSE, fig.align = 'center'}
 plotTstatSamplingDistribution(tVal = tStat, myDF = df, yAxisMod = 1.5)
 ```
 
@@ -117,7 +118,7 @@ plotTstatSamplingDistribution(tVal = tStat, myDF = df, yAxisMod = 1.5)
 
 $$d = \frac{t}{\sqrt{n}}$$
 
-```{r, echo=TRUE}
+```{r paired-effect-size-d, echo=TRUE}
 d <- tStat/(sqrt(n))
 d
 ```
