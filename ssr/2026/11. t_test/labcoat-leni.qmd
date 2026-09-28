@@ -1,0 +1,36 @@
+<!-- Research questions and variables taken from the Labcoat Leni's Real Research
+     boxes in DSUJ ch. 9 (pp. 379, 383, 387), reworded as questions. Variable
+     names, levels and descriptions from the data files on discoverjasp. -->
+
+## Labcoat Leni 9.1
+
+Board & Fritzon (2005): *You don't have to be 'mad' to work here, but it helps*
+
+Do managers score higher on histrionic personality disorder than legally classified psychopaths?
+
+- `Group`: 39 senior business managers vs. 317 legally classified psychopaths
+- `Histrionic personality index`: score on the MMPI-PD histrionic scale
+
+[Data (.jasp)](https://discoverjasp.com/repository/dsj1_data/data/board_2005.jasp) · [Results (.jasp)](https://discoverjasp.com/repository/dsj1_leni/leni_09a.jasp) · [Results (.html)](https://discoverjasp.com/repository/dsj1_leni/leni_09a.html)
+
+## Labcoat Leni 9.2
+
+Tuk et al. (2011): *Bladder control*
+
+Are people with full bladders inhibited more than those without?
+
+- `urgency`: drink all five cups of water vs. take a sip from each
+- `ll_sum`: number of trials (out of 8) choosing a large, later reward over a small, sooner one
+
+[Data (.jasp)](https://discoverjasp.com/repository/dsj1_data/data/tuk_2011.jasp) · [Results (.jasp)](https://discoverjasp.com/repository/dsj1_leni/leni_09b.jasp) · [Results (.html)](https://discoverjasp.com/repository/dsj1_leni/leni_09b.html)
+
+## Labcoat Leni 9.3
+
+Gelman & Weakliem (2009): *The beautiful people*
+
+Do the most beautiful celebrities (People magazine, 1995–2000) have more daughters than sons?
+
+- `daughters`: number of daughters, as of 2007
+- `sons`: number of sons, as of 2007
+
+[Data (.jasp)](https://discoverjasp.com/repository/dsj1_data/data/gelman_2009.jasp) · [Results (.jasp)](https://discoverjasp.com/repository/dsj1_leni/leni_09c.jasp) · [Results (.html)](https://discoverjasp.com/repository/dsj1_leni/leni_09c.html)

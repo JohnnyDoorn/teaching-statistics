@@ -2,7 +2,7 @@
 
 Two or more independent variables with two or more categories. One dependent variable.
 
-```{r, echo=FALSE}
+```{r fact-independent-factorial-anova, echo=FALSE}
 rm(list=ls())
 source("../../_setup.R")
 
@@ -78,7 +78,7 @@ In this example we will look at the amount of accidents in a car driving simulat
       
 ## Data {.smaller}
 
-```{r, echo=FALSE}
+```{r fact-data, echo=FALSE}
 ssrTable(data)
 ```
 
@@ -92,7 +92,7 @@ ssrTable(data)
 
 Predicts group means for each cell of the design:
 
-```{r, echo=FALSE}
+```{r fact-ss-full-model, echo=FALSE}
 accidents <- data$accidents
 n         <- length(accidents)
 
@@ -105,7 +105,7 @@ cbind(means.model, n = n.k.model$accidents)
 
 ## {.smaller}
 
-```{r, echo=FALSE}
+```{r fact-chunk, echo=FALSE}
 # Calculate expected accidents
 fit <- lm(accidents ~ speed + alcohol + speed * alcohol, data)
 exp.accidents <- fit$fitted.values
@@ -119,11 +119,11 @@ ssrTable(data.frame(speed = data$speed,
 
 <!-- ## Group means -->
 
-```{r, echo=FALSE}
+```{r fact-ss-model, echo=FALSE}
 SS.model <- sum((exp.accidents - mean(data$accidents))^2)
 ```
 
-```{r, echo=FALSE}
+```{r fact-cell-means-and-ns, echo=FALSE}
 means <- tapply(data$accidents, list(data$speed, data$alcohol), mean)
 # means
 ns <- table(list(data$speed, data$alcohol))
@@ -132,7 +132,7 @@ ns <- table(list(data$speed, data$alcohol))
 ```
 
 
-```{r, echo=FALSE}
+```{r fact-ns, echo=FALSE}
 squares <- (means - mean(accidents))^2
 # squares 
 
@@ -142,7 +142,7 @@ ss.model <- sum(squares * ns)
 
 ## SS full model visual
 
-```{r, echo=FALSE}
+```{r fact-ss-full-model-visual, echo=FALSE}
 input <- list()
 input$whatPred <- "Alcohol + Speed + A:S"
 input$whatDisplay <- c("Segments", "Sums")
@@ -160,25 +160,25 @@ plotSumSquaresFactorial(data, input = input, sumSq = "Model", myMain = "Full Mod
 
 <br>
 
-```{r, echo=FALSE}
+```{r fact-ss-error, echo=FALSE}
 SS.error <- sum((accidents - exp.accidents)^2)
 # SS.error
 ```
 
-```{r, echo=FALSE}
+```{r fact-ss-error-from-group-variances, echo=FALSE}
 vars <- tapply(data$accidents, list(data$speed, data$alcohol), var)
 # vars
 ```
 
 
-```{r, echo=FALSE}
+```{r fact-vars, echo=FALSE}
 ss.error <- sum(vars * (ns - 1))
 # ss.error
 ```
 
 ## SS error visual
 
-```{r, echo=FALSE}
+```{r fact-ss-error-visual, echo=FALSE}
 input <- list()
 input$whatPred <- "Alcohol + Speed + A:S"
 input$whatDisplay <- c("Segments", "Sums")
@@ -195,7 +195,7 @@ input$whatDisplay <- c("Segments", "Sums")
 
 <br>
 
-```{r, echo=FALSE}
+```{r fact-ss-a-speed, echo=FALSE}
 # Descriptives for speed
 means.speed <- aggregate(accidents ~ speed, data, mean  )
 n.k.speed   <- aggregate(accidents ~ speed, data, length)
@@ -207,12 +207,12 @@ data <- merge(data, means.speed,  by="speed",  all.x=TRUE)
 data <- data[order(data$subjects),]
 ```
 
-```{r, echo = FALSE}
+```{r fact-ss-speed, echo = FALSE}
 SS.speed <- sum(with(data, (means.speed - mean.total)^2))
 #SS.speed
 ```
 
-```{r, echo=FALSE}
+```{r fact-speed-means, echo=FALSE}
 # m.s1 = mean(subset(data, speed == "none", select = "accidents")$accidents)
 # m.s2 = mean(subset(data, speed == "some", select = "accidents")$accidents)
 # m.s3 = mean(subset(data, speed == "much", select = "accidents")$accidents)
@@ -224,7 +224,7 @@ s.means
 ```
 
 
-```{r, echo=FALSE}
+```{r fact-ss-speed-from-squares, echo=FALSE}
 s.squares <- (s.means - mean(accidents))^2
 # s.squares
 
@@ -234,7 +234,7 @@ ss.speed <- sum(60 * s.squares)
 
 ## SS A Speed Visual
 
-```{r, echo=FALSE}
+```{r fact-ss-a-speed-visual, echo=FALSE}
 input <- list()
 input$whatPred <- "Speed"
 input$whatDisplay <- c("Segments", "Sums")
@@ -245,7 +245,7 @@ input$whatDisplay <- c("Segments", "Sums")
 
 ## SS A Speed Error Visual
 
-```{r, echo=FALSE}
+```{r fact-ss-a-speed-error-visual, echo=FALSE}
 input <- list()
 input$whatPred <- "Speed"
 input$whatDisplay <- c("Segments", "Sums")
@@ -261,7 +261,7 @@ input$whatDisplay <- c("Segments", "Sums")
 |----------|----------------|----|--------------|---------|
 | $\hspace{2ex}B$ | $\text{SS}_{\text{B}} = \sum{n_k(\bar{X}_k-\bar{X})^2}$ | $k_B-1$ | $\frac{\text{SS}_{\text{B}}}{\text{df}_{\text{B}}}$ | $\frac{\text{MS}_{\text{B}}}{\text{MS}_{\text{error}}}$ |
 
-```{r, echo=FALSE}
+```{r fact-ss-b-alcohol, echo=FALSE}
 # Descriptives for alcohol
 means.alcohol <- aggregate(accidents ~ alcohol, data, mean)
 n.k.alcohol   <- aggregate(accidents ~ alcohol, data, length)
@@ -272,12 +272,12 @@ data <- merge(data,means.alcohol,by="alcohol", all.x=TRUE)
 data <- data[order(data$subjects),]
 ```
 
-```{r, echo=FALSE}
+```{r fact-means-alcohol, echo=FALSE}
 SS.alcohol <- sum(with(data, (means.alcohol - mean.total)^2))
 # SS.alcohol
 ```
 
-```{r, echo = FALSE}
+```{r fact-alcohol-means, echo = FALSE}
 a.means <- tapply(data$accidents, data$alcohol, mean)
 a.ns <- 60
 
@@ -286,7 +286,7 @@ a.means
 
 
 
-```{r, echo=FALSE}
+```{r fact-ss-alcohol, echo=FALSE}
 a.squares <- (a.means - mean(accidents))^2
 # a.squares
 
@@ -296,7 +296,7 @@ ss.alcohol <- sum(60 * a.squares)
 
 ## SS B Alcohol Visual
 
-```{r, echo=FALSE}
+```{r fact-ss-b-alcohol-visual, echo=FALSE}
 input <- list()
 input$whatPred <- "Alcohol"
 input$whatDisplay <- c("Segments", "Sums")
@@ -307,7 +307,7 @@ input$whatDisplay <- c("Segments", "Sums")
 
 ## SS B Alcohol Error Visual
 
-```{r, echo=FALSE}
+```{r fact-ss-b-alcohol-error-visual, echo=FALSE}
 input <- list()
 input$whatPred <- "Alcohol"
 input$whatDisplay <- c("Segments", "Sums")
@@ -324,7 +324,7 @@ input$whatDisplay <- c("Segments", "Sums")
 
 <br>
 
-```{r, echo=TRUE}
+```{r fact-ss-ab-alcohol-x-speed, echo=TRUE}
 # Sums of squares for the interaction between speed and alcohol
 ss.speed.alcohol <- ss.model - ss.speed - ss.alcohol
 ss.speed.alcohol
@@ -345,7 +345,7 @@ F_{Alcohol \times Speed} &= \frac{{MS}_{Alcohol \times Speed}}{{MS}_{error}} \\
 
 $$F_{Alcohol \times Speed}$$
 
-```{r, echo=TRUE}
+```{r fact-interaction, echo=TRUE}
 N          <- length(accidents)
 k.speed    <- 3
 k.alcohol  <- 3
@@ -362,7 +362,7 @@ ms.error <- ss.error / df.error
 
 ## $P$-value
 
-```{r, echo=FALSE}
+```{r fact-value, echo=FALSE}
 F.speed.alcohol <- fStat <- ms.speed.alcohol / ms.error
 # F.speed.alcohol
 
@@ -413,7 +413,7 @@ text(x = fStat, y = 4, paste("p-val =", round(pf(fStat, ms.error, df.error, lowe
 
 ## Partition the explained variance (BONUS) {.smaller}
 
-```{r, echo=FALSE}
+```{r fact-partition-true-division, echo=FALSE}
 
 # Define data points for visualization of sum of squares
 individual_model1 <- 50  # SS for model with IV1
@@ -437,7 +437,7 @@ text(x = .6:14.6*1.2, y = values, labels = round(values, 2), pos = 3)
 ```
 ## Partition the explained variance (BONUS) {.smaller}
 
-```{r, echo=FALSE}
+```{r fact-partition-in-reality, echo=FALSE}
 
 # Define data points for visualization of sum of squares
 individual_model1 <- 0  # SS for model with IV1
@@ -463,7 +463,7 @@ In reality, we do not know exactly how the shared variance is distributed across
 
 ## Partition the explained variance (BONUS) {.smaller}
 
-```{r, echo=FALSE}
+```{r fact-partition-from-individual-models, echo=FALSE}
 
 # Define data points for visualization of sum of squares
 individual_model1 <- 60  # SS for model with IV1

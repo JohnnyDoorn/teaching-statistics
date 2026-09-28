@@ -6,7 +6,7 @@
 
 ## What is a model?
 
-```{r fig.align='center', out.width='90%', echo = FALSE, cache=FALSE}
+```{r bpe-what-is-a-model, fig.align='center', out.width='90%', echo = FALSE, cache=FALSE}
 tBetFun <- function(x, shape1 = 1, shape2 = 1, side = "pos") {
   ds <- dbeta(x, shape1, shape2)
   if (side == "pos") {
@@ -32,7 +32,7 @@ arrows(x0 = 0.8, x1 = 0.8, y0 = 0, y1 = 4.0, lwd = 4, col = cols[3])
 
 ## What does a model predict?
 
-```{r fig.align='center', out.width='90%', echo = FALSE}
+```{r bpe-what-does-a-model-predict, fig.align='center', out.width='90%', echo = FALSE}
 par(mfrow = c(1, 2), cex.main = 0.95)
 cols <- viridis::viridis(6)
 barplot(dbinom(0:10, 10, 0.5), names.arg = 0:10, xlab = "Number of heads", ylab = "Likelihood",
@@ -45,7 +45,7 @@ barplot(c(rep(0, 8), dbinom(8, 10, 0.8)), add = TRUE, col = cols[6])
 ```
 
 ## Model with multiple values
-```{r fig.align='center', out.width='90%', echo = FALSE}
+```{r bpe-model-with-multiple-values, fig.align='center', out.width='90%', echo = FALSE}
 par(mfrow = c(1, 2), cex.main = 0.95)
 cols <- viridis::viridis(6)
 plot(1, 1, type ="n", xlim = c(0,1), ylim = c(0,4), bty = "n", main = "Alex's Model",
@@ -61,7 +61,7 @@ barplot(c(rep(0, 8), 1/11), add = TRUE, col = cols[6])
 
 ## One-sided model
 
-```{r fig.align='center', out.width='90%', echo = FALSE}
+```{r bpe-one-sided-model, fig.align='center', out.width='90%', echo = FALSE}
 par(mfrow = c(1, 2), cex.main = 0.95)
 cols <- viridis::viridis(6)
 plot(1, 1, type ="n", xlim = c(0,1), ylim = c(0,4), bty = "n", main = "Betty's Model",
@@ -90,7 +90,7 @@ $\begin{aligned}
   n &= 10
   \end{aligned}$
 
-```{r, echo=TRUE}
+```{r bpe-ten-coin-tosses, echo=TRUE}
 k = 8
 n = 10
 ```
@@ -102,7 +102,7 @@ How likely is 8 out of 10 for all possible $\theta$ values?
 
 $$\binom{n}{k} \theta^k (1-\theta)^{n-k}$$
 
-```{r fig.align='center', out.width='90%', echo = FALSE}
+```{r bpe-likelihood-function, fig.align='center', out.width='90%', echo = FALSE}
 par(cex = 1.4, cex.lab = 1.4, mar = c(5.1, 4.5, 4.1, 2.1), cex.main = 0.95)
 ss <- seq(0, 1, length.out = 1e4)
 dd <- dbinom(x = 8, size = 10, ss)
@@ -114,7 +114,7 @@ plot(ss, dd, type = "l", bty = "n", las = 1, ylab = bquote("P(Data |" ~ theta * 
 ## Marginal likelihood - $P(data)$
 How likely is 8 out of 10 for all $\theta$ values  **in the model, on average**?
 
-```{r fig.align='center', out.width='90%', echo = FALSE}
+```{r bpe-marginal-likelihood, fig.align='center', out.width='90%', echo = FALSE}
 par(cex = 1.4, cex.lab = 1.4, mar = c(5.1, 4.5, 4.1, 2.1), cex.main = 0.95)
 pCol <- palette.colors(NULL, "Okabe-Ito")
 margLik <- round(1/11, 2)
@@ -136,7 +136,7 @@ abline(h = margLik, lwd = 4, col = "purple")
 Now we can update Alex' belief about the possible values of theta based on the data (the likelihood function) we found. Values with a likelihood higher than the average likelihood receive a boost, and others receive a penalty, in plausibility.
 
 ## Updating beliefs
-```{r fig.align='center', out.width='90%', echo = FALSE}
+```{r bpe-updating-beliefs, fig.align='center', out.width='90%', echo = FALSE}
 par(cex = 1.4, cex.lab = 1.4, mar = c(5.1, 4.5, 4.1, 2.1), cex.main = 0.95)
 pCol <- palette.colors(NULL, "Okabe-Ito")
 margLik <- round(1/11, 2)
@@ -165,7 +165,7 @@ abline(h = margLik, lwd = 4, col = "purple")
 ```
 
 ## Posterior distribution - $P(\theta | data)$
-```{r fig.align='center', out.width='90%', echo = FALSE}
+```{r bpe-posterior-distribution, fig.align='center', out.width='90%', echo = FALSE}
 prior <- dbeta(ss, 1, 1)
 posterior <- prior * dd / margLik
 par(cex = 1.4, cex.lab = 1.4, mar = c(5.1, 4.5, 4.1, 2.1))

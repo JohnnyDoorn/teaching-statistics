@@ -54,5 +54,8 @@ Chapter 14 (§14.1–14.18)
 - To understand mechanics of RM ANOVA, [Exercise 14.1](https://discoverjasp.com/pages/smart_alex#task-14.1)
 - No sums of squares or effect size calculations required for the exam
 
+```{r child="labcoat-leni.qmd"}
+```
+
 ```{r child="../../footer.qmd"}
 ```

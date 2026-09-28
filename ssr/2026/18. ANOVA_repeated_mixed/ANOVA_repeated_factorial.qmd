@@ -1,6 +1,6 @@
 # ANOVA factorial repeated
 
-```{r, echo=FALSE}
+```{r rmfact-anova-factorial-repeated, echo=FALSE}
 rm(list=ls())
 source("../../_setup.R")
 ```
@@ -54,7 +54,7 @@ person | 1_1 | 1_2 | 1_3 | 2_1 | 2_2 | 2_3 | 3_1 | 3_2 | 3_3
 
 ## Data {.smaller}
 
-```{r, echo=FALSE}
+```{r rmfact-data, echo=FALSE}
 data <- read.csv(file = datasetsPath("RM_ANOVA_AlcoholSpeedTime.csv"), header = T)
 
 data <- data[, -2]

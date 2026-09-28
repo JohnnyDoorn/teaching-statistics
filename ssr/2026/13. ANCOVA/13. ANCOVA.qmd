@@ -2,6 +2,7 @@
 title: "13. ANCOVA"
 author: "Johnny van Doorn"
 date: "2 October 2026"
+view: "https://teams.microsoft.com/meet/321076515738520?p=UKADi1oc4Ht5U2tYg7"
 footer: "Scientific & Statistical Reasoning"
 format:
   revealjs:
@@ -41,6 +42,9 @@ Chapter 12 (§12.1–12.12)
 - [Exercise 12.2](https://discoverjasp.com/pages/smart_alex#task-12.2)
 - [Exercise 12.5](https://discoverjasp.com/pages/smart_alex#task-12.5)
 - [Exercise 12.6](https://discoverjasp.com/pages/smart_alex#task-12.6)
+
+```{r child="labcoat-leni.qmd"}
+```
 
 ```{r child="../../footer.qmd"}
 ```

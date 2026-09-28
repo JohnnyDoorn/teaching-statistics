@@ -50,7 +50,7 @@ The $\chi^2$ distribution describes the test statistic under the assumption of $
 
 $df = (r - 1) (c - 1)$ where $r$ is the number of rows and $c$ the number of columns.
 
-```{r, echo=FALSE,render=TRUE}
+```{r chisq-distribution, echo=FALSE,render=TRUE}
 #| output-location: slide
 
 chi <- seq(0,8,.01)
@@ -82,7 +82,7 @@ legend("topright", legend = paste("k =",df), col = mycols, lty = 1, bty = "n")
 
 <small>
 
-```{r, message=FALSE, eval=TRUE, echo=FALSE}
+```{r chisq-data, message=FALSE, eval=TRUE, echo=FALSE}
 source("../../_setup.R")
 gResults <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1I6p6wVmATt8VM0PvGt4lSbFCcV3WrTFs5FUQlG9Q4nQ/edit?usp=sharing')
 noMonth <- sapply(strsplit(gResults$Timestamp, split = "/"), function(x) x[[3]])
@@ -122,14 +122,14 @@ ssrTable(results,
 </small>
 
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, eval=TRUE}
+```{r chisq-install-packages-dt, echo=FALSE, message=FALSE, warning=FALSE, eval=TRUE}
 # Write data for use in SPSS
 write.table(results, "chisqrData.csv", row.names=FALSE)
 ```
 
 ## Calculating $\chi^2$ {.subsection}
 
-```{r, echo=TRUE}
+```{r chisq-observed-table, echo=TRUE}
 observed <- table(results[, c("Lecture", "Personality")])
 observed
 ```
@@ -144,7 +144,7 @@ $\text{observed}_{ij} =
 
 $\text{model}_{ij} = E_{ij} = \frac{\text{row total}_i \times \text{column total}_j}{n }$
 
-```{r, echo=TRUE}
+```{r chisq-marginal-totals, echo=TRUE}
 n   <- sum(observed)
 totExt <- colSums(observed)[1]
 totInt  <- colSums(observed)[2]
@@ -159,7 +159,7 @@ addmargins(observed)
 
 $\text{model}_{ij} = E_{ij} = \frac{\text{row total}_i \times \text{column total}_j}{n }$
 
-```{r, echo=TRUE}
+```{r chisq-expected-frequencies, echo=TRUE}
 modelPredictions <- matrix( c((totExt  * totDig)  / n,
                               (totExt  * totLiv)  / n,
                               (totInt  * totDig)  / n,
@@ -180,7 +180,7 @@ $\text{model}_{ij} =
 
 ## Error = Observed - Model {.subsection}
 
-```{r, echo=TRUE}
+```{r chisq-error-observed-model, echo=TRUE}
 observed
 
 modelPredictions
@@ -192,7 +192,7 @@ observed - modelPredictions
 
 $\chi^2 = \sum \frac{(\text{observed}_{ij} - \text{model}_{ij})^2}{\text{model}_{ij}}$
 
-```{r, echo=TRUE}
+```{r chisq-test-statistic, echo=TRUE}
 # Calculate chi squared
 chi.squared <- sum((observed - modelPredictions)^2 / modelPredictions)
 chi.squared
@@ -203,7 +203,7 @@ chi.squared
 $df = (r - 1) (c - 1)$
 
 ## $P$-value
-```{r, echo=FALSE}
+```{r chisq-value, echo=FALSE}
 df <- 1
 visualize_chisq_base(H = chi.squared, df = df, section = "upper", myLimX = c(0, 5))
 ```
@@ -222,7 +222,7 @@ For 2 x 2 contingency tables, Yates's correction is to prevent overestimation of
 
 $\chi^2 = \sum \frac{ ( | \text{observed}_{ij} - \text{model}_{ij} | - .5)^2}{\text{model}_{ij}}$
 
-```{r, echo=FALSE}
+```{r chisq-yates-s-correction, echo=FALSE}
 #| output-location: slide
 
 # Calculate Yates's corrected chi squared
@@ -250,7 +250,7 @@ visualize_chisq_base(H = chi.squared.yates, df = df, section = "upper", myLimX =
 
 $\text{standardized residuals} = \frac{ \text{observed}_{ij} - \text{model}_{ij} }{ \sqrt{ \text{model}_{ij} } }$
 
-```{r, echo=TRUE}
+```{r chisq-standardized-residuals, echo=TRUE}
 (observed - modelPredictions) / sqrt(modelPredictions)
 ```
 
@@ -258,7 +258,7 @@ $\text{standardized residuals} = \frac{ \text{observed}_{ij} - \text{model}_{ij}
 
 Odds ratio based on the observed values
 
-```{r, echo=TRUE}
+```{r chisq-effect-size, echo=TRUE}
 odds <- round( observed, 2); odds
 ```
 
@@ -271,7 +271,7 @@ $OR = \frac{a \times d}{b \times c} = \frac{`r odds[1,1]` \times `r odds[2,2]`}{
 
 ## Odds
 
-```{r, echo =FALSE}
+```{r chisq-odds-extrovert-introvert, echo =FALSE}
 odds
 ```
 
@@ -285,7 +285,7 @@ In the live responses, there  are +- `r round(odds[2,1] / odds[2,2], 2)` times a
 
 ## Odds
 
-```{r, echo =FALSE}
+```{r chisq-odds-digital-live, echo =FALSE}
 odds
 ```
 

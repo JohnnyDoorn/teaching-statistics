@@ -1,6 +1,6 @@
 # Mixed design ANOVA {.section}
 
-```{r, echo=FALSE}
+```{r mixed-mixed-design-anova, echo=FALSE}
 rm(list=ls())
 source("../../_setup.R")
 ```
@@ -39,7 +39,7 @@ Same as repeated measures ANOVA and same as factorial ANOVA.
 
 ## Data {.smaller}
 
-```{r, echo=FALSE}
+```{r mixed-data, echo=FALSE}
 data <- read.csv(file = datasetsPath("RM_ANOVA_AlcoholSpeedTime.csv"), header = TRUE)
 
 # data[,-1] <- round(data[,-1],2)

@@ -1,0 +1,5 @@
+## Remember me? {.smaller}
+
+![](../../images/t-distribution-shapes.png)
+
+Fatter tails for small $n$ (few degrees of freedom); converges to the standard normal as $n$ grows.

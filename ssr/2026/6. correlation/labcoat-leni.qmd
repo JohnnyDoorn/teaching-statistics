@@ -1,0 +1,16 @@
+<!-- Research question and variables taken from Labcoat Leni's Real Research 7.1
+     in DSUJ ch. 7 (p. 307), reworded as a question. Variable names and
+     descriptions from leni_07.jasp on discoverjasp. There is no data-only file:
+     the book's chamorro_premuzic.jasp does not exist (discoverjasp errata, p. 307),
+     so the data link points at leni_07.jasp, which holds data and results. -->
+
+## Labcoat Leni 7.1
+
+Chamorro-Premuzic et al. (2008): *Why do you like your lecturers?*
+
+Do students like lecturers who resemble themselves?
+
+- `stu_*`: the student's own five personality traits (NEO-FFI)
+- `lec_*`: how much they want each trait in a lecturer, from −5 to +5
+
+[Data + results (.jasp)](https://discoverjasp.com/repository/dsj1_leni/leni_07.jasp) · [Results (.html)](https://discoverjasp.com/repository/dsj1_leni/leni_07.html)

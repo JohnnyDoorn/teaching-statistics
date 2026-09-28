@@ -12,7 +12,7 @@ Source: [wikipedia](https://en.wikipedia.org/wiki/Linear_regression)
 
 ## Outcome vs Model Prediction
 
-```{r, fig.align='center', fig.asp=.5, echo=FALSE}
+```{r mreg-outcome-vs-model-prediction, fig.align='center', fig.asp=.5, echo=FALSE}
 error = c(2, 1, .5, .0001)
 n = 100
 
@@ -84,7 +84,7 @@ This can be checked through:
 * Matrix scatterplot with predictors and outcome variable
 
 
-```{r, echo=FALSE}
+```{r mreg-linearity, echo=FALSE}
 
 par(mfrow = c(1, 2))
 
@@ -123,7 +123,7 @@ abline(lm(y2 ~ x2), col = "red", lwd = 2)
 
 ## Read data {.smaller}
 
-```{r, echo=FALSE, eval=TRUE, warning=FALSE, message=FALSE}
+```{r mreg-read-data, echo=FALSE, eval=TRUE, warning=FALSE, message=FALSE}
 source("../../_setup.R")
 set.seed(273645)
 data <- read.csv(datasetsPath("Album Sales.csv"))[, -4]
@@ -144,13 +144,13 @@ Predict album sales based on airplay and adverts.
 $${sales}_i = b_0 + b_1 {airplay}_i + b_2 {adverts}_i +  \epsilon_i$$
 
 
-```{r, echo=TRUE}
+```{r mreg-regression-model, echo=TRUE}
 fit <- lm(sales ~ airplay + adverts, data = data)
 ```
 
 ## What is the model? {.subsection .smaller}
 
-```{r, echo=FALSE}
+```{r mreg-what-is-the-model, echo=FALSE}
 # fit$coefficients
 
 b.0 <- round(fit$coefficients[1], 2) ## Intercept
@@ -174,7 +174,7 @@ The beta coefficients are:
 
 ## Visual
 
-```{r, echo=FALSE, warning=FALSE, class.source='rglChunk', webgl=TRUE}
+```{r mreg-visual, echo=FALSE, warning=FALSE, class.source='rglChunk', webgl=TRUE}
 # 3d plot package rgl
 # install.packages('rgl')
 if(!"rgl" %in% installed.packages()) { install.packages("rgl") };
@@ -241,7 +241,7 @@ rglwidget()
 
 $\widehat{\text{album sales}} = b_0 + b_1 \text{airplay} + b_2 \text{adverts}$
 
-```{r, echo=TRUE}
+```{r mreg-predicted-values, echo=TRUE}
 predicted.sales <- b.0 + b.1 * airplay + b.2 * adverts
 ```
 
@@ -253,7 +253,7 @@ $\widehat{\text{album sales}} = b_0 + b_1 \text{airplay} + b_2 \text{adverts}$
 
 <!-- $\widehat{\text{model prediction}} = b_0 + b_1 \text{airplay} + b_2 \text{adverts}$ -->
 
-```{r, echo=FALSE}
+```{r mreg-prediction-table, echo=FALSE}
 
 
 ssrTable(cbind(predicted.sales, b.0, b.1, airplay, b.2, adverts)[1:5,],
@@ -268,16 +268,16 @@ thisPred <- b.0 + b.1 * 43 +  b.2 * 10.256 # for participant 1
 
 $\widehat{\text{album sales}} = `r b.0` + `r b.1` \times \text{airplay} + `r b.2` \times \text{adverts} = `r round(thisPred, 3)`$
 
-```{r, echo=FALSE}
+```{r mreg-single-prediction-example, echo=FALSE}
 ```
 
 ## How far are we off?
 
-```{r, echo=TRUE}
+```{r mreg-compute-error, echo=TRUE}
 error <- sales - predicted.sales
 ```
 
-```{r, echo=FALSE}
+```{r mreg-error-table, echo=FALSE}
 ssrTable(data.frame(sales, predicted.sales, error = round(error, 3))[1:5,],
               rownames = FALSE, height = 300,
               options = list(dom = 'Bfrtip',
@@ -288,7 +288,7 @@ ssrTable(data.frame(sales, predicted.sales, error = round(error, 3))[1:5,],
 
 Is that true?
 
-```{r, echo=TRUE}
+```{r mreg-outcome-model-prediction-error, echo=TRUE}
 sales == predicted.sales + error
 ```
 
@@ -296,7 +296,7 @@ sales == predicted.sales + error
 
 ## Visual (subset of 10 albums) {.smaller .subsection}
 
-```{r, fig.align='center', fig.width=15, fig.height = 7, echo=FALSE}
+```{r mreg-visual-subset-of-10-albums, fig.align='center', fig.width=15, fig.height = 7, echo=FALSE}
 par(mfrow = c(1, 3), cex = 1.5)
 plotN <- 10
 # This is all the sales data
@@ -353,7 +353,7 @@ We also call this: $r^2$ or $R^2$.
 
 Why?
 
-```{r, echo=TRUE}
+```{r mreg-explained-variance, echo=TRUE}
 r <- cor(sales, predicted.sales)
 r^2
 ```
@@ -361,7 +361,7 @@ r^2
 
 ## Explained variance {.subsection .smaller}
 
-```{r, fig.align='center', fig.asp=.5, echo=FALSE}
+```{r mreg-explained-variance-plot, fig.align='center', fig.asp=.5, echo=FALSE}
 r.2 <- round(r^2, 2)
 r <- round(r, 2)
 

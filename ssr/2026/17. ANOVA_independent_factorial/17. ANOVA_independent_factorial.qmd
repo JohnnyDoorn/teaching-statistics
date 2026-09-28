@@ -47,5 +47,8 @@ With multiple predictor variables:
 - [Exercise 13.6](https://discoverjasp.com/pages/smart_alex#task-13.6)
 - You do not need to compute effects sizes by hand!
 
+```{r child="labcoat-leni.qmd"}
+```
+
 ```{r child="../../footer.qmd"}
 ```

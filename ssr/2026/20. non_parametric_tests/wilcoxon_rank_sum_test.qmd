@@ -1,4 +1,4 @@
-```{r, echo=FALSE}
+```{r wrs-chunk, echo=FALSE}
 source("../../_setup.R")
 ```
 
@@ -17,7 +17,7 @@ By ranking all values and then summing the ranks per group, one would expect und
 After standardizing the test statistic (summed ranks for one group), we can use the standard normal distribution as the sampling distribution.
 
 
-```{r, echo=FALSE}
+```{r wrs-wilcoxon-rank-sum-test, echo=FALSE}
 set.seed(123)
 n      <- 20
 factor <- rep(c("Ecstasy","Alcohol"),each=n/2)
@@ -39,7 +39,7 @@ data$rankedBDI <- rank(data$Sunday.BDI)
 ## Example
 [Link](https://discoverjasp.com/repository/dsj1_data/data/drug_long.jasp)
 
-```{r, echo=FALSE}
+```{r wrs-example, echo=FALSE}
 ssrTable(data, height = 300,
           options = list(dom = 'Bfrtip',
                          buttons = c('csv')))
@@ -47,14 +47,14 @@ ssrTable(data, height = 300,
 
 ## Test statistic W is the sum of ranks per group {.subsection}
 
-```{r, echo=TRUE}
+```{r wrs-rank-sums, echo=TRUE}
 rankSums <- aggregate(rankedBDI ~ Drug, data, sum)
 rankSums
 ```
 
 We can take the sum of ranks for the first group as W:  
 
-```{r, echo=TRUE}
+```{r wrs-w-statistic, echo=TRUE}
 W <- rankSums[1, 2]
 W
 ```
@@ -63,7 +63,7 @@ W
 
 JASP reports the value of U, which is W with its minimum value subtracted:
 
-```{r, echo=TRUE}
+```{r wrs-subtracting-the-minimum-score, echo=TRUE}
 W.min <- sum(1:10); W.min
 
 U <- W - W.min
@@ -76,7 +76,7 @@ To calculate the Z-score we need to standardize the W. To do so we need the mean
 
 For this we need the sample sizes for each group.
 
-```{r, echo=TRUE}
+```{r wrs-normal-approximation-for-w, echo=TRUE}
 n <- aggregate(rankedBDI ~ factor, data, length)
 
 n.1 <- n$rankedBDI[1]
@@ -89,7 +89,7 @@ cbind(n.1, n.2)
 
 $$\bar{W}_s=\frac{n_1(n_1+n_2+1)}{2}$$
   
-```{r, echo=TRUE}
+```{r wrs-mean-w-under, echo=TRUE}
 W.mean <- (n.1 * (n.1 + n.2 + 1)) / 2
 W.mean # this is the middle point between the min and max value of W
 
@@ -101,7 +101,7 @@ W.min <- sum(1:10); W.min
 
 $${SE}_{\bar{W}_s}=\sqrt{ \frac{n_1 n_2 (n_1+n_2+1)}{12} }$$
   
-```{r, echo=TRUE}
+```{r wrs-se-w, echo=TRUE}
 W.se <- sqrt((n.1 * n.2 * (n.1 + n.2 + 1)) / 12)
 W.se
 ```
@@ -114,21 +114,21 @@ Which looks a lot like
 
 $$\frac{X - \bar{X}}{{SE}_X} \text{or} \frac{b - \mu_{b}}{{SE}_b} $$
   
-```{r, echo=TRUE}
+```{r wrs-calculate-z, echo=TRUE}
 z <- (W - W.mean) / W.se
 z
 ```
 
 ## Test for significance 2 sided
 
-```{r, echo=FALSE, warning=FALSE, fig.align='center'}
+```{r wrs-test-for-significance-2-sided, echo=FALSE, warning=FALSE, fig.align='center'}
 visualize_normal_base(z, side = "two-sided")
 ```
 
 
 ## Test for significance 1 sided
 
-```{r, echo=FALSE, warning=FALSE, fig.align='center'}
+```{r wrs-test-for-significance-1-sided, echo=FALSE, warning=FALSE, fig.align='center'}
 visualize_normal_base(z, side = "negative")
 ```
 
@@ -138,7 +138,7 @@ visualize_normal_base(z, side = "negative")
 
 $$r_{bs} = 1 - \frac{2*W}{n_1*n_2}$$
   
-```{r, echo=TRUE}
+```{r wrs-effect-size-rank-biserial-correlation, echo=TRUE}
 W <- W - W.min # use modern W
 biserialCor <- 1 - (2*(W)) / (n.1*n.2);
 biserialCor
@@ -147,7 +147,7 @@ biserialCor
 
 ## Robustness under monotonic transformations
 
-```{r, echo = FALSE, message=FALSE }
+```{r wrs-monotonic-transformation-data, echo = FALSE, message=FALSE }
 set.seed(123)
 n <- 20
 y <- runif(n, 0, 0.5)
@@ -178,7 +178,7 @@ y4Stats <- c(t.test(y4 ~ gr)$statistic, wilcox.test(y4 ~ gr)$statistic)
 yList <- list(y1, y2, y3, y4)
 ```
 
-```{r, echo= FALSE}
+```{r wrs-monotonic-transformation-plots, echo= FALSE}
 par(mfrow = c(2, 2), cex = 1, bty = "n")
 plotCex<- 1
 boxplot(y2 ~ gr, xlab = "Condition", ylab = "DV", col = c("darkgreen", "darkorange"),

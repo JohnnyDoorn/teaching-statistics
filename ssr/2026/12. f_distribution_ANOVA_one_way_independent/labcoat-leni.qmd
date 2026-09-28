@@ -1,0 +1,14 @@
+<!-- Research question and variables taken from Labcoat Leni's Real Research 11.1
+     in DSUJ ch. 11 (p. 471), reworded as questions. Variable names and levels
+     from the data file on discoverjasp (the book spells it jacob_2019.jasp). -->
+
+## Labcoat Leni 11.1
+
+Jakob et al. (2019): *Science behind the magic?*
+
+Does Machiavellianism differ between the Hogwarts houses? Do Slytherins score higher than the other three?
+
+- `Sorting house`: Sorting Hat quiz result (Gryffindor, Hufflepuff, Ravenclaw, Slytherin)
+- `Machiavellianism`: personality trait score
+
+[Data (.jasp)](https://discoverjasp.com/repository/dsj1_data/data/jakob_2019.jasp) · [Results (.jasp)](https://discoverjasp.com/repository/dsj1_leni/leni_11.jasp) · [Results (.html)](https://discoverjasp.com/repository/dsj1_leni/leni_11.html)

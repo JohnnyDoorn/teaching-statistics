@@ -5,7 +5,7 @@
   MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 </script>
 
-```{r, echo=FALSE}
+```{r mod-moderation, echo=FALSE}
 rm(list=ls())
 source("../../_setup.R")
 library("manipulateWidget")
@@ -49,7 +49,7 @@ $\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
 <!-- #                          .4*predictor*ml.coffee +  -->
 <!-- #                          error -->
 <!-- # ``` -->
-```{r, echo=FALSE}
+```{r mod-model, echo=FALSE}
 set.seed(283) ## 
 n <- 100
 hours.awake <- round(runif(n, 1, 18))
@@ -75,7 +75,7 @@ wakefulness <- intercept + -3 * hours.awake +
 
 
 ## View data {.smaller}
-```{r, echo=FALSE}
+```{r mod-view-data, echo=FALSE}
 data <- data.frame(hours.awake, ml.coffee, wakefulness)
 # save(data, file="moderation.rdata")
 ssrTable(round(data,2), 
@@ -88,20 +88,20 @@ ssrTable(round(data,2),
 
 ## Correlations
 
-```{r, echo=TRUE}
+```{r mod-correlations, echo=TRUE}
 cor(data)
 ```
 
 ## Scatterplots {.subsection}
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, prompt=FALSE, results='hide'}
+```{r mod-scatterplots, echo=FALSE, warning=FALSE, message=FALSE, prompt=FALSE, results='hide'}
 plot(data, pch = 21, bg = palette.colors(n = 9, palette = "Okabe-Ito"))
 attach(data)
 ```
 
 ## 3D plot
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r mod-3d-plot, echo=FALSE, warning=FALSE, message=FALSE}
 ## 3d plot package rgl
 ## install.packages('rgl')
 library(rgl)
@@ -121,14 +121,14 @@ Take it for a spin (does not work on tablet)
 
 ## 1 SD planes
 
-```{r, echo=TRUE}
+```{r mod-sd-and-quantile-planes, echo=TRUE}
 sds       <- c(mean(ml.coffee)+(sd(ml.coffee)*c(-1,0,1)))
 quantiles <- as.vector(quantile(ml.coffee,seq(.1,.9,.1)))
 ```
 
 ##
 
-```{r, eval=TRUE, echo=FALSE, warning=FALSE, message=FALSE, rgl.useNULL=TRUE}
+```{r mod-sd-planes-3d-plot, eval=TRUE, echo=FALSE, warning=FALSE, message=FALSE, rgl.useNULL=TRUE}
 my.plot
 
 par3d(mouseMode = "zAxis")
@@ -155,7 +155,7 @@ rglwidget()
 
 ## Fit model { .subsection}
 
-```{r, echo=TRUE}
+```{r mod-fit-model, echo=TRUE}
 fit <- lm(wakefulness ~ hours.awake + ml.coffee + hours.awake*ml.coffee); summary(fit)$coefficients
 ```
 
@@ -170,7 +170,7 @@ $\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
 $\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
 \color{black}\widehat{Out_i} = `r round(fit$coefficients[1],2)` + `r round(fit$coefficients[2],2)` \times `r hours.awake[1]` + `r round(fit$coefficients[3],2)` \times `r ml.coffee[1]` + \color{red} `r round(fit$coefficients[4],2)` \times `r hours.awake[1]` \times `r ml.coffee[1]` \color{black} \approx `r round(fit$fitted.values[1], 2)`$
 
-```{r, echo=FALSE}
+```{r mod-regression-equation-function, echo=FALSE}
 regeq <- function(model, hours.awake, ml.coffee) { 
     fit$coefficients[1] + 
     fit$coefficients[2]*hours.awake + 
@@ -191,7 +191,7 @@ ssrTable(data, rownames = FALSE,
                          buttons = c('csv')))
 ```
 
-```{r, echo=FALSE}
+```{r mod-prediction-surface, echo=FALSE}
 colnames(z.pre) <- x.pre
 rownames(z.pre) <- y.mod
 save(data, x.pre, y.mod, z.pre, quantiles, sds, file="moderation.rdata")
@@ -200,7 +200,7 @@ save(data, x.pre, y.mod, z.pre, quantiles, sds, file="moderation.rdata")
 
 ## Expected surface
 
-```{r, eval=TRUE, echo=FALSE, warning=FALSE, message=FALSE, rgl.useNULL=TRUE}
+```{r mod-expected-surface, eval=TRUE, echo=FALSE, warning=FALSE, message=FALSE, rgl.useNULL=TRUE}
 my.plot
 
 surface3d(x.pre,y.mod,z.pre, color = c("green"))
@@ -218,7 +218,7 @@ rglwidget(elementId="plot3drgl2", reuse = FALSE)
 ## Expected values {.subsection}
 
 
-```{r, fig.align='center', fig.width=15, fig.height = 7, echo=FALSE}
+```{r mod-expected-values, fig.align='center', fig.width=15, fig.height = 7, echo=FALSE}
 par(mfrow = c(1, 3), cex = 1.5)
 data$prediction <- prediction <- fit$fitted.values
 
@@ -267,7 +267,7 @@ $r^2$ is the proportion of <span style="color: blue;">blue</span> to <span style
 
 ## Expected vs. observed {.subsection}
 
-```{r, fig.align='center', echo=FALSE}
+```{r mod-expected-vs-observed, fig.align='center', echo=FALSE}
  plot(prediction, outcome, las = 1, ylab = "Outcome", xlab = "Model Prediction", 
       main =  bquote("r ="~ .(round(cor(prediction, outcome), 3)) ~ "," ~ r^2 ~ " = " ~ .(round(cor(prediction, outcome)^2, 3))), 
        pch = 21, bg = "turquoise", bty = "n")
@@ -278,12 +278,12 @@ $r^2$ is the proportion of <span style="color: blue;">blue</span> to <span style
   
 ## Turn quantitative into categorical?!
 
-```{r}
+```{r mod-turn-quantitative-into-categorical}
 ## Round to number of cups of coffee, always rounding down
 data$cups.coffee <- data$ml.coffee %/% 150
 ```
 
-```{r, echo=FALSE}
+```{r mod-round-to-cups, echo=FALSE}
 write.csv(data, "moderation-coffee.csv", row.names = FALSE)
 ssrTable(round(data,2)[, c(2, 5)], 
           rownames   = FALSE, 

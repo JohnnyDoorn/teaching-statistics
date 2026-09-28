@@ -10,9 +10,13 @@ The handouts are 1 continuous page, while the slides are spread across multiple 
 # One knob per academic year: bump this and everything below follows.
 year_dir    <- "2026"
 
-# How many lectures to list, counting from the first one of the year. Bump it by
-# one as each lecture is given; set it to Inf to show the whole year at once.
-n_lectures_shown <- 4
+# Two knobs, both lecture numbers (the leading number of the wrapper file):
+# - list_up_to:  lectures listed in the table, so students see the layout of the
+#                block ahead. Set it to Inf to list the whole year.
+# - links_up_to: lectures whose Handout / Slides / Watch links are shown; later
+#                rows get a dash. Bump it to the next lecture as each one is given.
+list_up_to  <- 20
+links_up_to <- 11
 course.path <- paste0("ssr/", year_dir, "/")
 
 # Resolve the lecture folder whether this file is knit standalone (wd is already
@@ -69,10 +73,12 @@ library("dplyr")
 # Extract the numeric part from the "Lecture" column
 lecture.list$LectureNumber <- as.numeric(sub("^([0-9]+).*", "\\1", lecture.list$Lecture))
 
-# Sort the data frame by the extracted lecture number, then keep only the first
-# n_lectures_shown of them (see the knob at the top).
+# Sort on lecture number, keep lectures up to list_up_to, and blank the links of
+# the ones after links_up_to (see the knobs at the top).
 lecture.list <- lecture.list[order(lecture.list$LectureNumber), ]
-lecture.list <- head(lecture.list, n_lectures_shown)
+lecture.list <- lecture.list[lecture.list$LectureNumber <= list_up_to, ]
+noLinks <- lecture.list$LectureNumber > links_up_to
+lecture.list[noLinks, c("Handout", "Slides", "Watch")] <- "-"
 # lecture.list$Date <- lubridate::dmy(lecture.list$Date)
 # lubridate::mdy(lecture.list$Date)
 lecture.list <- lecture.list[, -(ncol(lecture.list))]

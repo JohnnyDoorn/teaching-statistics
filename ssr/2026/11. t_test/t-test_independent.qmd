@@ -168,6 +168,7 @@ leveneTest(y = data$IQ, group = data$year)
 ```
 
 But more nuance lies in comparing observed sd's or variances:
+
 ```{r indep-observed-sds, echo=FALSE, warning=FALSE, message=FALSE}
 tapply(data$IQ, data$year, sd)
 ```

@@ -1,0 +1,34 @@
+<!-- Research questions and variables taken from Labcoat Leni's Real Research
+     16.1 and 16.2 in DSUJ ch. 16 (pp. 638, 641), reworded as questions.
+     Variable names from the data files on discoverjasp; both hold frequency
+     tables, so a counts column is listed. 16.2 heading capitalized as on
+     discoverjasp ("Black American"); the book has lowercase. Callout text adapted
+     from the discoverjasp 16.2 solution and Beckham's Wikipedia lead (2026-09-28). -->
+
+## Labcoat Leni 16.1
+
+Daniels (2012): *The impact of sexualized images on women's self-evaluations*
+
+Is the type of image viewed related to self-objectification?
+
+- `picture`: performance vs. sexualized athlete images
+- `theme_present`: self-objectification theme present or absent
+- `self_evaluation`: counts
+
+[Data (.jasp)](https://discoverjasp.com/repository/dsj1_data/data/daniels_2012.jasp) · [Results (.jasp)](https://discoverjasp.com/repository/dsj1_leni/leni_16a.jasp) · [Results (.html)](https://discoverjasp.com/repository/dsj1_leni/leni_16a.html)
+
+## Labcoat Leni 16.2 {.smaller}
+
+Beckham (1929): *Is the Black American happy?*
+
+Do yes/no answers differ between professions? One test for each of the three questions.
+
+- `profession`: the respondent's job
+- `response`: yes or no
+- `happy`, `you_happy`, `should_be_happy`: counts for each question
+
+[Data (.jasp)](https://discoverjasp.com/repository/dsj1_data/data/beckham_1929.jasp) · [Results (.jasp)](https://discoverjasp.com/repository/dsj1_leni/leni_16b.jasp) · [Results (.html)](https://discoverjasp.com/repository/dsj1_leni/leni_16b.html)
+
+::: {.callout-note}
+The 1929 phrasing may read as controversial today, but the study is a landmark. With just three simple questions, pioneering school psychologist [Albert Sidney Beckham](https://en.wikipedia.org/wiki/Albert_Sidney_Beckham) (1897–1964) illuminated big real-world issues for a marginalized group, issues that mattered to hundreds of thousands of people.
+:::

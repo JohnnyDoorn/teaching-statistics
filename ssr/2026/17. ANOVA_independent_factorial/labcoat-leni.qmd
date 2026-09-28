@@ -1,0 +1,15 @@
+<!-- Research question and variables taken from Labcoat Leni's Real Research 13.1
+     in DSUJ ch. 13 (p. 534), reworded as a question. Variable names and levels
+     from the data file on discoverjasp. -->
+
+## Labcoat Leni 13.1
+
+Davey et al. (2003): *Don't forget your toothbrush*
+
+Does the effect of the stop rule on checking depend on mood?
+
+- `mood`: negative, positive or neutral mood induction
+- `stop_rule`: "as many as you can" vs. "feel like continuing"
+- `checks`: number of things to check before going on holiday
+
+[Data (.jasp)](https://discoverjasp.com/repository/dsj1_data/data/davey_2003.jasp) · [Results (.jasp)](https://discoverjasp.com/repository/dsj1_leni/leni_13.jasp) · [Results (.html)](https://discoverjasp.com/repository/dsj1_leni/leni_13.html)

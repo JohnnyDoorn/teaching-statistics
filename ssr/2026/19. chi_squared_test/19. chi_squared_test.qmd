@@ -42,5 +42,8 @@ Chapter 16 (§16.1–16.10)
 - [Exercise 16.6](https://discoverjasp.com/pages/smart_alex#task-16.6)
 - [Exercise 16.7](https://discoverjasp.com/pages/smart_alex#task-16.7)
 
+```{r child="labcoat-leni.qmd"}
+```
+
 ```{r child="../../footer.qmd"}
 ```

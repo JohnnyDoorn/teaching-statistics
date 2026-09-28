@@ -467,7 +467,7 @@ Johnny van Doorn
 <p>The <span class="math inline">\(\chi^2\)</span> distribution describes the test statistic under the assumption of <span class="math inline">\(H_0\)</span>, given the degrees of freedom.</p>
 <p><span class="math inline">\(df = (r - 1) (c - 1)\)</span> where <span class="math inline">\(r\)</span> is the number of rows and <span class="math inline">\(c\)</span> the number of columns.</p>
 
-<img data-src="19.-chi_squared_test_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
+<img data-src="19.-chi_squared_test_files/figure-revealjs/chisq-distribution-1.png" width="960" class="r-stretch"></section>
 <section id="experiment" class="slide level2 flexbox vcenter">
 <h2>Experiment</h2>
 
@@ -478,8 +478,8 @@ Johnny van Doorn
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-b324c0eb8dba3f51052c" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-b324c0eb8dba3f51052c">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["Cats","Dogs","Dogs","Dogs","Dogs","Cats","Dogs","Cats","Cats","Cats","Dogs","Dogs","Cats","Other","Cats","Cats","Dogs","Cats","Cats","Other","Cats","Dogs","Dogs","Cats","Dogs","Dogs","Other","Dogs","Cats","Dogs","Cats","Cats","Dogs","Dogs","Dogs","Other","Other","Cats","Cats","Other","Cats","Cats","Dogs","Dogs","Cats","Cats","Dogs","Dogs","Cats","Dogs","Other","Dogs"],["Live","Live","Live","Live","Live","Live","Live","Live","Digital","Live","Live","Live","Live","Live","Live","Digital","Live","Live","Live","Live","Live","Live","Live","Digital","Live","Digital","Live","Digital","Live","Digital","Digital","Digital","Live","Digital","Digital","Live","Live","Live","Digital","Live","Digital","Digital","Digital","Digital","Digital","Digital","Digital","Digital","Digital","Digital","Digital","Digital"],["Introvert","Extrovert","Extrovert","Introvert","Extrovert","Introvert","Introvert","Introvert","Introvert","Extrovert","Extrovert","Introvert","Extrovert","Extrovert","Introvert","Introvert","Introvert","Introvert","Introvert","Extrovert","Extrovert","Extrovert","Extrovert","Introvert","Introvert","Extrovert","Introvert","Introvert","Introvert","Extrovert","Introvert","Introvert","Extrovert","Introvert","Introvert","Introvert","Extrovert","Introvert","Extrovert","Introvert","Introvert","Introvert","Extrovert","Extrovert","Introvert","Extrovert","Extrovert","Extrovert","Introvert","Extrovert","Introvert","Extrovert"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Animal<\/th>\n      <th>Lecture<\/th>\n      <th>Personality<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":350,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"name":"Animal","targets":0},{"name":"Lecture","targets":1},{"name":"Personality","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-b321fc766396cf90bcb2" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-b321fc766396cf90bcb2">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["Cats","Dogs","Dogs","Dogs","Dogs","Cats","Dogs","Cats","Cats","Cats","Dogs","Dogs","Cats","Other","Cats","Cats","Dogs","Cats","Cats","Other","Cats","Dogs","Dogs","Cats","Dogs","Dogs","Other","Dogs","Cats","Dogs","Cats","Cats","Dogs","Dogs","Dogs","Other","Other","Cats","Cats","Other","Cats","Cats","Dogs","Dogs","Cats","Cats","Dogs","Dogs","Cats","Dogs","Other","Dogs"],["Live","Live","Live","Live","Live","Live","Live","Live","Digital","Live","Live","Live","Live","Live","Live","Digital","Live","Live","Live","Live","Live","Live","Live","Digital","Live","Digital","Live","Digital","Live","Digital","Digital","Digital","Live","Digital","Digital","Live","Live","Live","Digital","Live","Digital","Digital","Digital","Digital","Digital","Digital","Digital","Digital","Digital","Digital","Digital","Digital"],["Introvert","Extrovert","Extrovert","Introvert","Extrovert","Introvert","Introvert","Introvert","Introvert","Extrovert","Extrovert","Introvert","Extrovert","Extrovert","Introvert","Introvert","Introvert","Introvert","Introvert","Extrovert","Extrovert","Extrovert","Extrovert","Introvert","Introvert","Extrovert","Introvert","Introvert","Introvert","Extrovert","Introvert","Introvert","Extrovert","Introvert","Introvert","Introvert","Extrovert","Introvert","Extrovert","Introvert","Introvert","Introvert","Extrovert","Extrovert","Introvert","Extrovert","Extrovert","Extrovert","Introvert","Extrovert","Introvert","Extrovert"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Animal<\/th>\n      <th>Lecture<\/th>\n      <th>Personality<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":350,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"name":"Animal","targets":0},{"name":"Lecture","targets":1},{"name":"Personality","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </small><p><small></small></p>
@@ -584,7 +584,7 @@ Lecture    Extrovert  Introvert
 <section id="p-value" class="slide level2">
 <h2><span class="math inline">\(P\)</span>-value</h2>
 
-<img data-src="19.-chi_squared_test_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
+<img data-src="19.-chi_squared_test_files/figure-revealjs/chisq-value-1.png" width="960" class="r-stretch"></section>
 <section id="fishers-exact-test" class="slide level2 subsection">
 <h2>Fisher’s exact test</h2>
 <p>Calculates exact <span class="math inline">\(\chi^2\)</span> for small samples (at least one cell of the table has an expected count smaller than 5), when the <span class="math inline">\(\chi^2\)</span> approximation does not yet suffice.</p>
@@ -612,7 +612,7 @@ Lecture    Extrovert  Introvert
 <!-- ll.ratio <- 2 * sum(observed * log(observed / modelPredictions) ); ll.ratio -->
 <!-- visualize.chisq(ll.ratio, df, section='upper') -->
 <!-- ``` -->
-<img data-src="19.-chi_squared_test_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section>
+<img data-src="19.-chi_squared_test_files/figure-revealjs/chisq-yates-s-correction-1.png" width="960" class="r-stretch"></section>
 <section id="standardized-residuals" class="slide level2 subsection">
 <h2>Standardized residuals</h2>
 <p><span class="math inline">\(\text{standardized residuals} = \frac{ \text{observed}_{ij} - \text{model}_{ij} }{ \sqrt{ \text{model}_{ij} } }\)</span></p>
@@ -701,6 +701,48 @@ Lecture   Extrovert Introvert
 <li><a href="https://discoverjasp.com/pages/smart_alex#task-16.6">Exercise 16.6</a></li>
 <li><a href="https://discoverjasp.com/pages/smart_alex#task-16.7">Exercise 16.7</a></li>
 </ul>
+
+<!-- Research questions and variables taken from Labcoat Leni's Real Research
+     16.1 and 16.2 in DSUJ ch. 16 (pp. 638, 641), reworded as questions.
+     Variable names from the data files on discoverjasp; both hold frequency
+     tables, so a counts column is listed. 16.2 heading capitalized as on
+     discoverjasp ("Black American"); the book has lowercase. Callout text adapted
+     from the discoverjasp 16.2 solution and Beckham's Wikipedia lead (2026-09-28). -->
+</section>
+<section id="labcoat-leni-16.1" class="slide level2">
+<h2>Labcoat Leni 16.1</h2>
+<p>Daniels (2012): <em>The impact of sexualized images on women’s self-evaluations</em></p>
+<p>Is the type of image viewed related to self-objectification?</p>
+<ul>
+<li><code>picture</code>: performance vs.&nbsp;sexualized athlete images</li>
+<li><code>theme_present</code>: self-objectification theme present or absent</li>
+<li><code>self_evaluation</code>: counts</li>
+</ul>
+<p><a href="https://discoverjasp.com/repository/dsj1_data/data/daniels_2012.jasp">Data (.jasp)</a> · <a href="https://discoverjasp.com/repository/dsj1_leni/leni_16a.jasp">Results (.jasp)</a> · <a href="https://discoverjasp.com/repository/dsj1_leni/leni_16a.html">Results (.html)</a></p>
+</section>
+<section id="labcoat-leni-16.2" class="slide level2 smaller">
+<h2>Labcoat Leni 16.2</h2>
+<p>Beckham (1929): <em>Is the Black American happy?</em></p>
+<p>Do yes/no answers differ between professions? One test for each of the three questions.</p>
+<ul>
+<li><code>profession</code>: the respondent’s job</li>
+<li><code>response</code>: yes or no</li>
+<li><code>happy</code>, <code>you_happy</code>, <code>should_be_happy</code>: counts for each question</li>
+</ul>
+<p><a href="https://discoverjasp.com/repository/dsj1_data/data/beckham_1929.jasp">Data (.jasp)</a> · <a href="https://discoverjasp.com/repository/dsj1_leni/leni_16b.jasp">Results (.jasp)</a> · <a href="https://discoverjasp.com/repository/dsj1_leni/leni_16b.html">Results (.html)</a></p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>The 1929 phrasing may read as controversial today, but the study is a landmark. With just three simple questions, pioneering school psychologist <a href="https://en.wikipedia.org/wiki/Albert_Sidney_Beckham">Albert Sidney Beckham</a> (1897–1964) illuminated big real-world issues for a marginalized group, issues that mattered to hundreds of thousands of people.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="contact" class="slide level2">
 <h2>Contact</h2>

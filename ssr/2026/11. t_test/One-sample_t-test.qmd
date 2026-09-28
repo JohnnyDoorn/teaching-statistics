@@ -10,14 +10,27 @@ Compare 1 group mean to a hypothesized value
 
 ## Models {.center}
 
-<div style="font-size:200%;;">
+<div style="font-size:150%;;">
 $$\text{outcome} = \text{model} + \text{error}$$
 </div>
 
 
+What does each model predict?
+
+. . .
+
+:::: {.columns}
+::: {.column width="50%"}
 $H_0:  \text{model} = 120$
 
+> Uses a postulated value
+:::
+::: {.column width="50%"}
 $H_A:  \text{model} = \bar{x}$
+
+> Uses the observed data
+:::
+::::
 
 ## Hypotheses {.subsection .smaller}
 

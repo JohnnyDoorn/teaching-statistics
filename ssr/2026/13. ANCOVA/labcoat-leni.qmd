@@ -1,0 +1,16 @@
+<!-- Research question and variables taken from Labcoat Leni's Real Research 12.1
+     in DSUJ ch. 12 (p. 497), reworded as a question. Variable names and levels
+     from the data file on discoverjasp (muris_2018.jasp; the book says
+     muris_2008.jasp). -->
+
+## Labcoat Leni 12.1
+
+Muris et al. (2008): *Space invaders*
+
+Does negative feedback training make children interpret situations more negatively?
+
+- `training`: positive vs. negative feedback in 30 scenarios
+- `int_bias`: high = interprets situations negatively
+- Adjusting for `age`, `gender` and `scared` (child anxiety)
+
+[Data (.jasp)](https://discoverjasp.com/repository/dsj1_data/data/muris_2018.jasp) · [Results (.jasp)](https://discoverjasp.com/repository/dsj1_leni/leni_12.jasp) · [Results (.html)](https://discoverjasp.com/repository/dsj1_leni/leni_12.html)

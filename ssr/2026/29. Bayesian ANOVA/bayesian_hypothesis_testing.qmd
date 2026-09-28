@@ -16,7 +16,7 @@ $$\underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}$$
 A Bayes factor of ${BF}_{10} = 3$, means that the data are 3 times more likely under the alternative model than under the null model.
 
 ## Bayes Factor {.smaller}
-```{r fig.align='center', out.width='90%', echo = FALSE}
+```{r bht-bayes-factor, fig.align='center', out.width='90%', echo = FALSE}
 par(mfrow = c(1, 2), cex.main = 0.95)
 cols <- viridis::viridis(6)
 barplot(dbinom(0:10, 10, 0.5), names.arg = 0:10, xlab = "Number of heads", ylab = "Likelihood",

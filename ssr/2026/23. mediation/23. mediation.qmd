@@ -40,5 +40,8 @@ Chapter 10 (§10.4–10.7)
 - [Exercise 10.4](https://discoverjasp.com/pages/smart_alex#task-10.4)
 - [Exercise 10.5](https://discoverjasp.com/pages/smart_alex#task-10.5)
 
+```{r child="labcoat-leni.qmd"}
+```
+
 ```{r child="../../footer.qmd"}
 ```

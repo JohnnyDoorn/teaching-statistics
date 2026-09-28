@@ -1,4 +1,4 @@
-```{r, echo=FALSE}
+```{r kw-chunk, echo=FALSE}
 source("../../_setup.R")
 library("visualize")
 
@@ -17,7 +17,7 @@ The Kruskal-Wallis test essentially subtracts the expected mean ranking from eac
 
 <!-- ## Simulate data -->
 
-```{r, echo=FALSE}
+```{r kw-kruskal-wallis-test, echo=FALSE}
 # set.seed(2348586)
 # n      <- 30
 # factor <- rep(c("ecstasy","alcohol","control"), each=n/3)
@@ -41,7 +41,7 @@ ssrTable(data, options = list(iDisplayLength = 7))
 
 ## Assign ranks {.subsection}
 
-```{r, echo=TRUE}
+```{r kw-assign-ranks, echo=TRUE}
 # Assign ranks
 data$ranks <- rank(data$Testosterone)
 ```
@@ -49,7 +49,7 @@ data$ranks <- rank(data$Testosterone)
 ## The data {.smaller}
 [Link](https://discoverjasp.com/repository/dsj1_data/data/soya.jasp)
 
-```{r, echo=FALSE}
+```{r kw-the-data, echo=FALSE}
 ssrTable(data, height = 300,
           options = list(dom = 'Bfrtip',
                          buttons = c('csv')))
@@ -69,7 +69,7 @@ $$H = \frac{12}{N(N+1)} \sum_{i=1}^k \frac{R_i^2}{n_i} - 3(N+1)$$
 
 ## Calculate H
 
-```{r, echo=TRUE}
+```{r kw-rank-sums, echo=TRUE}
 # Now we need the sum of the ranks per group.
 R.i <- aggregate(ranks ~ Soya, data = data, sum)$ranks
 R.i
@@ -86,21 +86,21 @@ n.i
 
 $$H = \frac{12}{N(N+1)} \sum_{i=1}^k \frac{R_i^2}{n_i} - 3(N+1)$$
 
-```{r, echo=TRUE}
+```{r kw-h-statistic, echo=TRUE}
 H <- ( 12/(N*(N+1)) ) * sum(R.i^2/n.i) - 3*(N+1)
 H
 ```
 
 And the degrees of freedom
 
-```{r, echo=TRUE}
+```{r kw-h-p-value, echo=TRUE}
 k  <- 4
 df <- k - 1
 ```
 
 ## Test for significance {.subsection}
 
-```{r, fig.align='center', warning=FALSE, echo=FALSE}
+```{r kw-test-for-significance, fig.align='center', warning=FALSE, echo=FALSE}
 visualize_chisq_base(H = H, df = df, section = "upper")
 ```
 

@@ -76,5 +76,8 @@ Chapter 7 (§7.1–7.8), 5.7 (Scatterplots), 2.8–2.9 (Standard error &amp; con
 - [Exercise 7.6](https://discoverjasp.com/pages/smart_alex#task-7.6)
 - [Exercise 7.7](https://discoverjasp.com/pages/smart_alex#task-7.7)
 
+```{r child="labcoat-leni.qmd"}
+```
+
 ```{r child="../../footer.qmd"}
 ```

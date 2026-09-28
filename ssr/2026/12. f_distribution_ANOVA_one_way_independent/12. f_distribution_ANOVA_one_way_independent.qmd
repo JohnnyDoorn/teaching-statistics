@@ -3,6 +3,7 @@ title: "12. ANOVA"
 subtitle: "One-way independent ANOVA"
 author: "Johnny van Doorn"
 date: "30 September 2026"
+view: "https://teams.microsoft.com/meet/383013566330381?p=J5cLpg457MUfuWlfF1"
 footer: "Scientific & Statistical Reasoning"
 format:
   revealjs:
@@ -45,6 +46,9 @@ Chapter 11 (§11.1–11.13)
 - [Exercise 11.4](https://discoverjasp.com/pages/smart_alex#task-11.4)
 - How would conclusions/interpretations differ for α = 0.01?
 - How are the assumptions looking for these data sets?
+
+```{r child="labcoat-leni.qmd"}
+```
 
 ```{r child="../../footer.qmd"}
 ```

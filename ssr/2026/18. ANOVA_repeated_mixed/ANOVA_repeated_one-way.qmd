@@ -1,6 +1,6 @@
 # ANOVA<br>One-way repeated
 
-```{r, echo=FALSE}
+```{r rm-anova-br-one-way-repeated, echo=FALSE}
 rm(list=ls())
 source("../../_setup.R")
 ```
@@ -49,7 +49,7 @@ Measure driving ability in a driving simulator. Test in three consecutive condit
 
 ## The data {.smaller}
 
-```{r, echo=FALSE}
+```{r rm-the-data, echo=FALSE}
 nSample <- 5
 data <- read.csv(datasetsPath("RM_ANOVA_Alcohol.csv"))[1:nSample, ]
 longdata <- read.csv(datasetsPath("RM_ANOVA_Alcohol_LONG.csv"))
@@ -75,7 +75,7 @@ ssrTable(data, rownames = FALSE)
 
 <!-- ## MS total -->
 
-```{r, echo=FALSE}
+```{r rm-general-flow-rm-anova, echo=FALSE}
 # Assign to individual variables
 none_alc <- data$none_alc
 some_alc <- data$some_alc
@@ -85,7 +85,7 @@ total    <- c(none_alc,some_alc,much_alc)
 
 <!-- ${MS}_{total} = \frac{{SS}_{{total}}}{{DF}_{{total}}} = s_{grand}^2$ -->
 
-```{r, echo=FALSE}
+```{r rm-ms-total, echo=FALSE}
 MS_total <- var(total)#; MS_total
 ```
 
@@ -95,7 +95,7 @@ MS_total <- var(total)#; MS_total
 
 <!-- ${SS}_{{total}} = s_{grand}^2(N-1)$ -->
 
-```{r, echo=FALSE}
+```{r rm-ss-total, echo=FALSE}
 N <- length(total)
 DF_total <- N - 1
 SS_total <- MS_total * DF_total#; SS_total
@@ -105,7 +105,7 @@ SS_total <- MS_total * DF_total#; SS_total
 
 ## Total variance (SS total) - visual {.smaller}
 
-```{r, echo=FALSE}
+```{r rm-ss-total-visual, echo=FALSE}
 input <- list()
 input$whatPred <- "Alcohol + ID"
 input$whatDisplay <- c("Segments", "Sums")
@@ -121,7 +121,7 @@ input$whatDisplay <- c("Segments", "Sums")
 
 <!-- ${DF}_{within} = (n_i-1)n$ -->
 
-```{r, echo=FALSE}
+```{r rm-df-within, echo=FALSE}
 n.i <- length(unique(longdata$alcohol))  # Number of mesurements per individual (none, some, much)
 n   <- length(unique(longdata$pp)) # Number of mesurements per group
 
@@ -133,7 +133,7 @@ DF_within <- (n.i - 1) * n
 
 ${SS}_{{within}} = \sum{s_i^2(n_i-1)}$
 
-```{r, echo=FALSE}
+```{r rm-within-subject-variance, echo=FALSE}
 var_pp <- apply(cbind(none_alc, some_alc, much_alc),1,var)
 ss_pp  <- var_pp * (n.i - 1)
 
@@ -148,7 +148,7 @@ mean_pp <- apply(cbind(none_alc, some_alc, much_alc),1,mean)
 
 ## Within subject variance ($SS_W$) - visual
 
-```{r, echo=FALSE}
+```{r rm-within-subject-variance-visual, echo=FALSE}
 input <- list()
 input$whatPred <- "ID"
 input$whatDisplay <- c("Segments", "Sums")
@@ -160,7 +160,7 @@ input$whatDisplay <- c("Segments", "Sums")
 
 ## Within subject variance ($SS_W$) - data
 
-```{r, echo=FALSE}
+```{r rm-within-subject-table, echo=FALSE}
 data$mean_pp <- round(mean_pp,3)
 data$ss_pp <- round(ss_pp, 3)
 ssrTable(data, rownames = FALSE)
@@ -173,7 +173,7 @@ ssrTable(data, rownames = FALSE)
 
 <!-- ## MS between -->
 
-```{r, echo=FALSE}
+```{r rm-ss-between, echo=FALSE}
 SS_between <- SS_total - SS_within
 # SS_between
 
@@ -187,7 +187,7 @@ DF_between <- DF_total - DF_within
 
 <!-- ${DF}_{model} = k-1$ -->
 
-```{r, echo=FALSE}
+```{r rm-df-between, echo=FALSE}
 k <- 3
 DF_model <- k - 1
 # DF_model
@@ -197,7 +197,7 @@ DF_model <- k - 1
 
 ${SS}_{model} = \sum{n_k(\bar{X}_k-\bar{X})^2}$
 
-```{r, echo=FALSE}
+```{r rm-alcohol-model-ss, echo=FALSE}
 # SS model
 n_k1 <- length(none_alc)
 n_k2 <- length(some_alc)
@@ -215,7 +215,7 @@ SS_model
 
 ## Alcohol model SS visual
 
-```{r, eval=TRUE,echo=FALSE}
+```{r rm-alcohol-model-ss-visual, eval=TRUE,echo=FALSE}
 input <- list()
 input$whatPred <- "Alcohol"
 input$whatDisplay <- c("Segments", "Sums")
@@ -227,7 +227,7 @@ input$whatDisplay <- c("Segments", "Sums")
 
 ## Full model SS visual
 
-```{r, eval=TRUE,echo=FALSE}
+```{r rm-full-model-ss-visual, eval=TRUE,echo=FALSE}
 input <- list()
 input$whatPred <- "Alcohol + ID"
 input$whatDisplay <- c("Segments", "Sums")
@@ -238,7 +238,7 @@ input$whatDisplay <- c("Segments", "Sums")
 
 ## Full model error SS visual ($SS_R$)
 
-```{r, eval=TRUE,echo=FALSE}
+```{r rm-full-model-error-ss-visual, eval=TRUE,echo=FALSE}
 input <- list()
 input$whatPred <- "Alcohol + ID"
 input$whatDisplay <- c("Segments", "Sums")
@@ -249,7 +249,7 @@ input$whatDisplay <- c("Segments", "Sums")
 
 ## We use full model error to compute F for alcohol
 
-```{r, eval=TRUE,echo=FALSE}
+```{r rm-f-for-alcohol-visual, eval=TRUE,echo=FALSE}
 input <- list()
 input$whatPred <- "Alcohol"
 input$whatDisplay <- c("Segments", "Sums", "F-stat")
@@ -265,7 +265,7 @@ input$whatDisplay <- c("Segments", "Sums", "F-stat")
 
 <!-- ${DF}_{error} = (n-1)(k-1)$ -->
 
-```{r, echo=FALSE}
+```{r rm-compute-df-error, echo=FALSE}
 DF_error <- DF_within - DF_model
 # DF_error
 ```
@@ -275,7 +275,7 @@ DF_error <- DF_within - DF_model
 
 <!-- ${SS}_{error} = {SS}_{within} - {SS}_{model}$ -->
 
-```{r, echo=FALSE}
+```{r rm-df-error, echo=FALSE}
 SS_error <- SS_within - SS_model
 # SS_error
 ```
@@ -284,14 +284,14 @@ SS_error <- SS_within - SS_model
 
 $F = \frac{{MS}_{{model}}}{{MS}_{{error}}}$
 
-```{r, echo=FALSE}
+```{r rm-f-ratio, echo=FALSE}
 # Calculate mean squares
 MS_model <- SS_model / DF_model
 MS_error <- SS_error / DF_error
 # MS_model; MS_error
 ```
 
-```{r, echo=TRUE}
+```{r rm-ms-model-ms-error, echo=TRUE}
 # Calculate F statistic
 fStat <- MS_model / MS_error
 fStat
@@ -300,7 +300,7 @@ fStat
 
 ## P-value
 
-```{r, echo=FALSE}
+```{r rm-p-value, echo=FALSE}
 # Set up the plot for the F-distribution
 curve(df(x, DF_model, DF_error), from = 0, to = 25, n = 1000, bty = "n", las = 1,
       xlab = "F-value", ylab = "Density", main = "F-distribution with P-value Region")

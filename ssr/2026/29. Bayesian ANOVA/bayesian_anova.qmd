@@ -19,7 +19,7 @@ $$\mathcal{M_1}: b_1 \sim Cauchy(0.707)$$
 $$\mathcal{M_0}: b_1 = 0 $$
 $$\mathcal{M_1}: b_1 \sim Cauchy(0.707)$$
 
-```{r fig.align='center', echo=FALSE}
+```{r banova-two-models, fig.align='center', echo=FALSE}
 myCauchy <- function(x, scale = 1, alt = "twosided") {
   myDens <- dcauchy(x, scale = scale)
   if (alt == "greater") {
@@ -49,7 +49,7 @@ $\rightarrow$ Marginal likelihood
 
 ## Marginal Likelihood of $\mathcal{M}_1$
 
-```{r, echo=FALSE}
+```{r banova-load-beer-data, echo=FALSE}
 source("../../_setup.R")
 dat <- read.csv(datasetsPath("beerTastingData.csv"))
 x <- dat$AlcRating
@@ -86,7 +86,7 @@ marglikM1 <- integrate(function(delta) alternative_likelihood(delta, diffs, sd(d
 
 ## Marginal Likelihood of $\mathcal{M}_0$
 
-```{r fig.align='center', echo=FALSE}
+```{r banova-marginal-likelihood-density, fig.align='center', echo=FALSE}
 delta <- seq(-3, 3, length.out = 1e4)
 mvDens <- numeric(length(delta))
 for(i in 1:length(delta)) {
@@ -120,7 +120,7 @@ $$ tastiness = b_0 + b_1 \times alcoholic + b_2 \times correct$$
 -   $\mathcal{M}_{A+C}$: model with the intercept $b_0$ and the two main effects
 
 ## Priors for $\mathcal{M_A}$ 
-```{r fig.align='center', echo = FALSE}
+```{r banova-cauchy-prior-function, fig.align='center', echo = FALSE}
 myCauchy <- function(x, scale = 1, alt = "twosided") {
   myDens <- dcauchy(x, scale = scale)
   if (alt == "greater") {
@@ -141,7 +141,7 @@ arrows(x0 = 0, x1 = 0, y0 = 0, y1 = 4.0, lwd = 4, col = cols[3])
 ```
 
 ## Priors for $\mathcal{M_C}$ 
-```{r fig.align='center', echo = FALSE}
+```{r banova-priors-model-c, fig.align='center', echo = FALSE}
 
 par(mfrow = c(1, 2), cex.main = 0.95)
 cols <- viridis::viridis(6)
@@ -155,7 +155,7 @@ curve(myCauchy(x, scale = 0.707), from = -3, to = 3, n = 1e3, col = cols[3], lwd
 
 
 ## Priors for $\mathcal{M_{A+C}}$ 
-```{r  fig.align='center', echo = FALSE}
+```{r banova-priors-model-a-plus-c, fig.align='center', echo = FALSE}
 
 par(mfrow = c(1, 2), cex.main = 0.95)
 cols <- viridis::viridis(6)

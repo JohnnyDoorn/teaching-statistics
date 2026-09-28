@@ -1,0 +1,15 @@
+<!-- Research question and variables taken from Labcoat Leni's Real Research 10.1
+     in DSUJ ch. 10 (p. 416), reworded as a question. Variable names from the
+     data file on discoverjasp. -->
+
+## Labcoat Leni 10.1
+
+Massar et al. (2012): *I heard that Jane has a boil and kissed a tramp*
+
+Do younger women gossip more, and is this mediated by their mate value?
+
+- `age`: 20 to 50 (predictor)
+- `mate_value`: sexual desirability (mediator)
+- `gossip`: tendency to gossip (outcome)
+
+[Data (.jasp)](https://discoverjasp.com/repository/dsj1_data/data/massar_2012.jasp) · [Results (.jasp)](https://discoverjasp.com/repository/dsj1_leni/leni_10.jasp) · [Results (.html)](https://discoverjasp.com/repository/dsj1_leni/leni_10.html)

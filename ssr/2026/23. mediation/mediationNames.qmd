@@ -1,6 +1,6 @@
 # Mediation {.section}
 
-```{r, echo=FALSE}
+```{r med-mediation, echo=FALSE}
 source("../../_setup.R")
 ```
 
@@ -27,7 +27,7 @@ Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Mediation_(statistics))
 
 ## Venn diagrams - effect
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, prompt=FALSE, results='hide'}
+```{r med-venn-diagrams-effect, echo=FALSE, warning=FALSE, message=FALSE, prompt=FALSE, results='hide'}
 library("VennDiagram")
 
 grid.newpage()
@@ -40,7 +40,7 @@ draw.pairwise.venn(area1 = 100, area2 = 100,
 
 ## Venn diagrams - mediator
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, prompt=FALSE, results='hide'}
+```{r med-venn-diagrams-mediator, echo=FALSE, warning=FALSE, message=FALSE, prompt=FALSE, results='hide'}
 library("VennDiagram")
 
 grid.newpage()
@@ -99,7 +99,7 @@ Does the speed of recovery after sickness improve with the use of alternative me
 
 <!-- Create predictor variable -->
 
-```{r, echo=FALSE}
+```{r med-mediation-paths, echo=FALSE}
 set.seed(1976)
 ## Set parameters for simulation
 n     <- 50
@@ -113,7 +113,7 @@ use.homeopathic.remedies <- rnorm(n, mu, sigma)
 
 <!-- Create mediator -->
 
-```{r, echo=FALSE}
+```{r med-simulate-lifestyle, echo=FALSE}
 b0    <- 2             # intercept of lifestyle
 b1    <- 1.5           # association homeopathy and lifestyle, b.a
 error <- rnorm(n,0,.7)
@@ -124,7 +124,7 @@ healthy.lifestyle <- b0 + b1 * use.homeopathic.remedies + error
 
 <!-- Create outcome variable -->
 
-```{r, echo=FALSE}
+```{r med-simulate-healing, echo=FALSE}
 b0    <- 6 # intercept of healing
 b1    <- 0.5 # association homeopathy and healing, b.c
 b2    <- 1 # association lifestyle and healing, b.b
@@ -140,14 +140,14 @@ data <- data.frame(use.homeopathic.remedies,
 data <- round(data, 4)
 ```
 
-```{r, echo=FALSE, eval=TRUE}
+```{r med-write-data, echo=FALSE, eval=TRUE}
 ## Write data for use in JASP
 write.csv(data, "homeopathy-mediation.csv", row.names=FALSE)
 ```
 
 ## The data {.subsection .smaller}
 
-```{r, echo=FALSE}
+```{r med-the-data, echo=FALSE}
 ssrTable(data, rownames = FALSE, 
           height = 300,
           extensions = 'Buttons',
@@ -157,7 +157,7 @@ ssrTable(data, rownames = FALSE,
 
 ## Fit 3 models {.smaller .flexbox .vcenter}
 
-```{r, echo=TRUE}
+```{r med-fit-3-models, echo=TRUE}
 model.outcome.predictor  <- lm(speed.of.healing  ~ use.homeopathic.remedies)
 model.mediator.predictor <- lm(healthy.lifestyle ~ use.homeopathic.remedies)
 model.combined           <- lm(speed.of.healing  ~ use.homeopathic.remedies + healthy.lifestyle)
@@ -175,7 +175,7 @@ model.combined           <- lm(speed.of.healing  ~ use.homeopathic.remedies + he
 
 ## Extract beta coëfficients {.smaller .flexbox .vcenter}
 
-```{r, echo=TRUE}
+```{r med-extract-beta-coefficients, echo=TRUE}
 b.outcome.predictor       <- model.outcome.predictor$coefficients[2]   # b.t
 b.mediator.predictor      <- model.mediator.predictor$coefficients[2]  # b.a
 b.combined.mediator       <- model.combined$coefficients[3]            # b.b
@@ -193,21 +193,21 @@ b.combined.predictor      <- model.combined$coefficients[2]            # b.c
 </div>
 
 ## View beta coëfficients {.subsection}
-```{r, echo = FALSE}
+```{r med-unname-coefficients, echo = FALSE}
 b.mediator.predictor  <- unname(b.mediator.predictor)
 b.combined.mediator       <- unname(b.combined.mediator)
 b.outcome.predictor   <- unname(b.outcome.predictor)
 b.combined.predictor      <- unname(b.combined.predictor)
 ```
 
-```{r, echo=TRUE}
+```{r med-coefficients-a-and-b, echo=TRUE}
 b.mediator.predictor     # b.a
 b.combined.mediator      # b.b
 ```
 
 ## View beta coëfficients  {.smaller .flexbox .vcenter}
 
-```{r, echo=TRUE}
+```{r med-coefficients-total-and-direct, echo=TRUE}
 b.outcome.predictor      # b.t 
 b.mediator.predictor     # b.a 
 b.combined.mediator      # b.b
@@ -232,7 +232,7 @@ b.combined.predictor     # b.c
 
 ## Visual {.subsection}
 
-```{r, fig.align='center',echo=FALSE}
+```{r med-visual, fig.align='center',echo=FALSE}
 par(mfrow = c(1, 3), cex.lab = 1.3, cex = 1.1)
 mycor <- cor(data$use.homeopathic.remedies, data$speed.of.healing)
 plot(data$use.homeopathic.remedies, data$speed.of.healing, 
@@ -275,7 +275,7 @@ abline(fit.1, col = 'darkgreen', lwd = 3)
 
 $a \times b = b_a \times b_b$
 
-```{r, echo=TRUE}
+```{r med-calculate-indirect-effect, echo=TRUE}
 indirect <- b.mediator.predictor * b.combined.mediator; indirect  # a * b
 
 indirect + b.combined.predictor # a * b + c 
@@ -291,7 +291,7 @@ b.outcome.predictor         # total effect
 
 $\frac{ab}{s_{Outcome}} \times s_{Predictor} = \frac{b_a b_b}{s_{Outcome}} \times s_{Predictor}$
 
-```{r, echo=TRUE}
+```{r med-calculate-indirect-effect-standardized, echo=TRUE}
 b.mediator.predictor*b.combined.mediator / 
   sd(speed.of.healing)*sd(use.homeopathic.remedies)
 ```
@@ -302,7 +302,7 @@ b.mediator.predictor*b.combined.mediator /
 
 $\frac{ab}{total} = \frac{b_a b_b}{b_t} = \frac{b_a b_b}{b_a b_b + b_c}$
 
-```{r, echo=TRUE}
+```{r med-calculate, echo=TRUE}
 (b.mediator.predictor*b.combined.mediator) /
   b.outcome.predictor
 ```

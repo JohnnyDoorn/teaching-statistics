@@ -1,4 +1,4 @@
-```{r, echo=FALSE}
+```{r wsr-chunk, echo=FALSE}
 source("../../_setup.R")
 library("visualize")
 ```
@@ -14,7 +14,7 @@ The Wilcoxon signed-rank test is a nonparametric alternative to the paired sampl
 
 <!-- ## Simulate data -->
 
-```{r, echo=FALSE}
+```{r wsr-wilcoxon-signed-rank-test, echo=FALSE}
 # set.seed(3562534)
 # n      <- 20
 # factor <- rep(c("Ecstasy","Alcohol"),each=n/2)
@@ -37,7 +37,7 @@ data <- data.frame(Sunday, Wednesday)
 ```
 
 ## Example
-```{r, echo=FALSE}
+```{r wsr-example-data, echo=FALSE}
 ssrTable(data, options = list(iDisplayLength = 7))
 
 # Write data for use in SPSS
@@ -46,7 +46,7 @@ ssrTable(data, options = list(iDisplayLength = 7))
 
 ## Example
 
-```{r, echo=FALSE}
+```{r wsr-example-qq-plot, echo=FALSE}
 par(pty = "s")
 qqnorm(scale(Sunday), main = "Normal Q-Q Plot", bty = "n", xlim = c(-1.5, 1.5), ylim = c(-1.5, 1.5))
 qqline(scale(Sunday), col = "darkred", lwd = 2)  # Adds a reference line for normality
@@ -61,7 +61,7 @@ qqline(scale(Sunday), col = "darkred", lwd = 2)  # Adds a reference line for nor
 ## Calculate T {.small .subsection}
 
 
-```{r, echo=TRUE}
+```{r wsr-calculate-t, echo=TRUE}
 # Calculate difference in scores between first and second measure
 data$diff = data$Sunday - data$Wednesday
 
@@ -83,7 +83,7 @@ data$sign <- sign(data$Sunday - data$Wednesday)
 [Link](https://discoverjasp.com/repository/dsj1_data/data/drug_wide.jasp)
 
 
-```{r, echo=FALSE}
+```{r wsr-the-data, echo=FALSE}
 ssrTable(data, height = 300,
           options = list(dom = 'Bfrtip',
                          buttons = c('csv')))
@@ -92,7 +92,7 @@ ssrTable(data, height = 300,
 
 ## Calculate $T_+$
 
-```{r, echo=TRUE}
+```{r wsr-calculate, echo=TRUE}
 # Calculate the sum of the positive ranks
 T_pos <- sum(data$rank * (data$diff > 0))
 T_pos
@@ -108,13 +108,13 @@ n
 
 $$\bar{T} = \frac{n(n+1)}{4}$$
 
-```{r, echo=TRUE}
+```{r wsr-t-mean, echo=TRUE}
 T_mean <- (n*(n+1))/4
 T_mean 
 ```
 
 
-```{r, echo=FALSE}
+```{r wsr-t-range, echo=FALSE}
 T.min <- 0
 T.max <- sum(1:n)
 # mean(c(T.min, T.max))
@@ -124,7 +124,7 @@ T.max <- sum(1:n)
 
 $${SE}_{T} = \sqrt{\frac{n(n+1)(2n+1)}{24}}$$
 
-```{r, echo=TRUE}
+```{r wsr-mean-c-t-min-t-max, echo=TRUE}
 SE_T <- sqrt( (n*(n+1)*(2*n+1)) / 24)
 ```
 
@@ -132,14 +132,14 @@ SE_T <- sqrt( (n*(n+1)*(2*n+1)) / 24)
 
 $$z = \frac{T_+ - \bar{T}}{{SE}_T}$$
 
-```{r, echo=TRUE}
+```{r wsr-calculate-z, echo=TRUE}
 z <- (T_pos - T_mean)/SE_T
 z
 ```
 
 ## Test for significance
 
-```{r, fig.align='center', warning=FALSE, echo=FALSE}
+```{r wsr-test-for-significance, fig.align='center', warning=FALSE, echo=FALSE}
 visualize_normal_base(z, side = "two-sided")
 ```
 
@@ -151,7 +151,7 @@ $$r = \frac{T_+ - T_- }{T_+ + T_-}$$
 
 Here $T_+$ is the sum of the positive ranks (i.e., where Sunday > Wednesday), which do not exist. $T_-$ is the sum of the negative ranks, which is 36. We have a maximum negative correlation (i.e., everybody scored lower on Wednesday).
 
-```{r, echo=TRUE}
+```{r wsr-effect-size, echo=TRUE}
 T_neg <- sum(data$rank * (data$diff < 0)) # sum negative ranks
 T_neg
 rbis <- (T_pos - T_neg) / (T_pos + T_neg)

@@ -1,0 +1,27 @@
+<!-- Research questions and variables taken from Labcoat Leni's Real Research
+     15.1 and 15.2 in DSUJ ch. 15 (pp. 599, 607), reworded as questions.
+     Variable names and levels from the data files on discoverjasp. -->
+
+## Labcoat Leni 15.1
+
+Matthews et al. (2007): *Having a quail of a time?*
+
+Do males fertilize more eggs when mating in the context that signalled a mating opportunity?
+
+- `signalled`: eggs fertilized in the male's signalled context
+- `control`: eggs fertilized in the male's control context
+- Both males mated with the same 14 females
+
+[Data (.jasp)](https://discoverjasp.com/repository/dsj1_data/data/matthews_2007.jasp) · [Results (.jasp)](https://discoverjasp.com/repository/dsj1_leni/leni_15a.jasp) · [Results (.html)](https://discoverjasp.com/repository/dsj1_leni/leni_15a.html)
+
+## Labcoat Leni 15.2
+
+Çetinkaya & Domjan (2006): *Eggs-traordinary*
+
+Do fetishistic quail fertilize more eggs and initiate sex more quickly?
+
+- `groups`: fetishistic, non-fetishistic or control
+- `egg_percent`: percentage of eggs fertilized
+- `latency`: time taken to initiate copulation
+
+[Data (.jasp)](https://discoverjasp.com/repository/dsj1_data/data/cetinkaya_2006.jasp) · [Results (.jasp)](https://discoverjasp.com/repository/dsj1_leni/leni_15b.jasp) · [Results (.html)](https://discoverjasp.com/repository/dsj1_leni/leni_15b.html)

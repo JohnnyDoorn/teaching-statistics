@@ -1,0 +1,14 @@
+<!-- Research question and variables taken from Labcoat Leni's Real Research 14.1
+     in DSUJ ch. 14 (p. 575), reworded as a question. Variable names from the
+     data file on discoverjasp (24 wide columns, quiet_pos1 ... disliked_pos8). -->
+
+## Labcoat Leni 14.1
+
+Perham & Sykora (2012): *Are splattered cadavers distracting?*
+
+Is recall affected by the sound played while learning letter sequences?
+
+- Two within-subject factors: sound (quiet, liked or disliked music) × position in the list (1–8)
+- `quiet_pos1` to `disliked_pos8`: probability of correctly recalling a letter
+
+[Data (.jasp)](https://discoverjasp.com/repository/dsj1_data/data/perham_2012.jasp) · [Results (.jasp)](https://discoverjasp.com/repository/dsj1_leni/leni_14.jasp) · [Results (.html)](https://discoverjasp.com/repository/dsj1_leni/leni_14.html)

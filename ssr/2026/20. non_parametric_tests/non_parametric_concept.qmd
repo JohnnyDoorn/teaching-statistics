@@ -1,6 +1,6 @@
 # Nonparametric tests {.section}
 
-```{r}
+```{r npconcept-nonparametric-tests}
 #| echo: false
 library("knitr")
 ```
@@ -38,7 +38,7 @@ speed        | fast                  | slow
 
 ## Ranking {.subsection}
 
-```{r, fig.height=3,fig.align='centre', echo = FALSE}
+```{r npconcept-ranking-data, fig.height=3,fig.align='center', echo = FALSE}
 x1 <- c(1, 4, 6, 7, 8, 9)
 x2 <- c(1, 4, 6, 7, 8, 39)
 
@@ -47,12 +47,12 @@ boxplot(x1, horizontal=T, col='pink', main = "A")
 boxplot(x2, horizontal=T, col='pink', main = "B")
 ```
 
-```{r, fig.height=3, echo=FALSE}
+```{r npconcept-ranking-table, fig.height=3, echo=FALSE}
 kable(rbind('A' = x1, 'B' = x2,'-' = " ", 'rank(A)' = rank(x1), 'rank(B)' = rank(x2)))
 ```
 
 ## Ties {.smaller}
-```{r, echo=FALSE}
+```{r npconcept-ties, echo=FALSE}
 # Scores
 x <- c(11, 42, 62, 73, 84, 84, 42, 73, 84)
 
@@ -63,7 +63,7 @@ x <- sort(x)
 ranks <- rank(x)
 ```
 
-```{r, echo=FALSE}
+```{r npconcept-assign-ranks, echo=FALSE}
 kable(rbind(index = 1:length(x), x, ranks))
 ```
 

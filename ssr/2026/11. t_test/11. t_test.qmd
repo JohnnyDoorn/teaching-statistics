@@ -2,6 +2,7 @@
 title: "11. T-tests"
 author: "Johnny van Doorn"
 date: "29 September 2026"
+view: "https://teams.microsoft.com/meet/383013566330381?p=J5cLpg457MUfuWlfF1"
 footer: "Scientific & Statistical Reasoning"
 format:
   revealjs:
@@ -33,14 +34,8 @@ In this lecture we aim to:
 Chapter 9 (§9.1–9.14)
 </div>
 
-## Remember this shape? {.smaller}
-
-Back in lecture 6 we saw that standardizing a sample statistic gives us a t-distribution, shaped by its degrees of freedom.
-
-```{r child="../t-distribution-shapes.qmd"}
+```{r child="t-distribution-shapes.qmd"}
 ```
-
-Today we finally put it to use on a single sample mean.
 
 ```{r child="One-sample_t-test.qmd"}
 ```
@@ -55,7 +50,8 @@ Today we finally put it to use on a single sample mean.
 
 ## Next Time
 
-<!-- Placeholder - fill in before the lecture. -->
+- More means!
+
 
 ## Recommended Exercises
 
@@ -64,6 +60,9 @@ Today we finally put it to use on a single sample mean.
 - [Exercise 9.4](https://discoverjasp.com/pages/smart_alex#task-9.4)
 - How would conclusions/interpretations differ for α = 0.01?
 - How are the assumptions looking for these data sets?
+
+```{r child="labcoat-leni.qmd"}
+```
 
 ```{r child="../../footer.qmd"}
 ```
