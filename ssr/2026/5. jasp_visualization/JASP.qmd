@@ -1,6 +1,6 @@
 # JASP {.section}
 
-```{r, eval=FALSE, echo=FALSE}
+```{r jasp-setup, eval=FALSE, echo=FALSE}
 # Remove all objects from workspace
 rm(list=ls())
 ```
@@ -50,9 +50,7 @@ Two modes: data editor (view and edit) and analysis mode.
 
 ![Figure 4.2: The JASP start-up window](../../images/figure-4-2.png){height="330"}
 
----
-
-### Two buttons
+## Two buttons {.smaller .unlisted}
 
 The hamburger button ![](../../images/hamburger.png){height="25"}:
 
@@ -63,7 +61,9 @@ The hamburger button ![](../../images/hamburger.png){height="25"}:
 The module button ![](../../images/blueplus.png){height="25"}:
 
 - Add modules to the top ribbon bar
-- Update modules 
+- Update modules
+
+---
 
 ### The data library
 
@@ -72,7 +72,7 @@ The module button ![](../../images/blueplus.png){height="25"}:
 ---
 
 
-## Loading Data in JASP
+## Loading Data in JASP {.smaller}
 
 
 - Click Open > select your file
@@ -134,7 +134,7 @@ Drag and drop, no syntax required.
 ---
 
 
-## Descriptive Statistics in JASP
+## Descriptive Statistics in JASP {.smaller}
 
 
 - Go to Descriptives > select variables

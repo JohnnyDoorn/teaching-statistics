@@ -25,9 +25,9 @@ Source: [Wikipedia](https://en.wikipedia.org/wiki/Student%27s_t-distribution)
 :::
 :::
 
-## Population distribution {.smaller .subsection}
+## Population distribution {.smaller .subsection .scrollable}
 
-```{r, echo=TRUE}
+```{r tdist-population-distribution, echo=TRUE}
 #| output-location: slide
 #| code-line-numbers: "3-4|6-7|14"
 set.seed(123)
@@ -62,11 +62,11 @@ axis(1)
 
 Let's take one sample from our normal population.
 
-```{r, echo=TRUE}
+```{r tdist-a-sample, echo=TRUE}
 x <- rnorm(n, mu, sigma); x
 ```
 
-```{r, echo=TRUE}
+```{r tdist-a-sample-histogram, echo=TRUE}
 #| output-location: slide
 hist(x, main = "Sample distribution", col = rainbow(12)[6], breaks = 15, las =1)
 text(125, 7, bquote(bar(x) ~ " = " ~ .(round(mean(x),2))), cex = 2)
@@ -76,7 +76,7 @@ text(125, 7, bquote(bar(x) ~ " = " ~ .(round(mean(x),2))), cex = 2)
 
 More samples, keeping $\bar{x}$ each time.
 
-```{r, echo=TRUE}
+```{r tdist-more-samples, echo=TRUE}
 n.samples     <- 1000
 mean.x.values <- vector()
 
@@ -90,7 +90,7 @@ for(i in 1:n.samples) {
 
 The means have their own distribution.
 
-```{r, echo=TRUE}
+```{r tdist-sampling-distribution, echo=TRUE}
 #| output-location: slide
 
 hist(mean.x.values, 
@@ -142,7 +142,7 @@ Fatter tails for small $n$ (few degrees of freedom); converges to the standard n
 
 ## $\alpha$ dictates the rejection region {.smaller}
 
-```{r, echo=FALSE, fig.width=13, fig.height=4.8}
+```{r tdist-alpha-rejection-region, echo=FALSE, fig.width=13, fig.height=4.8}
 # Drawn the way the NHST_Continuous applet draws it: the density as a dense set
 # of vertical lines, green where we retain H0 and purple where we reject, so the
 # continuous case rhymes with the binomial spikes from lecture 3. Shared with

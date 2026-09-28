@@ -24,6 +24,10 @@ Chapters 4 (§4.1–4.10), 5 (§5.1–5.6)
 </div>
 
 
+<!-- Next year: open with the Nightingale slides (now in visualization.qmd) under
+     their own "# Why visualize? {.section}", before JASP. Draft in commit 47af461,
+     next-year-lecture5.qmd + next-year-nightingale.qmd. -->
+
 ```{r child="JASP.qmd", eval=TRUE}
 ```
 

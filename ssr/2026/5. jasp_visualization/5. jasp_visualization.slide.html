@@ -356,6 +356,9 @@ Johnny van Doorn
 </ul>
 <p><strong>Reading:</strong> Chapters 4 (§4.1–4.10), 5 (§5.1–5.6)</p>
 </div>
+<!-- Next year: open with the Nightingale slides (now in visualization.qmd) under
+     their own "# Why visualize? {.section}", before JASP. Draft in commit 47af461,
+     next-year-lecture5.qmd + next-year-nightingale.qmd. -->
 </section>
 <section>
 <section id="jasp" class="title-slide slide level1 section center">
@@ -375,8 +378,14 @@ Johnny van Doorn
 <p><img data-src="../../images/JASP_logo_green.svg" height="100"></p>
 </div>
 </section>
+<section class="slide level2">
+
+<h3 class="smaller" id="origin">Origin</h3>
+<p><img data-src="../../images/jasp-trojan-horse.jpg" height="330"></p>
+<p><small>Artwork by <a href="https://www.instagram.com/viktordepictor">Viktor Beekman</a>, via <a href="https://www.bayesianspectacles.org/">Bayesian Spectacles</a></small></p>
+</section>
 <section id="getting-started-with-jasp" class="slide level2">
-<h2>Getting Started with JASP</h2>
+<h2>Getting started with JASP</h2>
 <ol type="1">
 <li>Download from <a href="https://jasp-stats.org">jasp-stats.org</a></li>
 <li>Open JASP, load your dataset (.jasp, .csv, .sav, etc.)</li>
@@ -394,9 +403,8 @@ Johnny van Doorn
 </figure>
 </div>
 </section>
-<section class="slide level2">
-
-<h3 id="two-buttons">Two buttons</h3>
+<section id="two-buttons" class="slide level2 smaller unlisted">
+<h2>Two buttons</h2>
 <p>The hamburger button <img data-src="../../images/hamburger.png" height="25">:</p>
 <ul>
 <li>Open files (from computer, <a href="https://osf.io">the Open Science Framework</a>, or the <a href="https://jasp-stats.github.io/jasp-data-library/">JASP data library</a>)</li>
@@ -408,6 +416,9 @@ Johnny van Doorn
 <li>Add modules to the top ribbon bar</li>
 <li>Update modules</li>
 </ul>
+</section>
+<section class="slide level2">
+
 <h3 id="the-data-library">The data library</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -416,7 +427,7 @@ Johnny van Doorn
 </figure>
 </div>
 </section>
-<section id="loading-data-in-jasp" class="slide level2">
+<section id="loading-data-in-jasp" class="slide level2 smaller">
 <h2>Loading Data in JASP</h2>
 <ul>
 <li>Click Open &gt; select your file</li>
@@ -487,7 +498,7 @@ Johnny van Doorn
 </figure>
 </div>
 </section>
-<section id="descriptive-statistics-in-jasp" class="slide level2">
+<section id="descriptive-statistics-in-jasp" class="slide level2 smaller">
 <h2>Descriptive Statistics in JASP</h2>
 <ul>
 <li>Go to Descriptives &gt; select variables</li>
@@ -581,7 +592,7 @@ Johnny van Doorn
 <h3 id="why-visualize-data-1">Why Visualize Data?</h3>
 
 <img data-src="../../images/catterplot.jpg" class="r-stretch quarto-figure-center"><p class="caption">Figure 5.15 Catterplot</p></section>
-<section id="scutari-1854" class="slide level2 smaller">
+<section id="scutari-1854" class="slide level2 smaller scrollable">
 <h2>Scutari, 1854</h2>
 <div class="columns">
 <div class="column" style="width:38%;">
@@ -631,7 +642,7 @@ Johnny van Doorn
 
 <h3 class="smaller" id="the-diagram">The diagram</h3>
 
-<img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-11-1.png" width="1056" class="r-stretch"><p>Each wedge is a month; its area is the death rate.</p>
+<img data-src="5.-jasp_visualization_files/figure-revealjs/vis-nightingale-diagram-1.png" width="1056" class="r-stretch"><p>Each wedge is a month; its area is the death rate.</p>
 <!-- --- -->
 <!-- ### What the picture says {.smaller} -->
 <!-- ::: {.incremental} -->
@@ -689,24 +700,29 @@ Johnny van Doorn
 <section class="slide level2">
 
 <h3 id="labels-and-axes">Labels and axes</h3>
-<div class="cell">
-<div class="cell-output-display">
-<p><img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
-</div>
-</div>
+
+<img data-src="5.-jasp_visualization_files/figure-revealjs/vis-labels-and-axes-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+
 <h3 id="scale-matters">Scale Matters</h3>
-<div class="cell">
-<div class="cell-output-display">
-<p><img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
-</div>
-</div>
+
+<img data-src="5.-jasp_visualization_files/figure-revealjs/vis-scale-matters-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+
+<h3 id="breaking-the-axis">Breaking the axis</h3>
+<ul>
+<li>A choice, not automatically a lie</li>
+<li>Difference of interest, or absolute level?</li>
+<li><a href="https://www.youtube.com/watch?v=14VYnFhBKcY">Shut up about the y-axis</a></li>
+</ul>
+</section>
+<section class="slide level2">
+
 <h3 id="error-bars">Error Bars!</h3>
-<div class="cell">
-<div class="cell-output-display">
-<p><img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-14-1.png" width="960"></p>
-</div>
-</div>
-<h3 class="smaller" id="what-is-the-plot-for">What is the plot for?</h3>
+
+<img data-src="5.-jasp_visualization_files/figure-revealjs/vis-error-bars-1.png" width="960" class="r-stretch"></section>
+<section id="what-is-the-plot-for" class="slide level2 smaller unlisted">
+<h2>What is the plot for?</h2>
 <p>Tufte’s principles, as Field lists them:</p>
 <ul>
 <li>Show the data, and avoid distorting it</li>
@@ -740,11 +756,11 @@ Johnny van Doorn
 <section id="the-evidence-they-reviewed" class="slide level2 smaller">
 <h2>The evidence they reviewed</h2>
 
-<img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"></section>
+<img data-src="5.-jasp_visualization_files/figure-revealjs/vis-challenger-evidence-1.png" width="960" class="r-stretch"></section>
 <section id="the-flights-that-were-excluded" class="slide level2 smaller">
 <h2>The flights that were excluded</h2>
 
-<img data-src="5.-jasp_visualization_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch"></section>
+<img data-src="5.-jasp_visualization_files/figure-revealjs/vis-challenger-excluded-flights-1.png" width="960" class="r-stretch"></section>
 <section id="what-the-plot-could-not-say" class="slide level2 smaller">
 <h2>What the plot could not say</h2>
 <div>

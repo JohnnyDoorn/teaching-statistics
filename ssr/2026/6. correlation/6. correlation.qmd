@@ -12,6 +12,8 @@ format:
 css: ../../ajohnson.css
 ---
 
+## {.smaller .scrollable .unlisted .untitled}
+
 <div class="goals">
 In this lecture we discuss:
 

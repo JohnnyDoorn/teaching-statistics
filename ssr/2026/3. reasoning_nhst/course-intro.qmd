@@ -38,7 +38,7 @@ Field, *Discovering Statistics Using JASP*.
 - Companion website: [discoverjasp.com](https://discoverjasp.com)
 - You have the book, glossary included, during the exam
 
-### Sections A to D {.smaller}
+## Sections A to D {.smaller .unlisted}
 
 Every section carries a letter for difficulty, each rhyming with what it does to your brain:
 
@@ -47,9 +47,9 @@ Every section carries a letter for difficulty, each rhyming with what it does to
 - C is for brain *Complain*: final-year or master's material
 - D is for brain *Drain*: difficult enough to drain Field's own brain
 
-We live mostly in A and B.
+In this course we focus mostly on A and B.
 
-### Characters {.smaller}
+## Characters {.smaller .unlisted}
 
 Worth looking out for:
 
@@ -59,7 +59,7 @@ Worth looking out for:
 - Oliver Twisted: extra material on the website
 - Jane Superbrain: advanced tangents
 
-## Software
+## Software {.smaller}
 - JASP
     - Download the latest version (0.98.1) from [the website](https://jasp-stats.org/download/)
     - Your main tool in SSR for handling data and conducting analyses

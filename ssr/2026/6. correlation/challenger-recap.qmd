@@ -1,7 +1,7 @@
 
-## Challenger {.smaller}
+## Challenger {.smaller .scrollable}
 
-```{r, echo=FALSE}
+```{r challenger-scatterplots, echo=FALSE}
 source("../../_setup.R")
 challenger <- read.csv(datasetsPath("2026/challenger.csv"), check.names = FALSE)
 temperature <- challenger$`temperature-c`
@@ -26,7 +26,7 @@ plot(temperature, damage, pch = 19, cex = 1.8,
 
 ### The statistics {.smaller}
 
-```{r, echo=TRUE}
+```{r challenger-statistics, echo=TRUE}
 cor.test(damagedTemp, damagedOr)$p.value
 cor.test(temperature, damage)$p.value
 ```

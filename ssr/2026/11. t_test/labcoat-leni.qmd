@@ -8,8 +8,8 @@ Board & Fritzon (2005): *You don't have to be 'mad' to work here, but it helps*
 
 Do managers score higher on histrionic personality disorder than legally classified psychopaths?
 
-- `Group`: 39 senior business managers vs. 317 legally classified psychopaths
-- `Histrionic personality index`: score on the MMPI-PD histrionic scale
+- `Group`: 39 managers vs. 317 legally classified psychopaths
+- `Histrionic personality index`: MMPI-PD score
 
 [Data (.jasp)](https://discoverjasp.com/repository/dsj1_data/data/board_2005.jasp) · [Results (.jasp)](https://discoverjasp.com/repository/dsj1_leni/leni_09a.jasp) · [Results (.html)](https://discoverjasp.com/repository/dsj1_leni/leni_09a.html)
 

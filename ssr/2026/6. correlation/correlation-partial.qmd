@@ -1,6 +1,6 @@
 # Partial correlation {.section}
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, prompt=FALSE}
+```{r partial-setup, echo=FALSE, warning=FALSE, message=FALSE, prompt=FALSE}
 source("../../_setup.R")
 data <- read.csv(datasetsPath("2026/exam-anxiety.csv"), check.names = FALSE)
 exam_grade <- data$`Exam performance`
@@ -35,7 +35,7 @@ $$\LARGE{r_{xy \cdot z} = \frac{r_{xy} - r_{xz} r_{yz}}{\sqrt{(1 - r_{xz}^2)(1 -
 
 Or do anxious students simply revise less?
 
-```{r, echo=TRUE}
+```{r partial-correlations, echo=TRUE}
 cor.exam.anxiety    <- cor(exam_grade, anxiety)
 cor.exam.revise     <- cor(exam_grade, revise)
 cor.anxiety.revise  <- cor(anxiety,    revise)
@@ -45,7 +45,7 @@ data.frame(cor.exam.anxiety, cor.exam.revise, cor.anxiety.revise)
 
 ------
 
-```{r, echo=TRUE}
+```{r partial-formula, echo=TRUE}
 numerator   <- cor.exam.anxiety - (cor.exam.revise * cor.anxiety.revise)
 denominator <- sqrt( (1-cor.exam.revise^2)*(1-cor.anxiety.revise^2) )
 
@@ -56,7 +56,7 @@ partial.correlation
 
 Holding revision constant, the link shrinks.
 
-```{r, echo=TRUE}
+```{r partial-shared-variance, echo=TRUE}
 # Back to figure 7.9: A + C, then A / (A + E)
 round(c(cor.exam.anxiety, partial.correlation)^2, 3)
 ```
@@ -65,7 +65,7 @@ round(c(cor.exam.anxiety, partial.correlation)^2, 3)
 
 Locate in t-distribution
 
-```{r, echo=TRUE}
+```{r partial-significance, echo=TRUE}
 df <- N - 3
 
 t.pr <- ( partial.correlation*sqrt(df) ) / sqrt(1-partial.correlation^2)
@@ -73,7 +73,7 @@ t.pr
 ```
 
 ## p-value
-```{r, echo=FALSE}
+```{r partial-p-value, echo=FALSE}
 # Set up the plot for the F-distribution
 curve(dt(x, df), from = -8, to = 8, n = 1000, bty = "n", las = 1,
       xlab = "t-value", ylab = "Density", main = "t-distribution with P-value Region")

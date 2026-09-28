@@ -19,7 +19,7 @@ css: ../../ajohnson.css
 - Between subjects vs. Within subjects
 - Adding predictors
     
---- 
+## {.smaller .unlisted .untitled}
 
 <div class="goals">
 In this lecture we aim to:

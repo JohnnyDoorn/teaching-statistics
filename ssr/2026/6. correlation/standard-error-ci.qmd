@@ -16,9 +16,9 @@ $$SE = \frac{\text{Standard deviation}}{\text{Square root of sample size}} = \fr
 ```{r, child="../../images/ci.html"}
 ```
 
-##
+## {.unlisted .untitled}
 
-```{r, echo=FALSE, out.height=600}
+```{r se-standard-error, echo=FALSE, out.height=600}
 set.seed(1548)
 
 x  = seq(-4,4,.05) # sequence x values for normal distribution

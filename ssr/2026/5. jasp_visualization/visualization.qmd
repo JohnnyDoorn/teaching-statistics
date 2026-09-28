@@ -1,6 +1,6 @@
 # Visualization {.section}
 
-```{r, eval=FALSE, echo=FALSE}
+```{r vis-setup, eval=FALSE, echo=FALSE}
 # Remove all objects from workspace
 rm(list=ls())
 ```
@@ -20,7 +20,7 @@ rm(list=ls())
 
 ---
 
-## Scutari, 1854 {.smaller}
+## Scutari, 1854 {.smaller .scrollable}
 
 ::: columns
 ::: {.column width="38%"}
@@ -34,7 +34,7 @@ rm(list=ls())
 - Recorded every death and its cause
 - Two years of counting:
 
-```{r, echo=FALSE}
+```{r vis-nightingale-table, echo=FALSE}
 data(Nightingale, package = "HistData")
 knitr::kable(data.frame(
   Cause  = c("Preventable disease", "Wounds", "Other"),
@@ -52,7 +52,7 @@ knitr::kable(data.frame(
 
 ### The diagram {.smaller}
 
-```{r, echo=FALSE, fig.width=11, fig.height=5.6}
+```{r vis-nightingale-diagram, echo=FALSE, fig.width=11, fig.height=5.6}
 N    <- Nightingale
 cols <- c(Disease = "#7BA7BC", Wounds = "#C1483A", Other = "#4A4A4A")
 
@@ -151,7 +151,7 @@ Each wedge is a month; its area is the death rate.
 
 
 ### Labels and axes
-```{r, echo=FALSE}
+```{r vis-labels-and-axes, echo=FALSE}
 set.seed(123)
 
 A <- rnorm(10, mean = 5, sd = 3)
@@ -166,11 +166,10 @@ bp <- barplot(means, names.arg = c("SPSS", "JASP"),
               col = c("skyblue", "orange"), ylim = c(0, 10), axes = FALSE)
 ```
 
-
-
+---
 
 ### Scale Matters
-```{r, echo=FALSE}
+```{r vis-scale-matters, echo=FALSE}
 
 # Bad: no axis labels
 par(mfrow = c(1, 2))
@@ -188,9 +187,18 @@ bp <- barplot(means, names.arg = c("SPSS", "JASP"),
 axis(2, labels = seq(90, 100, 2), at = seq(0, 10, by =2))
 ```
 
+---
+
+### Breaking the axis
+
+- A choice, not automatically a lie
+- Difference of interest, or absolute level?
+- [Shut up about the y-axis](https://www.youtube.com/watch?v=14VYnFhBKcY)
+
+---
 
 ### Error Bars!
-```{r, echo=FALSE}
+```{r vis-error-bars, echo=FALSE}
 
 # Bad: no axis labels
 bp <- barplot(means, names.arg = c("SPSS", "JASP"),
@@ -202,10 +210,7 @@ arrows(x0 = bp, y0 = means - ses*tcrit, x1 = bp, y1 = means + ses*tcrit,
 
 ```
 
-
-
-
-### What is the plot for? {.smaller}
+## What is the plot for? {.smaller .unlisted}
 
 Tufte's principles, as Field lists them:
 
@@ -234,7 +239,7 @@ Tomorrow's forecast: -0.5°C. Should they launch?
 
 ## The evidence they reviewed {.smaller}
 
-```{r, echo=FALSE}
+```{r vis-challenger-evidence, echo=FALSE}
 source("../../_setup.R")
 challenger <- read.csv(datasetsPath("2026/challenger.csv"), check.names = FALSE)
 temperature <- challenger$`temperature-c`
@@ -255,7 +260,7 @@ plot(damagedTemp, damagedOr,
 
 ## The flights that were excluded {.smaller}
 
-```{r, echo=FALSE}
+```{r vis-challenger-excluded-flights, echo=FALSE}
 par(cex = 1.0, cex.lab = 1.1)
 cols <- ifelse(anyDamage == "yes", "darkred", "darkgreen")
 

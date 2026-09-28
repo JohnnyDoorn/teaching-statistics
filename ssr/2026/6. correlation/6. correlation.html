@@ -109,7 +109,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#standard-error" id="toc-standard-error" class="nav-link" data-scroll-target="#standard-error">Standard Error</a></li>
   <li><a href="#standard-error-1" id="toc-standard-error-1" class="nav-link" data-scroll-target="#standard-error-1">Standard Error</a></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
   <li><a href="#t-distribution-1" id="toc-t-distribution-1" class="nav-link" data-scroll-target="#t-distribution-1">T-distribution</a></li>
   <li><a href="#the-t-distribution-family" id="toc-the-t-distribution-family" class="nav-link" data-scroll-target="#the-t-distribution-family">The t-distribution family</a></li>
   <li><a href="#alpha-dictates-the-rejection-region" id="toc-alpha-dictates-the-rejection-region" class="nav-link" data-scroll-target="#alpha-dictates-the-rejection-region"><span class="math inline">\(\alpha\)</span> dictates the rejection region</a></li>
@@ -135,6 +134,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#r-to-t" id="toc-r-to-t" class="nav-link" data-scroll-target="#r-to-t"><span class="math inline">\(r\)</span> to <span class="math inline">\(t\)</span></a></li>
   <li><a href="#one-sided-vs-two-sided" id="toc-one-sided-vs-two-sided" class="nav-link" data-scroll-target="#one-sided-vs-two-sided">One-sided vs two-sided</a></li>
   <li><a href="#visualize" id="toc-visualize" class="nav-link" data-scroll-target="#visualize">Visualize</a></li>
+  <li><a href="#back-to-challenger" id="toc-back-to-challenger" class="nav-link" data-scroll-target="#back-to-challenger">Back to Challenger</a></li>
   </ul></li>
   <li><a href="#partial-correlation" id="toc-partial-correlation" class="nav-link" data-scroll-target="#partial-correlation">Partial correlation</a>
   <ul class="collapse">
@@ -149,6 +149,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#next-week" id="toc-next-week" class="nav-link" data-scroll-target="#next-week">Next Week</a></li>
   <li><a href="#recommended-exercises" id="toc-recommended-exercises" class="nav-link" data-scroll-target="#recommended-exercises">Recommended Exercises</a></li>
+  <li><a href="#labcoat-leni-7.1" id="toc-labcoat-leni-7.1" class="nav-link" data-scroll-target="#labcoat-leni-7.1">Labcoat Leni 7.1</a></li>
   <li><a href="#contact" id="toc-contact" class="nav-link" data-scroll-target="#contact">Contact</a></li>
   </ul></li>
   </ul>
@@ -194,6 +195,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
+<section id="section" class="level2 smaller scrollable unlisted untitled">
+<h2 class="smaller scrollable unlisted untitled anchored" data-anchor-id="section"></h2>
 <div class="goals">
 <p>In this lecture we discuss:</p>
 <ul>
@@ -219,11 +222,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Reading:</strong> Chapter 7 (§7.1–7.8), 5.7 (Scatterplots), 2.8–2.9 (Standard error &amp; confidence intervals)</p>
 <p><small>Not exam material: §7.2.5, §7.4.3–7.4.5 (Spearman, Kendall, point-biserial), §7.6 (comparing correlations).</small></p>
 </div>
-<section id="challenger" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="challenger">Challenger</h2>
+</section>
+<section id="challenger" class="level2 smaller scrollable">
+<h2 class="smaller scrollable anchored" data-anchor-id="challenger">Challenger</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="6.-correlation_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+<p><img src="6.-correlation_files/figure-html/challenger-scatterplots-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <section id="the-statistics" class="level3 smaller">
@@ -290,8 +294,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="population-distribution" class="level2 smaller subsection">
-<h2 class="smaller subsection anchored" data-anchor-id="population-distribution">Population distribution</h2>
+<section id="population-distribution" class="level2 smaller subsection scrollable">
+<h2 class="smaller subsection scrollable anchored" data-anchor-id="population-distribution">Population distribution</h2>
 <div class="cell" data-output-location="slide">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">7</span><span class="sc">:</span><span class="dv">8</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">9</span><span class="sc">:</span><span class="dv">13</span>), <span class="dv">4</span>, <span class="dv">4</span>))</span>
@@ -320,7 +324,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-25"><a href="#cb5-25"></a>  </span>
 <span id="cb5-26"><a href="#cb5-26"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6.-correlation_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+<p><img src="6.-correlation_files/figure-html/tdist-population-distribution-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -344,7 +348,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x, <span class="at">main =</span> <span class="st">"Sample distribution"</span>, <span class="at">col =</span> <span class="fu">rainbow</span>(<span class="dv">12</span>)[<span class="dv">6</span>], <span class="at">breaks =</span> <span class="dv">15</span>, <span class="at">las =</span><span class="dv">1</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">125</span>, <span class="dv">7</span>, <span class="fu">bquote</span>(<span class="fu">bar</span>(x) <span class="sc">~</span> <span class="st">" = "</span> <span class="sc">~</span> .(<span class="fu">round</span>(<span class="fu">mean</span>(x),<span class="dv">2</span>))), <span class="at">cex =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6.-correlation_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+<p><img src="6.-correlation_files/figure-html/tdist-a-sample-histogram-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -370,7 +374,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Sampling distribution of the mean"</span>, </span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"1,000 sample means"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6.-correlation_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+<p><img src="6.-correlation_files/figure-html/tdist-sampling-distribution-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -525,11 +529,11 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 </script>
 </div>
 </section>
-<section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section"></h2>
+<section id="section-1" class="level2 unlisted untitled">
+<h2 class="unlisted untitled anchored" data-anchor-id="section-1"></h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="6.-correlation_files/figure-html/unnamed-chunk-28-1.png" width="672" height="600"></p>
+<p><img src="6.-correlation_files/figure-html/se-standard-error-1.png" width="672" height="600"></p>
 </div>
 </div>
 </section>
@@ -547,7 +551,7 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <h2 class="smaller anchored" data-anchor-id="the-t-distribution-family">The t-distribution family</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="6.-correlation_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid" width="672"></p>
+<p><img src="6.-correlation_files/figure-html/tdist-shapes-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Fatter tails for small <span class="math inline">\(n\)</span> (few degrees of freedom); converges to the standard normal as <span class="math inline">\(n\)</span> grows.</p>
@@ -556,7 +560,7 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <h2 class="smaller anchored" data-anchor-id="alpha-dictates-the-rejection-region"><span class="math inline">\(\alpha\)</span> dictates the rejection region</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="6.-correlation_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="1248"></p>
+<p><img src="6.-correlation_files/figure-html/tdist-alpha-rejection-region-1.png" class="img-fluid" width="1248"></p>
 </div>
 </div>
 <p>Same logic as the binomial, now continuous: stricter <span class="math inline">\(\alpha\)</span>, region further into the tails.</p>
@@ -600,7 +604,7 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="6.-correlation_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid figure-img" width="480"></p>
+<p><img src="6.-correlation_files/figure-html/cor-five-students-1.png" class="img-fluid figure-img" width="480"></p>
 </figure>
 </div>
 </div>
@@ -612,7 +616,7 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="6.-correlation_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid figure-img" width="480"></p>
+<p><img src="6.-correlation_files/figure-html/cor-five-students-quadrants-1.png" class="img-fluid figure-img" width="480"></p>
 </figure>
 </div>
 </div>
@@ -624,7 +628,7 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="6.-correlation_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid figure-img" width="480"></p>
+<p><img src="6.-correlation_files/figure-html/cor-five-students-deviations-1.png" class="img-fluid figure-img" width="480"></p>
 </figure>
 </div>
 </div>
@@ -634,8 +638,8 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <!-- [Guess the correlation](http://guessthecorrelation.com) -->
 <!-- <img src="qrcodeqtc.png"> -->
 </section>
-<section id="load-data" class="level2">
-<h2 class="anchored" data-anchor-id="load-data">Load data</h2>
+<section id="load-data" class="level2 smaller scrollable">
+<h2 class="smaller scrollable anchored" data-anchor-id="load-data">Load data</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">datasetsPath</span>(<span class="st">"2026/exam-anxiety.csv"</span>), <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data[, <span class="fu">c</span>(<span class="st">"Time spent revising"</span>, <span class="st">"Exam performance"</span>, <span class="st">"Exam anxiety"</span>)]</span>
@@ -647,8 +651,8 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 </div>
 </div>
 </section>
-<section id="covariance" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="covariance">Covariance</h2>
+<section id="covariance" class="level2 subsection smaller">
+<h2 class="subsection smaller anchored" data-anchor-id="covariance">Covariance</h2>
 <p><span class="math display">\[{COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}\]</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>mean.exam    <span class="ot">&lt;-</span> <span class="fu">mean</span>(exam_grade, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
@@ -688,8 +692,8 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 </div>
 </div>
 </section>
-<section id="correlation-2" class="level2">
-<h2 class="anchored" data-anchor-id="correlation-2">Correlation</h2>
+<section id="correlation-2" class="level2 smaller scrollable">
+<h2 class="smaller scrollable anchored" data-anchor-id="correlation-2">Correlation</h2>
 <p><span class="math display">\[r_{xy} = \frac{{COV}_{xy}}{S_xS_y}\]</span> <span class="math display">\[{COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}\]</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(exam_grade, anxiety) <span class="co"># correlation</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -713,7 +717,7 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <h2 class="anchored" data-anchor-id="plot-correlation-3">Plot correlation</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="6.-correlation_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid" width="672"></p>
+<p><img src="6.-correlation_files/figure-html/cor-quadrants-all-data-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -766,7 +770,7 @@ H_A &amp;: t_r &lt; 0 \\
 <p><a href="https://johnnydoorn.github.io/teaching-statistics/extra-texts/one-sided-vs-two-sided.html">Additional text here</a></p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="6.-correlation_files/figure-html/unnamed-chunk-52-1.png" class="img-fluid" width="1056"></p>
+<p><img src="6.-correlation_files/figure-html/cor-one-vs-two-sided-1.png" class="img-fluid" width="1056"></p>
 </div>
 </div>
 <p>Same <span class="math inline">\(\alpha\)</span>, split over two tails or spent on one.</p>
@@ -776,10 +780,53 @@ H_A &amp;: t_r &lt; 0 \\
 <p>Locate in <span class="math inline">\(t\)</span>-distribution</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="6.-correlation_files/figure-html/unnamed-chunk-53-1.png" class="img-fluid" width="672"></p>
+<p><img src="6.-correlation_files/figure-html/cor-visualize-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p><span class="math display">\[P(|t| \geq 4.94 \mid H_0) &lt; .001\]</span></p>
+</section>
+<section id="back-to-challenger" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="back-to-challenger">Back to Challenger</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="6.-correlation_files/figure-html/cor-back-to-challenger-1.png" class="img-fluid" width="1056"></p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Flights</th>
+<th style="text-align: right;">r</th>
+<th style="text-align: right;">N</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">t</th>
+<th style="text-align: right;">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">7 damaged flights</td>
+<td style="text-align: right;">-0.58</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">-1.59</td>
+<td style="text-align: right;">0.173</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">All 23 flights</td>
+<td style="text-align: right;">-0.64</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">-3.80</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Nearly the same <span class="math inline">\(r\)</span>; but <span class="math inline">\(\sqrt{N-2}\)</span> causes the t-statistics to differ substantially.</p>
 </section>
 </section>
 <section id="partial-correlation" class="level1 section">
@@ -798,10 +845,14 @@ H_A &amp;: t_r &lt; 0 \\
 <h2 class="smaller anchored" data-anchor-id="shared-variance">Shared variance</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../../images/figure-7-9.png" height="380" class="figure-img"></p>
+<p><img src="../../images/figure-7-9.png" height="300" class="figure-img"></p>
 <figcaption class="figure-caption">Figure 7.9</figcaption>
 </figure>
 </div>
+<ul>
+<li>Plain <span class="math inline">\(r\)</span> takes every overlap with anxiety: <span class="math inline">\(A + C = 19.4\%\)</span></li>
+<li>Partial <span class="math inline">\(r\)</span> keeps only <span class="math inline">\(A\)</span>, against what revision leaves: <span class="math inline">\(\frac{A}{A + E} = \frac{5.1}{5.1 + 79.1} = 6.1\%\)</span></li>
+</ul>
 </section>
 <section id="partial-correlation-1" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="partial-correlation-1">Partial correlation</h2>
@@ -831,15 +882,22 @@ H_A &amp;: t_r &lt; 0 \\
 </div>
 </div>
 <p>Holding revision constant, the link shrinks.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Back to figure 7.9: A + C, then A / (A + E)</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">c</span>(cor.exam.anxiety, partial.correlation)<span class="sc">^</span><span class="dv">2</span>, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.194 0.061</code></pre>
+</div>
+</div>
 </section>
 <section id="significance-of-partial-correlation" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="significance-of-partial-correlation">Significance of partial correlation</h2>
 <p>Locate in t-distribution</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> N <span class="sc">-</span> <span class="dv">3</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>t.pr <span class="ot">&lt;-</span> ( partial.correlation<span class="sc">*</span><span class="fu">sqrt</span>(df) ) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">-</span>partial.correlation<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>t.pr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> N <span class="sc">-</span> <span class="dv">3</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>t.pr <span class="ot">&lt;-</span> ( partial.correlation<span class="sc">*</span><span class="fu">sqrt</span>(df) ) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">-</span>partial.correlation<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>t.pr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -2.545307</code></pre>
 </div>
@@ -849,7 +907,7 @@ H_A &amp;: t_r &lt; 0 \\
 <h2 class="anchored" data-anchor-id="p-value">p-value</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="6.-correlation_files/figure-html/unnamed-chunk-74-1.png" class="img-fluid" width="672"></p>
+<p><img src="6.-correlation_files/figure-html/partial-p-value-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -883,6 +941,21 @@ H_A &amp;: t_r &lt; 0 \\
 <li><a href="https://discoverjasp.com/pages/smart_alex#task-7.6">Exercise 7.6</a></li>
 <li><a href="https://discoverjasp.com/pages/smart_alex#task-7.7">Exercise 7.7</a></li>
 </ul>
+<!-- Research question and variables taken from Labcoat Leni's Real Research 7.1
+     in DSUJ ch. 7 (p. 307), reworded as a question. Variable names and
+     descriptions from leni_07.jasp on discoverjasp. There is no data-only file:
+     the book's chamorro_premuzic.jasp does not exist (discoverjasp errata, p. 307),
+     so the data link points at leni_07.jasp, which holds data and results. -->
+</section>
+<section id="labcoat-leni-7.1" class="level2">
+<h2 class="anchored" data-anchor-id="labcoat-leni-7.1">Labcoat Leni 7.1</h2>
+<p>Chamorro-Premuzic et al.&nbsp;(2008): <em>Why do you like your lecturers?</em></p>
+<p>Do students like lecturers who resemble themselves?</p>
+<ul>
+<li><code>stu_*</code>: the student’s own five personality traits (NEO-FFI)</li>
+<li><code>lec_*</code>: how much they want each trait in a lecturer, from −5 to +5</li>
+</ul>
+<p><a href="https://discoverjasp.com/repository/dsj1_leni/leni_07.jasp">Data + results (.jasp)</a> · <a href="https://discoverjasp.com/repository/dsj1_leni/leni_07.html">Results (.html)</a></p>
 </section>
 <section id="contact" class="level2">
 <h2 class="anchored" data-anchor-id="contact">Contact</h2>

@@ -89,7 +89,7 @@ n <- length(diffScores)
 n
 ```
 
-## Calculate t-value {.subsection}
+## Calculate t-value {.subsection .smaller}
 
 $$t_{n-1} = \frac{\bar{D} - \mu}{ {SE}_D }$$
 

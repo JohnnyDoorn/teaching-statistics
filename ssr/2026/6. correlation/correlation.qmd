@@ -1,6 +1,6 @@
 # Correlation {.section}
 
-```{r, eval=TRUE, echo=FALSE}
+```{r cor-setup, eval=TRUE, echo=FALSE}
 source("../../_setup.R")
 ```
 
@@ -21,7 +21,7 @@ $${COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}$$
 
 ## Plot correlation
 
-```{r,echo=FALSE, fig.width=5, fig.height=5, fig.align='center'}
+```{r cor-five-students,echo=FALSE, fig.width=5, fig.height=5, fig.align='center'}
 data <- read.csv(datasetsPath("2026/exam-anxiety.csv"), check.names = FALSE)
 # five students picked so that no two share a value and all four quadrants are used
 tinydat <- data[c(95, 50, 77, 54, 94), ]
@@ -43,7 +43,7 @@ corners <- par("usr")
 ```
 ## Plot correlation
 
-```{r,echo=FALSE, fig.width=5, fig.height=5, fig.align='center'}
+```{r cor-five-students-quadrants,echo=FALSE, fig.width=5, fig.height=5, fig.align='center'}
 plot(x, y, las = 1, xlab = "Anxiety", ylab = "Exam performance (%)", 
      xlim = myLimsX, ylim = myLimsY)
 
@@ -76,7 +76,7 @@ mtext(side = 4, bquote(bar(y) ~ "=" ~ .(round(m.y, 1))), cex = 1.5, padj = 0.5, 
 
 ## Plot correlation
 
-```{r,echo=FALSE, fig.width=5, fig.height=5, fig.align='center'}
+```{r cor-five-students-deviations,echo=FALSE, fig.width=5, fig.height=5, fig.align='center'}
 plot(x, y, las = 1, xlab = "Anxiety", ylab = "Exam performance (%)", 
      xlim = myLimsX, ylim = myLimsY)
 
@@ -108,15 +108,15 @@ $$(x_i - \bar{x})(y_i - \bar{y})$$
 
 <!-- <img src="qrcodeqtc.png"> -->
 
-## Load data
+## Load data {.smaller .scrollable}
 
-```{r, eval=TRUE, echo=TRUE}
+```{r cor-load-data, eval=TRUE, echo=TRUE}
 data <- read.csv(datasetsPath("2026/exam-anxiety.csv"), check.names = FALSE)
 data <- data[, c("Time spent revising", "Exam performance", "Exam anxiety")]
 ssrTable(data)
 ```
 
-```{r, eval=TRUE, echo=FALSE}
+```{r cor-load-data-variables, eval=TRUE, echo=FALSE}
 exam_grade   <- data$`Exam performance`
 anxiety      <- data$`Exam anxiety`
 N            <- length(exam_grade)
@@ -126,11 +126,11 @@ z.exam       <- (exam_grade - mean(exam_grade)) / sd(exam_grade)
 z.anxiety    <- (anxiety    - mean(anxiety))    / sd(anxiety)
 ```
 
-## Covariance {.subsection}
+## Covariance {.subsection .smaller}
 
 $${COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}$$
 
-```{r, echo=TRUE}
+```{r cor-covariance, echo=TRUE}
 mean.exam    <- mean(exam_grade, na.rm=TRUE)
 mean.anxiety <- mean(anxiety,    na.rm=TRUE)
 
@@ -160,29 +160,29 @@ covariance
 
 $$r_{xy} = \frac{{COV}_{xy}}{S_xS_y}$$
 
-```{r, echo=TRUE}
+```{r cor-correlation, echo=TRUE}
 correlation <- covariance / ( sd(exam_grade) * sd(anxiety) ); correlation
 ```
 
-## Correlation
+## Correlation {.smaller .scrollable}
 $$r_{xy} = \frac{{COV}_{xy}}{S_xS_y}$$
 $${COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}$$
 
 
-```{r, echo=TRUE}
+```{r cor-correlation-cor, echo=TRUE}
 cor(exam_grade, anxiety) # correlation
 
 cor(z.exam,     z.anxiety) # correlation of z-scores
 ```
 
-```{r, echo=TRUE}
+```{r cor-correlation-z-scores, echo=TRUE}
 # covariance of z-scores
 sum(z.exam * z.anxiety ) / (N - 1)
 ```
 
 ## Plot correlation
 
-```{r, echo=FALSE}
+```{r cor-quadrants-all-data, echo=FALSE}
 plot(anxiety, exam_grade, las = 1, pch = 21, bg = "turquoise",
      ylab = "Exam performance (%)", xlab = "Anxiety")
 abline(h = mean.exam,    col = "black", lwd = 2)
@@ -236,7 +236,7 @@ $$
 
 ## $r$  to $t$ 
 
-```{r, echo=TRUE}
+```{r cor-r-to-t, echo=TRUE}
 df  <- N-2
 t.r <- ( correlation*sqrt(df) ) / sqrt(1-correlation^2)
 
@@ -250,7 +250,7 @@ The hypotheses above translate into where we shade the rejection region:
 
 [Additional text here](https://johnnydoorn.github.io/teaching-statistics/extra-texts/one-sided-vs-two-sided.html)
 
-```{r, echo=FALSE, fig.width=11, fig.height=4.6}
+```{r cor-one-vs-two-sided, echo=FALSE, fig.width=11, fig.height=4.6}
 layout(matrix(1:2, 1, 2))
 par(cex = 0.8, cex.lab = 1.2, cex.main = 1.2)
 
@@ -267,7 +267,7 @@ Same $\alpha$, split over two tails or spent on one.
 
 Locate in $t$-distribution
 
-```{r, echo=FALSE}
+```{r cor-visualize, echo=FALSE}
 tCurve(df, sided = "two", observed = t.r, showRegion = FALSE,
        main = "Our observed t in the null distribution")
 
@@ -275,3 +275,48 @@ p.r <- 2 * pt(abs(t.r), df, lower.tail = FALSE)
 ```
 
 $$P(|t| \geq `r sprintf("%.2f", abs(t.r))` \mid H_0) `r if (p.r < .001) "< .001" else sprintf("= %.3f", p.r)`$$
+
+## Back to Challenger {.smaller}
+
+```{r cor-back-to-challenger, echo=FALSE, fig.width=11, fig.height=4.4}
+# tCurve() is defined in t-distribution.qmd: this child has to stay after it in
+# the wrapper. The CSV is re-read rather than reusing challenger-recap.qmd's
+# variables, so a reorder cannot silently break the slide.
+challenger  <- read.csv(datasetsPath("2026/challenger.csv"), check.names = FALSE)
+damagedOnly <- challenger[challenger$`any-damage` == "yes", ]
+
+rToT <- function(r, n) r * sqrt(n - 2) / sqrt(1 - r^2)
+
+flights <- data.frame(
+  set = c("7 damaged flights", "All 23 flights"),
+  r   = c(cor(damagedOnly$`temperature-c`, damagedOnly$`damaged-o-rings`),
+          cor(challenger$`temperature-c`,  challenger$`damaged-o-rings`)),
+  N   = c(nrow(damagedOnly), nrow(challenger))
+)
+flights$df <- flights$N - 2
+flights$t  <- rToT(flights$r, flights$N)
+flights$p  <- 2 * pt(abs(flights$t), flights$df, lower.tail = FALSE)
+
+layout(matrix(1:2, 1, 2))
+par(cex = 0.8, cex.lab = 1.2, cex.main = 1.2)
+
+for (i in seq_len(nrow(flights)))
+  tCurve(flights$df[i], sided = "two", observed = flights$t[i], showRegion = FALSE,
+         main = sprintf("%s: r = %.2f", flights$set[i], flights$r[i]))
+```
+
+```{r cor-back-to-challenger-table, echo=FALSE}
+knitr::kable(
+  data.frame(
+    Flights = flights$set,
+    r       = sprintf("%.2f", flights$r),
+    N       = flights$N,
+    df      = flights$df,
+    t       = sprintf("%.2f", flights$t),
+    p       = sprintf("%.3f", flights$p)
+  ),
+  align = "lrrrrr"
+)
+```
+
+Nearly the same $r$; but  $\sqrt{N-2}$ causes the t-statistics to differ substantially.

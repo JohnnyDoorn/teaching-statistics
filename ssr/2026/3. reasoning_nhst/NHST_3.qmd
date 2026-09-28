@@ -51,13 +51,13 @@ $H_A$
 
 ## What happens if they are guessing?
 
-## Binomial distribution
+## Binomial distribution {.smaller}
 
 $$P(k \text{ success out of } n \text{ trials} \mid \text{probability } p) = {n\choose k}p^k(1-p)^{n-k}$$ where $$ {n\choose k} = \frac{n!}{k!(n-k)!} $$
 
 With values:
 
-```{r, echo=TRUE}
+```{r nhst-binomial-setup, echo=TRUE}
 n <- 10   # Sample size
 k <- 0:10 # Discrete probability space (numbers 0, 1, ..., 9, 10)
 p <- .5   # Probability of correct guess
@@ -65,7 +65,7 @@ p <- .5   # Probability of correct guess
 
 ## The null distribution
 
-```{r, echo=FALSE}
+```{r nhst-null-distribution, echo=FALSE}
 permutations = factorial(n) / ( factorial(k) * factorial(n-k) )
 
 p_k  = p^k * (1-p)^(n-k)  # Probability of single event
@@ -149,7 +149,7 @@ Reject $H_0$ when:
 
 ## P-value in $H_{0}$ distribution
 
-```{r, echo=FALSE}
+```{r nhst-p-value-null-distribution, echo=FALSE}
 
 n <- 10   # Sample size
 k <- 0:10 # Discrete probability space
@@ -185,7 +185,7 @@ text(k, p_kp + yMax * 0.08, round(p_kp, 3), col = col, cex = 0.9)
 
 $$P(k \geq `r observed` \mid H_0) = `r paste(round(p_kp[k >= observed], 3), collapse = " + ")` = `r round(sum(p_kp[k >= observed]), 3)`$$
 
-## P-value and $\alpha$
+## P-value and $\alpha$ {.smaller}
 
 Alpha determines how willingly we reject the null hypothesis:
 
@@ -200,7 +200,7 @@ light of his evidence and his ideas. (Fisher, 1956)
 
 ## $\alpha$ dictates the rejection region {.smaller}
 
-```{r, echo=FALSE, fig.width=13, fig.height=4.8}
+```{r nhst-alpha-rejection-region, echo=FALSE, fig.width=13, fig.height=4.8}
 layout(matrix(1:3, 1, 3))
 par(cex = 0.8, cex.lab = 1.2, cex.main = 1.2)
 
@@ -265,7 +265,7 @@ But we have no clue what this distribution could look like.
 
 For now let's assume the probability of answering an item correctly is .75
 
-```{r, echo=FALSE}
+```{r nhst-alternative-distribution, echo=FALSE}
 
 p = .75   # Probability of a correct answer if they really are an expert
 
@@ -303,7 +303,7 @@ text(k, p_kp2 + yMax * 0.08, round(p_kp2, 3), col = col, cex = 0.9)
 
 ## Both distributions at once {.smaller}
 
-```{r, echo=FALSE}
+```{r nhst-both-distributions, echo=FALSE}
 
 colh0 = 'darkgreen'
 colha = 'darkorange'
@@ -336,7 +336,7 @@ abline(v = crit_upper - 0.5, lwd = 2, lty = 2)
 legend("topright", legend = c("H0", "HA"), fill = c(colh0, colha), cex = 0.8, bty = "n")
 ```
 
-## Decision table
+## Decision table {.smaller .scrollable}
 
 ::: {.content-visible when-format="revealjs"}
 ```{=html}
@@ -351,7 +351,7 @@ legend("topright", legend = c("H0", "HA"), fill = c(colh0, colha), cex = 0.8, bt
 ```
 :::
 
-## The two ways to be wrong: $\alpha$ and $\beta$ {.smaller}
+## The two ways to be wrong: $\alpha$ and $\beta$ {.smaller .scrollable}
 
 ::: columns
 ::: {.column width="40%"}

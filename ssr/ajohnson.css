@@ -123,3 +123,8 @@ th {
 ul {
   list-style-type: square;
 }
+
+/* Untitled slide that still needs slide classes: `## {.smaller .unlisted .untitled}` */
+section.untitled > h2 {
+  display: none;
+}
