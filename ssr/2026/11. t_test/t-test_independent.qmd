@@ -58,6 +58,10 @@ iqLastYear <- loadIQData(lastYear)$nextIQ
 data <- data.frame(IQ   = c(iqLastYear, iqThisYear),
                    year = factor(c(rep(lastYear, length(iqLastYear)),
                                    rep(thisYear, length(iqThisYear)))))
+
+# Also save the data as csv for JASP (datasets/<year>/); a no-op until this
+# year's sheet has responses.
+writeIQData()
 ```
 
 

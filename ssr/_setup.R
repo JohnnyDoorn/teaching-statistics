@@ -55,12 +55,40 @@ loadIQData <- function(year) {
   data
 }
 
-# The year whose IQ data the slides should use. Bump `current` each year.
-iqYear <- function(current = 2026) {
+# The current academic year. Bump this each year (and add its sheet above).
+iqCurrentYear <- 2026
+
+# The year whose IQ data the slides should use.
+iqYear <- function(current = iqCurrentYear) {
   if (nrow(loadIQData(current)) > 0) return(current)
   message("IQ sheet for ", current, " is still empty - using ", current - 1,
           " instead. Re-render once the students have filled in the form.")
   current - 1
+}
+
+# Writes the IQ data to datasets/<year>/ for use in JASP: this year's answers
+# (wide), and this year's answers against last year's (long, with a year
+# column). Does nothing while this year's sheet is still empty.
+writeIQData <- function(current = iqCurrentYear) {
+  if (iqYear(current) != current) return(invisible(NULL))
+  thisYear <- loadIQData(current)
+  lastYear <- loadIQData(current - 1)
+
+  wide <- data.frame(`own-iq`      = thisYear$ownIQ,
+                     `neighbor-iq` = thisYear$nextIQ, check.names = FALSE)
+  long <- data.frame(year          = rep(c(current - 1, current),
+                                         c(nrow(lastYear), nrow(thisYear))),
+                     `own-iq`      = c(lastYear$ownIQ,  thisYear$ownIQ),
+                     `neighbor-iq` = c(lastYear$nextIQ, thisYear$nextIQ),
+                     check.names = FALSE)
+
+  dir <- datasetsPath(current)
+  dir.create(dir, showWarnings = FALSE, recursive = TRUE)
+  write.csv(wide, file.path(dir, sprintf("iq-estimates-%d.csv", current)),
+            row.names = FALSE)
+  write.csv(long, file.path(dir, sprintf("iq-estimates-%d-vs-%d.csv",
+                                         current - 1, current)),
+            row.names = FALSE)
 }
 
 # --- Helper: path to central datasets folder ---

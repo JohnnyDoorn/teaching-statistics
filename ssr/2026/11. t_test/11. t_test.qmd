@@ -2,7 +2,7 @@
 title: "11. T-tests"
 author: "Johnny van Doorn"
 date: "29 September 2026"
-view: "https://teams.microsoft.com/meet/383013566330381?p=J5cLpg457MUfuWlfF1"
+view: "https://amsuni-my.sharepoint.com/:v:/g/personal/j_b_vandoorn_uva_nl/IQB-g1ccbpT5RYUFSss0F_NZAfZvWgAuh7k_gG0b8Ikb69Q?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=xrns5n"
 footer: "Scientific & Statistical Reasoning"
 format:
   revealjs:
