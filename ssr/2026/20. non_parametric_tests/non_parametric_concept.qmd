@@ -14,6 +14,14 @@ library("knitr")
 
 + [Topic of my dissertation!](https://dare.uva.nl/search?identifier=fca7cec7-5ded-4e99-8c79-a0d0ee6a3f4c)
 
+## {.center .unlisted .untitled}
+
+> I'm Ken Griffey on the Mariners\
+> Okay, I'm way beyond the boundaries, outside of parameters\
+> The rap chancellor, jacket made of camel fur
+
+Mac Miller, [*Apparition*](https://genius.com/Mac-miller-apparition-lyrics) ([*Faces*](https://www.youtube.com/watch?v=dCAClyY6vlQ&list=RDdCAClyY6vlQ&start_radio=1))
+
 ## Parametric vs Nonparametric {#mytable}
 
 <!-- <style>
