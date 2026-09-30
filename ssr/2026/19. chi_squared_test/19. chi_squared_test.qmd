@@ -28,6 +28,11 @@ Chapter 16 (§16.1–16.10)
 ```
 
 
+## JASP
+
+![](../../images/JASP_logo_green.svg){width="300px"}
+
+
 # Closing
 
 ## Recap

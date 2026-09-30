@@ -29,6 +29,11 @@ Chapter 11 (§11.1–11.13)
 ```
 
 
+## JASP
+
+![](../../images/JASP_logo_green.svg){width="300px"}
+
+
 # Closing
 
 ## Recap {.smaller}

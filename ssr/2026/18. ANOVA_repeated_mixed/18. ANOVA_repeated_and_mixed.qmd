@@ -37,6 +37,11 @@ Chapter 14 (§14.1–14.18)
 ```
 
 
+## JASP
+
+![](../../images/JASP_logo_green.svg){width="300px"}
+
+
 # Closing
 
 ## Recap

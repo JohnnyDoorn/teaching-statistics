@@ -46,6 +46,11 @@ Chapter 9 (§9.1–9.14)
 ```{r child="t-test_independent.qmd"}
 ```
 
+## JASP
+
+![](../../images/JASP_logo_green.svg){width="300px"}
+
+
 # Closing
 
 ## Next Time

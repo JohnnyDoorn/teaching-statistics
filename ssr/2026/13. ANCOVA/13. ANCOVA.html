@@ -134,6 +134,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#closing" id="toc-closing" class="nav-link" data-scroll-target="#closing">Closing</a>
   <ul class="collapse">
   <li><a href="#recap" id="toc-recap" class="nav-link" data-scroll-target="#recap">Recap</a></li>
+  <li><a href="#exam-note-checking-assumptions" id="toc-exam-note-checking-assumptions" class="nav-link" data-scroll-target="#exam-note-checking-assumptions">Exam note: checking assumptions</a></li>
+  <li><a href="#exam-note-robust-alternatives" id="toc-exam-note-robust-alternatives" class="nav-link" data-scroll-target="#exam-note-robust-alternatives">Exam note: robust alternatives</a></li>
   <li><a href="#recommended-exercises" id="toc-recommended-exercises" class="nav-link" data-scroll-target="#recommended-exercises">Recommended Exercises</a></li>
   <li><a href="#labcoat-leni-12.1" id="toc-labcoat-leni-12.1" class="nav-link" data-scroll-target="#labcoat-leni-12.1">Labcoat Leni 12.1</a></li>
   <li><a href="#contact" id="toc-contact" class="nav-link" data-scroll-target="#contact">Contact</a></li>
@@ -508,6 +510,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Whether there is an interaction effect</li>
 <li>Whether the predictors are associated</li>
 </ul></li>
+</ul>
+</section>
+<section id="exam-note-checking-assumptions" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="exam-note-checking-assumptions">Exam note: checking assumptions</h2>
+<ul>
+<li>No assumption tests (Shapiro-Wilk, Levene’s) on the exam (see Jane Superbrain Box 6.7)</li>
+<li>Normality: Q-Q plot of the residuals, with confidence interval
+<ul>
+<li>Assumption Checks → Q-Q plot residuals → Confidence interval</li>
+<li>Points outside the band suggest non-normality</li>
+</ul></li>
+<li>Equal variances: ratio of variances/sd</li>
+<li>ANCOVA, homogeneity of regression slopes: interaction covariate * independent variable
+<ul>
+<li>Model → Model Terms: add or remove the interaction</li>
+<li>What it means: effect of the covariate differs between groups</li>
+</ul></li>
+</ul>
+</section>
+<section id="exam-note-robust-alternatives" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="exam-note-robust-alternatives">Exam note: robust alternatives</h2>
+<ul>
+<li>Unequal variances:
+<ul>
+<li>Welch <span class="math inline">\(t\)</span>-test</li>
+<li>Welch <span class="math inline">\(F\)</span> (one-way ANOVA <em>only</em>: Assumption Checks → Homogeneity corrections)</li>
+</ul></li>
+<li>Non-normality: nonparametric test (Chapter 15; lecture 20)
+<ul>
+<li>Mann-Whitney, Wilcoxon signed-rank, Kruskal-Wallis</li>
+</ul></li>
+<li>Question can give a decision rule, e.g., “use nonparametric test if more than 5 points fall outside the band”</li>
+<li>ANCOVA: no robust version, so have to eat the grain of salt</li>
 </ul>
 </section>
 <section id="recommended-exercises" class="level2">

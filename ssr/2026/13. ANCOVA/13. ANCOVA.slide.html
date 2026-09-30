@@ -732,6 +732,39 @@ Johnny van Doorn
 </ul></li>
 </ul>
 </section>
+<section id="exam-note-checking-assumptions" class="slide level2 smaller">
+<h2>Exam note: checking assumptions</h2>
+<ul>
+<li>No assumption tests (Shapiro-Wilk, Levene’s) on the exam (see Jane Superbrain Box 6.7)</li>
+<li>Normality: Q-Q plot of the residuals, with confidence interval
+<ul>
+<li>Assumption Checks → Q-Q plot residuals → Confidence interval</li>
+<li>Points outside the band suggest non-normality</li>
+</ul></li>
+<li>Equal variances: ratio of variances/sd</li>
+<li>ANCOVA, homogeneity of regression slopes: interaction covariate * independent variable
+<ul>
+<li>Model → Model Terms: add or remove the interaction</li>
+<li>What it means: effect of the covariate differs between groups</li>
+</ul></li>
+</ul>
+</section>
+<section id="exam-note-robust-alternatives" class="slide level2 smaller">
+<h2>Exam note: robust alternatives</h2>
+<ul>
+<li>Unequal variances:
+<ul>
+<li>Welch <span class="math inline">\(t\)</span>-test</li>
+<li>Welch <span class="math inline">\(F\)</span> (one-way ANOVA <em>only</em>: Assumption Checks → Homogeneity corrections)</li>
+</ul></li>
+<li>Non-normality: nonparametric test (Chapter 15; lecture 20)
+<ul>
+<li>Mann-Whitney, Wilcoxon signed-rank, Kruskal-Wallis</li>
+</ul></li>
+<li>Question can give a decision rule, e.g., “use nonparametric test if more than 5 points fall outside the band”</li>
+<li>ANCOVA: no robust version, so have to eat the grain of salt</li>
+</ul>
+</section>
 <section id="recommended-exercises" class="slide level2">
 <h2>Recommended Exercises</h2>
 <ul>

@@ -35,6 +35,11 @@ Chapter 8 (§8.1–8.8)
 ```
 
 
+## JASP
+
+![](../../images/JASP_logo_green.svg){width="300px"}
+
+
 # Closing
 
 ## Exam note

@@ -27,6 +27,11 @@ Chapter 10 (§10.4–10.7)
 ```
 
 
+## JASP
+
+![](../../images/JASP_logo_green.svg){width="300px"}
+
+
 # Closing
 
 ## Recap

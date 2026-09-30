@@ -37,6 +37,27 @@ Chapter 12 (§12.1–12.12)
   - Whether there is an interaction effect
   - Whether the predictors are associated
 
+## Exam note: checking assumptions {.smaller}
+
+- No assumption tests (Shapiro-Wilk, Levene's) on the exam (see Jane Superbrain Box 6.7)
+- Normality: Q-Q plot of the residuals, with confidence interval
+  - Assumption Checks → Q-Q plot residuals → Confidence interval
+  - Points outside the band suggest non-normality
+- Equal variances: ratio of variances/sd
+- ANCOVA, homogeneity of regression slopes: interaction covariate * independent variable
+  - Model → Model Terms: add or remove the interaction
+  - What it means: effect of the covariate differs between groups
+
+## Exam note: robust alternatives {.smaller}
+
+- Unequal variances:
+  - Welch $t$-test
+  - Welch $F$ (one-way ANOVA *only*: Assumption Checks → Homogeneity corrections)
+- Non-normality: nonparametric test (Chapter 15; lecture 20)
+  - Mann-Whitney, Wilcoxon signed-rank, Kruskal-Wallis
+- Question can give a decision rule, e.g., "use nonparametric test if more than 5 points fall outside the band"
+- ANCOVA: no robust version, so have to eat the grain of salt
+
 ## Recommended Exercises
 
 - [Exercise 12.2](https://discoverjasp.com/pages/smart_alex#task-12.2)
