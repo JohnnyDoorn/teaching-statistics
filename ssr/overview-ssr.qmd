@@ -19,7 +19,7 @@ format:
 ---
 
 ::: {.lead-intro}
-This page is continuously updated with everything you need for the course: the lecture slides and handouts, interactive applets, the JASP datasets and result files, and extra written explanations. Use the toggle in the sidebar to switch between light and dark mode.
+This page is continuously updated with everything you need for the course: the lecture slides and handouts, interactive applets, the JASP datasets and result files, and extra written explanations. Use the toggle in the sidebar to switch between light and dark mode. 
 :::
 
 ## Slides
