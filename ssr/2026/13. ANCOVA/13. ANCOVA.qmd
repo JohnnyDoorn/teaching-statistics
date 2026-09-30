@@ -47,15 +47,6 @@ What you should know: how to assess, robust alternatives, and why these assumpti
   - Points outside the band suggest non-normality
 - Equal variances: ratio of variances/sd
 
-## Exam note: ANCOVA assumptions {.smaller}
-
-- Independence of the covariate and treatment effect
-  - ANOVA with the covariate as dependent variable
-  - What it means: groups differ on the covariate
-- Homogeneity of regression slopes: interaction covariate * independent variable
-  - Model → Model Terms: add or remove the interaction
-  - What it means: effect of the covariate differs between groups
-
 ## Exam note: robust alternatives {.smaller}
 
 - Unequal variances:
@@ -65,6 +56,15 @@ What you should know: how to assess, robust alternatives, and why these assumpti
   - Mann-Whitney, Wilcoxon signed-rank, Kruskal-Wallis
 - Question can give a decision rule, e.g., "use nonparametric test if more than 5 points fall outside the Q-Q confidence band"
 - ANCOVA: no robust version, so have to eat the grain of salt if normality or variances seem problematic
+
+## Exam note: ANCOVA assumptions {.smaller}
+
+- Independence of the covariate and treatment effect
+  - ANOVA with the covariate as dependent variable
+  - What it means: groups differ on the covariate
+- Homogeneity of regression slopes: interaction covariate * independent variable
+  - Model → Model Terms: add or remove the interaction
+  - What it means: effect of the covariate differs between groups
 
 ## Recommended Exercises
 

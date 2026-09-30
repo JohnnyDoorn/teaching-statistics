@@ -719,18 +719,19 @@ Johnny van Doorn
 <section id="independence-of-the-covariate" class="slide level2 smaller">
 <h2>Independence of the covariate</h2>
 <div class="columns">
-<div class="column">
+<div class="column" style="width:60%;">
 <ul>
 <li>Groups should not differ on the covariate (§12.5.1)</li>
 <li>Otherwise: covariate and group share variance (Fig 12.2C)
 <ul>
 <li>Associated predictors can inflate/deflate the group effect (F, adjusted means)</li>
 <li>Does not “control for” the group difference</li>
+<li>Interpretation problem, not a statistical requirement (Jane Superbrain Box 12.1)</li>
 </ul></li>
 <li>Risk mostly without random assignment</li>
 <li>Assess: ANOVA with covariate as dependent variable (§12.6.3)</li>
 </ul>
-</div><div class="column">
+</div><div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="../../images/desc-plot-ancova.png"></p>
@@ -743,17 +744,21 @@ Johnny van Doorn
 <section id="homogeneity-of-regression-slopes" class="slide level2 smaller">
 <h2>Homogeneity of regression slopes</h2>
 <div class="columns">
-<div class="column">
+<div class="column" style="width:60%;">
 <ul>
 <li>One slope for the covariate: parallel lines (§12.5.2)</li>
 <li>Assumes the same covariate-DV relation in every group</li>
-<li>Violated: inflated Type I error (Jane Superbrain Box 12.2)</li>
+<li>Unequal slopes:
+<ul>
+<li>Interpretation: effect of nationality depends on openness (§12.8)</li>
+<li>Inflated Type I error (Jane Superbrain Box 12.2)</li>
+</ul></li>
 <li>Assess: add the interaction nationality * openness to the model (§12.8)
 <ul>
 <li>Descriptives plot: are the lines per group roughly parallel?</li>
 </ul></li>
 </ul>
-</div><div class="column">
+</div><div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="../../images/slopes-plot-ancova.png"></p>
@@ -796,21 +801,6 @@ Johnny van Doorn
 <li>Equal variances: ratio of variances/sd</li>
 </ul>
 </section>
-<section id="exam-note-ancova-assumptions" class="slide level2 smaller">
-<h2>Exam note: ANCOVA assumptions</h2>
-<ul>
-<li>Independence of the covariate and treatment effect
-<ul>
-<li>ANOVA with the covariate as dependent variable</li>
-<li>What it means: groups differ on the covariate</li>
-</ul></li>
-<li>Homogeneity of regression slopes: interaction covariate * independent variable
-<ul>
-<li>Model → Model Terms: add or remove the interaction</li>
-<li>What it means: effect of the covariate differs between groups</li>
-</ul></li>
-</ul>
-</section>
 <section id="exam-note-robust-alternatives" class="slide level2 smaller">
 <h2>Exam note: robust alternatives</h2>
 <ul>
@@ -825,6 +815,21 @@ Johnny van Doorn
 </ul></li>
 <li>Question can give a decision rule, e.g., “use nonparametric test if more than 5 points fall outside the Q-Q confidence band”</li>
 <li>ANCOVA: no robust version, so have to eat the grain of salt if normality or variances seem problematic</li>
+</ul>
+</section>
+<section id="exam-note-ancova-assumptions" class="slide level2 smaller">
+<h2>Exam note: ANCOVA assumptions</h2>
+<ul>
+<li>Independence of the covariate and treatment effect
+<ul>
+<li>ANOVA with the covariate as dependent variable</li>
+<li>What it means: groups differ on the covariate</li>
+</ul></li>
+<li>Homogeneity of regression slopes: interaction covariate * independent variable
+<ul>
+<li>Model → Model Terms: add or remove the interaction</li>
+<li>What it means: effect of the covariate differs between groups</li>
+</ul></li>
 </ul>
 </section>
 <section id="recommended-exercises" class="slide level2">

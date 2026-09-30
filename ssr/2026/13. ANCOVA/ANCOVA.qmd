@@ -433,18 +433,19 @@ aggregate(extraversion ~ nationality, data, mean)
 
 ::: {.columns}
 
-::: {.column}
+::: {.column width="60%"}
 
 * Groups should not differ on the covariate (§12.5.1)
 * Otherwise: covariate and group share variance (Fig 12.2C)
     * Associated predictors can inflate/deflate the group effect (F, adjusted means)
     * Does not "control for" the group difference
+    * Interpretation problem, not a statistical requirement (Jane Superbrain Box 12.1)
 * Risk mostly without random assignment
 * Assess: ANOVA with covariate as dependent variable (§12.6.3)
 
 :::
 
-::: {.column}
+::: {.column width="40%"}
 
 ```{r ancova-independence-covariate-test, echo=FALSE}
 # The plot is JASP's descriptives plot of the same data (ANOVA with openness as
@@ -465,17 +466,19 @@ covText <- sprintf("ANOVA on openness: F(%d, %d) = %.2f, p = %.3f",
 
 ::: {.columns}
 
-::: {.column}
+::: {.column width="60%"}
 
 * One slope for the covariate: parallel lines (§12.5.2)
 * Assumes the same covariate-DV relation in every group
-* Violated: inflated Type I error (Jane Superbrain Box 12.2)
+* Unequal slopes:
+    * Interpretation: effect of nationality depends on openness (§12.8)
+    * Inflated Type I error (Jane Superbrain Box 12.2)
 * Assess: add the interaction nationality * openness to the model (§12.8)
     * Descriptives plot: are the lines per group roughly parallel?
 
 :::
 
-::: {.column}
+::: {.column width="40%"}
 
 ```{r ancova-homogeneity-slopes-test, echo=FALSE}
 # The plot is JASP's scatterplot of the same data per group; the interaction
