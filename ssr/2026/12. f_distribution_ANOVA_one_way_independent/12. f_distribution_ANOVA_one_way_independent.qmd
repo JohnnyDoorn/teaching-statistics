@@ -3,7 +3,7 @@ title: "12. ANOVA"
 subtitle: "One-way independent ANOVA"
 author: "Johnny van Doorn"
 date: "30 September 2026"
-view: "https://teams.microsoft.com/meet/383013566330381?p=J5cLpg457MUfuWlfF1"
+view: "https://amsuni-my.sharepoint.com/:v:/g/personal/j_b_vandoorn_uva_nl/IQC8RXesSo_eRLK6yZYzsKzeAcJ292GAFFhQjhUF9Erj2Gk?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=wbfOC9"
 footer: "Scientific & Statistical Reasoning"
 format:
   revealjs:
