@@ -2,7 +2,11 @@
 
 Compare 2 or more independent groups.
 
-## Assumptions
+## Applet
+
+[Link](https://jvd-ssr-oneway-anova.share.connect.posit.cloud/)
+
+## Assumptions {.smaller}
 
 Assuming the $H_0$ hypothesis to be true, the following should hold:
 
@@ -12,6 +16,7 @@ Assuming the $H_0$ hypothesis to be true, the following should hold:
     * Q-Q plots (or Shapiro-Wilk)
 * Equal variance within groups (i.e., *Homogeneity of variances*)
     * Ratio of variances/sd (or Levene's test)
+* For examples of violations, see [here](https://johnnydoorn.github.io/teaching-statistics/extra-texts/violating-assumptions-anova.html)
 
 ## Puppies!
 
@@ -34,7 +39,7 @@ x.k <- x[data$Dose == "15 mins"] # Knees
 x.e <- x[data$Dose == "30 mins"] # Eyes
 ```
 
-## The data
+## The data {.smaller .scrollable}
 
 ```{r anova-the-data, echo=FALSE}
 ssrTable(data)
@@ -71,7 +76,7 @@ $$\hat{y} = b_0 + b_1 {dummy}_1 + b_2 {dummy}_2$$
 - ${dummy}_1 =$ 1 if participant received 15 minutes, 0 otherwise
 - ${dummy}_2 =$: 1 if participant received 30 minutes, 0 otherwise
 
-## Model predictions 
+## Model predictions {.smaller}
 
 $$\hat{y} = b_0 + b_1 {dummy}_1 + b_2 {dummy}_2$$
 
@@ -82,7 +87,9 @@ $$\hat{y} = b_0 + b_1 {dummy}_1 + b_2 {dummy}_2$$
 - If 30 min puppies: we predict $b_0 + 0 + b_2$
   - $b_2 =$ difference between control and 30 minute group
 
-## Data + predictions (i.e., group means)
+[Additional rambling here](https://johnnydoorn.github.io/teaching-statistics/extra-texts/predicting-with-dummies-1-variable.html)
+
+## Data + predictions (i.e., group means) {.smaller .scrollable}
 
 ```{r anova-data-and-predictions, echo=FALSE}
 data$Predictions <- tapply(data$Happiness, data$Dose, mean)[data$Dose]
@@ -90,13 +97,13 @@ ssrTable(data)
 ```
 
 
-## Variance components
+## Variance components {.smaller}
 
 Variance | Sum of Squares | DF | Mean Squares | F-ratio
 ---------|----------------|----|--------------|---------
-Model    | ${SS}_{model} = \sum n_k(\bar{X}_k - \bar{X})^2$ | $k-1$ | $\frac{{SS}_{model}}{{df}_{model}}$ | $\frac{{MS}_{model}}{{MS}_{error}}$
-Error    | ${SS}_{error} = \sum s_k^2 (n_k - 1)$            | $N-k$ | $\frac{{SS}_{error}}{{df}_{error}}$ | 
-Total    | ${SS}_{total} = {SS}_{model} + {SS}_{error}$     | $N-1$ | $\frac{{SS}_{total}}{{df}_{total}}$ | 
+Model    | ${SS}_{model} = \sum n_k(\bar{X}_k - \bar{X})^2$ | $k-1$ | $\frac{{SS}_{model}}{{df}_{model}}$ | $\frac{{MS}_{model}}{{MS}_{residual}}$
+Residual | ${SS}_{residual} = \sum s_k^2 (n_k - 1)$            | $N-k$ | $\frac{{SS}_{residual}}{{df}_{residual}}$ | 
+Total    | ${SS}_{total} = {SS}_{model} + {SS}_{residual}$     | $N-1$ | $\frac{{SS}_{total}}{{df}_{total}}$ | 
 
 Where $N$ is the total sample size, $n_k$ is the sample size per category and $k$ is the number of categories. Finally $s_k^2$ is the variance per category.
 
@@ -108,7 +115,7 @@ Where $N$ is the total sample size, $n_k$ is the sample size per category and $k
 - How much of this variance can we explain by looking at the group means?
   - Model variance = distance between group means and grand mean
 - How much of this variance is **not** explained by the group means?
-  - Error variance = distance between group means and observations
+  - Residual variance = distance between group means and observations
 
 > DV = Model + Error
 
@@ -181,13 +188,13 @@ ms.m <- ss.m / df.m
 plotSumSquares(data = plotData, sumSq = "Model", whatPred = "Group means", myLimY = c(0, 10), whatDisplay = c("Segments"))
 ```
 
-## Error variance {.smaller}
+## Residual variance {.smaller}
 
-$${MS}_{error} = \frac{{SS}_{error}}{{df}_{error}} \\ {df}_{error} = N - k$$
+$${MS}_{residual} = \frac{{SS}_{residual}}{{df}_{residual}} \\ {df}_{residual} = N - k$$
 
 where
 
-$${SS}_{error} = \sum_{k} s_k^2 (n_k - 1) = \sum_{k} \frac{\sum (x_{ik} - \bar{x}_k)^2}{(n_k - 1)} (n_k - 1)$$
+$${SS}_{residual} = \sum_{k} s_k^2 (n_k - 1) = \sum_{k} \frac{\sum (x_{ik} - \bar{x}_k)^2}{(n_k - 1)} (n_k - 1)$$
 
 ```{r anova-error-variance, echo=FALSE}
 ss.e.c <- var(x.c) * (n.c - 1)
@@ -197,7 +204,7 @@ ss.e   <- sum(ss.e.c, ss.e.k, ss.e.e)
 ```
 
 
-$${MS}_{error} = \frac{{SS}_{error}}{{df}_{error}} \\ {df}_{error} = N - k$$
+$${MS}_{residual} = \frac{{SS}_{residual}}{{df}_{residual}} \\ {df}_{residual} = N - k$$
 
 ```{r anova-error-variance-result, echo=FALSE}
 df.e <- (N - k)
@@ -205,20 +212,20 @@ ms.e <- ss.e / df.e
 # ; ms.e
 ```
 
-## Visual ${SS}_{error}  = `r round(ss.e, 3)`$
+## Visual ${SS}_{residual}  = `r round(ss.e, 3)`$
 
 ```{r anova-visual-ss-error, echo=FALSE}
 plotSumSquares(data = plotData, sumSq = "Error", whatPred = "Group means", myLimY = c(0, 10), whatDisplay = c("Segments"))
 ```
 
-## Variance components {.subsection}
+## Variance components {.subsection .smaller}
 
-$${SS}_{total} = {SS}_{model} + {SS}_{error}$$
+$${SS}_{total} = {SS}_{model} + {SS}_{residual}$$
 $$`r round(ss.t, 3)` = `r round(ss.m, 3)` + `r round(ss.e, 3)`$$
 
 $${MS}_{total} = \frac{{SS}_{total}}{{df}_{total}}= `r round(ms.t, 3)`$$
 $${MS}_{model} = \frac{{SS}_{model}}{{df}_{model}}= `r round(ms.m, 3)`$$
-$${MS}_{error} = \frac{{SS}_{error}}{{df}_{error}} = `r round(ms.e, 3)`$$
+$${MS}_{residual} = \frac{{SS}_{residual}}{{df}_{residual}} = `r round(ms.e, 3)`$$
 
 ## F-ratio {.subsection}
 
@@ -228,7 +235,7 @@ $${MS}_{error} = \frac{{SS}_{error}}{{df}_{error}} = `r round(ms.e, 3)`$$
 
 ### F-ratio {.subsection}
 
-$$F = \frac{{MS}_{model}}{{MS}_{error}} = \frac{{SIGNAL}}{{NOISE}}$$
+$$F = \frac{{MS}_{model}}{{MS}_{residual}} = \frac{{SIGNAL}}{{NOISE}}$$
 
 ```{r anova-f-ratio, echo=TRUE}
 fStat <- ms.m / ms.e; fStat
@@ -278,7 +285,7 @@ Planned comparisons
 Unplanned comparisons
 
 * Exploring all pairwise differences
-* Adjust T value for inflated type 1 error
+* Adjust p-value for inflated type 1 error
     * [Why?](https://xkcd.com/882/)
     * Different procedures exist (e.g., Tukey, Bonferroni)
     * Bonferroni most conservative, Tukey more permissive 
@@ -291,7 +298,7 @@ Unplanned comparisons
 
 The least bias estimate of explained variance in ANOVA is omega squared $\omega^2$:
 
-$$\omega^2 = \frac{{SS}_{model} - ({df}_{model}){MS}_{error}}{{SS}_{total}+{MS}_{error}}$$
+$$\omega^2 = \frac{{SS}_{model} - ({df}_{model}){MS}_{residual}}{{SS}_{total}+{MS}_{residual}}$$
 But what does it say?
 
 ## Effect size $d$

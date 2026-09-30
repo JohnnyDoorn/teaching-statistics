@@ -306,9 +306,9 @@ plotSumSquares <- function(data, sumSq = "Total", stats = NULL, plotMean = TRUE,
       totSumSquares <- round(stats[['Total.Sum.of.Squares']] - modSumSquares, 3)
       if ("Sums" %in% whatDisplay) {
         if (whatPred == "Mean" | !("F-stat" %in% whatDisplay)) {
-          mtext(paste0("Error Sum of Squares = ", totSumSquares), cex = 1.4)
+          mtext(paste0("Residual Sum of Squares = ", totSumSquares), cex = 1.4)
         } else {
-          mtext(paste0("Error Sum of Squares = ", totSumSquares, "\n Mean Square = ", round(totSumSquares/dfError, 3)), cex = 1.4)
+          mtext(paste0("Residual Sum of Squares = ", totSumSquares, "\n Mean Square = ", round(totSumSquares/dfError, 3)), cex = 1.4)
         }
       } else {
         mtext("Model error", cex = 1.8)
@@ -456,7 +456,7 @@ plotSumSquaresCov <- function(data, sumSq = "Total", stats = NULL, plotMean = TR
       segments(x0 = data$pp, x1 = data$pp, y0 = predPoints, y1 = data$dv, lwd = 2, col = darkCols[as.numeric(data$group)+1])
       totSumSquares <- round(stats[['Total.Sum.of.Squares']] - modSumSquares, 3)
       if ("Sums" %in% whatDisplay) {
-        mtext(paste0("Error Sum of Squares = ", totSumSquares, "\n Mean Square = ", round(totSumSquares/dfError, 3)), cex = 1.4)
+        mtext(paste0("Residual Sum of Squares = ", totSumSquares, "\n Mean Square = ", round(totSumSquares/dfError, 3)), cex = 1.4)
       } else {
         mtext("Model error", cex = 1.8)
       }
@@ -589,7 +589,7 @@ plotSumSquaresFactorial <- function(data, input, sumSq = "Total", stats = NULL, 
       # s <- round(fullModAccSumSq - modAccSumSquares, 3)
       s <- round(modErrorSumSquares, 3)
       if ("Sums" %in% input$whatDisplay) {
-        mtext(paste0("Error Sum of Squares = ", s, "\n Mean Square = ", round(s/dfError, 3)), cex = 1.4)
+        mtext(paste0("Residual Sum of Squares = ", s, "\n Mean Square = ", round(s/dfError, 3)), cex = 1.4)
       } else {
         mtext(myMain, cex = 1.8)
       }
@@ -720,7 +720,7 @@ plotSumSquaresRM <- function(mydat, input, sumSq = "Total", myMain = "", stats =
       # s <- round(fullModAccSumSq - modAccSumSquares, 3)
       s <- round(modErrorSumSquares, 3)
       if ("Sums" %in% input$whatDisplay) {
-        mtext(paste0("Error Sum of Squares = ", s, "\n Mean Square = ", round(s/dfError, 3)), cex = 1.4)
+        mtext(paste0("Residual Sum of Squares = ", s, "\n Mean Square = ", round(s/dfError, 3)), cex = 1.4)
       } else {
         mtext(myMain, cex = 1.8)
       }

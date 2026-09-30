@@ -345,7 +345,7 @@ fStat <- MS.model / MS.error
 
 $MS_{model-group} =  \frac{`r  round(SS.group, 3)`}{`r df.model`} = `r round(round(SS.group, 3) / df.model, 3)`$ 
 
-$F = \frac{{MS}_{model}}{{MS}_{error}} = \frac{{SIGNAL}}{{NOISE}} =  \frac{`r  round(MS.model, 3)`}{`r round( MS.error, 3)`} = `r round(fStat, 2)`$
+$F = \frac{{MS}_{model}}{{MS}_{residual}} = \frac{{SIGNAL}}{{NOISE}} =  \frac{`r  round(MS.model, 3)`}{`r round( MS.error, 3)`} = `r round(fStat, 2)`$
 
 
 

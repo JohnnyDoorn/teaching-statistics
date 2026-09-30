@@ -31,7 +31,7 @@ Chapter 11 (§11.1–11.13)
 
 # Closing
 
-## Recap
+## Recap {.smaller}
 
 - ANOVA is a regression (linear model) with categorical predictor
 - We compare variance explained by the model, to unexplained variance

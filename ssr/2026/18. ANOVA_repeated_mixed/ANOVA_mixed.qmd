@@ -5,7 +5,7 @@ rm(list=ls())
 source("../../_setup.R")
 ```
 
-## Mixed design 
+## Mixed design {.smaller}
 
 The mixed ANOVA analyses the variance of the model while reducing the error by the within person variance.
 
@@ -19,7 +19,7 @@ The mixed ANOVA analyses the variance of the model while reducing the error by t
 
 Same as repeated measures ANOVA and same as factorial ANOVA.
 
-## Example {.smaller}
+## Example {.smaller .scrollable}
 
 * Dependent variable
     * Accidents
@@ -37,7 +37,7 @@ Same as repeated measures ANOVA and same as factorial ANOVA.
         * Evening
 
 
-## Data {.smaller}
+## Data {.smaller .scrollable}
 
 ```{r mixed-data, echo=FALSE}
 data <- read.csv(file = datasetsPath("RM_ANOVA_AlcoholSpeedTime.csv"), header = TRUE)

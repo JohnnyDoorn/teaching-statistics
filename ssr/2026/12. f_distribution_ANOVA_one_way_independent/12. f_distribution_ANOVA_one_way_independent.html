@@ -97,6 +97,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#one-way-independent-anova" id="toc-one-way-independent-anova" class="nav-link active" data-scroll-target="#one-way-independent-anova">One-way independent ANOVA</a>
   <ul class="collapse">
+  <li><a href="#applet" id="toc-applet" class="nav-link" data-scroll-target="#applet">Applet</a></li>
   <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions">Assumptions</a></li>
   <li><a href="#puppies" id="toc-puppies" class="nav-link" data-scroll-target="#puppies">Puppies!</a></li>
   <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data">The data</a></li>
@@ -112,8 +113,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#visual-ss_total-43.733" id="toc-visual-ss_total-43.733" class="nav-link" data-scroll-target="#visual-ss_total-43.733">Visual <span class="math inline">\({SS}_{total} = 43.733\)</span></a></li>
   <li><a href="#model-variance" id="toc-model-variance" class="nav-link" data-scroll-target="#model-variance">Model variance</a></li>
   <li><a href="#visual-ss_model-20.133" id="toc-visual-ss_model-20.133" class="nav-link" data-scroll-target="#visual-ss_model-20.133">Visual <span class="math inline">\({SS}_{model} = 20.133\)</span></a></li>
-  <li><a href="#error-variance" id="toc-error-variance" class="nav-link" data-scroll-target="#error-variance">Error variance</a></li>
-  <li><a href="#visual-ss_error-23.6" id="toc-visual-ss_error-23.6" class="nav-link" data-scroll-target="#visual-ss_error-23.6">Visual <span class="math inline">\({SS}_{error} = 23.6\)</span></a></li>
+  <li><a href="#residual-variance" id="toc-residual-variance" class="nav-link" data-scroll-target="#residual-variance">Residual variance</a></li>
+  <li><a href="#visual-ss_residual-23.6" id="toc-visual-ss_residual-23.6" class="nav-link" data-scroll-target="#visual-ss_residual-23.6">Visual <span class="math inline">\({SS}_{residual} = 23.6\)</span></a></li>
   <li><a href="#variance-components-1" id="toc-variance-components-1" class="nav-link" data-scroll-target="#variance-components-1">Variance components</a></li>
   <li><a href="#f-ratio" id="toc-f-ratio" class="nav-link" data-scroll-target="#f-ratio">F-ratio</a></li>
   <li><a href="#reject-h_0" id="toc-reject-h_0" class="nav-link" data-scroll-target="#reject-h_0">Reject <span class="math inline">\(H_0\)</span>?</a></li>
@@ -187,8 +188,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="one-way-independent-anova" class="level1 section">
 <h1 class="section">One-way independent ANOVA</h1>
 <p>Compare 2 or more independent groups.</p>
-<section id="assumptions" class="level2">
-<h2 class="anchored" data-anchor-id="assumptions">Assumptions</h2>
+<section id="applet" class="level2">
+<h2 class="anchored" data-anchor-id="applet">Applet</h2>
+<p><a href="https://jvd-ssr-oneway-anova.share.connect.posit.cloud/">Link</a></p>
+</section>
+<section id="assumptions" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="assumptions">Assumptions</h2>
 <p>Assuming the <span class="math inline">\(H_0\)</span> hypothesis to be true, the following should hold:</p>
 <ul>
 <li>Continuous variable</li>
@@ -201,6 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Ratio of variances/sd (or Levene’s test)</li>
 </ul></li>
+<li>For examples of violations, see <a href="https://johnnydoorn.github.io/teaching-statistics/extra-texts/violating-assumptions-anova.html">here</a></li>
 </ul>
 </section>
 <section id="puppies" class="level2">
@@ -212,13 +218,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Long exposure (30 minutes of puppies)</li>
 </ul>
 </section>
-<section id="the-data" class="level2">
-<h2 class="anchored" data-anchor-id="the-data">The data</h2>
+<section id="the-data" class="level2 smaller scrollable">
+<h2 class="smaller scrollable anchored" data-anchor-id="the-data">The data</h2>
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-b2956e7f99483552038b" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-b2956e7f99483552038b">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"],["No puppies","No puppies","No puppies","No puppies","No puppies","15 mins","15 mins","15 mins","15 mins","15 mins","30 mins","30 mins","30 mins","30 mins","30 mins"],[3,2,1,1,4,5,2,4,2,3,7,4,5,3,6]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Dose<\/th>\n      <th>Happiness<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Dose","targets":1},{"name":"Happiness","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-341236cda5b3242dddaa" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-341236cda5b3242dddaa">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"],["No puppies","No puppies","No puppies","No puppies","No puppies","15 mins","15 mins","15 mins","15 mins","15 mins","30 mins","30 mins","30 mins","30 mins","30 mins"],[3,2,1,1,4,5,2,4,2,3,7,4,5,3,6]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Dose<\/th>\n      <th>Happiness<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Dose","targets":1},{"name":"Happiness","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><a href="https://discoverjasp.com/repository/dsj1_data/data/puppies.jasp">puppies.jasp</a></p>
@@ -250,8 +256,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><span class="math inline">\({dummy}_2 =\)</span>: 1 if participant received 30 minutes, 0 otherwise</li>
 </ul>
 </section>
-<section id="model-predictions" class="level2">
-<h2 class="anchored" data-anchor-id="model-predictions">Model predictions</h2>
+<section id="model-predictions" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="model-predictions">Model predictions</h2>
 <p><span class="math display">\[\hat{y} = b_0 + b_1 {dummy}_1 + b_2 {dummy}_2\]</span></p>
 <ul>
 <li>If 0 puppies: we predict <span class="math inline">\(b_0 + 0 + 0\)</span>
@@ -267,19 +273,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><span class="math inline">\(b_2 =\)</span> difference between control and 30 minute group</li>
 </ul></li>
 </ul>
+<p><a href="https://johnnydoorn.github.io/teaching-statistics/extra-texts/predicting-with-dummies-1-variable.html">Additional rambling here</a></p>
 </section>
-<section id="data-predictions-i.e.-group-means" class="level2">
-<h2 class="anchored" data-anchor-id="data-predictions-i.e.-group-means">Data + predictions (i.e., group means)</h2>
+<section id="data-predictions-i.e.-group-means" class="level2 smaller scrollable">
+<h2 class="smaller scrollable anchored" data-anchor-id="data-predictions-i.e.-group-means">Data + predictions (i.e., group means)</h2>
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-033c26c30d9968296713" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-033c26c30d9968296713">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"],["No puppies","No puppies","No puppies","No puppies","No puppies","15 mins","15 mins","15 mins","15 mins","15 mins","30 mins","30 mins","30 mins","30 mins","30 mins"],[3,2,1,1,4,5,2,4,2,3,7,4,5,3,6],[2.2,2.2,2.2,2.2,2.2,3.2,3.2,3.2,3.2,3.2,5,5,5,5,5]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Dose<\/th>\n      <th>Happiness<\/th>\n      <th>Predictions<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[2,3]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Dose","targets":1},{"name":"Happiness","targets":2},{"name":"Predictions","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-c3a868c3d4f217c6a8de" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-c3a868c3d4f217c6a8de">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"],["No puppies","No puppies","No puppies","No puppies","No puppies","15 mins","15 mins","15 mins","15 mins","15 mins","30 mins","30 mins","30 mins","30 mins","30 mins"],[3,2,1,1,4,5,2,4,2,3,7,4,5,3,6],[2.2,2.2,2.2,2.2,2.2,3.2,3.2,3.2,3.2,3.2,5,5,5,5,5]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Dose<\/th>\n      <th>Happiness<\/th>\n      <th>Predictions<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[2,3]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Dose","targets":1},{"name":"Happiness","targets":2},{"name":"Predictions","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
-<section id="variance-components" class="level2">
-<h2 class="anchored" data-anchor-id="variance-components">Variance components</h2>
+<section id="variance-components" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="variance-components">Variance components</h2>
 <table class="table">
 <colgroup>
 <col style="width: 17%">
@@ -303,18 +310,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td><span class="math inline">\({SS}_{model} = \sum n_k(\bar{X}_k - \bar{X})^2\)</span></td>
 <td><span class="math inline">\(k-1\)</span></td>
 <td><span class="math inline">\(\frac{{SS}_{model}}{{df}_{model}}\)</span></td>
-<td><span class="math inline">\(\frac{{MS}_{model}}{{MS}_{error}}\)</span></td>
+<td><span class="math inline">\(\frac{{MS}_{model}}{{MS}_{residual}}\)</span></td>
 </tr>
 <tr class="even">
-<td>Error</td>
-<td><span class="math inline">\({SS}_{error} = \sum s_k^2 (n_k - 1)\)</span></td>
+<td>Residual</td>
+<td><span class="math inline">\({SS}_{residual} = \sum s_k^2 (n_k - 1)\)</span></td>
 <td><span class="math inline">\(N-k\)</span></td>
-<td><span class="math inline">\(\frac{{SS}_{error}}{{df}_{error}}\)</span></td>
+<td><span class="math inline">\(\frac{{SS}_{residual}}{{df}_{residual}}\)</span></td>
 <td></td>
 </tr>
 <tr class="odd">
 <td>Total</td>
-<td><span class="math inline">\({SS}_{total} = {SS}_{model} + {SS}_{error}\)</span></td>
+<td><span class="math inline">\({SS}_{total} = {SS}_{model} + {SS}_{residual}\)</span></td>
 <td><span class="math inline">\(N-1\)</span></td>
 <td><span class="math inline">\(\frac{{SS}_{total}}{{df}_{total}}\)</span></td>
 <td></td>
@@ -336,7 +343,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 <li>How much of this variance is <strong>not</strong> explained by the group means?
 <ul>
-<li>Error variance = distance between group means and observations</li>
+<li>Residual variance = distance between group means and observations</li>
 </ul></li>
 </ul>
 <blockquote class="blockquote">
@@ -384,25 +391,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="error-variance" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="error-variance">Error variance</h2>
-<p><span class="math display">\[{MS}_{error} = \frac{{SS}_{error}}{{df}_{error}} \\ {df}_{error} = N - k\]</span></p>
+<section id="residual-variance" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="residual-variance">Residual variance</h2>
+<p><span class="math display">\[{MS}_{residual} = \frac{{SS}_{residual}}{{df}_{residual}} \\ {df}_{residual} = N - k\]</span></p>
 <p>where</p>
-<p><span class="math display">\[{SS}_{error} = \sum_{k} s_k^2 (n_k - 1) = \sum_{k} \frac{\sum (x_{ik} - \bar{x}_k)^2}{(n_k - 1)} (n_k - 1)\]</span></p>
-<p><span class="math display">\[{MS}_{error} = \frac{{SS}_{error}}{{df}_{error}} \\ {df}_{error} = N - k\]</span></p>
+<p><span class="math display">\[{SS}_{residual} = \sum_{k} s_k^2 (n_k - 1) = \sum_{k} \frac{\sum (x_{ik} - \bar{x}_k)^2}{(n_k - 1)} (n_k - 1)\]</span></p>
+<p><span class="math display">\[{MS}_{residual} = \frac{{SS}_{residual}}{{df}_{residual}} \\ {df}_{residual} = N - k\]</span></p>
 </section>
-<section id="visual-ss_error-23.6" class="level2">
-<h2 class="anchored" data-anchor-id="visual-ss_error-23.6">Visual <span class="math inline">\({SS}_{error} = 23.6\)</span></h2>
+<section id="visual-ss_residual-23.6" class="level2">
+<h2 class="anchored" data-anchor-id="visual-ss_residual-23.6">Visual <span class="math inline">\({SS}_{residual} = 23.6\)</span></h2>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="12.-f_distribution_ANOVA_one_way_independent_files/figure-html/anova-visual-ss-error-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
-<section id="variance-components-1" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="variance-components-1">Variance components</h2>
-<p><span class="math display">\[{SS}_{total} = {SS}_{model} + {SS}_{error}\]</span> <span class="math display">\[43.733 = 20.133 + 23.6\]</span></p>
-<p><span class="math display">\[{MS}_{total} = \frac{{SS}_{total}}{{df}_{total}}= 3.124\]</span> <span class="math display">\[{MS}_{model} = \frac{{SS}_{model}}{{df}_{model}}= 10.067\]</span> <span class="math display">\[{MS}_{error} = \frac{{SS}_{error}}{{df}_{error}} = 1.967\]</span></p>
+<section id="variance-components-1" class="level2 subsection smaller">
+<h2 class="subsection smaller anchored" data-anchor-id="variance-components-1">Variance components</h2>
+<p><span class="math display">\[{SS}_{total} = {SS}_{model} + {SS}_{residual}\]</span> <span class="math display">\[43.733 = 20.133 + 23.6\]</span></p>
+<p><span class="math display">\[{MS}_{total} = \frac{{SS}_{total}}{{df}_{total}}= 3.124\]</span> <span class="math display">\[{MS}_{model} = \frac{{SS}_{model}}{{df}_{model}}= 10.067\]</span> <span class="math display">\[{MS}_{residual} = \frac{{SS}_{residual}}{{df}_{residual}} = 1.967\]</span></p>
 </section>
 <section id="f-ratio" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="f-ratio">F-ratio</h2>
@@ -410,7 +417,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 <section id="f-ratio-1" class="level3 subsection">
 <h3 class="subsection anchored" data-anchor-id="f-ratio-1">F-ratio</h3>
-<p><span class="math display">\[F = \frac{{MS}_{model}}{{MS}_{error}} = \frac{{SIGNAL}}{{NOISE}}\]</span></p>
+<p><span class="math display">\[F = \frac{{MS}_{model}}{{MS}_{residual}} = \frac{{SIGNAL}}{{NOISE}}\]</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fStat <span class="ot">&lt;-</span> ms.m <span class="sc">/</span> ms.e; fStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -452,7 +459,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Unplanned comparisons</p>
 <ul>
 <li>Exploring all pairwise differences</li>
-<li>Adjust T value for inflated type 1 error
+<li>Adjust p-value for inflated type 1 error
 <ul>
 <li><a href="https://xkcd.com/882/">Why?</a></li>
 <li>Different procedures exist (e.g., Tukey, Bonferroni)</li>
@@ -464,7 +471,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="effect-size-omega2" class="level2">
 <h2 class="anchored" data-anchor-id="effect-size-omega2">Effect size <span class="math inline">\(\omega^2\)</span></h2>
 <p>The least bias estimate of explained variance in ANOVA is omega squared <span class="math inline">\(\omega^2\)</span>:</p>
-<p><span class="math display">\[\omega^2 = \frac{{SS}_{model} - ({df}_{model}){MS}_{error}}{{SS}_{total}+{MS}_{error}}\]</span> But what does it say?</p>
+<p><span class="math display">\[\omega^2 = \frac{{SS}_{model} - ({df}_{model}){MS}_{residual}}{{SS}_{total}+{MS}_{residual}}\]</span> But what does it say?</p>
 </section>
 <section id="effect-size-d" class="level2">
 <h2 class="anchored" data-anchor-id="effect-size-d">Effect size <span class="math inline">\(d\)</span></h2>
@@ -474,8 +481,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="closing" class="level1">
 <h1>Closing</h1>
-<section id="recap" class="level2">
-<h2 class="anchored" data-anchor-id="recap">Recap</h2>
+<section id="recap" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="recap">Recap</h2>
 <ul>
 <li>ANOVA is a regression (linear model) with categorical predictor</li>
 <li>We compare variance explained by the model, to unexplained variance</li>
