@@ -446,28 +446,16 @@ aggregate(extraversion ~ nationality, data, mean)
 
 ::: {.column}
 
-```{r ancova-independence-covariate, fig.align='center', fig.width=5, fig.height=5, echo=FALSE}
-# Same group colours as plotSumSquaresCov() in plotFunctionsSSR.r (Okabe-Ito,
-# first colour skipped). groupCols and groupNr are reused by the slopes plot below.
-groupCols <- palette.colors(n = nlevels(data$nationality) + 1, palette = "Okabe-Ito")[-1]
-groupNr   <- as.numeric(data$nationality)
-groups    <- seq_len(nlevels(data$nationality))
-covTest   <- anova(lm(openness ~ nationality, data))
-
-# Spread each group's points sideways without jitter, so every render draws the same image
-xSpread <- ave(seq_along(groupNr), groupNr,
-               FUN = function(i) seq(-0.15, 0.15, length.out = length(i)))
-
-par(cex = 1.0, cex.lab = 1.1)
-plot(groupNr + xSpread, data$openness, pch = 21, bg = groupCols[groupNr], cex = 1.5,
-     xlim = c(0.5, max(groups) + 0.5), xaxt = "n", bty = "n", las = 1,
-     xlab = "Nationality", ylab = "Openness")
-axis(1, at = groups, labels = levels(data$nationality))
-segments(x0 = groups - 0.25, x1 = groups + 0.25,
-         y0 = tapply(data$openness, data$nationality, mean), lwd = 3)
-mtext(sprintf("ANOVA on openness: F(%d, %d) = %.2f, p = %.3f",
-              covTest$Df[1], covTest$Df[2], covTest$`F value`[1], covTest$`Pr(>F)`[1]))
+```{r ancova-independence-covariate-test, echo=FALSE}
+# The plot is JASP's descriptives plot of the same data (ANOVA with openness as
+# dependent variable); the test result is computed here so the caption stays in
+# sync with the simulated data.
+covTest <- anova(lm(openness ~ nationality, data))
+covText <- sprintf("ANOVA on openness: F(%d, %d) = %.2f, p = %.3f",
+                   covTest$Df[1], covTest$Df[2], covTest[["F value"]][1], covTest[["Pr(>F)"]][1])
 ```
+
+![`r covText`](../../images/desc-plot-ancova.png)
 
 :::
 
@@ -489,26 +477,17 @@ mtext(sprintf("ANOVA on openness: F(%d, %d) = %.2f, p = %.3f",
 
 ::: {.column}
 
-```{r ancova-homogeneity-slopes, fig.align='center', fig.width=5, fig.height=5, echo=FALSE}
+```{r ancova-homogeneity-slopes-test, echo=FALSE}
+# The plot is JASP's scatterplot of the same data per group; the interaction
+# test (model with vs without nationality * openness) is computed here so the
+# caption stays in sync with the simulated data.
 slopesTest <- anova(lm(extraversion ~ nationality + openness, data),
                     lm(extraversion ~ nationality * openness, data))
-
-par(cex = 1.0, cex.lab = 1.1)
-plot(data$openness, data$extraversion, pch = 21, bg = groupCols[groupNr], cex = 1.5,
-     bty = "n", las = 1, xlab = "Openness", ylab = "Extraversion")
-# One regression line per group, over that group's own range of openness
-for (g in groups) {
-  inGroup  <- groupNr == g
-  groupFit <- lm(extraversion ~ openness, data[inGroup, ])
-  xRange   <- range(data$openness[inGroup])
-  lines(xRange, predict(groupFit, data.frame(openness = xRange)),
-        col = darken_color(groupCols[g], factor = 1.5), lwd = 3)
-}
-legend("topleft", legend = levels(data$nationality), pt.bg = groupCols, pch = 21,
-       cex = 0.8, bty = "n")
-mtext(sprintf("Interaction: F(%d, %d) = %.2f, p = %.3f",
-              slopesTest$Df[2], slopesTest$Res.Df[2], slopesTest$F[2], slopesTest$`Pr(>F)`[2]))
+slopesText <- sprintf("Interaction: F(%d, %d) = %.2f, p = %.3f",
+                      slopesTest$Df[2], slopesTest$Res.Df[2], slopesTest$F[2], slopesTest[["Pr(>F)"]][2])
 ```
+
+![`r slopesText`](../../images/slopes-plot-ancova.png)
 
 :::
 
