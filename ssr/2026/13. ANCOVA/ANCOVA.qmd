@@ -41,26 +41,16 @@ Determine main effect while accounting for covariate
 
 A covariate is a variable that can influence the DV. By adding a covariate, we reduce error/residual in the model.
 
-## Assumptions
+## Applet
 
-* Same as ANOVA
-* Independence of the covariate and treatment effect §12.5.1.
-    * No difference on ANOVA with covar and independent variable
-    * Matching experimental groups on the covariate
-* Homogeneity of regression slopes §12.5.2.
-    * Visual: scatterplot dep var * covar per condition
-    * Testing: interaction indep. var * covar
-
-## Independence of the covariate and treatment effect (Fig 12.2)
-
-<img src="../../images/FieldCovWarning.png" style="width:40%;"/>
+[Link](https://jvd-ssr-ancova.share.connect.posit.cloud/)
 
 ## Data example
 
 We want to test the difference in extraversion but want to also account for openness to experience.
 
 * Dependent variable: Extraversion
-* Independent variabele: Nationality (#groups $= k = 3$)
+* Independent variable: Nationality (#groups $= k = 3$)
     + Dutch
     + German
     + Belgian
@@ -134,13 +124,13 @@ What are the beta coefficients when we fit a model that only has `nationality` a
 fit.group <- lm(extraversion ~ nationality, data); fit.group$coefficients
 ```
 
-- $\beta_{0} = `r  round(fit.group$coefficients[1], 2)`$ 
+- $b_{0} = `r  round(fit.group$coefficients[1], 2)`$
 
-- $\beta_{German} = `r round(fit.group$coefficients[2], 2)`$
+- $b_{German} = `r round(fit.group$coefficients[2], 2)`$
 
     - Prediction for German: `r  round(fit.group$coefficients[1], 2)` + `r round(fit.group$coefficients[2], 2)` = `r round(round(fit.group$coefficients[1], 2) + round(fit.group$coefficients[2], 2), 2)`
 
-- $\beta_{Belgian} = `r round(fit.group$coefficients[3], 2)`$
+- $b_{Belgian} = `r round(fit.group$coefficients[3], 2)`$
 
     - Prediction for Belgian: `r round(fit.group$coefficients[1], 2)` + `r round(fit.group$coefficients[3], 2)` = `r round(round(fit.group$coefficients[1], 2) + round(fit.group$coefficients[3], 2), 2)`
 
@@ -152,9 +142,9 @@ What are the beta coefficients when we fit a model that only has `openness` as p
 fit.covar <- lm(extraversion ~ openness, data); fit.covar$coefficients
 ```
 
-$\beta_{0} = `r  round(fit.covar$coefficients[1],2)`$ 
+$b_{0} = `r  round(fit.covar$coefficients[1],2)`$
 
-$\beta_{Open} = `r  round(fit.covar$coefficients[2],2)`$ 
+$b_{Open} = `r  round(fit.covar$coefficients[2],2)`$
 
 
 ## Model fit with all predictor variables (factor + covariate) {.smaller}
@@ -169,13 +159,13 @@ fit <- lm(extraversion ~  nationality + openness, data); fit$coefficients
 fit$coefficients <- round(fit$coefficients, 2)
 ```
 
-$\beta_{Dutch} = `r  fit$coefficients[1]`$
+$b_{0} = `r  fit$coefficients[1]`$
 
-$\beta_{German} = `r fit$coefficients[2]`$
+$b_{German} = `r fit$coefficients[2]`$
 
-$\beta_{Belgian} = `r fit$coefficients[3]`$
+$b_{Belgian} = `r fit$coefficients[3]`$
 
-$\beta_{Open} = `r fit$coefficients[4]`$
+$b_{Open} = `r fit$coefficients[4]`$
 
 ## Predictions of the full model {.smaller}
 
@@ -184,12 +174,11 @@ For a German with a score of 8 on Openness:
 ```{r ancova-predictions-full-model, echo=TRUE}
 fit <- lm(extraversion ~ nationality + openness, data); fit$coefficients
 ```
-- $\beta_{0} = `r round(fit$coefficients[1], 2)`$
-- $\beta_{German} = `r round(fit$coefficients[2], 2)`$
-- $\beta_{Open} = `r round(fit$coefficients[4], 2)`$
+- $b_{0} = `r round(fit$coefficients[1], 2)`$
+- $b_{German} = `r round(fit$coefficients[2], 2)`$
+- $b_{Open} = `r round(fit$coefficients[4], 2)`$
 
-    - Prediction for German: `r round(fit$coefficients[1],2)` + `r round(fit$coefficients[2], 2)` + 8 * `r round(fit$coefficients[4],2)` = `r round(fit$coefficients[1] + 1 * fit$coefficients[2] + 0 * fit$coefficients[3] + 
-  8 * fit$coefficients[4],2)`
+    - Prediction for German: `r round(fit$coefficients[1],2)` + `r round(fit$coefficients[2], 2)` + 8 * `r round(fit$coefficients[4],2)` = `r round(round(fit$coefficients[1], 2) + round(fit$coefficients[2], 2) + 8 * round(fit$coefficients[4], 2), 2)`
   
 How about a Belgian with 6 Openness?
 
@@ -213,7 +202,7 @@ data$grand.mean <- mean(data$extraversion)
 # datatable(data, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
 ```
 
-## Total variance visual {.subsection}
+## Visual ${SS}_{total}$ {.subsection}
 
 ```{r ancova-visual-total-variance, echo=FALSE}
 colnames(plotData) <- c("pp", "group", "cov", "dv")
@@ -230,7 +219,7 @@ $\hat{y} = b_0 + b_1 {dummy}_1 + b_2 {dummy}_2$
 
 $\hat{y} = `r round(fit.group$coefficients[1], 2)` + `r round(fit.group$coefficients[2], 2)` \times {dummy}_1 + `r round(fit.group$coefficients[3], 2)` \times {dummy}_2$
 
-## Explained by group model - visual {.subsection}
+## Visual ${SS}_{model}$: group {.subsection}
 
 ```{r ancova-visual-explained-by-group, echo=FALSE}
 data$model.group <- (fit.group$fitted.values)
@@ -248,7 +237,7 @@ $\hat{y} = b_0 + b_3 covar$
 $\hat{y} = `r round(fit.covar$coefficients[1], 2)` + `r round(fit.covar$coefficients[2], 2)` \times {Openness}$
 
 
-## Explained by covariate model - visual {.subsection}
+## Visual ${SS}_{model}$: covariate {.subsection}
 
 ```{r ancova-visual-explained-by-covariate, echo=FALSE}
 
@@ -270,7 +259,7 @@ $\hat{y} = b_0 + b_1 {dummy}_1 + b_2 {dummy}_2 + b_3 covar$
 
 $\hat{y} = `r round(fit$coefficients[1], 2)` + `r round(fit$coefficients[2], 2)` \times {dummy}_1 + `r round(fit$coefficients[3], 2)` \times {dummy}_2  + `r round(fit$coefficients[4], 2)` \times {Openness}$
 
-## Explained by full model - visual {.subsection}
+## Visual ${SS}_{model}$: group + covariate {.subsection}
 
 
 ```{r ancova-visual-explained-by-full-model, echo=FALSE}
@@ -278,7 +267,7 @@ plotSumSquaresCov(data = plotData, sumSq = "Model", whatPred = "Group means + co
 
 ```
 
-## Unexplained variance (group and cov) {.subsection}
+## Visual ${SS}_{residual}$: group + covariate {.subsection}
 
 ```{r ancova-unexplained-variance, echo=FALSE}
 plotSumSquaresCov(data = plotData, sumSq = "Error", whatPred = "Group means + cov", myLimY = c(30, 50), whatDisplay = c("Segments", "Sums"), myLabY = "Extraversion")
@@ -345,11 +334,11 @@ fStat <- MS.model / MS.error
 
 $MS_{model-group} =  \frac{`r  round(SS.group, 3)`}{`r df.model`} = `r round(round(SS.group, 3) / df.model, 3)`$ 
 
-$F = \frac{{MS}_{model}}{{MS}_{residual}} = \frac{{SIGNAL}}{{NOISE}} =  \frac{`r  round(MS.model, 3)`}{`r round( MS.error, 3)`} = `r round(fStat, 2)`$
+$F = \frac{{MS}_{model-group}}{{MS}_{residual}} = \frac{{SIGNAL}}{{NOISE}} =  \frac{`r  round(MS.model, 3)`}{`r round( MS.error, 3)`} = `r round(fStat, 2)`$
 
 
 
-## $P$-value
+## $p$-value
 ```{r ancova-p-value, echo=FALSE}
 # Set up the plot for the F-distribution
 curve(df(x, df.model, df.error), from = 0, to = 25, n = 1000, bty = "n", las = 1,
@@ -425,6 +414,105 @@ Observed:
 ```{r ancova-adjustment-factor, echo=FALSE}
 aggregate(extraversion ~ nationality, data, mean)
 ```
+
+## Assumptions
+
+* Same as ANOVA
+* Independence of the covariate and treatment effect §12.5.1.
+    * No difference on ANOVA with covar and independent variable
+    * Matching experimental groups on the covariate
+* Homogeneity of regression slopes §12.5.2.
+    * Visual: scatterplot dep var * covar per condition
+    * Testing: interaction indep. var * covar
+
+## Independence of the covariate and treatment effect (Fig 12.2)
+
+<img src="../../images/FieldCovWarning.png" style="width:40%;"/>
+
+## Independence of the covariate {.smaller}
+
+::: {.columns}
+
+::: {.column}
+
+* Groups should not differ on the covariate (§12.5.1)
+* Otherwise: covariate and group share variance (Fig 12.2C)
+    * Associated predictors can inflate/deflate the group effect (F, adjusted means)
+    * Does not "control for" the group difference
+* Risk mostly without random assignment
+* Assess: ANOVA with covariate as dependent variable (§12.6.3)
+
+:::
+
+::: {.column}
+
+```{r ancova-independence-covariate, fig.align='center', fig.width=5, fig.height=5, echo=FALSE}
+# Same group colours as plotSumSquaresCov() in plotFunctionsSSR.r (Okabe-Ito,
+# first colour skipped). groupCols and groupNr are reused by the slopes plot below.
+groupCols <- palette.colors(n = nlevels(data$nationality) + 1, palette = "Okabe-Ito")[-1]
+groupNr   <- as.numeric(data$nationality)
+groups    <- seq_len(nlevels(data$nationality))
+covTest   <- anova(lm(openness ~ nationality, data))
+
+# Spread each group's points sideways without jitter, so every render draws the same image
+xSpread <- ave(seq_along(groupNr), groupNr,
+               FUN = function(i) seq(-0.15, 0.15, length.out = length(i)))
+
+par(cex = 1.0, cex.lab = 1.1)
+plot(groupNr + xSpread, data$openness, pch = 21, bg = groupCols[groupNr], cex = 1.5,
+     xlim = c(0.5, max(groups) + 0.5), xaxt = "n", bty = "n", las = 1,
+     xlab = "Nationality", ylab = "Openness")
+axis(1, at = groups, labels = levels(data$nationality))
+segments(x0 = groups - 0.25, x1 = groups + 0.25,
+         y0 = tapply(data$openness, data$nationality, mean), lwd = 3)
+mtext(sprintf("ANOVA on openness: F(%d, %d) = %.2f, p = %.3f",
+              covTest$Df[1], covTest$Df[2], covTest$`F value`[1], covTest$`Pr(>F)`[1]))
+```
+
+:::
+
+:::
+
+## Homogeneity of regression slopes {.smaller}
+
+::: {.columns}
+
+::: {.column}
+
+* One slope for the covariate: parallel lines (§12.5.2)
+* Assumes the same covariate-DV relation in every group
+* Violated: inflated Type I error (Jane Superbrain Box 12.2)
+* Assess: add the interaction nationality * openness to the model (§12.8)
+    * Descriptives plot: are the lines per group roughly parallel?
+
+:::
+
+::: {.column}
+
+```{r ancova-homogeneity-slopes, fig.align='center', fig.width=5, fig.height=5, echo=FALSE}
+slopesTest <- anova(lm(extraversion ~ nationality + openness, data),
+                    lm(extraversion ~ nationality * openness, data))
+
+par(cex = 1.0, cex.lab = 1.1)
+plot(data$openness, data$extraversion, pch = 21, bg = groupCols[groupNr], cex = 1.5,
+     bty = "n", las = 1, xlab = "Openness", ylab = "Extraversion")
+# One regression line per group, over that group's own range of openness
+for (g in groups) {
+  inGroup  <- groupNr == g
+  groupFit <- lm(extraversion ~ openness, data[inGroup, ])
+  xRange   <- range(data$openness[inGroup])
+  lines(xRange, predict(groupFit, data.frame(openness = xRange)),
+        col = darken_color(groupCols[g], factor = 1.5), lwd = 3)
+}
+legend("topleft", legend = levels(data$nationality), pt.bg = groupCols, pch = 21,
+       cex = 0.8, bty = "n")
+mtext(sprintf("Interaction: F(%d, %d) = %.2f, p = %.3f",
+              slopesTest$Df[2], slopesTest$Res.Df[2], slopesTest$F[2], slopesTest$`Pr(>F)`[2]))
+```
+
+:::
+
+:::
 
 ## JASP
 

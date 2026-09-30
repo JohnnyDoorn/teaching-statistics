@@ -39,12 +39,20 @@ Chapter 12 (§12.1–12.12)
 
 ## Exam note: checking assumptions {.smaller}
 
-- No assumption tests (Shapiro-Wilk, Levene's) on the exam (see Jane Superbrain Box 6.7)
+What you should know: how to assess, robust alternatives, and why these assumptions matter
+
+- No assumption NHST (Shapiro-Wilk, Levene's) on the exam (see Jane Superbrain Box 6.7)
 - Normality: Q-Q plot of the residuals, with confidence interval
   - Assumption Checks → Q-Q plot residuals → Confidence interval
   - Points outside the band suggest non-normality
 - Equal variances: ratio of variances/sd
-- ANCOVA, homogeneity of regression slopes: interaction covariate * independent variable
+
+## Exam note: ANCOVA assumptions {.smaller}
+
+- Independence of the covariate and treatment effect
+  - ANOVA with the covariate as dependent variable
+  - What it means: groups differ on the covariate
+- Homogeneity of regression slopes: interaction covariate * independent variable
   - Model → Model Terms: add or remove the interaction
   - What it means: effect of the covariate differs between groups
 
@@ -55,8 +63,8 @@ Chapter 12 (§12.1–12.12)
   - Welch $F$ (one-way ANOVA *only*: Assumption Checks → Homogeneity corrections)
 - Non-normality: nonparametric test (Chapter 15; lecture 20)
   - Mann-Whitney, Wilcoxon signed-rank, Kruskal-Wallis
-- Question can give a decision rule, e.g., "use nonparametric test if more than 5 points fall outside the band"
-- ANCOVA: no robust version, so have to eat the grain of salt
+- Question can give a decision rule, e.g., "use nonparametric test if more than 5 points fall outside the Q-Q confidence band"
+- ANCOVA: no robust version, so have to eat the grain of salt if normality or variances seem problematic
 
 ## Recommended Exercises
 

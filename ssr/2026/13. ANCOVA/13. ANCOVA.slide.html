@@ -451,32 +451,16 @@ Johnny van Doorn
 </ul>
 <p>A covariate is a variable that can influence the DV. By adding a covariate, we reduce error/residual in the model.</p>
 </section>
-<section id="assumptions" class="slide level2">
-<h2>Assumptions</h2>
-<ul>
-<li>Same as ANOVA</li>
-<li>Independence of the covariate and treatment effect §12.5.1.
-<ul>
-<li>No difference on ANOVA with covar and independent variable</li>
-<li>Matching experimental groups on the covariate</li>
-</ul></li>
-<li>Homogeneity of regression slopes §12.5.2.
-<ul>
-<li>Visual: scatterplot dep var * covar per condition</li>
-<li>Testing: interaction indep. var * covar</li>
-</ul></li>
-</ul>
+<section id="applet" class="slide level2">
+<h2>Applet</h2>
+<p><a href="https://jvd-ssr-ancova.share.connect.posit.cloud/">Link</a></p>
 </section>
-<section id="independence-of-the-covariate-and-treatment-effect-fig-12.2" class="slide level2">
-<h2>Independence of the covariate and treatment effect (Fig 12.2)</h2>
-
-<img src="../../images/FieldCovWarning.png" style="width:40%;" class="r-stretch"></section>
 <section id="data-example" class="slide level2">
 <h2>Data example</h2>
 <p>We want to test the difference in extraversion but want to also account for openness to experience.</p>
 <ul>
 <li>Dependent variable: Extraversion</li>
-<li>Independent variabele: Nationality (#groups <span class="math inline">\(= k = 3\)</span>)
+<li>Independent variable: Nationality (#groups <span class="math inline">\(= k = 3\)</span>)
 <ul>
 <li>Dutch</li>
 <li>German</li>
@@ -536,12 +520,12 @@ Johnny van Doorn
 </div>
 </div>
 <ul>
-<li><p><span class="math inline">\(\beta_{0} = 39.68\)</span></p></li>
-<li><p><span class="math inline">\(\beta_{German} = 1.18\)</span></p>
+<li><p><span class="math inline">\(b_{0} = 39.68\)</span></p></li>
+<li><p><span class="math inline">\(b_{German} = 1.18\)</span></p>
 <ul>
 <li>Prediction for German: 39.68 + 1.18 = 40.86</li>
 </ul></li>
-<li><p><span class="math inline">\(\beta_{Belgian} = -2.08\)</span></p>
+<li><p><span class="math inline">\(b_{Belgian} = -2.08\)</span></p>
 <ul>
 <li>Prediction for Belgian: 39.68 + -2.08 = 37.6</li>
 </ul></li>
@@ -557,8 +541,8 @@ Johnny van Doorn
   24.993473    1.799697 </code></pre>
 </div>
 </div>
-<p><span class="math inline">\(\beta_{0} = 24.99\)</span></p>
-<p><span class="math inline">\(\beta_{Open} = 1.8\)</span></p>
+<p><span class="math inline">\(b_{0} = 24.99\)</span></p>
+<p><span class="math inline">\(b_{Open} = 1.8\)</span></p>
 </section>
 <section id="model-fit-with-all-predictor-variables-factor-covariate" class="slide level2 smaller">
 <h2>Model fit with all predictor variables (factor + covariate)</h2>
@@ -570,10 +554,10 @@ Johnny van Doorn
         25.9029405         -0.1220751         -2.7012528          1.8036540 </code></pre>
 </div>
 </div>
-<p><span class="math inline">\(\beta_{Dutch} = 25.9\)</span></p>
-<p><span class="math inline">\(\beta_{German} = -0.12\)</span></p>
-<p><span class="math inline">\(\beta_{Belgian} = -2.7\)</span></p>
-<p><span class="math inline">\(\beta_{Open} = 1.8\)</span></p>
+<p><span class="math inline">\(b_{0} = 25.9\)</span></p>
+<p><span class="math inline">\(b_{German} = -0.12\)</span></p>
+<p><span class="math inline">\(b_{Belgian} = -2.7\)</span></p>
+<p><span class="math inline">\(b_{Open} = 1.8\)</span></p>
 </section>
 <section id="predictions-of-the-full-model" class="slide level2 smaller">
 <h2>Predictions of the full model</h2>
@@ -586,11 +570,11 @@ Johnny van Doorn
 </div>
 </div>
 <ul>
-<li><p><span class="math inline">\(\beta_{0} = 25.9\)</span></p></li>
-<li><p><span class="math inline">\(\beta_{German} = -0.12\)</span></p></li>
-<li><p><span class="math inline">\(\beta_{Open} = 1.8\)</span></p>
+<li><p><span class="math inline">\(b_{0} = 25.9\)</span></p></li>
+<li><p><span class="math inline">\(b_{German} = -0.12\)</span></p></li>
+<li><p><span class="math inline">\(b_{Open} = 1.8\)</span></p>
 <ul>
-<li>Prediction for German: 25.9 + -0.12 + 8 * 1.8 = 40.21</li>
+<li>Prediction for German: 25.9 + -0.12 + 8 * 1.8 = 40.18</li>
 </ul></li>
 </ul>
 <p>How about a Belgian with 6 Openness?</p>
@@ -603,8 +587,8 @@ Johnny van Doorn
 <!-- ``` -->
 <!-- ## The data -->
 </section>
-<section id="total-variance-visual" class="slide level2 subsection">
-<h2>Total variance visual</h2>
+<section id="visual-ss_total" class="slide level2 subsection">
+<h2>Visual <span class="math inline">\({SS}_{total}\)</span></h2>
 
 <img data-src="13.-ANCOVA_files/figure-revealjs/ancova-visual-total-variance-1.png" width="960" class="r-stretch"></section>
 <section id="explained-by-group-model" class="slide level2 smaller">
@@ -613,8 +597,8 @@ Johnny van Doorn
 <p><span class="math inline">\(\hat{y} = b_0 + b_1 {dummy}_1 + b_2 {dummy}_2\)</span></p>
 <p><span class="math inline">\(\hat{y} = 39.68 + 1.18 \times {dummy}_1 + -2.08 \times {dummy}_2\)</span></p>
 </section>
-<section id="explained-by-group-model---visual" class="slide level2 subsection">
-<h2>Explained by group model - visual</h2>
+<section id="visual-ss_model-group" class="slide level2 subsection">
+<h2>Visual <span class="math inline">\({SS}_{model}\)</span>: group</h2>
 
 <img data-src="13.-ANCOVA_files/figure-revealjs/ancova-visual-explained-by-group-1.png" width="960" class="r-stretch"></section>
 <section id="explained-by-covariate-model" class="slide level2 subsection">
@@ -623,8 +607,8 @@ Johnny van Doorn
 <p><span class="math inline">\(\hat{y} = b_0 + b_3 covar\)</span></p>
 <p><span class="math inline">\(\hat{y} = 24.99 + 1.8 \times {Openness}\)</span></p>
 </section>
-<section id="explained-by-covariate-model---visual" class="slide level2 subsection">
-<h2>Explained by covariate model - visual</h2>
+<section id="visual-ss_model-covariate" class="slide level2 subsection">
+<h2>Visual <span class="math inline">\({SS}_{model}\)</span>: covariate</h2>
 
 <img data-src="13.-ANCOVA_files/figure-revealjs/ancova-visual-explained-by-covariate-1.png" width="960" class="r-stretch"></section>
 <section id="explained-by-full-model" class="slide level2 smaller">
@@ -633,12 +617,12 @@ Johnny van Doorn
 <p><span class="math inline">\(\hat{y} = b_0 + b_1 {dummy}_1 + b_2 {dummy}_2 + b_3 covar\)</span></p>
 <p><span class="math inline">\(\hat{y} = 25.9 + -0.12 \times {dummy}_1 + -2.7 \times {dummy}_2 + 1.8 \times {Openness}\)</span></p>
 </section>
-<section id="explained-by-full-model---visual" class="slide level2 subsection">
-<h2>Explained by full model - visual</h2>
+<section id="visual-ss_model-group-covariate" class="slide level2 subsection">
+<h2>Visual <span class="math inline">\({SS}_{model}\)</span>: group + covariate</h2>
 
 <img data-src="13.-ANCOVA_files/figure-revealjs/ancova-visual-explained-by-full-model-1.png" width="960" class="r-stretch"></section>
-<section id="unexplained-variance-group-and-cov" class="slide level2 subsection">
-<h2>Unexplained variance (group and cov)</h2>
+<section id="visual-ss_residual-group-covariate" class="slide level2 subsection">
+<h2>Visual <span class="math inline">\({SS}_{residual}\)</span>: group + covariate</h2>
 
 <img data-src="13.-ANCOVA_files/figure-revealjs/ancova-unexplained-variance-1.png" width="960" class="r-stretch"></section>
 <section id="divide-model-sum-of-squares" class="slide level2 subsection">
@@ -672,10 +656,10 @@ Johnny van Doorn
 <section id="f-ratio" class="slide level2 subsection">
 <h2>F-ratio</h2>
 <p><span class="math inline">\(MS_{model-group} = \frac{32.582}{2} = 16.291\)</span></p>
-<p><span class="math inline">\(F = \frac{{MS}_{model}}{{MS}_{residual}} = \frac{{SIGNAL}}{{NOISE}} = \frac{16.291}{4.095} = 3.98\)</span></p>
+<p><span class="math inline">\(F = \frac{{MS}_{model-group}}{{MS}_{residual}} = \frac{{SIGNAL}}{{NOISE}} = \frac{16.291}{4.095} = 3.98\)</span></p>
 </section>
 <section id="p-value" class="slide level2">
-<h2><span class="math inline">\(P\)</span>-value</h2>
+<h2><span class="math inline">\(p\)</span>-value</h2>
 
 <img data-src="13.-ANCOVA_files/figure-revealjs/ancova-p-value-1.png" width="960" class="r-stretch"></section>
 <section id="alpha-power" class="slide level2 smaller">
@@ -712,6 +696,79 @@ Johnny van Doorn
 </div>
 </div>
 </section>
+<section id="assumptions" class="slide level2">
+<h2>Assumptions</h2>
+<ul>
+<li>Same as ANOVA</li>
+<li>Independence of the covariate and treatment effect §12.5.1.
+<ul>
+<li>No difference on ANOVA with covar and independent variable</li>
+<li>Matching experimental groups on the covariate</li>
+</ul></li>
+<li>Homogeneity of regression slopes §12.5.2.
+<ul>
+<li>Visual: scatterplot dep var * covar per condition</li>
+<li>Testing: interaction indep. var * covar</li>
+</ul></li>
+</ul>
+</section>
+<section id="independence-of-the-covariate-and-treatment-effect-fig-12.2" class="slide level2">
+<h2>Independence of the covariate and treatment effect (Fig 12.2)</h2>
+
+<img src="../../images/FieldCovWarning.png" style="width:40%;" class="r-stretch"></section>
+<section id="independence-of-the-covariate" class="slide level2 smaller">
+<h2>Independence of the covariate</h2>
+<div class="columns">
+<div class="column">
+<ul>
+<li>Groups should not differ on the covariate (§12.5.1)</li>
+<li>Otherwise: covariate and group share variance (Fig 12.2C)
+<ul>
+<li>Associated predictors can inflate/deflate the group effect (F, adjusted means)</li>
+<li>Does not “control for” the group difference</li>
+</ul></li>
+<li>Risk mostly without random assignment</li>
+<li>Assess: ANOVA with covariate as dependent variable (§12.6.3)</li>
+</ul>
+</div><div class="column">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="13.-ANCOVA_files/figure-revealjs/ancova-independence-covariate-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="homogeneity-of-regression-slopes" class="slide level2 smaller">
+<h2>Homogeneity of regression slopes</h2>
+<div class="columns">
+<div class="column">
+<ul>
+<li>One slope for the covariate: parallel lines (§12.5.2)</li>
+<li>Assumes the same covariate-DV relation in every group</li>
+<li>Violated: inflated Type I error (Jane Superbrain Box 12.2)</li>
+<li>Assess: add the interaction nationality * openness to the model (§12.8)
+<ul>
+<li>Descriptives plot: are the lines per group roughly parallel?</li>
+</ul></li>
+</ul>
+</div><div class="column">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="13.-ANCOVA_files/figure-revealjs/ancova-homogeneity-slopes-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 <section id="jasp" class="slide level2">
 <h2>JASP</h2>
 
@@ -734,15 +791,26 @@ Johnny van Doorn
 </section>
 <section id="exam-note-checking-assumptions" class="slide level2 smaller">
 <h2>Exam note: checking assumptions</h2>
+<p>What you should know: how to assess, robust alternatives, and why these assumptions matter</p>
 <ul>
-<li>No assumption tests (Shapiro-Wilk, Levene’s) on the exam (see Jane Superbrain Box 6.7)</li>
+<li>No assumption NHST (Shapiro-Wilk, Levene’s) on the exam (see Jane Superbrain Box 6.7)</li>
 <li>Normality: Q-Q plot of the residuals, with confidence interval
 <ul>
 <li>Assumption Checks → Q-Q plot residuals → Confidence interval</li>
 <li>Points outside the band suggest non-normality</li>
 </ul></li>
 <li>Equal variances: ratio of variances/sd</li>
-<li>ANCOVA, homogeneity of regression slopes: interaction covariate * independent variable
+</ul>
+</section>
+<section id="exam-note-ancova-assumptions" class="slide level2 smaller">
+<h2>Exam note: ANCOVA assumptions</h2>
+<ul>
+<li>Independence of the covariate and treatment effect
+<ul>
+<li>ANOVA with the covariate as dependent variable</li>
+<li>What it means: groups differ on the covariate</li>
+</ul></li>
+<li>Homogeneity of regression slopes: interaction covariate * independent variable
 <ul>
 <li>Model → Model Terms: add or remove the interaction</li>
 <li>What it means: effect of the covariate differs between groups</li>
@@ -761,8 +829,8 @@ Johnny van Doorn
 <ul>
 <li>Mann-Whitney, Wilcoxon signed-rank, Kruskal-Wallis</li>
 </ul></li>
-<li>Question can give a decision rule, e.g., “use nonparametric test if more than 5 points fall outside the band”</li>
-<li>ANCOVA: no robust version, so have to eat the grain of salt</li>
+<li>Question can give a decision rule, e.g., “use nonparametric test if more than 5 points fall outside the Q-Q confidence band”</li>
+<li>ANCOVA: no robust version, so have to eat the grain of salt if normality or variances seem problematic</li>
 </ul>
 </section>
 <section id="recommended-exercises" class="slide level2">
