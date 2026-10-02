@@ -124,11 +124,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#post-hoc-tests" id="toc-post-hoc-tests" class="nav-link" data-scroll-target="#post-hoc-tests">Post-hoc tests</a></li>
   <li><a href="#effect-size-omega2" id="toc-effect-size-omega2" class="nav-link" data-scroll-target="#effect-size-omega2">Effect size <span class="math inline">\(\omega^2\)</span></a></li>
   <li><a href="#effect-size-d" id="toc-effect-size-d" class="nav-link" data-scroll-target="#effect-size-d">Effect size <span class="math inline">\(d\)</span></a></li>
+  <li><a href="#t-test-anova-regression" id="toc-t-test-anova-regression" class="nav-link" data-scroll-target="#t-test-anova-regression"><span class="math inline">\(t\)</span>-test = ANOVA = regression</a></li>
   <li><a href="#jasp" id="toc-jasp" class="nav-link" data-scroll-target="#jasp">JASP</a></li>
   </ul></li>
   <li><a href="#closing" id="toc-closing" class="nav-link" data-scroll-target="#closing">Closing</a>
   <ul class="collapse">
   <li><a href="#recap" id="toc-recap" class="nav-link" data-scroll-target="#recap">Recap</a></li>
+  <li><a href="#next-time" id="toc-next-time" class="nav-link" data-scroll-target="#next-time">Next Time</a></li>
   <li><a href="#recommended-exercises" id="toc-recommended-exercises" class="nav-link" data-scroll-target="#recommended-exercises">Recommended Exercises</a></li>
   <li><a href="#labcoat-leni-11.1" id="toc-labcoat-leni-11.1" class="nav-link" data-scroll-target="#labcoat-leni-11.1">Labcoat Leni 11.1</a></li>
   <li><a href="#contact" id="toc-contact" class="nav-link" data-scroll-target="#contact">Contact</a></li>
@@ -224,8 +226,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-78606378bb4a0379822d" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-78606378bb4a0379822d">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"],["No puppies","No puppies","No puppies","No puppies","No puppies","15 mins","15 mins","15 mins","15 mins","15 mins","30 mins","30 mins","30 mins","30 mins","30 mins"],[3,2,1,1,4,5,2,4,2,3,7,4,5,3,6]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Dose<\/th>\n      <th>Happiness<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Dose","targets":1},{"name":"Happiness","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-2ec00d0e441ba0cd28ae" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-2ec00d0e441ba0cd28ae">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"],["No puppies","No puppies","No puppies","No puppies","No puppies","15 mins","15 mins","15 mins","15 mins","15 mins","30 mins","30 mins","30 mins","30 mins","30 mins"],[3,2,1,1,4,5,2,4,2,3,7,4,5,3,6]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Dose<\/th>\n      <th>Happiness<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Dose","targets":1},{"name":"Happiness","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><a href="https://discoverjasp.com/repository/dsj1_data/data/puppies.jasp">puppies.jasp</a></p>
@@ -281,8 +283,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-cc59dfb2c00912f3f703" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-cc59dfb2c00912f3f703">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"],["No puppies","No puppies","No puppies","No puppies","No puppies","15 mins","15 mins","15 mins","15 mins","15 mins","30 mins","30 mins","30 mins","30 mins","30 mins"],[3,2,1,1,4,5,2,4,2,3,7,4,5,3,6],[2.2,2.2,2.2,2.2,2.2,3.2,3.2,3.2,3.2,3.2,5,5,5,5,5]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Dose<\/th>\n      <th>Happiness<\/th>\n      <th>Predictions<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[2,3]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Dose","targets":1},{"name":"Happiness","targets":2},{"name":"Predictions","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-c05ef1d603029ac5af3d" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-c05ef1d603029ac5af3d">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"],["No puppies","No puppies","No puppies","No puppies","No puppies","15 mins","15 mins","15 mins","15 mins","15 mins","30 mins","30 mins","30 mins","30 mins","30 mins"],[3,2,1,1,4,5,2,4,2,3,7,4,5,3,6],[2.2,2.2,2.2,2.2,2.2,3.2,3.2,3.2,3.2,3.2,5,5,5,5,5]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Dose<\/th>\n      <th>Happiness<\/th>\n      <th>Predictions<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[2,3]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Dose","targets":1},{"name":"Happiness","targets":2},{"name":"Predictions","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -477,7 +479,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="effect-size-d" class="level2">
 <h2 class="anchored" data-anchor-id="effect-size-d">Effect size <span class="math inline">\(d\)</span></h2>
 <p>A more interpretable effect size measure is <span class="math inline">\(d_{Contrast}\)</span>. Which gives Cohen’s <span class="math inline">\(d\)</span> for a specific contrast.</p>
-<p><span class="math display">\[d_{Contrast} = \sqrt{\frac{2t}{\sqrt{n_1 + n_2}}}\]</span></p>
+<p><span class="math display">\[d_{Contrast} = \frac{2t}{\sqrt{n_1 + n_2}}\]</span></p>
+</section>
+<section id="t-test-anova-regression" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="t-test-anova-regression"><span class="math inline">\(t\)</span>-test = ANOVA = regression</h2>
+<p>Two groups: your guess of your neighbor’s IQ, 2025 vs.&nbsp;2026 (<a href="https://johnnydoorn.github.io/teaching-statistics/datasets/2026/iq-estimates-2025-vs-2026.jasp">iq-estimates-2025-vs-2026.jasp</a>)</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 49%">
+<col style="width: 42%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Analysis</th>
+<th style="text-align: left;">Statistic</th>
+<th style="text-align: left;"><span class="math inline">\(p\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Independent <span class="math inline">\(t\)</span>-test (2026 - 2025)</td>
+<td style="text-align: left;"><span class="math inline">\(t(181) = -1.33\)</span></td>
+<td style="text-align: left;">0.185</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">One-way ANOVA</td>
+<td style="text-align: left;"><span class="math inline">\(F(1, 181) = 1.77\)</span></td>
+<td style="text-align: left;">0.185</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Regression, dummy for 2026</td>
+<td style="text-align: left;"><span class="math inline">\(b = -4.70\)</span>, <span class="math inline">\(t(181) = -1.33\)</span></td>
+<td style="text-align: left;">0.185</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li>Same question: do the two group means differ?</li>
+<li>Same <span class="math inline">\(p\)</span>-value, and <span class="math inline">\(F = t^2\)</span>: <span class="math inline">\((-1.33)^2 = 1.77\)</span></li>
+<li><span class="math inline">\(b\)</span> = difference between the two group means</li>
+</ul>
 </section>
 <section id="jasp" class="level2">
 <h2 class="anchored" data-anchor-id="jasp">JASP</h2>
@@ -496,6 +542,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <blockquote class="blockquote">
 <p>bigger group differences = more informative predictor = more explained variance</p>
 </blockquote>
+</section>
+<section id="next-time" class="level2">
+<h2 class="anchored" data-anchor-id="next-time">Next Time</h2>
+<ul>
+<li>ANCOVA: adding a continuous predictor (lecture 13)</li>
+</ul>
 </section>
 <section id="recommended-exercises" class="level2">
 <h2 class="anchored" data-anchor-id="recommended-exercises">Recommended Exercises</h2>

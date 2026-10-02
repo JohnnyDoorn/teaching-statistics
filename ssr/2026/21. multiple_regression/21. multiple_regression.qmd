@@ -46,6 +46,10 @@ Chapter 8 (§8.9–8.16)
   - Dependence between predictors
   - Interaction effects
 
+## Next Time
+
+- Mediation analysis (lecture 23)
+
 ## Recommended Exercises
 
 - [Exercise 8.4](https://discoverjasp.com/pages/smart_alex#task-8.4)

@@ -41,6 +41,10 @@ Chapter 10 (§10.1–10.3)
   - Linear regression
   - PROCESS module
 
+## Next Time
+
+- Bayesian ANOVA (lecture 29)
+
 ## Recommended Exercises
 
 - [Exercise 10.1](https://discoverjasp.com/pages/smart_alex#task-10.1)

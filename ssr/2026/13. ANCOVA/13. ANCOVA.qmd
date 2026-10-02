@@ -39,7 +39,9 @@ Chapter 12 (§12.1–12.12)
 - We can add a continuous predictor to the ANOVA model, to reduce the overall model error
 - With multiple predictors, we need to check:
   - Whether there is an interaction effect
+    - An existing interaction effect gives crucial context to main effects
   - Whether the predictors are associated
+    - Associated predictors can either increase or reduce each other's unique contributions to explained variance
 
 ## Exam note: checking assumptions {.smaller}
 
@@ -49,7 +51,9 @@ What you should know: how to assess, robust alternatives, and why these assumpti
 - Normality: Q-Q plot of the residuals, with confidence interval
   - Assumption Checks → Q-Q plot residuals → Confidence interval
   - Points outside the band suggest non-normality
-- Equal variances: ratio of variances/sd
+- Equal variances: ratio of the largest to the smallest variance (Section 6.9.6)
+  - Ratio of 2 or more suggests unequal variances
+  - Equivalently for sd's: ratio of $\sqrt{2} \approx 1.4$ or more
 
 ## Exam note: robust alternatives {.smaller}
 
@@ -69,6 +73,13 @@ What you should know: how to assess, robust alternatives, and why these assumpti
 - Homogeneity of regression slopes: interaction covariate * independent variable
   - Model → Model Terms: add or remove the interaction
   - What it means: effect of the covariate differs between groups
+
+## Next Time
+
+- Extensions of ANOVA:
+  - Adding a second categorical variable (lecture 17)
+  - Within-subjects measurements (lecture 18)
+  - Mixed designs (lecture 18)
 
 ## Recommended Exercises
 

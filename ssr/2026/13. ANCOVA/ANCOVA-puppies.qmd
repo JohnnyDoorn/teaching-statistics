@@ -262,6 +262,26 @@ To see what is explained by covariate, we subtract the Model SS of the group mod
 SS.covar <- SS.model - SS.model.group; SS.covar ## SS.covar corrected for group
 ```
 
+## Why don't the parts add up? {.smaller}
+
+```{r puppylove-why-parts-do-not-add-up, echo=FALSE}
+# Suppression in these data: the 30-min group loves puppies least, so dose and
+# puppy love mask each other. Parts are rounded first so the sums match the table.
+fmt   <- function(x) sprintf("%.2f", x)
+alone <- round(c(SS.model.group, SS.model.covar), 2)
+uniq  <- round(c(SS.group, SS.covar), 2)
+knitr::kable(data.frame(
+  Dose         = c(fmt(alone[1]), fmt(uniq[1]), ""),
+  `Puppy love` = c(fmt(alone[2]), fmt(uniq[2]), ""),
+  Sum          = c(fmt(sum(alone)), fmt(sum(uniq)), fmt(SS.model)),
+  row.names    = c("Alone (one-predictor model)", "Unique (full model minus the other)", "Full model"),
+  check.names  = FALSE), align = "rrr")
+```
+
+- Usually (*redundancy*): alone parts add up to more than the full model, unique parts to less
+- Here it's reversed (*suppression*, p. 340)
+    - The 30-min group loves puppies least, which causes dose and puppy love to  suppress each other's effect
+
 ## F-ratio {.subsection}
 
 ```{r puppylove-f-ratio, echo=FALSE}

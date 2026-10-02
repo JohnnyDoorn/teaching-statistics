@@ -305,4 +305,31 @@ But what does it say?
 
 A more interpretable effect size measure is $d_{Contrast}$. Which gives Cohen's $d$ for a specific contrast.
 
-$$d_{Contrast} = \sqrt{\frac{2t}{\sqrt{n_1 + n_2}}}$$
+$$d_{Contrast} = \frac{2t}{\sqrt{n_1 + n_2}}$$
+
+## $t$-test = ANOVA = regression {.smaller}
+
+Two groups: your guess of your neighbor's IQ, 2025 vs. 2026 ([iq-estimates-2025-vs-2026.jasp](https://johnnydoorn.github.io/teaching-statistics/datasets/2026/iq-estimates-2025-vs-2026.jasp))
+
+```{r anova-t-test-anova-regression, echo=FALSE}
+# The JASP demo from the 2026 lecture as a slide: one question, three analyses,
+# the same p. Reads the published long-format file from lecture 11; datasetsPath()
+# comes from the _setup.R sourced in anova-load-puppies-data above.
+iq      <- read.csv(datasetsPath("2026", "iq-estimates-2025-vs-2026.csv"), check.names = FALSE)
+iq$year <- factor(iq$year)
+iq.t    <- t.test(iq$`neighbor-iq`[iq$year == "2026"], iq$`neighbor-iq`[iq$year == "2025"], var.equal = TRUE)
+iq.fit  <- lm(`neighbor-iq` ~ year, data = iq)
+iq.aov  <- anova(iq.fit)
+iq.b    <- summary(iq.fit)$coefficients["year2026", ]
+knitr::kable(data.frame(
+  Analysis  = c("Independent $t$-test (2026 - 2025)", "One-way ANOVA", "Regression, dummy for 2026"),
+  Statistic = c(sprintf("$t(%d) = %.2f$", iq.t$parameter, iq.t$statistic),
+                sprintf("$F(1, %d) = %.2f$", iq.aov$Df[2], iq.aov$`F value`[1]),
+                sprintf("$b = %.2f$, $t(%d) = %.2f$", iq.b[1], iq.fit$df.residual, iq.b[3])),
+  `$p$`     = sprintf("%.3f", c(iq.t$p.value, iq.aov$`Pr(>F)`[1], iq.b[4])),
+  check.names = FALSE))
+```
+
+- Same question: do the two group means differ?
+- Same $p$-value, and $F = t^2$: $`r sprintf("(%.2f)^2 = %.2f", iq.t$statistic, iq.t$statistic^2)`$
+- $b$ = difference between the two group means

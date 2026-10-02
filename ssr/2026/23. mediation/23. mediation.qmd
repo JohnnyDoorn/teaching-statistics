@@ -40,6 +40,10 @@ Chapter 10 (§10.4–10.7)
 - PROCESS module is very flexible
 - Causal assumptions extremely important with PROCESS models
 
+## Next Time
+
+- Moderation: interactions between continuous predictors (lecture 26)
+
 ## Recommended Exercises
 
 - [Exercise 10.4](https://discoverjasp.com/pages/smart_alex#task-10.4)

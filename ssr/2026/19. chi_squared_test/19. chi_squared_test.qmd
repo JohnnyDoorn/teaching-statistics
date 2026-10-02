@@ -41,6 +41,10 @@ Chapter 16 (§16.1–16.10)
 - Can be used to assess (in)dependence between predictors
 - Has test statistic (χ²) + effect size (odds ratio)
 
+## Next Time
+
+- Non-parametric tests: rank-based equivalents of old friends (lecture 20)
+
 ## Recommended Exercises
 
 - [Exercise 16.1](https://discoverjasp.com/pages/smart_alex#task-16.1)

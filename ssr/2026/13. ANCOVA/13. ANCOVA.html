@@ -124,6 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#visual-ss_residual-group-covariate" id="toc-visual-ss_residual-group-covariate" class="nav-link" data-scroll-target="#visual-ss_residual-group-covariate">Visual <span class="math inline">\({SS}_{residual}\)</span>: group + covariate</a></li>
   <li><a href="#divide-model-sum-of-squares" id="toc-divide-model-sum-of-squares" class="nav-link" data-scroll-target="#divide-model-sum-of-squares">Divide model sum of squares</a></li>
   <li><a href="#divide-model-sum-of-squares-1" id="toc-divide-model-sum-of-squares-1" class="nav-link" data-scroll-target="#divide-model-sum-of-squares-1">Divide model sum of squares</a></li>
+  <li><a href="#why-dont-the-parts-add-up" id="toc-why-dont-the-parts-add-up" class="nav-link" data-scroll-target="#why-dont-the-parts-add-up">Why don’t the parts add up?</a></li>
   <li><a href="#f-ratio" id="toc-f-ratio" class="nav-link" data-scroll-target="#f-ratio">F-ratio</a></li>
   <li><a href="#p-value" id="toc-p-value" class="nav-link" data-scroll-target="#p-value"><span class="math inline">\(p\)</span>-value</a></li>
   <li><a href="#what-if-we-ignore-puppy-love" id="toc-what-if-we-ignore-puppy-love" class="nav-link" data-scroll-target="#what-if-we-ignore-puppy-love">What if we ignore puppy love?</a></li>
@@ -143,6 +144,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#exam-note-checking-assumptions" id="toc-exam-note-checking-assumptions" class="nav-link" data-scroll-target="#exam-note-checking-assumptions">Exam note: checking assumptions</a></li>
   <li><a href="#exam-note-robust-alternatives" id="toc-exam-note-robust-alternatives" class="nav-link" data-scroll-target="#exam-note-robust-alternatives">Exam note: robust alternatives</a></li>
   <li><a href="#exam-note-ancova-assumptions" id="toc-exam-note-ancova-assumptions" class="nav-link" data-scroll-target="#exam-note-ancova-assumptions">Exam note: ANCOVA assumptions</a></li>
+  <li><a href="#next-time" id="toc-next-time" class="nav-link" data-scroll-target="#next-time">Next Time</a></li>
   <li><a href="#recommended-exercises" id="toc-recommended-exercises" class="nav-link" data-scroll-target="#recommended-exercises">Recommended Exercises</a></li>
   <li><a href="#labcoat-leni-12.1" id="toc-labcoat-leni-12.1" class="nav-link" data-scroll-target="#labcoat-leni-12.1">Labcoat Leni 12.1</a></li>
   <li><a href="#contact" id="toc-contact" class="nav-link" data-scroll-target="#contact">Contact</a></li>
@@ -252,8 +254,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-42c3b764c44e8a5c4ed5" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-42c3b764c44e8a5c4ed5">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30],["No puppies","No puppies","No puppies","No puppies","No puppies","No puppies","No puppies","No puppies","No puppies","15 mins","15 mins","15 mins","15 mins","15 mins","15 mins","15 mins","15 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins"],[4,1,5,1,2,2,7,4,5,5,3,1,2,2,6,4,2,1,3,5,4,3,3,2,0,1,3,0,1,0],[3,2,5,2,2,2,7,2,4,7,5,3,4,4,7,5,4,9,2,6,3,4,4,4,6,4,6,2,8,5]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>n<\/th>\n      <th>dose<\/th>\n      <th>puppylove<\/th>\n      <th>happiness<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":300,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"className":"dt-right","targets":[1,3,4]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"n","targets":1},{"name":"dose","targets":2},{"name":"puppylove","targets":3},{"name":"happiness","targets":4}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-d2a1cd078a454fda053f" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-d2a1cd078a454fda053f">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30],["No puppies","No puppies","No puppies","No puppies","No puppies","No puppies","No puppies","No puppies","No puppies","15 mins","15 mins","15 mins","15 mins","15 mins","15 mins","15 mins","15 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins"],[4,1,5,1,2,2,7,4,5,5,3,1,2,2,6,4,2,1,3,5,4,3,3,2,0,1,3,0,1,0],[3,2,5,2,2,2,7,2,4,7,5,3,4,4,7,5,4,9,2,6,3,4,4,4,6,4,6,2,8,5]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>n<\/th>\n      <th>dose<\/th>\n      <th>puppylove<\/th>\n      <th>happiness<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":300,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"className":"dt-right","targets":[1,3,4]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"n","targets":1},{"name":"dose","targets":2},{"name":"puppylove","targets":3},{"name":"happiness","targets":4}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><a href="https://discoverjasp.com/repository/dsj1_data/data/puppy_love.jasp">puppy_love.jasp</a></p>
@@ -263,8 +265,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-1a9a4ed805e379a69205" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-1a9a4ed805e379a69205">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"],["No puppies","No puppies","No puppies","No puppies","No puppies","No puppies","No puppies","No puppies","No puppies","15 mins","15 mins","15 mins","15 mins","15 mins","15 mins","15 mins","15 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins"],[0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1],[4,1,5,1,2,2,7,4,5,5,3,1,2,2,6,4,2,1,3,5,4,3,3,2,0,1,3,0,1,0],[3,2,5,2,2,2,7,2,4,7,5,3,4,4,7,5,4,9,2,6,3,4,4,4,6,4,6,2,8,5]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>dose<\/th>\n      <th>dummy.1<\/th>\n      <th>dummy.2<\/th>\n      <th>puppylove<\/th>\n      <th>happiness<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[2,3,4,5]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"dose","targets":1},{"name":"dummy.1","targets":2},{"name":"dummy.2","targets":3},{"name":"puppylove","targets":4},{"name":"happiness","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-cccb3f9c6630204e7366" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-cccb3f9c6630204e7366">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"],["No puppies","No puppies","No puppies","No puppies","No puppies","No puppies","No puppies","No puppies","No puppies","15 mins","15 mins","15 mins","15 mins","15 mins","15 mins","15 mins","15 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins"],[0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1],[4,1,5,1,2,2,7,4,5,5,3,1,2,2,6,4,2,1,3,5,4,3,3,2,0,1,3,0,1,0],[3,2,5,2,2,2,7,2,4,7,5,3,4,4,7,5,4,9,2,6,3,4,4,4,6,4,6,2,8,5]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>dose<\/th>\n      <th>dummy.1<\/th>\n      <th>dummy.2<\/th>\n      <th>puppylove<\/th>\n      <th>happiness<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[2,3,4,5]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"dose","targets":1},{"name":"dummy.1","targets":2},{"name":"dummy.2","targets":3},{"name":"puppylove","targets":4},{"name":"happiness","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -436,6 +438,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] 15.07575</code></pre>
 </div>
 </div>
+</section>
+<section id="why-dont-the-parts-add-up" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="why-dont-the-parts-add-up">Why don’t the parts add up?</h2>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Dose</th>
+<th style="text-align: right;">Puppy love</th>
+<th style="text-align: right;">Sum</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Alone (one-predictor model)</td>
+<td style="text-align: right;">16.84</td>
+<td style="text-align: right;">6.73</td>
+<td style="text-align: right;">23.57</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Unique (full model minus the other)</td>
+<td style="text-align: right;">25.19</td>
+<td style="text-align: right;">15.08</td>
+<td style="text-align: right;">40.27</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Full model</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">31.92</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li>Usually (<em>redundancy</em>): alone parts add up to more than the full model, unique parts to less</li>
+<li>Here it’s reversed (<em>suppression</em>, p.&nbsp;340)
+<ul>
+<li>The 30-min group loves puppies least, which causes dose and puppy love to suppress each other’s effect</li>
+</ul></li>
+</ul>
 </section>
 <section id="f-ratio" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="f-ratio">F-ratio</h2>
@@ -630,8 +676,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>We can add a continuous predictor to the ANOVA model, to reduce the overall model error</li>
 <li>With multiple predictors, we need to check:
 <ul>
-<li>Whether there is an interaction effect</li>
-<li>Whether the predictors are associated</li>
+<li>Whether there is an interaction effect
+<ul>
+<li>An existing interaction effect gives crucial context to main effects</li>
+</ul></li>
+<li>Whether the predictors are associated
+<ul>
+<li>Associated predictors can either increase or reduce each other’s unique contributions to explained variance</li>
+</ul></li>
 </ul></li>
 </ul>
 </section>
@@ -645,7 +697,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Assumption Checks → Q-Q plot residuals → Confidence interval</li>
 <li>Points outside the band suggest non-normality</li>
 </ul></li>
-<li>Equal variances: ratio of variances/sd</li>
+<li>Equal variances: ratio of the largest to the smallest variance (Section 6.9.6)
+<ul>
+<li>Ratio of 2 or more suggests unequal variances</li>
+<li>Equivalently for sd’s: ratio of <span class="math inline">\(\sqrt{2} \approx 1.4\)</span> or more</li>
+</ul></li>
 </ul>
 </section>
 <section id="exam-note-robust-alternatives" class="level2 smaller">
@@ -676,6 +732,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Model → Model Terms: add or remove the interaction</li>
 <li>What it means: effect of the covariate differs between groups</li>
+</ul></li>
+</ul>
+</section>
+<section id="next-time" class="level2">
+<h2 class="anchored" data-anchor-id="next-time">Next Time</h2>
+<ul>
+<li>Extensions of ANOVA:
+<ul>
+<li>Adding a second categorical variable (lecture 17)</li>
+<li>Within-subjects measurements (lecture 18)</li>
+<li>Mixed designs (lecture 18)</li>
 </ul></li>
 </ul>
 </section>

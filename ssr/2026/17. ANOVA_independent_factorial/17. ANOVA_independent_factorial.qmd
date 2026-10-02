@@ -40,6 +40,11 @@ With multiple predictor variables:
   - F-value of interaction effect
   - Conditional post-hoc tests
 
+## Next Time
+
+- RM ANOVA: within-subjects measurements (lecture 18)
+- Mixed ANOVA (lecture 18)
+
 ## Recommended Exercises
 
 - [Exercise 13.1](https://discoverjasp.com/pages/smart_alex#task-13.1)

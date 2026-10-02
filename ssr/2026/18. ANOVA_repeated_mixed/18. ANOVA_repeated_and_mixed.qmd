@@ -52,6 +52,10 @@ Chapter 14 (§14.1–14.18)
 - With between-subjects predictors, we need to check:
   - Equal variances of groups
 
+## Next Time
+
+- Association between categorical variables: chi-squared test (lecture 19)
+
 ## Recommended Exercises
 
 - [Exercise 14.4](https://discoverjasp.com/pages/smart_alex#task-14.4)

@@ -44,6 +44,10 @@ Chapter 11 (§11.1–11.13)
 
 > bigger group differences = more informative predictor = more explained variance
 
+## Next Time
+
+- ANCOVA: adding a continuous predictor (lecture 13)
+
 ## Recommended Exercises
 
 - [Exercise 11.1](https://discoverjasp.com/pages/smart_alex#task-11.1)
