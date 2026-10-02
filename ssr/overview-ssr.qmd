@@ -41,8 +41,8 @@ allLinks <- c(
    NHST_Continuous  = "https://statisticalreasoning-uva.shinyapps.io/NHST_Continuous",
    SimpleRegression = "https://statisticalreasoning-uva-2.shinyapps.io/SimpleRegression",
   NHST_Fdistribution = "https://statisticalreasoning-uva.shinyapps.io/NHST_Fdistribution",
-  onewayANOVA        = "https://jvd-ssr-oneway-anova.share.connect.posit.cloud/"
-  # ANCOVA             = "https://jvd-ssr-ancova.share.connect.posit.cloud/",
+  onewayANOVA        = "https://jvd-ssr-oneway-anova.share.connect.posit.cloud/",
+  ANCOVA             = "https://jvd-ssr-ancova.share.connect.posit.cloud/"
   # `Multi-ANOVA`      = "https://statisticalreasoning-uva-2.shinyapps.io/Multi-ANOVA",
   # RM_ANOVA           = "https://statisticalreasoning-uva-2.shinyapps.io/RM_ANOVA",
   # MultiRegression    = "https://statisticalreasoning-uva-2.shinyapps.io/MultiRegression"
@@ -129,6 +129,12 @@ externalSets <- list(
     Data    = "https://discoverjasp.com/repository/dsj1_data/data/puppies.jasp",
     Results = "https://discoverjasp.com/repository/dsj1_data/results/puppies.jasp",
     HTML    = "https://discoverjasp.com/repository/dsj1_data/html/puppies.html"
+  ),
+  # Same arrangement for lecture 13: datasets/puppy-love.csv is the one local copy.
+  "puppy-love" = c(
+    Data    = "https://discoverjasp.com/repository/dsj1_data/data/puppy_love.jasp",
+    Results = "https://discoverjasp.com/repository/dsj1_data/results/puppy_love.jasp",
+    HTML    = "https://discoverjasp.com/repository/dsj1_data/html/puppy_love.html"
   )
 )
 

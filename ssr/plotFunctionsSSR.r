@@ -411,7 +411,9 @@ plotSumSquaresCov <- function(data, sumSq = "Total", stats = NULL, plotMean = TR
     
   } else if (whatPred == "Cov") {
     predPoints <- data$predictedOnCov
-    modSumSquares <- stats[['Cov.Sum.of.Squares']]
+    # The covariate-only model's SS, which is what the segments show. The stats
+    # column 'Cov Sum of Squares' is the covariate's unique SS (full - group).
+    modSumSquares <- sumSquareCov
     dfMod <- 1
     dfError <- totN - (1)
   } else if (whatPred == "Group means + cov") {

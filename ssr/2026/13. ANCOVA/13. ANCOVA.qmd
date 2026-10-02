@@ -24,8 +24,12 @@ Chapter 12 (§12.1–12.12)
 </div>
 
 
-```{r child="ANCOVA.qmd"}
+```{r child="ANCOVA-puppies.qmd"}
 ```
+
+<!-- Backup: the simulated nationality/openness version. Swap it back in for ANCOVA-puppies.qmd above. -->
+<!-- ```{r child="ANCOVA.qmd"} -->
+<!-- ``` -->
 
 
 # Closing

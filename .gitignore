@@ -39,3 +39,5 @@ statbooks/
 /CLAUDE.md
 
 /.quarto/
+
+**/*.quarto_ipynb

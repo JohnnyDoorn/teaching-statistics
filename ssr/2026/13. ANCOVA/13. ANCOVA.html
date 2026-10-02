@@ -104,6 +104,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#ancova-1" id="toc-ancova-1" class="nav-link" data-scroll-target="#ancova-1">ANCOVA</a></li>
   <li><a href="#applet" id="toc-applet" class="nav-link" data-scroll-target="#applet">Applet</a></li>
+  <li><a href="#set-alpha-before-the-data" id="toc-set-alpha-before-the-data" class="nav-link" data-scroll-target="#set-alpha-before-the-data">Set <span class="math inline">\(\alpha\)</span> before the data</a></li>
   <li><a href="#data-example" id="toc-data-example" class="nav-link" data-scroll-target="#data-example">Data example</a></li>
   <li><a href="#define-the-model" id="toc-define-the-model" class="nav-link" data-scroll-target="#define-the-model">Define the model</a></li>
   <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data">The data</a></li>
@@ -125,6 +126,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#divide-model-sum-of-squares-1" id="toc-divide-model-sum-of-squares-1" class="nav-link" data-scroll-target="#divide-model-sum-of-squares-1">Divide model sum of squares</a></li>
   <li><a href="#f-ratio" id="toc-f-ratio" class="nav-link" data-scroll-target="#f-ratio">F-ratio</a></li>
   <li><a href="#p-value" id="toc-p-value" class="nav-link" data-scroll-target="#p-value"><span class="math inline">\(p\)</span>-value</a></li>
+  <li><a href="#what-if-we-ignore-puppy-love" id="toc-what-if-we-ignore-puppy-love" class="nav-link" data-scroll-target="#what-if-we-ignore-puppy-love">What if we ignore puppy love?</a></li>
   <li><a href="#alpha-power" id="toc-alpha-power" class="nav-link" data-scroll-target="#alpha-power">Alpha &amp; Power</a></li>
   <li><a href="#adjustedmarginal-means" id="toc-adjustedmarginal-means" class="nav-link" data-scroll-target="#adjustedmarginal-means">Adjusted/marginal means</a></li>
   <li><a href="#adjustedmarginal-means-1" id="toc-adjustedmarginal-means-1" class="nav-link" data-scroll-target="#adjustedmarginal-means-1">Adjusted/marginal means</a></li>
@@ -132,6 +134,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#independence-of-the-covariate-and-treatment-effect-fig-12.2" id="toc-independence-of-the-covariate-and-treatment-effect-fig-12.2" class="nav-link" data-scroll-target="#independence-of-the-covariate-and-treatment-effect-fig-12.2">Independence of the covariate and treatment effect (Fig 12.2)</a></li>
   <li><a href="#independence-of-the-covariate" id="toc-independence-of-the-covariate" class="nav-link" data-scroll-target="#independence-of-the-covariate">Independence of the covariate</a></li>
   <li><a href="#homogeneity-of-regression-slopes" id="toc-homogeneity-of-regression-slopes" class="nav-link" data-scroll-target="#homogeneity-of-regression-slopes">Homogeneity of regression slopes</a></li>
+  <li><a href="#puppy-love-slopes-not-parallel" id="toc-puppy-love-slopes-not-parallel" class="nav-link" data-scroll-target="#puppy-love-slopes-not-parallel">Puppy love: slopes not parallel</a></li>
+  <li><a href="#significant-at-alpha-0.005" id="toc-significant-at-alpha-0.005" class="nav-link" data-scroll-target="#significant-at-alpha-0.005">Significant at <span class="math inline">\(\alpha = 0.005\)</span>?</a></li>
+  <li><a href="#what-does-dose-mean-here" id="toc-what-does-dose-mean-here" class="nav-link" data-scroll-target="#what-does-dose-mean-here">What does “dose” mean here?</a></li>
   <li><a href="#jasp" id="toc-jasp" class="nav-link" data-scroll-target="#jasp">JASP</a></li>
   </ul></li>
   <li><a href="#closing" id="toc-closing" class="nav-link" data-scroll-target="#closing">Closing</a>
@@ -212,24 +217,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="applet">Applet</h2>
 <p><a href="https://jvd-ssr-ancova.share.connect.posit.cloud/">Link</a></p>
 </section>
+<section id="set-alpha-before-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="set-alpha-before-the-data">Set <span class="math inline">\(\alpha\)</span> before the data</h2>
+<ul>
+<li><span class="math inline">\(\alpha = 0.005\)</span></li>
+</ul>
+<blockquote class="blockquote">
+<p>“We propose to change the default P-value threshold for statistical significance from 0.05 to 0.005 for claims of new discoveries.”</p>
+</blockquote>
+<p><a href="https://doi.org/10.1038/s41562-017-0189-z">Benjamin et al.&nbsp;(2018)</a>: <em>Redefine statistical significance</em>, 72 authors</p>
+</section>
 <section id="data-example" class="level2">
 <h2 class="anchored" data-anchor-id="data-example">Data example</h2>
-<p>We want to test the difference in extraversion but want to also account for openness to experience.</p>
+<p>Puppy therapy again (lecture 12), but now we also measured how much each person loves puppies.</p>
 <ul>
-<li>Dependent variable: Extraversion</li>
-<li>Independent variable: Nationality (#groups <span class="math inline">\(= k = 3\)</span>)
+<li>Dependent variable: Happiness</li>
+<li>Independent variable: Dose (#groups <span class="math inline">\(= k = 3\)</span>)
 <ul>
-<li>Dutch</li>
-<li>German</li>
-<li>Belgian</li>
+<li>No puppies (<span class="math inline">\(n = 9\)</span>)</li>
+<li>15 mins (<span class="math inline">\(n = 8\)</span>)</li>
+<li>30 mins (<span class="math inline">\(n = 13\)</span>)</li>
 </ul></li>
-<li>Covariate: Openness to experience</li>
+<li>Covariate: Puppy love (0–7)</li>
 </ul>
 </section>
 <section id="define-the-model" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="define-the-model">Define the model</h2>
-<p><span class="math display">\[{extraversion} = {model} + {error}\]</span></p>
-<p><span class="math inline">\({model} = {independent} + {covariate}\)</span> <span class="math inline">\(\color{white}{model} = {nationality} + {openness}\)</span></p>
+<p><span class="math display">\[{happiness} = {model} + {error}\]</span></p>
+<p><span class="math inline">\({model} = {independent} + {covariate}\)</span> <span class="math inline">\(\color{white}{model} = {dose} + {puppy \; love}\)</span></p>
 <p><span class="math inline">\(\color{white}{model}\)</span></p>
 <p>Linear model with <span class="math inline">\(k-1\)</span> dummy variables:</p>
 <p><span class="math display">\[\hat{y} = b_0 + b_1 {dummy}_1 + b_2 {dummy}_2 + b_3 covar\]</span></p>
@@ -239,116 +254,109 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-d708d32e3b75ae203d13" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-d708d32e3b75ae203d13">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21],["Dutch","Dutch","Dutch","Dutch","Dutch","Dutch","Dutch","German","German","German","German","German","German","German","Belgian","Belgian","Belgian","Belgian","Belgian","Belgian","Belgian"],[8.92,6.21,6.74,8.56,7.93,8.1,7.02,7.48,6.78,9.42,9,9.300000000000001,8.42,8.15,9.380000000000001,8.470000000000001,7.26,6.7,8.33,8.039999999999999,7.7],[42.97,36.64,35.93,43.48,40.16,37.48,41.12,38.02,38.77,44.12,38.6,41.21,44.13,41.22,39.72,36.6,39.02,33.48,39.14,38.33,36.91]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>n<\/th>\n      <th>nationality<\/th>\n      <th>openness<\/th>\n      <th>extraversion<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":300,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"className":"dt-right","targets":[1,3,4]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"n","targets":1},{"name":"nationality","targets":2},{"name":"openness","targets":3},{"name":"extraversion","targets":4}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-350b6a808672f36168a4" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-350b6a808672f36168a4">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30],["No puppies","No puppies","No puppies","No puppies","No puppies","No puppies","No puppies","No puppies","No puppies","15 mins","15 mins","15 mins","15 mins","15 mins","15 mins","15 mins","15 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins"],[4,1,5,1,2,2,7,4,5,5,3,1,2,2,6,4,2,1,3,5,4,3,3,2,0,1,3,0,1,0],[3,2,5,2,2,2,7,2,4,7,5,3,4,4,7,5,4,9,2,6,3,4,4,4,6,4,6,2,8,5]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>n<\/th>\n      <th>dose<\/th>\n      <th>puppylove<\/th>\n      <th>happiness<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":300,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"className":"dt-right","targets":[1,3,4]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"n","targets":1},{"name":"dose","targets":2},{"name":"puppylove","targets":3},{"name":"happiness","targets":4}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
+<p><a href="https://discoverjasp.com/repository/dsj1_data/data/puppy_love.jasp">puppy_love.jasp</a></p>
 </section>
 <section id="dummies" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="dummies">Dummies</h2>
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-b96c719c0e1f27a87ee5" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-b96c719c0e1f27a87ee5">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21"],["Dutch","Dutch","Dutch","Dutch","Dutch","Dutch","Dutch","German","German","German","German","German","German","German","Belgian","Belgian","Belgian","Belgian","Belgian","Belgian","Belgian"],[0,0,0,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1],[8.92,6.21,6.74,8.56,7.93,8.1,7.02,7.48,6.78,9.42,9,9.300000000000001,8.42,8.15,9.380000000000001,8.470000000000001,7.26,6.7,8.33,8.039999999999999,7.7],[42.97,36.64,35.93,43.48,40.16,37.48,41.12,38.02,38.77,44.12,38.6,41.21,44.13,41.22,39.72,36.6,39.02,33.48,39.14,38.33,36.91]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>nationality<\/th>\n      <th>dummy.1<\/th>\n      <th>dummy.2<\/th>\n      <th>openness<\/th>\n      <th>extraversion<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[2,3,4,5]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"nationality","targets":1},{"name":"dummy.1","targets":2},{"name":"dummy.2","targets":3},{"name":"openness","targets":4},{"name":"extraversion","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-122620bbceb4019c7ce7" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-122620bbceb4019c7ce7">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"],["No puppies","No puppies","No puppies","No puppies","No puppies","No puppies","No puppies","No puppies","No puppies","15 mins","15 mins","15 mins","15 mins","15 mins","15 mins","15 mins","15 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins","30 mins"],[0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1],[4,1,5,1,2,2,7,4,5,5,3,1,2,2,6,4,2,1,3,5,4,3,3,2,0,1,3,0,1,0],[3,2,5,2,2,2,7,2,4,7,5,3,4,4,7,5,4,9,2,6,3,4,4,4,6,4,6,2,8,5]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>dose<\/th>\n      <th>dummy.1<\/th>\n      <th>dummy.2<\/th>\n      <th>puppylove<\/th>\n      <th>happiness<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[2,3,4,5]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"dose","targets":1},{"name":"dummy.1","targets":2},{"name":"dummy.2","targets":3},{"name":"puppylove","targets":4},{"name":"happiness","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
 <section id="observed-group-means" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="observed-group-means">Observed group means</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(extraversion <span class="sc">~</span> nationality, data, mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(happiness <span class="sc">~</span> dose, data, mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  nationality extraversion
-1       Dutch     39.68286
-2      German     40.86714
-3     Belgian     37.60000</code></pre>
+<pre><code>        dose happiness
+1 No puppies  3.222222
+2    15 mins  4.875000
+3    30 mins  4.846154</code></pre>
 </div>
 </div>
 </section>
 <section id="model-fit-without-covariate" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="model-fit-without-covariate">Model fit without covariate</h2>
-<p>What are the beta coefficients when we fit a model that only has <code>nationality</code> as a predictor variable?</p>
+<p>What are the beta coefficients when we fit a model that only has <code>dose</code> as a predictor variable?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fit.group <span class="ot">&lt;-</span> <span class="fu">lm</span>(extraversion <span class="sc">~</span> nationality, data); fit.group<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fit.group <span class="ot">&lt;-</span> <span class="fu">lm</span>(happiness <span class="sc">~</span> dose, data); fit.group<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>       (Intercept)  nationalityGerman nationalityBelgian 
-         39.682857           1.184286          -2.082857 </code></pre>
+<pre><code>(Intercept) dose15 mins dose30 mins 
+   3.222222    1.652778    1.623932 </code></pre>
 </div>
 </div>
 <ul>
-<li><p><span class="math inline">\(b_{0} = 39.68\)</span></p></li>
-<li><p><span class="math inline">\(b_{German} = 1.18\)</span></p>
+<li><p><span class="math inline">\(b_{0} = 3.22\)</span></p></li>
+<li><p><span class="math inline">\(b_{15min} = 1.65\)</span></p>
 <ul>
-<li>Prediction for German: 39.68 + 1.18 = 40.86</li>
+<li>Prediction for 15 mins: 3.22 + 1.65 = 4.87</li>
 </ul></li>
-<li><p><span class="math inline">\(b_{Belgian} = -2.08\)</span></p>
+<li><p><span class="math inline">\(b_{30min} = 1.62\)</span></p>
 <ul>
-<li>Prediction for Belgian: 39.68 + -2.08 = 37.6</li>
+<li>Prediction for 30 mins: 3.22 + 1.62 = 4.84</li>
 </ul></li>
 </ul>
 </section>
 <section id="model-fit-with-only-covariate" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="model-fit-with-only-covariate">Model fit with only covariate</h2>
-<p>What are the beta coefficients when we fit a model that only has <code>openness</code> as predictor variable?</p>
+<p>What are the beta coefficients when we fit a model that only has <code>puppylove</code> as predictor variable?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fit.covar <span class="ot">&lt;-</span> <span class="fu">lm</span>(extraversion <span class="sc">~</span> openness, data); fit.covar<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fit.covar <span class="ot">&lt;-</span> <span class="fu">lm</span>(happiness <span class="sc">~</span> puppylove, data); fit.covar<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>(Intercept)    openness 
-  24.993473    1.799697 </code></pre>
+<pre><code>(Intercept)   puppylove 
+  3.6568758   0.2596796 </code></pre>
 </div>
 </div>
-<p><span class="math inline">\(b_{0} = 24.99\)</span></p>
-<p><span class="math inline">\(b_{Open} = 1.8\)</span></p>
+<p><span class="math inline">\(b_{0} = 3.66\)</span></p>
+<p><span class="math inline">\(b_{love} = 0.26\)</span></p>
 </section>
 <section id="model-fit-with-all-predictor-variables-factor-covariate" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="model-fit-with-all-predictor-variables-factor-covariate">Model fit with all predictor variables (factor + covariate)</h2>
 <p>What are the beta coefficients when we fit the full model (i.e., with both predictor variables)?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(extraversion <span class="sc">~</span>  nationality <span class="sc">+</span> openness, data); fit<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(happiness <span class="sc">~</span> dose <span class="sc">+</span> puppylove, data); fit<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>       (Intercept)  nationalityGerman nationalityBelgian           openness 
-        25.9029405         -0.1220751         -2.7012528          1.8036540 </code></pre>
+<pre><code>(Intercept) dose15 mins dose30 mins   puppylove 
+  1.7891883   1.7856801   2.2248813   0.4160421 </code></pre>
 </div>
 </div>
-<p><span class="math inline">\(b_{0} = 25.9\)</span></p>
-<p><span class="math inline">\(b_{German} = -0.12\)</span></p>
-<p><span class="math inline">\(b_{Belgian} = -2.7\)</span></p>
-<p><span class="math inline">\(b_{Open} = 1.8\)</span></p>
+<p><span class="math inline">\(b_{0} = 1.79\)</span></p>
+<p><span class="math inline">\(b_{15min} = 1.79\)</span></p>
+<p><span class="math inline">\(b_{30min} = 2.22\)</span></p>
+<p><span class="math inline">\(b_{love} = 0.42\)</span></p>
 </section>
 <section id="predictions-of-the-full-model" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="predictions-of-the-full-model">Predictions of the full model</h2>
-<p>For a German with a score of 8 on Openness:</p>
+<p>For someone in the 15 mins group with a score of 4 on puppy love:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(extraversion <span class="sc">~</span> nationality <span class="sc">+</span> openness, data); fit<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(happiness <span class="sc">~</span> dose <span class="sc">+</span> puppylove, data); fit<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>       (Intercept)  nationalityGerman nationalityBelgian           openness 
-        25.9029405         -0.1220751         -2.7012528          1.8036540 </code></pre>
+<pre><code>(Intercept) dose15 mins dose30 mins   puppylove 
+  1.7891883   1.7856801   2.2248813   0.4160421 </code></pre>
 </div>
 </div>
 <ul>
-<li><p><span class="math inline">\(b_{0} = 25.9\)</span></p></li>
-<li><p><span class="math inline">\(b_{German} = -0.12\)</span></p></li>
-<li><p><span class="math inline">\(b_{Open} = 1.8\)</span></p>
+<li><p><span class="math inline">\(b_{0} = 1.79\)</span></p></li>
+<li><p><span class="math inline">\(b_{15min} = 1.79\)</span></p></li>
+<li><p><span class="math inline">\(b_{love} = 0.42\)</span></p>
 <ul>
-<li>Prediction for German: 25.9 + -0.12 + 8 * 1.8 = 40.18</li>
+<li>Prediction for 15 mins: 1.79 + 1.79 + 4 * 0.42 = 5.26</li>
 </ul></li>
 </ul>
-<p>How about a Belgian with 6 Openness?</p>
-<!-- ## Total variance {.subsection} -->
-<!-- What is the total variance? -->
-<!-- ${MS}_{total} = s^2_{extraversion} = \frac{{SS}_{extraversion}}{{df}_{extraversion}}$ -->
-<!-- ```{r, echo=TRUE} -->
-<!-- ms.t <- var(data$extraversion); ms.t -->
-<!-- ss.t <- var(data$extraversion) * (length(data$extraversion) - 1); ss.t -->
-<!-- ``` -->
-<!-- ## The data -->
+<p>How about someone in the 30 mins group with a score of 1 on puppy love?</p>
 </section>
 <section id="visual-ss_total" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="visual-ss_total">Visual <span class="math inline">\({SS}_{total}\)</span></h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="13.-ANCOVA_files/figure-html/ancova-visual-total-variance-1.png" class="img-fluid" width="672"></p>
+<p><img src="13.-ANCOVA_files/figure-html/puppylove-visual-total-variance-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -356,27 +364,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="smaller anchored" data-anchor-id="explained-by-group-model">Explained by group model</h2>
 <p>The model that predicts only using group means:</p>
 <p><span class="math inline">\(\hat{y} = b_0 + b_1 {dummy}_1 + b_2 {dummy}_2\)</span></p>
-<p><span class="math inline">\(\hat{y} = 39.68 + 1.18 \times {dummy}_1 + -2.08 \times {dummy}_2\)</span></p>
+<p><span class="math inline">\(\hat{y} = 3.22 + 1.65 \times {dummy}_1 + 1.62 \times {dummy}_2\)</span></p>
 </section>
 <section id="visual-ss_model-group" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="visual-ss_model-group">Visual <span class="math inline">\({SS}_{model}\)</span>: group</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="13.-ANCOVA_files/figure-html/ancova-visual-explained-by-group-1.png" class="img-fluid" width="672"></p>
+<p><img src="13.-ANCOVA_files/figure-html/puppylove-visual-explained-by-group-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
 <section id="explained-by-covariate-model" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="explained-by-covariate-model">Explained by covariate model</h2>
-<p>The model that predicts only using openness:</p>
+<p>The model that predicts only using puppy love:</p>
 <p><span class="math inline">\(\hat{y} = b_0 + b_3 covar\)</span></p>
-<p><span class="math inline">\(\hat{y} = 24.99 + 1.8 \times {Openness}\)</span></p>
+<p><span class="math inline">\(\hat{y} = 3.66 + 0.26 \times {Puppy \; love}\)</span></p>
 </section>
 <section id="visual-ss_model-covariate" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="visual-ss_model-covariate">Visual <span class="math inline">\({SS}_{model}\)</span>: covariate</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="13.-ANCOVA_files/figure-html/ancova-visual-explained-by-covariate-1.png" class="img-fluid" width="672"></p>
+<p><img src="13.-ANCOVA_files/figure-html/puppylove-visual-explained-by-covariate-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -384,13 +392,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="smaller anchored" data-anchor-id="explained-by-full-model">Explained by full model</h2>
 <p>The model that predicts with group and covariate:</p>
 <p><span class="math inline">\(\hat{y} = b_0 + b_1 {dummy}_1 + b_2 {dummy}_2 + b_3 covar\)</span></p>
-<p><span class="math inline">\(\hat{y} = 25.9 + -0.12 \times {dummy}_1 + -2.7 \times {dummy}_2 + 1.8 \times {Openness}\)</span></p>
+<p><span class="math inline">\(\hat{y} = 1.79 + 1.79 \times {dummy}_1 + 2.22 \times {dummy}_2 + 0.42 \times {Puppy \; love}\)</span></p>
 </section>
 <section id="visual-ss_model-group-covariate" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="visual-ss_model-group-covariate">Visual <span class="math inline">\({SS}_{model}\)</span>: group + covariate</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="13.-ANCOVA_files/figure-html/ancova-visual-explained-by-full-model-1.png" class="img-fluid" width="672"></p>
+<p><img src="13.-ANCOVA_files/figure-html/puppylove-visual-explained-by-full-model-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -398,7 +406,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="subsection anchored" data-anchor-id="visual-ss_residual-group-covariate">Visual <span class="math inline">\({SS}_{residual}\)</span>: group + covariate</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="13.-ANCOVA_files/figure-html/ancova-unexplained-variance-1.png" class="img-fluid" width="672"></p>
+<p><img src="13.-ANCOVA_files/figure-html/puppylove-unexplained-variance-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -413,43 +421,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>SS.model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 91.38149</code></pre>
+<pre><code>[1] 31.91955</code></pre>
 </div>
 </div>
 <p>To see what is explained by group, we subtract the Model SS of the covariate model:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>SS.group <span class="ot">&lt;-</span> SS.model <span class="sc">-</span> SS.model.covar; SS.group <span class="do">## SS.group corrected for covar</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 32.58198</code></pre>
+<pre><code>[1] 25.18519</code></pre>
 </div>
 </div>
 <p>To see what is explained by covariate, we subtract the Model SS of the group model:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>SS.covar <span class="ot">&lt;-</span> SS.model <span class="sc">-</span> SS.model.group; SS.covar <span class="do">## SS.covar corrected for group</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 53.07971</code></pre>
+<pre><code>[1] 15.07575</code></pre>
 </div>
 </div>
 </section>
 <section id="f-ratio" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="f-ratio">F-ratio</h2>
-<p><span class="math inline">\(MS_{model-group} = \frac{32.582}{2} = 16.291\)</span></p>
-<p><span class="math inline">\(F = \frac{{MS}_{model-group}}{{MS}_{residual}} = \frac{{SIGNAL}}{{NOISE}} = \frac{16.291}{4.095} = 3.98\)</span></p>
+<p><span class="math inline">\(MS_{model-group} = \frac{25.185}{2} = 12.593\)</span></p>
+<p><span class="math inline">\(F = \frac{{MS}_{model-group}}{{MS}_{residual}} = \frac{{SIGNAL}}{{NOISE}} = \frac{12.593}{3.04} = 4.14\)</span></p>
 </section>
 <section id="p-value" class="level2">
 <h2 class="anchored" data-anchor-id="p-value"><span class="math inline">\(p\)</span>-value</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="13.-ANCOVA_files/figure-html/ancova-p-value-1.png" class="img-fluid" width="672"></p>
+<p><img src="13.-ANCOVA_files/figure-html/puppylove-p-value-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+</section>
+<section id="what-if-we-ignore-puppy-love" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="what-if-we-ignore-puppy-love">What if we ignore puppy love?</h2>
+<p>Without puppy love (Output 12.4):</p>
+<p><img src="../../images/output-12-4.png" class="img-fluid" style="width:58.0%"></p>
+<p>With puppy love (Output 12.5):</p>
+<p><img src="../../images/output-12-5.png" class="img-fluid" style="width:58.0%"></p>
+<ul>
+<li><span class="math inline">\({SS}_{residual}\)</span>: 94.12 → 79.05; effect of dose: <span class="math inline">\(p\)</span> = 0.108 → <span class="math inline">\(p\)</span> = 0.027 (§12.7)</li>
+</ul>
 </section>
 <section id="alpha-power" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="alpha-power">Alpha &amp; Power</h2>
 <p>Power becomes quite abstract when we increase the complexity (i.e., number of predictors) of our models. We can make an F-distribution that symbolizes the alternative distribution by shifting the distribution more to the right (although the interpretability becomes pretty murky..)</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="13.-ANCOVA_files/figure-html/ancova-alpha-and-power-1.png" class="img-fluid" width="672"></p>
+<p><img src="13.-ANCOVA_files/figure-html/puppylove-alpha-and-power-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -457,7 +475,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="adjustedmarginal-means">Adjusted/marginal means</h2>
 <p>Marginal means are estimated group means, while keeping the covariate equal across the groups</p>
 <blockquote class="blockquote">
-<p>What are extraversion averages in each group, if they would all score the same on openness?</p>
+<p>What are happiness averages in each group, if they would all score the same on puppy love?</p>
 </blockquote>
 <p>See also <a href="https://jasp-stats.org/2020/04/14/the-wonderful-world-of-marginal-means/">this blogpost</a></p>
 </section>
@@ -466,19 +484,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Adjusted:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>  nationality mean.adj
-1       Dutch 40.32444
-2      German 40.20237
-3     Belgian 37.62319</code></pre>
+<pre><code>        dose mean.adj
+1 No puppies 2.926370
+2    15 mins 4.712050
+3    30 mins 5.151251</code></pre>
 </div>
 </div>
 <p>Observed:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>  nationality extraversion
-1       Dutch     39.68286
-2      German     40.86714
-3     Belgian     37.60000</code></pre>
+<pre><code>        dose happiness
+1 No puppies  3.222222
+2    15 mins  4.875000
+3    30 mins  4.846154</code></pre>
 </div>
 </div>
 </section>
@@ -504,8 +522,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="independence-of-the-covariate" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="independence-of-the-covariate">Independence of the covariate</h2>
-<div class="columns">
-<div class="column" style="width:60%;">
 <ul>
 <li>Groups should not differ on the covariate (§12.5.1)</li>
 <li>Otherwise: covariate and group share variance (Fig 12.2C)
@@ -517,14 +533,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Risk mostly without random assignment</li>
 <li>Assess: ANOVA with covariate as dependent variable (§12.6.3)</li>
 </ul>
-</div><div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../../images/desc-plot-ancova.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">ANOVA on openness: F(2, 18) = 1.01, p = 0.383</figcaption>
+<p><img src="../../images/output-12-3.png" class="img-fluid figure-img" style="width:65.0%"></p>
+<figcaption class="figure-caption">ANOVA on puppy love: F(2, 27) = 1.98, p = 0.158</figcaption>
 </figure>
-</div>
-</div>
 </div>
 </section>
 <section id="homogeneity-of-regression-slopes" class="level2 smaller">
@@ -536,10 +549,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Assumes the same covariate-DV relation in every group</li>
 <li>Unequal slopes:
 <ul>
-<li>Interpretation: effect of nationality depends on openness (§12.8)</li>
+<li>Interpretation: effect of dose depends on puppy love (§12.8)</li>
 <li>Inflated Type I error (Jane Superbrain Box 12.2)</li>
 </ul></li>
-<li>Assess: add the interaction nationality * openness to the model (§12.8)
+<li>Assess: add the interaction dose * puppy love to the model (§12.8)
 <ul>
 <li>Descriptives plot: are the lines per group roughly parallel?</li>
 </ul></li>
@@ -547,16 +560,89 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div><div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../../images/slopes-plot-ancova.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Interaction: F(2, 15) = 0.24, p = 0.788</figcaption>
+<p><img src="../../images/figure-12-9.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Interaction: F(2, 24) = 4.18, p = 0.028</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
+<section id="puppy-love-slopes-not-parallel" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="puppy-love-slopes-not-parallel">Puppy love: slopes not parallel</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li>30 mins: slightly negative slope; other groups positive (§12.5.2)</li>
+<li>Model → Model Terms: add Dose * Puppy love (§12.8)</li>
+<li>Field (<span class="math inline">\(\alpha\)</span> = .05): interaction significant, so interpret this model instead (§12.8)</li>
+<li>Our <span class="math inline">\(\alpha\)</span> = .005: <span class="math inline">\(p\)</span> = .028 is not</li>
+</ul>
+</div><div class="column" style="width:60%;">
+<p><img src="../../images/figure-12-8.png" class="img-fluid"></p>
+<p><img src="../../images/output-12-9.png" class="img-fluid" style="width:78.0%"></p>
+</div>
+</div>
+</section>
+<section id="significant-at-alpha-0.005" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="significant-at-alpha-0.005">Significant at <span class="math inline">\(\alpha = 0.005\)</span>?</h2>
+<p><img src="../../images/output-12-9.png" class="img-fluid" style="width:80.0%"></p>
+<ul>
+<li>Dose: <span class="math inline">\(p\)</span> = 0.003 &lt; <span class="math inline">\(\alpha\)</span> = 0.005</li>
+<li>But partial <span class="math inline">\(\omega^2\)</span> = 0.30, 95% CI [0.02, 0.53]</li>
+</ul>
+</section>
+<section id="what-does-dose-mean-here" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="what-does-dose-mean-here">What does “dose” mean here?</h2>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Puppy love</th>
+<th style="text-align: right;">No puppies</th>
+<th style="text-align: right;">15 mins</th>
+<th style="text-align: right;">30 mins</th>
+<th style="text-align: right;">Dose: p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">0</td>
+<td style="text-align: right;">0.59</td>
+<td style="text-align: right;">2.31</td>
+<td style="text-align: right;">5.28</td>
+<td style="text-align: right;">0.003</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2.73 (average)</td>
+<td style="text-align: right;">2.68</td>
+<td style="text-align: right;">4.55</td>
+<td style="text-align: right;">4.69</td>
+<td style="text-align: right;">0.025</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: right;">4.41</td>
+<td style="text-align: right;">6.41</td>
+<td style="text-align: right;">4.19</td>
+<td style="text-align: right;">0.138</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li>Each dose has its own slope, so the dose effect depends on puppy love</li>
+<li>Output 12.9’s “Dose” compares the groups at puppy love = 0</li>
+<li>Interaction present: little value in interpreting the main effect (p.&nbsp;568)</li>
+</ul>
+</section>
 <section id="jasp" class="level2">
 <h2 class="anchored" data-anchor-id="jasp">JASP</h2>
 <p><img src="../../images/JASP_logo_green.svg" class="img-fluid" width="300"></p>
+<!-- Backup: the simulated nationality/openness version. Swap it back in for ANCOVA-puppies.qmd above. -->
+<!-- ```{r child="ANCOVA.qmd"} -->
+<!-- ``` -->
 </section>
 </section>
 <section id="closing" class="level1">
