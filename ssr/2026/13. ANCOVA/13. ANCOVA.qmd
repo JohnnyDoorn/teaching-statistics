@@ -2,7 +2,7 @@
 title: "13. ANCOVA"
 author: "Johnny van Doorn"
 date: "2 October 2026"
-view: "https://teams.microsoft.com/meet/321076515738520?p=UKADi1oc4Ht5U2tYg7"
+view: "https://amsuni-my.sharepoint.com/:v:/g/personal/j_b_vandoorn_uva_nl/IQA7LdI082EvRIBMc7O0Z4ghAc_R5Gt7pwDoVgncEjVHGhs?e=Q8B1Lz&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D"
 footer: "Scientific & Statistical Reasoning"
 format:
   revealjs:
