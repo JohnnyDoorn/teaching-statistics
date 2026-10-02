@@ -436,6 +436,11 @@ slopesText <- sprintf("Interaction: F(%d, %d) = %.2f, p = %.3f",
 
 :::
 
+<!-- Hidden for now (2 Oct 2026): the non-parallel slopes in these data and the dose
+     test at alpha = 0.005 (Output 12.9). Delete the two :::::: fence lines to bring
+     both slides back. The code inside still runs; the next slide needs fit.int. -->
+:::::: {.content-hidden}
+
 ## Puppy love: slopes not parallel {.smaller}
 
 ::: {.columns}
@@ -482,6 +487,8 @@ omText <- sprintf("%.2f, 95%% CI [%.2f, %.2f]", om$Omega2_partial, om$CI_low, om
 * Dose: $p$ = `r sprintf("%.3f", p.dose.0)` < $\alpha$ = 0.005
 * But partial $\omega^2$ = `r omText`
 
+::::::
+
 ## What does "dose" mean here? {.smaller}
 
 ```{r puppylove-dose-depends-on-love, echo=FALSE}
@@ -503,7 +510,7 @@ knitr::kable(tab, align = "lrrrr")
 ```
 
 * Each dose has its own slope, so the dose effect depends on puppy love
-* Output 12.9's "Dose" compares the groups at puppy love = 0
+* In the model with the interaction, "Dose" compares the groups at puppy love = 0
 * Interaction present: little value in interpreting the main effect (p. 568)
 
 ## JASP
