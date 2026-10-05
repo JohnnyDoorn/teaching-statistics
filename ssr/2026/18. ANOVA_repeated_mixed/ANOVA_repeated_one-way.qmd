@@ -18,11 +18,13 @@ The one-way repeated measures ANOVA analyses the variance of the model while red
 
 * Continuous dependent variable
 * Normally distributed
-    * Q-Q plots
-    * Shapiro-Wilk
+    * Q-Q plots (or Shapiro-Wilk)
 
 * Equality of variance of the within-group differences
     * Mauchly's test of Sphericity
+    * Same caution as Levene's test (see also Misconception Mutt 14.1)
+    * Plus caution as with any p-value (black-and-white decision making)
+    * Robust version: Greenhouse-Geisser correction
     * See Field 14.5, table 14.2, Jane Superbrain boxes 14.2 and 14.3
     * Always met when having only 2 levels
 
