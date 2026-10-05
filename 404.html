@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found</title>
+<script>
+// GitHub Pages serves this page for every missing URL on the site. Old links (in ANS
+// items, Canvas, slides) point to paths that were renamed, so send them on:
+//   SSR/... and RMS/...      -> ssr/... and rms/... (folders lowercased, 2026)
+//   extra-texts/CamelCase    -> extra-texts/kebab-case (renamed 2026-09-01)
+//   jasp-gifs/...            -> the matching JASP video library page (folder removed
+//                               in commit 10683a8 to stay under the Pages size limit)
+// A target that is itself missing lands back here and shows the message below, so
+// this cannot loop.
+var LIBRARY = "https://jasp-stats.github.io/jasp-video-library/";
+var EXTRA = {
+  "EffSizeVsTestStat.html": "eff-size-vs-test-stat.html",
+  "IncludingIntercept.html": "including-intercept.html",
+  "OneSidedVsTwoSided.html": "one-sided-vs-two-sided.html",
+  "PredictingWithDummies.html": "predicting-with-dummies-1-variable.html",
+  "PredictingWithDummies_1Variable.html": "predicting-with-dummies-1-variable.html",
+  "PredictingWithDummies_Interaction.html": "predicting-with-dummies-2-variables.html",
+  "PredictingWithDummies_2Variables.html": "predicting-with-dummies-2-variables.html",
+  "ViolatingNormalityANOVA.html": "violating-normality-anova.html"
+};
+var MOVED = {  // links in ANS items that never matched the file's real name or folder
+  "ssr/WA_Datasets/WA3/WA3_Emo_JASP_Results.html": "ssr/WA_Datasets/WA3/Emo_JASP_Results.html",
+  "ssr/WA_Datasets/WA5/alcoholdriving.html": "ssr/WA_Datasets/WA4/alcoholdriving.html",
+  "ssr/WA_Datasets/WA5/alcoholdriving.jasp": "ssr/WA_Datasets/WA4/alcoholdriving.jasp"
+};
+var GIFS = [  // file-name prefix -> video library page
+  [/^(TTest|Bayesian-TTest|Nonparametrics)/i, "All_T-Tests.html"],
+  [/^(ANOVA|ANCOVA|RM-?ANOVA)/i, "All_ANOVA.html"],
+  [/^(Regression|Correlation|Bayesian-Correlation)/i, "All_Regression.html"],
+  [/^(Mediation|Moderation)/i, "All_PROCESS.html"],
+  [/^(Binomial|Contingency)/i, "All_Frequencies.html"],
+  [/^Descriptives/i, "Descriptives.html"],
+  [/^(Getting-Started|ComputeColumns)/i, "Getting-Started.html"]
+];
+
+function resolveOldPath(path) {
+  var base = "/teaching-statistics/";
+  var site = "johnnydoorn.github.io/teaching-statistics/";
+  var original = path;
+  var i = path.lastIndexOf(site);
+  if (i >= 0) path = base + path.slice(i + site.length);  // a link pasted inside another link
+  i = path.indexOf(base);
+  if (i < 0) return null;
+  var rest = path.slice(i + base.length).replace(/^\/+/, "");  // also drops a doubled slash
+  rest = rest.replace(/^SSR\//, "ssr/").replace(/^RMS\//, "rms/");
+  if (MOVED[rest]) rest = MOVED[rest];
+  var m = rest.match(/^extra-texts\/([^\/]+)$/);
+  if (m && EXTRA[m[1]]) rest = "extra-texts/" + EXTRA[m[1]];
+  if (/^jasp-gifs\//.test(rest)) {
+    var file = rest.split("/").pop();
+    for (var k = 0; k < GIFS.length; k++) {
+      if (GIFS[k][0].test(file)) return LIBRARY + GIFS[k][1];
+    }
+    return LIBRARY;
+  }
+  return base + rest === original ? null : base + rest;
+}
+
+if (typeof window !== "undefined") {
+  var target = resolveOldPath(decodeURIComponent(window.location.pathname));
+  if (target && target !== window.location.pathname) {
+    window.location.replace(target + window.location.search + window.location.hash);
+  }
+} else if (typeof module !== "undefined") {
+  module.exports = resolveOldPath;
+}
+</script>
+<style>
+  :root { --bg: #ffffff; --fg: #1f2328; --muted: #59636e; --link: #BC0031; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #16181d; --fg: #e6e8eb; --muted: #9aa3ad; --link: #ff6b81; }
+  }
+  body { background: var(--bg); color: var(--fg); margin: 0;
+         font: 17px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 36rem; margin: 15vh auto 0; padding: 0 16px; }
+  h1 { font-size: 1.6rem; margin: 0 0 .5rem; }
+  p { color: var(--muted); }
+  a { color: var(--link); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Page not found</h1>
+  <p>This page has moved or no longer exists.</p>
+  <p>
+    <a href="/teaching-statistics/ssr/overview-ssr.html">SSR course page</a> ·
+    <a href="/teaching-statistics/rms/overview-rms.html">RMS course page</a> ·
+    <a href="https://jasp-stats.github.io/jasp-video-library/">JASP video library</a>
+  </p>
+</main>
+</body>
+</html>
