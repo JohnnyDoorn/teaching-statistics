@@ -1,4 +1,4 @@
-# Nonparametric tests {.section}
+# Nonparametric tests {.section .smaller}
 
 ```{r npconcept-nonparametric-tests}
 #| echo: false
@@ -22,7 +22,7 @@ library("knitr")
 
 Mac Miller, [*Apparition*](https://genius.com/Mac-miller-apparition-lyrics) ([*Faces*](https://www.youtube.com/watch?v=dCAClyY6vlQ&list=RDdCAClyY6vlQ&start_radio=1))
 
-## Parametric vs Nonparametric {#mytable}
+## Parametric vs Nonparametric {#mytable .smaller}
 
 <!-- <style>
 #mytable th {
@@ -44,7 +44,7 @@ sensitivity to outliers | yes        | no
 works with   | large data sets       | small and large data sets
 speed        | fast                  | slow
 
-## Ranking {.subsection}
+## Ranking {.subsection .smaller}
 
 ```{r npconcept-ranking-data, fig.height=3,fig.align='center', echo = FALSE}
 x1 <- c(1, 4, 6, 7, 8, 9)

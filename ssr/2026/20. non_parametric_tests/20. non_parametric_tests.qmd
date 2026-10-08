@@ -54,6 +54,18 @@ Chapter 15 (§15.1–15.9)
   - Transformations of the data
   - Outliers
 
+<!-- Block 2 exam-note recap: the L13 slides, plus the L17 and L18 one-liners below.
+     Each note lives in one file in its own lecture folder, so edit it there. -->
+```{r child="../13. ANCOVA/exam-notes.qmd"}
+```
+
+## Exam note: lectures 17 and 18
+
+- Post hoc tests (lecture 17)
+  - `r readLines("../17. ANOVA_independent_factorial/exam-note-post-hoc.txt", warn = FALSE)`
+- RM ANOVA (lecture 18)
+  - `r readLines("../18. ANOVA_repeated_mixed/exam-note-rm-calculations.txt", warn = FALSE)`
+
 ## Recommended Exercises
 
 - [Exercise 15.1](https://discoverjasp.com/pages/smart_alex#task-15.1)

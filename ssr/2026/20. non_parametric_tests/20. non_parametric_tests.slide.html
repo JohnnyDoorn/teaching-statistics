@@ -1130,6 +1130,69 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 <li>Outliers</li>
 </ul></li>
 </ul>
+<!-- Block 2 exam-note recap: the L13 slides, plus the L17 and L18 one-liners below.
+     Each note lives in one file in its own lecture folder, so edit it there. -->
+</section>
+<section id="exam-note-checking-assumptions" class="slide level2 smaller">
+<h2>Exam note: checking assumptions</h2>
+<p>What you should know: how to assess, robust alternatives, and why these assumptions matter</p>
+<ul>
+<li>No assumption NHST (Shapiro-Wilk, Levene’s) on the exam (see Jane Superbrain Box 6.7)</li>
+<li>Normality: Q-Q plot of the residuals, with confidence interval
+<ul>
+<li>Assumption Checks → Q-Q plot residuals → Confidence interval</li>
+<li>Points outside the band suggest non-normality</li>
+</ul></li>
+<li>Equal variances: ratio of the largest to the smallest variance (Section 6.9.6)
+<ul>
+<li>Ratio of 2 or more suggests unequal variances</li>
+<li>Equivalently for sd’s: ratio of <span class="math inline">\(\sqrt{2} \approx 1.4\)</span> or more</li>
+</ul></li>
+</ul>
+</section>
+<section id="exam-note-robust-alternatives" class="slide level2 smaller">
+<h2>Exam note: robust alternatives</h2>
+<ul>
+<li>Unequal variances:
+<ul>
+<li>Welch <span class="math inline">\(t\)</span>-test</li>
+<li>Welch <span class="math inline">\(F\)</span> (one-way ANOVA <em>only</em>: Assumption Checks → Homogeneity corrections)</li>
+</ul></li>
+<li>Non-normality: nonparametric test (Chapter 15; lecture 20)
+<ul>
+<li>Mann-Whitney, Wilcoxon signed-rank, Kruskal-Wallis</li>
+</ul></li>
+<li>Question can give a decision rule, e.g., “use nonparametric test if more than 5 points fall outside the Q-Q confidence band”</li>
+<li>ANCOVA: no robust version, so have to eat the grain of salt if normality or variances seem problematic</li>
+</ul>
+</section>
+<section id="exam-note-ancova-assumptions" class="slide level2 smaller">
+<h2>Exam note: ANCOVA assumptions</h2>
+<ul>
+<li>Independence of the covariate and treatment effect
+<ul>
+<li>ANOVA with the covariate as dependent variable</li>
+<li>What it means: groups differ on the covariate</li>
+</ul></li>
+<li>Homogeneity of regression slopes: interaction covariate * independent variable
+<ul>
+<li>Model → Model Terms: add or remove the interaction</li>
+<li>What it means: effect of the covariate differs between groups</li>
+</ul></li>
+</ul>
+</section>
+<section id="exam-note-lectures-17-and-18" class="slide level2">
+<h2>Exam note: lectures 17 and 18</h2>
+<ul>
+<li>Post hoc tests (lecture 17)
+<ul>
+<li>know where the options are, exam question will inform you which correction to use</li>
+</ul></li>
+<li>RM ANOVA (lecture 18)
+<ul>
+<li>No sums of squares or effect size calculations required for the exam</li>
+</ul></li>
+</ul>
 </section>
 <section id="recommended-exercises" class="slide level2">
 <h2>Recommended Exercises</h2>

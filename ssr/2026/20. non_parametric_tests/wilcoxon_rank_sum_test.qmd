@@ -45,7 +45,7 @@ ssrTable(data, height = 300,
                          buttons = c('csv')))
 ```
 
-## Test statistic W is the sum of ranks per group {.subsection}
+## Test statistic W is the sum of ranks per group {.subsection .smaller}
 
 ```{r wrs-rank-sums, echo=TRUE}
 rankSums <- aggregate(rankedBDI ~ Drug, data, sum)
@@ -85,7 +85,7 @@ n.2 <- n$rankedBDI[2]
 cbind(n.1, n.2)
 ```
 
-## Mean W under $H_0$
+## Mean W under $H_0$ {.smaller}
 
 $$\bar{W}_s=\frac{n_1(n_1+n_2+1)}{2}$$
   
@@ -106,7 +106,7 @@ W.se <- sqrt((n.1 * n.2 * (n.1 + n.2 + 1)) / 12)
 W.se
 ```
 
-## Calculate Z {.subsection}
+## Calculate Z {.subsection .smaller}
 
 $$z = \frac{W - \bar{W}}{{SE}_W}$$
   

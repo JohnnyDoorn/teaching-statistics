@@ -49,7 +49,7 @@ colnames(data) <- c("T0", "T1", "T2")
 <!-- data <- data.frame(ecstasy, alcohol, control) -->
 <!-- ``` -->
 
-## The data
+## The data {.smaller}
 [Link](https://discoverjasp.com/repository/dsj1_data/data/soya.jasp)
 
 ```{r friedman-the-data, echo=FALSE}
@@ -81,7 +81,7 @@ ssrTable(combDat, height = 300,
                          buttons = c('csv')))
 ```
 
-## Calculate $F_r$ {.subsection}
+## Calculate $F_r$ {.subsection .smaller}
 
 $$F_r = \left[ \frac{12}{Nk(k+1)} \sum_{i=1}^k R_i^2 \right] - 3N(k+1)$$
 
@@ -113,7 +113,7 @@ F.r <- ( ( 12/(N*k*(k+1)) ) * sum(R.i^2) ) - ( 3*N*(k+1) )
 F.r
 ```
 
-## Adjusting for ties (just for fun)
+## Adjusting for ties (just for fun) {.smaller}
 
 $$  \frac{(k-1) \sum_i^k (R_i - \frac{b(k+1))}{2})^2}{\sum_i^b \sum_j^k (R_{ij}^2) - \frac{bk(k+1)^2}{4}} $$
 

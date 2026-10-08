@@ -90,7 +90,7 @@ ssrTable(data, height = 300,
 ```
 
 
-## Calculate $T_+$
+## Calculate $T_+$ {.smaller}
 
 ```{r wsr-calculate, echo=TRUE}
 # Calculate the sum of the positive ranks
@@ -104,7 +104,7 @@ n
 
 > How likely is it to observe the lowest possible rank sum (0), for $n=8$, if there is no difference in BDI between Sunday and Wednesday?
 
-## Calculate $\bar{T}$ and ${SE}_{T}$ {.subsection}
+## Calculate $\bar{T}$ and ${SE}_{T}$ {.subsection .smaller}
 
 $$\bar{T} = \frac{n(n+1)}{4}$$
 
@@ -143,7 +143,7 @@ z
 visualize_normal_base(z, side = "two-sided")
 ```
 
-## Effect size
+## Effect size {.smaller}
 
 - Matched rank-biserial correlation
 

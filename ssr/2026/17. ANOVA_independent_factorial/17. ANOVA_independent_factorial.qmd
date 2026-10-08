@@ -23,6 +23,15 @@ In this lecture we aim to:
 Chapter 13 (§13.1–13.14)
 </div>
 
+## Updated slides
+
+- Lecture 12
+  - [$t$-test = ANOVA = regression](https://johnnydoorn.github.io/teaching-statistics/ssr/2026/12.%20f_distribution_ANOVA_one_way_independent/12.%20f_distribution_ANOVA_one_way_independent.slide.html#/t-test-anova-regression)
+  - [Effect size $d$](https://johnnydoorn.github.io/teaching-statistics/ssr/2026/12.%20f_distribution_ANOVA_one_way_independent/12.%20f_distribution_ANOVA_one_way_independent.slide.html#/effect-size-d)
+- Lecture 13
+  - [Why don't the parts add up?](https://johnnydoorn.github.io/teaching-statistics/ssr/2026/13.%20ANCOVA/13.%20ANCOVA.slide.html#/why-dont-the-parts-add-up)
+  - [Exam note: checking assumptions](https://johnnydoorn.github.io/teaching-statistics/ssr/2026/13.%20ANCOVA/13.%20ANCOVA.slide.html#/exam-note-checking-assumptions)
+
 
 ```{r child="factorial_independent_ANOVA.qmd"}
 ```

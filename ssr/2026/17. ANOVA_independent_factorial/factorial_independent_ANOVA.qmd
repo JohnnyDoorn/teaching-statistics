@@ -510,7 +510,7 @@ Unplanned comparisons
     * P(not 5 type-I errors) = $0.95^5 = `r round(0.950^5, 3)`$
 * Bonferroni more conservative, Tukey more permissive
 
-> **Exam note:** know where the options are, exam question will inform you which correction to use
+> **Exam note:** `r readLines("exam-note-post-hoc.txt", warn = FALSE)`
 
 ## Effect size in ANOVA {.smaller}
 
