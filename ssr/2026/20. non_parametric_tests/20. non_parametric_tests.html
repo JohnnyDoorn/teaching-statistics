@@ -139,6 +139,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#calculate-h" id="toc-calculate-h" class="nav-link" data-scroll-target="#calculate-h">Calculate H</a></li>
   <li><a href="#calculate-h-1" id="toc-calculate-h-1" class="nav-link" data-scroll-target="#calculate-h-1">Calculate H</a></li>
   <li><a href="#calculate-h-2" id="toc-calculate-h-2" class="nav-link" data-scroll-target="#calculate-h-2">Calculate H</a></li>
+  <li><a href="#chi2-distribution" id="toc-chi2-distribution" class="nav-link" data-scroll-target="#chi2-distribution"><span class="math inline">\(\chi^2\)</span> distribution</a></li>
   <li><a href="#test-for-significance-1" id="toc-test-for-significance-1" class="nav-link" data-scroll-target="#test-for-significance-1">Test for significance</a></li>
   <li><a href="#follow-up" id="toc-follow-up" class="nav-link" data-scroll-target="#follow-up">Follow-up?</a></li>
   </ul></li>
@@ -221,8 +222,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p><strong>Reading:</strong> Chapter 15 (§15.1–15.9)</p>
 </div>
-<section id="nonparametric-tests" class="level1 section">
-<h1 class="section">Nonparametric tests</h1>
+<section id="nonparametric-tests" class="level1 section smaller">
+<h1 class="section smaller">Nonparametric tests</h1>
 <ul>
 <li>When assumptions are violated
 <ul>
@@ -247,8 +248,8 @@ The rap chancellor, jacket made of camel fur</p>
 </blockquote>
 <p>Mac Miller, <a href="https://genius.com/Mac-miller-apparition-lyrics"><em>Apparition</em></a> (<a href="https://www.youtube.com/watch?v=dCAClyY6vlQ&amp;list=RDdCAClyY6vlQ&amp;start_radio=1"><em>Faces</em></a>)</p>
 </section>
-<section id="mytable" class="level2">
-<h2 class="anchored" data-anchor-id="mytable">Parametric vs Nonparametric</h2>
+<section id="mytable" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="mytable">Parametric vs Nonparametric</h2>
 
 <!-- <style>
 #mytable th {
@@ -298,8 +299,8 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 </tbody>
 </table>
 </section>
-<section id="ranking" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="ranking">Ranking</h2>
+<section id="ranking" class="level2 subsection smaller">
+<h2 class="subsection smaller anchored" data-anchor-id="ranking">Ranking</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -444,8 +445,8 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 </div>
 </div>
 </section>
-<section id="test-statistic-w-is-the-sum-of-ranks-per-group" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="test-statistic-w-is-the-sum-of-ranks-per-group">Test statistic W is the sum of ranks per group</h2>
+<section id="test-statistic-w-is-the-sum-of-ranks-per-group" class="level2 subsection smaller">
+<h2 class="subsection smaller anchored" data-anchor-id="test-statistic-w-is-the-sum-of-ranks-per-group">Test statistic W is the sum of ranks per group</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>rankSums <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(rankedBDI <span class="sc">~</span> Drug, data, sum)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>rankSums</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -496,8 +497,8 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 </div>
 </div>
 </section>
-<section id="mean-w-under-h_0" class="level2">
-<h2 class="anchored" data-anchor-id="mean-w-under-h_0">Mean W under <span class="math inline">\(H_0\)</span></h2>
+<section id="mean-w-under-h_0" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="mean-w-under-h_0">Mean W under <span class="math inline">\(H_0\)</span></h2>
 <p><span class="math display">\[\bar{W}_s=\frac{n_1(n_1+n_2+1)}{2}\]</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>W.mean <span class="ot">&lt;-</span> (n<span class="fl">.1</span> <span class="sc">*</span> (n<span class="fl">.1</span> <span class="sc">+</span> n<span class="fl">.2</span> <span class="sc">+</span> <span class="dv">1</span>)) <span class="sc">/</span> <span class="dv">2</span></span>
@@ -526,8 +527,8 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 </div>
 </div>
 </section>
-<section id="calculate-z" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="calculate-z">Calculate Z</h2>
+<section id="calculate-z" class="level2 subsection smaller">
+<h2 class="subsection smaller anchored" data-anchor-id="calculate-z">Calculate Z</h2>
 <p><span class="math display">\[z = \frac{W - \bar{W}}{{SE}_W}\]</span></p>
 <p>Which looks a lot like</p>
 <p><span class="math display">\[\frac{X - \bar{X}}{{SE}_X} \text{or} \frac{b - \mu_{b}}{{SE}_b} \]</span></p>
@@ -644,8 +645,8 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 </div>
 </div>
 </section>
-<section id="calculate-t_" class="level2">
-<h2 class="anchored" data-anchor-id="calculate-t_">Calculate <span class="math inline">\(T_+\)</span></h2>
+<section id="calculate-t_" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="calculate-t_">Calculate <span class="math inline">\(T_+\)</span></h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the sum of the positive ranks</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>T_pos <span class="ot">&lt;-</span> <span class="fu">sum</span>(data<span class="sc">$</span>rank <span class="sc">*</span> (data<span class="sc">$</span>diff <span class="sc">&gt;</span> <span class="dv">0</span>))</span>
@@ -664,8 +665,8 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 <p>How likely is it to observe the lowest possible rank sum (0), for <span class="math inline">\(n=8\)</span>, if there is no difference in BDI between Sunday and Wednesday?</p>
 </blockquote>
 </section>
-<section id="calculate-bart-and-se_t" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="calculate-bart-and-se_t">Calculate <span class="math inline">\(\bar{T}\)</span> and <span class="math inline">\({SE}_{T}\)</span></h2>
+<section id="calculate-bart-and-se_t" class="level2 subsection smaller">
+<h2 class="subsection smaller anchored" data-anchor-id="calculate-bart-and-se_t">Calculate <span class="math inline">\(\bar{T}\)</span> and <span class="math inline">\({SE}_{T}\)</span></h2>
 <p><span class="math display">\[\bar{T} = \frac{n(n+1)}{4}\]</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>T_mean <span class="ot">&lt;-</span> (n<span class="sc">*</span>(n<span class="sc">+</span><span class="dv">1</span>))<span class="sc">/</span><span class="dv">4</span></span>
@@ -705,8 +706,8 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 </div>
 </div>
 </section>
-<section id="effect-size" class="level2">
-<h2 class="anchored" data-anchor-id="effect-size">Effect size</h2>
+<section id="effect-size" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="effect-size">Effect size</h2>
 <ul>
 <li>Matched rank-biserial correlation</li>
 </ul>
@@ -734,8 +735,8 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 <section id="kruskalwallis-test" class="level1 section">
 <h1 class="section">Kruskal–Wallis test</h1>
 <p>Independent &gt;2 samples</p>
-<section id="kruskalwallis-test-1" class="level2">
-<h2 class="anchored" data-anchor-id="kruskalwallis-test-1">Kruskal–Wallis test</h2>
+<section id="kruskalwallis-test-1" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="kruskalwallis-test-1">Kruskal–Wallis test</h2>
 <p>Created by <a href="http://en.wikipedia.org/wiki/William_Kruskal">William Henry Kruskal</a> (L) and <a href="http://en.wikipedia.org/wiki/W._Allen_Wallis">Wilson Allen Wallis</a> (R), the Kruskal-Wallis test is a nonparametric alternative to the independent one-way ANOVA.</p>
 <p>The Kruskal-Wallis test essentially subtracts the expected mean ranking from each oberved mean ranking, which is <span class="math inline">\(\chi^2\)</span> distributed.</p>
 <!-- ## Simulate data -->
@@ -795,8 +796,8 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 </div>
 </div>
 </section>
-<section id="calculate-h-2" class="level2">
-<h2 class="anchored" data-anchor-id="calculate-h-2">Calculate H</h2>
+<section id="calculate-h-2" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="calculate-h-2">Calculate H</h2>
 <p><span class="math display">\[H = \frac{12}{N(N+1)} \sum_{i=1}^k \frac{R_i^2}{n_i} - 3(N+1)\]</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>H <span class="ot">&lt;-</span> ( <span class="dv">12</span><span class="sc">/</span>(N<span class="sc">*</span>(N<span class="sc">+</span><span class="dv">1</span>)) ) <span class="sc">*</span> <span class="fu">sum</span>(R.i<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>n.i) <span class="sc">-</span> <span class="dv">3</span><span class="sc">*</span>(N<span class="sc">+</span><span class="dv">1</span>)</span>
@@ -809,6 +810,19 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 <div class="cell">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>k  <span class="ot">&lt;-</span> <span class="dv">4</span></span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> k <span class="sc">-</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<!-- Copied from the chi-squared lecture (28. chi_squared_test/chi_square_test.qmd),
+     because this lecture now comes first (schedule change, October 2026). Legend reads
+     "df =" instead of "k =", since k is the number of groups here; df.plot keeps the
+     test's df (k - 1) intact for the next chunk. -->
+</section>
+<section id="chi2-distribution" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="chi2-distribution"><span class="math inline">\(\chi^2\)</span> distribution</h2>
+<p>The <span class="math inline">\(\chi^2\)</span> distribution describes the test statistic under the assumption of <span class="math inline">\(H_0\)</span>, given the degrees of freedom.</p>
+<div class="cell" data-output-location="slide">
+<div class="cell-output-display">
+<p><img src="20.-non_parametric_tests_files/figure-html/kw-chisq-distribution-1.png" class="img-fluid" width="672"></p>
+</div>
 </div>
 </section>
 <section id="test-for-significance-1" class="level2 subsection">
@@ -849,8 +863,8 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 <!-- data <- data.frame(ecstasy, alcohol, control) -->
 <!-- ``` -->
 </section>
-<section id="the-data-2" class="level2">
-<h2 class="anchored" data-anchor-id="the-data-2">The data</h2>
+<section id="the-data-2" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="the-data-2">The data</h2>
 <p><a href="https://discoverjasp.com/repository/dsj1_data/data/soya.jasp">Link</a></p>
 <div class="cell">
 <div class="cell-output-display">
@@ -878,8 +892,8 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 </div>
 </div>
 </section>
-<section id="calculate-f_r" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="calculate-f_r">Calculate <span class="math inline">\(F_r\)</span></h2>
+<section id="calculate-f_r" class="level2 subsection smaller">
+<h2 class="subsection smaller anchored" data-anchor-id="calculate-f_r">Calculate <span class="math inline">\(F_r\)</span></h2>
 <p><span class="math display">\[F_r = \left[ \frac{12}{Nk(k+1)} \sum_{i=1}^k R_i^2 \right] - 3N(k+1)\]</span></p>
 <ul>
 <li><span class="math inline">\(N\)</span> total number of subjects</li>
@@ -914,8 +928,8 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 </div>
 </div>
 </section>
-<section id="adjusting-for-ties-just-for-fun" class="level2">
-<h2 class="anchored" data-anchor-id="adjusting-for-ties-just-for-fun">Adjusting for ties (just for fun)</h2>
+<section id="adjusting-for-ties-just-for-fun" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="adjusting-for-ties-just-for-fun">Adjusting for ties (just for fun)</h2>
 <p><span class="math display">\[  \frac{(k-1) \sum_i^k (R_i - \frac{b(k+1))}{2})^2}{\sum_i^b \sum_j^k (R_{ij}^2) - \frac{bk(k+1)^2}{4}} \]</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">3</span></span>
@@ -1023,7 +1037,7 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 <ul>
 <li>Post hoc tests (lecture 17)
 <ul>
-<li>know where the options are, exam question will inform you which correction to use</li>
+<li>Know where the options are, exam question will inform you which correction to use</li>
 </ul></li>
 <li>RM ANOVA (lecture 18)
 <ul>

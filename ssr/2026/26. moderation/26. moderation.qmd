@@ -43,7 +43,7 @@ Chapter 10 (§10.1–10.3)
 
 ## Next Time
 
-- Bayesian ANOVA (lecture 29)
+- Association between categorical variables: chi-squared test (lecture 28)
 
 ## Recommended Exercises
 

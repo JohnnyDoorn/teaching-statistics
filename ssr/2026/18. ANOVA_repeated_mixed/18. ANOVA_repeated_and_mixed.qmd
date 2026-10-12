@@ -54,7 +54,7 @@ Chapter 14 (§14.1–14.18)
 
 ## Next Time
 
-- Association between categorical variables: chi-squared test (lecture 19)
+- Non-parametric tests: rank-based equivalents of old friends (lecture 20)
 
 ## Recommended Exercises
 

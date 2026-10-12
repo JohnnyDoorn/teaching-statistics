@@ -98,6 +98,37 @@ k  <- 4
 df <- k - 1
 ```
 
+<!-- Copied from the chi-squared lecture (28. chi_squared_test/chi_square_test.qmd),
+     because this lecture now comes first (schedule change, October 2026). Legend reads
+     "df =" instead of "k =", since k is the number of groups here; df.plot keeps the
+     test's df (k - 1) intact for the next chunk. -->
+
+## $\chi^2$ distribution {.smaller}
+
+The $\chi^2$ distribution describes the test statistic under the assumption of $H_0$, given the degrees of freedom.
+
+```{r kw-chisq-distribution, echo=FALSE}
+#| output-location: slide
+
+chi <- seq(0,8,.01)
+df.plot <- c(1,2,3,6,8,10)
+mycols  <- palette.colors(n = 7, palette = "Okabe-Ito")
+
+plot( chi, dchisq(chi, df.plot[1]), lwd = 2, col = mycols[1], type="l",
+      main = "Chi squared distributions",
+      ylab = "Density",
+      ylim = c(0,1),
+      xlab = "Chi squared")
+
+lines(chi, dchisq(chi, df.plot[2]), lwd = 2, col = mycols[2], type="l")
+lines(chi, dchisq(chi, df.plot[3]), lwd = 2, col = mycols[3], type="l")
+lines(chi, dchisq(chi, df.plot[4]), lwd = 2, col = mycols[4], type="l")
+lines(chi, dchisq(chi, df.plot[5]), lwd = 2, col = mycols[5], type="l")
+lines(chi, dchisq(chi, df.plot[6]), lwd = 2, col = mycols[6], type="l")
+
+legend("topright", legend = paste("df =",df.plot), col = mycols, lty = 1, bty = "n")
+```
+
 ## Test for significance {.subsection}
 
 ```{r kw-test-for-significance, fig.align='center', warning=FALSE, echo=FALSE}
