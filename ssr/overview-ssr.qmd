@@ -43,8 +43,8 @@ allLinks <- c(
   NHST_Fdistribution = "https://statisticalreasoning-uva.shinyapps.io/NHST_Fdistribution",
   onewayANOVA        = "https://jvd-ssr-oneway-anova.share.connect.posit.cloud/",
   ANCOVA             = "https://jvd-ssr-ancova.share.connect.posit.cloud/"
-  # `Multi-ANOVA`      = "https://statisticalreasoning-uva-2.shinyapps.io/Multi-ANOVA",
-  # RM_ANOVA           = "https://statisticalreasoning-uva-2.shinyapps.io/RM_ANOVA",
+  # factorialANOVA     = "https://jvd-ssr-factorial-anova.share.connect.posit.cloud/",
+  # RM_ANOVA           = "https://jvd-ssr-rm-anova.share.connect.posit.cloud/",
   # MultiRegression    = "https://statisticalreasoning-uva-2.shinyapps.io/MultiRegression"
   
 )

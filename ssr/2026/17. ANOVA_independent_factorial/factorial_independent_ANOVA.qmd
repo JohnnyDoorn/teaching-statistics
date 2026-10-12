@@ -22,7 +22,11 @@ Effects and interactions:
 * 1 dependent/outcome variable
 * 2 or more independent/predictor variables
     * 2 or more cat./levels
-    
+
+## Applet
+
+[Link](https://jvd-ssr-factorial-anova.share.connect.posit.cloud/)
+
 ## Assumptions {.smaller}
 
 * Continuous variable
