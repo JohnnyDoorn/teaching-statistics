@@ -32,6 +32,20 @@ Chapter 13 (§13.1–13.14)
   - [Why don't the parts add up?](https://johnnydoorn.github.io/teaching-statistics/ssr/2026/13.%20ANCOVA/13.%20ANCOVA.slide.html#/why-dont-the-parts-add-up)
   - [Exam note: checking assumptions](https://johnnydoorn.github.io/teaching-statistics/ssr/2026/13.%20ANCOVA/13.%20ANCOVA.slide.html#/exam-note-checking-assumptions)
 
+## Practice in ANS {.smaller}
+
+- Practice tests in ANS, one per exam block
+- Exercises from the book (Smart Alex), as SSR exam questions
+- Do them as many times as you want
+- Not required, just practice
+- Made with help from an LLM, keeping as much human text as possible
+  - Questions 77% human-written, model answers 84%
+- Examples of added text
+  - Andy's "I" becomes "Andy Field"
+  - Instructions ("Use alpha = 0.05.", "how to" links)
+  - Wrong options for multiple-choice questions
+  - Bridging sentences in model answers
+
 
 ```{r child="factorial_independent_ANOVA.qmd"}
 ```
