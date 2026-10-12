@@ -44,7 +44,7 @@ sensitivity to outliers | yes        | no
 works with   | large data sets       | small and large data sets
 speed        | fast                  | slow
 
-## Ranking {.subsection .smaller}
+## Ranking {.subsection .smaller .scrollable}
 
 ```{r npconcept-ranking-data, fig.height=3,fig.align='center', echo = FALSE}
 x1 <- c(1, 4, 6, 7, 8, 9)

@@ -49,7 +49,7 @@ colnames(data) <- c("T0", "T1", "T2")
 <!-- data <- data.frame(ecstasy, alcohol, control) -->
 <!-- ``` -->
 
-## The data {.smaller}
+## The data {.smaller .scrollable}
 [Link](https://discoverjasp.com/repository/dsj1_data/data/soya.jasp)
 
 ```{r friedman-the-data, echo=FALSE}
