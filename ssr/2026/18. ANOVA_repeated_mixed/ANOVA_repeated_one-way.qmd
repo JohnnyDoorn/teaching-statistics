@@ -14,6 +14,10 @@ The one-way repeated measures ANOVA analyses the variance of the model while red
     * 2 or more levels
 * All with same subjects
 
+## Applet
+
+[Link](https://jvd-ssr-rm-anova.share.connect.posit.cloud/)
+
 ## Assumptions {.smaller}
 
 * Continuous dependent variable
@@ -48,8 +52,11 @@ Measure driving ability in a driving simulator. Test in three consecutive condit
 * Alcohol none
 * Alcohol some
 * Alcohol much
+* $\alpha = 0.005$
 
-## The data {.smaller}
+## The data {.smaller .scrollable}
+
+[Data (.csv)](https://johnnydoorn.github.io/teaching-statistics/datasets/RM_ANOVA_Alcohol.csv)
 
 ```{r rm-the-data, echo=FALSE}
 nSample <- 5
@@ -111,9 +118,7 @@ SS_total <- MS_total * DF_total#; SS_total
 input <- list()
 input$whatPred <- "Alcohol + ID"
 input$whatDisplay <- c("Segments", "Sums")
-    plotSumSquaresRM(longdata, input = input, sumSq = "Total", myMain = "",
-                   alcColors = palette.colors(n = 3, palette = "Okabe-Ito"),
-                   speedSymbols = c(21, 22, 23)) 
+    plotSumSquaresRM(longdata, input = input, sumSq = "Total") 
 ```
 
 
@@ -154,9 +159,7 @@ mean_pp <- apply(cbind(none_alc, some_alc, much_alc),1,mean)
 input <- list()
 input$whatPred <- "ID"
 input$whatDisplay <- c("Segments", "Sums")
-    plotSumSquaresRM(longdata, input = input, sumSq = "Error", myMain = "Full Model SS Error",
-                   alcColors = palette.colors(n = 3, palette = "Okabe-Ito"),
-                   speedSymbols = c(21, 22, 23)) 
+    plotSumSquaresRM(longdata, input = input, sumSq = "Error") 
 ```
 
 
@@ -221,9 +224,7 @@ SS_model
 input <- list()
 input$whatPred <- "Alcohol"
 input$whatDisplay <- c("Segments", "Sums")
-    plotSumSquaresRM(longdata, input = input, sumSq = "Model", myMain = "Full Model SS Error",
-                   alcColors = palette.colors(n = 3, palette = "Okabe-Ito"),
-                   speedSymbols = c(21, 22, 23)) 
+    plotSumSquaresRM(longdata, input = input, sumSq = "Model", sortBy = "alcohol") 
 ```
 
 
@@ -233,9 +234,7 @@ input$whatDisplay <- c("Segments", "Sums")
 input <- list()
 input$whatPred <- "Alcohol + ID"
 input$whatDisplay <- c("Segments", "Sums")
-    plotSumSquaresRM(longdata, input = input, sumSq = "Model", myMain = "Full Model SS Error",
-                   alcColors = palette.colors(n = 3, palette = "Okabe-Ito"),
-                   speedSymbols = c(21, 22, 23)) 
+    plotSumSquaresRM(longdata, input = input, sumSq = "Model") 
 ```
 
 ## Full model residual SS visual ($SS_{residual}$)
@@ -244,9 +243,47 @@ input$whatDisplay <- c("Segments", "Sums")
 input <- list()
 input$whatPred <- "Alcohol + ID"
 input$whatDisplay <- c("Segments", "Sums")
-    plotSumSquaresRM(longdata, input = input, sumSq = "Error", myMain = "Full Model SS Error",
-                   alcColors = palette.colors(n = 3, palette = "Okabe-Ito"),
-                   speedSymbols = c(21, 22, 23)) 
+    plotSumSquaresRM(longdata, input = input, sumSq = "Error") 
+```
+
+## Variance in the alcohol data
+
+```{r rm-variance-partition-alcohol, echo=FALSE, fig.width=10, fig.height=5.5}
+local({
+  # Figure 14.3 (DSUJ) with the numbers of this example (longdata, the participants shown
+  # on "The data"): box widths are proportional to the sums of squares.
+  grand <- mean(longdata$accidents)
+  personMean    <- ave(longdata$accidents, longdata$pp)
+  conditionMean <- ave(longdata$accidents, longdata$alcohol)
+  nPart <- length(unique(longdata$pp)); kCond <- length(unique(longdata$alcohol))
+  ssPart <- c(total   = sum((longdata$accidents - grand)^2),
+              between = sum((personMean - grand)^2),
+              model   = sum((conditionMean - grand)^2))
+  ssPart[["within"]]   <- ssPart[["total"]] - ssPart[["between"]]
+  ssPart[["residual"]] <- ssPart[["within"]] - ssPart[["model"]]
+  dfPart <- c(total = nPart * kCond - 1, between = nPart - 1, within = nPart * (kCond - 1),
+              model = kCond - 1, residual = (nPart - 1) * (kCond - 1))
+
+  partBox <- function(x0, x1, y0, y1, col, border, label, textCol = "white") {
+    rect(x0, y0, x1, y1, col = col, border = border, lwd = 2)
+    if (!is.null(label)) text((x0 + x1) / 2, (y0 + y1) / 2, label, col = textCol, cex = 1.4)
+  }
+  ssLabel <- function(name, what, sep = ", ") sprintf("%s\nSS = %.2f%sdf = %d", name, ssPart[[what]], sep, dfPart[[what]])
+
+  par(mar = c(0.5, 0.5, 0.5, 0.5))
+  plot.new(); plot.window(xlim = c(-0.2, 1), ylim = c(0, 3))
+  w <- ssPart / ssPart[["total"]]
+  xB <- w[["between"]]
+  xM <- xB + w[["model"]]
+
+  partBox(0, 1, 2.15, 2.95, "#7FB6D9", "#3F7FAF", ssLabel("Total variability", "total"))
+  # Too narrow for its label, which sits in the free space to its left.
+  partBox(0, xB, 1.15, 1.95, "#4A9E7E", "#2C5E4F", NULL)
+  text(-0.015, 1.55, ssLabel("Between\nparticipants", "between", sep = "\n"), adj = 1, col = "#2C5E4F", cex = 1.4)
+  partBox(xB, 1, 1.15, 1.95, "#DDAA44", "#C0702E", ssLabel("Within participants", "within"))
+  partBox(xB, xM, 0.15, 0.95, "#EDE36E", "#D4B23A", ssLabel("Model (alcohol)", "model"), textCol = "gray20")
+  partBox(xM, 1, 0.15, 0.95, "#FCF0D9", "#C9773A", ssLabel("Residual", "residual", sep = "\n"), textCol = "gray20")
+})
 ```
 
 ## We use full model residual to compute F for alcohol
@@ -255,9 +292,7 @@ input$whatDisplay <- c("Segments", "Sums")
 input <- list()
 input$whatPred <- "Alcohol"
 input$whatDisplay <- c("Segments", "Sums", "F-stat")
-    plotSumSquaresRM(longdata, input = input, sumSq = "Model", myMain = "Full Model SS Error",
-                   alcColors = palette.colors(n = 3, palette = "Okabe-Ito"),
-                   speedSymbols = c(21, 22, 23)) 
+    plotSumSquaresRM(longdata, input = input, sumSq = "Model", sortBy = "alcohol") 
 ```
 
 

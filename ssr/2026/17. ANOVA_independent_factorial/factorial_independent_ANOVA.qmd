@@ -325,6 +325,18 @@ ss.speed.alcohol <- ss.model - ss.speed - ss.alcohol
 ss.speed.alcohol
 ```
 
+<!-- Added 2026-10-13 after teaching L17 (not rendered: the taught html stays as it was).
+     DSUJ Figure 13.6 (previous "Variance in factorial designs" slide) with the accidents
+     numbers; in class a student asked whether SS A is the one-way or the unique part
+     (balanced design: both, so the shared part is 0). -->
+
+## Variance in the accidents data
+
+```{r fact-variance-partition-accidents, echo=FALSE, fig.width=10, fig.height=5.5}
+# Same function as the FacANOVA applet's "Variance partition" tab (plotFunctionsSSR.r).
+plotVariancePartitionFactorial(data)
+```
+
 ## Using mean squares to compute $F$
 
 For every $F$-statistic, we use the $MS_{residual}$ of the full model:

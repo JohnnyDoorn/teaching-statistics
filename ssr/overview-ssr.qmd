@@ -141,6 +141,13 @@ externalSets <- list(
     Data    = "https://johnnydoorn.github.io/teaching-statistics/datasets/anova_alcohol_speed_daytime.csv",
     Results = "https://johnnydoorn.github.io/teaching-statistics/datasets/anova_alcohol_speed_daytime.jasp",
     HTML    = "https://johnnydoorn.github.io/teaching-statistics/datasets/anova_alcohol_speed_daytime.html"
+  ),
+  # Lecture 18: data only (no results files); one copy each in datasets/.
+  "RM_ANOVA_Alcohol" = c(
+    Data    = "https://johnnydoorn.github.io/teaching-statistics/datasets/RM_ANOVA_Alcohol.csv"
+  ),
+  "RM_ANOVA_AlcoholSpeedTime" = c(
+    Data    = "https://johnnydoorn.github.io/teaching-statistics/datasets/RM_ANOVA_AlcoholSpeedTime.csv"
   )
 )
 

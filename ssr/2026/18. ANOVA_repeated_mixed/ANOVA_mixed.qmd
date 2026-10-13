@@ -39,6 +39,8 @@ Same as repeated measures ANOVA and same as factorial ANOVA.
 
 ## Data {.smaller .scrollable}
 
+[Data (.csv)](https://johnnydoorn.github.io/teaching-statistics/datasets/RM_ANOVA_AlcoholSpeedTime.csv)
+
 ```{r mixed-data, echo=FALSE}
 data <- read.csv(file = datasetsPath("RM_ANOVA_AlcoholSpeedTime.csv"), header = TRUE)
 
@@ -53,6 +55,6 @@ ssrTable(data,
 
 ## Further reading {.smaller}
 
-[Oliver Twisted from Chapter 14](https://johnnydoorn.github.io/discoverjasp/pages/oliver_twisted.html#please-sir-can-i-have-some-more-mixing)
+[Oliver Twisted from Chapter 14](https://discoverjasp.com/pages/oliver_twisted.html#please-sir-can-i-have-some-more-mixing)
 
 
