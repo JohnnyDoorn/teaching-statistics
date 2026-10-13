@@ -135,6 +135,12 @@ externalSets <- list(
     Data    = "https://discoverjasp.com/repository/dsj1_data/data/puppy_love.jasp",
     Results = "https://discoverjasp.com/repository/dsj1_data/results/puppy_love.jasp",
     HTML    = "https://discoverjasp.com/repository/dsj1_data/html/puppy_love.html"
+  ),
+  # Lecture 17: our own data, but the one copy lives in datasets/ (not per year).
+  "anova_alcohol_speed_daytime" = c(
+    Data    = "https://johnnydoorn.github.io/teaching-statistics/datasets/anova_alcohol_speed_daytime.csv",
+    Results = "https://johnnydoorn.github.io/teaching-statistics/datasets/anova_alcohol_speed_daytime.jasp",
+    HTML    = "https://johnnydoorn.github.io/teaching-statistics/datasets/anova_alcohol_speed_daytime.html"
   )
 )
 

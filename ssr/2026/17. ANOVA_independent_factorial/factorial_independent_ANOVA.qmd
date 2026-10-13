@@ -81,7 +81,9 @@ In this example we will look at the amount of accidents in a car driving simulat
 <!-- 8      | 3       | 2     | 14 -->
 <!-- 9      | 3       | 3     | 16 -->
       
-## Data {.smaller}
+## Data {.smaller .scrollable}
+
+[Data (.csv)](https://johnnydoorn.github.io/teaching-statistics/datasets/anova_alcohol_speed_daytime.csv)
 
 ```{r fact-data, echo=FALSE}
 ssrTable(data)
