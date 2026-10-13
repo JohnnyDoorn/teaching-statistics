@@ -28,17 +28,15 @@ Chapter 13 (§13.1–13.14)
 
 - Lecture 12
   - [$t$-test = ANOVA = regression](https://johnnydoorn.github.io/teaching-statistics/ssr/2026/12.%20f_distribution_ANOVA_one_way_independent/12.%20f_distribution_ANOVA_one_way_independent.slide.html#/t-test-anova-regression)
-  - [Effect size $d$](https://johnnydoorn.github.io/teaching-statistics/ssr/2026/12.%20f_distribution_ANOVA_one_way_independent/12.%20f_distribution_ANOVA_one_way_independent.slide.html#/effect-size-d)
 - Lecture 13
   - [Why don't the parts add up?](https://johnnydoorn.github.io/teaching-statistics/ssr/2026/13.%20ANCOVA/13.%20ANCOVA.slide.html#/why-dont-the-parts-add-up)
   - [Exam note: checking assumptions](https://johnnydoorn.github.io/teaching-statistics/ssr/2026/13.%20ANCOVA/13.%20ANCOVA.slide.html#/exam-note-checking-assumptions)
 
-## Practice in ANS {.smaller}
+## DSUJ in ANS {.smaller}
 
-- Practice tests in ANS, one per exam block
+- **Not required**, just extra practice
 - Exercises from the book (Smart Alex), as SSR exam questions
 - Do them as many times as you want
-- Not required, just practice
 - Made with help from an LLM, keeping as much human text as possible
   - Questions 77% human-written, model answers 84%
 - Examples of added text
@@ -63,6 +61,7 @@ With multiple predictor variables:
   - Plots!
   - F-value of interaction effect
   - Conditional post-hoc tests
+  - Simple main effects
 
 ## Next Time
 
