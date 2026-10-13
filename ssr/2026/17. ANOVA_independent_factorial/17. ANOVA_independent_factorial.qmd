@@ -3,6 +3,7 @@ title: "17. Factorial ANOVA"
 subtitle: "Independent factorial"
 author: "Johnny van Doorn"
 date: "13 October 2026"
+view: "https://teams.microsoft.com/meet/382505808448069?p=K4IITOzucHhtUXN3xV"
 footer: "Scientific & Statistical Reasoning"
 format:
   revealjs:

@@ -2,6 +2,7 @@
 title: "20. Non-parametric tests"
 author: "Johnny van Doorn"
 date: "20 October 2026"
+view: "https://teams.microsoft.com/meet/3565951642010668?p=4VNMHshQDv5l1r6W9c"
 footer: "Scientific & Statistical Reasoning"
 format:
   revealjs:

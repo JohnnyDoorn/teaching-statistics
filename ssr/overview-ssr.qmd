@@ -42,8 +42,8 @@ allLinks <- c(
    SimpleRegression = "https://statisticalreasoning-uva-2.shinyapps.io/SimpleRegression",
   NHST_Fdistribution = "https://statisticalreasoning-uva.shinyapps.io/NHST_Fdistribution",
   onewayANOVA        = "https://jvd-ssr-oneway-anova.share.connect.posit.cloud/",
-  ANCOVA             = "https://jvd-ssr-ancova.share.connect.posit.cloud/"
-  # factorialANOVA     = "https://jvd-ssr-factorial-anova.share.connect.posit.cloud/",
+  ANCOVA             = "https://jvd-ssr-ancova.share.connect.posit.cloud/",
+  factorialANOVA     = "https://jvd-ssr-factorial-anova.share.connect.posit.cloud/"
   # RM_ANOVA           = "https://jvd-ssr-rm-anova.share.connect.posit.cloud/",
   # MultiRegression    = "https://statisticalreasoning-uva-2.shinyapps.io/MultiRegression"
   
@@ -67,8 +67,8 @@ shownTexts <- c(
   "eff-size-vs-test-stat.html",   # lecture 6: statistical vs practical significance
   #"heteroscedasticity.html"       # lecture 9: linear model assumptions
   "violating-assumptions-anova.html",
-  "predicting-with-dummies-1-variable.html"
-  # "predicting-with-dummies-2-variables.html"
+  "predicting-with-dummies-1-variable.html",
+  "predicting-with-dummies-2-variables.html"
 )
 
 # Titles come from each text's own YAML front matter, so the table reads as
