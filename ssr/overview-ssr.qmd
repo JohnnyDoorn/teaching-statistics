@@ -142,12 +142,17 @@ externalSets <- list(
     Results = "https://johnnydoorn.github.io/teaching-statistics/datasets/anova_alcohol_speed_daytime.jasp",
     HTML    = "https://johnnydoorn.github.io/teaching-statistics/datasets/anova_alcohol_speed_daytime.html"
   ),
-  # Lecture 18: data only (no results files); one copy each in datasets/.
+  # Lecture 18: data in datasets/, worked results (2025) in datasets/2025/. The 2025 folder
+  # also has data-only .jasp files; Results links the -result.jasp with the analyses.
   "RM_ANOVA_Alcohol" = c(
-    Data    = "https://johnnydoorn.github.io/teaching-statistics/datasets/RM_ANOVA_Alcohol.csv"
+    Data    = "https://johnnydoorn.github.io/teaching-statistics/datasets/RM_ANOVA_Alcohol.csv",
+    Results = "https://johnnydoorn.github.io/teaching-statistics/datasets/2025/RM_ANOVA_Alcohol-result.jasp",
+    HTML    = "https://johnnydoorn.github.io/teaching-statistics/datasets/2025/RM_ANOVA_Alcohol.html"
   ),
   "RM_ANOVA_AlcoholSpeedTime" = c(
-    Data    = "https://johnnydoorn.github.io/teaching-statistics/datasets/RM_ANOVA_AlcoholSpeedTime.csv"
+    Data    = "https://johnnydoorn.github.io/teaching-statistics/datasets/RM_ANOVA_AlcoholSpeedTime.csv",
+    Results = "https://johnnydoorn.github.io/teaching-statistics/datasets/2025/RM_ANOVA_AlcoholSpeedTime-result.jasp",
+    HTML    = "https://johnnydoorn.github.io/teaching-statistics/datasets/2025/RM_ANOVA_AlcoholSpeedTime.html"
   ),
   # Lecture 18: the csv is in datasets/2026 under the new name; the results files (2024,
   # old column names) stay in datasets/ rather than being copied (8.5 MB).
