@@ -68,7 +68,7 @@ ssrTable(data, rownames = FALSE)
 ```
 ## Wide vs. long data formats
 
-<img src="../../images/Screenshot_LongWide.png" style="width:40%;"/>
+![](../../images/figure-4-5.png){width="400px"}
 
 
 ## General flow RM ANOVA {.smaller}

@@ -43,8 +43,8 @@ allLinks <- c(
   NHST_Fdistribution = "https://statisticalreasoning-uva.shinyapps.io/NHST_Fdistribution",
   onewayANOVA        = "https://jvd-ssr-oneway-anova.share.connect.posit.cloud/",
   ANCOVA             = "https://jvd-ssr-ancova.share.connect.posit.cloud/",
-  factorialANOVA     = "https://jvd-ssr-factorial-anova.share.connect.posit.cloud/"
-  # RM_ANOVA           = "https://jvd-ssr-rm-anova.share.connect.posit.cloud/",
+  factorialANOVA     = "https://jvd-ssr-factorial-anova.share.connect.posit.cloud/",
+  RM_ANOVA           = "https://jvd-ssr-rm-anova.share.connect.posit.cloud/"
   # MultiRegression    = "https://statisticalreasoning-uva-2.shinyapps.io/MultiRegression"
   
 )
@@ -148,6 +148,12 @@ externalSets <- list(
   ),
   "RM_ANOVA_AlcoholSpeedTime" = c(
     Data    = "https://johnnydoorn.github.io/teaching-statistics/datasets/RM_ANOVA_AlcoholSpeedTime.csv"
+  ),
+  # Lecture 18: the csv is in datasets/2026 under the new name; the results files (2024,
+  # old column names) stay in datasets/ rather than being copied (8.5 MB).
+  "equivalence-anova-t-test" = c(
+    Results = "https://johnnydoorn.github.io/teaching-statistics/datasets/equivalenceBetweenANOVA_and_TTest.jasp",
+    HTML    = "https://johnnydoorn.github.io/teaching-statistics/datasets/equivalenceBetweenANOVA_and_TTest.html"
   )
 )
 

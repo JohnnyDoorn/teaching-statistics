@@ -22,35 +22,33 @@ Same as one-way repeated measures ANOVA
 
 <small>
 
-In this example we will again look at the amount of accidents in a car driving simulator while subjects where given varying doses of speed and alcohol. But this time we lat participants partake in all conditions. Every week subjects returned for a different experimental condition.
+In this example we will again look at the amount of accidents in a car driving simulator while subjects were given varying doses of speed and alcohol. But this time we let participants partake in all conditions. Every week subjects returned for a different experimental condition.
 
 * Dependent variable
     * Accidents
 * Independent variables
     * Speed
         * None
-        * Small
-        * Large
+        * Some
+        * Much
     * Alcohol
         * None
-        * Small
-        * Large
+        * Some
+        * Much
         
 </small>
         
 ## {.smaller}
 
+Every participant is measured in every cell of the design
+
 person | 1_1 | 1_2 | 1_3 | 2_1 | 2_2 | 2_3 | 3_1 | 3_2 | 3_3
 -------|-----|-----|-----|-----|-----|-----|-----|-----|----
-1      | 1   |     |     |     |     |     |     |     |
-2      |     | 2   |     |     |     |     |     |     |
-3      |     |     | 3   |     |     |     |     |     |
-4      |     |     |     | 4   |     |     |     |     |
-5      |     |     |     |     | 5   |     |     |     |
-6      |     |     |     |     |     | 6   |     |     |
-7      |     |     |     |     |     |     | 7   |     |
-8      |     |     |     |     |     |     |     | 8   |
-9      |     |     |     |     |     |     |     |     | 9
+1      | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓
+2      | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓
+3      | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓
+⋮      | ⋮ | ⋮ | ⋮ | ⋮ | ⋮ | ⋮ | ⋮ | ⋮ | ⋮
+20     | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓
 
 ## Data {.smaller .scrollable}
 
@@ -64,4 +62,20 @@ data <- data[, -2]
 ssrTable(data, rownames = FALSE)
 ```
 
+## Balanced by design {.smaller}
+
+```{r rmfact-balanced-cells, echo=FALSE}
+# Participants with an observation in each alcohol x speed cell, counted from the data
+# above (RM ANOVA only uses participants with all observations).
+cellCols <- grep("_alc_", names(data), value = TRUE)
+counts <- matrix(colSums(!is.na(data[, cellCols])), nrow = 3, byrow = TRUE)
+knitr::kable(data.frame(`Alcohol / speed` = c("none", "some", "much"),
+                        none = counts[, 1], some = counts[, 2], much = counts[, 3],
+                        check.names = FALSE), align = "lccc")
+```
+
+- RM ANOVA only uses participants with all observations
+- So every cell holds the same people, always balanced
+    - Between-subjects groups (mixed design) can still differ in size
+- Balanced, so alcohol and speed are uncorrelated
 

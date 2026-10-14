@@ -89,6 +89,23 @@ In this example we will look at the amount of accidents in a car driving simulat
 ssrTable(data)
 ```
 
+<!-- Added 2026-10-14 for 2027 (not rendered: L17 2026 is taught). Same idea as lecture 18's
+     "Balanced by design" slide; the applet's association slider shows the unbalanced case. -->
+
+## Balanced by design {.smaller}
+
+```{r fact-balanced-cells, echo=FALSE}
+# Participants per alcohol x speed cell, counted from the data above.
+counts <- table(data$alcohol, data$speed)
+knitr::kable(data.frame(`Alcohol / speed` = c("none", "some", "much"),
+                        none = as.vector(counts[, 1]), some = as.vector(counts[, 2]), much = as.vector(counts[, 3]),
+                        check.names = FALSE), align = "lccc")
+```
+
+- Same number of participants in every cell
+- Balanced, so alcohol and speed are uncorrelated
+- Unbalanced? Try the applet's association slider
+
 ## SS full model {.smaller}
 
 | Variance | Sum of squares | df | Mean squares | F-ratio |
