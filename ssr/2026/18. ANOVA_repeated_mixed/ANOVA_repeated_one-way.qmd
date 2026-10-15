@@ -47,7 +47,7 @@ Where $n_i$ is the number of observations per person and $k$ is the number of co
 
 ## Example
 
-Measure driving ability in a driving simulator. Test in three consecutive conditions where participants come back to attend the next condition.
+Measure driving ability in a driving simulator. Test in three consecutive conditions where participants come back to attend the next condition.^[The slides use the first 5 participants, so the plots stay readable; the data file (and the JASP demonstration) has all 20.]
 
 * Alcohol none
 * Alcohol some
@@ -355,6 +355,42 @@ arrows(x0 = fStat, x1 = fStat, y0 = 0 , y1 = 0.6, col = "darkred", lwd = 2)
 text(x = fStat, y = 0.8, paste("F =", round(fStat, 2)), cex = 1.2)
 text(x = fStat, y = 0.7, paste("p-val < 0.001"), cex = 1.2)
 ```
+
+<!-- Added 2026-10-14 for 2027 (not rendered: L18 2026 is taught). After class three
+     students asked why the between-subjects "Residuals" are ignored; this slide maps the
+     hand calculations onto JASP's two tables. -->
+
+## As JASP shows it {.smaller}
+
+```{r rm-jasp-tables, echo=FALSE, results="asis"}
+local({
+  grand <- mean(longdata$accidents)
+  personMean    <- ave(longdata$accidents, longdata$pp)
+  conditionMean <- ave(longdata$accidents, longdata$alcohol)
+  nPart <- length(unique(longdata$pp)); kCond <- length(unique(longdata$alcohol))
+  ssTotal   <- sum((longdata$accidents - grand)^2)
+  ssBetween <- sum((personMean - grand)^2)
+  ssModel   <- sum((conditionMean - grand)^2)
+  ssResid   <- ssTotal - ssBetween - ssModel
+  dfModel <- kCond - 1; dfResid <- (nPart - 1) * (kCond - 1); dfBetween <- nPart - 1
+  fStat <- (ssModel / dfModel) / (ssResid / dfResid)
+  pVal  <- pf(fStat, dfModel, dfResid, lower.tail = FALSE)
+  f3 <- function(x) sprintf("%.3f", x)
+  cat("**Within Subjects Effects**\n\n")
+  print(knitr::kable(data.frame(Cases = c("alcohol", "Residuals"), `Sum of Squares` = f3(c(ssModel, ssResid)),
+                                df = c(dfModel, dfResid), `Mean Square` = f3(c(ssModel / dfModel, ssResid / dfResid)),
+                                F = c(f3(fStat), ""), p = c(if (pVal < 0.001) "< .001" else f3(pVal), ""),
+                                check.names = FALSE), align = "lrrrrr"))
+  cat("\n\n**Between Subjects Effects**\n\n")
+  print(knitr::kable(data.frame(Cases = "Residuals", `Sum of Squares` = f3(ssBetween), df = dfBetween,
+                                `Mean Square` = f3(ssBetween / dfBetween), F = "", p = "",
+                                check.names = FALSE), align = "lrrrrr"))
+  cat("\n\n*Note.* Type III Sum of Squares\n")
+})
+```
+
+- F for alcohol divides by the within-subjects residual
+- Between-subjects "Residuals" are the differences between participants, not used for F
 
 ## Contrast
 

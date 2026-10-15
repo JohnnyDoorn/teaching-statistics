@@ -163,9 +163,12 @@ print(f"dropped {len(drop)} extra masters, swept {removed} orphaned parts")
 ct = rd(W("[Content_Types].xml"))
 present = {os.path.relpath(os.path.join(dp, fn), WORK).replace(os.sep, "/")
            for dp, _, fns in os.walk(W("")) for fn in fns}
+# the layouts get fresh Overrides below; keeping an old one for the same part name listed it
+# twice (L12, L23 in Sept 2026), and PowerPoint then asks to repair the deck on every open
+new_layouts = {f"ppt/slideLayouts/slideLayout{i+1}.xml" for i in range(n)}
 def keep_override(tag):
     p = re.search(r'PartName="/([^"]+)"', tag)
-    return p and p.group(1) in present
+    return p and p.group(1) in present and p.group(1) not in new_layouts
 ct = "".join(t if not t.startswith("<Override") or keep_override(t) else ""
              for t in re.split(r'(<Override[^>]*/>)', ct))
 ct = ct.replace("</Types>", "".join(

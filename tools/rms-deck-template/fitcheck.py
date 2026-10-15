@@ -35,7 +35,8 @@ def runs_of(p):
 
 def unesc(t): return t.replace('&lt;', '<').replace('&gt;', '>').replace('&amp;', '&').replace('&quot;', '"').replace('&apos;', "'")
 
-def check_shape(b, default_sz):
+def measure_shape(b, default_sz):
+    """Layout estimate for one <p:sp>: dict with box size, inner size, widest line, total height."""
     g = re.search(r'<a:off x="(-?\d+)" y="(-?\d+)"/>\s*<a:ext cx="(\d+)" cy="(\d+)"/>', b)
     if not g or '<p:txBody>' not in b: return None
     cx, cy = int(g.group(3)) / EMU, int(g.group(4)) / EMU
@@ -74,12 +75,19 @@ def check_shape(b, default_sz):
         widest = max(widest, max(lines) + marL)
         line_h = psz * 1.2 * lnsp * (1 - lnred) / 72
         total_h += bef + line_h * (len(lines) if any(x[0].strip() for x in rs) else 1)
+    return dict(cx=cx, cy=cy, W=W, H=H, widest=widest, total_h=total_h, nowrap=nowrap, auto=auto, spauto=spauto,
+                filled=filled, text=' / '.join(x for x in text_all if x.strip())[:90], ins=(l, t, r, bt))
+
+def check_shape(b, default_sz):
+    m = measure_shape(b, default_sz)
+    if m is None: return None
+    W, H, widest, total_h, nowrap, auto, spauto, filled = (m[k] for k in ('W', 'H', 'widest', 'total_h', 'nowrap', 'auto', 'spauto', 'filled'))
     probs = []
     if nowrap and widest > W * 1.02: probs.append(f'line {widest:.2f}in > box {W:.2f}in (no wrap){" FILLED" if filled else ""}')
     if not nowrap and widest > W * 1.02: probs.append(f'word wider than box ({widest:.2f} > {W:.2f}in)')
     if not spauto and total_h > H * 1.04 and (filled or not auto): probs.append(f'text {total_h:.2f}in tall > box {H:.2f}in')
     if spauto and total_h > H * 1.15 and filled: probs.append(f'auto-fit box not regrown: text {total_h:.2f}in > {H:.2f}in FILLED')
-    return probs, ' / '.join(x for x in text_all if x.strip())[:90]
+    return probs, m['text']
 
 def main(path, only):
     z = zipfile.ZipFile(path)
