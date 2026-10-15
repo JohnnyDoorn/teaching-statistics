@@ -92,7 +92,7 @@ def inherited_xfrm(deck, slide_part, key):
     return None
 
 
-def shapes(deck, slide_part):
+def shapes(deck, slide_part, slide_no=0):
     """(name, box_pt, tokens, info) for every text shape, in z-order; info['z'] is the drawing
     order and deck.occluders[slide_part] lists (z, name, box) of opaque shapes and pictures."""
     root = deck.xml(slide_part)
@@ -126,7 +126,11 @@ def shapes(deck, slide_part):
             for p in tx.iter(q('a:p')):
                 for node in p.iter():
                     ln = etree.QName(node).localname
-                    if ln == 't' and node.text: toks += node.text.split()
+                    if ln == 'fld' and node.get('type') == 'slidenum':
+                        toks.append(str(slide_no)); continue      # cached text is '#' until PowerPoint saves
+                    if ln == 't' and node.text and not (etree.QName(node.getparent()).localname == 'fld'
+                                                       and node.getparent().get('type') == 'slidenum'):
+                        toks += node.text.split()
             toks = [t for t in toks if norm(t)]
             if not toks: continue
             xf = el.find(q('p:spPr') + '/' + q('a:xfrm'))
@@ -163,8 +167,8 @@ def covered(word, z, occ):
     return None
 
 
-def check_slide(deck, slide_part, pdf, page, tol, show_all=False):
-    shp, occ = shapes(deck, slide_part)
+def check_slide(deck, slide_part, pdf, page, tol, show_all=False, slide_no=0):
+    shp, occ = shapes(deck, slide_part, slide_no)
     words = [w for w in pdf_words(pdf, page) if norm(w[0])]
     a = [(norm(t), i) for i, s in enumerate(shp) for t in s[2]]
     b = [norm(w[0]) for w in words]
@@ -226,7 +230,7 @@ def main(argv):
         if deck.xml(part).get('show') == '0': continue
         page += 1
         if only and n not in only: continue
-        issues, shp, ext = check_slide(deck, part, pdf, page, tol, show_all)
+        issues, shp, ext = check_slide(deck, part, pdf, page, tol, show_all, n)
         for kind, name, what, txt, box, tb in issues:
             print(f'slide {n:2d} {kind} {name:22s} {what}' + (f' | {txt}' if txt else ''))
         total += len(issues)
