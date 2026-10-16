@@ -1,0 +1,117 @@
+{
+ "EXAMPLE discoverjasp Smart Alex 9.1-9.2 - spider anxiety (paired t-test)": {
+  "route": "qti21",
+  "parts": 5,
+  "points": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "model_answer": [
+   "We have 12 arachnophobes who were",
+   "In words, the hypotheses are as",
+   null,
+   "The two-tailed probability for the spider",
+   "The output also contains a 95%"
+  ],
+  "leak_check": [
+   "We have 12 arachnophobes who were",
+   "In words, the hypotheses are as",
+   "The test statistic, t, is calculated",
+   "The two-tailed probability for the spider",
+   "The output also contains a 95%"
+  ],
+  "feedback": [
+   null,
+   null,
+   "The test statistic, t, is calculated",
+   null,
+   null
+  ],
+  "attachments": [],
+  "images": []
+ },
+ "EXAMPLE discoverjasp Smart Alex 9.5-9.6 - pets and life satisfaction (t-test and linear model)": {
+  "route": "qti21",
+  "parts": 5,
+  "points": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "model_answer": [
+   null,
+   "H0: mu1 = mu2. The null",
+   null,
+   null,
+   "Compare this output with the one"
+  ],
+  "leak_check": [
+   "On average, the life satisfaction of",
+   "H0: mu1 = mu2. The null",
+   "On average, the life satisfaction of",
+   "In the Coefficients table, the intercept",
+   "Compare this output with the one"
+  ],
+  "feedback": [
+   "On average, the life satisfaction of",
+   null,
+   "On average, the life satisfaction of",
+   "In the Coefficients table, the intercept",
+   null
+  ],
+  "attachments": [],
+  "images": []
+ },
+ "EXAMPLE discoverjasp Smart Alex 9.9 - backward messages (paired t-test)": {
+  "route": "qti21",
+  "parts": 2,
+  "points": [
+   1.0,
+   3.0
+  ],
+  "model_answer": [
+   "Fewer goats were sacrificed after hearing",
+   "The test statistic quantifies the difference"
+  ],
+  "leak_check": [
+   "Fewer goats were sacrificed after hearing",
+   "The test statistic quantifies the difference"
+  ],
+  "criteria": [
+   [],
+   [
+    [
+     0.5,
+     "test statistic, mentioning difference be"
+    ],
+    [
+     0.5,
+     "test statistic, mentioning standardizati"
+    ],
+    [
+     0.5,
+     "p-value, for if the null hypothesis is t"
+    ],
+    [
+     0.5,
+     "p-value, probability of test statistic o"
+    ],
+    [
+     0.5,
+     "decision, rejecting the null hypothesis,"
+    ],
+    [
+     0.5,
+     "decision, two-sided test"
+    ]
+   ]
+  ],
+  "attachments": [],
+  "images": []
+ }
+}

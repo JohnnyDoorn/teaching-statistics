@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>EXAMPLES (preview)</title>
+<meta charset="utf-8" />
+<style type="text/css">
+body { font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; max-width: 52rem;
+       margin: 2rem auto; padding: 0 1rem; line-height: 1.5; color: #222; }
+h2 { color: #BC0031; margin-bottom: 0.2rem; }
+.intro { color: #555; margin-top: 0; }
+.item { margin: 2.2rem 0 0.4rem; padding: 0.45rem 0.8rem; background: #f5f5f5;
+        border-left: 4px solid #BC0031; font-size: 0.95rem; }
+.item .title { font-weight: 600; }
+h4 { margin: 0.9rem 0 0.3rem; }
+table { border-collapse: collapse; } td, th { border: 1px solid #ccc; padding: 2px 8px; }
+pre { background: #f5f5f5; padding: 0.5rem 0.8rem; overflow-x: auto; }
+</style>
+<script type="text/javascript"   src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
+</head>
+<body>
+<h2>EXAMPLES</h2>
+<p class="intro">Preview of the package: every numbered item is one question in ANS, with its solution (the model answer) below it. In choice questions the True/False list marks the key, in the option order the package fixes.</p>
+<ol>
+<li>
+<div class="item"><span class="title">EXAMPLE discoverjasp Smart Alex 9.1-9.2 - spider anxiety (paired t-test)</span><br/>Exercise 1, part 1 of 5 &middot; single choice &middot; 1 point &middot; 1-spider-a-test.qmd</div>
+<h4>Question</h4>
+<p>Is arachnophobia (fear of spiders) specific to real spiders or will pictures of spiders evoke similar levels of anxiety? Twelve arachnophobes were asked to play with a big hairy tarantula with big fangs and an evil look in its eight eyes and at a different point in time were shown only pictures of the same spider. The participants’ anxiety was measured in each case.</p>
+<p><a href="https://discoverjasp.com/repository/dsj1_data/data/big_hairy_spider.jasp">Download the data</a>. The data set contains three variables:</p>
+<ul>
+<li><strong>id</strong> - participant name</li>
+<li><strong>picture</strong> - anxiety after the picture of the spider</li>
+<li><strong>real</strong> - anxiety after the real spider</li>
+</ul>
+<p>Every person is measured once with the picture, and once with the real spider.</p>
+<p>What is the appropriate statistical test to find out whether anxiety is higher for real spiders than pictures?</p>
+<br/>
+<ol type="a">
+<li>
+Paired samples t-test
+</li>
+<li>
+Independent samples t-test
+</li>
+<li>
+One sample t-test
+</li>
+</ol>
+<br/>
+<h4>Solution</h4>
+<p>We have 12 arachnophobes who were exposed to a picture of a spider (picture) and on a separate occasion a real live tarantula (real). Their anxiety was measured in each condition (half of the participants were exposed to the picture before the real spider while the other half were exposed to the real spider first). The same participants were used in both conditions, so the paired samples t-test.</p>
+<p>DSUJ §9.9, p. 384; §9.10, p. 388. discoverjasp: <a href="https://discoverjasp.com/pages/smart_alex.html#task-9.1">Task 9.1</a>, <a href="https://discoverjasp.com/repository/dsj1_alex/alex_09_01-02.html">results</a>.</p>
+<br/>
+<ol type="a">
+<li>
+True.
+</li>
+<li>
+False.
+</li>
+<li>
+False.
+</li>
+</ol>
+<br/>
+</li>
+<li>
+<div class="item"><span class="title">EXAMPLE discoverjasp Smart Alex 9.1-9.2 - spider anxiety (paired t-test)</span><br/>Exercise 1, part 2 of 5 &middot; tick-all (multiple response) &middot; 1 point &middot; 1-spider-b-hypotheses.qmd</div>
+<h4>Question</h4>
+<p>Before we continue with the t-test, it is useful to first clarify the hypotheses for yourself. What is the correct formulation of the null hypothesis and alternative hypothesis? Check the statement(s) that is/are true; at least one statement is true.</p>
+<br/>
+<ol type="a">
+<li>
+Null hypothesis: There is no difference between the anxiety of arachnophobes for the picture and for the real spider.
+</li>
+<li>
+Alternative hypothesis: There is a difference between the anxiety of arachnophobes for the picture and for the real spider.
+</li>
+<li>
+Alternative hypothesis: There is no difference between the anxiety of arachnophobes for the picture and for the real spider.
+</li>
+<li>
+Null hypothesis: There is a difference between the anxiety of arachnophobes for the picture and for the real spider.
+</li>
+</ol>
+<br/>
+<h4>Solution</h4>
+<p>In words, the hypotheses are as follows: Null hypothesis: There is no difference between the anxiety of arachnophobes for the picture and for the real spider. Alternative hypothesis: There is a difference between the anxiety of arachnophobes for the picture and for the real spider.</p>
+<p>DSUJ §2.10.2, p. 84. discoverjasp: <a href="https://discoverjasp.com/pages/smart_alex.html#task-9.1">Task 9.1</a>.</p>
+<br/>
+<ol type="a">
+<li>
+True.
+</li>
+<li>
+True.
+</li>
+<li>
+False.
+</li>
+<li>
+False.
+</li>
+</ol>
+<br/>
+</li>
+<li>
+<div class="item"><span class="title">EXAMPLE discoverjasp Smart Alex 9.1-9.2 - spider anxiety (paired t-test)</span><br/>Exercise 1, part 3 of 5 &middot; 2 gaps &middot; 1 point &middot; 1-spider-c-t.qmd</div>
+<h4>Question</h4>
+<p>Test in JASP whether there is a difference between the mean anxiety for the picture and the mean anxiety for the real spider, with picture as the first and real as the second measure (<a href="https://jasp-stats.github.io/jasp-video-library/All_T-Tests.html#paired-all">how to</a>). What is the calculated t-value? Round to two decimal places.</p>
+<p>t-value: </p>
+<p>Degrees of freedom: </p>
+<br/>
+<ol type="a">
+</ol>
+<br/>
+<h4>Solution</h4>
+<p>The test statistic, t, is calculated by dividing the mean of differences by the standard error of differences (t = -7/2.8311 = -2.47). The size of t is compared against known values (under the null hypothesis) based on the degrees of freedom. When the same participants have been used, the degrees of freedom are the sample size minus 1 (df = N - 1 = 11).</p>
+<p>(With real as the first measure, t = 2.47; that counts as correct too.)</p>
+<p>DSUJ §9.9, p. 384. discoverjasp: <a href="https://discoverjasp.com/pages/smart_alex.html#task-9.1">Task 9.1</a>, <a href="https://discoverjasp.com/repository/dsj1_alex/alex_09_01-02.html">results</a>.</p>
+<br/>
+</li>
+<li>
+<div class="item"><span class="title">EXAMPLE discoverjasp Smart Alex 9.1-9.2 - spider anxiety (paired t-test)</span><br/>Exercise 1, part 4 of 5 &middot; single choice &middot; 1 point &middot; 1-spider-d-direction.qmd</div>
+<h4>Question</h4>
+<p>Is anxiety indeed higher for real spiders than for pictures? Use alpha = 0.05.</p>
+<br/>
+<ol type="a">
+<li>
+No, there is no significant difference between the picture and the real spider.
+</li>
+<li>
+No, the picture led to significantly greater anxiety than the real spider.
+</li>
+<li>
+Yes, the real spider led to significantly greater anxiety than the picture.
+</li>
+</ol>
+<br/>
+<h4>Solution</h4>
+<p>The two-tailed probability for the spider data is very low (p = 0.031) and significant because 0.031 is smaller than the widely-used criterion of 0.05. The fact that the t-value is a negative number tells us that the first condition (the picture condition) had a smaller mean than the second (the real condition) and so the real spider led to greater anxiety than the picture. Therefore, we can conclude that exposure to a real spider caused significantly more reported anxiety in arachnophobes than exposure to a picture, t(11) = -2.47, p = .031.</p>
+<p>On average, participants experienced significantly greater anxiety with real spiders (M = 47.00, SE = 3.18) than with pictures of spiders (M = 40.00, SE = 2.68).</p>
+<p>DSUJ §9.9, p. 384; §9.11, p. 390. discoverjasp: <a href="https://discoverjasp.com/pages/smart_alex.html#task-9.1">Task 9.1</a>, <a href="https://discoverjasp.com/repository/dsj1_alex/alex_09_01-02.html">results</a>.</p>
+<br/>
+<ol type="a">
+<li>
+False.
+</li>
+<li>
+False.
+</li>
+<li>
+True.
+</li>
+</ol>
+<br/>
+</li>
+<li>
+<div class="item"><span class="title">EXAMPLE discoverjasp Smart Alex 9.1-9.2 - spider anxiety (paired t-test)</span><br/>Exercise 1, part 5 of 5 &middot; tick-all (multiple response) &middot; 1 point &middot; 1-spider-e-statements.qmd</div>
+<h4>Question</h4>
+<p>In the t-test, also ask for the bar plots (with 95% confidence intervals as error bars), and look at the confidence interval for the mean difference in the t-test table. Use alpha = 0.05. Check the statement(s) that is/are true; at least one statement is true.</p>
+<br/>
+<ol type="a">
+<li>
+The error bars of the two conditions overlap, so the difference between pictures and real spiders is not significant.
+</li>
+<li>
+Assuming that this sample’s confidence interval is one of the 95 out of 100 that contains the population value, we can say that the true mean difference lies between -13.23 and -0.77.
+</li>
+<li>
+The confidence interval for the mean difference does not contain zero, which tells us that the true value of the mean difference is unlikely to be zero.
+</li>
+</ol>
+<br/>
+<h4>Solution</h4>
+<p>The output also contains a 95% confidence interval for the mean difference. Assuming that this sample’s confidence interval is one of the 95 out of 100 that contains the population value, we can say that the true mean difference lies between -13.231 and -0.769. The importance of this interval is that it does not contain zero (i.e., both limits are negative) because this tells us that the true value of the mean difference is unlikely to be zero.</p>
+<p>The error bars slightly overlap, which is a reminder that we cannot use overlap of confidence intervals to conclude whether there is a significant group difference, and it’s much more accurate to instead look at the confidence interval for the difference scores when we are working with a within-subjects design.</p>
+<p>DSUJ §9.9, p. 384. discoverjasp: <a href="https://discoverjasp.com/pages/smart_alex.html#task-9.1">Task 9.1</a>, <a href="https://discoverjasp.com/pages/smart_alex.html#task-9.2">Task 9.2</a>, <a href="https://discoverjasp.com/repository/dsj1_alex/alex_09_01-02.html">results</a>.</p>
+<br/>
+<ol type="a">
+<li>
+False.
+</li>
+<li>
+True.
+</li>
+<li>
+True.
+</li>
+</ol>
+<br/>
+</li>
+<li>
+<div class="item"><span class="title">EXAMPLE discoverjasp Smart Alex 9.5-9.6 - pets and life satisfaction (t-test and linear model)</span><br/>Exercise 2, part 1 of 5 &middot; 2 gaps &middot; 1 point &middot; 2-pets-a-means.qmd</div>
+<h4>Question</h4>
+<p>A researcher collected data from people who had fish or cats as pets and measured their life satisfaction as well as how much they like animals. Does life satisfaction depend upon the type of pet a person has?</p>
+<p><a href="https://discoverjasp.com/repository/dsj1_data/data/pets.jasp">Download the data</a>. The data set contains three variables:</p>
+<ul>
+<li><strong>pet</strong>: Fish or Cat - independent variable</li>
+<li><strong>animal</strong> - how much the person likes animals (not used here)</li>
+<li><strong>life_satisfaction</strong> - dependent variable</li>
+</ul>
+<p>Each independent variable is measured between subjects.</p>
+<p>What are the observed group means for each condition? Round to two decimals.</p>
+<p>Fish: </p>
+<p>Cat: </p>
+<br/>
+<ol type="a">
+</ol>
+<br/>
+<h4>Solution</h4>
+<p>On average, the life satisfaction of cat owners (M = 60.13, SE = 3.93) was higher than that of people who had fish as pets (M = 38.17, SE = 4.48).</p>
+<p>DSUJ §9.8, p. 380. discoverjasp: <a href="https://discoverjasp.com/pages/smart_alex.html#task-9.5">Task 9.5</a>, <a href="https://discoverjasp.com/repository/dsj1_alex/alex_09_05-06.html">results</a>.</p>
+<br/>
+</li>
+<li>
+<div class="item"><span class="title">EXAMPLE discoverjasp Smart Alex 9.5-9.6 - pets and life satisfaction (t-test and linear model)</span><br/>Exercise 2, part 2 of 5 &middot; tick-all (multiple response) &middot; 1 point &middot; 2-pets-b-hypotheses.qmd</div>
+<h4>Question</h4>
+<p>Which of the following statements is correct with respect to H0 and Ha? μ stands for population mean. Check the statement(s) that is/are true; at least one statement is true.</p>
+<br/>
+<ol type="a">
+<li>
+H0: μ1 = μ2
+</li>
+<li>
+Ha: μ1 &gt; μ2
+</li>
+<li>
+Ha: μ1 ≠ μ2
+</li>
+<li>
+H0: μ1 ≠ μ2
+</li>
+</ol>
+<br/>
+<h4>Solution</h4>
+<p>H0: mu1 = mu2. The null hypothesis is that there is no difference. The means of both groups in the population will in that case be equal to each other.</p>
+<p>Ha: mu1 != mu2. The alternative hypothesis states that the means do differ. A two-tailed test is performed, because you have no expectation about the direction of a possible difference between the means.</p>
+<p>DSUJ §2.10.2, p. 84; §2.10.6, p. 93. discoverjasp: <a href="https://discoverjasp.com/pages/smart_alex.html#task-9.5">Task 9.5</a>.</p>
+<br/>
+<ol type="a">
+<li>
+True.
+</li>
+<li>
+False.
+</li>
+<li>
+True.
+</li>
+<li>
+False.
+</li>
+</ol>
+<br/>
+</li>
+<li>
+<div class="item"><span class="title">EXAMPLE discoverjasp Smart Alex 9.5-9.6 - pets and life satisfaction (t-test and linear model)</span><br/>Exercise 2, part 3 of 5 &middot; 2 gaps &middot; 1 point &middot; 2-pets-c-welch.qmd</div>
+<h4>Question</h4>
+<p>Conduct a t-test to see whether life satisfaction depends upon the type of pet a person has. Use the Welch version of the t-test, for more robustness against possible unequal variances. What is the calculated t-value? Round to two decimal places.</p>
+<p>t-value: </p>
+<p>Degrees of freedom: </p>
+<br/>
+<ol type="a">
+</ol>
+<br/>
+<h4>Solution</h4>
+<p>On average, the life satisfaction of cat owners (M = 60.13, SE = 3.93) was significantly higher than that of people who had fish as pets (M = 38.17, SE = 4.48), t(17.84) = -3.69, p = 0.002, d = -1.63 [-2.65, -0.57]. Note that I report the results of the Welch version of the t-test, as recommended in the book, to have more robustness against possible unequal variances.</p>
+<p>(With the groups the other way around, t = 3.69; that counts as correct too.)</p>
+<p>DSUJ §9.8, p. 380. discoverjasp: <a href="https://discoverjasp.com/pages/smart_alex.html#task-9.5">Task 9.5</a>, <a href="https://discoverjasp.com/repository/dsj1_alex/alex_09_05-06.html">results</a>.</p>
+<br/>
+</li>
+<li>
+<div class="item"><span class="title">EXAMPLE discoverjasp Smart Alex 9.5-9.6 - pets and life satisfaction (t-test and linear model)</span><br/>Exercise 2, part 4 of 5 &middot; one numeric gap &middot; 1 point &middot; 2-pets-d-prediction.qmd</div>
+<h4>Question</h4>
+<p>Fit a linear model to the data to see whether life satisfaction is significantly predicted from the type of animal (<a href="https://jasp-stats.github.io/jasp-video-library/All_Regression.html#main-analysis-single-predictor">how to</a>). What does this regression model predict for a cat owner? Use two decimals.</p>
+<br/>
+<ol type="a">
+<li>
+Predicted life satisfaction:
+</li>
+</ol>
+<br/>
+<h4>Solution</h4>
+<p>In the Coefficients table, the intercept is 38.17 (the mean of the fish group, the reference category) and b for pet (Cat) is 21.96, the difference between the two group means. So the prediction for a cat owner is 38.17 + 21.96 = 60.13, the mean of the cat group.</p>
+<p>DSUJ §9.4, p. 371. discoverjasp: <a href="https://discoverjasp.com/pages/smart_alex.html#task-9.6">Task 9.6</a>, <a href="https://discoverjasp.com/repository/dsj1_alex/alex_09_05-06.html">results</a>.</p>
+<br/>
+</li>
+<li>
+<div class="item"><span class="title">EXAMPLE discoverjasp Smart Alex 9.5-9.6 - pets and life satisfaction (t-test and linear model)</span><br/>Exercise 2, part 5 of 5 &middot; tick-all (multiple response) &middot; 1 point &middot; 2-pets-e-statements.qmd</div>
+<h4>Question</h4>
+<p>What do you notice about the t-value and significance in this model compared to the t-tests? Check the statement(s) that is/are true; at least one statement is true.</p>
+<br/>
+<ol type="a">
+<li>
+The sign of t merely reflects which way around you coded the fish and cat groups.
+</li>
+<li>
+The b for pet (Cat) is the mean life satisfaction of cat owners.
+</li>
+<li>
+If we would have used the Student t-test, the results would be identical.
+</li>
+<li>
+The linear model gives the same t-value as Welch’s t-test.
+</li>
+</ol>
+<br/>
+<h4>Solution</h4>
+<p>Compare this output with the one from the t-test: the values of t and p are almost the same. If we would have used the Student t-test, the results would be identical (t = 3.45, p = 0.003). (Technically, t is different because for the linear model it is a positive value and for the t-test it is negative. However, the sign of t merely reflects which way around you coded the fish and cat groups. The linear model, by default, has coded the groups the opposite way around to the t-test.) The main point is that whether you run these data through the regression or t-test menus, the results are identical (if you give up the robustness to unequal variances, which does not exist in normal regression).</p>
+<p>The b for pet (Cat), 21.96, is the difference between the two group means, not the mean of the cat owners.</p>
+<p>DSUJ §9.4, p. 371. discoverjasp: <a href="https://discoverjasp.com/pages/smart_alex.html#task-9.6">Task 9.6</a>, <a href="https://discoverjasp.com/repository/dsj1_alex/alex_09_05-06.html">results</a>.</p>
+<br/>
+<ol type="a">
+<li>
+True.
+</li>
+<li>
+False.
+</li>
+<li>
+True.
+</li>
+<li>
+False.
+</li>
+</ol>
+<br/>
+</li>
+<li>
+<div class="item"><span class="title">EXAMPLE discoverjasp Smart Alex 9.9 - backward messages (paired t-test)</span><br/>Exercise 3, part 1 of 2 &middot; single choice &middot; 1 point &middot; 3-darklord-a-report.qmd</div>
+<h4>Question</h4>
+<p>Both Ozzy Osbourne and Judas Priest have been accused of putting backward masked messages on their albums that subliminally influence poor unsuspecting teenagers into doing Very Bad things. A psychologist was interested in whether backward masked messages could have an effect. He created a version of Taylor Swift’s ‘Shake it Off’ that contained the masked message ‘deliver your soul to the dark lord’ repeated in the chorus. He took this version, and the original, and played one version (randomly) to a group of 32 veterinary students. Six months later he played them whatever version they hadn’t heard the time before. So each student heard both the original and the version with the masked message, but at different points in time. The psychologist measured the number of goats that the students sacrificed in the week after listening to each version.</p>
+<p><a href="https://discoverjasp.com/repository/dsj1_data/data/dark_lord.jasp">Download the data</a>. The data set contains three variables:</p>
+<ul>
+<li><strong>id</strong> - participant code</li>
+<li><strong>message</strong> - number of goats sacrificed after the version with the masked message</li>
+<li><strong>nomessage</strong> - number of goats sacrificed after the normal version</li>
+</ul>
+<p>Every person is measured once after each version of the song.</p>
+<p>Analyze whether the type of music you hear influences goat sacrificing, using a paired-samples t-test with message as the first measure (<a href="https://jasp-stats.github.io/jasp-video-library/All_T-Tests.html#paired-all">how to</a>). Use alpha = 0.05. What is the correct way to report the test results?</p>
+<br/>
+<ol type="a">
+<li>
+Fewer goats were sacrificed after hearing the backward message (M = 9.16, SE = 3.55), than after hearing the normal version of the song (M = 11.50, SE = 4.38). This difference, -2.34, 95% CI [-4.07, -0.61], was significant, t(31) = -2.76, p = 0.010.
+</li>
+<li>
+Fewer goats were sacrificed after hearing the backward message (M = 9.16, SE = 0.63), than after hearing the normal version of the song (M = 11.50, SE = 0.78). This difference, -2.34, 95% CI [-4.07, -0.61], was significant, t(31) = -2.76, p = 0.010.
+</li>
+<li>
+More goats were sacrificed after hearing the backward message (M = 9.16, SE = 0.63), than after hearing the normal version of the song (M = 11.50, SE = 0.78). This difference, -2.34, 95% CI [-4.07, -0.61], was significant, t(31) = -2.76, p = 0.010.
+</li>
+<li>
+Fewer goats were sacrificed after hearing the backward message (M = 9.16, SE = 0.63), than after hearing the normal version of the song (M = 11.50, SE = 0.78). This difference, -2.34, 95% CI [-4.07, -0.61], was significant, t(62) = -2.76, p = 0.010.
+</li>
+</ol>
+<br/>
+<h4>Solution</h4>
+<p>Fewer goats were sacrificed after hearing the backward message (M = 9.16, SE = 0.63), than after hearing the normal version of the song (M = 11.50, SE = 0.78). This difference, -2.34, 95% CI [-4.07, -0.61], was significant, t(31) = -2.76, p = 0.010.</p>
+<p>The confidence interval does not cross zero suggesting (if we assume that it is one of the 95% of confidence intervals that contain the true value) that the effect in the population is unlikely to be zero. The other options have the wrong degrees of freedom (the same 32 students heard both versions, so df = N - 1 = 31), the standard deviations instead of the standard errors (3.55 and 4.38), or the direction flipped.</p>
+<p>DSUJ §9.11, p. 390. discoverjasp: <a href="https://discoverjasp.com/pages/smart_alex.html#task-9.9">Task 9.9</a>, <a href="https://discoverjasp.com/repository/dsj1_alex/alex_09_09.html">results</a>.</p>
+<br/>
+<ol type="a">
+<li>
+False.
+</li>
+<li>
+True.
+</li>
+<li>
+False.
+</li>
+<li>
+False.
+</li>
+</ol>
+<br/>
+</li>
+<li>
+<div class="item"><span class="title">EXAMPLE discoverjasp Smart Alex 9.9 - backward messages (paired t-test)</span><br/>Exercise 3, part 2 of 2 &middot; open question &middot; 3 points &middot; 3-darklord-b-essay.qmd</div>
+<h4>Question</h4>
+<p>Based on the t-test output and alpha of 0.05, interpret the output for the researchers, and what this means for their null/alternative hypothesis (1 point). Explain in your own words what the test statistic (1 point) and p-value (1 point) mean and how they inform the decision making process.</p>
+<p><strong>Max 150 words.</strong></p>
+<br/>
+<h4>Solution</h4>
+<p>The test statistic quantifies the difference between what the null hypothesis posits, and the observed data. The test statistic is standardized, so that it moves away from the measurement scale and follows the t-distribution. The p-value is the probability of the observed test statistic, or more extreme, if the null hypothesis would be true. Here, the alternative hypothesis is two-sided, “or more extreme” means higher and lower t-statistics, which results in a p-value of 0.010, which is significant for alpha of 0.05. We therefore reject the null hypothesis and conclude that fewer goats were sacrificed after hearing the backward message (M = 9.16, SE = 0.63), than after hearing the normal version of the song (M = 11.50, SE = 0.78), t(31) = -2.76, p = 0.010.</p>
+<p>DSUJ §2.10.5, p. 92; §2.10.6, p. 93; §9.9, p. 384. discoverjasp: <a href="https://discoverjasp.com/pages/smart_alex.html#task-9.9">Task 9.9</a>, <a href="https://discoverjasp.com/repository/dsj1_alex/alex_09_09.html">results</a>.</p>
+<p><strong>Criteria</strong></p>
+<ul>
+<li>0.5 pt: test statistic, mentioning difference between data and model (or any version of that)</li>
+<li>0.5 pt: test statistic, mentioning standardization and/or sampling distribution</li>
+<li>0.5 pt: p-value, for if the null hypothesis is true</li>
+<li>0.5 pt: p-value, probability of test statistic or more extreme</li>
+<li>0.5 pt: decision, rejecting the null hypothesis, fewer goats sacrificed after the backward message</li>
+<li>0.5 pt: decision, two-sided test</li>
+</ul>
+<br/>
+</li>
+</ol>
+</body>
+</html>

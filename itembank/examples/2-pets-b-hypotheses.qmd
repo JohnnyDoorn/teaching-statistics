@@ -1,0 +1,39 @@
+```{r}
+#| include: false
+# Exercise 2, part b: tick-all with symbols typed as plain Unicode (μ, ≠).
+```
+
+Question
+========
+Which of the following statements is correct with respect to H0 and Ha? μ stands for population mean. Check the statement(s) that is/are true; at least one statement is true.
+
+Answerlist
+----------
+* H0: μ1 = μ2
+* Ha: μ1 ≠ μ2
+* H0: μ1 ≠ μ2
+* Ha: μ1 > μ2
+
+Solution
+========
+H0: mu1 = mu2. The null hypothesis is that there is no difference. The means of both groups in the population will in that case be equal to each other.
+
+Ha: mu1 != mu2. The alternative hypothesis states that the means do differ. A two-tailed test is performed, because you have no expectation about the direction of a possible difference between the means.
+
+DSUJ §2.10.2, p. 84; §2.10.6, p. 93. discoverjasp: [Task 9.5](https://discoverjasp.com/pages/smart_alex.html#task-9.5).
+
+Answerlist
+----------
+* True.
+* True.
+* False.
+* False.
+
+Meta-information
+================
+exname: dsj-09-pets-b-hypotheses
+extype: mchoice
+exsolution: 1100
+exshuffle: TRUE
+exextra[exercise]: dsj-09-pets
+exextra[anstitle]: discoverjasp Smart Alex 9.5-9.6 - pets and life satisfaction (t-test and linear model)

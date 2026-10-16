@@ -1,0 +1,17 @@
+# Renders only the two readmes. The question files in examples/ are R/exams sources:
+# tools/build-ans.R builds them, Quarto should not.
+project:
+  type: default
+  lib-dir: site_libs      # one shared copy of the page libraries, not one per page
+  render:
+    - README.qmd
+    - ans-agent-instructions.qmd
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 3
+    smooth-scroll: true
+    link-external-newwindow: true
+    linkcolor: '#BC0031'

@@ -1,0 +1,39 @@
+```{r}
+#| include: false
+# Exercise 1, part e: tick-all again. ANS scores each true statement +1/k and each
+# false one -1/(n-k), so ticking a false statement costs points.
+```
+
+Question
+========
+In the t-test, also ask for the bar plots (with 95% confidence intervals as error bars), and look at the confidence interval for the mean difference in the t-test table. Use alpha = 0.05. Check the statement(s) that is/are true; at least one statement is true.
+
+Answerlist
+----------
+* Assuming that this sample's confidence interval is one of the 95 out of 100 that contains the population value, we can say that the true mean difference lies between -13.23 and -0.77.
+* The confidence interval for the mean difference does not contain zero, which tells us that the true value of the mean difference is unlikely to be zero.
+* The error bars of the two conditions overlap, so the difference between pictures and real spiders is not significant.
+
+Solution
+========
+The output also contains a 95% confidence interval for the mean difference. Assuming that this sample's confidence interval is one of the 95 out of 100 that contains the population value, we can say that the true mean difference lies between -13.231 and -0.769. The importance of this interval is that it does not contain zero (i.e., both limits are negative) because this tells us that the true value of the mean difference is unlikely to be zero.
+
+The error bars slightly overlap, which is a reminder that we cannot use overlap of confidence intervals to conclude whether there is a significant group difference, and it's much more accurate to instead look at the confidence interval for the difference scores when we are working with a within-subjects design.
+
+
+DSUJ §9.9, p. 384. discoverjasp: [Task 9.1](https://discoverjasp.com/pages/smart_alex.html#task-9.1), [Task 9.2](https://discoverjasp.com/pages/smart_alex.html#task-9.2), [results](https://discoverjasp.com/repository/dsj1_alex/alex_09_01-02.html).
+
+Answerlist
+----------
+* True.
+* True.
+* False.
+
+Meta-information
+================
+exname: dsj-09-spider-e-statements
+extype: mchoice
+exsolution: 110
+exshuffle: TRUE
+exextra[exercise]: dsj-09-spider
+exextra[anstitle]: discoverjasp Smart Alex 9.1-9.2 - spider anxiety (paired t-test)

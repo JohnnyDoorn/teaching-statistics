@@ -1,0 +1,40 @@
+```{r}
+#| include: false
+# Exercise 3, part b: an open question (extype: string plus exstringtype: essay).
+# The **Criteria** list at the end of the solution becomes ANS's grading criteria;
+# the points must add up to expoints, or the builder stops.
+```
+
+Question
+========
+Based on the t-test output and alpha of 0.05, interpret the output for the researchers, and what this means for their null/alternative hypothesis (1 point). Explain in your own words what the test statistic (1 point) and p-value (1 point) mean and how they inform the decision making process.
+
+**Max 150 words.**
+
+Solution
+========
+The test statistic quantifies the difference between what the null hypothesis posits, and the observed data. The test statistic is standardized, so that it moves away from the measurement scale and follows the t-distribution. The p-value is the probability of the observed test statistic, or more extreme, if the null hypothesis would be true. Here, the alternative hypothesis is two-sided, "or more extreme" means higher and lower t-statistics, which results in a p-value of 0.010, which is significant for alpha of 0.05. We therefore reject the null hypothesis and conclude that fewer goats were sacrificed after hearing the backward message (M = 9.16, SE = 0.63), than after hearing the normal version of the song (M = 11.50, SE = 0.78), t(31) = -2.76, p = 0.010.
+
+DSUJ §2.10.5, p. 92; §2.10.6, p. 93; §9.9, p. 384. discoverjasp: [Task 9.9](https://discoverjasp.com/pages/smart_alex.html#task-9.9), [results](https://discoverjasp.com/repository/dsj1_alex/alex_09_09.html).
+
+**Criteria**
+
+- 0.5 pt: test statistic, mentioning difference between data and model (or any version of that)
+- 0.5 pt: test statistic, mentioning standardization and/or sampling distribution
+- 0.5 pt: p-value, for if the null hypothesis is true
+- 0.5 pt: p-value, probability of test statistic or more extreme
+- 0.5 pt: decision, rejecting the null hypothesis, fewer goats sacrificed after the backward message
+- 0.5 pt: decision, two-sided test
+
+Meta-information
+================
+exname: dsj-09-darklord-b-essay
+extype: string
+exstringtype: essay
+exsolution: nil
+expoints: 3
+exextra[essay,logical]: TRUE
+exextra[essay_format,character]: editor
+exextra[essay_fieldlines,numeric]: 10
+exextra[exercise]: dsj-09-darklord
+exextra[anstitle]: discoverjasp Smart Alex 9.9 - backward messages (paired t-test)

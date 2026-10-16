@@ -1,0 +1,474 @@
+---
+title: "Instructions for coding agents working with ANS question banks"
+subtitle: "Format, build, import and checks, as settled by test imports (University of Amsterdam, September and October 2026)"
+date: "16 October 2026"
+---
+
+*People, read [README](README.html) first. This file is written for a coding agent (Claude Code
+or similar) and is meant to be read in full before any ANS work.*
+
+You are helping a teacher write, convert, build or check questions for **ANS** (ans.app), a
+digital assessment platform. Questions are written as text files in the R/exams format and built
+into a QTI 2.1 package with `tools/build-ans.R`, which ANS imports. Read this file completely
+before you read, convert or build any ANS question. Section 10 says what is verified and what is
+not; when something is untested, say so to the teacher instead of assuming it works.
+
+The folder `examples/` holds 12 working questions (3 exercises). When in doubt about the format,
+copy the example that looks most like what you need.
+
+## 1. Rules that matter most
+
+1. **Import QTI 2.1 packages through the button "QTI 2.X package (Legacy)".** The Respondus CSV
+   route gives no grading criteria, no penalty for wrong ticks in multiple-response questions,
+   and only alphanumeric gaps. QTI 3.0 loses the text, links, figures and model answers around
+   fill-in parts. (Verified, four import rounds.)
+2. **Write only elements ANS itself emits.** One unexpected element can sink the whole package
+   with "There are no exercises to import". When in doubt, copy the structure of an item from
+   the teacher's own QTI 2.X export. The builder already writes the right form; do not hand-edit
+   its XML.
+3. **Never put a scorer rubric inside the `itemBody` of a fill-in question.** ANS imports it as
+   question text, so students see the answer. (Verified.)
+4. **One answer field per question.** The one exception is several numeric gaps in one question,
+   which work only in ANS's own multi-gap form (section 6.3). Otherwise make the parts separate
+   questions of one exercise (section 2.4).
+5. **List images and data files as `<file>` entries of the item that uses them** in the manifest.
+   A separate manifest resource per file makes ANS create an empty exercise titled
+   `d41d8cd98f00b204e9800998ecf8427e`. (Verified.)
+6. **Multiple-response (tick-all) questions need at least one true statement**, and the stem must
+   say so ("Check the statement(s) that is/are true; at least one statement is true."), because
+   ANS's correction for guessing assumes it. The builder stops otherwise.
+7. **Compute every key from the data, in code.** Never copy a number from a published answer, a
+   textbook or a previous version of the question without recomputing it. Published answers
+   contain errors.
+8. **Check every import by exporting again and comparing** (section 8). You cannot import
+   yourself; the teacher imports and gives you the re-export.
+
+## 2. The question format
+
+One file per question, `.qmd` or `.Rmd`, in R/exams markdown. Number the files, because the build
+order is the sorted file order (`1-spider-a-test.qmd`, `1-spider-b-hypotheses.qmd`, ...).
+Every file has these sections, in this order.
+
+- `Question` (what students see), with an `Answerlist` for the options or one empty line per gap;
+- `Solution` (the model answer), with an `Answerlist` of `True.` / `False.` per option in choice
+  questions;
+- `Meta-information` (type, key, points, title).
+
+An R chunk before `Question` may compute or simulate anything the question needs; inline
+`` `r value` `` puts its values in the text. Give it `#| include: false` when it only computes.
+
+### 2.1 Single choice
+
+```markdown
+Question
+========
+Stem text. State alpha whenever the answer depends on it.
+
+Answerlist
+----------
+* Correct option
+* Wrong option (a mistake you can name)
+* Wrong option (another nameable mistake)
+
+Solution
+========
+Why the first option is right, then one line per wrong option naming its mistake.
+
+Source line, for example: DSUJ §9.9, p. 384.
+
+Answerlist
+----------
+* True.
+* False.
+* False.
+
+Meta-information
+================
+exname: short-unique-id
+extype: schoice
+exsolution: 100
+exshuffle: TRUE
+exextra[anstitle]: Title shown in ANS
+```
+
+Write the correct option first; `exshuffle: TRUE` shuffles once at build time, so every student
+sees the same order unless ANS's own setting shuffles per student.
+
+### 2.2 Tick-all (multiple response)
+
+As single choice, with `extype: mchoice`, one `1` per true statement in `exsolution` (for
+example `1100`), and the stem ending with "Check the statement(s) that is/are true; at least one
+statement is true." ANS scores each true statement +1/k and each false one -1/(n-k).
+
+### 2.3 Numeric gaps
+
+One gap is `extype: num` with `exsolution` and `extol` (the margin). The gap's label is a
+one-line `Answerlist` in the question; the builder stops on a gap without a label.
+
+```markdown
+Question
+========
+What does the model predict for a cat owner? Use two decimals.
+
+Answerlist
+----------
+* Predicted life satisfaction:
+
+Solution
+========
+...
+
+Meta-information
+================
+exname: short-unique-id
+extype: num
+exsolution: 60.13
+extol: 0.01
+exextra[anstitle]: Title shown in ANS
+```
+
+Several gaps in one question use `extype: cloze` with `##ANSWER1##`, `##ANSWER2##`, ... in the
+text. The text right before each placeholder is its label. Give one empty `Answerlist` line per
+gap, `exclozetype: num|num`, `exsolution: -2.47|11`, `extol: 0.01|0`, and `expoints` **per gap**
+(two gaps worth 1 point together need `expoints: 0.5`). `exextra[alt]: 2.47|` adds accepted
+answers per gap (spaces between answers, `|` between gaps), for example the other sign of t
+where the sign only reflects the order of the variables.
+
+In a `cloze`, the builder also adds the obvious variants of each numeric key (a comma decimal,
+no leading zero) and writes a margin of 0 as a zero-width range, which ANS needs to keep the gap
+numeric. A single `num` gap stays a float with a tolerance, which ANS imports as its numeric gap
+with that margin; no variants are added there.
+
+### 2.4 Multi-part exercises
+
+One file per part, all with the same `exextra[exercise]` and the same `exextra[anstitle]`, named
+so they sort next to each other. Part 1 carries the shared scenario and the data link; ANS shows
+it inside question a. Do not label parts a), b); ANS letters them itself. A part can be any type,
+with its own points. R/exams weaves every file on its own, so numbers shared between parts are
+recomputed or repeated in each part. ANS shuffles **exercises**, never the parts within one, so
+"the data from the previous question" only works within one exercise.
+
+### 2.5 Open questions with grading criteria
+
+```markdown
+Meta-information
+================
+exname: short-unique-id
+extype: string
+exstringtype: essay
+exsolution: nil
+expoints: 3
+exextra[essay,logical]: TRUE
+exextra[essay_format,character]: editor
+exextra[essay_fieldlines,numeric]: 10
+exextra[anstitle]: Title shown in ANS
+```
+
+End the solution with a criteria list. The builder moves it out of the model answer into ANS's
+grading criteria and stops when the points do not add up to `expoints`.
+
+```markdown
+**Criteria**
+
+- 0.5 pt: a probability of the data, including "or more extreme".
+- 0.5 pt: conditioned on the null hypothesis being true.
+```
+
+`extype: string` without the essay fields is a short auto-scored text answer, not an open
+question.
+
+### 2.6 Data files, figures and maths
+
+- **Data files** either sit next to the question file and are shipped with a chunk
+  `include_supplement("data.csv")` plus a link `[data](data.csv)` in the text, or are linked from
+  a stable website, as the examples link discoverjasp.com.
+- **A static image** (`![](figure.png)`) is only shipped if it is also listed in
+  `include_supplement()`. Figures drawn by an R chunk are shipped automatically.
+- **Maths** goes in as `$...$` or `$$...$$`; the builder turns it into ANS's equation component.
+  Plain Unicode symbols (μ, ≠, χ²) also work.
+- **Tables** as markdown pipe tables. From data, use `knitr::kable()` with `results = "asis"` and
+  set the column names; printing a data frame gives console lines starting with `##`.
+
+### 2.7 Content rules
+
+- Every wrong option is a mistake you can name (the wrong df, SD for SE, the reversed
+  conditional), and the model answer names it. A distractor that can be rejected on its size
+  alone is wasted.
+- Every model answer ends with its source (book section and page, lecture slides), for whoever
+  checks the questions.
+- A calculation question ends its solution with the working. In a randomized question, write
+  the working with `cat(sprintf(...))` in a chunk with `comment = ""`, from the same variables
+  as the question, so it can never drift from the numbers students see.
+- Say which data each part uses, label every gap, and state units and the number of decimals.
+- Do not invent features of ANS, of the software students use, or of the course. Ask.
+
+### 2.8 Markdown traps
+
+1. A paragraph starting with `I.` becomes a roman-numeral list that swallows `II.` and `III.`;
+   write `**I.**` and give each statement its own paragraph.
+2. A list straight after a line of text runs into that paragraph; put a blank line before it.
+3. A pipe table at the very start of the solution is not rendered; start with a sentence.
+4. Inline code that starts with `r ` is run as R by knitr (`` `r = 0.80` `` breaks the build).
+5. R/exams writes a key like `0.70` as `0.7`; the builder keeps the margin's decimals for the
+   range, so set `extol` with the decimals you mean (`0.01`).
+
+## 3. Building and checking
+
+From the folder that holds `tools/`:
+
+```sh
+Rscript tools/build-ans.R <question folder> --html                 # preview only
+Rscript tools/build-ans.R <question folder>                        # preview + package
+Rscript tools/build-ans.R <question folder> --title-prefix="TEST " # for a trial import
+Rscript tools/build-ans.R <question folder> --feedback             # practice tests
+python3 tools/check-import.py <unzipped re-export> --expected <folder>/<NAME>.expected.json
+```
+
+Build the preview first and read it: labels before every gap, the stem of every tick-all
+question, the source line at the end of every model answer. The full build writes `<NAME>.zip`
+(import this), `<NAME>.html` (preview) and `<NAME>.expected.json` (for the check). It stops with
+a message on every rule in this file it can test; fix the question, do not work around the
+check.
+
+## 4. Reading an ANS export
+
+To convert an existing bank, the teacher exports it from ANS (**Settings > Export**) twice and
+gives you both, unzipped.
+
+**The QTI 2.X export** (a folder of XML files plus `imsmanifest.xml`) holds the complete content.
+
+- There is one file per question, `QUE_<exercise id>_<n>.xml`. **`n` is question n of one
+  multi-part exercise, not version n.** Merge the parts of an exercise; never de-duplicate them.
+- The exercise title is in the manifest (`<imsmd:langstring>`) and in the item's `title`
+  attribute.
+- The **model answer** is a `<rubricBlock view="scorer">`, inside `itemBody` for choice and open
+  questions and after `</itemBody>` for fill-in questions.
+- **Question feedback** is a `<modalFeedback outcomeIdentifier="FEEDBACK" identifier="...">`
+  after the rubric. `identifier` is `correct` or `incorrect`, or `choice1`, `choice2`, ... for
+  feedback on one option. Teachers often keep the real explanation here rather than in the model
+  answer, so read both.
+- **Grading criteria** of open questions are `<rubricScoring><criterion points="0.5">`, with an
+  optional description. An export may hold the points without the text.
+- The **accepted answers of a gap** are every `mapEntry mapKey` of that gap's
+  `responseDeclaration`. A key like `5.7;5.8` is a numeric range. Gaps often accept several values
+  (both signs, comma decimals, typo variants); keep all of them.
+- **Multiple-response weights** are the `mappedValue` of each option, +1/k for each of the k true
+  options and -1/(n-k) for each false one. ANS does **not** recompute them when an option is
+  deleted, so check them in old items.
+- **Attachments** uploaded with ANS's current editor come back as `<uuid>.<ext>`, with the
+  original name in `data-name`. Files of older questions, linked as
+  `/redactor_images/<uuid>/download`, are **missing** from the QTI export; look them up in the
+  Respondus export by that uuid.
+
+**The Respondus export** (one `;`-separated CSV plus files) has the ANS folder of every question
+(`Folder /...` tags) and the attachments, but it loses the shared scenario of multi-part
+exercises and the text of fill-in questions, and it marks **every** option of a
+multiple-response question as correct. Use it for folders and files only.
+
+**The HTML in exports is messy.** Expect, and repair,
+
+- tables with unclosed `<tr>`, nested `<th>`, merged header cells, and question text inside the
+  last table cell;
+- code as `<pre><code><code>line</code>...` with `<br>`s;
+- `<br>` line breaks (statements I and II, two-line formulas) that become one paragraph;
+- empty or unpaired `<strong>` and `<em>` around line breaks, which become stray `**` and `*`;
+- zero-width spaces;
+- `<` and `>` that ANS dropped from the text ("θ 0.5" for "θ > 0.5"). Restore them from the
+  context, and flag them to the teacher.
+
+Converting HTML to markdown with pandoc works once code blocks and tables are built separately.
+After converting, recompute every key (rule 7): old items contain wrong keys, solutions written
+for an earlier version of the numbers, and page references to older editions of the book.
+
+## 5. Package structure
+
+The builder writes this; it is here for debugging and for agents writing packages without it.
+
+```
+package.zip
+├── imsmanifest.xml
+├── QUE_10000001_1.xml        exercise 10000001, question 1
+├── QUE_10000001_2.xml        exercise 10000001, question 2
+├── QUE_10000002_1.xml        a single-question exercise
+└── media/data.jasp, media/figure.png   (any relative path)
+```
+
+The manifest has one resource per question:
+
+```xml
+<resource identifier="QUE_10000001_1" type="imsqti_item_xmlv2p1" href="QUE_10000001_1.xml">
+  <metadata>
+    <imsmd:lom><imsmd:general><imsmd:title>
+      <imsmd:langstring xml:lang="en">Exercise title shown in ANS</imsmd:langstring>
+    </imsmd:title></imsmd:general></imsmd:lom>
+  </metadata>
+  <file href="QUE_10000001_1.xml"/>
+  <file href="media/data.jasp"/>
+</resource>
+```
+
+Inside each item, set `identifier="QUE_<id>_<n>"` and `title="<exercise title>"`. Points come
+from `normalMaximum` and the `MAXSCORE` outcome; write exact values (2, not 1.999998).
+
+## 6. Question types in QTI
+
+### 6.1 Single choice and multiple response
+
+A `choiceInteraction` (`maxChoices="1"` for single choice, `0` for multiple response), with the
+model answer at the **end of `itemBody`**:
+
+```xml
+<itemBody>
+  ...<choiceInteraction responseIdentifier="RESPONSE" shuffle="false" maxChoices="1">...</choiceInteraction>
+  <rubricBlock view="scorer"><p>Model answer, with the source.</p></rubricBlock>
+</itemBody>
+```
+
+Verified by import. The model answer arrives, and for multiple response the per-option weights
+in the package are kept. `shuffle="false"` keeps the order written; ANS can shuffle per student
+in its own settings.
+
+### 6.2 One numeric gap
+
+A `textEntryInteraction` with a float response and an absolute tolerance imports as an ANS
+numeric gap with that margin (verified, margins 0.002 and 0.01):
+
+```xml
+<responseDeclaration identifier="R1" cardinality="single" baseType="float">
+  <correctResponse><value>0.035</value></correctResponse>
+</responseDeclaration>
+...
+<equal toleranceMode="absolute" tolerance="0.002 0.002" includeLowerBound="true" includeUpperBound="true">
+  <variable identifier="R1"/><correct identifier="R1"/>
+</equal>
+```
+
+ANS also has a *Numerical value* question type, but a gap shows the teacher what students typed.
+
+### 6.3 Several gaps in one question, or several accepted answers
+
+Use ANS's own form, as in its exports (verified by import with 5 gaps in one question). That
+means one string `responseDeclaration` per gap, the accepted keys and a mapping **inside
+`correctResponse`**, numeric margins as `low;high` keys, and the `map_response` template.
+
+```xml
+<responseDeclaration identifier="GAP1" cardinality="single" baseType="string">
+  <correctResponse>
+    <value>191.5</value><value>191,5</value><value>191.4;191.6</value>
+    <mapping defaultValue="0">
+      <mapEntry mapKey="191.5" mappedValue="0.2"/>
+      <mapEntry mapKey="191,5" mappedValue="0.2"/>
+      <mapEntry mapKey="191.4;191.6" mappedValue="0.2"/>
+    </mapping>
+  </correctResponse>
+</responseDeclaration>
+<!-- one per gap; only SCORE and MAXSCORE outcome declarations -->
+...
+<responseProcessing template="http://www.imsglobal.org/question/qti_v2p1/rptemplates/map_response"/>
+```
+
+An exact value (margin 0) gets the zero-width range `123;123` next to `123`, as in ANS's own
+exports; with the plain key alone ANS made the gap alphanumeric instead of numeric (seen on
+import, October 2026).
+`mappedValue` is the points per gap. R/exams' own multi-gap output imports with **only the first
+gap** showing; the builder rewrites it into this form.
+
+### 6.4 Explanation of a fill-in question
+
+ANS ignores a scorer rubric after `</itemBody>` and leaks one inside it (rule 3). The explanation
+goes in as **question feedback**, the same text for a correct and an incorrect answer, after
+`</itemBody>` (verified by import):
+
+```xml
+</itemBody>
+<rubricBlock view="scorer"><p>For the record; ANS ignores this one.</p></rubricBlock>
+<modalFeedback outcomeIdentifier="FEEDBACK" showHide="show" identifier="correct"><div>Explanation.</div></modalFeedback>
+<modalFeedback outcomeIdentifier="FEEDBACK" showHide="show" identifier="incorrect"><div>Explanation.</div></modalFeedback>
+<responseProcessing .../>
+```
+
+The same two feedback blocks work on choice questions (`--feedback`, for practice tests). ANS's
+API (`PATCH /api/v2/questions/{id}`, field `grading_description`, personal token) could set a
+fill-in's model answer directly; that route is untested.
+
+### 6.5 Open questions with grading criteria
+
+An `extendedTextInteraction` with `expectedLength="0"`, **no `responseProcessing`**, the model
+answer as a scorer rubric at the end of `itemBody`, and the criteria after `</itemBody>`
+(verified):
+
+```xml
+<rubricScoring>
+  <criterion points="0.5"><div>Names the test statistic.</div></criterion>
+  <criterion points="0.5"><div>Interprets the p-value as conditional on H0.</div></criterion>
+</rubricScoring>
+```
+
+The criteria must add up to the question's points.
+
+### 6.6 Multi-part exercises
+
+Parts with the same exercise id and title, as `QUE_<id>_1.xml`, `QUE_<id>_2.xml`, ..., are
+regrouped by ANS into one exercise with the parts in order (verified, including ANS's own 5-part
+export re-imported). The shared scenario goes at the top of question 1.
+
+## 7. Media, maths, links
+
+- **Images and data files** travel inside the package, referenced by relative `src` / `href` and
+  listed as `<file>` entries of their item (rule 5). They become real ANS attachments that
+  students can download (verified with `.png`, `.jasp` and `.csv`).
+- **Maths** goes in as `$$...$$`, which ANS turns into its equation component; MathML gets
+  flattened. Tables in plain HTML are fine.
+- **External links** survive. Prefer stable sites (the publisher's or the software's own pages)
+  over self-hosted copies that may move.
+
+## 8. Checking an import
+
+After every import, the teacher exports the bank as QTI 2.X (and, if possible, as a Respondus
+package) and gives you the export. Run `tools/check-import.py` on it with the build's
+`expected.json`. Per question it checks
+
+- present, with the right exercise title and number of parts;
+- points;
+- the model answer in the scorer rubric (choice and open questions);
+- **the answer not visible in the question text** (the failure that matters most);
+- feedback on fill-in questions;
+- accepted keys and margins of every gap;
+- the correct options and their weights;
+- criteria (points and text);
+- attachments present.
+
+Report every failed check to the teacher, with what the export holds.
+
+## 9. What the builder changes in R/exams output
+
+R/exams (`exams2qti21()`) is a good base, but ANS needs its output reshaped. The builder
+(`tools/ans_package.py`) does all of this; it matters when you debug or write packages yourself.
+
+| R/exams writes | ANS needs |
+|---|---|
+| the solution as `modalFeedback` (ANS drops it) | a scorer `rubricBlock` (choice, open) or correct/incorrect feedback (fill-in) |
+| a separate manifest resource per media file | `<file>` entries of the item |
+| `cloze` with several float gaps | ANS's multi-gap form (6.3) |
+| item titles "1", "2", ... | the title from `exextra[anstitle]` |
+| `expectedLength="1000"` on open questions | `expectedLength="0"`, no response processing |
+| MathML | `$$...$$` |
+
+Two R/exams behaviors to keep in mind when writing questions: `expoints` in a `cloze` is per gap
+(R/exams recycles it), and `exshuffle: TRUE` shuffles once at build time.
+
+## 10. What is verified, and how
+
+| Behavior | Status |
+|---|---|
+| QTI 2.1 legacy: choice and open model answers, criteria, multi-part regrouping, attachments, numeric gaps with margin | verified by import and re-export (Sept/Oct 2026) |
+| Fill-in rubric inside `itemBody` leaks into the question | verified (do not do it) |
+| Separate media resources create an empty exercise | verified (do not do it) |
+| Correct/incorrect feedback on gaps and choice questions | verified by import, checked on screen |
+| ANS multi-gap form with `low;high` ranges | verified by import, checked on screen |
+| Exact gaps (margin 0) | the plain key alone imports as an alphanumeric gap (seen October 2026); `123` plus `123;123` is ANS's own export form, not yet confirmed after import |
+| Extra accepted keys (comma decimals, other sign) from a package | in ANS's own exports; not yet checked key by key after import |
+| Per-option (`choiceN`) feedback on import | seen in exports, not tested on import |
+| ANS API for fill-in model answers | untested |
+| Respondus CSV import | works, but unsuitable for exams (rule 1) |
+| QTI 3.0 import | loses fill-in context and model answers |

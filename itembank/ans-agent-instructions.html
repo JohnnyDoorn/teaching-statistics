@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.340">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-10-16">
+
+<title>Instructions for coding agents working with ANS question banks</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#rules-that-matter-most" id="toc-rules-that-matter-most" class="nav-link active" data-scroll-target="#rules-that-matter-most">1. Rules that matter most</a></li>
+  <li><a href="#the-question-format" id="toc-the-question-format" class="nav-link" data-scroll-target="#the-question-format">2. The question format</a>
+  <ul class="collapse">
+  <li><a href="#single-choice" id="toc-single-choice" class="nav-link" data-scroll-target="#single-choice">2.1 Single choice</a></li>
+  <li><a href="#tick-all-multiple-response" id="toc-tick-all-multiple-response" class="nav-link" data-scroll-target="#tick-all-multiple-response">2.2 Tick-all (multiple response)</a></li>
+  <li><a href="#numeric-gaps" id="toc-numeric-gaps" class="nav-link" data-scroll-target="#numeric-gaps">2.3 Numeric gaps</a></li>
+  <li><a href="#multi-part-exercises" id="toc-multi-part-exercises" class="nav-link" data-scroll-target="#multi-part-exercises">2.4 Multi-part exercises</a></li>
+  <li><a href="#open-questions-with-grading-criteria" id="toc-open-questions-with-grading-criteria" class="nav-link" data-scroll-target="#open-questions-with-grading-criteria">2.5 Open questions with grading criteria</a></li>
+  <li><a href="#data-files-figures-and-maths" id="toc-data-files-figures-and-maths" class="nav-link" data-scroll-target="#data-files-figures-and-maths">2.6 Data files, figures and maths</a></li>
+  <li><a href="#content-rules" id="toc-content-rules" class="nav-link" data-scroll-target="#content-rules">2.7 Content rules</a></li>
+  <li><a href="#markdown-traps" id="toc-markdown-traps" class="nav-link" data-scroll-target="#markdown-traps">2.8 Markdown traps</a></li>
+  </ul></li>
+  <li><a href="#building-and-checking" id="toc-building-and-checking" class="nav-link" data-scroll-target="#building-and-checking">3. Building and checking</a></li>
+  <li><a href="#reading-an-ans-export" id="toc-reading-an-ans-export" class="nav-link" data-scroll-target="#reading-an-ans-export">4. Reading an ANS export</a></li>
+  <li><a href="#package-structure" id="toc-package-structure" class="nav-link" data-scroll-target="#package-structure">5. Package structure</a></li>
+  <li><a href="#question-types-in-qti" id="toc-question-types-in-qti" class="nav-link" data-scroll-target="#question-types-in-qti">6. Question types in QTI</a>
+  <ul class="collapse">
+  <li><a href="#single-choice-and-multiple-response" id="toc-single-choice-and-multiple-response" class="nav-link" data-scroll-target="#single-choice-and-multiple-response">6.1 Single choice and multiple response</a></li>
+  <li><a href="#one-numeric-gap" id="toc-one-numeric-gap" class="nav-link" data-scroll-target="#one-numeric-gap">6.2 One numeric gap</a></li>
+  <li><a href="#several-gaps-in-one-question-or-several-accepted-answers" id="toc-several-gaps-in-one-question-or-several-accepted-answers" class="nav-link" data-scroll-target="#several-gaps-in-one-question-or-several-accepted-answers">6.3 Several gaps in one question, or several accepted answers</a></li>
+  <li><a href="#explanation-of-a-fill-in-question" id="toc-explanation-of-a-fill-in-question" class="nav-link" data-scroll-target="#explanation-of-a-fill-in-question">6.4 Explanation of a fill-in question</a></li>
+  <li><a href="#open-questions-with-grading-criteria-1" id="toc-open-questions-with-grading-criteria-1" class="nav-link" data-scroll-target="#open-questions-with-grading-criteria-1">6.5 Open questions with grading criteria</a></li>
+  <li><a href="#multi-part-exercises-1" id="toc-multi-part-exercises-1" class="nav-link" data-scroll-target="#multi-part-exercises-1">6.6 Multi-part exercises</a></li>
+  </ul></li>
+  <li><a href="#media-maths-links" id="toc-media-maths-links" class="nav-link" data-scroll-target="#media-maths-links">7. Media, maths, links</a></li>
+  <li><a href="#checking-an-import" id="toc-checking-an-import" class="nav-link" data-scroll-target="#checking-an-import">8. Checking an import</a></li>
+  <li><a href="#what-the-builder-changes-in-rexams-output" id="toc-what-the-builder-changes-in-rexams-output" class="nav-link" data-scroll-target="#what-the-builder-changes-in-rexams-output">9. What the builder changes in R/exams output</a></li>
+  <li><a href="#what-is-verified-and-how" id="toc-what-is-verified-and-how" class="nav-link" data-scroll-target="#what-is-verified-and-how">10. What is verified, and how</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Instructions for coding agents working with ANS question banks</h1>
+<p class="subtitle lead">Format, build, import and checks, as settled by test imports (University of Amsterdam, September and October 2026)</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 16, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<p><em>People, read <a href="README.html">README</a> first. This file is written for a coding agent (Claude Code or similar) and is meant to be read in full before any ANS work.</em></p>
+<p>You are helping a teacher write, convert, build or check questions for <strong>ANS</strong> (ans.app), a digital assessment platform. Questions are written as text files in the R/exams format and built into a QTI 2.1 package with <code>tools/build-ans.R</code>, which ANS imports. Read this file completely before you read, convert or build any ANS question. Section 10 says what is verified and what is not; when something is untested, say so to the teacher instead of assuming it works.</p>
+<p>The folder <code>examples/</code> holds 12 working questions (3 exercises). When in doubt about the format, copy the example that looks most like what you need.</p>
+<section id="rules-that-matter-most" class="level2">
+<h2 class="anchored" data-anchor-id="rules-that-matter-most">1. Rules that matter most</h2>
+<ol type="1">
+<li><strong>Import QTI 2.1 packages through the button “QTI 2.X package (Legacy)”.</strong> The Respondus CSV route gives no grading criteria, no penalty for wrong ticks in multiple-response questions, and only alphanumeric gaps. QTI 3.0 loses the text, links, figures and model answers around fill-in parts. (Verified, four import rounds.)</li>
+<li><strong>Write only elements ANS itself emits.</strong> One unexpected element can sink the whole package with “There are no exercises to import”. When in doubt, copy the structure of an item from the teacher’s own QTI 2.X export. The builder already writes the right form; do not hand-edit its XML.</li>
+<li><strong>Never put a scorer rubric inside the <code>itemBody</code> of a fill-in question.</strong> ANS imports it as question text, so students see the answer. (Verified.)</li>
+<li><strong>One answer field per question.</strong> The one exception is several numeric gaps in one question, which work only in ANS’s own multi-gap form (section 6.3). Otherwise make the parts separate questions of one exercise (section 2.4).</li>
+<li><strong>List images and data files as <code>&lt;file&gt;</code> entries of the item that uses them</strong> in the manifest. A separate manifest resource per file makes ANS create an empty exercise titled <code>d41d8cd98f00b204e9800998ecf8427e</code>. (Verified.)</li>
+<li><strong>Multiple-response (tick-all) questions need at least one true statement</strong>, and the stem must say so (“Check the statement(s) that is/are true; at least one statement is true.”), because ANS’s correction for guessing assumes it. The builder stops otherwise.</li>
+<li><strong>Compute every key from the data, in code.</strong> Never copy a number from a published answer, a textbook or a previous version of the question without recomputing it. Published answers contain errors.</li>
+<li><strong>Check every import by exporting again and comparing</strong> (section 8). You cannot import yourself; the teacher imports and gives you the re-export.</li>
+</ol>
+</section>
+<section id="the-question-format" class="level2">
+<h2 class="anchored" data-anchor-id="the-question-format">2. The question format</h2>
+<p>One file per question, <code>.qmd</code> or <code>.Rmd</code>, in R/exams markdown. Number the files, because the build order is the sorted file order (<code>1-spider-a-test.qmd</code>, <code>1-spider-b-hypotheses.qmd</code>, …). Every file has these sections, in this order.</p>
+<ul>
+<li><code>Question</code> (what students see), with an <code>Answerlist</code> for the options or one empty line per gap;</li>
+<li><code>Solution</code> (the model answer), with an <code>Answerlist</code> of <code>True.</code> / <code>False.</code> per option in choice questions;</li>
+<li><code>Meta-information</code> (type, key, points, title).</li>
+</ul>
+<p>An R chunk before <code>Question</code> may compute or simulate anything the question needs; inline <code>`r value`</code> puts its values in the text. Give it <code>#| include: false</code> when it only computes.</p>
+<section id="single-choice" class="level3">
+<h3 class="anchored" data-anchor-id="single-choice">2.1 Single choice</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Question</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">========</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>Stem text. State alpha whenever the answer depends on it.</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>Answerlist</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>----------</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Correct option</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Wrong option (a mistake you can name)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Wrong option (another nameable mistake)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>Solution</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">========</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>Why the first option is right, then one line per wrong option naming its mistake.</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>Source line, for example: DSUJ §9.9, p. 384.</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>Answerlist</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>----------</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>True.</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>False.</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>False.</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>Meta-information</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="fu">================</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>exname: short-unique-id</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>extype: schoice</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>exsolution: 100</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>exshuffle: TRUE</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>exextra<span class="co">[</span><span class="ot">anstitle</span><span class="co">]</span>: Title shown in ANS</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Write the correct option first; <code>exshuffle: TRUE</code> shuffles once at build time, so every student sees the same order unless ANS’s own setting shuffles per student.</p>
+</section>
+<section id="tick-all-multiple-response" class="level3">
+<h3 class="anchored" data-anchor-id="tick-all-multiple-response">2.2 Tick-all (multiple response)</h3>
+<p>As single choice, with <code>extype: mchoice</code>, one <code>1</code> per true statement in <code>exsolution</code> (for example <code>1100</code>), and the stem ending with “Check the statement(s) that is/are true; at least one statement is true.” ANS scores each true statement +1/k and each false one -1/(n-k).</p>
+</section>
+<section id="numeric-gaps" class="level3">
+<h3 class="anchored" data-anchor-id="numeric-gaps">2.3 Numeric gaps</h3>
+<p>One gap is <code>extype: num</code> with <code>exsolution</code> and <code>extol</code> (the margin). The gap’s label is a one-line <code>Answerlist</code> in the question; the builder stops on a gap without a label.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Question</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">========</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>What does the model predict for a cat owner? Use two decimals.</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>Answerlist</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>----------</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Predicted life satisfaction:</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>Solution</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">========</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>Meta-information</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">================</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>exname: short-unique-id</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>extype: num</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>exsolution: 60.13</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>extol: 0.01</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>exextra<span class="co">[</span><span class="ot">anstitle</span><span class="co">]</span>: Title shown in ANS</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Several gaps in one question use <code>extype: cloze</code> with <code>##ANSWER1##</code>, <code>##ANSWER2##</code>, … in the text. The text right before each placeholder is its label. Give one empty <code>Answerlist</code> line per gap, <code>exclozetype: num|num</code>, <code>exsolution: -2.47|11</code>, <code>extol: 0.01|0</code>, and <code>expoints</code> <strong>per gap</strong> (two gaps worth 1 point together need <code>expoints: 0.5</code>). <code>exextra[alt]: 2.47|</code> adds accepted answers per gap (spaces between answers, <code>|</code> between gaps), for example the other sign of t where the sign only reflects the order of the variables.</p>
+<p>In a <code>cloze</code>, the builder also adds the obvious variants of each numeric key (a comma decimal, no leading zero) and writes a margin of 0 as a zero-width range, which ANS needs to keep the gap numeric. A single <code>num</code> gap stays a float with a tolerance, which ANS imports as its numeric gap with that margin; no variants are added there.</p>
+</section>
+<section id="multi-part-exercises" class="level3">
+<h3 class="anchored" data-anchor-id="multi-part-exercises">2.4 Multi-part exercises</h3>
+<p>One file per part, all with the same <code>exextra[exercise]</code> and the same <code>exextra[anstitle]</code>, named so they sort next to each other. Part 1 carries the shared scenario and the data link; ANS shows it inside question a. Do not label parts a), b); ANS letters them itself. A part can be any type, with its own points. R/exams weaves every file on its own, so numbers shared between parts are recomputed or repeated in each part. ANS shuffles <strong>exercises</strong>, never the parts within one, so “the data from the previous question” only works within one exercise.</p>
+</section>
+<section id="open-questions-with-grading-criteria" class="level3">
+<h3 class="anchored" data-anchor-id="open-questions-with-grading-criteria">2.5 Open questions with grading criteria</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Meta-information</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">================</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>exname: short-unique-id</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>extype: string</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>exstringtype: essay</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>exsolution: nil</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>expoints: 3</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>exextra<span class="co">[</span><span class="ot">essay,logical</span><span class="co">]</span>: TRUE</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>exextra<span class="co">[</span><span class="ot">essay_format,character</span><span class="co">]</span>: editor</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>exextra<span class="co">[</span><span class="ot">essay_fieldlines,numeric</span><span class="co">]</span>: 10</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>exextra<span class="co">[</span><span class="ot">anstitle</span><span class="co">]</span>: Title shown in ANS</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>End the solution with a criteria list. The builder moves it out of the model answer into ANS’s grading criteria and stops when the points do not add up to <code>expoints</code>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>**Criteria**</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>0.5 pt: a probability of the data, including "or more extreme".</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>0.5 pt: conditioned on the null hypothesis being true.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>extype: string</code> without the essay fields is a short auto-scored text answer, not an open question.</p>
+</section>
+<section id="data-files-figures-and-maths" class="level3">
+<h3 class="anchored" data-anchor-id="data-files-figures-and-maths">2.6 Data files, figures and maths</h3>
+<ul>
+<li><strong>Data files</strong> either sit next to the question file and are shipped with a chunk <code>include_supplement("data.csv")</code> plus a link <code>[data](data.csv)</code> in the text, or are linked from a stable website, as the examples link discoverjasp.com.</li>
+<li><strong>A static image</strong> (<code>![](figure.png)</code>) is only shipped if it is also listed in <code>include_supplement()</code>. Figures drawn by an R chunk are shipped automatically.</li>
+<li><strong>Maths</strong> goes in as <code>$...$</code> or <code>$$...$$</code>; the builder turns it into ANS’s equation component. Plain Unicode symbols (μ, ≠, χ²) also work.</li>
+<li><strong>Tables</strong> as markdown pipe tables. From data, use <code>knitr::kable()</code> with <code>results = "asis"</code> and set the column names; printing a data frame gives console lines starting with <code>##</code>.</li>
+</ul>
+</section>
+<section id="content-rules" class="level3">
+<h3 class="anchored" data-anchor-id="content-rules">2.7 Content rules</h3>
+<ul>
+<li>Every wrong option is a mistake you can name (the wrong df, SD for SE, the reversed conditional), and the model answer names it. A distractor that can be rejected on its size alone is wasted.</li>
+<li>Every model answer ends with its source (book section and page, lecture slides), for whoever checks the questions.</li>
+<li>A calculation question ends its solution with the working. In a randomized question, write the working with <code>cat(sprintf(...))</code> in a chunk with <code>comment = ""</code>, from the same variables as the question, so it can never drift from the numbers students see.</li>
+<li>Say which data each part uses, label every gap, and state units and the number of decimals.</li>
+<li>Do not invent features of ANS, of the software students use, or of the course. Ask.</li>
+</ul>
+</section>
+<section id="markdown-traps" class="level3">
+<h3 class="anchored" data-anchor-id="markdown-traps">2.8 Markdown traps</h3>
+<ol type="1">
+<li>A paragraph starting with <code>I.</code> becomes a roman-numeral list that swallows <code>II.</code> and <code>III.</code>; write <code>**I.**</code> and give each statement its own paragraph.</li>
+<li>A list straight after a line of text runs into that paragraph; put a blank line before it.</li>
+<li>A pipe table at the very start of the solution is not rendered; start with a sentence.</li>
+<li>Inline code that starts with <code>r</code> is run as R by knitr (<code>`r = 0.80`</code> breaks the build).</li>
+<li>R/exams writes a key like <code>0.70</code> as <code>0.7</code>; the builder keeps the margin’s decimals for the range, so set <code>extol</code> with the decimals you mean (<code>0.01</code>).</li>
+</ol>
+</section>
+</section>
+<section id="building-and-checking" class="level2">
+<h2 class="anchored" data-anchor-id="building-and-checking">3. Building and checking</h2>
+<p>From the folder that holds <code>tools/</code>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> tools/build-ans.R <span class="op">&lt;</span>question folder<span class="op">&gt;</span> --html                 <span class="co"># preview only</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> tools/build-ans.R <span class="op">&lt;</span>question folder<span class="op">&gt;</span>                        # preview + package</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> tools/build-ans.R <span class="op">&lt;</span>question folder<span class="op">&gt;</span> --title-prefix=<span class="st">"TEST "</span> <span class="co"># for a trial import</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> tools/build-ans.R <span class="op">&lt;</span>question folder<span class="op">&gt;</span> --feedback             <span class="co"># practice tests</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> tools/check-import.py <span class="op">&lt;</span>unzipped re-export<span class="op">&gt;</span> --expected <span class="op">&lt;</span>folder<span class="op">&gt;</span>/<span class="op">&lt;</span>NAME<span class="op">&gt;</span>.expected.json</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Build the preview first and read it: labels before every gap, the stem of every tick-all question, the source line at the end of every model answer. The full build writes <code>&lt;NAME&gt;.zip</code> (import this), <code>&lt;NAME&gt;.html</code> (preview) and <code>&lt;NAME&gt;.expected.json</code> (for the check). It stops with a message on every rule in this file it can test; fix the question, do not work around the check.</p>
+</section>
+<section id="reading-an-ans-export" class="level2">
+<h2 class="anchored" data-anchor-id="reading-an-ans-export">4. Reading an ANS export</h2>
+<p>To convert an existing bank, the teacher exports it from ANS (<strong>Settings &gt; Export</strong>) twice and gives you both, unzipped.</p>
+<p><strong>The QTI 2.X export</strong> (a folder of XML files plus <code>imsmanifest.xml</code>) holds the complete content.</p>
+<ul>
+<li>There is one file per question, <code>QUE_&lt;exercise id&gt;_&lt;n&gt;.xml</code>. <strong><code>n</code> is question n of one multi-part exercise, not version n.</strong> Merge the parts of an exercise; never de-duplicate them.</li>
+<li>The exercise title is in the manifest (<code>&lt;imsmd:langstring&gt;</code>) and in the item’s <code>title</code> attribute.</li>
+<li>The <strong>model answer</strong> is a <code>&lt;rubricBlock view="scorer"&gt;</code>, inside <code>itemBody</code> for choice and open questions and after <code>&lt;/itemBody&gt;</code> for fill-in questions.</li>
+<li><strong>Question feedback</strong> is a <code>&lt;modalFeedback outcomeIdentifier="FEEDBACK" identifier="..."&gt;</code> after the rubric. <code>identifier</code> is <code>correct</code> or <code>incorrect</code>, or <code>choice1</code>, <code>choice2</code>, … for feedback on one option. Teachers often keep the real explanation here rather than in the model answer, so read both.</li>
+<li><strong>Grading criteria</strong> of open questions are <code>&lt;rubricScoring&gt;&lt;criterion points="0.5"&gt;</code>, with an optional description. An export may hold the points without the text.</li>
+<li>The <strong>accepted answers of a gap</strong> are every <code>mapEntry mapKey</code> of that gap’s <code>responseDeclaration</code>. A key like <code>5.7;5.8</code> is a numeric range. Gaps often accept several values (both signs, comma decimals, typo variants); keep all of them.</li>
+<li><strong>Multiple-response weights</strong> are the <code>mappedValue</code> of each option, +1/k for each of the k true options and -1/(n-k) for each false one. ANS does <strong>not</strong> recompute them when an option is deleted, so check them in old items.</li>
+<li><strong>Attachments</strong> uploaded with ANS’s current editor come back as <code>&lt;uuid&gt;.&lt;ext&gt;</code>, with the original name in <code>data-name</code>. Files of older questions, linked as <code>/redactor_images/&lt;uuid&gt;/download</code>, are <strong>missing</strong> from the QTI export; look them up in the Respondus export by that uuid.</li>
+</ul>
+<p><strong>The Respondus export</strong> (one <code>;</code>-separated CSV plus files) has the ANS folder of every question (<code>Folder /...</code> tags) and the attachments, but it loses the shared scenario of multi-part exercises and the text of fill-in questions, and it marks <strong>every</strong> option of a multiple-response question as correct. Use it for folders and files only.</p>
+<p><strong>The HTML in exports is messy.</strong> Expect, and repair,</p>
+<ul>
+<li>tables with unclosed <code>&lt;tr&gt;</code>, nested <code>&lt;th&gt;</code>, merged header cells, and question text inside the last table cell;</li>
+<li>code as <code>&lt;pre&gt;&lt;code&gt;&lt;code&gt;line&lt;/code&gt;...</code> with <code>&lt;br&gt;</code>s;</li>
+<li><code>&lt;br&gt;</code> line breaks (statements I and II, two-line formulas) that become one paragraph;</li>
+<li>empty or unpaired <code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code> around line breaks, which become stray <code>**</code> and <code>*</code>;</li>
+<li>zero-width spaces;</li>
+<li><code>&lt;</code> and <code>&gt;</code> that ANS dropped from the text (“θ 0.5” for “θ &gt; 0.5”). Restore them from the context, and flag them to the teacher.</li>
+</ul>
+<p>Converting HTML to markdown with pandoc works once code blocks and tables are built separately. After converting, recompute every key (rule 7): old items contain wrong keys, solutions written for an earlier version of the numbers, and page references to older editions of the book.</p>
+</section>
+<section id="package-structure" class="level2">
+<h2 class="anchored" data-anchor-id="package-structure">5. Package structure</h2>
+<p>The builder writes this; it is here for debugging and for agents writing packages without it.</p>
+<pre><code>package.zip
+├── imsmanifest.xml
+├── QUE_10000001_1.xml        exercise 10000001, question 1
+├── QUE_10000001_2.xml        exercise 10000001, question 2
+├── QUE_10000002_1.xml        a single-question exercise
+└── media/data.jasp, media/figure.png   (any relative path)</code></pre>
+<p>The manifest has one resource per question:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode xml code-with-copy"><code class="sourceCode xml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">resource</span><span class="ot"> identifier=</span><span class="st">"QUE_10000001_1"</span><span class="ot"> type=</span><span class="st">"imsqti_item_xmlv2p1"</span><span class="ot"> href=</span><span class="st">"QUE_10000001_1.xml"</span>&gt;</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">metadata</span>&gt;</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">imsmd:lom</span>&gt;&lt;<span class="kw">imsmd:general</span>&gt;&lt;<span class="kw">imsmd:title</span>&gt;</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">imsmd:langstring</span><span class="ot"> xml:lang=</span><span class="st">"en"</span>&gt;Exercise title shown in ANS&lt;/<span class="kw">imsmd:langstring</span>&gt;</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    &lt;/<span class="kw">imsmd:title</span>&gt;&lt;/<span class="kw">imsmd:general</span>&gt;&lt;/<span class="kw">imsmd:lom</span>&gt;</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">metadata</span>&gt;</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">file</span><span class="ot"> href=</span><span class="st">"QUE_10000001_1.xml"</span>/&gt;</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">file</span><span class="ot"> href=</span><span class="st">"media/data.jasp"</span>/&gt;</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">resource</span>&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Inside each item, set <code>identifier="QUE_&lt;id&gt;_&lt;n&gt;"</code> and <code>title="&lt;exercise title&gt;"</code>. Points come from <code>normalMaximum</code> and the <code>MAXSCORE</code> outcome; write exact values (2, not 1.999998).</p>
+</section>
+<section id="question-types-in-qti" class="level2">
+<h2 class="anchored" data-anchor-id="question-types-in-qti">6. Question types in QTI</h2>
+<section id="single-choice-and-multiple-response" class="level3">
+<h3 class="anchored" data-anchor-id="single-choice-and-multiple-response">6.1 Single choice and multiple response</h3>
+<p>A <code>choiceInteraction</code> (<code>maxChoices="1"</code> for single choice, <code>0</code> for multiple response), with the model answer at the <strong>end of <code>itemBody</code></strong>:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode xml code-with-copy"><code class="sourceCode xml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">itemBody</span>&gt;</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  ...&lt;<span class="kw">choiceInteraction</span><span class="ot"> responseIdentifier=</span><span class="st">"RESPONSE"</span><span class="ot"> shuffle=</span><span class="st">"false"</span><span class="ot"> maxChoices=</span><span class="st">"1"</span>&gt;...&lt;/<span class="kw">choiceInteraction</span>&gt;</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">rubricBlock</span><span class="ot"> view=</span><span class="st">"scorer"</span>&gt;&lt;<span class="kw">p</span>&gt;Model answer, with the source.&lt;/<span class="kw">p</span>&gt;&lt;/<span class="kw">rubricBlock</span>&gt;</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">itemBody</span>&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Verified by import. The model answer arrives, and for multiple response the per-option weights in the package are kept. <code>shuffle="false"</code> keeps the order written; ANS can shuffle per student in its own settings.</p>
+</section>
+<section id="one-numeric-gap" class="level3">
+<h3 class="anchored" data-anchor-id="one-numeric-gap">6.2 One numeric gap</h3>
+<p>A <code>textEntryInteraction</code> with a float response and an absolute tolerance imports as an ANS numeric gap with that margin (verified, margins 0.002 and 0.01):</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode xml code-with-copy"><code class="sourceCode xml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">responseDeclaration</span><span class="ot"> identifier=</span><span class="st">"R1"</span><span class="ot"> cardinality=</span><span class="st">"single"</span><span class="ot"> baseType=</span><span class="st">"float"</span>&gt;</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">correctResponse</span>&gt;&lt;<span class="kw">value</span>&gt;0.035&lt;/<span class="kw">value</span>&gt;&lt;/<span class="kw">correctResponse</span>&gt;</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">responseDeclaration</span>&gt;</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">equal</span><span class="ot"> toleranceMode=</span><span class="st">"absolute"</span><span class="ot"> tolerance=</span><span class="st">"0.002 0.002"</span><span class="ot"> includeLowerBound=</span><span class="st">"true"</span><span class="ot"> includeUpperBound=</span><span class="st">"true"</span>&gt;</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">variable</span><span class="ot"> identifier=</span><span class="st">"R1"</span>/&gt;&lt;<span class="kw">correct</span><span class="ot"> identifier=</span><span class="st">"R1"</span>/&gt;</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">equal</span>&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>ANS also has a <em>Numerical value</em> question type, but a gap shows the teacher what students typed.</p>
+</section>
+<section id="several-gaps-in-one-question-or-several-accepted-answers" class="level3">
+<h3 class="anchored" data-anchor-id="several-gaps-in-one-question-or-several-accepted-answers">6.3 Several gaps in one question, or several accepted answers</h3>
+<p>Use ANS’s own form, as in its exports (verified by import with 5 gaps in one question). That means one string <code>responseDeclaration</code> per gap, the accepted keys and a mapping <strong>inside <code>correctResponse</code></strong>, numeric margins as <code>low;high</code> keys, and the <code>map_response</code> template.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode xml code-with-copy"><code class="sourceCode xml"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">responseDeclaration</span><span class="ot"> identifier=</span><span class="st">"GAP1"</span><span class="ot"> cardinality=</span><span class="st">"single"</span><span class="ot"> baseType=</span><span class="st">"string"</span>&gt;</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">correctResponse</span>&gt;</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">value</span>&gt;191.5&lt;/<span class="kw">value</span>&gt;&lt;<span class="kw">value</span>&gt;191,5&lt;/<span class="kw">value</span>&gt;&lt;<span class="kw">value</span>&gt;191.4;191.6&lt;/<span class="kw">value</span>&gt;</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">mapping</span><span class="ot"> defaultValue=</span><span class="st">"0"</span>&gt;</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">mapEntry</span><span class="ot"> mapKey=</span><span class="st">"191.5"</span><span class="ot"> mappedValue=</span><span class="st">"0.2"</span>/&gt;</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">mapEntry</span><span class="ot"> mapKey=</span><span class="st">"191,5"</span><span class="ot"> mappedValue=</span><span class="st">"0.2"</span>/&gt;</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">mapEntry</span><span class="ot"> mapKey=</span><span class="st">"191.4;191.6"</span><span class="ot"> mappedValue=</span><span class="st">"0.2"</span>/&gt;</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    &lt;/<span class="kw">mapping</span>&gt;</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">correctResponse</span>&gt;</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">responseDeclaration</span>&gt;</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- one per gap; only SCORE and MAXSCORE outcome declarations --&gt;</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">responseProcessing</span><span class="ot"> template=</span><span class="st">"http://www.imsglobal.org/question/qti_v2p1/rptemplates/map_response"</span>/&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>An exact value (margin 0) gets the zero-width range <code>123;123</code> next to <code>123</code>, as in ANS’s own exports; with the plain key alone ANS made the gap alphanumeric instead of numeric (seen on import, October 2026). <code>mappedValue</code> is the points per gap. R/exams’ own multi-gap output imports with <strong>only the first gap</strong> showing; the builder rewrites it into this form.</p>
+</section>
+<section id="explanation-of-a-fill-in-question" class="level3">
+<h3 class="anchored" data-anchor-id="explanation-of-a-fill-in-question">6.4 Explanation of a fill-in question</h3>
+<p>ANS ignores a scorer rubric after <code>&lt;/itemBody&gt;</code> and leaks one inside it (rule 3). The explanation goes in as <strong>question feedback</strong>, the same text for a correct and an incorrect answer, after <code>&lt;/itemBody&gt;</code> (verified by import):</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode xml code-with-copy"><code class="sourceCode xml"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="er">&lt;</span>/itemBody&gt;</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">rubricBlock</span><span class="ot"> view=</span><span class="st">"scorer"</span>&gt;&lt;<span class="kw">p</span>&gt;For the record; ANS ignores this one.&lt;/<span class="kw">p</span>&gt;&lt;/<span class="kw">rubricBlock</span>&gt;</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">modalFeedback</span><span class="ot"> outcomeIdentifier=</span><span class="st">"FEEDBACK"</span><span class="ot"> showHide=</span><span class="st">"show"</span><span class="ot"> identifier=</span><span class="st">"correct"</span>&gt;&lt;<span class="kw">div</span>&gt;Explanation.&lt;/<span class="kw">div</span>&gt;&lt;/<span class="kw">modalFeedback</span>&gt;</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">modalFeedback</span><span class="ot"> outcomeIdentifier=</span><span class="st">"FEEDBACK"</span><span class="ot"> showHide=</span><span class="st">"show"</span><span class="ot"> identifier=</span><span class="st">"incorrect"</span>&gt;&lt;<span class="kw">div</span>&gt;Explanation.&lt;/<span class="kw">div</span>&gt;&lt;/<span class="kw">modalFeedback</span>&gt;</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">responseProcessing</span> <span class="er">...</span>/&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The same two feedback blocks work on choice questions (<code>--feedback</code>, for practice tests). ANS’s API (<code>PATCH /api/v2/questions/{id}</code>, field <code>grading_description</code>, personal token) could set a fill-in’s model answer directly; that route is untested.</p>
+</section>
+<section id="open-questions-with-grading-criteria-1" class="level3">
+<h3 class="anchored" data-anchor-id="open-questions-with-grading-criteria-1">6.5 Open questions with grading criteria</h3>
+<p>An <code>extendedTextInteraction</code> with <code>expectedLength="0"</code>, <strong>no <code>responseProcessing</code></strong>, the model answer as a scorer rubric at the end of <code>itemBody</code>, and the criteria after <code>&lt;/itemBody&gt;</code> (verified):</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode xml code-with-copy"><code class="sourceCode xml"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">rubricScoring</span>&gt;</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">criterion</span><span class="ot"> points=</span><span class="st">"0.5"</span>&gt;&lt;<span class="kw">div</span>&gt;Names the test statistic.&lt;/<span class="kw">div</span>&gt;&lt;/<span class="kw">criterion</span>&gt;</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">criterion</span><span class="ot"> points=</span><span class="st">"0.5"</span>&gt;&lt;<span class="kw">div</span>&gt;Interprets the p-value as conditional on H0.&lt;/<span class="kw">div</span>&gt;&lt;/<span class="kw">criterion</span>&gt;</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">rubricScoring</span>&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The criteria must add up to the question’s points.</p>
+</section>
+<section id="multi-part-exercises-1" class="level3">
+<h3 class="anchored" data-anchor-id="multi-part-exercises-1">6.6 Multi-part exercises</h3>
+<p>Parts with the same exercise id and title, as <code>QUE_&lt;id&gt;_1.xml</code>, <code>QUE_&lt;id&gt;_2.xml</code>, …, are regrouped by ANS into one exercise with the parts in order (verified, including ANS’s own 5-part export re-imported). The shared scenario goes at the top of question 1.</p>
+</section>
+</section>
+<section id="media-maths-links" class="level2">
+<h2 class="anchored" data-anchor-id="media-maths-links">7. Media, maths, links</h2>
+<ul>
+<li><strong>Images and data files</strong> travel inside the package, referenced by relative <code>src</code> / <code>href</code> and listed as <code>&lt;file&gt;</code> entries of their item (rule 5). They become real ANS attachments that students can download (verified with <code>.png</code>, <code>.jasp</code> and <code>.csv</code>).</li>
+<li><strong>Maths</strong> goes in as <code>$$...$$</code>, which ANS turns into its equation component; MathML gets flattened. Tables in plain HTML are fine.</li>
+<li><strong>External links</strong> survive. Prefer stable sites (the publisher’s or the software’s own pages) over self-hosted copies that may move.</li>
+</ul>
+</section>
+<section id="checking-an-import" class="level2">
+<h2 class="anchored" data-anchor-id="checking-an-import">8. Checking an import</h2>
+<p>After every import, the teacher exports the bank as QTI 2.X (and, if possible, as a Respondus package) and gives you the export. Run <code>tools/check-import.py</code> on it with the build’s <code>expected.json</code>. Per question it checks</p>
+<ul>
+<li>present, with the right exercise title and number of parts;</li>
+<li>points;</li>
+<li>the model answer in the scorer rubric (choice and open questions);</li>
+<li><strong>the answer not visible in the question text</strong> (the failure that matters most);</li>
+<li>feedback on fill-in questions;</li>
+<li>accepted keys and margins of every gap;</li>
+<li>the correct options and their weights;</li>
+<li>criteria (points and text);</li>
+<li>attachments present.</li>
+</ul>
+<p>Report every failed check to the teacher, with what the export holds.</p>
+</section>
+<section id="what-the-builder-changes-in-rexams-output" class="level2">
+<h2 class="anchored" data-anchor-id="what-the-builder-changes-in-rexams-output">9. What the builder changes in R/exams output</h2>
+<p>R/exams (<code>exams2qti21()</code>) is a good base, but ANS needs its output reshaped. The builder (<code>tools/ans_package.py</code>) does all of this; it matters when you debug or write packages yourself.</p>
+<table class="table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>R/exams writes</th>
+<th>ANS needs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>the solution as <code>modalFeedback</code> (ANS drops it)</td>
+<td>a scorer <code>rubricBlock</code> (choice, open) or correct/incorrect feedback (fill-in)</td>
+</tr>
+<tr class="even">
+<td>a separate manifest resource per media file</td>
+<td><code>&lt;file&gt;</code> entries of the item</td>
+</tr>
+<tr class="odd">
+<td><code>cloze</code> with several float gaps</td>
+<td>ANS’s multi-gap form (6.3)</td>
+</tr>
+<tr class="even">
+<td>item titles “1”, “2”, …</td>
+<td>the title from <code>exextra[anstitle]</code></td>
+</tr>
+<tr class="odd">
+<td><code>expectedLength="1000"</code> on open questions</td>
+<td><code>expectedLength="0"</code>, no response processing</td>
+</tr>
+<tr class="even">
+<td>MathML</td>
+<td><code>$$...$$</code></td>
+</tr>
+</tbody>
+</table>
+<p>Two R/exams behaviors to keep in mind when writing questions: <code>expoints</code> in a <code>cloze</code> is per gap (R/exams recycles it), and <code>exshuffle: TRUE</code> shuffles once at build time.</p>
+</section>
+<section id="what-is-verified-and-how" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-verified-and-how">10. What is verified, and how</h2>
+<table class="table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Behavior</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>QTI 2.1 legacy: choice and open model answers, criteria, multi-part regrouping, attachments, numeric gaps with margin</td>
+<td>verified by import and re-export (Sept/Oct 2026)</td>
+</tr>
+<tr class="even">
+<td>Fill-in rubric inside <code>itemBody</code> leaks into the question</td>
+<td>verified (do not do it)</td>
+</tr>
+<tr class="odd">
+<td>Separate media resources create an empty exercise</td>
+<td>verified (do not do it)</td>
+</tr>
+<tr class="even">
+<td>Correct/incorrect feedback on gaps and choice questions</td>
+<td>verified by import, checked on screen</td>
+</tr>
+<tr class="odd">
+<td>ANS multi-gap form with <code>low;high</code> ranges</td>
+<td>verified by import, checked on screen</td>
+</tr>
+<tr class="even">
+<td>Exact gaps (margin 0)</td>
+<td>the plain key alone imports as an alphanumeric gap (seen October 2026); <code>123</code> plus <code>123;123</code> is ANS’s own export form, not yet confirmed after import</td>
+</tr>
+<tr class="odd">
+<td>Extra accepted keys (comma decimals, other sign) from a package</td>
+<td>in ANS’s own exports; not yet checked key by key after import</td>
+</tr>
+<tr class="even">
+<td>Per-option (<code>choiceN</code>) feedback on import</td>
+<td>seen in exports, not tested on import</td>
+</tr>
+<tr class="odd">
+<td>ANS API for fill-in model answers</td>
+<td>untested</td>
+</tr>
+<tr class="even">
+<td>Respondus CSV import</td>
+<td>works, but unsuitable for exams (rule 1)</td>
+</tr>
+<tr class="odd">
+<td>QTI 3.0 import</td>
+<td>loses fill-in context and model answers</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

@@ -1,0 +1,50 @@
+```{r}
+#| include: false
+# Exercise 3, part a: single choice with four options. Each wrong option is a nameable
+# mistake (df, SD for SE, direction), and the solution names it.
+```
+
+Question
+========
+Both Ozzy Osbourne and Judas Priest have been accused of putting backward masked messages on their albums that subliminally influence poor unsuspecting teenagers into doing Very Bad things. A psychologist was interested in whether backward masked messages could have an effect. He created a version of Taylor Swift's 'Shake it Off' that contained the masked message 'deliver your soul to the dark lord' repeated in the chorus. He took this version, and the original, and played one version (randomly) to a group of 32 veterinary students. Six months later he played them whatever version they hadn't heard the time before. So each student heard both the original and the version with the masked message, but at different points in time. The psychologist measured the number of goats that the students sacrificed in the week after listening to each version.
+
+[Download the data](https://discoverjasp.com/repository/dsj1_data/data/dark_lord.jasp). The data set contains three variables:
+
+- **id** - participant code
+- **message** - number of goats sacrificed after the version with the masked message
+- **nomessage** - number of goats sacrificed after the normal version
+
+Every person is measured once after each version of the song.
+
+Analyze whether the type of music you hear influences goat sacrificing, using a paired-samples t-test with message as the first measure ([how to](https://jasp-stats.github.io/jasp-video-library/All_T-Tests.html#paired-all)). Use alpha = 0.05. What is the correct way to report the test results?
+
+Answerlist
+----------
+* Fewer goats were sacrificed after hearing the backward message (M = 9.16, SE = 0.63), than after hearing the normal version of the song (M = 11.50, SE = 0.78). This difference, -2.34, 95% CI [-4.07, -0.61], was significant, t(31) = -2.76, p = 0.010.
+* Fewer goats were sacrificed after hearing the backward message (M = 9.16, SE = 0.63), than after hearing the normal version of the song (M = 11.50, SE = 0.78). This difference, -2.34, 95% CI [-4.07, -0.61], was significant, t(62) = -2.76, p = 0.010.
+* Fewer goats were sacrificed after hearing the backward message (M = 9.16, SE = 3.55), than after hearing the normal version of the song (M = 11.50, SE = 4.38). This difference, -2.34, 95% CI [-4.07, -0.61], was significant, t(31) = -2.76, p = 0.010.
+* More goats were sacrificed after hearing the backward message (M = 9.16, SE = 0.63), than after hearing the normal version of the song (M = 11.50, SE = 0.78). This difference, -2.34, 95% CI [-4.07, -0.61], was significant, t(31) = -2.76, p = 0.010.
+
+Solution
+========
+Fewer goats were sacrificed after hearing the backward message (M = 9.16, SE = 0.63), than after hearing the normal version of the song (M = 11.50, SE = 0.78). This difference, -2.34, 95% CI [-4.07, -0.61], was significant, t(31) = -2.76, p = 0.010.
+
+The confidence interval does not cross zero suggesting (if we assume that it is one of the 95% of confidence intervals that contain the true value) that the effect in the population is unlikely to be zero. The other options have the wrong degrees of freedom (the same 32 students heard both versions, so df = N - 1 = 31), the standard deviations instead of the standard errors (3.55 and 4.38), or the direction flipped.
+
+DSUJ §9.11, p. 390. discoverjasp: [Task 9.9](https://discoverjasp.com/pages/smart_alex.html#task-9.9), [results](https://discoverjasp.com/repository/dsj1_alex/alex_09_09.html).
+
+Answerlist
+----------
+* True.
+* False.
+* False.
+* False.
+
+Meta-information
+================
+exname: dsj-09-darklord-a-report
+extype: schoice
+exsolution: 1000
+exshuffle: TRUE
+exextra[exercise]: dsj-09-darklord
+exextra[anstitle]: discoverjasp Smart Alex 9.9 - backward messages (paired t-test)

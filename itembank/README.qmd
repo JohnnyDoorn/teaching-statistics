@@ -1,0 +1,217 @@
+---
+title: "Writing ANS questions as text files"
+subtitle: "Examples and tools for building an ANS question bank with R/exams"
+author: "Johnny van Doorn"
+date: "16 October 2026"
+---
+
+This folder shows how we write questions for **ANS** at the Psychology department of the
+University of Amsterdam. Each question is a small text file. A builder turns a folder of these
+files into one package, and ANS imports that package with the parts that normally take hand work
+already in place, such as **model answers**, **grading criteria** for open questions, numeric
+fill-in gaps with a margin, multi-part exercises, data files and maths.
+
+Why files instead of the ANS editor? Questions in files can be searched, reused, compared across
+years and checked. Every key in the examples below was recomputed from the data, and a coding
+agent can read and write the files too. Everything here was settled by test imports into ANS in
+September and October 2026. Where something is only partly tested, the agent instructions say so.
+
+## What is in this folder
+
+| File or folder | For whom | What it holds |
+|----------------|--------|----------------------------|
+| `README.qmd` (this page) | you | how it works, how to try it, how to write your own questions |
+| [`ans-agent-instructions.qmd`](ans-agent-instructions.html) | your coding agent | the question format, what ANS accepts and drops, and what is verified |
+| `examples/` | both | 12 example questions in 3 exercises, the built package and a preview |
+| `tools/` | both | the builder (R), the packaging step it calls (Python) and an import checker |
+
+## The examples
+
+Three exercises built on Smart Alex tasks from Chapter 9 (comparing two means) of *Discovering
+Statistics Using JASP* (Field, van Doorn & Wagenmakers, 2025). The scenarios and model answers
+follow the [Smart Alex answers on discoverjasp.com](https://discoverjasp.com/pages/smart_alex.html),
+and the questions link to the data files there rather than shipping copies. Every key was
+recomputed in R from those data files.
+
+| Exercise | Smart Alex | Questions | What it shows |
+|-----------|------|-----:|---------------------------|
+| Spider anxiety (paired t-test) | 9.1-9.2 | 5 | a multi-part exercise with a shared scenario; single choice; tick-all; two numeric gaps in one question, accepting either sign of t |
+| Pets and life satisfaction (t-test and linear model) | 9.5-9.6 | 5 | numeric gaps with a margin; a single fill-in gap with its explanation as feedback; tick-all with symbols |
+| Backward messages (paired t-test) | 9.9 | 2 | single choice whose wrong options are named mistakes; an open question with grading criteria |
+
+[Preview every question with its answer](examples/EXAMPLES.html), or
+[download the package](examples/EXAMPLES.zip) and try it in ANS.
+
+## Try it in ANS
+
+1. Download [`EXAMPLES.zip`](examples/EXAMPLES.zip).
+2. In ANS, open a question bank (a scratch bank is safest), go to **Settings > Import** and
+   choose **QTI 2.X package (Legacy)**. Not *QTI 3.0*, and not *Respondus*.
+3. Three exercises appear outside any folder, with titles that start with "EXAMPLE". Move them to
+   a folder if you like.
+4. Open them and look at what normally takes hand work. The choice and open questions have their
+   model answers, the open question has its grading criteria, some questions hold two gaps (each
+   with a margin), and the fill-in questions carry their explanation as feedback.
+
+## Build it yourself
+
+You need R with the packages `exams` and `jsonlite`, pandoc (RStudio ships one) and Python 3.
+From this folder, run
+
+```sh
+Rscript tools/build-ans.R examples
+```
+
+This writes three files into `examples/`.
+
+- `EXAMPLES.zip`, the package to import;
+- `EXAMPLES.html`, a preview of every question with its solution;
+- `EXAMPLES.expected.json`, what each question should look like after import (for the checker
+  below).
+
+| Option | What it does |
+|-------------|---------------------|
+| `--html` | builds the preview only, which is faster |
+| `--title-prefix="TEST "` | puts a prefix before every title, handy for a trial import |
+| `--feedback` | gives every choice question its solution as feedback too (practice tests) |
+| `--out=folder` | writes the output somewhere else |
+| `--seed=N` | redraws randomized questions |
+
+The package in `examples/` was built with `--title-prefix="EXAMPLE "`.
+
+To write your own questions, make a new folder, copy the example that looks most like what you
+need, change it, and build the folder. One file per question; the file names set the order, so
+number them, and give the parts of one exercise names that sort next to each other.
+
+## Anatomy of a question file
+
+A question file is plain text in the R/exams format, saved as `.qmd` (or `.Rmd`). Here is the
+part of the spider exercise with two gaps, `examples/1-spider-c-t.qmd`, slightly shortened:
+
+````markdown
+Question
+========
+Test in JASP whether there is a difference between the mean anxiety for the picture and
+the mean anxiety for the real spider. What is the calculated t-value? Round to two
+decimal places.
+
+t-value: ##ANSWER1##
+
+Degrees of freedom: ##ANSWER2##
+
+Answerlist
+----------
+*
+*
+
+Solution
+========
+The test statistic, t, is calculated by dividing the mean of differences by the standard
+error of differences (t = -7/2.8311 = -2.47). ... When the same participants have been
+used, the degrees of freedom are the sample size minus 1 (df = N - 1 = 11).
+
+DSUJ §9.9, p. 384.
+
+Meta-information
+================
+exname: dsj-09-spider-c-t
+extype: cloze
+exsolution: -2.47|11
+exclozetype: num|num
+extol: 0.01|0
+expoints: 0.5
+exextra[alt]: 2.47|
+exextra[exercise]: dsj-09-spider
+exextra[anstitle]: discoverjasp Smart Alex 9.1-9.2 - spider anxiety (paired t-test)
+````
+
+**Question** is what students see. Its **Answerlist** holds the options of a choice question, or
+one empty line per gap. **Solution** becomes the model answer, and in a choice question a second
+Answerlist marks the options, with one `* True.` or `* False.` line per option in the same order.
+**Meta-information** says what kind of question it is and what the key is.
+
+| Field | What it does |
+|---------|---------------------------------|
+| `extype` | `schoice` (single choice), `mchoice` (tick-all), `num` (one numeric gap), `cloze` (several gaps) or `string` (an open question, with the essay fields below) |
+| `exsolution` | the key, as `100` for options (1 marks a correct one), a number for a gap, or `-2.47\|11` for several gaps |
+| `extol` | the margin of each numeric gap |
+| `expoints` | the points; in a `cloze`, the points per gap |
+| `exshuffle` | shuffles the options once, when the package is built (ANS can also shuffle per student) |
+| `exextra[exercise]` | questions with the same value become one exercise with several parts |
+| `exextra[anstitle]` | the title ANS shows; parts of one exercise share it |
+| `exextra[alt]` | extra accepted answers per gap, with `\|` between the gaps |
+| `exstringtype: essay` | with `exextra[essay,logical]: TRUE`, turns a `string` question into an open question with an essay field |
+
+In an open question, a **Criteria** list at the end of the solution becomes the grading criteria
+in ANS (see `examples/3-darklord-b-essay.qmd`). The [R/exams website](https://www.r-exams.org)
+documents the format in full, including questions that draw new numbers every time they are built.
+
+## What the builder checks for you
+
+The build stops, with a message that says what to fix, when
+
+1. a tick-all question does not say that at least one statement is true (ANS's correction for
+   guessing assumes it);
+2. a gap has no label right before it (students miss unlabelled gaps);
+3. a question holds more than one answer field, apart from several numeric gaps;
+4. the grading criteria of an open question do not add up to its points;
+5. the parts of an exercise do not sort next to each other.
+
+## What ANS cannot import
+
+- **A model answer for a fill-in question.** The builder puts the explanation in as question
+  feedback instead, the same text for a right and a wrong answer.
+- **A separate text block above a multi-part exercise.** The shared scenario ends up at the top
+  of the first question, which reads fine.
+- **Folders and tags.** Imported questions land outside any folder.
+
+## Our conventions
+
+These are our choices, not rules of ANS, so adapt them to your course.
+
+- The correct option comes first in the file; the build shuffles.
+- Numeric answers are fill-in gaps with a margin rather than ANS's own numerical question type,
+  because a gap shows you exactly what students typed. In a question with several gaps, the
+  builder also accepts the obvious variants of each key, such as `0,035` and `.035` for `0.035`.
+- Every wrong option is a mistake you can name, and the model answer names it.
+- Every model answer ends with its source (book section and page, lecture slides), for whoever
+  checks the questions.
+- Keys are computed from the data, never copied from a published answer.
+- The question states alpha whenever the answer depends on it.
+
+## Working with a coding agent
+
+Give your agent (Claude Code or similar) [`ans-agent-instructions.qmd`](ans-agent-instructions.html)
+before it reads, writes or builds any ANS question. It then knows the format above, which import
+route works, what ANS silently drops, and how to check an import. These requests work well.
+
+- "Read ans-agent-instructions.qmd. Convert the questions in this ANS export (the QTI 2.X export
+  and the Respondus package) into that format, one file per question."
+- "Write two tick-all questions about the paired t-test in the format of examples/, and compute
+  the keys from this data file."
+- "Build my folder with a TEST prefix, and after I import it, compare my re-export with the
+  expected file."
+
+## Check an import
+
+After an import, export the bank again (**Settings > Export**, the QTI 2.X export and, if you
+like, the Respondus package), unzip it, and run
+
+```sh
+python3 tools/check-import.py path/to/export --expected examples/EXAMPLES.expected.json
+```
+
+It prints one line per check (titles, parts, points, model answers, feedback, accepted answers,
+criteria, attachments) and marks failures with `XX`. The check that matters most is that no model
+answer ended up in the text students see.
+
+## Credits
+
+- Field, A., van Doorn, J., & Wagenmakers, E.-J. (2025). *Discovering statistics using JASP*.
+  Sage. Smart Alex tasks, answers and data at [discoverjasp.com](https://discoverjasp.com).
+- Zeileis, A., Umlauf, N., & Leisch, F. (2014). Flexible generation of e-learning exams in R:
+  Moodle quizzes, OLAT assessments, and beyond. *Journal of Statistical Software, 58*(1), 1-36.
+  <https://doi.org/10.18637/jss.v058.i01>
+- The questions link to the [JASP video library](https://jasp-stats.github.io/jasp-video-library/)
+  for how to run each analysis.
+- The tools are free software under this repository's GPL-3 license.

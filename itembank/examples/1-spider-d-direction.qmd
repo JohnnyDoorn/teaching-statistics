@@ -1,0 +1,38 @@
+```{r}
+#| include: false
+# Exercise 1, part d: single choice. The stem states alpha because the decision
+# depends on it.
+```
+
+Question
+========
+Is anxiety indeed higher for real spiders than for pictures? Use alpha = 0.05.
+
+Answerlist
+----------
+* Yes, the real spider led to significantly greater anxiety than the picture.
+* No, the picture led to significantly greater anxiety than the real spider.
+* No, there is no significant difference between the picture and the real spider.
+
+Solution
+========
+The two-tailed probability for the spider data is very low (p = 0.031) and significant because 0.031 is smaller than the widely-used criterion of 0.05. The fact that the t-value is a negative number tells us that the first condition (the picture condition) had a smaller mean than the second (the real condition) and so the real spider led to greater anxiety than the picture. Therefore, we can conclude that exposure to a real spider caused significantly more reported anxiety in arachnophobes than exposure to a picture, t(11) = -2.47, p = .031.
+
+On average, participants experienced significantly greater anxiety with real spiders (M = 47.00, SE = 3.18) than with pictures of spiders (M = 40.00, SE = 2.68).
+
+DSUJ §9.9, p. 384; §9.11, p. 390. discoverjasp: [Task 9.1](https://discoverjasp.com/pages/smart_alex.html#task-9.1), [results](https://discoverjasp.com/repository/dsj1_alex/alex_09_01-02.html).
+
+Answerlist
+----------
+* True.
+* False.
+* False.
+
+Meta-information
+================
+exname: dsj-09-spider-d-direction
+extype: schoice
+exsolution: 100
+exshuffle: TRUE
+exextra[exercise]: dsj-09-spider
+exextra[anstitle]: discoverjasp Smart Alex 9.1-9.2 - spider anxiety (paired t-test)

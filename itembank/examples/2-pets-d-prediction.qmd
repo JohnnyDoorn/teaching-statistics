@@ -1,0 +1,29 @@
+```{r}
+#| include: false
+# Exercise 2, part d: one numeric gap (extype: num). The one-line Answerlist in the
+# Question is the gap's label. A fill-in's solution goes into ANS as question feedback,
+# because ANS does not import model answers for fill-in questions.
+```
+
+Question
+========
+Fit a linear model to the data to see whether life satisfaction is significantly predicted from the type of animal ([how to](https://jasp-stats.github.io/jasp-video-library/All_Regression.html#main-analysis-single-predictor)). What does this regression model predict for a cat owner? Use two decimals.
+
+Answerlist
+----------
+* Predicted life satisfaction:
+
+Solution
+========
+In the Coefficients table, the intercept is 38.17 (the mean of the fish group, the reference category) and b for pet (Cat) is 21.96, the difference between the two group means. So the prediction for a cat owner is 38.17 + 21.96 = 60.13, the mean of the cat group.
+
+DSUJ §9.4, p. 371. discoverjasp: [Task 9.6](https://discoverjasp.com/pages/smart_alex.html#task-9.6), [results](https://discoverjasp.com/repository/dsj1_alex/alex_09_05-06.html).
+
+Meta-information
+================
+exname: dsj-09-pets-d-prediction
+extype: num
+exsolution: 60.13
+extol: 0.01
+exextra[exercise]: dsj-09-pets
+exextra[anstitle]: discoverjasp Smart Alex 9.5-9.6 - pets and life satisfaction (t-test and linear model)

@@ -1,0 +1,39 @@
+```{r}
+#| include: false
+# Exercise 1, part b: a tick-all question (extype: mchoice), two statements true.
+# The stem must say that at least one statement is true (ANS's guessing correction
+# assumes it); the builder stops if it does not.
+```
+
+Question
+========
+Before we continue with the t-test, it is useful to first clarify the hypotheses for yourself. What is the correct formulation of the null hypothesis and alternative hypothesis? Check the statement(s) that is/are true; at least one statement is true.
+
+Answerlist
+----------
+* Null hypothesis: There is no difference between the anxiety of arachnophobes for the picture and for the real spider.
+* Alternative hypothesis: There is a difference between the anxiety of arachnophobes for the picture and for the real spider.
+* Null hypothesis: There is a difference between the anxiety of arachnophobes for the picture and for the real spider.
+* Alternative hypothesis: There is no difference between the anxiety of arachnophobes for the picture and for the real spider.
+
+Solution
+========
+In words, the hypotheses are as follows: Null hypothesis: There is no difference between the anxiety of arachnophobes for the picture and for the real spider. Alternative hypothesis: There is a difference between the anxiety of arachnophobes for the picture and for the real spider.
+
+DSUJ §2.10.2, p. 84. discoverjasp: [Task 9.1](https://discoverjasp.com/pages/smart_alex.html#task-9.1).
+
+Answerlist
+----------
+* True.
+* True.
+* False.
+* False.
+
+Meta-information
+================
+exname: dsj-09-spider-b-hypotheses
+extype: mchoice
+exsolution: 1100
+exshuffle: TRUE
+exextra[exercise]: dsj-09-spider
+exextra[anstitle]: discoverjasp Smart Alex 9.1-9.2 - spider anxiety (paired t-test)

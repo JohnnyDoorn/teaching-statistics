@@ -1,0 +1,39 @@
+```{r}
+#| include: false
+# Exercise 2, part e: tick-all; the solution says why each false statement is false.
+```
+
+Question
+========
+What do you notice about the t-value and significance in this model compared to the t-tests? Check the statement(s) that is/are true; at least one statement is true.
+
+Answerlist
+----------
+* If we would have used the Student t-test, the results would be identical.
+* The sign of t merely reflects which way around you coded the fish and cat groups.
+* The linear model gives the same t-value as Welch's t-test.
+* The b for pet (Cat) is the mean life satisfaction of cat owners.
+
+Solution
+========
+Compare this output with the one from the t-test: the values of t and p are almost the same. If we would have used the Student t-test, the results would be identical (t = 3.45, p = 0.003). (Technically, t is different because for the linear model it is a positive value and for the t-test it is negative. However, the sign of t merely reflects which way around you coded the fish and cat groups. The linear model, by default, has coded the groups the opposite way around to the t-test.) The main point is that whether you run these data through the regression or t-test menus, the results are identical (if you give up the robustness to unequal variances, which does not exist in normal regression).
+
+The b for pet (Cat), 21.96, is the difference between the two group means, not the mean of the cat owners.
+
+DSUJ §9.4, p. 371. discoverjasp: [Task 9.6](https://discoverjasp.com/pages/smart_alex.html#task-9.6), [results](https://discoverjasp.com/repository/dsj1_alex/alex_09_05-06.html).
+
+Answerlist
+----------
+* True.
+* True.
+* False.
+* False.
+
+Meta-information
+================
+exname: dsj-09-pets-e-statements
+extype: mchoice
+exsolution: 1100
+exshuffle: TRUE
+exextra[exercise]: dsj-09-pets
+exextra[anstitle]: discoverjasp Smart Alex 9.5-9.6 - pets and life satisfaction (t-test and linear model)

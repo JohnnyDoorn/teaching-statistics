@@ -1,0 +1,45 @@
+```{r}
+#| include: false
+# Exercise 2, part a: a new exercise starts (new exextra[exercise]). Two numeric gaps,
+# each with a margin of 0.01.
+```
+
+Question
+========
+A researcher collected data from people who had fish or cats as pets and measured their life satisfaction as well as how much they like animals. Does life satisfaction depend upon the type of pet a person has?
+
+[Download the data](https://discoverjasp.com/repository/dsj1_data/data/pets.jasp). The data set contains three variables:
+
+- **pet**: Fish or Cat - independent variable
+- **animal** - how much the person likes animals (not used here)
+- **life_satisfaction** - dependent variable
+
+Each independent variable is measured between subjects.
+
+What are the observed group means for each condition? Round to two decimals.
+
+Fish: ##ANSWER1##
+
+Cat: ##ANSWER2##
+
+Answerlist
+----------
+* 
+* 
+
+Solution
+========
+On average, the life satisfaction of cat owners (M = 60.13, SE = 3.93) was higher than that of people who had fish as pets (M = 38.17, SE = 4.48).
+
+DSUJ §9.8, p. 380. discoverjasp: [Task 9.5](https://discoverjasp.com/pages/smart_alex.html#task-9.5), [results](https://discoverjasp.com/repository/dsj1_alex/alex_09_05-06.html).
+
+Meta-information
+================
+exname: dsj-09-pets-a-means
+extype: cloze
+exsolution: 38.17|60.13
+exclozetype: num|num
+extol: 0.01|0.01
+expoints: 0.5
+exextra[exercise]: dsj-09-pets
+exextra[anstitle]: discoverjasp Smart Alex 9.5-9.6 - pets and life satisfaction (t-test and linear model)
