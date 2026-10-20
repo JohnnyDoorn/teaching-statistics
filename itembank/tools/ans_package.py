@@ -83,7 +83,7 @@ def strip_answer_list(sol):
     """exams2qti21 ends a choice item's feedback with each option and True/False."""
     if sol and sol[-1].tag == Q + "ul":
         lis = list(sol[-1])
-        if lis and all(re.search(r"(True|False)\s*$", text_of(li)) for li in lis):
+        if lis and all(re.search(r"(True|False)\.?\s*$", text_of(li)) for li in lis):   # "* True." in our files
             sol = sol[:-1]
             if sol and sol[-1].tag == Q + "br":
                 sol = sol[:-1]

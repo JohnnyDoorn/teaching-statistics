@@ -16,7 +16,7 @@ What you should know: how to assess, robust alternatives, and why these assumpti
   - Welch $t$-test
   - Welch $F$ (one-way ANOVA *only*: Assumption Checks → Homogeneity corrections)
 - Non-normality: nonparametric test (Chapter 15; lecture 20)
-  - Mann-Whitney, Wilcoxon signed-rank, Kruskal-Wallis
+  - Mann-Whitney, Wilcoxon signed-rank, Kruskal-Wallis, Friedman
 - Question can give a decision rule, e.g., "use nonparametric test if more than 5 points fall outside the Q-Q confidence band"
 - ANCOVA: no robust version, so have to eat the grain of salt if normality or variances seem problematic
 

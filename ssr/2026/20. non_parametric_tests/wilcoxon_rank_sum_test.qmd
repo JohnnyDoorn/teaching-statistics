@@ -37,13 +37,25 @@ data$rankedBDI <- rank(data$Sunday.BDI)
 
 
 ## Example
-[Link](https://discoverjasp.com/repository/dsj1_data/data/drug_long.jasp)
+`r dsjLinks("drug_long")`
 
 ```{r wrs-example, echo=FALSE}
 ssrTable(data, height = 300,
           options = list(dom = 'Bfrtip',
                          buttons = c('csv')))
 ```
+
+## Q-Q plot of the residuals {.smaller}
+
+Sunday BDI, independent $t$-test in JASP: Assumption Checks → Q-Q plot residuals → Confidence interval^[The book (Figure 15.4) checks the raw scores per group, with separate Q-Q plots from the Descriptives module. Its Q-Q plots (also Figures 15.10 and 15.13) have no confidence band, which JASP added later.]
+
+More on this in the [extra text on skewed data](https://johnnydoorn.github.io/teaching-statistics/extra-texts/violating-assumptions-anova.html#t-test-with-skewed-data) (Student, Welch or Mann-Whitney?)
+
+```{r wrs-qq-plot, echo=FALSE, fig.width=6, fig.height=4.5, out.width='390px', fig.align='center'}
+groupMeans <- tapply(data$Sunday.BDI, data$Drug, mean)
+qqJasp(as.vector(scale(data$Sunday.BDI - groupMeans[data$Drug])))
+```
+
 
 ## Test statistic W is the sum of ranks per group {.subsection .smaller}
 
@@ -59,7 +71,7 @@ W <- rankSums[1, 2]
 W
 ```
 
-## Subtracting the minimum score
+## Subtracting the minimum score {.smaller}
 
 JASP reports the value of U, which is W with its minimum value subtracted:
 
@@ -69,6 +81,13 @@ W.min <- sum(1:10); W.min
 U <- W - W.min
 U
 ```
+
+```{r wrs-u-ecstasy, echo=FALSE}
+U.ecstasy <- rankSums[rankSums$Drug == "Ecstasy", 2] - W.min
+```
+
+- JASP (and the book) take the ecstasy group: `r rankSums[rankSums$Drug == "Ecstasy", 2]` - `r W.min` = `r U.ecstasy`
+- The two add up to $n_1 n_2$ = `r U + U.ecstasy`
 
 ## Normal approximation for W
 
@@ -124,6 +143,12 @@ z
 ```{r wrs-test-for-significance-2-sided, echo=FALSE, warning=FALSE, fig.align='center'}
 visualize_normal_base(z, side = "two-sided")
 ```
+
+```{r wrs-jasp-p, echo=FALSE}
+jaspMW <- suppressWarnings(wilcox.test(Sunday.BDI ~ factor(Drug, levels = c("Ecstasy", "Alcohol")), data = data))
+```
+
+JASP: *U* = `r jaspMW$statistic`, *p* = `r sub("^0", "", sprintf("%.3f", jaspMW$p.value))`, a bit higher because of a continuity correction (Jane Superbrain 15.2)
 
 
 ## Test for significance 1 sided

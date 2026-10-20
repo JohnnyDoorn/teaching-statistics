@@ -159,6 +159,34 @@ externalSets <- list(
   "equivalence-anova-t-test" = c(
     Results = "https://johnnydoorn.github.io/teaching-statistics/datasets/equivalenceBetweenANOVA_and_TTest.jasp",
     HTML    = "https://johnnydoorn.github.io/teaching-statistics/datasets/equivalenceBetweenANOVA_and_TTest.html"
+  ),
+  # Lecture 20 recap of lecture 18: the same csv, with the results file that also has the
+  # two regressions (2024, old column names; stays in datasets/ like the one above).
+  "equivalence-anova-t-test-regression" = c(
+    Data    = "https://johnnydoorn.github.io/teaching-statistics/datasets/2026/equivalence-anova-t-test.csv",
+    Results = "https://johnnydoorn.github.io/teaching-statistics/datasets/equivalenceBetweenAllTests.jasp",
+    HTML    = "https://johnnydoorn.github.io/teaching-statistics/datasets/equivalenceBetweenAllTests.html"
+  ),
+  # Lecture 20: Field's data, hosted by discoverjasp in all three columns (like puppies).
+  "drug_long" = c(
+    Data    = "https://discoverjasp.com/repository/dsj1_data/data/drug_long.jasp",
+    Results = "https://discoverjasp.com/repository/dsj1_data/results/drug_long.jasp",
+    HTML    = "https://discoverjasp.com/repository/dsj1_data/html/drug_long.html"
+  ),
+  "drug_wide" = c(
+    Data    = "https://discoverjasp.com/repository/dsj1_data/data/drug_wide.jasp",
+    Results = "https://discoverjasp.com/repository/dsj1_data/results/drug_wide.jasp",
+    HTML    = "https://discoverjasp.com/repository/dsj1_data/html/drug_wide.html"
+  ),
+  "soya" = c(
+    Data    = "https://discoverjasp.com/repository/dsj1_data/data/soya.jasp",
+    Results = "https://discoverjasp.com/repository/dsj1_data/results/soya.jasp",
+    HTML    = "https://discoverjasp.com/repository/dsj1_data/html/soya.html"
+  ),
+  "diet" = c(
+    Data    = "https://discoverjasp.com/repository/dsj1_data/data/diet.jasp",
+    Results = "https://discoverjasp.com/repository/dsj1_data/results/diet.jasp",
+    HTML    = "https://discoverjasp.com/repository/dsj1_data/html/diet.html"
   )
 )
 

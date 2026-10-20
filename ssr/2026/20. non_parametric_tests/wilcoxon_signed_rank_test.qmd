@@ -10,7 +10,7 @@ Paired 2 samples
 ## Wilcoxon signed-rank test {.section}
 
 
-The Wilcoxon signed-rank test is a nonparametric alternative to the paired samples t-test. It assigns + or - signs to the difference between two repeated measures. By ranking the *absolute* differences and summing these ranks for the positive group, the null hypothesis is tested that both positive and negative differences are equal.
+The Wilcoxon signed-rank test is a nonparametric alternative to the paired samples t-test. It assigns + or - signs to the difference between two repeated measures. By ranking the *absolute* differences and summing these ranks for the positive group, the null hypothesis is tested that positive and negative differences are equally likely.
 
 <!-- ## Simulate data -->
 
@@ -37,21 +37,22 @@ data <- data.frame(Sunday, Wednesday)
 ```
 
 ## Example
+`r dsjLinks("drug_wide")`
+
 ```{r wsr-example-data, echo=FALSE}
-ssrTable(data, options = list(iDisplayLength = 7))
+ssrTable(data, height = 330, options = list(iDisplayLength = 7))
 
 # Write data for use in SPSS
 # write.csv(data, "mann-whitney-signed-rank.csv", row.names=FALSE)
 ```
 
-## Example
+## Q-Q plot of the differences {.smaller}
 
-```{r wsr-example-qq-plot, echo=FALSE}
-par(pty = "s")
-qqnorm(scale(Sunday), main = "Normal Q-Q Plot", bty = "n", xlim = c(-1.5, 1.5), ylim = c(-1.5, 1.5))
-qqline(scale(Sunday), col = "darkred", lwd = 2)  # Adds a reference line for normality
-# Write data for use in SPSS
-# write.csv(data, "mann-whitney-signed-rank.csv", row.names=FALSE)
+Paired samples $t$-test in JASP: Assumption Checks → Q-Q plot residuals → Confidence interval
+
+```{r wsr-example-qq-plot, echo=FALSE, fig.width=6, fig.height=4.5, fig.align='center'}
+# JASP's paired Q-Q plot uses the standardized differences (jaspTTests, commonTTest.R)
+qqJasp(as.vector(scale(Wednesday - Sunday)))
 ```
 
 ## The plot 
@@ -62,11 +63,11 @@ qqline(scale(Sunday), col = "darkred", lwd = 2)  # Adds a reference line for nor
 
 
 ```{r wsr-calculate-t, echo=TRUE}
-# Calculate difference in scores between first and second measure
-data$diff = data$Sunday - data$Wednesday
+# Calculate difference in scores between second and first measure (as in the book)
+data$diff = data$Wednesday - data$Sunday
 
-# Calculate absolute difference in scores between first and second measure
-data$abs.diff = abs(data$Sunday - data$Wednesday)
+# Calculate absolute difference in scores between second and first measure
+data$abs.diff = abs(data$Wednesday - data$Sunday)
 
 # Remove observations where the difference is 0
 data <- data[data$diff != 0, ]
@@ -75,12 +76,12 @@ data <- data[data$diff != 0, ]
 data$rank <- rank(data$abs.diff)
 
 # Assign a '+' or a '-' to those values 
-data$sign <- sign(data$Sunday - data$Wednesday)
+data$sign <- sign(data$Wednesday - data$Sunday)
 ```
 
 ## The data {.smaller}
 
-[Link](https://discoverjasp.com/repository/dsj1_data/data/drug_wide.jasp)
+`r dsjLinks("drug_wide")`
 
 
 ```{r wsr-the-data, echo=FALSE}
@@ -102,7 +103,7 @@ n <- nrow(data)
 n
 ```
 
-> How likely is it to observe the lowest possible rank sum (0), for $n=8$, if there is no difference in BDI between Sunday and Wednesday?
+> How likely is it to observe the highest possible rank sum (36), for $n=8$, if there is no difference in BDI between Sunday and Wednesday?
 
 ## Calculate $\bar{T}$ and ${SE}_{T}$ {.subsection .smaller .scrollable}
 
@@ -143,13 +144,19 @@ z
 visualize_normal_base(z, side = "two-sided")
 ```
 
+```{r wsr-jasp-p, echo=FALSE}
+jaspWSR <- suppressWarnings(wilcox.test(Wednesday, Sunday, paired = TRUE))
+```
+
+JASP: *W* = `r jaspWSR$statistic`, *p* = `r sub("^0", "", sprintf("%.3f", jaspWSR$p.value))`, a bit higher because of a continuity correction (Jane Superbrain 15.2)
+
 ## Effect size {.smaller .scrollable}
 
 - Matched rank-biserial correlation
 
 $$r = \frac{T_+ - T_- }{T_+ + T_-}$$
 
-Here $T_+$ is the sum of the positive ranks (i.e., where Sunday > Wednesday), which do not exist. $T_-$ is the sum of the negative ranks, which is 36. We have a maximum negative correlation (i.e., everybody scored lower on Wednesday).
+Here $T_+$ is the sum of the positive ranks (i.e., where Wednesday > Sunday), which is 36. $T_-$ is the sum of the negative ranks, which do not exist. We have a maximum positive correlation (i.e., everybody with a difference scored higher on Wednesday).
 
 ```{r wsr-effect-size, echo=TRUE}
 T_neg <- sum(data$rank * (data$diff < 0)) # sum negative ranks

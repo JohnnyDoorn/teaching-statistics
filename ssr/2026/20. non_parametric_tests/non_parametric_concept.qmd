@@ -56,7 +56,7 @@ boxplot(x2, horizontal=T, col='pink', main = "B")
 ```
 
 ```{r npconcept-ranking-table, fig.height=3, echo=FALSE}
-kable(rbind('A' = x1, 'B' = x2,'-' = " ", 'rank(A)' = rank(x1), 'rank(B)' = rank(x2)))
+kable(rbind('A' = x1, 'B' = x2, 'rank(A)' = rank(x1), 'rank(B)' = rank(x2)), align = "r")
 ```
 
 ## Ties {.smaller}
@@ -72,7 +72,9 @@ ranks <- rank(x)
 ```
 
 ```{r npconcept-assign-ranks, echo=FALSE}
-kable(rbind(index = 1:length(x), x, ranks))
+# format() per value, so whole numbers stay whole (1, 2.5, 3 rather than 1.0, 2.5, 3.0)
+tieTable <- rbind(index = 1:length(x), x, ranks)
+kable(format(tieTable, trim = TRUE, drop0trailing = TRUE), align = "r")
 ```
 
 
@@ -89,3 +91,20 @@ $$\frac{2 + 3}{2} = 2.5,  \frac{5 + 6}{2} = 5.5,  \frac{7 + 8 + 9}{3} = 8$$
 4. Standardize test statistic to normal sampling distribution.
 5. Calculate *P*-value one or two sided.
 5. Conclude to reject $H_0$ if $p < \alpha$.
+
+<!-- What H0 states, per test (2026-10-20, his question). DSUJ frames the rank tests as comparing
+     distributions (p. 583, "compare the distributions in two conditions"; p. 600, Kruskal-Wallis
+     "assesses the hypothesis that multiple independent groups come from different populations").
+     The medians caveat is not in DSUJ; it is the standard one (e.g., Divine et al., 2018). -->
+
+## What does $H_0$ state? {.smaller}
+
+| Test | $H_0$ |
+|---|---|
+| Wilcoxon rank-sum (Mann-Whitney) | Both groups come from the same population distribution |
+| Wilcoxon signed-rank | Positive and negative differences are equally likely (symmetric around 0) |
+| Kruskal-Wallis | All groups come from the same population distribution |
+| Friedman's ANOVA | Within each participant, every order of the conditions is equally likely |
+
+- Under $H_0$ the mean ranks are equal; rejecting it means one group or condition tends to score higher
+- Not a test of means, and of medians only if the distributions have the same shape

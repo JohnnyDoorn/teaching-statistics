@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="JvD">
-<meta name="dcterms.date" content="2026-09-01">
+<meta name="dcterms.date" content="2026-10-20">
 
 <title>Why Assumptions Matter</title>
 <style>
@@ -82,8 +82,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#simulating-a-single-data-set" id="toc-simulating-a-single-data-set" class="nav-link active" data-scroll-target="#simulating-a-single-data-set">Simulating a single data set</a></li>
+  <li><a href="#anova-with-extreme-values" id="toc-anova-with-extreme-values" class="nav-link active" data-scroll-target="#anova-with-extreme-values">ANOVA with extreme values</a>
+  <ul class="collapse">
+  <li><a href="#simulating-a-single-data-set" id="toc-simulating-a-single-data-set" class="nav-link" data-scroll-target="#simulating-a-single-data-set">Simulating a single data set</a></li>
   <li><a href="#simulating-many-data-sets" id="toc-simulating-many-data-sets" class="nav-link" data-scroll-target="#simulating-many-data-sets">Simulating many data sets</a></li>
+  </ul></li>
+  <li><a href="#t-test-with-skewed-data" id="toc-t-test-with-skewed-data" class="nav-link" data-scroll-target="#t-test-with-skewed-data">t-test with skewed data</a>
+  <ul class="collapse">
+  <li><a href="#simulating-a-single-data-set-1" id="toc-simulating-a-single-data-set-1" class="nav-link" data-scroll-target="#simulating-a-single-data-set-1">Simulating a single data set</a></li>
+  <li><a href="#simulating-many-data-sets-1" id="toc-simulating-many-data-sets-1" class="nav-link" data-scroll-target="#simulating-many-data-sets-1">Simulating many data sets</a></li>
+  </ul></li>
+  <li><a href="#concluding-thoughts" id="toc-concluding-thoughts" class="nav-link" data-scroll-target="#concluding-thoughts">Concluding thoughts</a></li>
   </ul>
 </nav>
 </div>
@@ -108,7 +117,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 1, 2026</p>
+      <p class="date">October 20, 2026</p>
     </div>
   </div>
   
@@ -118,8 +127,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="simulating-a-single-data-set" class="level2">
-<h2 class="anchored" data-anchor-id="simulating-a-single-data-set">Simulating a single data set</h2>
+<!-- 2026-10-20: the t-test case (lecture 20) added as a second part; the 2024 text below is
+     unchanged apart from heading levels and chunk labels. Backup: violating-assumptions-anova-2024.qmd -->
+<p>In this text we use simulations to see what happens to our inference when assumptions do not hold. We first look at an ANOVA on data with extreme values, and then at a t-test on skewed data in small samples (lecture 20).</p>
+<section id="anova-with-extreme-values" class="level2">
+<h2 class="anchored" data-anchor-id="anova-with-extreme-values">ANOVA with extreme values</h2>
+<section id="simulating-a-single-data-set" class="level3">
+<h3 class="anchored" data-anchor-id="simulating-a-single-data-set">Simulating a single data set</h3>
 <p>We can investigate the effect of assumptions on our inference by running a small simulation study where we simulate 100,000 data sets under the null hypothesis. We can then check what the sampling distribution looks like: if it deviates from what we usually assume when conducting an ANOVA, we are at risk of increased or decreased type-1 errors. Let’s start by simulating a single data set, with 3 groups. We can imagine we simulate reaction times, because this variable is often not normally distributed (due to time always being positive, and most people responding as close to 0 as possible) and can contain extreme values (which lead to unequal variances).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">124</span>) <span class="co"># for reproducability</span></span>
@@ -133,7 +147,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(dv, <span class="at">col =</span> <span class="fu">rainbow</span>(<span class="dv">10</span>), <span class="at">xlab =</span> <span class="st">"Reaction time (s)"</span>, <span class="at">main =</span> <span class="st">"Histogram for 1 data set"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="violating-assumptions-anova_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+<p><img src="violating-assumptions-anova_files/figure-html/anova-single-data-set-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Note that the distribution we used to simulate, is the Cauchy distribution, which is a distribution that produces extreme values fairly often. Especially in cases of ANOVA, more extreme values can have a big impact on our inference. So while the ANOVA is relatively robust to violations of normality, it is pretty vulnerable to extreme observations because of their impact on the variance. These can still be detected by the usual normality assumption checks (Q-Q plot, Shapiro), or by other means, such as boxplots (see the tutorial assignment for an example).</p>
@@ -167,8 +181,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 </section>
-<section id="simulating-many-data-sets" class="level2">
-<h2 class="anchored" data-anchor-id="simulating-many-data-sets">Simulating many data sets</h2>
+<section id="simulating-many-data-sets" class="level3">
+<h3 class="anchored" data-anchor-id="simulating-many-data-sets">Simulating many data sets</h3>
 <p>In order to get 100,000 F-values, we repeat the above steps 100,000 times, each time saving the F-statistic. This enables us to afterwards make a histogram of those 100,000 F-values and see how well the theoretical distribution fits</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fValues <span class="ot">&lt;-</span> rejectedNull <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="fl">1e5</span>) <span class="co"># allocate an object to save the F values to, and our decisions</span></span>
@@ -193,7 +207,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>     <span class="at">freq =</span><span class="cn">FALSE</span>, <span class="at">breaks =</span> <span class="dv">25</span>)</span>
 <span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">df</span>(x, dfModel, dfError), <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">12</span>, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="violating-assumptions-anova_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+<p><img src="violating-assumptions-anova_files/figure-html/anova-many-data-sets-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Based on the shape of the histogram and the overlaid theoretical F-distribution (the one we assume that the F-statistic follows when we attach a p-value to our observed F-statistic), we can see that there is not a perfect match: the histogram is a bit more located around 1, whereas the theoretical distribution has most of its mass close to 0. In addition to such a plot, we can also look at how many times we made a type-I error. We simulated under the null distribution (no group differences), so every time we rejected the null hypothesis based on the data, we made a type-I error. We used an alpha of 0.05, so if our assumption would hold we expect to have made this error in about 5% of the cases. However, when we look at the number of times we rejected the null hypothesis and express it as an proportion of the total, we see:</p>
@@ -204,6 +218,142 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <p>That our rejection rate is actually a lot lower than 5%! This might seem like good news (fewer errors), but it means that the sampling distribution we assume is not accurate. We likely have a lot less power than we originally thought we had based on an alpha of 0.05. So while it might seem like a good thing here (fewer type-I errors), overall it’s a bad thing, because the NHST framework is completely focused on having good control over type-I and type-II error rates.</p>
+</section>
+</section>
+<section id="t-test-with-skewed-data" class="level2">
+<h2 class="anchored" data-anchor-id="t-test-with-skewed-data">t-test with skewed data</h2>
+<p>In lecture 20 we saw nonparametric tests, which work on the ranks of the data instead of the data themselves. But when would we actually prefer them over a t-test? Let’s investigate this with a second simulation study, now for two groups. We again simulate reaction times, but this time without the extreme values of the Cauchy distribution. Instead, we use a shifted log-normal distribution, which is a popular model for reaction times. Nobody responds faster than 0.2 seconds, most people respond fairly quickly (the median is 0.5 seconds), and every now and then someone takes much longer, which gives the distribution a long tail to the right. We compare three tests that JASP offers under Tests in the independent samples t-test. These are Student’s t-test, Welch’s t-test, and the Mann-Whitney test, which is the Wilcoxon rank-sum test from lecture 20.</p>
+<section id="simulating-a-single-data-set-1" class="level3">
+<h3 class="anchored" data-anchor-id="simulating-a-single-data-set-1">Simulating a single data set</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">3</span>) <span class="co"># for reproducibility</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>groupN <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># sample size per group</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># a reaction time is 0.2 seconds plus a log-normal part with a median of 0.3 seconds</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>simulateRT <span class="ot">&lt;-</span> <span class="cf">function</span>(n) <span class="fl">0.2</span> <span class="sc">+</span> <span class="fu">rlnorm</span>(n, <span class="at">meanlog =</span> <span class="fu">log</span>(<span class="fl">0.3</span>), <span class="at">sdlog =</span> <span class="dv">1</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>groupA <span class="ot">&lt;-</span> <span class="fu">simulateRT</span>(groupN)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>groupB <span class="ot">&lt;-</span> <span class="fu">simulateRT</span>(groupN) <span class="co"># the same distribution for both groups, because we operate under H0</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">c</span>(groupA, groupB), <span class="at">col =</span> <span class="fu">rainbow</span>(<span class="dv">10</span>), <span class="at">xlab =</span> <span class="st">"Reaction time (s)"</span>, <span class="at">main =</span> <span class="st">"Histogram for 1 data set"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="violating-assumptions-anova_files/figure-html/ttest-single-data-set-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>With only 20 observations a histogram is hard to read, so we also look at the Q-Q plot of the residuals with its confidence band, which you get in JASP under Assumption Checks → Q-Q plot residuals → Confidence interval. The function below draws the same plot as JASP does, and there is no need to understand every line of it.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the Q-Q plot with its confidence band, computed as in JASP (jaspGraphs::plotQQnorm);</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># returns the number of points outside the band</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>qqPlotWithBand <span class="ot">&lt;-</span> <span class="cf">function</span>(residuals, <span class="at">ciLevel =</span> <span class="fl">0.95</span>) {</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  z <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">as.numeric</span>(<span class="fu">scale</span>(residuals))) <span class="co"># standardized residuals, from smallest to largest</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(z)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  i <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>n</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  theoretical <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="fu">ppoints</span>(n)) <span class="co"># where the points would be for perfectly normal data</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  slope     <span class="ot">&lt;-</span> <span class="fu">diff</span>(<span class="fu">quantile</span>(z, <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.75</span>), <span class="at">names =</span> <span class="cn">FALSE</span>)) <span class="sc">/</span> <span class="fu">diff</span>(<span class="fu">qnorm</span>(<span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.75</span>)))</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  intercept <span class="ot">&lt;-</span> <span class="fu">quantile</span>(z, <span class="fl">0.25</span>, <span class="at">names =</span> <span class="cn">FALSE</span>) <span class="sc">-</span> slope <span class="sc">*</span> <span class="fu">qnorm</span>(<span class="fl">0.25</span>)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  lower     <span class="ot">&lt;-</span> intercept <span class="sc">+</span> slope <span class="sc">*</span> <span class="fu">qnorm</span>(<span class="fu">qbeta</span>((<span class="dv">1</span> <span class="sc">-</span> ciLevel) <span class="sc">/</span> <span class="dv">2</span>, i, n <span class="sc">-</span> i <span class="sc">+</span> <span class="dv">1</span>))</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  upper     <span class="ot">&lt;-</span> intercept <span class="sc">+</span> slope <span class="sc">*</span> <span class="fu">qnorm</span>(<span class="fu">qbeta</span>(<span class="dv">1</span> <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">-</span> ciLevel) <span class="sc">/</span> <span class="dv">2</span>, i, n <span class="sc">-</span> i <span class="sc">+</span> <span class="dv">1</span>))</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  axisRange <span class="ot">&lt;-</span> <span class="fu">range</span>(<span class="fu">pretty</span>(<span class="fu">c</span>(theoretical, z, lower, upper))) <span class="co"># same range on both axes</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(theoretical, z, <span class="at">type =</span> <span class="st">"n"</span>, <span class="at">xlim =</span> axisRange, <span class="at">ylim =</span> axisRange, <span class="at">bty =</span> <span class="st">"n"</span>, <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">"Theoretical quantiles"</span>, <span class="at">ylab =</span> <span class="st">"Standardized residuals"</span>)</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">polygon</span>(<span class="fu">c</span>(theoretical, <span class="fu">rev</span>(theoretical)), <span class="fu">c</span>(lower, <span class="fu">rev</span>(upper)),</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>          <span class="at">col =</span> <span class="fu">adjustcolor</span>(<span class="st">"steelblue"</span>, <span class="at">alpha.f =</span> <span class="fl">0.25</span>), <span class="at">border =</span> <span class="cn">NA</span>)</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(theoretical, lower)</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(theoretical, upper)</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">"darkred"</span>, <span class="at">lwd =</span> <span class="dv">2</span>) <span class="co"># the line y = x</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">points</span>(theoretical, z, <span class="at">pch =</span> <span class="dv">19</span>)</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>(<span class="fu">sum</span>(z <span class="sc">&lt;</span> lower <span class="sc">|</span> z <span class="sc">&gt;</span> upper))</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>residualsAB <span class="ot">&lt;-</span> <span class="fu">c</span>(groupA <span class="sc">-</span> <span class="fu">mean</span>(groupA), groupB <span class="sc">-</span> <span class="fu">mean</span>(groupB)) <span class="co"># each observation minus its group mean</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>nOutside <span class="ot">&lt;-</span> <span class="fu">qqPlotWithBand</span>(residualsAB)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="violating-assumptions-anova_files/figure-html/ttest-qq-plot-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>nOutside</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+<p>If the residuals were normally distributed, the points would stay inside the band. Here 3 points fall outside the band, at the slow end of the reaction times, and together the points form the curve that a long right tail produces.</p>
+</section>
+<section id="simulating-many-data-sets-1" class="level3">
+<h3 class="anchored" data-anchor-id="simulating-many-data-sets-1">Simulating many data sets</h3>
+<p>In order to get the type-I error rate of each test, we repeat the above steps 100,000 times, each time saving whether each test rejects the null hypothesis. We then do the same once more with an effect, by adding 0.5 seconds to every reaction time in group B, so that every rejection is a correct decision and every failure to reject is a type-II error. And to see what we would lose with well-behaved data, we repeat both for normally distributed reaction times with the same mean (0.69 seconds) and standard deviation (0.65 seconds).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the proportion of data sets in which each test rejects H0, with an alpha of 0.05</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>rejectionRate <span class="ot">&lt;-</span> <span class="cf">function</span>(simulateData, shift, <span class="at">nSims =</span> <span class="fl">1e5</span>) {</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  rejected <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> nSims, <span class="at">ncol =</span> <span class="dv">3</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="cn">NULL</span>, <span class="fu">c</span>(<span class="st">"Student"</span>, <span class="st">"Welch"</span>, <span class="st">"Mann-Whitney"</span>)))</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nSims) {</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    groupA <span class="ot">&lt;-</span> <span class="fu">simulateData</span>(groupN)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    groupB <span class="ot">&lt;-</span> <span class="fu">simulateData</span>(groupN) <span class="sc">+</span> shift</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    rejected[i, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">t.test</span>(groupA, groupB, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>p.value,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">t.test</span>(groupA, groupB)<span class="sc">$</span>p.value, <span class="co"># Welch is the default in R</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">wilcox.test</span>(groupA, groupB)<span class="sc">$</span>p.value) <span class="sc">&lt;</span> <span class="fl">0.05</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colMeans</span>(rejected)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>simulateNormalRT <span class="ot">&lt;-</span> <span class="cf">function</span>(n) <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="fl">0.69</span>, <span class="at">sd =</span> <span class="fl">0.65</span>)</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>rates <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="st">"Skewed, type-I error rate"</span> <span class="ot">=</span> <span class="fu">rejectionRate</span>(simulateRT, <span class="at">shift =</span> <span class="dv">0</span>),</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Skewed, power"</span>             <span class="ot">=</span> <span class="fu">rejectionRate</span>(simulateRT, <span class="at">shift =</span> <span class="fl">0.5</span>),</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Normal, type-I error rate"</span> <span class="ot">=</span> <span class="fu">rejectionRate</span>(simulateNormalRT, <span class="at">shift =</span> <span class="dv">0</span>),</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Normal, power"</span>             <span class="ot">=</span> <span class="fu">rejectionRate</span>(simulateNormalRT, <span class="at">shift =</span> <span class="fl">0.5</span>))</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(rates, <span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Student</th>
+<th style="text-align: right;">Welch</th>
+<th style="text-align: right;">Mann-Whitney</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Skewed, type-I error rate</td>
+<td style="text-align: right;">0.035</td>
+<td style="text-align: right;">0.028</td>
+<td style="text-align: right;">0.045</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Skewed, power</td>
+<td style="text-align: right;">0.590</td>
+<td style="text-align: right;">0.577</td>
+<td style="text-align: right;">0.791</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Normal, type-I error rate</td>
+<td style="text-align: right;">0.051</td>
+<td style="text-align: right;">0.049</td>
+<td style="text-align: right;">0.044</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Normal, power</td>
+<td style="text-align: right;">0.370</td>
+<td style="text-align: right;">0.365</td>
+<td style="text-align: right;">0.330</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>We simulated the first row under the null distribution (no group differences), so every time we rejected the null hypothesis based on the data, we made a type-I error. We used an alpha of 0.05, so if our assumption would hold we expect to have made this error in about 5% of the cases. The Mann-Whitney test comes close, at 0.045. That is no coincidence. Under the null hypothesis both groups come from the same distribution, so every way of dividing the ranks 1 to 20 over the two groups is equally likely, whatever the shape of that distribution. (It lands slightly below 5% because with 10 people per group, the p-value can only take on a limited set of values.)</p>
+<p>The two t-tests reject the null hypothesis less often than they should, at 0.035 (Student) and 0.028 (Welch). Just like in the ANOVA case, this might seem like good news (fewer errors), but it means that the sampling distribution we assume is not accurate, and the second row shows what that costs us. The Mann-Whitney test detects the effect in 79% of the data sets, against 59% for Student’s t-test. The slow responses in the long tail inflate the standard deviation of each group, which makes the t-statistic smaller, whereas ranking limits their influence (a reaction time of 3 seconds simply becomes rank 20). Welch’s t-test does not help here either, because it corrects for unequal variances, and our two groups come from the same distribution.</p>
+<p>So should we always use the Mann-Whitney test? The last two rows say no. With normal data, Student’s t-test has a type-I error rate of about 5% and a bit more power than the Mann-Whitney test (37% versus 33%). This is the point of Jane Superbrain Box 15.1 in the book, which says that nonparametric tests only have less power when the assumptions of the parametric test are met. Notice the size of the differences though. With normal data the Mann-Whitney test loses 4 percentage points, while with our skewed reaction times the t-test loses 20.</p>
+</section>
+</section>
+<section id="concluding-thoughts" class="level2">
+<h2 class="anchored" data-anchor-id="concluding-thoughts">Concluding thoughts</h2>
+<ul>
+<li>With extreme values, the F-distribution no longer describes our F-statistics, and we make fewer type-I errors than alpha promises, which costs us power.</li>
+<li>With small and skewed samples, the t-tests are also conservative and clearly less powerful than the Mann-Whitney test, which keeps its type-I error rate close to 5% whatever the shape of the distribution.</li>
+<li>Welch’s t-test protects against unequal variances, not against skewness.</li>
+<li>When the assumptions do hold, the t-test has a little more power than the Mann-Whitney test.</li>
+<li>In practice, the Q-Q plot of the residuals with its confidence band is how we spot these problems.</li>
+</ul>
 </section>
 
 </main>

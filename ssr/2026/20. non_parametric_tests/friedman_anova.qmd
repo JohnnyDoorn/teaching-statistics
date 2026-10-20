@@ -11,7 +11,7 @@ Paired >2 samples
 
 ## Friedman's ANOVA {.section}
 
-Created by [William Frederick Friedman](http://en.wikipedia.org/wiki/William_F._Friedman) the Friedman's ANOVA is a nonparametric alternative to the repeated one-way ANOVA.
+Created by [Milton Friedman](https://en.wikipedia.org/wiki/Milton_Friedman) the Friedman's ANOVA is a nonparametric alternative to the repeated one-way ANOVA.
 
 Just like the Kruskal-Wallis test, Friedman's ANOVA, subtracts the expected mean ranking from the calculated observed mean ranking, which is also $\chi^2$ distributed.
 
@@ -35,8 +35,7 @@ Just like the Kruskal-Wallis test, Friedman's ANOVA, subtracts the expected mean
 # 
 # data <- data.frame(factor, depres)
 data <- read.csv(datasetsPath("diet.csv"))
-data <- round(data, 2)
-colnames(data) <- c("T0", "T1", "T2")
+data <- round(data, 2)   # columns Start, Month1, Month2, as in diet.jasp
 ```
 
 <!-- ## Simulate data -->
@@ -50,7 +49,7 @@ colnames(data) <- c("T0", "T1", "T2")
 <!-- ``` -->
 
 ## The data {.smaller .scrollable}
-[Link](https://discoverjasp.com/repository/dsj1_data/data/soya.jasp)
+`r dsjLinks("diet")`
 
 ```{r friedman-the-data, echo=FALSE}
 ssrTable(data, options = list(iDisplayLength = 7))
@@ -58,6 +57,15 @@ nTies <- sum(data[, 1] == data[, 2]) +
   sum(data[, 1] == data[, 3]) +
   sum(data[, 2] == data[, 3])
 
+```
+
+## Q-Q plot of the residuals {.smaller}
+
+Repeated measures ANOVA in JASP (as in the book, Figure 15.13)
+
+```{r friedman-qq-plot, echo=FALSE, fig.width=6, fig.height=4.5, fig.align='center'}
+# JASP pools the standardized residuals of the three time points (anovarepeatedmeasures.R)
+qqJasp(as.vector(rstandard(lm(cbind(Start, Month1, Month2) ~ 1, data = data))))
 ```
 
 ## Assign ranks
@@ -91,7 +99,7 @@ $$F_r = \left[ \frac{12}{Nk(k+1)} \sum_{i=1}^k R_i^2 \right] - 3N(k+1)$$
 
 --> We sum the ranks for each of the three experimental conditions (and apply some standardizations).
 
-## Calculate $F_r$
+## Calculate $F_r$ (without adjusting for ties) {.smaller}
 
 Calculate ranks sum per condition and $N$.
 
@@ -102,10 +110,6 @@ R.i
 # N is number of participants
 N <- 10
 ```
-
-## Calculate $F_r$ (without adjusting for ties)
-
-$$F_r = \left[ \frac{12}{Nk(k+1)} \sum_{i=1}^k R_i^2 \right] - 3N(k+1)$$
 
 ```{r friedman-calculate-without-adjusting-for-ties, echo=TRUE}
 k <- 3
