@@ -33,7 +33,9 @@ You probably know chatbots like ChatGPT or UvA AI Chat. You type a question, it 
 and you copy out whatever it makes by hand. A **coding agent** is the same kind of language model,
 but it works on your own computer, inside a folder you give it. It opens and writes files there,
 runs programs such as R and Python, reads what comes back, and fixes its own mistakes before it
-reports to you.
+reports to you. Because it works in your folder, you can also give it highly specific context,
+such as your lecture slides, lecture transcripts, literature, exam regulations and earlier
+exercises, and it reads them whenever it needs them.
 
 For ANS questions, that changes what you can hand off. You give the agent an export of your
 question bank and say what you want, for example "turn these into files and recompute every key
@@ -54,8 +56,9 @@ is free for UvA staff and keeps your prompts within the UvA. For now it is a cha
 cannot work in your folder, but agentic use is expected soon. Once that arrives it becomes the
 natural choice, certainly for exam questions.
 
-Whichever tool you use, never give it student data such as names, grades or answers. With a
-commercial account, also switch off the use of your chats for model training in its privacy
+Whichever tool you use, never give it student data such as names, grades or answers. Also check
+whether you may share copyrighted or recorded material, such as a textbook PDF or a lecture
+transcript, before you put it in the agent's folder. With a commercial account, also switch off the use of your chats for model training in its privacy
 settings.
 
 ### Set it up, once
