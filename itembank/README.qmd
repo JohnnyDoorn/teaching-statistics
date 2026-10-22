@@ -154,36 +154,6 @@ recomputed in R from those data files.
    model answers, the open question has its grading criteria, some questions hold two gaps (each
    with a margin), and the fill-in questions carry their explanation as feedback.
 
-## Build it yourself
-
-Your agent does this for you, but you can also build by hand. You need R with the packages `exams` and `jsonlite`, pandoc (RStudio ships one) and Python 3.
-From this folder, run
-
-```sh
-Rscript tools/build-ans.R examples
-```
-
-This writes three files into `examples/`.
-
-- `EXAMPLES.zip`, the package to import;
-- `EXAMPLES.html`, a preview of every question with its solution;
-- `EXAMPLES.expected.json`, what each question should look like after import (for the checker
-  below).
-
-| Option | What it does |
-|-------------|---------------------|
-| `--html` | builds the preview only, which is faster |
-| `--title-prefix="TEST "` | puts a prefix before every title, handy for a trial import |
-| `--feedback` | gives every choice question its solution as feedback too (practice tests) |
-| `--out=folder` | writes the output somewhere else |
-| `--seed=N` | redraws randomized questions |
-
-The package in `examples/` was built with `--title-prefix="EXAMPLE "`.
-
-To write your own questions, make a new folder, copy the example that looks most like what you
-need, change it, and build the folder. One file per question; the file names set the order, so
-number them, and give the parts of one exercise names that sort next to each other.
-
 ## Anatomy of a question file
 
 A question file is plain text in the R/exams format, saved as `.qmd` (or `.Rmd`). Here is the

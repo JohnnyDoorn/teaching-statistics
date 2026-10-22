@@ -92,7 +92,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#what-is-in-this-folder" id="toc-what-is-in-this-folder" class="nav-link" data-scroll-target="#what-is-in-this-folder">What is in this folder</a></li>
   <li><a href="#the-examples" id="toc-the-examples" class="nav-link" data-scroll-target="#the-examples">The examples</a></li>
   <li><a href="#try-it-in-ans" id="toc-try-it-in-ans" class="nav-link" data-scroll-target="#try-it-in-ans">Try it in ANS</a></li>
-  <li><a href="#build-it-yourself" id="toc-build-it-yourself" class="nav-link" data-scroll-target="#build-it-yourself">Build it yourself</a></li>
   <li><a href="#anatomy-of-a-question-file" id="toc-anatomy-of-a-question-file" class="nav-link" data-scroll-target="#anatomy-of-a-question-file">Anatomy of a question file</a></li>
   <li><a href="#what-the-builder-checks-for-you" id="toc-what-the-builder-checks-for-you" class="nav-link" data-scroll-target="#what-the-builder-checks-for-you">What the builder checks for you</a></li>
   <li><a href="#what-ans-cannot-import" id="toc-what-ans-cannot-import" class="nav-link" data-scroll-target="#what-ans-cannot-import">What ANS cannot import</a></li>
@@ -279,90 +278,43 @@ Tip
 <li>Open them and look at what normally takes hand work. The choice and open questions have their model answers, the open question has its grading criteria, some questions hold two gaps (each with a margin), and the fill-in questions carry their explanation as feedback.</li>
 </ol>
 </section>
-<section id="build-it-yourself" class="level2">
-<h2 class="anchored" data-anchor-id="build-it-yourself">Build it yourself</h2>
-<p>Your agent does this for you, but you can also build by hand. You need R with the packages <code>exams</code> and <code>jsonlite</code>, pandoc (RStudio ships one) and Python 3. From this folder, run</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> tools/build-ans.R examples</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This writes three files into <code>examples/</code>.</p>
-<ul>
-<li><code>EXAMPLES.zip</code>, the package to import;</li>
-<li><code>EXAMPLES.html</code>, a preview of every question with its solution;</li>
-<li><code>EXAMPLES.expected.json</code>, what each question should look like after import (for the checker below).</li>
-</ul>
-<table class="table">
-<colgroup>
-<col style="width: 38%">
-<col style="width: 61%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Option</th>
-<th>What it does</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>--html</code></td>
-<td>builds the preview only, which is faster</td>
-</tr>
-<tr class="even">
-<td><code>--title-prefix="TEST "</code></td>
-<td>puts a prefix before every title, handy for a trial import</td>
-</tr>
-<tr class="odd">
-<td><code>--feedback</code></td>
-<td>gives every choice question its solution as feedback too (practice tests)</td>
-</tr>
-<tr class="even">
-<td><code>--out=folder</code></td>
-<td>writes the output somewhere else</td>
-</tr>
-<tr class="odd">
-<td><code>--seed=N</code></td>
-<td>redraws randomized questions</td>
-</tr>
-</tbody>
-</table>
-<p>The package in <code>examples/</code> was built with <code>--title-prefix="EXAMPLE "</code>.</p>
-<p>To write your own questions, make a new folder, copy the example that looks most like what you need, change it, and build the folder. One file per question; the file names set the order, so number them, and give the parts of one exercise names that sort next to each other.</p>
-</section>
 <section id="anatomy-of-a-question-file" class="level2">
 <h2 class="anchored" data-anchor-id="anatomy-of-a-question-file">Anatomy of a question file</h2>
 <p>A question file is plain text in the R/exams format, saved as <code>.qmd</code> (or <code>.Rmd</code>). Here is the part of the spider exercise with two gaps, <code>examples/1-spider-c-t.qmd</code>, slightly shortened:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Question</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">========</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>Test in JASP whether there is a difference between the mean anxiety for the picture and</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>the mean anxiety for the real spider. What is the calculated t-value? Round to two</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>decimal places.</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>t-value: ##ANSWER1##</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>Degrees of freedom: ##ANSWER2##</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>Answerlist</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>----------</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>*</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>*</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>Solution</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">========</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>The test statistic, t, is calculated by dividing the mean of differences by the standard</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>error of differences (t = -7/2.8311 = -2.47). ... When the same participants have been</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>used, the degrees of freedom are the sample size minus 1 (df = N - 1 = 11).</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>DSUJ §9.9, p. 384.</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>Meta-information</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="fu">================</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>exname: dsj-09-spider-c-t</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>extype: cloze</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>exsolution: -2.47|11</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>exclozetype: num|num</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>extol: 0.01|0</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>expoints: 0.5</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>exextra<span class="co">[</span><span class="ot">alt</span><span class="co">]</span>: 2.47|</span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>exextra<span class="co">[</span><span class="ot">exercise</span><span class="co">]</span>: dsj-09-spider</span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>exextra<span class="co">[</span><span class="ot">anstitle</span><span class="co">]</span>: discoverjasp Smart Alex 9.1-9.2 - spider anxiety (paired t-test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Question</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">========</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>Test in JASP whether there is a difference between the mean anxiety for the picture and</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>the mean anxiety for the real spider. What is the calculated t-value? Round to two</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>decimal places.</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>t-value: ##ANSWER1##</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>Degrees of freedom: ##ANSWER2##</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>Answerlist</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>----------</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>*</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>*</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>Solution</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">========</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>The test statistic, t, is calculated by dividing the mean of differences by the standard</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>error of differences (t = -7/2.8311 = -2.47). ... When the same participants have been</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>used, the degrees of freedom are the sample size minus 1 (df = N - 1 = 11).</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>DSUJ §9.9, p. 384.</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>Meta-information</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="fu">================</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>exname: dsj-09-spider-c-t</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>extype: cloze</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>exsolution: -2.47|11</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>exclozetype: num|num</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>extol: 0.01|0</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>expoints: 0.5</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>exextra<span class="co">[</span><span class="ot">alt</span><span class="co">]</span>: 2.47|</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>exextra<span class="co">[</span><span class="ot">exercise</span><span class="co">]</span>: dsj-09-spider</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>exextra<span class="co">[</span><span class="ot">anstitle</span><span class="co">]</span>: discoverjasp Smart Alex 9.1-9.2 - spider anxiety (paired t-test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Question</strong> is what students see. Its <strong>Answerlist</strong> holds the options of a choice question, or one empty line per gap. <strong>Solution</strong> becomes the model answer, and in a choice question a second Answerlist marks the options, with one <code>* True.</code> or <code>* False.</code> line per option in the same order. <strong>Meta-information</strong> says what kind of question it is and what the key is.</p>
 <table class="table">
 <colgroup>
@@ -450,7 +402,7 @@ Tip
 <section id="check-an-import" class="level2">
 <h2 class="anchored" data-anchor-id="check-an-import">Check an import</h2>
 <p>After an import, export the bank again (<strong>Settings &gt; Export</strong>, the QTI 2.X export and, if you like, the Respondus package), unzip it, and run</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> tools/check-import.py path/to/export <span class="at">--expected</span> examples/EXAMPLES.expected.json</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> tools/check-import.py path/to/export <span class="at">--expected</span> examples/EXAMPLES.expected.json</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>It prints one line per check (titles, parts, points, model answers, feedback, accepted answers, criteria, attachments) and marks failures with <code>XX</code>. The check that matters most is that no model answer ended up in the text students see.</p>
 </section>
 <section id="credits" class="level2">
