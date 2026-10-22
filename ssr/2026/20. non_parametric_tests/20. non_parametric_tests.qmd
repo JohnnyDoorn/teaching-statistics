@@ -57,6 +57,26 @@ dsjLinks <- function(name) {
 ```{r child="friedman_anova.qmd"}
 ```
 
+<!-- Added 2026-10-21 for 2027 (his call). L20 was taught on 2026-10-20 with the deck as it was,
+     so this slide is in the source only; it appears with the next render. Grounded in DSUJ §6.10.5
+     (pp. 270-271, a C section, so not exam material) and the JASP options as of October 2026:
+     "From ... bootstraps" in Correlation (CI), Linear Regression (coefficients) and ANOVA post hoc
+     tests; Descriptives (CI of the mean, method Bootstrap); PROCESS (Confidence intervals, method
+     Bootstrap). L11's "Handling Assumption violations" slide already points here as a bonus. -->
+
+## Bootstrapping (bonus) {.smaller}
+
+Not needed for the exam, but you will meet it in the book (Section 6.10.5) and in JASP
+
+- Treat the sample as the population and draw new samples from it, with replacement
+- Compute the statistic in each bootstrap sample (JASP uses 1000 by default)
+- The middle 95% of those estimates gives a bootstrap confidence interval
+- No need to assume the shape of the sampling distribution
+- In JASP mostly a way to get more robust confidence intervals
+  - Usually a checkbox "From ... bootstraps"
+  - Correlation, linear regression, ANOVA post hoc tests, Descriptives, PROCESS (lecture 23)
+- Random resampling, so the numbers differ slightly each time
+
 
 ## JASP
 

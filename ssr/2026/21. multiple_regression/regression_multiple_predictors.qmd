@@ -34,7 +34,7 @@ for(e in error) {
 
 ```
 
-## Assumptions {.subsection}
+## Assumptions {.subsection .smaller}
 
 A selection from Field (8.3 Bias in linear models):
 
@@ -51,7 +51,7 @@ Additionally, for multiple regression
 
 * Multicollinearity (Section 8.9)
 
-## Multicollinearity {.smaller}
+## Multicollinearity {.smaller .scrollable}
 
 ::: {.columns}
 ::: {.column width="60%"}
@@ -63,7 +63,7 @@ This can be assessed through:
 * Correlations
 * Matrix scatterplot 
 * Collinearity diagnostics
-    * VIF: max < 10, mean < 1
+    * VIF: max < 10, mean not substantially > 1
     * Tolerance \> 0.2 -> good
     * Tolerance = $\frac{1}{VIF}$
 
@@ -113,6 +113,16 @@ abline(lm(y2 ~ x2), col = "red", lwd = 2)
 
 
 ```
+
+## Robust alternative: bootstrap {.smaller}
+
+- Assumptions in doubt? Confidence intervals and $p$-values may be off
+- Bootstrap the coefficients (Section 8.12)
+  - Statistics → Coefficients → *From 5000 bootstraps*
+  - Output: *Bootstrap Coefficients* table
+- More robust methods (e.g., winsorizing, Section 6.10.7)
+  - *Robust Statistics* module (WRS2)
+  - Not exam material
 
 
 ## Example

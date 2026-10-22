@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Johnny van Doorn">
-<meta name="dcterms.date" content="2026-10-16">
+<meta name="dcterms.date" content="2026-10-22">
 
 <title>Writing ANS questions as text files</title>
 <style>
@@ -82,7 +82,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#what-is-in-this-folder" id="toc-what-is-in-this-folder" class="nav-link active" data-scroll-target="#what-is-in-this-folder">What is in this folder</a></li>
+  <li><a href="#start-here" id="toc-start-here" class="nav-link active" data-scroll-target="#start-here">Start here</a>
+  <ul class="collapse">
+  <li><a href="#what-a-coding-agent-is" id="toc-what-a-coding-agent-is" class="nav-link" data-scroll-target="#what-a-coding-agent-is">What a coding agent is</a></li>
+  <li><a href="#which-subscription-to-get" id="toc-which-subscription-to-get" class="nav-link" data-scroll-target="#which-subscription-to-get">Which subscription to get</a></li>
+  <li><a href="#set-it-up-once" id="toc-set-it-up-once" class="nav-link" data-scroll-target="#set-it-up-once">Set it up, once</a></li>
+  <li><a href="#what-we-do-with-it" id="toc-what-we-do-with-it" class="nav-link" data-scroll-target="#what-we-do-with-it">What we do with it</a></li>
+  </ul></li>
+  <li><a href="#what-is-in-this-folder" id="toc-what-is-in-this-folder" class="nav-link" data-scroll-target="#what-is-in-this-folder">What is in this folder</a></li>
   <li><a href="#the-examples" id="toc-the-examples" class="nav-link" data-scroll-target="#the-examples">The examples</a></li>
   <li><a href="#try-it-in-ans" id="toc-try-it-in-ans" class="nav-link" data-scroll-target="#try-it-in-ans">Try it in ANS</a></li>
   <li><a href="#build-it-yourself" id="toc-build-it-yourself" class="nav-link" data-scroll-target="#build-it-yourself">Build it yourself</a></li>
@@ -90,7 +97,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#what-the-builder-checks-for-you" id="toc-what-the-builder-checks-for-you" class="nav-link" data-scroll-target="#what-the-builder-checks-for-you">What the builder checks for you</a></li>
   <li><a href="#what-ans-cannot-import" id="toc-what-ans-cannot-import" class="nav-link" data-scroll-target="#what-ans-cannot-import">What ANS cannot import</a></li>
   <li><a href="#our-conventions" id="toc-our-conventions" class="nav-link" data-scroll-target="#our-conventions">Our conventions</a></li>
-  <li><a href="#working-with-a-coding-agent" id="toc-working-with-a-coding-agent" class="nav-link" data-scroll-target="#working-with-a-coding-agent">Working with a coding agent</a></li>
   <li><a href="#check-an-import" id="toc-check-an-import" class="nav-link" data-scroll-target="#check-an-import">Check an import</a></li>
   <li><a href="#credits" id="toc-credits" class="nav-link" data-scroll-target="#credits">Credits</a></li>
   </ul>
@@ -118,7 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 16, 2026</p>
+      <p class="date">October 22, 2026</p>
     </div>
   </div>
   
@@ -130,6 +136,65 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>This folder shows how we write questions for <strong>ANS</strong> at the Psychology department of the University of Amsterdam. Each question is a small text file. A builder turns a folder of these files into one package, and ANS imports that package with the parts that normally take hand work already in place, such as <strong>model answers</strong>, <strong>grading criteria</strong> for open questions, numeric fill-in gaps with a margin, multi-part exercises, data files and maths.</p>
 <p>Why files instead of the ANS editor? Questions in files can be searched, reused, compared across years and checked. Every key in the examples below was recomputed from the data, and a coding agent can read and write the files too. Everything here was settled by test imports into ANS in September and October 2026. Where something is only partly tested, the agent instructions say so.</p>
+<section id="start-here" class="level2">
+<h2 class="anchored" data-anchor-id="start-here">Start here</h2>
+<p>New to all of this? This section takes you from nothing to your first package. If you only want to see the end result, skip to <a href="#try-it-in-ans">Try it in ANS</a>, which needs no setup at all.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>One of the handy things about a language model is that you can ask it about itself. Stuck on an install step, an error message or a setting? Paste it in and ask what to do, or ask how a feature works. Before your agent runs, any chatbot (UvA AI Chat included) can help you get it running.</p>
+</div>
+</div>
+<section id="what-a-coding-agent-is" class="level3">
+<h3 class="anchored" data-anchor-id="what-a-coding-agent-is">What a coding agent is</h3>
+<p>You probably know chatbots like ChatGPT or UvA AI Chat. You type a question, it types an answer, and you copy out whatever it makes by hand. A <strong>coding agent</strong> is the same kind of language model, but it works on your own computer, inside a folder you give it. It opens and writes files there, runs programs such as R and Python, reads what comes back, and fixes its own mistakes before it reports to you.</p>
+<p>For ANS questions, that changes what you can hand off. You give the agent an export of your question bank and say what you want, for example “turn these into files and recompute every key from the data”. It does the hand work, and you check the result. It can still be wrong about the statistics, so treat its output as a draft from a teaching assistant. The builder catches format mistakes, not wrong answers.</p>
+</section>
+<section id="which-subscription-to-get" class="level3">
+<h3 class="anchored" data-anchor-id="which-subscription-to-get">Which subscription to get</h3>
+<p>Everything here was built and tested with Claude Code, Anthropic’s coding agent. It comes with a paid Claude account (the free plan does not include it). Claude Pro, about $20 a month, is enough to start; see <a href="https://claude.com/pricing">claude.com/pricing</a>. The more expensive Max plans only matter if you hit the usage limits every day. Other agents, such as OpenAI’s Codex or GitHub Copilot, can read the same instructions, but we have not tested the workflow with them.</p>
+<p><a href="https://www.uva.nl/en/about-the-uva/about-the-university/ai/ai-in-education/uva-ai-chat/uva-ai-chat.html">UvA AI Chat</a> is free for UvA staff and keeps your prompts within the UvA. For now it is a chat window, so it cannot work in your folder, but agentic use is expected soon. Once that arrives it becomes the natural choice, certainly for exam questions.</p>
+<p>Whichever tool you use, never give it student data such as names, grades or answers. With a commercial account, also switch off the use of your chats for model training in its privacy settings.</p>
+</section>
+<section id="set-it-up-once" class="level3">
+<h3 class="anchored" data-anchor-id="set-it-up-once">Set it up, once</h3>
+<ol type="1">
+<li><p>Install <a href="https://code.visualstudio.com">VS Code</a>, a free editor. Open its Extensions view (<code>Cmd+Shift+X</code> on a Mac, <code>Ctrl+Shift+X</code> on Windows), search for “Claude Code”, click <em>Install</em>, and sign in with your Claude account. (Would you rather not use an editor? The <a href="https://claude.com/download">Claude desktop app</a> runs Claude Code too.)</p></li>
+<li><p>Install <a href="https://cran.r-project.org">R</a> and <a href="https://www.python.org/downloads/">Python 3</a> if you do not have them yet. On Windows, also install <a href="https://git-scm.com/downloads/win">Git for Windows</a>, which Claude Code uses to run commands and to download this folder.</p></li>
+<li><p>Make an empty folder for your questions, open it in VS Code (<em>File &gt; Open Folder</em>), and click <em>✻ Claude Code</em> in the bottom-right corner to open the agent.</p></li>
+<li><p>By default the agent decides for itself which steps are safe. Until you know how it behaves, click the mode indicator below the prompt box and choose <em>Manual</em>. It then shows every change and asks before most commands.</p></li>
+<li><p>Paste this as your first request.</p>
+<blockquote class="blockquote">
+<p>Download only the itembank folder from https://github.com/JohnnyDoorn/teaching-statistics into this folder (the full repository is large, so do not clone all of it). Check that R with the packages exams and jsonlite, pandoc and Python 3 are installed, and install what is missing. Then build itembank/examples with itembank/tools/build-ans.R and tell me what you did.</p>
+</blockquote></li>
+<li><p>Give the agent its standing instructions. Claude Code reads a file called <code>CLAUDE.md</code> in your folder at the start of every conversation, so you only have to say this once.</p>
+<blockquote class="blockquote">
+<p>Create a CLAUDE.md in this folder that says to read itembank/ans-agent-instructions.qmd before reading, writing or building any ANS question, and that I review every question before it goes into ANS.</p>
+</blockquote></li>
+</ol>
+<p>When it is done, open <code>itembank/examples/EXAMPLES.html</code> in your browser. If you see the twelve example questions with their answers, everything works.</p>
+</section>
+<section id="what-we-do-with-it" class="level3">
+<h3 class="anchored" data-anchor-id="what-we-do-with-it">What we do with it</h3>
+<p>This is the loop we use for the weekly assignments and exams in our statistics courses. Each step is one request to the agent.</p>
+<ol type="1">
+<li>Export your question bank from ANS (<em>Settings &gt; Export</em>, both the QTI 2.X export and the Respondus package) and put the zip files in your folder.</li>
+<li>“Convert the questions in these ANS exports into the format of itembank/examples, one file per question, in one folder per assignment.”</li>
+<li>“Recompute every key from this data file and list the questions where the key differs or the wording is ambiguous. Change nothing yet.” You decide what changes.</li>
+<li>“Write two tick-all questions about the paired t-test, based on section 9.9 of the book, and compute the keys from this data file.” Always point it to a source, such as a book section or your slides, so it does not make up statistics.</li>
+<li>“Build this folder with a TEST prefix.” Read the preview page it makes, which shows every question with its answer.</li>
+<li>Import the zip into a scratch bank, export it again, and ask “Compare this export with the expected file.” Then move the questions to your real bank.</li>
+</ol>
+<p>A few habits help. Ask for one thing at a time and read each change before you accept it. The agent forgets everything between conversations except what is in <code>CLAUDE.md</code>, so when you settle a convention (say, final answers in two decimals), ask it to add that to <code>CLAUDE.md</code>. And keep exam questions out of public places; this page lives in a public repository, which is why it holds only practice questions whose answers are already online.</p>
+</section>
+</section>
 <section id="what-is-in-this-folder" class="level2">
 <h2 class="anchored" data-anchor-id="what-is-in-this-folder">What is in this folder</h2>
 <table class="table">
@@ -216,7 +281,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="build-it-yourself" class="level2">
 <h2 class="anchored" data-anchor-id="build-it-yourself">Build it yourself</h2>
-<p>You need R with the packages <code>exams</code> and <code>jsonlite</code>, pandoc (RStudio ships one) and Python 3. From this folder, run</p>
+<p>Your agent does this for you, but you can also build by hand. You need R with the packages <code>exams</code> and <code>jsonlite</code>, pandoc (RStudio ships one) and Python 3. From this folder, run</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> tools/build-ans.R examples</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This writes three files into <code>examples/</code>.</p>
 <ul>
@@ -380,15 +445,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Every model answer ends with its source (book section and page, lecture slides), for whoever checks the questions.</li>
 <li>Keys are computed from the data, never copied from a published answer.</li>
 <li>The question states alpha whenever the answer depends on it.</li>
-</ul>
-</section>
-<section id="working-with-a-coding-agent" class="level2">
-<h2 class="anchored" data-anchor-id="working-with-a-coding-agent">Working with a coding agent</h2>
-<p>Give your agent (Claude Code or similar) <a href="ans-agent-instructions.html"><code>ans-agent-instructions.qmd</code></a> before it reads, writes or builds any ANS question. It then knows the format above, which import route works, what ANS silently drops, and how to check an import. These requests work well.</p>
-<ul>
-<li>“Read ans-agent-instructions.qmd. Convert the questions in this ANS export (the QTI 2.X export and the Respondus package) into that format, one file per question.”</li>
-<li>“Write two tick-all questions about the paired t-test in the format of examples/, and compute the keys from this data file.”</li>
-<li>“Build my folder with a TEST prefix, and after I import it, compare my re-export with the expected file.”</li>
 </ul>
 </section>
 <section id="check-an-import" class="level2">

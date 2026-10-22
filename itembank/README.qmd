@@ -2,7 +2,7 @@
 title: "Writing ANS questions as text files"
 subtitle: "Examples and tools for building an ANS question bank with R/exams"
 author: "Johnny van Doorn"
-date: "16 October 2026"
+date: "22 October 2026"
 ---
 
 This folder shows how we write questions for **ANS** at the Psychology department of the
@@ -15,6 +15,104 @@ Why files instead of the ANS editor? Questions in files can be searched, reused,
 years and checked. Every key in the examples below was recomputed from the data, and a coding
 agent can read and write the files too. Everything here was settled by test imports into ANS in
 September and October 2026. Where something is only partly tested, the agent instructions say so.
+
+## Start here
+
+New to all of this? This section takes you from nothing to your first package. If you only want
+to see the end result, skip to [Try it in ANS](#try-it-in-ans), which needs no setup at all.
+
+::: {.callout-tip}
+One of the handy things about a language model is that you can ask it about itself. Stuck on an
+install step, an error message or a setting? Paste it in and ask what to do, or ask how a feature
+works. Before your agent runs, any chatbot (UvA AI Chat included) can help you get it running.
+:::
+
+### What a coding agent is
+
+You probably know chatbots like ChatGPT or UvA AI Chat. You type a question, it types an answer,
+and you copy out whatever it makes by hand. A **coding agent** is the same kind of language model,
+but it works on your own computer, inside a folder you give it. It opens and writes files there,
+runs programs such as R and Python, reads what comes back, and fixes its own mistakes before it
+reports to you.
+
+For ANS questions, that changes what you can hand off. You give the agent an export of your
+question bank and say what you want, for example "turn these into files and recompute every key
+from the data". It does the hand work, and you check the result. It can still be wrong about the
+statistics, so treat its output as a draft from a teaching assistant. The builder catches
+format mistakes, not wrong answers.
+
+### Which subscription to get
+
+Everything here was built and tested with Claude Code, Anthropic's coding agent. It comes with a
+paid Claude account (the free plan does not include it). Claude Pro, about $20 a month, is enough
+to start; see [claude.com/pricing](https://claude.com/pricing). The more expensive Max plans only
+matter if you hit the usage limits every day. Other agents, such as OpenAI's Codex or GitHub
+Copilot, can read the same instructions, but we have not tested the workflow with them.
+
+[UvA AI Chat](https://www.uva.nl/en/about-the-uva/about-the-university/ai/ai-in-education/uva-ai-chat/uva-ai-chat.html)
+is free for UvA staff and keeps your prompts within the UvA. For now it is a chat window, so it
+cannot work in your folder, but agentic use is expected soon. Once that arrives it becomes the
+natural choice, certainly for exam questions.
+
+Whichever tool you use, never give it student data such as names, grades or answers. With a
+commercial account, also switch off the use of your chats for model training in its privacy
+settings.
+
+### Set it up, once
+
+1. Install [VS Code](https://code.visualstudio.com), a free editor. Open its Extensions view
+   (`Cmd+Shift+X` on a Mac, `Ctrl+Shift+X` on Windows), search for "Claude Code", click
+   *Install*, and sign in with your Claude account. (Would you rather not use an editor? The
+   [Claude desktop app](https://claude.com/download) runs Claude Code too.)
+2. Install [R](https://cran.r-project.org) and [Python 3](https://www.python.org/downloads/) if you
+   do not have them yet. On Windows, also install [Git for Windows](https://git-scm.com/downloads/win),
+   which Claude Code uses to run commands and to download this folder.
+3. Make an empty folder for your questions, open it in VS Code (*File > Open Folder*), and click
+   *✻ Claude Code* in the bottom-right corner to open the agent.
+4. By default the agent decides for itself which steps are safe. Until you know how it behaves,
+   click the mode indicator below the prompt box and choose *Manual*. It then shows every change
+   and asks before most commands.
+5. Paste this as your first request.
+
+   > Download only the itembank folder from https://github.com/JohnnyDoorn/teaching-statistics
+   > into this folder (the full repository is large, so do not clone all of it). Check that R
+   > with the packages exams and jsonlite, pandoc and Python 3 are installed, and install what is
+   > missing. Then build itembank/examples with itembank/tools/build-ans.R and tell me what you did.
+
+6. Give the agent its standing instructions. Claude Code reads a file called `CLAUDE.md` in your
+   folder at the start of every conversation, so you only have to say this once.
+
+   > Create a CLAUDE.md in this folder that says to read itembank/ans-agent-instructions.qmd
+   > before reading, writing or building any ANS question, and that I review every question
+   > before it goes into ANS.
+
+When it is done, open `itembank/examples/EXAMPLES.html` in your browser. If you see the twelve
+example questions with their answers, everything works.
+
+### What we do with it
+
+This is the loop we use for the weekly assignments and exams in our statistics courses. Each
+step is one request to the agent.
+
+1. Export your question bank from ANS (*Settings > Export*, both the QTI 2.X export and the
+   Respondus package) and put the zip files in your folder.
+2. "Convert the questions in these ANS exports into the format of itembank/examples, one file per
+   question, in one folder per assignment."
+3. "Recompute every key from this data file and list the questions where the key differs or the
+   wording is ambiguous. Change nothing yet." You decide what changes.
+4. "Write two tick-all questions about the paired t-test, based on section 9.9 of the book, and
+   compute the keys from this data file." Always point it to a source, such as a book section or
+   your slides, so it does not make up statistics.
+5. "Build this folder with a TEST prefix." Read the preview page it makes, which shows every
+   question with its answer.
+6. Import the zip into a scratch bank, export it again, and ask "Compare this export with the
+   expected file." Then move the questions to your real bank.
+
+A few habits help. Ask for one thing at a time and read each change before you accept it. The
+agent forgets everything between conversations except what is in `CLAUDE.md`, so when you settle a
+convention (say, final answers in two decimals), ask it to add that to `CLAUDE.md`. And keep exam
+questions out of public places; this page lives in a public repository, which is why it holds only
+practice questions whose answers are already online.
 
 ## What is in this folder
 
@@ -55,7 +153,7 @@ recomputed in R from those data files.
 
 ## Build it yourself
 
-You need R with the packages `exams` and `jsonlite`, pandoc (RStudio ships one) and Python 3.
+Your agent does this for you, but you can also build by hand. You need R with the packages `exams` and `jsonlite`, pandoc (RStudio ships one) and Python 3.
 From this folder, run
 
 ```sh
@@ -178,19 +276,6 @@ These are our choices, not rules of ANS, so adapt them to your course.
   checks the questions.
 - Keys are computed from the data, never copied from a published answer.
 - The question states alpha whenever the answer depends on it.
-
-## Working with a coding agent
-
-Give your agent (Claude Code or similar) [`ans-agent-instructions.qmd`](ans-agent-instructions.html)
-before it reads, writes or builds any ANS question. It then knows the format above, which import
-route works, what ANS silently drops, and how to check an import. These requests work well.
-
-- "Read ans-agent-instructions.qmd. Convert the questions in this ANS export (the QTI 2.X export
-  and the Respondus package) into that format, one file per question."
-- "Write two tick-all questions about the paired t-test in the format of examples/, and compute
-  the keys from this data file."
-- "Build my folder with a TEST prefix, and after I import it, compare my re-export with the
-  expected file."
 
 ## Check an import
 
