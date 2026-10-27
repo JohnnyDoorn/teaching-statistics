@@ -34,6 +34,10 @@ for(e in error) {
 
 ```
 
+## Applet
+
+[Link](https://jvd-ssr-multiple-regression.share.connect.posit.cloud/)
+
 ## Assumptions {.subsection .smaller}
 
 A selection from Field (8.3 Bias in linear models):
@@ -64,14 +68,45 @@ This can be assessed through:
 * Matrix scatterplot 
 * Collinearity diagnostics
     * VIF: max < 10, mean not substantially > 1
-    * Tolerance \> 0.2 -> good
-    * Tolerance = $\frac{1}{VIF}$
+    * Tolerance ($= \frac{1}{VIF}$): min > 0.1
 
 :::
 
 ::: {.column  width="40%"}
 ![](../../images/pinguins.jpg){width="350px"}
 :::
+:::
+
+## Homoscedasticity {.smaller}
+
+::: {.columns}
+
+::: {.column}
+
+* Variance of residuals should be equal across all expected values
+* Look at scatterplot of residuals vs. predicted values. Ideally it's an uncorrelated, round cloud
+* For examples of violations, see [here](https://johnnydoorn.github.io/teaching-statistics/extra-texts/heteroscedasticity.html)
+* After the analysis is complete because it's based on the residuals
+:::
+
+::: {.column}
+
+```{r mreg-homoscedasticity, fig.align='center', fig.width=5, fig.height=5, echo=FALSE}
+# Copied from lecture 9 (reg-homoscedasticity), same album sales model. Sources _setup.R itself
+# (datasetsPath, plotrix) because the "Read data" chunk that sources it comes later; own variable
+# names, so the later fit and data are untouched.
+source("../../_setup.R")
+homFit  <- lm(Sales ~ Adverts, data = read.csv(datasetsPath("2026/album_sales.csv")))
+z.pred  = scale(homFit$fitted.values) # convert model predictions to z-scores
+z.resid = scale(homFit$residuals)     # convert model residuals to z-scores
+
+plot(z.pred, z.resid, xlim = c(-2, 2), ylim = c(-2, 2), xlab = "z-score prediction", ylab = "z-score residual")
+abline(h = 0, v = 0, lwd=2)
+
+draw.circle(0,0,1.7,col=rgb(1,0,0,.5))
+```
+:::
+
 :::
 
 ## Linearity
@@ -195,10 +230,6 @@ p3d$width  <- 900
 p3d$height <- 520
 p3d
 ```
-
-## Applet
-
-[Link](https://jvd-ssr-multiple-regression.share.connect.posit.cloud/)
 
 ## What are the predicted values based on this model
 
