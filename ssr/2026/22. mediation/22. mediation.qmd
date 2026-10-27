@@ -1,7 +1,8 @@
 ---
-title: "23. Mediation"
+title: "22. Mediation"
 author: "Johnny van Doorn"
-date: "30 October 2026"
+date: "28 October 2026"
+view: "https://teams.microsoft.com/meet/3697492461680604?p=ThrVxoHKbGbwIRyzs2"
 footer: "Scientific & Statistical Reasoning"
 format:
   revealjs:
@@ -16,6 +17,7 @@ In this lecture we aim to:
 
 - Explore mediation analysis
 - Link it to regression
+- Introduce the PROCESS module
 - Demonstrate in JASP
     
 <strong>Reading:</strong>
@@ -39,6 +41,13 @@ Chapter 10 (§10.4–10.7)
 - Mediation analysis is a way to model dependence between predictors
 - PROCESS module is very flexible
 - Causal assumptions extremely important with PROCESS models
+
+## Exam note {.smaller}
+
+- For the exam, max 1 mediator (but see Section 10.4.7)
+- Read paths $a$, $b$ and $c$ from the *Path coefficients* table
+- Test mediation with the $p$-value of the indirect effect $a \times b$
+- Report its estimate, $p$-value and 95% CI (Section 10.4.6)
 
 ## Next Time
 

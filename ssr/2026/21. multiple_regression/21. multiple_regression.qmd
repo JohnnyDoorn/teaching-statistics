@@ -2,6 +2,7 @@
 title: "21. Multiple regression"
 author: "Johnny van Doorn"
 date: "27 October 2026"
+view: "https://teams.microsoft.com/meet/3257661194084921?p=KMmsoOWGb4ItWovn92"
 footer: "Scientific & Statistical Reasoning"
 format:
   revealjs:
@@ -14,8 +15,8 @@ css: ../../ajohnson.css
 # Block 3: Life is Continuous
 
 - Regression with multiple predictors
-- Interaction effects
 - Mediation effects
+- Interaction effects
 - Chi-square
 - Bayes!
 
@@ -41,14 +42,14 @@ Chapter 8 (§8.9–8.16)
 
 ## Recap
 
-- In linear regression, we can build multiple models and look at their fit
+- In linear regression, we can build multiple models and look at the increase in model fit
 - Just as in ANOVA, when we have multiple predictors we look out for:
   - Dependence between predictors
   - Interaction effects
 
 ## Next Time
 
-- Mediation analysis (lecture 23)
+- Mediation analysis (lecture 22)
 
 ## Recommended Exercises
 

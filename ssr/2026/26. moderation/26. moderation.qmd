@@ -15,7 +15,7 @@ css: ../../ajohnson.css
 In this lecture we aim to:
 
 - Look at interactions between continuous predictors
-- Introduce the PROCESS module
+- Revisit the PROCESS module
 - Demonstrate in JASP
     
 <strong>Reading:</strong>

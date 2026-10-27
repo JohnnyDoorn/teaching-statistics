@@ -147,7 +147,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Import QTI 2.1 packages through the button “QTI 2.X package (Legacy)”.</strong> The Respondus CSV route gives no grading criteria, no penalty for wrong ticks in multiple-response questions, and only alphanumeric gaps. QTI 3.0 loses the text, links, figures and model answers around fill-in parts. (Verified, four import rounds.)</li>
 <li><strong>Write only elements ANS itself emits.</strong> One unexpected element can sink the whole package with “There are no exercises to import”. When in doubt, copy the structure of an item from the teacher’s own QTI 2.X export. The builder already writes the right form; do not hand-edit its XML.</li>
 <li><strong>Never put a scorer rubric inside the <code>itemBody</code> of a fill-in question.</strong> ANS imports it as question text, so students see the answer. (Verified.)</li>
-<li><strong>One answer field per question.</strong> The one exception is several numeric gaps in one question, which work only in ANS’s own multi-gap form (section 6.3). Otherwise make the parts separate questions of one exercise (section 2.4).</li>
+<li><strong>One answer field per question.</strong> Several gaps in one question are possible in ANS’s own multi-gap form (section 6.3), but ANS imports those gaps as alphanumeric gaps that accept only the exact keys, so give each numeric answer its own question. Otherwise make the parts separate questions of one exercise (section 2.4).</li>
 <li><strong>List images and data files as <code>&lt;file&gt;</code> entries of the item that uses them</strong> in the manifest. A separate manifest resource per file makes ANS create an empty exercise titled <code>d41d8cd98f00b204e9800998ecf8427e</code>. (Verified.)</li>
 <li><strong>Multiple-response (tick-all) questions need at least one true statement</strong>, and the stem must say so (“Check the statement(s) that is/are true; at least one statement is true.”), because ANS’s correction for guessing assumes it. The builder stops otherwise.</li>
 <li><strong>Compute every key from the data, in code.</strong> Never copy a number from a published answer, a textbook or a previous version of the question without recomputing it. Published answers contain errors.</li>
@@ -223,7 +223,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>extol: 0.01</span>
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>exextra<span class="co">[</span><span class="ot">anstitle</span><span class="co">]</span>: Title shown in ANS</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Several gaps in one question use <code>extype: cloze</code> with <code>##ANSWER1##</code>, <code>##ANSWER2##</code>, … in the text. The text right before each placeholder is its label. Give one empty <code>Answerlist</code> line per gap, <code>exclozetype: num|num</code>, <code>exsolution: -2.47|11</code>, <code>extol: 0.01|0</code>, and <code>expoints</code> <strong>per gap</strong> (two gaps worth 1 point together need <code>expoints: 0.5</code>). <code>exextra[alt]: 2.47|</code> adds accepted answers per gap (spaces between answers, <code>|</code> between gaps), for example the other sign of t where the sign only reflects the order of the variables.</p>
-<p>In a <code>cloze</code>, the builder also adds the obvious variants of each numeric key (a comma decimal, no leading zero) and writes a margin of 0 as a zero-width range, which ANS needs to keep the gap numeric. A single <code>num</code> gap stays a float with a tolerance, which ANS imports as its numeric gap with that margin; no variants are added there.</p>
+<p>In a <code>cloze</code>, the builder also adds the obvious variants of each numeric key (a comma decimal, no leading zero) and writes the margin as a <code>low;high</code> range, as ANS’s own exports do. A single <code>num</code> gap stays a float with a tolerance, which ANS imports as its numeric gap with that margin; no variants are added there.</p>
+<p><strong>Caution, seen on import in October 2026:</strong> ANS imports the gaps of a multi-gap question as alphanumeric gaps, not as numeric gaps with the margin. They then accept only the exact keys, and a key such as <code>-3.10</code> is stored as <code>-3.1</code>, so a student who types <code>-3.10</code> is marked wrong. For numeric answers, give each gap its own question (one <code>num</code> gap each, parts of one exercise), or set the gaps to <em>Numeric</em> with a margin by hand after import.</p>
 </section>
 <section id="multi-part-exercises" class="level3">
 <h3 class="anchored" data-anchor-id="multi-part-exercises">2.4 Multi-part exercises</h3>
@@ -361,7 +362,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="several-gaps-in-one-question-or-several-accepted-answers" class="level3">
 <h3 class="anchored" data-anchor-id="several-gaps-in-one-question-or-several-accepted-answers">6.3 Several gaps in one question, or several accepted answers</h3>
-<p>Use ANS’s own form, as in its exports (verified by import with 5 gaps in one question). That means one string <code>responseDeclaration</code> per gap, the accepted keys and a mapping <strong>inside <code>correctResponse</code></strong>, numeric margins as <code>low;high</code> keys, and the <code>map_response</code> template.</p>
+<p>Use ANS’s own form, as in its exports (verified by import with 5 gaps in one question: every gap shows, but as an alphanumeric gap; see the caution in section 2.3). That means one string <code>responseDeclaration</code> per gap, the accepted keys and a mapping <strong>inside <code>correctResponse</code></strong>, numeric margins as <code>low;high</code> keys, and the <code>map_response</code> template.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode xml code-with-copy"><code class="sourceCode xml"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">responseDeclaration</span><span class="ot"> identifier=</span><span class="st">"GAP1"</span><span class="ot"> cardinality=</span><span class="st">"single"</span><span class="ot"> baseType=</span><span class="st">"string"</span>&gt;</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">correctResponse</span>&gt;</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">value</span>&gt;191.5&lt;/<span class="kw">value</span>&gt;&lt;<span class="kw">value</span>&gt;191,5&lt;/<span class="kw">value</span>&gt;&lt;<span class="kw">value</span>&gt;191.4;191.6&lt;/<span class="kw">value</span>&gt;</span>
@@ -450,7 +451,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td><code>cloze</code> with several float gaps</td>
-<td>ANS’s multi-gap form (6.3)</td>
+<td>one <code>num</code> gap per question; ANS’s multi-gap form (6.3) only where exact keys are fine</td>
 </tr>
 <tr class="even">
 <td>item titles “1”, “2”, …</td>
@@ -500,7 +501,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td>ANS multi-gap form with <code>low;high</code> ranges</td>
-<td>verified by import, checked on screen</td>
+<td>every gap shows after import, but as an alphanumeric gap with the exact keys, not as a numeric gap with the range (seen October 2026)</td>
 </tr>
 <tr class="even">
 <td>Exact gaps (margin 0)</td>

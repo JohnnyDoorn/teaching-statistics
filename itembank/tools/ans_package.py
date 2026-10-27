@@ -37,7 +37,9 @@ Every rule below was settled by test imports into ANS at the University of Amste
   a string responseDeclaration per gap whose correctResponse holds the value, the
   margin as a "low;high" range and a mapping (points / number of gaps each), and the
   map_response template instead of exams' own scoring. exams' version of a multi-gap
-  question showed only its first gap in ANS (2026-09-22). Confirmed by import
+  question showed only its first gap in ANS (2026-09-22). Caution: ANS imports these
+  gaps as alphanumeric (exact keys only), not as numeric gaps with the range (2026-10-26);
+  for numeric answers prefer one num gap per question. Confirmed by import
   (2026-10-06).
 * With --feedback (practice tests), every choice and fill-in item also gets its
   Solution as question feedback, so students see it after answering.

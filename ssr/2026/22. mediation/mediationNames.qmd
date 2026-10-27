@@ -162,18 +162,24 @@ model.outcome.predictor  <- lm(speed.of.healing  ~ use.homeopathic.remedies)
 model.mediator.predictor <- lm(healthy.lifestyle ~ use.homeopathic.remedies)
 model.combined           <- lm(speed.of.healing  ~ use.homeopathic.remedies + healthy.lifestyle)
 ```
+:::: {.columns}
+
+::: {.column width="60%"}
 1. Total effect:
     - $\widehat{\text{Outcome}} = b_0 + b_t \text{Predictor}_i$
 2. Mediator effect:
     - $\widehat{\text{Mediator}} = b_0 + b_a \text{Predictor}_i$
 3. Combined effect:
     - $\widehat{\text{Outcome}} = b_0 + b_{c} \text{Predictor}_i + b_b \text{Mediator}_i$
+:::
 
-<div style="text-align: center;">
-![](../../images/mediation.png){width="400px"}
-</div>
+::: {.column width="40%"}
+![](../../images/mediation.png){width="349px"}
+:::
 
-## Extract beta coëfficients {.smaller .flexbox .vcenter}
+::::
+
+## Extract beta coefficients {.smaller .flexbox .vcenter}
 
 ```{r med-extract-beta-coefficients, echo=TRUE}
 b.outcome.predictor       <- model.outcome.predictor$coefficients[2]   # b.t
@@ -181,18 +187,24 @@ b.mediator.predictor      <- model.mediator.predictor$coefficients[2]  # b.a
 b.combined.mediator       <- model.combined$coefficients[3]            # b.b
 b.combined.predictor      <- model.combined$coefficients[2]            # b.c
 ```
+:::: {.columns}
+
+::: {.column width="60%"}
 1. Total effect:
     - $\widehat{\text{Outcome}} = b_0 + b_t \text{Predictor}_i$
 2. Mediator effect:
     - $\widehat{\text{Mediator}} = b_0 + b_a \text{Predictor}_i$
 3. Combined effect:
     - $\widehat{\text{Outcome}} = b_0 + b_{c} \text{Predictor}_i + b_b \text{Mediator}_i$
+:::
 
-<div style="text-align: center;">
-![](../../images/mediation.png){width="400px"}
-</div>
+::: {.column width="40%"}
+![](../../images/mediation.png){width="349px"}
+:::
 
-## View beta coëfficients {.subsection}
+::::
+
+## View beta coefficients {.subsection}
 ```{r med-unname-coefficients, echo = FALSE}
 b.mediator.predictor  <- unname(b.mediator.predictor)
 b.combined.mediator       <- unname(b.combined.mediator)
@@ -205,14 +217,24 @@ b.mediator.predictor     # b.a
 b.combined.mediator      # b.b
 ```
 
-## View beta coëfficients  {.smaller .flexbox .vcenter}
+## View beta coefficients  {.smaller .flexbox .vcenter}
 
+:::: {.columns}
+
+::: {.column width="60%"}
 ```{r med-coefficients-total-and-direct, echo=TRUE}
 b.outcome.predictor      # b.t 
 b.mediator.predictor     # b.a 
 b.combined.mediator      # b.b
 b.combined.predictor     # b.c
 ```
+:::
+
+::: {.column width="40%"}
+![](../../images/mediation.png){width="349px"}
+:::
+
+::::
 
 
 
@@ -220,9 +242,7 @@ b.combined.predictor     # b.c
 <!-- 2. $\widehat{\text{Mediator}} = b_0 + b_a \text{Predictor}_i$ -->
 <!-- 3. $\widehat{\text{Outcome}} = b_0 + b_{c`} \text{Predictor}_i + b_b \text{Mediator}_i$ -->
 
-<div style="text-align: center;">
-![](../../images/mediation.png){width="400px"}
-</div>
+
 
 
 ## Path plot
@@ -275,6 +295,9 @@ abline(fit.1, col = 'darkgreen', lwd = 3)
 
 $a \times b = b_a \times b_b$
 
+:::: {.columns}
+
+::: {.column width="73%"}
 ```{r med-calculate-indirect-effect, echo=TRUE}
 indirect <- b.mediator.predictor * b.combined.mediator; indirect  # a * b
 
@@ -282,10 +305,15 @@ indirect + b.combined.predictor # a * b + c
 
 b.outcome.predictor         # total effect
 ```
+:::
 
-<div style="text-align: center;">
-![](../../images/mediation.png){width="400px"}
-</div>
+::: {.column width="27%"}
+![](../../images/mediation.png){width="100%"}
+:::
+
+::::
+
+
 
 ## Calculate indirect effect (standardized) {.subsection}
 
@@ -298,7 +326,7 @@ b.mediator.predictor*b.combined.mediator /
 
 
 
-## Calculate $P_M$
+## Calculate $P_M$ {.smaller}
 
 $\frac{ab}{total} = \frac{b_a b_b}{b_t} = \frac{b_a b_b}{b_a b_b + b_c}$
 
@@ -319,6 +347,16 @@ blockquote {
 
 > "although it is tempting to think of $P_M$ as a proportion (because it is the ratio of the indirect effect to the total effect) it is not: it can exceed 1 and even take negative values (Preacher & Kelley, 2011)."
 
+
+## Is the indirect effect significant? {.smaller}
+
+- Test the indirect effect $a \times b$ itself (Section 10.4.2)
+- JASP gives its estimate, $p$-value and 95% CI
+  - In the *Direct and indirect effects* table
+- Significant indirect effect if $p < \alpha$
+- The CI shows how precisely $a \times b$ is estimated
+- Assumptions in doubt? Bootstrap the indirect effect (lecture 21)
+  - Options → Method → *Bootstrap*
 
 ## Caution with PROCESS
 

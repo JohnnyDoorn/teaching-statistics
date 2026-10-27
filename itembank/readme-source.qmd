@@ -3,10 +3,20 @@ title: "Writing ANS questions as text files"
 subtitle: "Examples and tools for building an ANS question bank with R/exams"
 author: "Johnny van Doorn"
 date: "22 October 2026"
+# One source, two outputs. README.html is the page on GitHub Pages; README.md is what GitHub shows
+# in the folder view (it prefers README.md over README.html). The source is not called README.qmd
+# because Quarto 1.3 then deletes README.md as its intermediate file when it renders the html.
+# Links point to the Pages URLs so they work in both.
+format-links: false   # no "Other formats" link to the .md on the html page
+format:
+  html:
+    output-file: README.html
+  gfm:
+    output-file: README.md
+    wrap: none
 ---
 
-This folder shows how we write questions for **ANS** at the Psychology department of the
-University of Amsterdam. Each question is a small text file. A builder turns a folder of these
+This folder shows how to write questions for **ANS**. Each question is a small text file. A builder turns a folder of these
 files into one package, and ANS imports that package with the parts that normally take hand work
 already in place, such as **model answers**, **grading criteria** for open questions, numeric
 fill-in gaps with a margin, multi-part exercises, data files and maths.
@@ -37,19 +47,32 @@ reports to you. Because it works in your folder, you can also give it highly spe
 such as your lecture slides, lecture transcripts, literature, exam regulations and earlier
 exercises, and it reads them whenever it needs them.
 
-For ANS questions, that changes what you can hand off. You give the agent an export of your
-question bank and say what you want, for example "turn these into files and recompute every key
-from the data". It does the hand work, and you check the result. It can still be wrong about the
-statistics, so treat its output as a draft from a teaching assistant. The builder catches
-format mistakes, not wrong answers.
+For ANS questions, the most useful job is not writing new questions but cleaning up the ones you
+already have. A bank that has been reused for years collects wrong keys, model answers written for
+an earlier version of the numbers, page references to an older edition of the book, and links
+that no longer work. You give the agent an export of your bank, and it turns the questions into
+files, recomputes every key from the data, checks the model answers and book references, and lists
+what it would change. You decide, and it does the hand work. It can still be wrong about the
+statistics, so treat its output as a draft from a teaching assistant. The builder catches format
+mistakes, not wrong answers.
 
-### Which subscription to get
+### Which agent to use
+
+Several companies now offer a coding agent, and they all work in much the same way. The table
+lists the ones you are most likely to come across, with the cheapest plan that includes the agent.
+Prices change often; these were checked on 25 October 2026.
+
+| Agent | Company | Cheapest plan that includes it | Good to know |
+|-------|---------|--------------------------------|--------------|
+| Claude Code | Anthropic (US) | Claude Pro, $20 a month ([pricing](https://claude.com/pricing)) | The one I used for everything on this page |
+| Codex | OpenAI (US) | Every ChatGPT plan, the free one included; Plus is $20 a month ([pricing](https://learn.chatgpt.com/docs/pricing)) | Many people already have a ChatGPT account |
+| GitHub Copilot | GitHub, part of Microsoft (US) | Copilot Free, with monthly limits; Pro is $10 a month ([plans](https://github.com/features/copilot/plans)) | Verified teachers can get Pro for free through [GitHub Education](https://docs.github.com/en/copilot/how-tos/copilot-on-github/set-up-copilot/enable-copilot/set-up-for-teachers-and-os-maintainers) |
+| Mistral Vibe | Mistral AI (France) | Pro, $14.99 a month; the free plan has a few coding sessions ([pricing](https://mistral.ai/pricing)) | A European company |
 
 Everything here was built and tested with Claude Code, Anthropic's coding agent. It comes with a
-paid Claude account (the free plan does not include it). Claude Pro, about $20 a month, is enough
-to start; see [claude.com/pricing](https://claude.com/pricing). The more expensive Max plans only
-matter if you hit the usage limits every day. Other agents, such as OpenAI's Codex or GitHub
-Copilot, can read the same instructions, but we have not tested the workflow with them.
+paid Claude account (the free plan does not include it). Claude Pro is enough to start. The more
+expensive Max plans only matter if you hit the usage limits every day. The other agents in the
+table can read the same instructions, but I have not tested the workflow with them.
 
 [UvA AI Chat](https://www.uva.nl/en/about-the-uva/about-the-university/ai/ai-in-education/uva-ai-chat/uva-ai-chat.html)
 is free for UvA staff and keeps your prompts within the UvA. For now it is a chat window, so it
@@ -66,7 +89,9 @@ settings.
 1. Install [VS Code](https://code.visualstudio.com), a free editor. Open its Extensions view
    (`Cmd+Shift+X` on a Mac, `Ctrl+Shift+X` on Windows), search for "Claude Code", click
    *Install*, and sign in with your Claude account. (Would you rather not use an editor? The
-   [Claude desktop app](https://claude.com/download) runs Claude Code too.)
+   [Claude desktop app](https://claude.com/download) runs Claude Code too.) For another agent,
+   install its extension instead, such as Codex or GitHub Copilot Chat. The steps below use
+   Claude Code as the example; the other agents have the same parts under slightly different names.
 2. Install [R](https://cran.r-project.org) and [Python 3](https://www.python.org/downloads/) if you
    do not have them yet. On Windows, also install [Git for Windows](https://git-scm.com/downloads/win),
    which Claude Code uses to run commands and to download this folder.
@@ -82,38 +107,43 @@ settings.
    > with the packages exams and jsonlite, pandoc and Python 3 are installed, and install what is
    > missing. Then build itembank/examples with itembank/tools/build-ans.R and tell me what you did.
 
-6. Give the agent its standing instructions. Claude Code reads a file called `CLAUDE.md` in your
-   folder at the start of every conversation, so you only have to say this once.
+6. Give the agent its standing instructions. Your agent reads one file in your folder at the
+   start of each conversation, `CLAUDE.md` for Claude Code and `AGENTS.md` for Codex, GitHub
+   Copilot and many others, so you only have to say this once.
 
-   > Create a CLAUDE.md in this folder that says to read itembank/ans-agent-instructions.qmd
-   > before reading, writing or building any ANS question, and that I review every question
-   > before it goes into ANS.
+   > Create the instruction file you read at the start of every conversation (CLAUDE.md or
+   > AGENTS.md) in this folder. It should say to read itembank/ans-agent-instructions.qmd before
+   > reading, writing or building any ANS question, and that I review every question before it
+   > goes into ANS.
 
 When it is done, open `itembank/examples/EXAMPLES.html` in your browser. If you see the twelve
 example questions with their answers, everything works.
 
-### What we do with it
+### What I use it for
 
-This is the loop we use for the weekly assignments and exams in our statistics courses. Each
-step is one request to the agent.
+This is how I clean up a bank, for example the weekly assignments of a course. Each step is one
+request to the agent.
 
 1. Export your question bank from ANS (*Settings > Export*, both the QTI 2.X export and the
    Respondus package) and put the zip files in your folder.
 2. "Convert the questions in these ANS exports into the format of itembank/examples, one file per
-   question, in one folder per assignment."
-3. "Recompute every key from this data file and list the questions where the key differs or the
-   wording is ambiguous. Change nothing yet." You decide what changes.
-4. "Write two tick-all questions about the paired t-test, based on section 9.9 of the book, and
-   compute the keys from this data file." Always point it to a source, such as a book section or
-   your slides, so it does not make up statistics.
-5. "Build this folder with a TEST prefix." Read the preview page it makes, which shows every
+   question, in one folder per assignment. Change nothing in the content yet."
+3. "Recompute every key from the data files, and list each question where the key, the model
+   answer or the feedback disagrees with your result."
+4. "Check every book reference in the model answers against the book in this folder, and list
+   references to an older edition, to the wrong section, or to a page that does not say what the
+   answer claims. Also list links that no longer work." This works best with a text version of
+   the book in your folder (see the caveat about copyrighted material above).
+5. "Go through the list with me, one question at a time." You decide what changes, and the agent
+   edits the files.
+6. "Build this folder with a TEST prefix." Read the preview page it makes, which shows every
    question with its answer.
-6. Import the zip into a scratch bank, export it again, and ask "Compare this export with the
-   expected file." Then move the questions to your real bank.
+7. Import the zip into a scratch bank, export it again, and ask "Compare this export with the
+   expected file." Then replace the old questions in your real bank.
 
 A few habits help. Ask for one thing at a time and read each change before you accept it. The
-agent forgets everything between conversations except what is in `CLAUDE.md`, so when you settle a
-convention (say, final answers in two decimals), ask it to add that to `CLAUDE.md`. And keep exam
+agent forgets everything between conversations except what is in that instruction file, so when you
+settle a convention (say, final answers in two decimals), ask it to add that to the file. And keep exam
 questions out of public places; this page lives in a public repository, which is why it holds only
 practice questions whose answers are already online.
 
@@ -121,8 +151,8 @@ practice questions whose answers are already online.
 
 | File or folder | For whom | What it holds |
 |----------------|--------|----------------------------|
-| `README.qmd` (this page) | you | how it works, how to try it, how to write your own questions |
-| [`ans-agent-instructions.qmd`](ans-agent-instructions.html) | your coding agent | the question format, what ANS accepts and drops, and what is verified |
+| `README.md` (this page) | you | how it works, how to try it, how to write your own questions |
+| [`ans-agent-instructions.qmd`](https://johnnydoorn.github.io/teaching-statistics/itembank/ans-agent-instructions.html) | your coding agent | the question format, what ANS accepts and drops, and what is verified |
 | `examples/` | both | 12 example questions in 3 exercises, the built package and a preview |
 | `tools/` | both | the builder (R), the packaging step it calls (Python) and an import checker |
 
@@ -140,12 +170,12 @@ recomputed in R from those data files.
 | Pets and life satisfaction (t-test and linear model) | 9.5-9.6 | 5 | numeric gaps with a margin; a single fill-in gap with its explanation as feedback; tick-all with symbols |
 | Backward messages (paired t-test) | 9.9 | 2 | single choice whose wrong options are named mistakes; an open question with grading criteria |
 
-[Preview every question with its answer](examples/EXAMPLES.html), or
-[download the package](examples/EXAMPLES.zip) and try it in ANS.
+[Preview every question with its answer](https://johnnydoorn.github.io/teaching-statistics/itembank/examples/EXAMPLES.html), or
+[download the package](https://johnnydoorn.github.io/teaching-statistics/itembank/examples/EXAMPLES.zip) and try it in ANS.
 
 ## Try it in ANS
 
-1. Download [`EXAMPLES.zip`](examples/EXAMPLES.zip).
+1. Download [`EXAMPLES.zip`](https://johnnydoorn.github.io/teaching-statistics/itembank/examples/EXAMPLES.zip).
 2. In ANS, open a question bank (a scratch bank is safest), go to **Settings > Import** and
    choose **QTI 2.X package (Legacy)**. Not *QTI 3.0*, and not *Respondus*.
 3. Three exercises appear outside any folder, with titles that start with "EXAMPLE". Move them to
@@ -236,9 +266,9 @@ The build stops, with a message that says what to fix, when
   of the first question, which reads fine.
 - **Folders and tags.** Imported questions land outside any folder.
 
-## Our conventions
+## My conventions
 
-These are our choices, not rules of ANS, so adapt them to your course.
+These are my choices, not rules of ANS, so adapt them to your course.
 
 - The correct option comes first in the file; the build shuffles.
 - Numeric answers are fill-in gaps with a margin rather than ANS's own numerical question type,

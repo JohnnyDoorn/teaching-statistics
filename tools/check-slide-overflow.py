@@ -40,8 +40,9 @@ for arg in sys.argv[1:]:
     t=t.replace('<head>','<head><base href="file://%s/">'%urllib.parse.quote(d),1).replace('</body>',js+'</body>',1)
     tmp=tempfile.NamedTemporaryFile('w',suffix='.html',delete=False); tmp.write(t); tmp.close()
     C="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+    # Software WebGL instead of --disable-gpu: rgl 3D widgets (L21) never finish loading without it.
     try:
-        dom=subprocess.run(["perl","-e","alarm 60; exec @ARGV",C,"--headless=new","--disable-gpu","--allow-file-access-from-files",
+        dom=subprocess.run(["perl","-e","alarm 120; exec @ARGV",C,"--headless=new","--use-angle=swiftshader","--enable-unsafe-swiftshader","--allow-file-access-from-files",
             "--window-size=1050,700","--virtual-time-budget=15000","--dump-dom","file://"+tmp.name],capture_output=True,text=True).stdout
     finally: os.unlink(tmp.name)
     m=re.search(r'<pre id="ovf">(.*?)</pre>',dom,re.S)

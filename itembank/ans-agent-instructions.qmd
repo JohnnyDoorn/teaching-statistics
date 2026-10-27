@@ -28,8 +28,9 @@ copy the example that looks most like what you need.
    its XML.
 3. **Never put a scorer rubric inside the `itemBody` of a fill-in question.** ANS imports it as
    question text, so students see the answer. (Verified.)
-4. **One answer field per question.** The one exception is several numeric gaps in one question,
-   which work only in ANS's own multi-gap form (section 6.3). Otherwise make the parts separate
+4. **One answer field per question.** Several gaps in one question are possible in ANS's own
+   multi-gap form (section 6.3), but ANS imports those gaps as alphanumeric gaps that accept only
+   the exact keys, so give each numeric answer its own question. Otherwise make the parts separate
    questions of one exercise (section 2.4).
 5. **List images and data files as `<file>` entries of the item that uses them** in the manifest.
    A separate manifest resource per file makes ANS create an empty exercise titled
@@ -135,9 +136,15 @@ answers per gap (spaces between answers, `|` between gaps), for example the othe
 where the sign only reflects the order of the variables.
 
 In a `cloze`, the builder also adds the obvious variants of each numeric key (a comma decimal,
-no leading zero) and writes a margin of 0 as a zero-width range, which ANS needs to keep the gap
-numeric. A single `num` gap stays a float with a tolerance, which ANS imports as its numeric gap
-with that margin; no variants are added there.
+no leading zero) and writes the margin as a `low;high` range, as ANS's own exports do. A single
+`num` gap stays a float with a tolerance, which ANS imports as its numeric gap with that margin;
+no variants are added there.
+
+**Caution, seen on import in October 2026:** ANS imports the gaps of a multi-gap question as
+alphanumeric gaps, not as numeric gaps with the margin. They then accept only the exact keys, and a
+key such as `-3.10` is stored as `-3.1`, so a student who types `-3.10` is marked wrong. For numeric
+answers, give each gap its own question (one `num` gap each, parts of one exercise), or set the gaps
+to *Numeric* with a margin by hand after import.
 
 ### 2.4 Multi-part exercises
 
@@ -347,7 +354,8 @@ ANS also has a *Numerical value* question type, but a gap shows the teacher what
 
 ### 6.3 Several gaps in one question, or several accepted answers
 
-Use ANS's own form, as in its exports (verified by import with 5 gaps in one question). That
+Use ANS's own form, as in its exports (verified by import with 5 gaps in one question: every gap
+shows, but as an alphanumeric gap; see the caution in section 2.3). That
 means one string `responseDeclaration` per gap, the accepted keys and a mapping **inside
 `correctResponse`**, numeric margins as `low;high` keys, and the `map_response` template.
 
@@ -449,7 +457,7 @@ R/exams (`exams2qti21()`) is a good base, but ANS needs its output reshaped. The
 |---|---|
 | the solution as `modalFeedback` (ANS drops it) | a scorer `rubricBlock` (choice, open) or correct/incorrect feedback (fill-in) |
 | a separate manifest resource per media file | `<file>` entries of the item |
-| `cloze` with several float gaps | ANS's multi-gap form (6.3) |
+| `cloze` with several float gaps | one `num` gap per question; ANS's multi-gap form (6.3) only where exact keys are fine |
 | item titles "1", "2", ... | the title from `exextra[anstitle]` |
 | `expectedLength="1000"` on open questions | `expectedLength="0"`, no response processing |
 | MathML | `$$...$$` |
@@ -465,7 +473,7 @@ Two R/exams behaviors to keep in mind when writing questions: `expoints` in a `c
 | Fill-in rubric inside `itemBody` leaks into the question | verified (do not do it) |
 | Separate media resources create an empty exercise | verified (do not do it) |
 | Correct/incorrect feedback on gaps and choice questions | verified by import, checked on screen |
-| ANS multi-gap form with `low;high` ranges | verified by import, checked on screen |
+| ANS multi-gap form with `low;high` ranges | every gap shows after import, but as an alphanumeric gap with the exact keys, not as a numeric gap with the range (seen October 2026) |
 | Exact gaps (margin 0) | the plain key alone imports as an alphanumeric gap (seen October 2026); `123` plus `123;123` is ANS's own export form, not yet confirmed after import |
 | Extra accepted keys (comma decimals, other sign) from a package | in ANS's own exports; not yet checked key by key after import |
 | Per-option (`choiceN`) feedback on import | seen in exports, not tested on import |

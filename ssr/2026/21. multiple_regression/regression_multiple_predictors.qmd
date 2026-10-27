@@ -184,68 +184,21 @@ The beta coefficients are:
 
 ## Visual
 
-```{r mreg-visual, echo=FALSE, warning=FALSE, class.source='rglChunk', webgl=TRUE}
-# 3d plot package rgl
-# install.packages('rgl')
-if(!"rgl" %in% installed.packages()) { install.packages("rgl") };
-library("rgl")
-
-library(knitr)
-knit_hooks$set(webgl = hook_webgl)
-
-#1 #D scatter 
-
-plot3d(airplay, adverts, sales,
-       col  = "red",
-       size = 8)
-
-# #2 Add airplay value planes 
-# 
-quantiles <- as.vector(quantile(airplay,seq(.1,.9,.1)))
-sds       <- c(mean(adverts)+(sd(adverts)*c(-1,0,1)))
-sds       <- 1:4
-
-planes3d(a = 0,
-         b = 1,
-         c = 0,
-         #d = c(1,2,3,4),
-         d = -sds,
-         alpha=0.1,
-         color = c("blue"))
-
-#3 Add regression model surface
-
-## Fit model
-fit <- lm(sales ~ airplay + adverts)
-
-## Create xyz coordinates
-regeq <- function(airplay, adverts) { 
-    fit$coefficients[1] + 
-    fit$coefficients[2]*airplay + 
-    fit$coefficients[3]*adverts
-}
-
-b.0 <- unname(b.0)
+```{r mreg-visual, echo=FALSE, warning=FALSE}
+# Same plot as the 3D tab of the MultiRegression applet: plot3D() from ../../plotFunctionsSSR.r
+# (sourced by _setup.R), a copy of the applet's helper. Plane of sales ~ adverts + airplay.
+b.0 <- unname(b.0)    # later slides print these without names
 b.1 <- unname(b.1)
 b.2 <- unname(b.2)
-x.pre <- seq(0, 100,length.out=30)
-y.mod <- seq( 0,   2000 ,length.out=30)
-
-z.pre <- outer(x.pre, y.mod, FUN='regeq')
-
-# z.pre[z.pre > 4] = 4
-# z.pre[z.pre < 1] = 1
-
-
-## Add 3D regression plane to scatter plot 
-surface3d(x.pre, y.mod, z.pre, color = c("green"))
-
-aspect3d(1,1,1)
-view3d(theta = 5)
-view3d(theta = -10, phi = -90)
-play3d(spin3d(axis = c(0, 0, 1), rpm = 30), duration = 5)
-rglwidget()
+p3d <- plot3D(data.frame(Sales = sales, Adverts = adverts, Airplay = airplay), model = "main")
+p3d$width  <- 900
+p3d$height <- 520
+p3d
 ```
+
+## Applet
+
+[Link](https://jvd-ssr-multiple-regression.share.connect.posit.cloud/)
 
 ## What are the predicted values based on this model
 
@@ -257,7 +210,7 @@ predicted.sales <- b.0 + b.1 * airplay + b.2 * adverts
 
 $\text{model prediction} = \widehat{\text{album sales}}$
 
-## Apply regression model {.subsection}
+## Apply regression model {.subsection .smaller}
 
 $\widehat{\text{album sales}} = b_0 + b_1 \text{airplay} + b_2 \text{adverts}$
 
@@ -294,7 +247,7 @@ ssrTable(data.frame(sales, predicted.sales, error = round(error, 3))[1:5,],
                              buttons = c('csv')))
 ```
 
-## Outcome = Model Prediction + Error {.subsection}
+## Outcome = Model Prediction + Error {.subsection .smaller}
 
 Is that true?
 
@@ -379,6 +332,9 @@ r <- round(r, 2)
        ylim=c(0,400), xlim=c(0, 400), pch = 21, bg = "turquoise", bty = "n")
  abline(lm(sales ~ predicted.sales), lwd = 3, col = "purple")
 
+```
+
+```{r child="hierarchical_regression.qmd"}
 ```
 
 ## JASP

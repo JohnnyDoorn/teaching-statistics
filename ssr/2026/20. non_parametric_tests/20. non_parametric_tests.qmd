@@ -74,7 +74,7 @@ Not needed for the exam, but you will meet it in the book (Section 6.10.5) and i
 - No need to assume the shape of the sampling distribution
 - In JASP mostly a way to get more robust confidence intervals
   - Usually a checkbox "From ... bootstraps"
-  - Correlation, linear regression, ANOVA post hoc tests, Descriptives, PROCESS (lecture 23)
+  - Correlation, linear regression, ANOVA post hoc tests, Descriptives, PROCESS (lecture 22)
 - Random resampling, so the numbers differ slightly each time
 
 

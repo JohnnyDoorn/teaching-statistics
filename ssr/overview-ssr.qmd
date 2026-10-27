@@ -44,8 +44,8 @@ allLinks <- c(
   onewayANOVA        = "https://jvd-ssr-oneway-anova.share.connect.posit.cloud/",
   ANCOVA             = "https://jvd-ssr-ancova.share.connect.posit.cloud/",
   factorialANOVA     = "https://jvd-ssr-factorial-anova.share.connect.posit.cloud/",
-  RM_ANOVA           = "https://jvd-ssr-rm-anova.share.connect.posit.cloud/"
-  # MultiRegression    = "https://statisticalreasoning-uva-2.shinyapps.io/MultiRegression"
+  RM_ANOVA           = "https://jvd-ssr-rm-anova.share.connect.posit.cloud/",
+  MultiRegression    = "https://jvd-ssr-multiple-regression.share.connect.posit.cloud/"
   
 )
 
@@ -65,7 +65,7 @@ knitr::kable(dplyr::arrange(data.frame(Topic = topics, Link = allLinks)), escape
 shownTexts <- c(
   "one-sided-vs-two-sided.html",  # lecture 6: correlation
   "eff-size-vs-test-stat.html",   # lecture 6: statistical vs practical significance
-  #"heteroscedasticity.html"       # lecture 9: linear model assumptions
+  "heteroscedasticity.html",       # lecture 9: linear model assumptions
   "violating-assumptions-anova.html",
   "predicting-with-dummies-1-variable.html",
   "predicting-with-dummies-2-variables.html"

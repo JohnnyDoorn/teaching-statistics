@@ -1,0 +1,99 @@
+<!-- Hierarchical regression (DSUJ sections 8.9.1, 8.10 and 8.11), added 2026-10-26 on Johnny's
+     request, with the assumption checks of the same model. Uses DSUJ's album sales data with all
+     three predictors (datasets/2026/album_sales.csv), so the numbers match Outputs 8.5 to 8.8.
+     Needs datasetsPath() from _setup.R, sourced in the "Read data" chunk of
+     regression_multiple_predictors.qmd, which runs first. -->
+
+```{r hreg-setup, echo=FALSE}
+album <- read.csv(datasetsPath("2026", "album_sales.csv"), check.names = FALSE, fileEncoding = "UTF-8-BOM")
+m0 <- lm(Sales ~ 1, data = album)
+m1 <- lm(Sales ~ Adverts, data = album)
+m2 <- lm(Sales ~ Adverts + Airplay + Image, data = album)
+nAlbum <- nrow(album)
+r2  <- c(0, summary(m1)$r.squared, summary(m2)$r.squared)
+k   <- c(0, 1, 3)
+df1 <- c(NA, diff(k))
+df2 <- nAlbum - k - 1
+Fc  <- c(NA, (diff(r2) / diff(k)) / ((1 - r2[-1]) / df2[-1]))
+pc  <- c(NA, pf(Fc[-1], df1[-1], df2[-1], lower.tail = FALSE))
+f3  <- function(x) formatC(x, format = "f", digits = 3)
+fp  <- function(p) ifelse(is.na(p), "", ifelse(p < .001, "< .001", f3(p)))
+z   <- rstandard(m2)
+# Q-Q plot as JASP draws it (same helper as qqJasp() in the lecture 20 wrapper)
+qqJasp <- function(res) {
+  suppressWarnings(print(jaspGraphs::plotQQnorm(res, yName = "Std. residuals", ablineColor = "darkred",
+                                                ablineOrigin = TRUE, identicalAxes = TRUE, ciLevel = 0.95)))
+}
+```
+
+# Hierarchical regression {.section}
+
+## Isolating individual contributions {.smaller}
+
+- What does a predictor add on top of the others?
+- Enter predictors in steps, known ones first (past research)
+- $R^2$ change is the extra variance the new predictors explain
+- $F$ change tests whether that increase is more than chance
+
+$$F_{change} = \frac{(N - k_{new} - 1)\, R^2_{change}}{k_{change}\, (1 - R^2_{new})}$$
+
+- Album sales (Section 8.10), adding airplay and image to adverts
+  - $R^2$ goes from `r f3(r2[2])` to `r f3(r2[3])`, $F$(`r df1[3]`, `r df2[3]`) = `r f3(Fc[3])`, $p$ `r fp(pc[3])`
+- [How to in JASP](https://jasp-stats.github.io/jasp-video-library/All_Regression.html#hierarchical-regression)
+
+## Model summary {.smaller}
+
+```{r hreg-model-summary, echo=FALSE}
+summaryTable <- data.frame(Model = c("M<sub>0</sub>", "M<sub>1</sub>", "M<sub>2</sub>"),
+                           R2 = f3(r2),
+                           adjR2 = f3(c(0, summary(m1)$adj.r.squared, summary(m2)$adj.r.squared)),
+                           R2change = f3(c(0, diff(r2))),
+                           Fchange = c("", f3(Fc[-1])),
+                           df1 = c(0, df1[-1]), df2 = df2, p = fp(pc))
+knitr::kable(summaryTable, format = "html", escape = FALSE, align = "lrrrrrrr",
+             col.names = c("Model", "R<sup>2</sup>", "Adjusted R<sup>2</sup>", "R<sup>2</sup> change",
+                           "F change", "df1", "df2", "p"))
+```
+
+- $M_1$ includes adverts; $M_2$ includes adverts, airplay and image
+
+## Checking the assumptions {.smaller}
+
+Where to check each assumption in JASP (final model)
+
+::: {style="font-size: 75%;"}
+| Assumption | In JASP | Looks fine when |
+|------------|---------|-----------------|
+| Multicollinearity | Statistics &rarr; Coefficients &rarr; *Tolerance and VIF* | all VIFs below 10, average close to 1 |
+| Linearity, equal variances | Plots &rarr; *Residuals vs. predicted* | a random cloud around 0 |
+| Normality of the residuals | Plots &rarr; *Q-Q plot standardized residuals* &rarr; *Confidence interval* | points close to the line, mostly within the band |
+| Outliers, influential cases | Statistics &rarr; Residuals &rarr; *Casewise diagnostics* | about 5% of std. residuals beyond $\pm 2$ at most, Cook's distance below 1 |
+:::
+
+## Residuals of the final model {.smaller}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+Residuals vs. predicted
+
+```{r hreg-residuals-vs-predicted, echo=FALSE, fig.width=5, fig.height=3.2}
+par(cex = 1.3, mar = c(4.5, 4.5, 1, 1))
+plot(fitted(m2), z, pch = 21, bg = "grey70", col = "grey30", bty = "n", las = 1,
+     xlab = "Predicted sales", ylab = "Std. residuals")
+abline(h = 0, lty = 2, lwd = 2)
+```
+:::
+
+::: {.column width="50%"}
+Q-Q plot standardized residuals
+
+```{r hreg-qq-residuals, echo=FALSE, fig.width=5, fig.height=3.2}
+qqJasp(z)
+```
+:::
+
+::::
+
+- Left plot shows a random cloud around 0, so linearity and equal variances look fine
+- Right plot shows points close to the line, so the residuals look normal

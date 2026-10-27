@@ -863,3 +863,24 @@ tCurve <- function(df, alpha = .05, sided = "two", observed = NULL, main = NULL,
   }
   invisible(crit)
 }
+
+# ---- plot3D: identical to plot3D() in ShinyApps/MultiRegression/helpers.R (L21 "Visual" slide and the
+# applet's 3D tab look the same). Edit one, copy to the other, check with diff.
+# The data in 3D with the regression plane of M2 (flat) or M3 (twisted when there is an
+# interaction). plotly rather than rgl (as on the L21 slide), because rgl needs OpenGL
+# libraries on the server.
+plot3D <- function(data, model = "full") {
+  fit <- if (model == "full") lm(Sales ~ Adverts * Airplay, data = data) else lm(Sales ~ Adverts + Airplay, data = data)
+  g1  <- seq(min(data$Adverts), max(data$Adverts), length.out = 30)
+  g2  <- seq(min(data$Airplay), max(data$Airplay), length.out = 30)
+  z   <- outer(g1, g2, function(a, b) predict(fit, newdata = data.frame(Adverts = a, Airplay = b)))
+  p <- plotly::plot_ly()
+  p <- plotly::add_markers(p, x = data$Adverts, y = data$Airplay, z = data$Sales, name = "Albums",
+                           marker = list(size = 3, color = "grey", line = list(color = "black", width = 1)))
+  p <- plotly::add_surface(p, x = g1, y = g2, z = t(z), opacity = 0.7, showscale = FALSE, name = "Model",
+                           colorscale = list(c(0, 1), c("darkgreen", "darkgreen")))
+  plotly::layout(p, showlegend = FALSE, margin = list(l = 0, r = 0, b = 0, t = 0),
+                 scene = list(xaxis = list(title = "Adverts"), yaxis = list(title = "Airplay"),
+                              zaxis = list(title = "Sales"), aspectmode = "cube",
+                              camera = list(eye = list(x = -1.3, y = -1.45, z = 0.6))))
+}

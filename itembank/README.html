@@ -85,9 +85,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#start-here" id="toc-start-here" class="nav-link active" data-scroll-target="#start-here">Start here</a>
   <ul class="collapse">
   <li><a href="#what-a-coding-agent-is" id="toc-what-a-coding-agent-is" class="nav-link" data-scroll-target="#what-a-coding-agent-is">What a coding agent is</a></li>
-  <li><a href="#which-subscription-to-get" id="toc-which-subscription-to-get" class="nav-link" data-scroll-target="#which-subscription-to-get">Which subscription to get</a></li>
+  <li><a href="#which-agent-to-use" id="toc-which-agent-to-use" class="nav-link" data-scroll-target="#which-agent-to-use">Which agent to use</a></li>
   <li><a href="#set-it-up-once" id="toc-set-it-up-once" class="nav-link" data-scroll-target="#set-it-up-once">Set it up, once</a></li>
-  <li><a href="#what-we-do-with-it" id="toc-what-we-do-with-it" class="nav-link" data-scroll-target="#what-we-do-with-it">What we do with it</a></li>
+  <li><a href="#what-i-use-it-for" id="toc-what-i-use-it-for" class="nav-link" data-scroll-target="#what-i-use-it-for">What I use it for</a></li>
   </ul></li>
   <li><a href="#what-is-in-this-folder" id="toc-what-is-in-this-folder" class="nav-link" data-scroll-target="#what-is-in-this-folder">What is in this folder</a></li>
   <li><a href="#the-examples" id="toc-the-examples" class="nav-link" data-scroll-target="#the-examples">The examples</a></li>
@@ -95,7 +95,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#anatomy-of-a-question-file" id="toc-anatomy-of-a-question-file" class="nav-link" data-scroll-target="#anatomy-of-a-question-file">Anatomy of a question file</a></li>
   <li><a href="#what-the-builder-checks-for-you" id="toc-what-the-builder-checks-for-you" class="nav-link" data-scroll-target="#what-the-builder-checks-for-you">What the builder checks for you</a></li>
   <li><a href="#what-ans-cannot-import" id="toc-what-ans-cannot-import" class="nav-link" data-scroll-target="#what-ans-cannot-import">What ANS cannot import</a></li>
-  <li><a href="#our-conventions" id="toc-our-conventions" class="nav-link" data-scroll-target="#our-conventions">Our conventions</a></li>
+  <li><a href="#my-conventions" id="toc-my-conventions" class="nav-link" data-scroll-target="#my-conventions">My conventions</a></li>
   <li><a href="#check-an-import" id="toc-check-an-import" class="nav-link" data-scroll-target="#check-an-import">Check an import</a></li>
   <li><a href="#credits" id="toc-credits" class="nav-link" data-scroll-target="#credits">Credits</a></li>
   </ul>
@@ -133,7 +133,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>This folder shows how we write questions for <strong>ANS</strong> at the Psychology department of the University of Amsterdam. Each question is a small text file. A builder turns a folder of these files into one package, and ANS imports that package with the parts that normally take hand work already in place, such as <strong>model answers</strong>, <strong>grading criteria</strong> for open questions, numeric fill-in gaps with a margin, multi-part exercises, data files and maths.</p>
+<p>This folder shows how to write questions for <strong>ANS</strong>. Each question is a small text file. A builder turns a folder of these files into one package, and ANS imports that package with the parts that normally take hand work already in place, such as <strong>model answers</strong>, <strong>grading criteria</strong> for open questions, numeric fill-in gaps with a margin, multi-part exercises, data files and maths.</p>
 <p>Why files instead of the ANS editor? Questions in files can be searched, reused, compared across years and checked. Every key in the examples below was recomputed from the data, and a coding agent can read and write the files too. Everything here was settled by test imports into ANS in September and October 2026. Where something is only partly tested, the agent instructions say so.</p>
 <section id="start-here" class="level2">
 <h2 class="anchored" data-anchor-id="start-here">Start here</h2>
@@ -154,18 +154,55 @@ Tip
 <section id="what-a-coding-agent-is" class="level3">
 <h3 class="anchored" data-anchor-id="what-a-coding-agent-is">What a coding agent is</h3>
 <p>You probably know chatbots like ChatGPT or UvA AI Chat. You type a question, it types an answer, and you copy out whatever it makes by hand. A <strong>coding agent</strong> is the same kind of language model, but it works on your own computer, inside a folder you give it. It opens and writes files there, runs programs such as R and Python, reads what comes back, and fixes its own mistakes before it reports to you. Because it works in your folder, you can also give it highly specific context, such as your lecture slides, lecture transcripts, literature, exam regulations and earlier exercises, and it reads them whenever it needs them.</p>
-<p>For ANS questions, that changes what you can hand off. You give the agent an export of your question bank and say what you want, for example “turn these into files and recompute every key from the data”. It does the hand work, and you check the result. It can still be wrong about the statistics, so treat its output as a draft from a teaching assistant. The builder catches format mistakes, not wrong answers.</p>
+<p>For ANS questions, the most useful job is not writing new questions but cleaning up the ones you already have. A bank that has been reused for years collects wrong keys, model answers written for an earlier version of the numbers, page references to an older edition of the book, and links that no longer work. You give the agent an export of your bank, and it turns the questions into files, recomputes every key from the data, checks the model answers and book references, and lists what it would change. You decide, and it does the hand work. It can still be wrong about the statistics, so treat its output as a draft from a teaching assistant. The builder catches format mistakes, not wrong answers.</p>
 </section>
-<section id="which-subscription-to-get" class="level3">
-<h3 class="anchored" data-anchor-id="which-subscription-to-get">Which subscription to get</h3>
-<p>Everything here was built and tested with Claude Code, Anthropic’s coding agent. It comes with a paid Claude account (the free plan does not include it). Claude Pro, about $20 a month, is enough to start; see <a href="https://claude.com/pricing">claude.com/pricing</a>. The more expensive Max plans only matter if you hit the usage limits every day. Other agents, such as OpenAI’s Codex or GitHub Copilot, can read the same instructions, but we have not tested the workflow with them.</p>
+<section id="which-agent-to-use" class="level3">
+<h3 class="anchored" data-anchor-id="which-agent-to-use">Which agent to use</h3>
+<p>Several companies now offer a coding agent, and they all work in much the same way. The table lists the ones you are most likely to come across, with the cheapest plan that includes the agent. Prices change often; these were checked on 25 October 2026.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Agent</th>
+<th>Company</th>
+<th>Cheapest plan that includes it</th>
+<th>Good to know</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Claude Code</td>
+<td>Anthropic (US)</td>
+<td>Claude Pro, $20 a month (<a href="https://claude.com/pricing">pricing</a>)</td>
+<td>The one I used for everything on this page</td>
+</tr>
+<tr class="even">
+<td>Codex</td>
+<td>OpenAI (US)</td>
+<td>Every ChatGPT plan, the free one included; Plus is $20 a month (<a href="https://learn.chatgpt.com/docs/pricing">pricing</a>)</td>
+<td>Many people already have a ChatGPT account</td>
+</tr>
+<tr class="odd">
+<td>GitHub Copilot</td>
+<td>GitHub, part of Microsoft (US)</td>
+<td>Copilot Free, with monthly limits; Pro is $10 a month (<a href="https://github.com/features/copilot/plans">plans</a>)</td>
+<td>Verified teachers can get Pro for free through <a href="https://docs.github.com/en/copilot/how-tos/copilot-on-github/set-up-copilot/enable-copilot/set-up-for-teachers-and-os-maintainers">GitHub Education</a></td>
+</tr>
+<tr class="even">
+<td>Mistral Vibe</td>
+<td>Mistral AI (France)</td>
+<td>Pro, $14.99 a month; the free plan has a few coding sessions (<a href="https://mistral.ai/pricing">pricing</a>)</td>
+<td>A European company</td>
+</tr>
+</tbody>
+</table>
+<p>Everything here was built and tested with Claude Code, Anthropic’s coding agent. It comes with a paid Claude account (the free plan does not include it). Claude Pro is enough to start. The more expensive Max plans only matter if you hit the usage limits every day. The other agents in the table can read the same instructions, but I have not tested the workflow with them.</p>
 <p><a href="https://www.uva.nl/en/about-the-uva/about-the-university/ai/ai-in-education/uva-ai-chat/uva-ai-chat.html">UvA AI Chat</a> is free for UvA staff and keeps your prompts within the UvA. For now it is a chat window, so it cannot work in your folder, but agentic use is expected soon. Once that arrives it becomes the natural choice, certainly for exam questions.</p>
 <p>Whichever tool you use, never give it student data such as names, grades or answers. Also check whether you may share copyrighted or recorded material, such as a textbook PDF or a lecture transcript, before you put it in the agent’s folder. With a commercial account, also switch off the use of your chats for model training in its privacy settings.</p>
 </section>
 <section id="set-it-up-once" class="level3">
 <h3 class="anchored" data-anchor-id="set-it-up-once">Set it up, once</h3>
 <ol type="1">
-<li><p>Install <a href="https://code.visualstudio.com">VS Code</a>, a free editor. Open its Extensions view (<code>Cmd+Shift+X</code> on a Mac, <code>Ctrl+Shift+X</code> on Windows), search for “Claude Code”, click <em>Install</em>, and sign in with your Claude account. (Would you rather not use an editor? The <a href="https://claude.com/download">Claude desktop app</a> runs Claude Code too.)</p></li>
+<li><p>Install <a href="https://code.visualstudio.com">VS Code</a>, a free editor. Open its Extensions view (<code>Cmd+Shift+X</code> on a Mac, <code>Ctrl+Shift+X</code> on Windows), search for “Claude Code”, click <em>Install</em>, and sign in with your Claude account. (Would you rather not use an editor? The <a href="https://claude.com/download">Claude desktop app</a> runs Claude Code too.) For another agent, install its extension instead, such as Codex or GitHub Copilot Chat. The steps below use Claude Code as the example; the other agents have the same parts under slightly different names.</p></li>
 <li><p>Install <a href="https://cran.r-project.org">R</a> and <a href="https://www.python.org/downloads/">Python 3</a> if you do not have them yet. On Windows, also install <a href="https://git-scm.com/downloads/win">Git for Windows</a>, which Claude Code uses to run commands and to download this folder.</p></li>
 <li><p>Make an empty folder for your questions, open it in VS Code (<em>File &gt; Open Folder</em>), and click <em>✻ Claude Code</em> in the bottom-right corner to open the agent.</p></li>
 <li><p>By default the agent decides for itself which steps are safe. Until you know how it behaves, click the mode indicator below the prompt box and choose <em>Manual</em>. It then shows every change and asks before most commands.</p></li>
@@ -173,25 +210,26 @@ Tip
 <blockquote class="blockquote">
 <p>Download only the itembank folder from https://github.com/JohnnyDoorn/teaching-statistics into this folder (the full repository is large, so do not clone all of it). Check that R with the packages exams and jsonlite, pandoc and Python 3 are installed, and install what is missing. Then build itembank/examples with itembank/tools/build-ans.R and tell me what you did.</p>
 </blockquote></li>
-<li><p>Give the agent its standing instructions. Claude Code reads a file called <code>CLAUDE.md</code> in your folder at the start of every conversation, so you only have to say this once.</p>
+<li><p>Give the agent its standing instructions. Your agent reads one file in your folder at the start of each conversation, <code>CLAUDE.md</code> for Claude Code and <code>AGENTS.md</code> for Codex, GitHub Copilot and many others, so you only have to say this once.</p>
 <blockquote class="blockquote">
-<p>Create a CLAUDE.md in this folder that says to read itembank/ans-agent-instructions.qmd before reading, writing or building any ANS question, and that I review every question before it goes into ANS.</p>
+<p>Create the instruction file you read at the start of every conversation (CLAUDE.md or AGENTS.md) in this folder. It should say to read itembank/ans-agent-instructions.qmd before reading, writing or building any ANS question, and that I review every question before it goes into ANS.</p>
 </blockquote></li>
 </ol>
 <p>When it is done, open <code>itembank/examples/EXAMPLES.html</code> in your browser. If you see the twelve example questions with their answers, everything works.</p>
 </section>
-<section id="what-we-do-with-it" class="level3">
-<h3 class="anchored" data-anchor-id="what-we-do-with-it">What we do with it</h3>
-<p>This is the loop we use for the weekly assignments and exams in our statistics courses. Each step is one request to the agent.</p>
+<section id="what-i-use-it-for" class="level3">
+<h3 class="anchored" data-anchor-id="what-i-use-it-for">What I use it for</h3>
+<p>This is how I clean up a bank, for example the weekly assignments of a course. Each step is one request to the agent.</p>
 <ol type="1">
 <li>Export your question bank from ANS (<em>Settings &gt; Export</em>, both the QTI 2.X export and the Respondus package) and put the zip files in your folder.</li>
-<li>“Convert the questions in these ANS exports into the format of itembank/examples, one file per question, in one folder per assignment.”</li>
-<li>“Recompute every key from this data file and list the questions where the key differs or the wording is ambiguous. Change nothing yet.” You decide what changes.</li>
-<li>“Write two tick-all questions about the paired t-test, based on section 9.9 of the book, and compute the keys from this data file.” Always point it to a source, such as a book section or your slides, so it does not make up statistics.</li>
+<li>“Convert the questions in these ANS exports into the format of itembank/examples, one file per question, in one folder per assignment. Change nothing in the content yet.”</li>
+<li>“Recompute every key from the data files, and list each question where the key, the model answer or the feedback disagrees with your result.”</li>
+<li>“Check every book reference in the model answers against the book in this folder, and list references to an older edition, to the wrong section, or to a page that does not say what the answer claims. Also list links that no longer work.” This works best with a text version of the book in your folder (see the caveat about copyrighted material above).</li>
+<li>“Go through the list with me, one question at a time.” You decide what changes, and the agent edits the files.</li>
 <li>“Build this folder with a TEST prefix.” Read the preview page it makes, which shows every question with its answer.</li>
-<li>Import the zip into a scratch bank, export it again, and ask “Compare this export with the expected file.” Then move the questions to your real bank.</li>
+<li>Import the zip into a scratch bank, export it again, and ask “Compare this export with the expected file.” Then replace the old questions in your real bank.</li>
 </ol>
-<p>A few habits help. Ask for one thing at a time and read each change before you accept it. The agent forgets everything between conversations except what is in <code>CLAUDE.md</code>, so when you settle a convention (say, final answers in two decimals), ask it to add that to <code>CLAUDE.md</code>. And keep exam questions out of public places; this page lives in a public repository, which is why it holds only practice questions whose answers are already online.</p>
+<p>A few habits help. Ask for one thing at a time and read each change before you accept it. The agent forgets everything between conversations except what is in that instruction file, so when you settle a convention (say, final answers in two decimals), ask it to add that to the file. And keep exam questions out of public places; this page lives in a public repository, which is why it holds only practice questions whose answers are already online.</p>
 </section>
 </section>
 <section id="what-is-in-this-folder" class="level2">
@@ -206,12 +244,12 @@ Tip
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>README.qmd</code> (this page)</td>
+<td><code>README.md</code> (this page)</td>
 <td>you</td>
 <td>how it works, how to try it, how to write your own questions</td>
 </tr>
 <tr class="even">
-<td><a href="ans-agent-instructions.html"><code>ans-agent-instructions.qmd</code></a></td>
+<td><a href="https://johnnydoorn.github.io/teaching-statistics/itembank/ans-agent-instructions.html"><code>ans-agent-instructions.qmd</code></a></td>
 <td>your coding agent</td>
 <td>the question format, what ANS accepts and drops, and what is verified</td>
 </tr>
@@ -267,12 +305,12 @@ Tip
 </tr>
 </tbody>
 </table>
-<p><a href="examples/EXAMPLES.html">Preview every question with its answer</a>, or <a href="examples/EXAMPLES.zip">download the package</a> and try it in ANS.</p>
+<p><a href="https://johnnydoorn.github.io/teaching-statistics/itembank/examples/EXAMPLES.html">Preview every question with its answer</a>, or <a href="https://johnnydoorn.github.io/teaching-statistics/itembank/examples/EXAMPLES.zip">download the package</a> and try it in ANS.</p>
 </section>
 <section id="try-it-in-ans" class="level2">
 <h2 class="anchored" data-anchor-id="try-it-in-ans">Try it in ANS</h2>
 <ol type="1">
-<li>Download <a href="examples/EXAMPLES.zip"><code>EXAMPLES.zip</code></a>.</li>
+<li>Download <a href="https://johnnydoorn.github.io/teaching-statistics/itembank/examples/EXAMPLES.zip"><code>EXAMPLES.zip</code></a>.</li>
 <li>In ANS, open a question bank (a scratch bank is safest), go to <strong>Settings &gt; Import</strong> and choose <strong>QTI 2.X package (Legacy)</strong>. Not <em>QTI 3.0</em>, and not <em>Respondus</em>.</li>
 <li>Three exercises appear outside any folder, with titles that start with “EXAMPLE”. Move them to a folder if you like.</li>
 <li>Open them and look at what normally takes hand work. The choice and open questions have their model answers, the open question has its grading criteria, some questions hold two gaps (each with a margin), and the fill-in questions carry their explanation as feedback.</li>
@@ -387,9 +425,9 @@ Tip
 <li><strong>Folders and tags.</strong> Imported questions land outside any folder.</li>
 </ul>
 </section>
-<section id="our-conventions" class="level2">
-<h2 class="anchored" data-anchor-id="our-conventions">Our conventions</h2>
-<p>These are our choices, not rules of ANS, so adapt them to your course.</p>
+<section id="my-conventions" class="level2">
+<h2 class="anchored" data-anchor-id="my-conventions">My conventions</h2>
+<p>These are my choices, not rules of ANS, so adapt them to your course.</p>
 <ul>
 <li>The correct option comes first in the file; the build shuffles.</li>
 <li>Numeric answers are fill-in gaps with a margin rather than ANS’s own numerical question type, because a gap shows you exactly what students typed. In a question with several gaps, the builder also accepts the obvious variants of each key, such as <code>0,035</code> and <code>.035</code> for <code>0.035</code>.</li>
