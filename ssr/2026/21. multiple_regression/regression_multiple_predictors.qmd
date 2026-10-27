@@ -60,7 +60,7 @@ Additionally, for multiple regression
 ::: {.columns}
 ::: {.column width="60%"}
 
-To adhere to the multicollinearity assumption, there must not be a too high linear relation between the predictor variables.
+To adhere to the multicollinearity assumption, there must not be a too high linear relation between the predictor variables (main effects, not interaction terms).
 
 This can be assessed through:
 
