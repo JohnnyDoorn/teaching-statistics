@@ -42,7 +42,7 @@ Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Mediation_(statistics))
 :::: {.columns}
 
 ::: {.column width="55%"}
-![Figure 7.9](../../images/figure-7-9.png){height="430"}
+![Figure 7.9](../../images/figure-7-9.png){style="max-width: 100%; max-height: 430px;"}
 :::
 
 ::: {.column width="45%"}
@@ -69,6 +69,8 @@ Does an article about a sugar shortage on the front page increase the intention 
 - `Condition`: front page (1) or inside page (0), randomized (predictor)
 - `MediaInfluence`: how much people think others will buy sugar, 1 to 7 (mediator)
 - `Intention`: intention to buy sugar, 1 to 7 (outcome)
+
+Only `Condition` was randomized, so path $a$ is causal but path $b$ may be confounded or reversed
 
 <span style="font-size:60%;">Data from the JASP Data Library, also used in Hayes (2022, Section 3.3)</span>
 
@@ -391,6 +393,59 @@ Where to check each assumption in JASP (mediator and combined models)^[The Proce
 - [Rohrer et al (2022). That’s a Lot to Process! Pitfalls of Popular Path Models. Advances in Methods and Practices in Psychological Science. ](https://journals.sagepub.com/doi/full/10.1177/25152459221095827)
 
 > When we test such hypotheses with the help of path models applied to observational data, we are in the business of causal inference on the basis of observational data
+
+<!-- His request (2026-10-27): models that observational data cannot tell apart. With three
+     variables and all three arrows, every direction is a saturated model (0 df) that reproduces
+     the correlations exactly. Checked with lavaan on the example data: the same log-likelihood
+     (-509.101) for all four. -->
+
+## Equivalent models {.smaller}
+
+Which way do the arrows point? The data cannot tell.
+
+:::: {.columns}
+
+::: {.column width="55%"}
+```{r med-equivalent-models, echo=FALSE, fig.width=6, fig.height=5}
+box.w <- 1.1
+box.h <- 0.45
+pos <- list(X = c(1.5, 1), M = c(5, 3.6), Y = c(8.5, 1))
+# Point where the line from one box centre to another leaves the box
+clip <- function(from, to) {
+  d <- to - from
+  from + min(box.w / abs(d[1]), box.h / abs(d[2])) * d
+}
+draw.model <- function(edges, title) {
+  plot.new()
+  plot.window(xlim = c(0, 10), ylim = c(0, 4.4))
+  title(main = title, cex.main = 1.2)
+  for (e in edges) {
+    from <- clip(pos[[e[1]]], pos[[e[2]]])
+    to   <- clip(pos[[e[2]]], pos[[e[1]]])
+    arrows(from[1], from[2], to[1], to[2], lwd = 2, length = 0.12)
+  }
+  for (v in names(pos)) {
+    rect(pos[[v]][1] - box.w, pos[[v]][2] - box.h, pos[[v]][1] + box.w, pos[[v]][2] + box.h,
+         col = "grey90", border = "grey20", lwd = 2)
+    text(pos[[v]][1], pos[[v]][2], v, cex = 1.6)
+  }
+}
+par(mfrow = c(2, 2), mar = c(0.3, 0.3, 1.8, 0.3), cex = 0.8, cex.main = 1.2)
+draw.model(list(c("X", "M"), c("M", "Y"), c("X", "Y")), "1. Mediation")
+draw.model(list(c("M", "X"), c("M", "Y"), c("X", "Y")), "2. M is a common cause")
+draw.model(list(c("X", "M"), c("Y", "M"), c("X", "Y")), "3. M is a common effect")
+draw.model(list(c("Y", "M"), c("M", "X"), c("Y", "X")), "4. Reversed")
+```
+:::
+
+::: {.column width="45%"}
+- X, M and Y are the predictor, mediator and outcome of model 1
+- All four reproduce the observed correlations exactly
+- Randomizing X (like `Condition`) rules out models 2 and 4
+- Models 1 and 3 still differ in the direction of the M-Y arrow
+:::
+
+::::
 
 <!-- Work-in-progress paper, no link until it is public. Title as in the Overleaf version
      of 2026-07-01. -->

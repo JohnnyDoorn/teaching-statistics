@@ -467,9 +467,9 @@ Johnny van Doorn
 <h2>Shared variance</h2>
 <div class="columns">
 <div class="column" style="width:55%;">
-<div class="quarto-figure quarto-figure-center">
+<div class="quarto-figure quarto-figure-center" style="max-width: 100%; max-height: 430px;">
 <figure>
-<p><img data-src="../../images/figure-7-9.png" height="430"></p>
+<p><img data-src="../../images/figure-7-9.png"></p>
 <figcaption>Figure 7.9</figcaption>
 </figure>
 </div>
@@ -495,6 +495,7 @@ Johnny van Doorn
 <li><code>MediaInfluence</code>: how much people think others will buy sugar, 1 to 7 (mediator)</li>
 <li><code>Intention</code>: intention to buy sugar, 1 to 7 (outcome)</li>
 </ul>
+<p>Only <code>Condition</code> was randomized, so path <span class="math inline">\(a\)</span> is causal but path <span class="math inline">\(b\)</span> may be confounded</p>
 <p><span style="font-size:60%;">Data from the JASP Data Library, also used in Hayes (2022, Section 3.3)</span></p>
 </section>
 <section id="total-effect" class="slide level2">
@@ -543,8 +544,8 @@ Johnny van Doorn
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-809a22c9b43d5b9f4de4" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-809a22c9b43d5b9f4de4">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[[1,0,1,0,0,0,0,1,0,0,1,0,1,0,1,1,0,0,1,0,1,1,1,1,1,0,1,0,1,0,0,1,0,0,1,0,1,0,1,0,0,0,1,0,1,1,0,0,0,1,0,1,0,0,1,1,1,0,1,0,0,1,1,0,0,0,1,1,0,0,1,0,1,0,1,0,0,0,1,0,0,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0],[7,6,5.5,6.5,6,5.5,3.5,6,4.5,7,1,6,5,7,7,7,4.5,3.5,7,7,4.5,6,6,4,7,4,6.5,6,6.5,6,4,7,6,7,6.5,5.5,6,2,4.5,4,7,6,7,5,7,7,5,6,5.5,7,3.5,7,6,3.5,7,5,1.5,6.5,6,7,7,6,6,4,3.5,6,6,6,5,3,7,6,5,5,5.5,5.5,6,2.5,4.5,5,6,5,7,5,4.5,6.5,7,6,5,7,5.5,6,6,7,4,6.5,5,7,7,5,7,7,5,6,5,6.5,7,6.5,6,5,5.5,5.5,5,7,1.5,6,5.5,6.5,4.5,3.5,6,6.5,5.5],[5.25,1.25,5,2.75,2.5,1.25,1.5,4.75,4.25,6.25,1.25,2.75,3.75,5,4,5,3.5,2.25,4.5,5.75,2.75,3.75,2.75,4,5,2,4,1.75,3.5,4.75,4,3,5.75,2.75,3.25,5.5,3.25,1.25,2,2.5,3,5.75,1.5,4,1.25,3.25,3.75,2.75,3,6,3.25,2.75,5,1.5,7,5,1.75,2.25,3.5,3.5,6.75,4.25,4,2.25,3,5.5,1.75,4.5,4.25,1.5,2,1.5,3.25,1,1.5,1,2.5,1,3,2.5,1,3.75,1.75,2.75,5.25,5.25,5,5,5,6.5,3,2.75,4.25,7,5.75,3,4.5,4.25,4.5,3.75,4.75,2.5,1,6,2,5,5,4.25,2,3.5,1.75,3.5,2.25,5.5,1,3,2.25,4.75,2.25,1.5,5.75,5.25,3]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>condition<\/th>\n      <th>media.influence<\/th>\n      <th>intention<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":300,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"className":"dt-right","targets":[0,1,2]},{"name":"condition","targets":0},{"name":"media.influence","targets":1},{"name":"intention","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-a5de875a3dbeddfdf85d" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-a5de875a3dbeddfdf85d">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[[1,0,1,0,0,0,0,1,0,0,1,0,1,0,1,1,0,0,1,0,1,1,1,1,1,0,1,0,1,0,0,1,0,0,1,0,1,0,1,0,0,0,1,0,1,1,0,0,0,1,0,1,0,0,1,1,1,0,1,0,0,1,1,0,0,0,1,1,0,0,1,0,1,0,1,0,0,0,1,0,0,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0],[7,6,5.5,6.5,6,5.5,3.5,6,4.5,7,1,6,5,7,7,7,4.5,3.5,7,7,4.5,6,6,4,7,4,6.5,6,6.5,6,4,7,6,7,6.5,5.5,6,2,4.5,4,7,6,7,5,7,7,5,6,5.5,7,3.5,7,6,3.5,7,5,1.5,6.5,6,7,7,6,6,4,3.5,6,6,6,5,3,7,6,5,5,5.5,5.5,6,2.5,4.5,5,6,5,7,5,4.5,6.5,7,6,5,7,5.5,6,6,7,4,6.5,5,7,7,5,7,7,5,6,5,6.5,7,6.5,6,5,5.5,5.5,5,7,1.5,6,5.5,6.5,4.5,3.5,6,6.5,5.5],[5.25,1.25,5,2.75,2.5,1.25,1.5,4.75,4.25,6.25,1.25,2.75,3.75,5,4,5,3.5,2.25,4.5,5.75,2.75,3.75,2.75,4,5,2,4,1.75,3.5,4.75,4,3,5.75,2.75,3.25,5.5,3.25,1.25,2,2.5,3,5.75,1.5,4,1.25,3.25,3.75,2.75,3,6,3.25,2.75,5,1.5,7,5,1.75,2.25,3.5,3.5,6.75,4.25,4,2.25,3,5.5,1.75,4.5,4.25,1.5,2,1.5,3.25,1,1.5,1,2.5,1,3,2.5,1,3.75,1.75,2.75,5.25,5.25,5,5,5,6.5,3,2.75,4.25,7,5.75,3,4.5,4.25,4.5,3.75,4.75,2.5,1,6,2,5,5,4.25,2,3.5,1.75,3.5,2.25,5.5,1,3,2.25,4.75,2.25,1.5,5.75,5.25,3]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>condition<\/th>\n      <th>media.influence<\/th>\n      <th>intention<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":300,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"className":"dt-right","targets":[0,1,2]},{"name":"condition","targets":0},{"name":"media.influence","targets":1},{"name":"intention","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -787,6 +788,30 @@ blockquote {
 <blockquote>
 <p>When we test such hypotheses with the help of path models applied to observational data, we are in the business of causal inference on the basis of observational data</p>
 </blockquote>
+<!-- His request (2026-10-27): models that observational data cannot tell apart. With three
+     variables and all three arrows, every direction is a saturated model (0 df) that reproduces
+     the correlations exactly. Checked with lavaan on the example data: the same log-likelihood
+     (-509.101) for all four. -->
+</section>
+<section id="equivalent-models" class="slide level2 smaller">
+<h2>Equivalent models</h2>
+<p>Which way do the arrows point? The data cannot tell.</p>
+<div class="columns">
+<div class="column" style="width:55%;">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="22.-mediation_files/figure-revealjs/med-equivalent-models-1.png" width="576"></p>
+</div>
+</div>
+</div><div class="column" style="width:45%;">
+<ul>
+<li>X, M and Y are the predictor, mediator and outcome of model 1</li>
+<li>All four reproduce the observed correlations exactly</li>
+<li>Randomizing X (like <code>Condition</code>) rules out models 2 and 4</li>
+<li>Models 1 and 3 still differ in the direction of the M-Y arrow</li>
+</ul>
+</div>
+</div>
 <!-- Work-in-progress paper, no link until it is public. Title as in the Overleaf version
      of 2026-07-01. -->
 </section>
