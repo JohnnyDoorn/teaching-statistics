@@ -187,6 +187,12 @@ externalSets <- list(
     Data    = "https://discoverjasp.com/repository/dsj1_data/data/diet.jasp",
     Results = "https://discoverjasp.com/repository/dsj1_data/results/diet.jasp",
     HTML    = "https://discoverjasp.com/repository/dsj1_data/html/diet.html"
+  ),
+  # Lecture 22: Tal-Or et al. (2010) from the JASP Data Library. The csv here is the one local
+  # copy (the lecture reads it); the worked results stay with the Data Library (like album sales).
+  "presumed-media-influence" = c(
+    Results = "https://raw.githubusercontent.com/jasp-stats/jasp-data-library/main/Presumed%20Media%20Influence/Presumed%20Media%20Influence.jasp",
+    HTML    = "https://htmlpreview.github.io/?https://github.com/jasp-stats/jasp-data-library/blob/main/Presumed%20Media%20Influence/Presumed_Media_Influence.html"
   )
 )
 

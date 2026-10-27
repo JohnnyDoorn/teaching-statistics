@@ -100,11 +100,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul class="collapse">
-  <li><a href="#mediation" id="toc-mediation" class="nav-link active" data-scroll-target="#mediation">Mediation</a>
+  <li><a href="#applet" id="toc-applet" class="nav-link active" data-scroll-target="#applet">Applet</a></li>
+  <li><a href="#mediation" id="toc-mediation" class="nav-link" data-scroll-target="#mediation">Mediation</a>
   <ul class="collapse">
   <li><a href="#mediation-1" id="toc-mediation-1" class="nav-link" data-scroll-target="#mediation-1">Mediation</a></li>
-  <li><a href="#venn-diagrams---effect" id="toc-venn-diagrams---effect" class="nav-link" data-scroll-target="#venn-diagrams---effect">Venn diagrams - effect</a></li>
-  <li><a href="#venn-diagrams---mediator" id="toc-venn-diagrams---mediator" class="nav-link" data-scroll-target="#venn-diagrams---mediator">Venn diagrams - mediator</a></li>
+  <li><a href="#shared-variance" id="toc-shared-variance" class="nav-link" data-scroll-target="#shared-variance">Shared variance</a></li>
   <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
   <li><a href="#total-effect" id="toc-total-effect" class="nav-link" data-scroll-target="#total-effect">Total effect</a></li>
   <li><a href="#mediation-paths" id="toc-mediation-paths" class="nav-link" data-scroll-target="#mediation-paths">Mediation paths</a></li>
@@ -116,10 +116,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#path-plot" id="toc-path-plot" class="nav-link" data-scroll-target="#path-plot">Path plot</a></li>
   <li><a href="#visual" id="toc-visual" class="nav-link" data-scroll-target="#visual">Visual</a></li>
   <li><a href="#calculate-indirect-effect" id="toc-calculate-indirect-effect" class="nav-link" data-scroll-target="#calculate-indirect-effect">Calculate indirect effect</a></li>
-  <li><a href="#calculate-indirect-effect-standardized" id="toc-calculate-indirect-effect-standardized" class="nav-link" data-scroll-target="#calculate-indirect-effect-standardized">Calculate indirect effect (standardized)</a></li>
+  <li><a href="#calculate-indirect-effect-partially-standardized" id="toc-calculate-indirect-effect-partially-standardized" class="nav-link" data-scroll-target="#calculate-indirect-effect-partially-standardized">Calculate indirect effect (partially standardized)</a></li>
   <li><a href="#calculate-p_m" id="toc-calculate-p_m" class="nav-link" data-scroll-target="#calculate-p_m">Calculate <span class="math inline">\(P_M\)</span></a></li>
   <li><a href="#is-the-indirect-effect-significant" id="toc-is-the-indirect-effect-significant" class="nav-link" data-scroll-target="#is-the-indirect-effect-significant">Is the indirect effect significant?</a></li>
-  <li><a href="#caution-with-process" id="toc-caution-with-process" class="nav-link" data-scroll-target="#caution-with-process">Caution with PROCESS</a></li>
+  <li><a href="#checking-the-assumptions" id="toc-checking-the-assumptions" class="nav-link" data-scroll-target="#checking-the-assumptions">Checking the assumptions</a></li>
+  <li><a href="#caution-with-process-models" id="toc-caution-with-process-models" class="nav-link" data-scroll-target="#caution-with-process-models">Caution with Process models</a></li>
+  <li><a href="#tutorial-paper-in-preparation" id="toc-tutorial-paper-in-preparation" class="nav-link" data-scroll-target="#tutorial-paper-in-preparation">Tutorial paper (in preparation)</a></li>
   <li><a href="#more-examples" id="toc-more-examples" class="nav-link" data-scroll-target="#more-examples">More examples</a></li>
   <li><a href="#jasp" id="toc-jasp" class="nav-link" data-scroll-target="#jasp">JASP</a></li>
   </ul></li>
@@ -180,11 +182,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Explore mediation analysis</li>
 <li>Link it to regression</li>
-<li>Introduce the PROCESS module</li>
+<li>Introduce the Process module</li>
 <li>Demonstrate in JASP</li>
 </ul>
-<p><strong>Reading:</strong> Chapter 10 (§10.4–10.7)</p>
+<p><strong>Reading:</strong> Chapter 10 (§10.2, §10.4–10.7)</p>
 </div>
+<!-- Opens with the MultiRegression applet (correlated predictors), carried over from the end of
+     lecture 21. Same slide as in lecture 21. -->
+<section id="applet" class="level2">
+<h2 class="anchored" data-anchor-id="applet">Applet</h2>
+<p><a href="https://jvd-ssr-multiple-regression.share.connect.posit.cloud/">Link</a></p>
+</section>
 <section id="mediation" class="level1 section">
 <h1 class="section">Mediation</h1>
 <section id="mediation-1" class="level2 smaller">
@@ -197,32 +205,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Source: <a href="https://en.wikipedia.org/wiki/Mediation_(statistics)">WIKIPEDIA</a></p>
 </div>
 </div>
+<!-- DSUJ's variance diagram instead of Venn diagrams, as in lecture 6 (partial correlation, the
+     same figure) and the ANOVA lectures (Figures 11.5 and 13.6). The regions are the R-squared of
+     this lecture's three models: total effect A + C, path a C + D, and in the combined model the
+     unique parts A (path c) and B (path b). The percentages are in the figure (DSUJ p. 300). -->
 </section>
-<section id="venn-diagrams---effect" class="level2">
-<h2 class="anchored" data-anchor-id="venn-diagrams---effect">Venn diagrams - effect</h2>
-<div class="cell">
-<div class="cell-output-display">
-<p><img src="22.-mediation_files/figure-html/med-venn-diagrams-effect-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="venn-diagrams---mediator" class="level2">
-<h2 class="anchored" data-anchor-id="venn-diagrams---mediator">Venn diagrams - mediator</h2>
-<div class="cell">
-<div class="cell-output-display">
-<p><img src="22.-mediation_files/figure-html/med-venn-diagrams-mediator-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="example" class="level2">
-<h2 class="anchored" data-anchor-id="example">Example</h2>
-<p>Does the speed of recovery after sickness improve with the use of alternative medicine or is this effect mediated by a healthy lifestyle?</p>
+<section id="shared-variance" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="shared-variance">Shared variance</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../../images/green-purple-flower-163186.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption"><a style="font-size:50%;" href="https://www.pexels.com/photo/green-purple-flower-163186/" target="_blank">Photo from Pixabay</a></figcaption>
+<p><img src="../../images/figure-7-9.png" height="430" class="figure-img"></p>
+<figcaption class="figure-caption">Figure 7.9</figcaption>
 </figure>
 </div>
+</div><div class="column" style="width:45%;">
+<p>Back to lecture 6. Do anxious students simply revise less?</p>
+<ul>
+<li>Predictor anxiety, mediator revision</li>
+<li>Total effect, regions <span class="math inline">\(A + C\)</span></li>
+<li>Path <span class="math inline">\(a\)</span>, regions <span class="math inline">\(C + D\)</span></li>
+<li>Path <span class="math inline">\(b\)</span>, region <span class="math inline">\(B\)</span></li>
+<li>Path <span class="math inline">\(c\)</span>, region <span class="math inline">\(A\)</span></li>
+<li>Shared by both predictors, region <span class="math inline">\(C\)</span></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="example" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="example">Example</h2>
+<p>Tal-Or et al.&nbsp;(2010): <em>Testing causal direction in the influence of presumed media influence</em></p>
+<p>Does an article about a sugar shortage on the front page increase the intention to buy sugar, or is this effect mediated by presumed media influence?</p>
+<ul>
+<li><code>Condition</code>: front page (1) or inside page (0), randomized (predictor)</li>
+<li><code>MediaInfluence</code>: how much people think others will buy sugar, 1 to 7 (mediator)</li>
+<li><code>Intention</code>: intention to buy sugar, 1 to 7 (outcome)</li>
+</ul>
+<p><span style="font-size:60%;">Data from the JASP Data Library, also used in Hayes (2022, Section 3.3)</span></p>
 </section>
 <section id="total-effect" class="level2">
 <h2 class="anchored" data-anchor-id="total-effect">Total effect</h2>
@@ -259,29 +279,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="../../images/mediation.png" class="img-fluid" width="500"></p>
 </div>
 </div>
-<!-- ## Simulate data {.subsection} -->
-<!-- Create predictor variable -->
-<!-- ## Mediator  -->
-<!-- Create mediator -->
-<!-- ## Specify model  -->
-<!-- Create outcome variable -->
+<!-- Data: Tal-Or et al. (2010), copied from the JASP Data Library ("Presumed Media Influence",
+     jasp-stats/jasp-data-library, AGPL-3.0), the same data as Hayes (2022, Section 3.3). The one
+     local copy is datasets/2026/presumed-media-influence.csv (listed on the overview, whose Results
+     and HTML links point to the Data Library). Replaced the simulated homeopathy example on
+     2026-10-27 (his call). -->
 </section>
 <section id="the-data" class="level2 subsection smaller">
 <h2 class="subsection smaller anchored" data-anchor-id="the-data">The data</h2>
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-210a81a7dc914783ae94" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-210a81a7dc914783ae94">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[[11.8474,6.4263,7.4717,11.1266,9.859999999999999,10.2019,8.034800000000001,8.963800000000001,7.5647,12.8471,11.99,12.6076,10.8439,10.3023,12.7552,10.9376,8.510899999999999,7.4004,10.6501,10.0805,9.3925,10.1325,9.2196,7.4472,11.3594,9.3028,6.2763,12.078,9.5563,11.7054,11.7785,7.1043,9.1099,13.7946,11.4151,9.9574,8.6585,13.5017,9.080299999999999,11.4784,11.2515,10.5131,5.6602,9.7018,10.5397,6.3475,10.7253,8.4131,9.792899999999999,9.4457],[19.4147,10.8913,13.4331,18.7493,15.724,17.0466,13.6053,14.6359,13.4854,20.3873,19.6664,20.7404,19.4803,15.7924,20.935,18.4966,14.4279,12.9514,17.7578,17.4318,15.4437,16.8949,15.5785,12.6264,19.2173,16.0537,11.3278,18.7028,16.7465,19.8332,19.4624,12.4367,16.4776,23.3338,19.2888,17.6057,14.1238,22.434,15.1066,19.7061,18.8499,17.0535,10.4748,17.2767,17.5378,10.6793,18.2382,15.3139,17.7263,16.3963],[31.5653,21.56,24.7655,30.3038,28.1135,28.915,24.2853,24.968,22.0825,32.0679,30.2207,33.6882,29.6136,26.721,35.9895,29.1626,27.1764,22.0209,28.6834,29.2812,28.0397,25.0259,26.2159,20.8893,29.645,25.7313,20.116,28.9131,26.7673,32.6348,29.7994,17.3543,27.1644,37.9107,29.5814,29.6244,23.8872,34.0762,23.3827,32.0559,29.374,30.2277,21.2304,28.79,26.4061,19.1665,30.4876,24.9833,25.818,28.0138]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>use.homeopathic.remedies<\/th>\n      <th>healthy.lifestyle<\/th>\n      <th>speed.of.healing<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":300,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"className":"dt-right","targets":[0,1,2]},{"name":"use.homeopathic.remedies","targets":0},{"name":"healthy.lifestyle","targets":1},{"name":"speed.of.healing","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-c7fc52f9f8def9177e3a" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-c7fc52f9f8def9177e3a">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[[1,0,1,0,0,0,0,1,0,0,1,0,1,0,1,1,0,0,1,0,1,1,1,1,1,0,1,0,1,0,0,1,0,0,1,0,1,0,1,0,0,0,1,0,1,1,0,0,0,1,0,1,0,0,1,1,1,0,1,0,0,1,1,0,0,0,1,1,0,0,1,0,1,0,1,0,0,0,1,0,0,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0],[7,6,5.5,6.5,6,5.5,3.5,6,4.5,7,1,6,5,7,7,7,4.5,3.5,7,7,4.5,6,6,4,7,4,6.5,6,6.5,6,4,7,6,7,6.5,5.5,6,2,4.5,4,7,6,7,5,7,7,5,6,5.5,7,3.5,7,6,3.5,7,5,1.5,6.5,6,7,7,6,6,4,3.5,6,6,6,5,3,7,6,5,5,5.5,5.5,6,2.5,4.5,5,6,5,7,5,4.5,6.5,7,6,5,7,5.5,6,6,7,4,6.5,5,7,7,5,7,7,5,6,5,6.5,7,6.5,6,5,5.5,5.5,5,7,1.5,6,5.5,6.5,4.5,3.5,6,6.5,5.5],[5.25,1.25,5,2.75,2.5,1.25,1.5,4.75,4.25,6.25,1.25,2.75,3.75,5,4,5,3.5,2.25,4.5,5.75,2.75,3.75,2.75,4,5,2,4,1.75,3.5,4.75,4,3,5.75,2.75,3.25,5.5,3.25,1.25,2,2.5,3,5.75,1.5,4,1.25,3.25,3.75,2.75,3,6,3.25,2.75,5,1.5,7,5,1.75,2.25,3.5,3.5,6.75,4.25,4,2.25,3,5.5,1.75,4.5,4.25,1.5,2,1.5,3.25,1,1.5,1,2.5,1,3,2.5,1,3.75,1.75,2.75,5.25,5.25,5,5,5,6.5,3,2.75,4.25,7,5.75,3,4.5,4.25,4.5,3.75,4.75,2.5,1,6,2,5,5,4.25,2,3.5,1.75,3.5,2.25,5.5,1,3,2.25,4.75,2.25,1.5,5.75,5.25,3]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>condition<\/th>\n      <th>media.influence<\/th>\n      <th>intention<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":300,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"className":"dt-right","targets":[0,1,2]},{"name":"condition","targets":0},{"name":"media.influence","targets":1},{"name":"intention","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
 <section id="fit-3-models" class="level2 smaller flexbox vcenter">
 <h2 class="smaller flexbox vcenter anchored" data-anchor-id="fit-3-models">Fit 3 models</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>model.outcome.predictor  <span class="ot">&lt;-</span> <span class="fu">lm</span>(speed.of.healing  <span class="sc">~</span> use.homeopathic.remedies)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>model.mediator.predictor <span class="ot">&lt;-</span> <span class="fu">lm</span>(healthy.lifestyle <span class="sc">~</span> use.homeopathic.remedies)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>model.combined           <span class="ot">&lt;-</span> <span class="fu">lm</span>(speed.of.healing  <span class="sc">~</span> use.homeopathic.remedies <span class="sc">+</span> healthy.lifestyle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>model.outcome.predictor  <span class="ot">&lt;-</span> <span class="fu">lm</span>(intention       <span class="sc">~</span> condition)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>model.mediator.predictor <span class="ot">&lt;-</span> <span class="fu">lm</span>(media.influence <span class="sc">~</span> condition)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>model.combined           <span class="ot">&lt;-</span> <span class="fu">lm</span>(intention       <span class="sc">~</span> condition <span class="sc">+</span> media.influence)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="columns">
 <div class="column" style="width:60%;">
@@ -338,11 +357,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>b.mediator.predictor     <span class="co"># b.a</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.530447</code></pre>
+<pre><code>[1] 0.4765252</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>b.combined.mediator      <span class="co"># b.b</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.9725824</code></pre>
+<pre><code>[1] 0.5064485</code></pre>
 </div>
 </div>
 </section>
@@ -353,19 +372,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>b.outcome.predictor      <span class="co"># b.t </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.035573</code></pre>
+<pre><code>[1] 0.4956897</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>b.mediator.predictor     <span class="co"># b.a </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.530447</code></pre>
+<pre><code>[1] 0.4765252</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>b.combined.mediator      <span class="co"># b.b</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.9725824</code></pre>
+<pre><code>[1] 0.5064485</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>b.combined.predictor     <span class="co"># b.c</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5470875</code></pre>
+<pre><code>[1] 0.2543542</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:40%;">
@@ -378,7 +397,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="path-plot" class="level2">
 <h2 class="anchored" data-anchor-id="path-plot">Path plot</h2>
-<p><img src="../../images/homeopathy-pathplot.png" class="img-fluid" width="400"></p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="22.-mediation_files/figure-html/med-path-plot-1.png" class="img-fluid" width="768"></p>
+</div>
+</div>
 </section>
 <section id="visual" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="visual">Visual</h2>
@@ -400,15 +423,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>indirect <span class="ot">&lt;-</span> b.mediator.predictor <span class="sc">*</span> b.combined.mediator; indirect  <span class="co"># a * b</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.488485</code></pre>
+<pre><code>[1] 0.2413355</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>indirect <span class="sc">+</span> b.combined.predictor <span class="co"># a * b + c </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.035573</code></pre>
+<pre><code>[1] 0.4956897</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>b.outcome.predictor         <span class="co"># total effect</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.035573</code></pre>
+<pre><code>[1] 0.4956897</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:27%;">
@@ -416,16 +439,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="calculate-indirect-effect-standardized" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="calculate-indirect-effect-standardized">Calculate indirect effect (standardized)</h2>
-<p><span class="math inline">\(\frac{ab}{s_{Outcome}} \times s_{Predictor} = \frac{b_a b_b}{s_{Outcome}} \times s_{Predictor}\)</span></p>
+<section id="calculate-indirect-effect-partially-standardized" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="calculate-indirect-effect-partially-standardized">Calculate indirect effect (partially standardized)</h2>
+<p><span class="math inline">\(\frac{ab}{s_{Outcome}} = \frac{b_a b_b}{s_{Outcome}}\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>b.mediator.predictor<span class="sc">*</span>b.combined.mediator <span class="sc">/</span> </span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sd</span>(speed.of.healing)<span class="sc">*</span><span class="fu">sd</span>(use.homeopathic.remedies)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>b.mediator.predictor<span class="sc">*</span>b.combined.mediator <span class="sc">/</span> <span class="fu">sd</span>(intention)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.67769</code></pre>
+<pre><code>[1] 0.1556704</code></pre>
 </div>
 </div>
+<ul>
+<li>Predictor is 0/1, so only the outcome is standardized (Section 10.4.3)</li>
+</ul>
 </section>
 <section id="calculate-p_m" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="calculate-p_m">Calculate <span class="math inline">\(P_M\)</span></h2>
@@ -434,7 +459,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>(b.mediator.predictor<span class="sc">*</span>b.combined.mediator) <span class="sc">/</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  b.outcome.predictor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7312366</code></pre>
+<pre><code>[1] 0.4868681</code></pre>
 </div>
 </div>
 <p>The proportion of the total effect that can be attributed to the mediator</p>
@@ -463,23 +488,81 @@ blockquote {
 <li>Assumptions in doubt? Bootstrap the indirect effect (lecture 21)
 <ul>
 <li>Options → Method → <em>Bootstrap</em></li>
+<li>Only the CI is bootstrapped, not the <span class="math inline">\(p\)</span>-value</li>
 </ul></li>
 </ul>
+
+<!-- Mirrors L21's "Checking the assumptions" table (hierarchical_regression.qmd), same labels
+     (jaspRegression QML, checked 2026-10-27). The Process module (jaspProcess ClassicProcess.qml)
+     has no residual plots, collinearity statistics or casewise diagnostics, hence the footnote. -->
 </section>
-<section id="caution-with-process" class="level2">
-<h2 class="anchored" data-anchor-id="caution-with-process">Caution with PROCESS</h2>
+<section id="checking-the-assumptions" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="checking-the-assumptions">Checking the assumptions</h2>
+<p>Where to check each assumption in JASP (mediator and combined models)<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div style="font-size: 75%;">
+<table class="table">
+<colgroup>
+<col style="width: 31%">
+<col style="width: 23%">
+<col style="width: 44%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Assumption</th>
+<th>In JASP</th>
+<th>Looks fine when</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Multicollinearity (combined model)</td>
+<td>Statistics → Coefficients → <em>Tolerance and VIF</em></td>
+<td>all VIFs below 10, average close to 1</td>
+</tr>
+<tr class="even">
+<td>Linearity, equal variances</td>
+<td>Plots → <em>Residuals vs.&nbsp;predicted</em></td>
+<td>a random cloud around 0</td>
+</tr>
+<tr class="odd">
+<td>Normality of the residuals</td>
+<td>Plots → <em>Q-Q plot standardized residuals</em> → <em>Confidence interval</em></td>
+<td>points close to the line, mostly within the band</td>
+</tr>
+<tr class="even">
+<td>Outliers, influential cases</td>
+<td>Statistics → Residuals → <em>Casewise diagnostics</em></td>
+<td>about 5% of std. residuals beyond <span class="math inline">\(\pm 2\)</span> at most, Cook’s distance below 1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="caution-with-process-models" class="level2">
+<h2 class="anchored" data-anchor-id="caution-with-process-models">Caution with Process models</h2>
 <ul>
 <li><a href="https://journals.sagepub.com/doi/full/10.1177/25152459221095827">Rohrer et al (2022). That’s a Lot to Process! Pitfalls of Popular Path Models. Advances in Methods and Practices in Psychological Science.</a></li>
 </ul>
 <blockquote class="blockquote">
 <p>When we test such hypotheses with the help of path models applied to observational data, we are in the business of causal inference on the basis of observational data</p>
 </blockquote>
+<!-- Work-in-progress paper, no link until it is public. Title as in the Overleaf version
+     of 2026-07-01. -->
+</section>
+<section id="tutorial-paper-in-preparation" class="level2">
+<h2 class="anchored" data-anchor-id="tutorial-paper-in-preparation">Tutorial paper (in preparation)</h2>
+<p>van Doorn, Lüken, Vroegh, Montoya &amp; Wagenmakers. <em>A tutorial on moderation and mediation analysis in JASP</em></p>
+<ul>
+<li>Walks through one real study, step by step in JASP</li>
+<li>Predictor and mediator both manipulated (Ren &amp; Schaumberg, 2024)</li>
+<li>Uses <span class="math inline">\(c'\)</span> for the direct effect (the book uses <span class="math inline">\(c\)</span>)</li>
+</ul>
 </section>
 <section id="more-examples" class="level2">
 <h2 class="anchored" data-anchor-id="more-examples">More examples</h2>
 <p><a href="https://jasp-stats.github.io/jasp-data-library/myChapters/chapter_20.html#presumed-media-influence">JASP Data Library</a></p>
 <ul>
-<li><a href="https://htmlpreview.github.io/?https://github.com/jasp-stats/jasp-data-library/blob/main/Presumed%20Media%20Influence/Presumed_Media_Influence.html">Basic mediation - Presumed Media Influence</a></li>
+<li><a href="https://htmlpreview.github.io/?https://github.com/jasp-stats/jasp-data-library/blob/main/Presumed%20Media%20Influence/Presumed_Media_Influence.html">Today’s example - Presumed Media Influence</a></li>
 <li><a href="https://htmlpreview.github.io/?https://github.com/jasp-stats/jasp-data-library/blob/main/Age%20and%20Fatigue/Age_and_Fatigue.html">Crazier example - Age and Fatigue</a></li>
 <li>For the exam, max 1 mediator (but see Section 10.4.7)</li>
 </ul>
@@ -495,8 +578,8 @@ blockquote {
 <h2 class="anchored" data-anchor-id="recap">Recap</h2>
 <ul>
 <li>Mediation analysis is a way to model dependence between predictors</li>
-<li>PROCESS module is very flexible</li>
-<li>Causal assumptions extremely important with PROCESS models</li>
+<li>Process module is very flexible</li>
+<li>Causal assumptions extremely important with Process models</li>
 </ul>
 </section>
 <section id="exam-note" class="level2 smaller">
@@ -557,7 +640,13 @@ blockquote {
 </section>
 </section>
 
-</main>
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>The Process module has no residual plots or collinearity statistics, so fit both models in <em>Linear Regression</em> (lecture 21).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {

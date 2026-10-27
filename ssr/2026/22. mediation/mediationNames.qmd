@@ -1,3 +1,10 @@
+<!-- Opens with the MultiRegression applet (correlated predictors), carried over from the end of
+     lecture 21. Same slide as in lecture 21. -->
+
+## Applet
+
+[Link](https://jvd-ssr-multiple-regression.share.connect.posit.cloud/)
+
 # Mediation {.section}
 
 ```{r med-mediation, echo=FALSE}
@@ -25,42 +32,45 @@ Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Mediation_(statistics))
 ::::
 
 
-## Venn diagrams - effect
+<!-- DSUJ's variance diagram instead of Venn diagrams, as in lecture 6 (partial correlation, the
+     same figure) and the ANOVA lectures (Figures 11.5 and 13.6). The regions are the R-squared of
+     this lecture's three models: total effect A + C, path a C + D, and in the combined model the
+     unique parts A (path c) and B (path b). The percentages are in the figure (DSUJ p. 300). -->
 
-```{r med-venn-diagrams-effect, echo=FALSE, warning=FALSE, message=FALSE, prompt=FALSE, results='hide'}
-library("VennDiagram")
+## Shared variance {.smaller}
 
-grid.newpage()
+:::: {.columns}
 
-draw.pairwise.venn(area1 = 100, area2 = 100,
-                 cross.area  = 80,
-                 category = c("Predictor", "Outcome"), lty = "blank", 
-                 fill = c("skyblue", "pink1"), cat.prompts = F)
-```
+::: {.column width="55%"}
+![Figure 7.9](../../images/figure-7-9.png){height="430"}
+:::
 
-## Venn diagrams - mediator
+::: {.column width="45%"}
+Back to lecture 6. Do anxious students simply revise less?
 
-```{r med-venn-diagrams-mediator, echo=FALSE, warning=FALSE, message=FALSE, prompt=FALSE, results='hide'}
-library("VennDiagram")
+- Predictor anxiety, mediator revision
+- Total effect, regions $A + C$
+- Path $a$, regions $C + D$
+- Path $b$, region $B$
+- Path $c$, region $A$
+- Shared by both predictors, region $C$
+:::
 
-grid.newpage()
-
-draw.triple.venn(area1 = 100, area2 = 100, area3 = 100, 
-                 n12  = 80, 
-                 n23  = 85, 
-                 n13  = 90, 
-                 n123 = 75, 
-                 category = c("Predictor", "Outcome", "Mediator"), lty = "blank", 
-                 fill = c("skyblue", "pink1", "mediumorchid"), cat.prompts = F)
-```
+::::
 
 
 
-## Example
+## Example {.smaller}
 
-Does the speed of recovery after sickness improve with the use of alternative medicine or is this effect mediated by a healthy lifestyle?
+Tal-Or et al. (2010): *Testing causal direction in the influence of presumed media influence*
 
-![<a style="font-size:50%;" href="https://www.pexels.com/photo/green-purple-flower-163186/" target="_blank">Photo from Pixabay</a>](../../images/green-purple-flower-163186.jpg)
+Does an article about a sugar shortage on the front page increase the intention to buy sugar, or is this effect mediated by presumed media influence?
+
+- `Condition`: front page (1) or inside page (0), randomized (predictor)
+- `MediaInfluence`: how much people think others will buy sugar, 1 to 7 (mediator)
+- `Intention`: intention to buy sugar, 1 to 7 (outcome)
+
+<span style="font-size:60%;">Data from the JASP Data Library, also used in Hayes (2022, Section 3.3)</span>
 
 ## Total effect 
 
@@ -95,54 +105,19 @@ Does the speed of recovery after sickness improve with the use of alternative me
 
 ::::
 
-<!-- ## Simulate data {.subsection} -->
+<!-- Data: Tal-Or et al. (2010), copied from the JASP Data Library ("Presumed Media Influence",
+     jasp-stats/jasp-data-library, AGPL-3.0), the same data as Hayes (2022, Section 3.3). The one
+     local copy is datasets/2026/presumed-media-influence.csv (listed on the overview, whose Results
+     and HTML links point to the Data Library). Replaced the simulated homeopathy example on
+     2026-10-27 (his call). -->
 
-<!-- Create predictor variable -->
+```{r med-read-data, echo=FALSE}
+pmi <- read.csv(datasetsPath("2026/presumed-media-influence.csv"))
+condition       <- pmi$Condition       # 1 = front page, 0 = inside page (randomized)
+media.influence <- pmi$MediaInfluence  # presumed media influence, 1 to 7
+intention       <- pmi$Intention       # intention to buy sugar, 1 to 7
 
-```{r med-mediation-paths, echo=FALSE}
-set.seed(1976)
-## Set parameters for simulation
-n     <- 50
-mu    <- 10
-sigma <- 2
-## Predictor
-use.homeopathic.remedies <- rnorm(n, mu, sigma)
-```
-
-<!-- ## Mediator  -->
-
-<!-- Create mediator -->
-
-```{r med-simulate-lifestyle, echo=FALSE}
-b0    <- 2             # intercept of lifestyle
-b1    <- 1.5           # association homeopathy and lifestyle, b.a
-error <- rnorm(n,0,.7)
-healthy.lifestyle <- b0 + b1 * use.homeopathic.remedies + error
-```
-
-<!-- ## Specify model  -->
-
-<!-- Create outcome variable -->
-
-```{r med-simulate-healing, echo=FALSE}
-b0    <- 6 # intercept of healing
-b1    <- 0.5 # association homeopathy and healing, b.c
-b2    <- 1 # association lifestyle and healing, b.b
-error <- rnorm(n, 0, 1.4)
-speed.of.healing <- b0 + 
-                    b1 * use.homeopathic.remedies + 
-                    b2 * healthy.lifestyle + 
-                    error
-
-data <- data.frame(use.homeopathic.remedies, 
-                   healthy.lifestyle, 
-                   speed.of.healing)
-data <- round(data, 4)
-```
-
-```{r med-write-data, echo=FALSE, eval=TRUE}
-## Write data for use in JASP
-write.csv(data, "homeopathy-mediation.csv", row.names=FALSE)
+data <- data.frame(condition, media.influence, intention)
 ```
 
 ## The data {.subsection .smaller}
@@ -158,9 +133,9 @@ ssrTable(data, rownames = FALSE,
 ## Fit 3 models {.smaller .flexbox .vcenter}
 
 ```{r med-fit-3-models, echo=TRUE}
-model.outcome.predictor  <- lm(speed.of.healing  ~ use.homeopathic.remedies)
-model.mediator.predictor <- lm(healthy.lifestyle ~ use.homeopathic.remedies)
-model.combined           <- lm(speed.of.healing  ~ use.homeopathic.remedies + healthy.lifestyle)
+model.outcome.predictor  <- lm(intention       ~ condition)
+model.mediator.predictor <- lm(media.influence ~ condition)
+model.combined           <- lm(intention       ~ condition + media.influence)
 ```
 :::: {.columns}
 
@@ -247,43 +222,77 @@ b.combined.predictor     # b.c
 
 ## Path plot
 
-![](../../images/homeopathy-pathplot.png){width="400px"}
+```{r med-path-plot, echo=FALSE, fig.width=8, fig.height=4.5}
+# The three models above as one path diagram, in the layout and colours of mediation.png
+par(mar = c(0, 0, 0, 0))
+plot.new()
+plot.window(xlim = c(0, 10), ylim = c(0, 5))
+box.w <- 1.4
+box.h <- 0.45
+node <- function(xy, label, fill) {
+  rect(xy[1] - box.w, xy[2] - box.h, xy[1] + box.w, xy[2] + box.h,
+       col = fill, border = "grey20", lwd = 2)
+  text(xy[1], xy[2], label, cex = 1.4)
+}
+pos.x <- c(1.6, 1)
+pos.m <- c(5, 3.8)
+pos.y <- c(8.4, 1)
+
+arrows(pos.x[1] + box.w, pos.x[2], pos.y[1] - box.w, pos.y[2], lwd = 2, length = 0.15)
+arrows(pos.x[1] + 0.6 * box.w, pos.x[2] + box.h, pos.m[1] - 0.6 * box.w, pos.m[2] - box.h,
+       lwd = 2, length = 0.15)
+arrows(pos.m[1] + 0.6 * box.w, pos.m[2] - box.h, pos.y[1] - 0.6 * box.w, pos.y[2] + box.h,
+       lwd = 2, length = 0.15)
+node(pos.x, "Condition", "lightskyblue")
+node(pos.m, "MediaInfluence", "orange")
+node(pos.y, "Intention", "lightskyblue")
+
+text(2.6, 2.7, sprintf("a = %.3f", b.mediator.predictor), cex = 1.3)
+text(7.4, 2.7, sprintf("b = %.3f", b.combined.mediator), cex = 1.3)
+text(5, 0.55, sprintf("c = %.3f", b.combined.predictor), cex = 1.3)
+```
 
 
 ## Visual {.subsection}
 
 ```{r med-visual, fig.align='center',echo=FALSE}
 par(mfrow = c(1, 3), cex.lab = 1.3, cex = 1.1)
-mycor <- cor(data$use.homeopathic.remedies, data$speed.of.healing)
-plot(data$use.homeopathic.remedies, data$speed.of.healing, 
-     main = paste0("Homeopathy/Healing\ncor = ", round(mycor, 2)), 
-     bg = 'purple', pch = 21, bty = "n", las = 1,
-     xlab="Homeopathy",
-     ylab="Speed of Healing")
+# Condition is 0/1, so spread its points sideways; the seed keeps the plot the same per render
+set.seed(2010)
+condition.jittered <- jitter(data$condition, amount = 0.1)
 
-fit.1 <- lm(speed.of.healing ~ use.homeopathic.remedies, data)
+mycor <- cor(data$condition, data$intention)
+plot(condition.jittered, data$intention,
+     main = paste0("Condition/Intention\ncor = ", round(mycor, 2)),
+     bg = 'purple', pch = 21, bty = "n", las = 1, xaxt = "n", xlim = c(-0.3, 1.3),
+     xlab="Condition",
+     ylab="Intention")
+axis(1, at = c(0, 1), labels = c("Inside", "Front"))
 
-abline(fit.1, col = 'darkgreen', lwd = 3)
-
-mycor <- cor(data$use.homeopathic.remedies, data$healthy.lifestyle)
-plot(data$use.homeopathic.remedies, data$healthy.lifestyle, 
-     main = paste0("Homeopathy/Lifestyle\ncor = ", round(mycor, 2)), 
-     bg = 'purple', pch = 21, bty = "n", las = 1,
-     xlab="Homeopathy",
-     ylab="Healthy Lifestyle")
-
-fit.1 <- lm(healthy.lifestyle ~ use.homeopathic.remedies, data)
+fit.1 <- lm(intention ~ condition, data)
 
 abline(fit.1, col = 'darkgreen', lwd = 3)
 
-mycor <- cor(data$healthy.lifestyle, data$speed.of.healing)
-plot(data$healthy.lifestyle, data$speed.of.healing, 
-     main = paste0("Lifestyle/Healing\ncor = ", round(mycor, 2)), 
-     bg = 'purple', pch = 21, bty = "n", las = 1,
-     xlab="Healthy Lifestyle",
-     ylab="Speed of Healing")
+mycor <- cor(data$condition, data$media.influence)
+plot(condition.jittered, data$media.influence,
+     main = paste0("Condition/Influence\ncor = ", round(mycor, 2)),
+     bg = 'purple', pch = 21, bty = "n", las = 1, xaxt = "n", xlim = c(-0.3, 1.3),
+     xlab="Condition",
+     ylab="Media Influence")
+axis(1, at = c(0, 1), labels = c("Inside", "Front"))
 
-fit.1 <- lm(speed.of.healing ~ healthy.lifestyle, data)
+fit.1 <- lm(media.influence ~ condition, data)
+
+abline(fit.1, col = 'darkgreen', lwd = 3)
+
+mycor <- cor(data$media.influence, data$intention)
+plot(data$media.influence, data$intention,
+     main = paste0("Influence/Intention\ncor = ", round(mycor, 2)),
+     bg = 'purple', pch = 21, bty = "n", las = 1,
+     xlab="Media Influence",
+     ylab="Intention")
+
+fit.1 <- lm(intention ~ media.influence, data)
 
 abline(fit.1, col = 'darkgreen', lwd = 3)
 
@@ -315,14 +324,15 @@ b.outcome.predictor         # total effect
 
 
 
-## Calculate indirect effect (standardized) {.subsection}
+## Calculate indirect effect (partially standardized) {.subsection}
 
-$\frac{ab}{s_{Outcome}} \times s_{Predictor} = \frac{b_a b_b}{s_{Outcome}} \times s_{Predictor}$
+$\frac{ab}{s_{Outcome}} = \frac{b_a b_b}{s_{Outcome}}$
 
 ```{r med-calculate-indirect-effect-standardized, echo=TRUE}
-b.mediator.predictor*b.combined.mediator / 
-  sd(speed.of.healing)*sd(use.homeopathic.remedies)
+b.mediator.predictor*b.combined.mediator / sd(intention)
 ```
+
+- Predictor is 0/1, so only the outcome is standardized (Section 10.4.3)
 
 
 
@@ -357,18 +367,47 @@ blockquote {
 - The CI shows how precisely $a \times b$ is estimated
 - Assumptions in doubt? Bootstrap the indirect effect (lecture 21)
   - Options → Method → *Bootstrap*
+  - Only the CI is bootstrapped, not the $p$-value
 
-## Caution with PROCESS
+<!-- Mirrors L21's "Checking the assumptions" table (hierarchical_regression.qmd), same labels
+     (jaspRegression QML, checked 2026-10-27). The Process module (jaspProcess ClassicProcess.qml)
+     has no residual plots, collinearity statistics or casewise diagnostics, hence the footnote. -->
+
+## Checking the assumptions {.smaller}
+
+Where to check each assumption in JASP (mediator and combined models)^[The Process module has no residual plots or collinearity statistics, so fit both models in *Linear Regression* (lecture 21).]
+
+::: {style="font-size: 75%;"}
+| Assumption | In JASP | Looks fine when |
+|------------|---------|-----------------|
+| Multicollinearity (combined model) | Statistics &rarr; Coefficients &rarr; *Tolerance and VIF* | all VIFs below 10, average close to 1 |
+| Linearity, equal variances | Plots &rarr; *Residuals vs. predicted* | a random cloud around 0 |
+| Normality of the residuals | Plots &rarr; *Q-Q plot standardized residuals* &rarr; *Confidence interval* | points close to the line, mostly within the band |
+| Outliers, influential cases | Statistics &rarr; Residuals &rarr; *Casewise diagnostics* | about 5% of std. residuals beyond $\pm 2$ at most, Cook's distance below 1 |
+:::
+
+## Caution with Process models
 
 - [Rohrer et al (2022). That’s a Lot to Process! Pitfalls of Popular Path Models. Advances in Methods and Practices in Psychological Science. ](https://journals.sagepub.com/doi/full/10.1177/25152459221095827)
 
 > When we test such hypotheses with the help of path models applied to observational data, we are in the business of causal inference on the basis of observational data
 
+<!-- Work-in-progress paper, no link until it is public. Title as in the Overleaf version
+     of 2026-07-01. -->
+
+## Tutorial paper (in preparation)
+
+van Doorn, Lüken, Vroegh, Montoya & Wagenmakers. *A tutorial on moderation and mediation analysis in JASP*
+
+- Walks through one real study, step by step in JASP
+- Predictor and mediator both manipulated (Ren & Schaumberg, 2024)
+- Uses $c'$ for the direct effect (the book uses $c$)
+
 ## More examples
 
 [JASP Data Library](https://jasp-stats.github.io/jasp-data-library/myChapters/chapter_20.html#presumed-media-influence)
 
-- [Basic mediation - Presumed Media Influence](https://htmlpreview.github.io/?https://github.com/jasp-stats/jasp-data-library/blob/main/Presumed%20Media%20Influence/Presumed_Media_Influence.html)
+- [Today's example - Presumed Media Influence](https://htmlpreview.github.io/?https://github.com/jasp-stats/jasp-data-library/blob/main/Presumed%20Media%20Influence/Presumed_Media_Influence.html)
 - [Crazier example - Age and Fatigue](https://htmlpreview.github.io/?https://github.com/jasp-stats/jasp-data-library/blob/main/Age%20and%20Fatigue/Age_and_Fatigue.html)
 - For the exam, max 1 mediator (but see Section 10.4.7)
 

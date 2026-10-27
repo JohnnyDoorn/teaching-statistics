@@ -17,11 +17,11 @@ In this lecture we aim to:
 
 - Explore mediation analysis
 - Link it to regression
-- Introduce the PROCESS module
+- Introduce the Process module
 - Demonstrate in JASP
     
 <strong>Reading:</strong>
-Chapter 10 (§10.4–10.7)
+Chapter 10 (§10.2, §10.4–10.7)
 </div>
 
 
@@ -39,8 +39,8 @@ Chapter 10 (§10.4–10.7)
 ## Recap
 
 - Mediation analysis is a way to model dependence between predictors
-- PROCESS module is very flexible
-- Causal assumptions extremely important with PROCESS models
+- Process module is very flexible
+- Causal assumptions extremely important with Process models
 
 ## Exam note {.smaller}
 
