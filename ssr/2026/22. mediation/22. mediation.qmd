@@ -2,7 +2,7 @@
 title: "22. Mediation"
 author: "Johnny van Doorn"
 date: "28 October 2026"
-view: "https://teams.microsoft.com/meet/3697492461680604?p=ThrVxoHKbGbwIRyzs2"
+view: "https://amsuni-my.sharepoint.com/:v:/g/personal/j_b_vandoorn_uva_nl/IQBQeZ7hOI48S5LYcLN6EMREAf-fkqtz_uW6tVnQV48SPCc?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=SKla9H"
 footer: "Scientific & Statistical Reasoning"
 format:
   revealjs:
