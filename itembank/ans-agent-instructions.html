@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-10-16">
+<meta name="dcterms.date" content="2026-10-27">
 
 <title>Instructions for coding agents working with ANS question banks</title>
 <style>
@@ -95,20 +95,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#building-and-checking" id="toc-building-and-checking" class="nav-link" data-scroll-target="#building-and-checking">3. Building and checking</a></li>
   <li><a href="#reading-an-ans-export" id="toc-reading-an-ans-export" class="nav-link" data-scroll-target="#reading-an-ans-export">4. Reading an ANS export</a></li>
-  <li><a href="#package-structure" id="toc-package-structure" class="nav-link" data-scroll-target="#package-structure">5. Package structure</a></li>
-  <li><a href="#question-types-in-qti" id="toc-question-types-in-qti" class="nav-link" data-scroll-target="#question-types-in-qti">6. Question types in QTI</a>
+  <li><a href="#cleaning-up-an-existing-bank" id="toc-cleaning-up-an-existing-bank" class="nav-link" data-scroll-target="#cleaning-up-an-existing-bank">5. Cleaning up an existing bank</a></li>
+  <li><a href="#package-structure" id="toc-package-structure" class="nav-link" data-scroll-target="#package-structure">6. Package structure</a></li>
+  <li><a href="#question-types-in-qti" id="toc-question-types-in-qti" class="nav-link" data-scroll-target="#question-types-in-qti">7. Question types in QTI</a>
   <ul class="collapse">
-  <li><a href="#single-choice-and-multiple-response" id="toc-single-choice-and-multiple-response" class="nav-link" data-scroll-target="#single-choice-and-multiple-response">6.1 Single choice and multiple response</a></li>
-  <li><a href="#one-numeric-gap" id="toc-one-numeric-gap" class="nav-link" data-scroll-target="#one-numeric-gap">6.2 One numeric gap</a></li>
-  <li><a href="#several-gaps-in-one-question-or-several-accepted-answers" id="toc-several-gaps-in-one-question-or-several-accepted-answers" class="nav-link" data-scroll-target="#several-gaps-in-one-question-or-several-accepted-answers">6.3 Several gaps in one question, or several accepted answers</a></li>
-  <li><a href="#explanation-of-a-fill-in-question" id="toc-explanation-of-a-fill-in-question" class="nav-link" data-scroll-target="#explanation-of-a-fill-in-question">6.4 Explanation of a fill-in question</a></li>
-  <li><a href="#open-questions-with-grading-criteria-1" id="toc-open-questions-with-grading-criteria-1" class="nav-link" data-scroll-target="#open-questions-with-grading-criteria-1">6.5 Open questions with grading criteria</a></li>
-  <li><a href="#multi-part-exercises-1" id="toc-multi-part-exercises-1" class="nav-link" data-scroll-target="#multi-part-exercises-1">6.6 Multi-part exercises</a></li>
+  <li><a href="#single-choice-and-multiple-response" id="toc-single-choice-and-multiple-response" class="nav-link" data-scroll-target="#single-choice-and-multiple-response">7.1 Single choice and multiple response</a></li>
+  <li><a href="#one-numeric-gap" id="toc-one-numeric-gap" class="nav-link" data-scroll-target="#one-numeric-gap">7.2 One numeric gap</a></li>
+  <li><a href="#several-gaps-in-one-question-or-several-accepted-answers" id="toc-several-gaps-in-one-question-or-several-accepted-answers" class="nav-link" data-scroll-target="#several-gaps-in-one-question-or-several-accepted-answers">7.3 Several gaps in one question, or several accepted answers</a></li>
+  <li><a href="#explanation-of-a-fill-in-question" id="toc-explanation-of-a-fill-in-question" class="nav-link" data-scroll-target="#explanation-of-a-fill-in-question">7.4 Explanation of a fill-in question</a></li>
+  <li><a href="#open-questions-with-grading-criteria-1" id="toc-open-questions-with-grading-criteria-1" class="nav-link" data-scroll-target="#open-questions-with-grading-criteria-1">7.5 Open questions with grading criteria</a></li>
+  <li><a href="#multi-part-exercises-1" id="toc-multi-part-exercises-1" class="nav-link" data-scroll-target="#multi-part-exercises-1">7.6 Multi-part exercises</a></li>
   </ul></li>
-  <li><a href="#media-maths-links" id="toc-media-maths-links" class="nav-link" data-scroll-target="#media-maths-links">7. Media, maths, links</a></li>
-  <li><a href="#checking-an-import" id="toc-checking-an-import" class="nav-link" data-scroll-target="#checking-an-import">8. Checking an import</a></li>
-  <li><a href="#what-the-builder-changes-in-rexams-output" id="toc-what-the-builder-changes-in-rexams-output" class="nav-link" data-scroll-target="#what-the-builder-changes-in-rexams-output">9. What the builder changes in R/exams output</a></li>
-  <li><a href="#what-is-verified-and-how" id="toc-what-is-verified-and-how" class="nav-link" data-scroll-target="#what-is-verified-and-how">10. What is verified, and how</a></li>
+  <li><a href="#media-maths-links" id="toc-media-maths-links" class="nav-link" data-scroll-target="#media-maths-links">8. Media, maths, links</a></li>
+  <li><a href="#checking-an-import" id="toc-checking-an-import" class="nav-link" data-scroll-target="#checking-an-import">9. Checking an import</a></li>
+  <li><a href="#what-the-builder-changes-in-rexams-output" id="toc-what-the-builder-changes-in-rexams-output" class="nav-link" data-scroll-target="#what-the-builder-changes-in-rexams-output">10. What the builder changes in R/exams output</a></li>
+  <li><a href="#what-is-verified-and-how" id="toc-what-is-verified-and-how" class="nav-link" data-scroll-target="#what-is-verified-and-how">11. What is verified, and how</a></li>
   </ul>
 </nav>
 </div>
@@ -128,7 +129,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 16, 2026</p>
+      <p class="date">October 27, 2026</p>
     </div>
   </div>
   
@@ -139,7 +140,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 <p><em>People, read <a href="README.html">README</a> first. This file is written for a coding agent (Claude Code or similar) and is meant to be read in full before any ANS work.</em></p>
-<p>You are helping a teacher write, convert, build or check questions for <strong>ANS</strong> (ans.app), a digital assessment platform. Questions are written as text files in the R/exams format and built into a QTI 2.1 package with <code>tools/build-ans.R</code>, which ANS imports. Read this file completely before you read, convert or build any ANS question. Section 10 says what is verified and what is not; when something is untested, say so to the teacher instead of assuming it works.</p>
+<p>You are helping a teacher write, convert, clean up, build or check questions for <strong>ANS</strong> (ans.app), a digital assessment platform. Questions are written as text files in the R/exams format and built into a QTI 2.1 package with <code>tools/build-ans.R</code>, which ANS imports. Read this file completely before you read, convert or build any ANS question. Section 11 says what is verified and what is not; when something is untested, say so to the teacher instead of assuming it works.</p>
 <p>The folder <code>examples/</code> holds 12 working questions (3 exercises). When in doubt about the format, copy the example that looks most like what you need.</p>
 <section id="rules-that-matter-most" class="level2">
 <h2 class="anchored" data-anchor-id="rules-that-matter-most">1. Rules that matter most</h2>
@@ -147,11 +148,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Import QTI 2.1 packages through the button “QTI 2.X package (Legacy)”.</strong> The Respondus CSV route gives no grading criteria, no penalty for wrong ticks in multiple-response questions, and only alphanumeric gaps. QTI 3.0 loses the text, links, figures and model answers around fill-in parts. (Verified, four import rounds.)</li>
 <li><strong>Write only elements ANS itself emits.</strong> One unexpected element can sink the whole package with “There are no exercises to import”. When in doubt, copy the structure of an item from the teacher’s own QTI 2.X export. The builder already writes the right form; do not hand-edit its XML.</li>
 <li><strong>Never put a scorer rubric inside the <code>itemBody</code> of a fill-in question.</strong> ANS imports it as question text, so students see the answer. (Verified.)</li>
-<li><strong>One answer field per question.</strong> Several gaps in one question are possible in ANS’s own multi-gap form (section 6.3), but ANS imports those gaps as alphanumeric gaps that accept only the exact keys, so give each numeric answer its own question. Otherwise make the parts separate questions of one exercise (section 2.4).</li>
+<li><strong>One answer field per question.</strong> Several gaps in one question are possible in ANS’s own multi-gap form (section 7.3), but ANS imports those gaps as alphanumeric gaps that accept only the exact keys, so give each numeric answer its own question. Otherwise make the parts separate questions of one exercise (section 2.4).</li>
 <li><strong>List images and data files as <code>&lt;file&gt;</code> entries of the item that uses them</strong> in the manifest. A separate manifest resource per file makes ANS create an empty exercise titled <code>d41d8cd98f00b204e9800998ecf8427e</code>. (Verified.)</li>
 <li><strong>Multiple-response (tick-all) questions need at least one true statement</strong>, and the stem must say so (“Check the statement(s) that is/are true; at least one statement is true.”), because ANS’s correction for guessing assumes it. The builder stops otherwise.</li>
-<li><strong>Compute every key from the data, in code.</strong> Never copy a number from a published answer, a textbook or a previous version of the question without recomputing it. Published answers contain errors.</li>
-<li><strong>Check every import by exporting again and comparing</strong> (section 8). You cannot import yourself; the teacher imports and gives you the re-export.</li>
+<li><strong>Compute every key from the data, in code.</strong> Never copy a number from a published answer, a textbook or a previous version of the question without recomputing it. Published answers contain errors. Section 5 says how to clean up an old bank.</li>
+<li><strong>Check every import by exporting again and comparing</strong> (section 9). You cannot import yourself; the teacher imports and gives you the re-export.</li>
 </ol>
 </section>
 <section id="the-question-format" class="level2">
@@ -314,10 +315,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>zero-width spaces;</li>
 <li><code>&lt;</code> and <code>&gt;</code> that ANS dropped from the text (“θ 0.5” for “θ &gt; 0.5”). Restore them from the context, and flag them to the teacher.</li>
 </ul>
-<p>Converting HTML to markdown with pandoc works once code blocks and tables are built separately. After converting, recompute every key (rule 7): old items contain wrong keys, solutions written for an earlier version of the numbers, and page references to older editions of the book.</p>
+<p>Converting HTML to markdown with pandoc works once code blocks and tables are built separately. After converting, clean up the bank as in section 5.</p>
+</section>
+<section id="cleaning-up-an-existing-bank" class="level2">
+<h2 class="anchored" data-anchor-id="cleaning-up-an-existing-bank">5. Cleaning up an existing bank</h2>
+<p>Most of the work on an old bank is checking, not writing. Banks that have been reused for years contain wrong keys, model answers and feedback written for an earlier version of the numbers, page references to older editions of the book, and links that no longer work. Check in the order below, collect what you find in one report, and change nothing in the content until the teacher has decided.</p>
+<ol type="1">
+<li><strong>Convert without edits.</strong> Convert the export as it is (section 4) and keep the teacher’s wording, repairing only the HTML. Every later change can then be compared with the original.</li>
+<li><strong>Keys.</strong> Recompute every key from the data, in code (rule 7). Compare your result with the key, with the accepted answers of each gap, with the numbers in the model answer and the feedback, and with the decimals the stem asks for. Check the weights of multiple-response options too (section 4).</li>
+<li><strong>Model answers and feedback.</strong> Check that the model answer supports the keyed option, uses the same numbers as the key, and names the mistake behind each wrong option (section 2.7). Read the feedback as well, since teachers often keep the real explanation there.</li>
+<li><strong>Book references.</strong> Ask the teacher which edition of the book the course uses now, preferably as a text file you can search. For every reference (chapter, section, page, figure or box), find the passage and check that it says what the answer claims. Report references to an older edition, or to a version of the book for other software, with the corrected reference; section numbers often shift between the two. If the PDF’s page numbers differ from the printed ones, work out the offset once and always report printed pages.</li>
+<li><strong>Links.</strong> Open every link. Report links that fail or now land on a different page, and suggest the current address of the same page. Do not replace a link with a copy of the material.</li>
+<li><strong>Wording and notation.</strong> Flag ambiguous stems, a missing alpha where the answer depends on it, missing units or decimals, and notation that differs from the book or the lectures. Flag these; do not rewrite them unasked.</li>
+<li><strong>Report, then fix.</strong> Give the teacher one list, per question file, with what is wrong, the proposed change and its evidence (your computation, the book page). Keep what you recomputed apart from what is a judgement call. Go through the list with the teacher one question at a time, apply only the changes the teacher approves, and keep the teacher’s own sentences wherever they are still right. End each corrected model answer with its updated source (section 2.7).</li>
+</ol>
 </section>
 <section id="package-structure" class="level2">
-<h2 class="anchored" data-anchor-id="package-structure">5. Package structure</h2>
+<h2 class="anchored" data-anchor-id="package-structure">6. Package structure</h2>
 <p>The builder writes this; it is here for debugging and for agents writing packages without it.</p>
 <pre><code>package.zip
 ├── imsmanifest.xml
@@ -338,9 +352,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Inside each item, set <code>identifier="QUE_&lt;id&gt;_&lt;n&gt;"</code> and <code>title="&lt;exercise title&gt;"</code>. Points come from <code>normalMaximum</code> and the <code>MAXSCORE</code> outcome; write exact values (2, not 1.999998).</p>
 </section>
 <section id="question-types-in-qti" class="level2">
-<h2 class="anchored" data-anchor-id="question-types-in-qti">6. Question types in QTI</h2>
+<h2 class="anchored" data-anchor-id="question-types-in-qti">7. Question types in QTI</h2>
 <section id="single-choice-and-multiple-response" class="level3">
-<h3 class="anchored" data-anchor-id="single-choice-and-multiple-response">6.1 Single choice and multiple response</h3>
+<h3 class="anchored" data-anchor-id="single-choice-and-multiple-response">7.1 Single choice and multiple response</h3>
 <p>A <code>choiceInteraction</code> (<code>maxChoices="1"</code> for single choice, <code>0</code> for multiple response), with the model answer at the <strong>end of <code>itemBody</code></strong>:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode xml code-with-copy"><code class="sourceCode xml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">itemBody</span>&gt;</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  ...&lt;<span class="kw">choiceInteraction</span><span class="ot"> responseIdentifier=</span><span class="st">"RESPONSE"</span><span class="ot"> shuffle=</span><span class="st">"false"</span><span class="ot"> maxChoices=</span><span class="st">"1"</span>&gt;...&lt;/<span class="kw">choiceInteraction</span>&gt;</span>
@@ -349,7 +363,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Verified by import. The model answer arrives, and for multiple response the per-option weights in the package are kept. <code>shuffle="false"</code> keeps the order written; ANS can shuffle per student in its own settings.</p>
 </section>
 <section id="one-numeric-gap" class="level3">
-<h3 class="anchored" data-anchor-id="one-numeric-gap">6.2 One numeric gap</h3>
+<h3 class="anchored" data-anchor-id="one-numeric-gap">7.2 One numeric gap</h3>
 <p>A <code>textEntryInteraction</code> with a float response and an absolute tolerance imports as an ANS numeric gap with that margin (verified, margins 0.002 and 0.01):</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode xml code-with-copy"><code class="sourceCode xml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">responseDeclaration</span><span class="ot"> identifier=</span><span class="st">"R1"</span><span class="ot"> cardinality=</span><span class="st">"single"</span><span class="ot"> baseType=</span><span class="st">"float"</span>&gt;</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">correctResponse</span>&gt;&lt;<span class="kw">value</span>&gt;0.035&lt;/<span class="kw">value</span>&gt;&lt;/<span class="kw">correctResponse</span>&gt;</span>
@@ -361,7 +375,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>ANS also has a <em>Numerical value</em> question type, but a gap shows the teacher what students typed.</p>
 </section>
 <section id="several-gaps-in-one-question-or-several-accepted-answers" class="level3">
-<h3 class="anchored" data-anchor-id="several-gaps-in-one-question-or-several-accepted-answers">6.3 Several gaps in one question, or several accepted answers</h3>
+<h3 class="anchored" data-anchor-id="several-gaps-in-one-question-or-several-accepted-answers">7.3 Several gaps in one question, or several accepted answers</h3>
 <p>Use ANS’s own form, as in its exports (verified by import with 5 gaps in one question: every gap shows, but as an alphanumeric gap; see the caution in section 2.3). That means one string <code>responseDeclaration</code> per gap, the accepted keys and a mapping <strong>inside <code>correctResponse</code></strong>, numeric margins as <code>low;high</code> keys, and the <code>map_response</code> template.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode xml code-with-copy"><code class="sourceCode xml"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">responseDeclaration</span><span class="ot"> identifier=</span><span class="st">"GAP1"</span><span class="ot"> cardinality=</span><span class="st">"single"</span><span class="ot"> baseType=</span><span class="st">"string"</span>&gt;</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">correctResponse</span>&gt;</span>
@@ -379,7 +393,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>An exact value (margin 0) gets the zero-width range <code>123;123</code> next to <code>123</code>, as in ANS’s own exports; with the plain key alone ANS made the gap alphanumeric instead of numeric (seen on import, October 2026). <code>mappedValue</code> is the points per gap. R/exams’ own multi-gap output imports with <strong>only the first gap</strong> showing; the builder rewrites it into this form.</p>
 </section>
 <section id="explanation-of-a-fill-in-question" class="level3">
-<h3 class="anchored" data-anchor-id="explanation-of-a-fill-in-question">6.4 Explanation of a fill-in question</h3>
+<h3 class="anchored" data-anchor-id="explanation-of-a-fill-in-question">7.4 Explanation of a fill-in question</h3>
 <p>ANS ignores a scorer rubric after <code>&lt;/itemBody&gt;</code> and leaks one inside it (rule 3). The explanation goes in as <strong>question feedback</strong>, the same text for a correct and an incorrect answer, after <code>&lt;/itemBody&gt;</code> (verified by import):</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode xml code-with-copy"><code class="sourceCode xml"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="er">&lt;</span>/itemBody&gt;</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">rubricBlock</span><span class="ot"> view=</span><span class="st">"scorer"</span>&gt;&lt;<span class="kw">p</span>&gt;For the record; ANS ignores this one.&lt;/<span class="kw">p</span>&gt;&lt;/<span class="kw">rubricBlock</span>&gt;</span>
@@ -389,7 +403,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The same two feedback blocks work on choice questions (<code>--feedback</code>, for practice tests). ANS’s API (<code>PATCH /api/v2/questions/{id}</code>, field <code>grading_description</code>, personal token) could set a fill-in’s model answer directly; that route is untested.</p>
 </section>
 <section id="open-questions-with-grading-criteria-1" class="level3">
-<h3 class="anchored" data-anchor-id="open-questions-with-grading-criteria-1">6.5 Open questions with grading criteria</h3>
+<h3 class="anchored" data-anchor-id="open-questions-with-grading-criteria-1">7.5 Open questions with grading criteria</h3>
 <p>An <code>extendedTextInteraction</code> with <code>expectedLength="0"</code>, <strong>no <code>responseProcessing</code></strong>, the model answer as a scorer rubric at the end of <code>itemBody</code>, and the criteria after <code>&lt;/itemBody&gt;</code> (verified):</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode xml code-with-copy"><code class="sourceCode xml"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">rubricScoring</span>&gt;</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">criterion</span><span class="ot"> points=</span><span class="st">"0.5"</span>&gt;&lt;<span class="kw">div</span>&gt;Names the test statistic.&lt;/<span class="kw">div</span>&gt;&lt;/<span class="kw">criterion</span>&gt;</span>
@@ -398,12 +412,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The criteria must add up to the question’s points.</p>
 </section>
 <section id="multi-part-exercises-1" class="level3">
-<h3 class="anchored" data-anchor-id="multi-part-exercises-1">6.6 Multi-part exercises</h3>
+<h3 class="anchored" data-anchor-id="multi-part-exercises-1">7.6 Multi-part exercises</h3>
 <p>Parts with the same exercise id and title, as <code>QUE_&lt;id&gt;_1.xml</code>, <code>QUE_&lt;id&gt;_2.xml</code>, …, are regrouped by ANS into one exercise with the parts in order (verified, including ANS’s own 5-part export re-imported). The shared scenario goes at the top of question 1.</p>
 </section>
 </section>
 <section id="media-maths-links" class="level2">
-<h2 class="anchored" data-anchor-id="media-maths-links">7. Media, maths, links</h2>
+<h2 class="anchored" data-anchor-id="media-maths-links">8. Media, maths, links</h2>
 <ul>
 <li><strong>Images and data files</strong> travel inside the package, referenced by relative <code>src</code> / <code>href</code> and listed as <code>&lt;file&gt;</code> entries of their item (rule 5). They become real ANS attachments that students can download (verified with <code>.png</code>, <code>.jasp</code> and <code>.csv</code>).</li>
 <li><strong>Maths</strong> goes in as <code>$$...$$</code>, which ANS turns into its equation component; MathML gets flattened. Tables in plain HTML are fine.</li>
@@ -411,7 +425,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </section>
 <section id="checking-an-import" class="level2">
-<h2 class="anchored" data-anchor-id="checking-an-import">8. Checking an import</h2>
+<h2 class="anchored" data-anchor-id="checking-an-import">9. Checking an import</h2>
 <p>After every import, the teacher exports the bank as QTI 2.X (and, if possible, as a Respondus package) and gives you the export. Run <code>tools/check-import.py</code> on it with the build’s <code>expected.json</code>. Per question it checks</p>
 <ul>
 <li>present, with the right exercise title and number of parts;</li>
@@ -427,7 +441,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Report every failed check to the teacher, with what the export holds.</p>
 </section>
 <section id="what-the-builder-changes-in-rexams-output" class="level2">
-<h2 class="anchored" data-anchor-id="what-the-builder-changes-in-rexams-output">9. What the builder changes in R/exams output</h2>
+<h2 class="anchored" data-anchor-id="what-the-builder-changes-in-rexams-output">10. What the builder changes in R/exams output</h2>
 <p>R/exams (<code>exams2qti21()</code>) is a good base, but ANS needs its output reshaped. The builder (<code>tools/ans_package.py</code>) does all of this; it matters when you debug or write packages yourself.</p>
 <table class="table">
 <colgroup>
@@ -451,7 +465,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td><code>cloze</code> with several float gaps</td>
-<td>one <code>num</code> gap per question; ANS’s multi-gap form (6.3) only where exact keys are fine</td>
+<td>one <code>num</code> gap per question; ANS’s multi-gap form (7.3) only where exact keys are fine</td>
 </tr>
 <tr class="even">
 <td>item titles “1”, “2”, …</td>
@@ -470,7 +484,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Two R/exams behaviors to keep in mind when writing questions: <code>expoints</code> in a <code>cloze</code> is per gap (R/exams recycles it), and <code>exshuffle: TRUE</code> shuffles once at build time.</p>
 </section>
 <section id="what-is-verified-and-how" class="level2">
-<h2 class="anchored" data-anchor-id="what-is-verified-and-how">10. What is verified, and how</h2>
+<h2 class="anchored" data-anchor-id="what-is-verified-and-how">11. What is verified, and how</h2>
 <table class="table">
 <colgroup>
 <col style="width: 50%">

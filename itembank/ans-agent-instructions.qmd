@@ -1,16 +1,16 @@
 ---
 title: "Instructions for coding agents working with ANS question banks"
 subtitle: "Format, build, import and checks, as settled by test imports (University of Amsterdam, September and October 2026)"
-date: "16 October 2026"
+date: "27 October 2026"
 ---
 
 *People, read [README](README.html) first. This file is written for a coding agent (Claude Code
 or similar) and is meant to be read in full before any ANS work.*
 
-You are helping a teacher write, convert, build or check questions for **ANS** (ans.app), a
+You are helping a teacher write, convert, clean up, build or check questions for **ANS** (ans.app), a
 digital assessment platform. Questions are written as text files in the R/exams format and built
 into a QTI 2.1 package with `tools/build-ans.R`, which ANS imports. Read this file completely
-before you read, convert or build any ANS question. Section 10 says what is verified and what is
+before you read, convert or build any ANS question. Section 11 says what is verified and what is
 not; when something is untested, say so to the teacher instead of assuming it works.
 
 The folder `examples/` holds 12 working questions (3 exercises). When in doubt about the format,
@@ -29,7 +29,7 @@ copy the example that looks most like what you need.
 3. **Never put a scorer rubric inside the `itemBody` of a fill-in question.** ANS imports it as
    question text, so students see the answer. (Verified.)
 4. **One answer field per question.** Several gaps in one question are possible in ANS's own
-   multi-gap form (section 6.3), but ANS imports those gaps as alphanumeric gaps that accept only
+   multi-gap form (section 7.3), but ANS imports those gaps as alphanumeric gaps that accept only
    the exact keys, so give each numeric answer its own question. Otherwise make the parts separate
    questions of one exercise (section 2.4).
 5. **List images and data files as `<file>` entries of the item that uses them** in the manifest.
@@ -40,8 +40,8 @@ copy the example that looks most like what you need.
    ANS's correction for guessing assumes it. The builder stops otherwise.
 7. **Compute every key from the data, in code.** Never copy a number from a published answer, a
    textbook or a previous version of the question without recomputing it. Published answers
-   contain errors.
-8. **Check every import by exporting again and comparing** (section 8). You cannot import
+   contain errors. Section 5 says how to clean up an old bank.
+8. **Check every import by exporting again and comparing** (section 9). You cannot import
    yourself; the teacher imports and gives you the re-export.
 
 ## 2. The question format
@@ -284,10 +284,45 @@ multiple-response question as correct. Use it for folders and files only.
   context, and flag them to the teacher.
 
 Converting HTML to markdown with pandoc works once code blocks and tables are built separately.
-After converting, recompute every key (rule 7): old items contain wrong keys, solutions written
-for an earlier version of the numbers, and page references to older editions of the book.
+After converting, clean up the bank as in section 5.
 
-## 5. Package structure
+## 5. Cleaning up an existing bank
+
+Most of the work on an old bank is checking, not writing. Banks that have been reused for years
+contain wrong keys, model answers and feedback written for an earlier version of the numbers,
+page references to older editions of the book, and links that no longer work. Check in the order
+below, collect what you find in one report, and change nothing in the content until the teacher
+has decided.
+
+1. **Convert without edits.** Convert the export as it is (section 4) and keep the teacher's
+   wording, repairing only the HTML. Every later change can then be compared with the original.
+2. **Keys.** Recompute every key from the data, in code (rule 7). Compare your result with the
+   key, with the accepted answers of each gap, with the numbers in the model answer and the
+   feedback, and with the decimals the stem asks for. Check the weights of multiple-response
+   options too (section 4).
+3. **Model answers and feedback.** Check that the model answer supports the keyed option, uses
+   the same numbers as the key, and names the mistake behind each wrong option (section 2.7).
+   Read the feedback as well, since teachers often keep the real explanation there.
+4. **Book references.** Ask the teacher which edition of the book the course uses now, preferably
+   as a text file you can search. For every reference (chapter, section, page, figure or box),
+   find the passage and check that it says what the answer claims. Report references to an older
+   edition, or to a version of the book for other software, with the corrected reference; section
+   numbers often shift between the two. If the PDF's page numbers differ from the printed ones,
+   work out the offset once and always report printed pages.
+5. **Links.** Open every link. Report links that fail or now land on a different page, and
+   suggest the current address of the same page. Do not replace a link with a copy of the
+   material.
+6. **Wording and notation.** Flag ambiguous stems, a missing alpha where the answer depends on it,
+   missing units or decimals, and notation that differs from the book or the lectures. Flag
+   these; do not rewrite them unasked.
+7. **Report, then fix.** Give the teacher one list, per question file, with what is wrong, the
+   proposed change and its evidence (your computation, the book page). Keep what you recomputed
+   apart from what is a judgement call. Go through the list with the teacher one question at a
+   time, apply only the changes the teacher approves, and keep the teacher's own sentences
+   wherever they are still right. End each corrected model answer with its updated source
+   (section 2.7).
+
+## 6. Package structure
 
 The builder writes this; it is here for debugging and for agents writing packages without it.
 
@@ -317,9 +352,9 @@ The manifest has one resource per question:
 Inside each item, set `identifier="QUE_<id>_<n>"` and `title="<exercise title>"`. Points come
 from `normalMaximum` and the `MAXSCORE` outcome; write exact values (2, not 1.999998).
 
-## 6. Question types in QTI
+## 7. Question types in QTI
 
-### 6.1 Single choice and multiple response
+### 7.1 Single choice and multiple response
 
 A `choiceInteraction` (`maxChoices="1"` for single choice, `0` for multiple response), with the
 model answer at the **end of `itemBody`**:
@@ -335,7 +370,7 @@ Verified by import. The model answer arrives, and for multiple response the per-
 in the package are kept. `shuffle="false"` keeps the order written; ANS can shuffle per student
 in its own settings.
 
-### 6.2 One numeric gap
+### 7.2 One numeric gap
 
 A `textEntryInteraction` with a float response and an absolute tolerance imports as an ANS
 numeric gap with that margin (verified, margins 0.002 and 0.01):
@@ -352,7 +387,7 @@ numeric gap with that margin (verified, margins 0.002 and 0.01):
 
 ANS also has a *Numerical value* question type, but a gap shows the teacher what students typed.
 
-### 6.3 Several gaps in one question, or several accepted answers
+### 7.3 Several gaps in one question, or several accepted answers
 
 Use ANS's own form, as in its exports (verified by import with 5 gaps in one question: every gap
 shows, but as an alphanumeric gap; see the caution in section 2.3). That
@@ -381,7 +416,7 @@ import, October 2026).
 `mappedValue` is the points per gap. R/exams' own multi-gap output imports with **only the first
 gap** showing; the builder rewrites it into this form.
 
-### 6.4 Explanation of a fill-in question
+### 7.4 Explanation of a fill-in question
 
 ANS ignores a scorer rubric after `</itemBody>` and leaks one inside it (rule 3). The explanation
 goes in as **question feedback**, the same text for a correct and an incorrect answer, after
@@ -399,7 +434,7 @@ The same two feedback blocks work on choice questions (`--feedback`, for practic
 API (`PATCH /api/v2/questions/{id}`, field `grading_description`, personal token) could set a
 fill-in's model answer directly; that route is untested.
 
-### 6.5 Open questions with grading criteria
+### 7.5 Open questions with grading criteria
 
 An `extendedTextInteraction` with `expectedLength="0"`, **no `responseProcessing`**, the model
 answer as a scorer rubric at the end of `itemBody`, and the criteria after `</itemBody>`
@@ -414,13 +449,13 @@ answer as a scorer rubric at the end of `itemBody`, and the criteria after `</it
 
 The criteria must add up to the question's points.
 
-### 6.6 Multi-part exercises
+### 7.6 Multi-part exercises
 
 Parts with the same exercise id and title, as `QUE_<id>_1.xml`, `QUE_<id>_2.xml`, ..., are
 regrouped by ANS into one exercise with the parts in order (verified, including ANS's own 5-part
 export re-imported). The shared scenario goes at the top of question 1.
 
-## 7. Media, maths, links
+## 8. Media, maths, links
 
 - **Images and data files** travel inside the package, referenced by relative `src` / `href` and
   listed as `<file>` entries of their item (rule 5). They become real ANS attachments that
@@ -430,7 +465,7 @@ export re-imported). The shared scenario goes at the top of question 1.
 - **External links** survive. Prefer stable sites (the publisher's or the software's own pages)
   over self-hosted copies that may move.
 
-## 8. Checking an import
+## 9. Checking an import
 
 After every import, the teacher exports the bank as QTI 2.X (and, if possible, as a Respondus
 package) and gives you the export. Run `tools/check-import.py` on it with the build's
@@ -448,7 +483,7 @@ package) and gives you the export. Run `tools/check-import.py` on it with the bu
 
 Report every failed check to the teacher, with what the export holds.
 
-## 9. What the builder changes in R/exams output
+## 10. What the builder changes in R/exams output
 
 R/exams (`exams2qti21()`) is a good base, but ANS needs its output reshaped. The builder
 (`tools/ans_package.py`) does all of this; it matters when you debug or write packages yourself.
@@ -457,7 +492,7 @@ R/exams (`exams2qti21()`) is a good base, but ANS needs its output reshaped. The
 |---|---|
 | the solution as `modalFeedback` (ANS drops it) | a scorer `rubricBlock` (choice, open) or correct/incorrect feedback (fill-in) |
 | a separate manifest resource per media file | `<file>` entries of the item |
-| `cloze` with several float gaps | one `num` gap per question; ANS's multi-gap form (6.3) only where exact keys are fine |
+| `cloze` with several float gaps | one `num` gap per question; ANS's multi-gap form (7.3) only where exact keys are fine |
 | item titles "1", "2", ... | the title from `exextra[anstitle]` |
 | `expectedLength="1000"` on open questions | `expectedLength="0"`, no response processing |
 | MathML | `$$...$$` |
@@ -465,7 +500,7 @@ R/exams (`exams2qti21()`) is a good base, but ANS needs its output reshaped. The
 Two R/exams behaviors to keep in mind when writing questions: `expoints` in a `cloze` is per gap
 (R/exams recycles it), and `exshuffle: TRUE` shuffles once at build time.
 
-## 10. What is verified, and how
+## 11. What is verified, and how
 
 | Behavior | Status |
 |---|---|

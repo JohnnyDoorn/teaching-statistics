@@ -5,6 +5,61 @@
 
 [Link](https://jvd-ssr-multiple-regression.share.connect.posit.cloud/)
 
+<!-- His request (2026-10-27): introduce the diagram convention before mediation, with lecture 21's
+     album sales model (the applet's variables, b1 and b2 as in lecture 21). Lines rather than
+     arrows, because a regression makes no causal claim; the mediation model (Path plot) gets the
+     arrows. DSUJ draws arrows in the same kind of diagram (Figure 10.5), so the lines are ours. -->
+
+## Multiple regression
+
+$\widehat{\text{album sales}} = b_0 + b_1 \text{airplay} + b_2 \text{adverts}$
+
+```{r med-regression-diagram, echo=FALSE, fig.width=8, fig.height=2.6}
+# A regression model as a diagram: predictors on the left, the outcome on the right, one line per
+# coefficient. Units are inches (par("pin")), so boxes and text keep one size in panels of any
+# height. Used again on "View beta coefficients" (children share one R session, in wrapper order).
+draw.regression <- function(predictors, outcome, labels, fill, main = NULL) {
+  par(mar = c(0, 0, 0, 0), cex = 1)                  # layout() with 3 rows would shrink text to 0.66
+  plot.new()
+  size <- par("pin")
+  plot.window(xlim = c(0, size[1]), ylim = c(0, size[2]), xaxs = "i", yaxs = "i")
+  box.w <- 1.2
+  box.h <- 0.3
+  top   <- size[2]
+  if (!is.null(main)) {
+    text(0.05, top - 0.05, main, adj = c(0, 1), font = 2, cex = 1.4)
+    top <- top - 0.45
+  }
+  mid <- top / 2
+  y.p <- if (length(predictors) == 1) mid else mid + c(0.6, -0.6)
+  pos <- c(setNames(lapply(y.p, function(y) c(box.w + 0.05, y)), predictors),
+           setNames(list(c(size[1] - box.w - 0.05, mid)), outcome))
+  # Point where the line from one box centre to another leaves the box
+  clip <- function(from, to) {
+    d <- to - from
+    from + min(box.w / abs(d[1]), box.h / abs(d[2])) * d
+  }
+  for (i in seq_along(predictors)) {
+    from <- clip(pos[[predictors[i]]], pos[[outcome]])
+    to   <- clip(pos[[outcome]], pos[[predictors[i]]])
+    segments(from[1], from[2], to[1], to[2], lwd = 2)
+    side <- if (i == 2) -1 else 1                     # label above the first line, below the second
+    text(mean(c(from[1], to[1])), mean(c(from[2], to[2])) + side * 0.3, labels[[i]], cex = 1.5)
+  }
+  for (v in names(pos)) {
+    rect(pos[[v]][1] - box.w, pos[[v]][2] - box.h, pos[[v]][1] + box.w, pos[[v]][2] + box.h,
+         col = fill[[v]], border = "grey20", lwd = 2)
+    text(pos[[v]][1], pos[[v]][2], v, cex = 1.5)
+  }
+}
+
+draw.regression(c("Airplay", "Adverts"), "Album sales", list(quote(b[1]), quote(b[2])),
+                c(Airplay = "lightskyblue", Adverts = "lightskyblue", "Album sales" = "lightskyblue"))
+```
+
+- Boxes are variables, lines are $b$s
+- No arrows, so no causal claim
+
 # Mediation {.section}
 
 ```{r med-mediation, echo=FALSE}
@@ -60,19 +115,26 @@ Back to lecture 6. Do anxious students simply revise less?
 
 
 
+<!-- Measures (checked 2026-10-27): the psych package's Tal_Or documentation (Revelle; data from
+     Hayes's files, used with the authors' permission) says the data are Study 2, pmi = mean of two
+     items, reaction = agreement with possible reactions to the story, mean of 4 items; the JASP Data
+     Library describes the front vs. internal page placement and MediaInfluence as how much others
+     would buy sugar after reading the article. The data agree (n = 123; MediaInfluence in half
+     steps, Intention in quarter steps, both 1 to 7). Exact item wording not checked (paywalled). -->
+
 ## Example {.smaller}
 
-Tal-Or et al. (2010): *Testing causal direction in the influence of presumed media influence*
+Tal-Or et al. (2010, Study 2, $n$ = 123): *Testing causal direction in the influence of presumed media influence*
 
 Does an article about a sugar shortage on the front page increase the intention to buy sugar, or is this effect mediated by presumed media influence?
 
-- `Condition`: front page (1) or inside page (0), randomized (predictor)
-- `MediaInfluence`: how much people think others will buy sugar, 1 to 7 (mediator)
-- `Intention`: intention to buy sugar, 1 to 7 (outcome)
+- `Condition`: article on the front page (1) or an inside page (0), randomized (predictor)
+- `MediaInfluence`: mean of 2 questionnaire items, 1 to 7 (mediator)
+  - How much they think others will buy sugar after reading the article
+- `Intention`: mean of 4 questionnaire items, 1 to 7 (outcome)
+  - Agreement with possible reactions to the article, such as buying sugar
 
 Only `Condition` was randomized, so path $a$ is causal but path $b$ may be confounded or reversed
-
-<span style="font-size:60%;">Data from the JASP Data Library, also used in Hayes (2022, Section 3.3)</span>
 
 ## Total effect 
 
@@ -109,9 +171,13 @@ Only `Condition` was randomized, so path $a$ is causal but path $b$ may be confo
 
 <!-- Data: Tal-Or et al. (2010), copied from the JASP Data Library ("Presumed Media Influence",
      jasp-stats/jasp-data-library, AGPL-3.0), the same data as Hayes (2022, Section 3.3). The one
-     local copy is datasets/2026/presumed-media-influence.csv (listed on the overview, whose Results
-     and HTML links point to the Data Library). Replaced the simulated homeopathy example on
-     2026-10-27 (his call). -->
+     local copy is datasets/2026/presumed-media-influence.csv (listed on the overview, csv only).
+     The slides do not link the Data Library's worked example for these data until it is updated
+     (2026-10-27). Replaced the simulated homeopathy example on 2026-10-27 (his call).
+     Rows sorted by Condition on 2026-10-28 (0 first, otherwise the original order; his ask, so
+     students need no extra steps): JASP then takes the inside page (0) as the reference category
+     whether its "Order labels by value by default" preference is on or off (off, the levels
+     follow the first row), so its estimates have the slides' signs. -->
 
 ```{r med-read-data, echo=FALSE}
 pmi <- read.csv(datasetsPath("2026/presumed-media-influence.csv"))
@@ -181,6 +247,10 @@ b.combined.predictor      <- model.combined$coefficients[2]            # b.c
 
 ::::
 
+<!-- Diagrams instead of the R output since 2026-10-27 (his ask); this slide replaces two "View
+     beta coefficients" slides (a and b, then all four with mediation.png). Lines, as for any
+     regression ("Multiple regression" slide); the Path plot adds the arrows. -->
+
 ## View beta coefficients {.subsection}
 ```{r med-unname-coefficients, echo = FALSE}
 b.mediator.predictor  <- unname(b.mediator.predictor)
@@ -189,29 +259,22 @@ b.outcome.predictor   <- unname(b.outcome.predictor)
 b.combined.predictor      <- unname(b.combined.predictor)
 ```
 
-```{r med-coefficients-a-and-b, echo=TRUE}
-b.mediator.predictor     # b.a
-b.combined.mediator      # b.b
+```{r med-view-beta-coefficients, echo=FALSE, fig.width=10, fig.height=5}
+# The three models with draw.regression() from the "Multiple regression" slide; the mediator is
+# the outcome of model 2 and a predictor in model 3
+med.fill <- c(Condition = "lightskyblue", MediaInfluence = "orange", Intention = "lightskyblue")
+layout(matrix(1:3), heights = c(1.25, 1.25, 2.5))
+draw.regression("Condition", "Intention",
+                list(bquote(b[t] == .(sprintf("%.3f", b.outcome.predictor)))),
+                med.fill, "1. Total effect")
+draw.regression("Condition", "MediaInfluence",
+                list(bquote(b[a] == .(sprintf("%.3f", b.mediator.predictor)))),
+                med.fill, "2. Mediator effect")
+draw.regression(c("Condition", "MediaInfluence"), "Intention",
+                list(bquote(b[c] == .(sprintf("%.3f", b.combined.predictor))),
+                     bquote(b[b] == .(sprintf("%.3f", b.combined.mediator)))),
+                med.fill, "3. Combined effect")
 ```
-
-## View beta coefficients  {.smaller .flexbox .vcenter}
-
-:::: {.columns}
-
-::: {.column width="60%"}
-```{r med-coefficients-total-and-direct, echo=TRUE}
-b.outcome.predictor      # b.t 
-b.mediator.predictor     # b.a 
-b.combined.mediator      # b.b
-b.combined.predictor     # b.c
-```
-:::
-
-::: {.column width="40%"}
-![](../../images/mediation.png){width="349px"}
-:::
-
-::::
 
 
 
@@ -257,35 +320,38 @@ text(5, 0.55, sprintf("c = %.3f", b.combined.predictor), cex = 1.3)
 
 ## Visual {.subsection}
 
-```{r med-visual, fig.align='center',echo=FALSE}
-par(mfrow = c(1, 3), cex.lab = 1.3, cex = 1.1)
-# Condition is 0/1, so spread its points sideways; the seed keeps the plot the same per render
+```{r med-visual, fig.align='center',echo=FALSE, fig.width=10.5, fig.height=4.6}
+# Narrow right margins, so the panels are less tall and slim (his note, 2026-10-28)
+par(mfrow = c(1, 3), cex.lab = 1.3, cex = 1.1, mar = c(4.5, 4.5, 4, 0.5))
+# Condition is 0/1, so its two panels are rainclouds as in JASP (points, boxplot, density; his ask,
+# 2026-10-28). The regression line of a 0/1 predictor joins the two group means, marked in green.
+# The seed keeps the jittered points the same per render.
 set.seed(2010)
-condition.jittered <- jitter(data$condition, amount = 0.1)
+raincloud <- function(y, main, ylab) {
+  plot(NA, xlim = c(-0.55, 1.55), ylim = c(1, 7), bty = "n", las = 1, xaxt = "n",
+       main = main, xlab = "Condition", ylab = ylab)
+  axis(1, at = c(0, 1), labels = c("Inside", "Front"))
+  fill <- adjustcolor("purple", alpha.f = 0.25)
+  for (g in 0:1) {
+    y.g  <- y[data$condition == g]
+    dens <- density(y.g, from = min(y.g), to = max(y.g))
+    w    <- 0.32 * dens$y / max(dens$y)
+    polygon(g + 0.1 + c(w, rep(0, length(w))), c(dens$x, rev(dens$x)),
+            col = fill, border = "purple", lwd = 1.5)
+    boxplot(y.g, at = g, add = TRUE, boxwex = 0.25, axes = FALSE, outline = FALSE,
+            col = fill, border = "purple", lwd = 1.5, whisklty = 1, staplewex = 0.6)
+    points(g - 0.17 - runif(length(y.g), 0, 0.16), y.g, pch = 21, bg = "purple", cex = 0.9)
+  }
+  means <- tapply(y, data$condition, mean)
+  lines(0:1, means, col = 'darkgreen', lwd = 3)
+  points(0:1, means, pch = 21, bg = 'darkgreen', cex = 1.4)
+}
 
 mycor <- cor(data$condition, data$intention)
-plot(condition.jittered, data$intention,
-     main = paste0("Condition/Intention\ncor = ", round(mycor, 2)),
-     bg = 'purple', pch = 21, bty = "n", las = 1, xaxt = "n", xlim = c(-0.3, 1.3),
-     xlab="Condition",
-     ylab="Intention")
-axis(1, at = c(0, 1), labels = c("Inside", "Front"))
-
-fit.1 <- lm(intention ~ condition, data)
-
-abline(fit.1, col = 'darkgreen', lwd = 3)
+raincloud(data$intention, paste0("Condition/Intention\ncor = ", round(mycor, 2)), "Intention")
 
 mycor <- cor(data$condition, data$media.influence)
-plot(condition.jittered, data$media.influence,
-     main = paste0("Condition/Influence\ncor = ", round(mycor, 2)),
-     bg = 'purple', pch = 21, bty = "n", las = 1, xaxt = "n", xlim = c(-0.3, 1.3),
-     xlab="Condition",
-     ylab="Media Influence")
-axis(1, at = c(0, 1), labels = c("Inside", "Front"))
-
-fit.1 <- lm(media.influence ~ condition, data)
-
-abline(fit.1, col = 'darkgreen', lwd = 3)
+raincloud(data$media.influence, paste0("Condition/Influence\ncor = ", round(mycor, 2)), "Media Influence")
 
 mycor <- cor(data$media.influence, data$intention)
 plot(data$media.influence, data$intention,
@@ -326,50 +392,65 @@ b.outcome.predictor         # total effect
 
 
 
-## Calculate indirect effect (partially standardized) {.subsection}
+<!-- One slide since 2026-10-27 (his ask: streamline, match DSUJ), was "Calculate indirect effect
+     (partially standardized)" and "Calculate P_M". Since 2026-10-28 only what DSUJ Section 10.4.3
+     (pp. 412-413) gives, without the example's values (his call: inference rests on the p-value
+     and CI): ab with its CI, the partially standardized ab (eq. 10.7) and the index of mediation
+     (eq. 10.8), with the JASP option from Section 10.4.4. P_M (not in DSUJ) went too; WA07 (2026)
+     item e defines the indirect/total ratio in its own stem. -->
 
-$\frac{ab}{s_{Outcome}} = \frac{b_a b_b}{s_{Outcome}}$
+## Effect sizes of mediation {.smaller}
 
-```{r med-calculate-indirect-effect-standardized, echo=TRUE}
-b.mediator.predictor*b.combined.mediator / sd(intention)
-```
-
-- Predictor is 0/1, so only the outcome is standardized (Section 10.4.3)
-
-
-
-## Calculate $P_M$ {.smaller}
-
-$\frac{ab}{total} = \frac{b_a b_b}{b_t} = \frac{b_a b_b}{b_a b_b + b_c}$
-
-```{r med-calculate, echo=TRUE}
-(b.mediator.predictor*b.combined.mediator) /
-  b.outcome.predictor
-```
-
-The proportion of the total effect that can be attributed to the mediator
-
-<style>
-blockquote {
-  font-size: 0.8em; /* Adjust size as needed */
-}
-</style>
-
-> Does not take into account size of total effect
-
-> "although it is tempting to think of $P_M$ as a proportion (because it is the ratio of the indirect effect to the total effect) it is not: it can exceed 1 and even take negative values (Preacher & Kelley, 2011)."
+- Simplest is $ab$ itself with its CI, in units of the outcome
+- Partially standardized, $\frac{ab}{s_{Outcome}}$
+- Standardized (index of mediation), $\frac{ab}{s_{Outcome}} \times s_{Predictor}$, to compare studies
+  - Options → *Standardized estimates*
 
 
 ## Is the indirect effect significant? {.smaller}
 
-- Test the indirect effect $a \times b$ itself (Section 10.4.2)
+- Test the indirect effect $a \times b$ itself
 - JASP gives its estimate, $p$-value and 95% CI
   - In the *Direct and indirect effects* table
 - Significant indirect effect if $p < \alpha$
 - The CI shows how precisely $a \times b$ is estimated
-- Assumptions in doubt? Bootstrap the indirect effect (lecture 21)
+- Assumptions problematic? Bootstrap the indirect effect
   - Options → Method → *Bootstrap*
   - Only the CI is bootstrapped, not the $p$-value
+
+::: {style="font-size: 60%;"}
+```{r med-indirect-effect-table, echo=FALSE}
+# JASP's Direct and indirect effects table for the example, with the Process module's default
+# Method (Standard: ML estimates, delta-method SEs and p, normal-theory CI). jaspProcess fits the
+# same lavaan::sem() model; estimate, SE, z and p match the JASP Data Library's output for these
+# data (its CIs differ because that analysis used Bootstrap).
+med.model <- "
+  media.influence ~ a * condition
+  intention       ~ c * condition + b * media.influence
+  direct   := c
+  indirect := a * b
+"
+med.fit     <- lavaan::sem(med.model, data = data, fixed.x = FALSE, auto.cov.y = FALSE)
+med.effects <- lavaan::parameterEstimates(med.fit)
+med.effects <- med.effects[med.effects$op == ":=", ]
+f3 <- function(x) formatC(x, format = "f", digits = 3)
+fp <- function(p) ifelse(p < .001, "< .001", sub("^0", "", f3(p)))
+effects.table <- data.frame(path  = c("Condition &rarr; Intention",
+                                      "Condition &rarr; MediaInfluence &rarr; Intention"),
+                            est   = f3(med.effects$est),
+                            se    = f3(med.effects$se),
+                            z     = f3(med.effects$z),
+                            p     = fp(med.effects$pvalue),
+                            lower = f3(med.effects$ci.lower),
+                            upper = f3(med.effects$ci.upper))
+effects.html <- knitr::kable(effects.table, format = "html", escape = FALSE, align = "lrrrrrr",
+                             col.names = c("", "Estimate", "Std. Error", "z-value", "p", "Lower", "Upper"))
+# JASP's "95% Confidence Interval" overtitle above Lower and Upper (plain kable, so no kableExtra libs)
+knitr::asis_output(sub("<thead>", paste0("<thead>\n<tr><th colspan=\"5\"></th>",
+                                         "<th colspan=\"2\" style=\"text-align: center;\">95% Confidence Interval</th></tr>"),
+                       effects.html, fixed = TRUE))
+```
+:::
 
 <!-- Mirrors L21's "Checking the assumptions" table (hierarchical_regression.qmd), same labels
      (jaspRegression QML, checked 2026-10-27). The Process module (jaspProcess ClassicProcess.qml)
@@ -377,7 +458,7 @@ blockquote {
 
 ## Checking the assumptions {.smaller}
 
-Where to check each assumption in JASP (mediator and combined models)^[The Process module has no residual plots or collinearity statistics, so fit both models in *Linear Regression* (lecture 21).]
+Where to check each assumption in JASP (mediator and combined models)^[The Process module has no residual plots or collinearity statistics, so fit both models in *Linear Regression*.]
 
 ::: {style="font-size: 75%;"}
 | Assumption | In JASP | Looks fine when |
@@ -392,6 +473,13 @@ Where to check each assumption in JASP (mediator and combined models)^[The Proce
 
 - [Rohrer et al (2022). That’s a Lot to Process! Pitfalls of Popular Path Models. Advances in Methods and Practices in Psychological Science. ](https://journals.sagepub.com/doi/full/10.1177/25152459221095827)
 
+<!-- Moved here from the old P_M slide; the rule applies to every blockquote in the deck. -->
+<style>
+blockquote {
+  font-size: 0.8em; /* Adjust size as needed */
+}
+</style>
+
 > When we test such hypotheses with the help of path models applied to observational data, we are in the business of causal inference on the basis of observational data
 
 <!-- His request (2026-10-27): models that observational data cannot tell apart. With three
@@ -401,7 +489,7 @@ Where to check each assumption in JASP (mediator and combined models)^[The Proce
 
 ## Equivalent models {.smaller}
 
-Which way do the arrows point? The data cannot tell.
+Which way do the arrows point? The data cannot tell!
 
 :::: {.columns}
 
@@ -447,22 +535,13 @@ draw.model(list(c("Y", "M"), c("M", "X"), c("Y", "X")), "4. Reversed")
 
 ::::
 
-<!-- Work-in-progress paper, no link until it is public. Title as in the Overleaf version
-     of 2026-07-01. -->
-
-## Tutorial paper (in preparation)
-
-van Doorn, Lüken, Vroegh, Montoya & Wagenmakers. *A tutorial on moderation and mediation analysis in JASP*
-
-- Walks through one real study, step by step in JASP
-- Predictor and mediator both manipulated (Ren & Schaumberg, 2024)
-- Uses $c'$ for the direct effect (the book uses $c$)
+<!-- Tutorial paper slide (van Doorn et al., in preparation) taken out 2026-10-27; bring it
+     back once the paper is public (git history has the 2026 version). -->
 
 ## More examples
 
 [JASP Data Library](https://jasp-stats.github.io/jasp-data-library/myChapters/chapter_20.html#presumed-media-influence)
 
-- [Today's example - Presumed Media Influence](https://htmlpreview.github.io/?https://github.com/jasp-stats/jasp-data-library/blob/main/Presumed%20Media%20Influence/Presumed_Media_Influence.html)
 - [Crazier example - Age and Fatigue](https://htmlpreview.github.io/?https://github.com/jasp-stats/jasp-data-library/blob/main/Age%20and%20Fatigue/Age_and_Fatigue.html)
 - For the exam, max 1 mediator (but see Section 10.4.7)
 

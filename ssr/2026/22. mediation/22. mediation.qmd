@@ -44,14 +44,13 @@ Chapter 10 (§10.2, §10.4–10.7)
 
 ## Exam note {.smaller}
 
-- For the exam, max 1 mediator (but see Section 10.4.7)
+- For the exam, max 1 mediator 
 - Read paths $a$, $b$ and $c$ from the *Path coefficients* table
 - Test mediation with the $p$-value of the indirect effect $a \times b$
-- Report its estimate, $p$-value and 95% CI (Section 10.4.6)
 
 ## Next Time
 
-- Moderation: interactions between continuous predictors (lecture 26)
+- Moderation: interactions between continuous predictors 
 
 ## Recommended Exercises
 

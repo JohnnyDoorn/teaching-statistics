@@ -101,6 +101,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul class="collapse">
   <li><a href="#applet" id="toc-applet" class="nav-link active" data-scroll-target="#applet">Applet</a></li>
+  <li><a href="#multiple-regression" id="toc-multiple-regression" class="nav-link" data-scroll-target="#multiple-regression">Multiple regression</a></li>
   <li><a href="#mediation" id="toc-mediation" class="nav-link" data-scroll-target="#mediation">Mediation</a>
   <ul class="collapse">
   <li><a href="#mediation-1" id="toc-mediation-1" class="nav-link" data-scroll-target="#mediation-1">Mediation</a></li>
@@ -112,17 +113,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#fit-3-models" id="toc-fit-3-models" class="nav-link" data-scroll-target="#fit-3-models">Fit 3 models</a></li>
   <li><a href="#extract-beta-coefficients" id="toc-extract-beta-coefficients" class="nav-link" data-scroll-target="#extract-beta-coefficients">Extract beta coefficients</a></li>
   <li><a href="#view-beta-coefficients" id="toc-view-beta-coefficients" class="nav-link" data-scroll-target="#view-beta-coefficients">View beta coefficients</a></li>
-  <li><a href="#view-beta-coefficients-1" id="toc-view-beta-coefficients-1" class="nav-link" data-scroll-target="#view-beta-coefficients-1">View beta coefficients</a></li>
   <li><a href="#path-plot" id="toc-path-plot" class="nav-link" data-scroll-target="#path-plot">Path plot</a></li>
   <li><a href="#visual" id="toc-visual" class="nav-link" data-scroll-target="#visual">Visual</a></li>
   <li><a href="#calculate-indirect-effect" id="toc-calculate-indirect-effect" class="nav-link" data-scroll-target="#calculate-indirect-effect">Calculate indirect effect</a></li>
-  <li><a href="#calculate-indirect-effect-partially-standardized" id="toc-calculate-indirect-effect-partially-standardized" class="nav-link" data-scroll-target="#calculate-indirect-effect-partially-standardized">Calculate indirect effect (partially standardized)</a></li>
-  <li><a href="#calculate-p_m" id="toc-calculate-p_m" class="nav-link" data-scroll-target="#calculate-p_m">Calculate <span class="math inline">\(P_M\)</span></a></li>
+  <li><a href="#effect-sizes-of-mediation" id="toc-effect-sizes-of-mediation" class="nav-link" data-scroll-target="#effect-sizes-of-mediation">Effect sizes of mediation</a></li>
   <li><a href="#is-the-indirect-effect-significant" id="toc-is-the-indirect-effect-significant" class="nav-link" data-scroll-target="#is-the-indirect-effect-significant">Is the indirect effect significant?</a></li>
   <li><a href="#checking-the-assumptions" id="toc-checking-the-assumptions" class="nav-link" data-scroll-target="#checking-the-assumptions">Checking the assumptions</a></li>
   <li><a href="#caution-with-process-models" id="toc-caution-with-process-models" class="nav-link" data-scroll-target="#caution-with-process-models">Caution with Process models</a></li>
   <li><a href="#equivalent-models" id="toc-equivalent-models" class="nav-link" data-scroll-target="#equivalent-models">Equivalent models</a></li>
-  <li><a href="#tutorial-paper-in-preparation" id="toc-tutorial-paper-in-preparation" class="nav-link" data-scroll-target="#tutorial-paper-in-preparation">Tutorial paper (in preparation)</a></li>
   <li><a href="#more-examples" id="toc-more-examples" class="nav-link" data-scroll-target="#more-examples">More examples</a></li>
   <li><a href="#jasp" id="toc-jasp" class="nav-link" data-scroll-target="#jasp">JASP</a></li>
   </ul></li>
@@ -193,6 +191,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="applet" class="level2">
 <h2 class="anchored" data-anchor-id="applet">Applet</h2>
 <p><a href="https://jvd-ssr-multiple-regression.share.connect.posit.cloud/">Link</a></p>
+<!-- His request (2026-10-27): introduce the diagram convention before mediation, with lecture 21's
+     album sales model (the applet's variables, b1 and b2 as in lecture 21). Lines rather than
+     arrows, because a regression makes no causal claim; the mediation model (Path plot) gets the
+     arrows. DSUJ draws arrows in the same kind of diagram (Figure 10.5), so the lines are ours. -->
+</section>
+<section id="multiple-regression" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-regression">Multiple regression</h2>
+<p><span class="math inline">\(\widehat{\text{album sales}} = b_0 + b_1 \text{airplay} + b_2 \text{adverts}\)</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="22.-mediation_files/figure-html/med-regression-diagram-1.png" class="img-fluid" width="768"></p>
+</div>
+</div>
+<ul>
+<li>Boxes are variables, lines are <span class="math inline">\(b\)</span>s</li>
+<li>No arrows, so no causal claim</li>
+</ul>
 </section>
 <section id="mediation" class="level1 section">
 <h1 class="section">Mediation</h1>
@@ -233,18 +248,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </div>
 </div>
+<!-- Measures (checked 2026-10-27): the psych package's Tal_Or documentation (Revelle; data from
+     Hayes's files, used with the authors' permission) says the data are Study 2, pmi = mean of two
+     items, reaction = agreement with possible reactions to the story, mean of 4 items; the JASP Data
+     Library describes the front vs. internal page placement and MediaInfluence as how much others
+     would buy sugar after reading the article. The data agree (n = 123; MediaInfluence in half
+     steps, Intention in quarter steps, both 1 to 7). Exact item wording not checked (paywalled). -->
 </section>
 <section id="example" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="example">Example</h2>
-<p>Tal-Or et al.&nbsp;(2010): <em>Testing causal direction in the influence of presumed media influence</em></p>
+<p>Tal-Or et al.&nbsp;(2010, Study 2, <span class="math inline">\(n\)</span> = 123): <em>Testing causal direction in the influence of presumed media influence</em></p>
 <p>Does an article about a sugar shortage on the front page increase the intention to buy sugar, or is this effect mediated by presumed media influence?</p>
 <ul>
-<li><code>Condition</code>: front page (1) or inside page (0), randomized (predictor)</li>
-<li><code>MediaInfluence</code>: how much people think others will buy sugar, 1 to 7 (mediator)</li>
-<li><code>Intention</code>: intention to buy sugar, 1 to 7 (outcome)</li>
+<li><code>Condition</code>: article on the front page (1) or an inside page (0), randomized (predictor)</li>
+<li><code>MediaInfluence</code>: mean of 2 questionnaire items, 1 to 7 (mediator)
+<ul>
+<li>How much they think others will buy sugar after reading the article</li>
+</ul></li>
+<li><code>Intention</code>: mean of 4 questionnaire items, 1 to 7 (outcome)
+<ul>
+<li>Agreement with possible reactions to the article, such as buying sugar</li>
+</ul></li>
 </ul>
-<p>Only <code>Condition</code> was randomized, so path <span class="math inline">\(a\)</span> is causal but path <span class="math inline">\(b\)</span> may be confounded</p>
-<p><span style="font-size:60%;">Data from the JASP Data Library, also used in Hayes (2022, Section 3.3)</span></p>
+<p>Only <code>Condition</code> was randomized, so path <span class="math inline">\(a\)</span> is causal but path <span class="math inline">\(b\)</span> may be confounded or reversed</p>
 </section>
 <section id="total-effect" class="level2">
 <h2 class="anchored" data-anchor-id="total-effect">Total effect</h2>
@@ -283,17 +309,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <!-- Data: Tal-Or et al. (2010), copied from the JASP Data Library ("Presumed Media Influence",
      jasp-stats/jasp-data-library, AGPL-3.0), the same data as Hayes (2022, Section 3.3). The one
-     local copy is datasets/2026/presumed-media-influence.csv (listed on the overview, whose Results
-     and HTML links point to the Data Library). Replaced the simulated homeopathy example on
-     2026-10-27 (his call). -->
+     local copy is datasets/2026/presumed-media-influence.csv (listed on the overview, csv only).
+     The slides do not link the Data Library's worked example for these data until it is updated
+     (2026-10-27). Replaced the simulated homeopathy example on 2026-10-27 (his call).
+     Rows sorted by Condition on 2026-10-28 (0 first, otherwise the original order; his ask, so
+     students need no extra steps): JASP then takes the inside page (0) as the reference category
+     whether its "Order labels by value by default" preference is on or off (off, the levels
+     follow the first row), so its estimates have the slides' signs. -->
 </section>
 <section id="the-data" class="level2 subsection smaller">
 <h2 class="subsection smaller anchored" data-anchor-id="the-data">The data</h2>
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-86272a7ff2917eada025" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-86272a7ff2917eada025">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[[1,0,1,0,0,0,0,1,0,0,1,0,1,0,1,1,0,0,1,0,1,1,1,1,1,0,1,0,1,0,0,1,0,0,1,0,1,0,1,0,0,0,1,0,1,1,0,0,0,1,0,1,0,0,1,1,1,0,1,0,0,1,1,0,0,0,1,1,0,0,1,0,1,0,1,0,0,0,1,0,0,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0],[7,6,5.5,6.5,6,5.5,3.5,6,4.5,7,1,6,5,7,7,7,4.5,3.5,7,7,4.5,6,6,4,7,4,6.5,6,6.5,6,4,7,6,7,6.5,5.5,6,2,4.5,4,7,6,7,5,7,7,5,6,5.5,7,3.5,7,6,3.5,7,5,1.5,6.5,6,7,7,6,6,4,3.5,6,6,6,5,3,7,6,5,5,5.5,5.5,6,2.5,4.5,5,6,5,7,5,4.5,6.5,7,6,5,7,5.5,6,6,7,4,6.5,5,7,7,5,7,7,5,6,5,6.5,7,6.5,6,5,5.5,5.5,5,7,1.5,6,5.5,6.5,4.5,3.5,6,6.5,5.5],[5.25,1.25,5,2.75,2.5,1.25,1.5,4.75,4.25,6.25,1.25,2.75,3.75,5,4,5,3.5,2.25,4.5,5.75,2.75,3.75,2.75,4,5,2,4,1.75,3.5,4.75,4,3,5.75,2.75,3.25,5.5,3.25,1.25,2,2.5,3,5.75,1.5,4,1.25,3.25,3.75,2.75,3,6,3.25,2.75,5,1.5,7,5,1.75,2.25,3.5,3.5,6.75,4.25,4,2.25,3,5.5,1.75,4.5,4.25,1.5,2,1.5,3.25,1,1.5,1,2.5,1,3,2.5,1,3.75,1.75,2.75,5.25,5.25,5,5,5,6.5,3,2.75,4.25,7,5.75,3,4.5,4.25,4.5,3.75,4.75,2.5,1,6,2,5,5,4.25,2,3.5,1.75,3.5,2.25,5.5,1,3,2.25,4.75,2.25,1.5,5.75,5.25,3]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>condition<\/th>\n      <th>media.influence<\/th>\n      <th>intention<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":300,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"className":"dt-right","targets":[0,1,2]},{"name":"condition","targets":0},{"name":"media.influence","targets":1},{"name":"intention","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-b6ffe34b2f356c298273" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-b6ffe34b2f356c298273">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[6,6.5,6,5.5,3.5,4.5,7,6,7,4.5,3.5,7,4,6,6,4,6,7,5.5,2,4,7,6,5,5,6,5.5,3.5,6,3.5,6.5,7,7,4,3.5,6,5,3,6,5,5.5,6,2.5,5,6,6,5.5,7,7,5,7,7,5,6,5,6.5,1.5,6,5.5,6.5,4.5,3.5,6,6.5,5.5,7,5.5,6,1,5,7,7,7,4.5,6,6,4,7,6.5,6.5,7,6.5,6,4.5,7,7,7,7,7,7,5,1.5,6,6,6,6,6,7,5,5.5,4.5,5,7,5,4.5,6.5,7,5,7,6,6,7,4,6.5,5,7,6.5,6,5,5.5,5.5,5,7],[1.25,2.75,2.5,1.25,1.5,4.25,6.25,2.75,5,3.5,2.25,5.75,2,1.75,4.75,4,5.75,2.75,5.5,1.25,2.5,3,5.75,4,3.75,2.75,3,3.25,5,1.5,2.25,3.5,6.75,2.25,3,5.5,4.25,1.5,1.5,1,1,2.5,1,2.5,1,5,3,4.25,4.5,3.75,4.75,2.5,1,6,2,5,1,3,2.25,4.75,2.25,1.5,5.75,5.25,3,5.25,5,4.75,1.25,3.75,4,5,4.5,2.75,3.75,2.75,4,5,4,3.5,3,3.25,3.25,2,1.5,1.25,3.25,6,2.75,7,5,1.75,3.5,4.25,4,1.75,4.5,2,3.25,1.5,3,3.75,1.75,2.75,5.25,5.25,5,5,6.5,2.75,4.25,7,5.75,3,4.5,5,4.25,2,3.5,1.75,3.5,2.25,5.5]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>condition<\/th>\n      <th>media.influence<\/th>\n      <th>intention<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":300,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"className":"dt-right","targets":[0,1,2]},{"name":"condition","targets":0},{"name":"media.influence","targets":1},{"name":"intention","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -353,44 +383,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="../../images/mediation.png" class="img-fluid" width="349"></p>
 </div>
 </div>
+<!-- Diagrams instead of the R output since 2026-10-27 (his ask); this slide replaces two "View
+     beta coefficients" slides (a and b, then all four with mediation.png). Lines, as for any
+     regression ("Multiple regression" slide); the Path plot adds the arrows. -->
 </section>
 <section id="view-beta-coefficients" class="level2 subsection">
 <h2 class="subsection anchored" data-anchor-id="view-beta-coefficients">View beta coefficients</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>b.mediator.predictor     <span class="co"># b.a</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4765252</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>b.combined.mediator      <span class="co"># b.b</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5064485</code></pre>
-</div>
-</div>
-</section>
-<section id="view-beta-coefficients-1" class="level2 smaller flexbox vcenter">
-<h2 class="smaller flexbox vcenter anchored" data-anchor-id="view-beta-coefficients-1">View beta coefficients</h2>
-<div class="columns">
-<div class="column" style="width:60%;">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>b.outcome.predictor      <span class="co"># b.t </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4956897</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>b.mediator.predictor     <span class="co"># b.a </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4765252</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>b.combined.mediator      <span class="co"># b.b</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5064485</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>b.combined.predictor     <span class="co"># b.c</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2543542</code></pre>
-</div>
-</div>
-</div><div class="column" style="width:40%;">
-<p><img src="../../images/mediation.png" class="img-fluid" width="349"></p>
+<div class="cell-output-display">
+<p><img src="22.-mediation_files/figure-html/med-view-beta-coefficients-1.png" class="img-fluid" width="960"></p>
 </div>
 </div>
 <!-- 1. $\widehat{\text{Outcome}} = b_0 + b_c \text{Predictor}_i$ -->
@@ -411,7 +412,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="22.-mediation_files/figure-html/med-visual-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="22.-mediation_files/figure-html/med-visual-1.png" class="img-fluid figure-img" width="1008"></p>
 </figure>
 </div>
 </div>
@@ -423,15 +424,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="columns">
 <div class="column" style="width:73%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>indirect <span class="ot">&lt;-</span> b.mediator.predictor <span class="sc">*</span> b.combined.mediator; indirect  <span class="co"># a * b</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>indirect <span class="ot">&lt;-</span> b.mediator.predictor <span class="sc">*</span> b.combined.mediator; indirect  <span class="co"># a * b</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.2413355</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>indirect <span class="sc">+</span> b.combined.predictor <span class="co"># a * b + c </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>indirect <span class="sc">+</span> b.combined.predictor <span class="co"># a * b + c </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.4956897</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>b.outcome.predictor         <span class="co"># total effect</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>b.outcome.predictor         <span class="co"># total effect</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.4956897</code></pre>
 </div>
@@ -440,59 +441,83 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="../../images/mediation.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
+<!-- One slide since 2026-10-27 (his ask: streamline, match DSUJ), was "Calculate indirect effect
+     (partially standardized)" and "Calculate P_M". Since 2026-10-28 only what DSUJ Section 10.4.3
+     (pp. 412-413) gives, without the example's values (his call: inference rests on the p-value
+     and CI): ab with its CI, the partially standardized ab (eq. 10.7) and the index of mediation
+     (eq. 10.8), with the JASP option from Section 10.4.4. P_M (not in DSUJ) went too; WA07 (2026)
+     item e defines the indirect/total ratio in its own stem. -->
 </section>
-<section id="calculate-indirect-effect-partially-standardized" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="calculate-indirect-effect-partially-standardized">Calculate indirect effect (partially standardized)</h2>
-<p><span class="math inline">\(\frac{ab}{s_{Outcome}} = \frac{b_a b_b}{s_{Outcome}}\)</span></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>b.mediator.predictor<span class="sc">*</span>b.combined.mediator <span class="sc">/</span> <span class="fu">sd</span>(intention)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1556704</code></pre>
-</div>
-</div>
+<section id="effect-sizes-of-mediation" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="effect-sizes-of-mediation">Effect sizes of mediation</h2>
 <ul>
-<li>Predictor is 0/1, so only the outcome is standardized (Section 10.4.3)</li>
+<li>Simplest is <span class="math inline">\(ab\)</span> itself with its CI, in units of the outcome</li>
+<li>Partially standardized, <span class="math inline">\(\frac{ab}{s_{Outcome}}\)</span></li>
+<li>Standardized (index of mediation), <span class="math inline">\(\frac{ab}{s_{Outcome}} \times s_{Predictor}\)</span>, to compare studies
+<ul>
+<li>Options → <em>Standardized estimates</em></li>
+</ul></li>
 </ul>
-</section>
-<section id="calculate-p_m" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="calculate-p_m">Calculate <span class="math inline">\(P_M\)</span></h2>
-<p><span class="math inline">\(\frac{ab}{total} = \frac{b_a b_b}{b_t} = \frac{b_a b_b}{b_a b_b + b_c}\)</span></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>(b.mediator.predictor<span class="sc">*</span>b.combined.mediator) <span class="sc">/</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  b.outcome.predictor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4868681</code></pre>
-</div>
-</div>
-<p>The proportion of the total effect that can be attributed to the mediator</p>
-<style>
-blockquote {
-  font-size: 0.8em; /* Adjust size as needed */
-}
-</style>
-<blockquote class="blockquote">
-<p>Does not take into account size of total effect</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>“although it is tempting to think of <span class="math inline">\(P_M\)</span> as a proportion (because it is the ratio of the indirect effect to the total effect) it is not: it can exceed 1 and even take negative values (Preacher &amp; Kelley, 2011).”</p>
-</blockquote>
 </section>
 <section id="is-the-indirect-effect-significant" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="is-the-indirect-effect-significant">Is the indirect effect significant?</h2>
 <ul>
-<li>Test the indirect effect <span class="math inline">\(a \times b\)</span> itself (Section 10.4.2)</li>
+<li>Test the indirect effect <span class="math inline">\(a \times b\)</span> itself</li>
 <li>JASP gives its estimate, <span class="math inline">\(p\)</span>-value and 95% CI
 <ul>
 <li>In the <em>Direct and indirect effects</em> table</li>
 </ul></li>
 <li>Significant indirect effect if <span class="math inline">\(p &lt; \alpha\)</span></li>
 <li>The CI shows how precisely <span class="math inline">\(a \times b\)</span> is estimated</li>
-<li>Assumptions in doubt? Bootstrap the indirect effect (lecture 21)
+<li>Assumptions problematic? Bootstrap the indirect effect
 <ul>
 <li>Options → Method → <em>Bootstrap</em></li>
 <li>Only the CI is bootstrapped, not the <span class="math inline">\(p\)</span>-value</li>
 </ul></li>
 </ul>
+<div style="font-size: 60%;">
+<div class="cell">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th colspan="5" style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th colspan="2" style="text-align: center;" data-quarto-table-cell-role="th">95% Confidence Interval</th>
+</tr>
+<tr class="odd">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Estimate</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Std. Error</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">z-value</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">p</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Lower</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Upper</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Condition → Intention</td>
+<td style="text-align: right;">0.254</td>
+<td style="text-align: right;">0.253</td>
+<td style="text-align: right;">1.007</td>
+<td style="text-align: right;">.314</td>
+<td style="text-align: right;">-0.241</td>
+<td style="text-align: right;">0.750</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Condition → MediaInfluence → Intention</td>
+<td style="text-align: right;">0.241</td>
+<td style="text-align: right;">0.127</td>
+<td style="text-align: right;">1.902</td>
+<td style="text-align: right;">.057</td>
+<td style="text-align: right;">-0.007</td>
+<td style="text-align: right;">0.490</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 
 <!-- Mirrors L21's "Checking the assumptions" table (hierarchical_regression.qmd), same labels
      (jaspRegression QML, checked 2026-10-27). The Process module (jaspProcess ClassicProcess.qml)
@@ -545,6 +570,12 @@ blockquote {
 <ul>
 <li><a href="https://journals.sagepub.com/doi/full/10.1177/25152459221095827">Rohrer et al (2022). That’s a Lot to Process! Pitfalls of Popular Path Models. Advances in Methods and Practices in Psychological Science.</a></li>
 </ul>
+<!-- Moved here from the old P_M slide; the rule applies to every blockquote in the deck. -->
+<style>
+blockquote {
+  font-size: 0.8em; /* Adjust size as needed */
+}
+</style>
 <blockquote class="blockquote">
 <p>When we test such hypotheses with the help of path models applied to observational data, we are in the business of causal inference on the basis of observational data</p>
 </blockquote>
@@ -555,7 +586,7 @@ blockquote {
 </section>
 <section id="equivalent-models" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="equivalent-models">Equivalent models</h2>
-<p>Which way do the arrows point? The data cannot tell.</p>
+<p>Which way do the arrows point? The data cannot tell!</p>
 <div class="columns">
 <div class="column" style="width:55%;">
 <div class="cell">
@@ -572,23 +603,13 @@ blockquote {
 </ul>
 </div>
 </div>
-<!-- Work-in-progress paper, no link until it is public. Title as in the Overleaf version
-     of 2026-07-01. -->
-</section>
-<section id="tutorial-paper-in-preparation" class="level2">
-<h2 class="anchored" data-anchor-id="tutorial-paper-in-preparation">Tutorial paper (in preparation)</h2>
-<p>van Doorn, Lüken, Vroegh, Montoya &amp; Wagenmakers. <em>A tutorial on moderation and mediation analysis in JASP</em></p>
-<ul>
-<li>Walks through one real study, step by step in JASP</li>
-<li>Predictor and mediator both manipulated (Ren &amp; Schaumberg, 2024)</li>
-<li>Uses <span class="math inline">\(c'\)</span> for the direct effect (the book uses <span class="math inline">\(c\)</span>)</li>
-</ul>
+<!-- Tutorial paper slide (van Doorn et al., in preparation) taken out 2026-10-27; bring it
+     back once the paper is public (git history has the 2026 version). -->
 </section>
 <section id="more-examples" class="level2">
 <h2 class="anchored" data-anchor-id="more-examples">More examples</h2>
 <p><a href="https://jasp-stats.github.io/jasp-data-library/myChapters/chapter_20.html#presumed-media-influence">JASP Data Library</a></p>
 <ul>
-<li><a href="https://htmlpreview.github.io/?https://github.com/jasp-stats/jasp-data-library/blob/main/Presumed%20Media%20Influence/Presumed_Media_Influence.html">Today’s example - Presumed Media Influence</a></li>
 <li><a href="https://htmlpreview.github.io/?https://github.com/jasp-stats/jasp-data-library/blob/main/Age%20and%20Fatigue/Age_and_Fatigue.html">Crazier example - Age and Fatigue</a></li>
 <li>For the exam, max 1 mediator (but see Section 10.4.7)</li>
 </ul>
@@ -611,16 +632,15 @@ blockquote {
 <section id="exam-note" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="exam-note">Exam note</h2>
 <ul>
-<li>For the exam, max 1 mediator (but see Section 10.4.7)</li>
+<li>For the exam, max 1 mediator</li>
 <li>Read paths <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span> and <span class="math inline">\(c\)</span> from the <em>Path coefficients</em> table</li>
 <li>Test mediation with the <span class="math inline">\(p\)</span>-value of the indirect effect <span class="math inline">\(a \times b\)</span></li>
-<li>Report its estimate, <span class="math inline">\(p\)</span>-value and 95% CI (Section 10.4.6)</li>
 </ul>
 </section>
 <section id="next-time" class="level2">
 <h2 class="anchored" data-anchor-id="next-time">Next Time</h2>
 <ul>
-<li>Moderation: interactions between continuous predictors (lecture 26)</li>
+<li>Moderation: interactions between continuous predictors</li>
 </ul>
 </section>
 <section id="recommended-exercises" class="level2">
@@ -670,7 +690,7 @@ blockquote {
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>The Process module has no residual plots or collinearity statistics, so fit both models in <em>Linear Regression</em> (lecture 21).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>The Process module has no residual plots or collinearity statistics, so fit both models in <em>Linear Regression</em>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>
 <!-- /main column -->
