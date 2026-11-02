@@ -159,7 +159,7 @@ rglwidget()
 fit <- lm(wakefulness ~ hours.awake + ml.coffee + hours.awake*ml.coffee); summary(fit)$coefficients
 ```
 
-## Regression equation {.smaller}
+## Regression equation {.smaller .scrollable}
 
 $\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
 \color{black}\widehat{Out_i} = b_0 + b_1 Pred_i + b_2 Mod_i + \color{red}b_3 Pred_i \times Mod_i \color{black}$

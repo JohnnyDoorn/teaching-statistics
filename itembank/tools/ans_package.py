@@ -56,6 +56,7 @@ import json
 import re
 import sys
 import zipfile
+from decimal import Decimal
 import xml.etree.ElementTree as ET
 
 QTI = "http://www.imsglobal.org/xsd/imsqti_v2p1"
@@ -166,8 +167,11 @@ def key_variants(k):
 
 def ans_multigap(root, inter, points, where, alt=None):
     """Rewrite exams' cloze fill-ins into ANS's own (multi-)gap form (see the docstring).
-    alt: extra accepted answers, gaps separated by "|", answers within a gap by spaces."""
-    alts = [a.split() for a in str(alt).split("|")] if alt else []
+    alt: extra accepted answers, gaps separated by "|", answers within a gap by spaces;
+    "_" inside an answer stands for a space ("Is_not")."""
+    if isinstance(alt, list):          # R/exams splits exextra[alt] on "|" into a vector
+        alt = "|".join(alt)
+    alts = [[w.replace("_", " ") for w in a.split()] for a in str(alt).split("|")] if alt else []
     rp = root.find(Q + "responseProcessing")
     tol = {}
     for eq in (rp.iter(Q + "equal") if rp is not None else []):
@@ -181,6 +185,8 @@ def ans_multigap(root, inter, points, where, alt=None):
         val = decl.findtext(f"{Q}correctResponse/{Q}value")
         if val is None:
             die(f"{where}: gap {rid} has no correct value")
+        if re.fullmatch(r"-?\d*\.?\d+[eE][-+]?\d+", val):   # R writes 0.00006 as 6e-05
+            val = format(Decimal(val), "f")
         t = tol.get(rid, 0.0)
         gi = order.index(rid) if rid in order else 0
         keys = []

@@ -171,7 +171,9 @@ Only `Condition` was randomized, so path $a$ is causal but path $b$ may be confo
 
 <!-- Data: Tal-Or et al. (2010), copied from the JASP Data Library ("Presumed Media Influence",
      jasp-stats/jasp-data-library, AGPL-3.0), the same data as Hayes (2022, Section 3.3). The one
-     local copy is datasets/2026/presumed-media-influence.csv (listed on the overview, csv only).
+     local copy is datasets/2026/presumed-media-influence.csv (listed on the overview; since
+     2026-10-28 with a .jasp of the Process analysis as demonstrated, Hayes model 4 and the
+     statistical path plot, with notes from the lecture, and its HTML export).
      The slides do not link the Data Library's worked example for these data until it is updated
      (2026-10-27). Replaced the simulated homeopathy example on 2026-10-27 (his call).
      Rows sorted by Condition on 2026-10-28 (0 first, otherwise the original order; his ask, so

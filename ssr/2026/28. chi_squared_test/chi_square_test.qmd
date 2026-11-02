@@ -78,7 +78,7 @@ legend("topright", legend = paste("k =",df), col = mycols, lty = 1, bty = "n")
 <a href=""><img src="../../images/qr_hngxh.png" alt="edu.nl/hngxh" /></a>
 
 
-## Data {.smaller}
+## Data {.smaller .scrollable}
 
 <small>
 
@@ -155,7 +155,7 @@ addmargins(observed)
 ```
 
 
-## Calculating the model
+## Calculating the model {.smaller}
 
 $\text{model}_{ij} = E_{ij} = \frac{\text{row total}_i \times \text{column total}_j}{n }$
 
@@ -178,7 +178,7 @@ $\text{model}_{ij} =
 
 
 
-## Error = Observed - Model {.subsection}
+## Error = Observed - Model {.subsection .smaller}
 
 ```{r chisq-error-observed-model, echo=TRUE}
 observed
@@ -269,7 +269,7 @@ c & d \\
 
 $OR = \frac{a \times d}{b \times c} = \frac{`r odds[1,1]` \times `r odds[2,2]`}{`r odds[1,2]` \times `r odds[2,1]`} = `r (odds[1,1] * odds[2,2]) / (odds[1,2] * odds[2,1])`$
 
-## Odds
+## Odds {.smaller}
 
 ```{r chisq-odds-extrovert-introvert, echo =FALSE}
 odds
@@ -283,7 +283,7 @@ The extrovert/introvert ratio for digital and live audiences:
 In the digital responses, there are +- `r round(odds[1,1] / odds[1,2], 2)` times as many extroverts than introverts.
 In the live responses, there  are +- `r round(odds[2,1] / odds[2,2], 2)` times as many extroverts than introverts.
 
-## Odds
+## Odds {.smaller}
 
 ```{r chisq-odds-digital-live, echo =FALSE}
 odds

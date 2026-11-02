@@ -1,0 +1,56 @@
+```{r}
+#| include: false
+# Exercise 1, part d: another open question with grading criteria. The italic line in the
+# solution is a note for the grader; it stays in the model answer.
+```
+
+```{r data, echo = FALSE, results = "hide"}
+f <- "ssr-furniture.csv"
+d <- read.csv(if (file.exists(f)) f else file.path(exams:::.exams_get_internal("xexams_dir_exercises"), f))
+suppressMessages(library(car))
+options(contrasts = c("contr.sum", "contr.poly"))
+d$instruction <- factor(d$instruction); d$age <- factor(d$age)
+fp <- function(p) if (p < .001) "< .001" else paste("=", sub("^0", "", sprintf("%.3f", p)))
+full  <- Anova(lm(minutes ~ instruction * age, d), type = 3)
+msRes <- full["Residuals", "Sum Sq"] / full["Residuals", "Df"]; dfRes <- full["Residuals", "Df"]
+cellM <- tapply(d$minutes, list(d$instruction, d$age), mean)
+# JASP's simple main effects: SS within each age group, tested against the full model's residual
+simple <- do.call(rbind, lapply(levels(d$age), function(a) {
+  ms <- anova(lm(minutes ~ instruction, d[d$age == a, ]))["instruction", "Mean Sq"]
+  data.frame(age = a, F = ms / msRes, p = pf(ms / msRes, 1, dfRes, lower.tail = FALSE))
+}))
+sOf <- function(a, col) simple[simple$age == a, col]
+Fint <- full["instruction:age", "F value"]; pInt <- full["instruction:age", "Pr(>F)"]
+stopifnot(pInt < .001, full["instruction", "Pr(>F)"] < .001, sOf("18-35", "p") > .3,
+          sOf("36-60", "p") < .001, sOf("61-80", "p") < .001)
+```
+
+Question
+========
+A colleague sees that the main effect of the type of instruction is significant, and concludes that video instructions make everyone assemble the bookcase faster. Do you agree? Why (not)? *(1 point)*
+
+Solution
+========
+No. The main effect is an average over the three age groups, and the significant interaction qualifies it. The effect of the instructions depends on age. Video instructions are faster for 36-60 and 61-80 year olds, but for 18-35 year olds there is no evidence of a difference (`r sprintf("%.2f", cellM["video", "18-35"])` versus `r sprintf("%.2f", cellM["written", "18-35"])` minutes, simple effect *p* `r fp(sOf("18-35", "p"))`). So the conclusion holds for the older age groups, not for everyone.
+
+*Does not depend on the previous answers; the descriptives, the plot or the simple main effects all support the second criterion.*
+
+Lecture 17, slide 26 (Interaction) and slide 37 (Recap).
+
+**Criteria**
+
+- 0.5 pt: no, the main effect averages over the age groups and is qualified by the (significant) interaction, shown by its *F*-test or, used correctly, by the descriptives plot, simple main effects or conditional post hoc tests.
+- 0.5 pt: for 18-35 year olds there is no evidence that video instructions are faster (simple effect *p* `r fp(sOf("18-35", "p"))`, or means of `r sprintf("%.0f", cellM["video", "18-35"])` and `r sprintf("%.0f", cellM["written", "18-35"])` minutes); the advantage is found in the older age groups.
+
+Meta-information
+================
+exname: ssr-furniture-d-colleague
+extype: string
+exstringtype: essay
+exsolution: nil
+expoints: 1
+exextra[essay,logical]: TRUE
+exextra[essay_format,character]: editor
+exextra[essay_fieldlines,numeric]: 6
+exextra[exercise]: ssr-furniture
+exextra[anstitle]: SSR - furniture assembly (factorial ANOVA in JASP)

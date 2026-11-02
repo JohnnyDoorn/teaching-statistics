@@ -15,7 +15,7 @@ css: ../../ajohnson.css
 In this lecture we aim to:
 
 - Look at interactions between continuous predictors
-- Revisit the PROCESS module
+- Revisit the Process module
 - Demonstrate in JASP
     
 <strong>Reading:</strong>
@@ -39,7 +39,7 @@ Chapter 10 (§10.1–10.3)
 - Interactions still matter with continuous predictors
 - Continuous interactions can be assessed with:
   - Linear regression
-  - PROCESS module
+  - Process module
 
 ## Next Time
 

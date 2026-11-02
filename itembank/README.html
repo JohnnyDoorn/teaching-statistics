@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Johnny van Doorn">
-<meta name="dcterms.date" content="2026-10-22">
+<meta name="dcterms.date" content="2026-10-29">
 
 <title>Writing ANS questions as text files</title>
 <style>
@@ -90,7 +90,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#what-i-use-it-for" id="toc-what-i-use-it-for" class="nav-link" data-scroll-target="#what-i-use-it-for">What I use it for</a></li>
   </ul></li>
   <li><a href="#what-is-in-this-folder" id="toc-what-is-in-this-folder" class="nav-link" data-scroll-target="#what-is-in-this-folder">What is in this folder</a></li>
-  <li><a href="#the-examples" id="toc-the-examples" class="nav-link" data-scroll-target="#the-examples">The examples</a></li>
+  <li><a href="#the-example" id="toc-the-example" class="nav-link" data-scroll-target="#the-example">The example</a></li>
   <li><a href="#try-it-in-ans" id="toc-try-it-in-ans" class="nav-link" data-scroll-target="#try-it-in-ans">Try it in ANS</a></li>
   <li><a href="#anatomy-of-a-question-file" id="toc-anatomy-of-a-question-file" class="nav-link" data-scroll-target="#anatomy-of-a-question-file">Anatomy of a question file</a></li>
   <li><a href="#what-the-builder-checks-for-you" id="toc-what-the-builder-checks-for-you" class="nav-link" data-scroll-target="#what-the-builder-checks-for-you">What the builder checks for you</a></li>
@@ -123,7 +123,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 22, 2026</p>
+      <p class="date">October 29, 2026</p>
     </div>
   </div>
   
@@ -134,7 +134,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 <p>This folder shows how to write questions for <strong>ANS</strong>. Each question is a small text file. A builder turns a folder of these files into one package, and ANS imports that package with the parts that normally take hand work already in place, such as <strong>model answers</strong>, <strong>grading criteria</strong> for open questions, numeric fill-in gaps with a margin, multi-part exercises, data files and maths.</p>
-<p>Why files instead of the ANS editor? Questions in files can be searched, reused, compared across years and checked. Every key in the examples below was recomputed from the data, and a coding agent can read and write the files too. Everything here was settled by test imports into ANS in September and October 2026. Where something is only partly tested, the agent instructions say so.</p>
+<p>Why files instead of the ANS editor? Questions in files can be searched, reused, compared across years and checked. Every key in the example below is computed from the data, and a coding agent can read and write the files too. Everything here was settled by test imports into ANS in September and October 2026. Where something is only partly tested, the agent instructions say so.</p>
 <section id="start-here" class="level2">
 <h2 class="anchored" data-anchor-id="start-here">Start here</h2>
 <p>New to all of this? This section takes you from nothing to your first package. If you only want to see the end result, skip to <a href="#try-it-in-ans">Try it in ANS</a>, which needs no setup at all.</p>
@@ -208,14 +208,14 @@ Tip
 <li><p>By default the agent decides for itself which steps are safe. Until you know how it behaves, click the mode indicator below the prompt box and choose <em>Manual</em>. It then shows every change and asks before most commands.</p></li>
 <li><p>Paste this as your first request.</p>
 <blockquote class="blockquote">
-<p>Download only the itembank folder from https://github.com/JohnnyDoorn/teaching-statistics into this folder (the full repository is large, so do not clone all of it). Check that R with the packages exams and jsonlite, pandoc and Python 3 are installed, and install what is missing. Then build itembank/examples with itembank/tools/build-ans.R and tell me what you did.</p>
+<p>Download only the itembank folder from https://github.com/JohnnyDoorn/teaching-statistics into this folder (the full repository is large, so do not clone all of it). Check that R with the packages exams, jsonlite and car, pandoc and Python 3 are installed, and install what is missing. Then build itembank/examples with itembank/tools/build-ans.R and tell me what you did.</p>
 </blockquote></li>
 <li><p>Give the agent its standing instructions. Your agent reads one file in your folder at the start of each conversation, <code>CLAUDE.md</code> for Claude Code and <code>AGENTS.md</code> for Codex, GitHub Copilot and many others, so you only have to say this once.</p>
 <blockquote class="blockquote">
 <p>Create the instruction file you read at the start of every conversation (CLAUDE.md or AGENTS.md) in this folder. It should say to read itembank/ans-agent-instructions.qmd before reading, writing or building any ANS question, and that I review every question before it goes into ANS.</p>
 </blockquote></li>
 </ol>
-<p>When it is done, open <code>itembank/examples/EXAMPLES.html</code> in your browser. If you see the twelve example questions with their answers, everything works.</p>
+<p>When it is done, open <code>itembank/examples/EXAMPLES.html</code> in your browser. If you see the four example questions with their answers, everything works.</p>
 </section>
 <section id="what-i-use-it-for" class="level3">
 <h3 class="anchored" data-anchor-id="what-i-use-it-for">What I use it for</h3>
@@ -229,7 +229,7 @@ Tip
 <li>“Build this folder with a TEST prefix.” Read the preview page it makes, which shows every question with its answer.</li>
 <li>Import the zip into a scratch bank, export it again, and ask “Compare this export with the expected file.” Then replace the old questions in your real bank.</li>
 </ol>
-<p>A few habits help. Ask for one thing at a time and read each change before you accept it. The agent forgets everything between conversations except what is in that instruction file, so when you settle a convention (say, final answers in two decimals), ask it to add that to the file. And keep exam questions out of public places; this page lives in a public repository, which is why it holds only practice questions whose answers are already online.</p>
+<p>A few habits help. Ask for one thing at a time and read each change before you accept it. The agent forgets everything between conversations except what is in that instruction file, so when you settle a convention (say, final answers in two decimals), ask it to add that to the file. And keep exam questions out of public places; this page lives in a public repository, which is why its example is an exercise I cut from an exam before any student saw it.</p>
 </section>
 </section>
 <section id="what-is-in-this-folder" class="level2">
@@ -256,7 +256,7 @@ Tip
 <tr class="odd">
 <td><code>examples/</code></td>
 <td>both</td>
-<td>12 example questions in 3 exercises, the built package and a preview</td>
+<td>an example exercise of 4 questions with its data file, the built package and a preview</td>
 </tr>
 <tr class="even">
 <td><code>tools/</code></td>
@@ -266,42 +266,42 @@ Tip
 </tbody>
 </table>
 </section>
-<section id="the-examples" class="level2">
-<h2 class="anchored" data-anchor-id="the-examples">The examples</h2>
-<p>Three exercises built on Smart Alex tasks from Chapter 9 (comparing two means) of <em>Discovering Statistics Using JASP</em> (Field, van Doorn &amp; Wagenmakers, 2025). The scenarios and model answers follow the <a href="https://discoverjasp.com/pages/smart_alex.html">Smart Alex answers on discoverjasp.com</a>, and the questions link to the data files there rather than shipping copies. Every key was recomputed in R from those data files.</p>
+<section id="the-example" class="level2">
+<h2 class="anchored" data-anchor-id="the-example">The example</h2>
+<p>The example is one exercise from my second-year statistics course, on factorial ANOVA in JASP. I wrote it for an exam and cut it before any student saw it, so it can be public. The data are simulated and ship with the questions (<code>examples/ssr-furniture.csv</code>), and every key is computed in R from that file each time the package is built. Three parts are the exam questions as I wrote them; the numeric part was added for this page, to show a numeric gap.</p>
 <table class="table">
 <colgroup>
 <col style="width: 22%">
-<col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 54%">
+<col style="width: 22%">
+<col style="width: 55%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Exercise</th>
-<th>Smart Alex</th>
-<th style="text-align: right;">Questions</th>
+<th>Part</th>
+<th>Asks</th>
 <th>What it shows</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Spider anxiety (paired t-test)</td>
-<td>9.1-9.2</td>
-<td style="text-align: right;">5</td>
-<td>a multi-part exercise with a shared scenario; single choice; tick-all; two numeric gaps in one question, accepting either sign of t</td>
+<td>a</td>
+<td>Does the effect of the instructions depend on age?</td>
+<td>a multi-part exercise with a shared scenario and an attached data file; an open question with grading criteria</td>
 </tr>
 <tr class="even">
-<td>Pets and life satisfaction (t-test and linear model)</td>
-<td>9.5-9.6</td>
-<td style="text-align: right;">5</td>
-<td>numeric gaps with a margin; a single fill-in gap with its explanation as feedback; tick-all with symbols</td>
+<td>b</td>
+<td>Simple main effects per age group</td>
+<td>tick-all</td>
 </tr>
 <tr class="odd">
-<td>Backward messages (paired t-test)</td>
-<td>9.9</td>
-<td style="text-align: right;">2</td>
-<td>single choice whose wrong options are named mistakes; an open question with grading criteria</td>
+<td>c</td>
+<td>The <em>F</em>-value of the main effect</td>
+<td>one numeric gap with a margin, with its explanation as feedback</td>
+</tr>
+<tr class="even">
+<td>d</td>
+<td>A colleague’s conclusion from the main effect</td>
+<td>an open question with grading criteria and a note for the grader</td>
 </tr>
 </tbody>
 </table>
@@ -312,47 +312,39 @@ Tip
 <ol type="1">
 <li>Download <a href="https://johnnydoorn.github.io/teaching-statistics/itembank/examples/EXAMPLES.zip"><code>EXAMPLES.zip</code></a>.</li>
 <li>In ANS, open a question bank (a scratch bank is safest), go to <strong>Settings &gt; Import</strong> and choose <strong>QTI 2.X package (Legacy)</strong>. Not <em>QTI 3.0</em>, and not <em>Respondus</em>.</li>
-<li>Three exercises appear outside any folder, with titles that start with “EXAMPLE”. Move them to a folder if you like.</li>
-<li>Open them and look at what normally takes hand work. The choice and open questions have their model answers, the open question has its grading criteria, some questions hold two gaps (each with a margin), and the fill-in questions carry their explanation as feedback.</li>
+<li>One exercise of four questions appears outside any folder, with a title that starts with “EXAMPLE”. Move it to a folder if you like.</li>
+<li>Open it and look at what normally takes hand work. The data file is attached to the first question, the tick-all and open questions have their model answers, both open questions have their grading criteria, and the numeric question has its margin and carries its explanation as feedback.</li>
 </ol>
 </section>
 <section id="anatomy-of-a-question-file" class="level2">
 <h2 class="anchored" data-anchor-id="anatomy-of-a-question-file">Anatomy of a question file</h2>
-<p>A question file is plain text in the R/exams format, saved as <code>.qmd</code> (or <code>.Rmd</code>). Here is the part of the spider exercise with two gaps, <code>examples/1-spider-c-t.qmd</code>, slightly shortened:</p>
+<p>A question file is plain text in the R/exams format, saved as <code>.qmd</code> (or <code>.Rmd</code>). Here is the numeric part of the example, <code>examples/1-furniture-c-main-effect.qmd</code>. An R chunk at the top of the file, left out here, reads the data file and computes the values that the inline R code fills in, the key included.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Question</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">========</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>Test in JASP whether there is a difference between the mean anxiety for the picture and</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>the mean anxiety for the real spider. What is the calculated t-value? Round to two</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>decimal places.</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>t-value: ##ANSWER1##</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>What is the *F*-value of the main effect of the type of instruction? Use 2 decimals.</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>Answerlist</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>----------</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>*F*-value:</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>Degrees of freedom: ##ANSWER2##</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>Answerlist</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>----------</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>*</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>*</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>Solution</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">========</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>In the ANOVA table in JASP, the row for instruction gives *F*(<span class="in">`r full["instruction", "Df"]`</span>, <span class="in">`r dfRes`</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>= <span class="in">`r sprintf("%.2f", Fins)`</span>, *p* `r fp(pIns)`. The *F*-value is the mean square of instruction</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>divided by the residual mean square, <span class="in">`r sprintf("%.4f", msIns)`</span> / <span class="in">`r sprintf("%.4f", msRes)`</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>= <span class="in">`r sprintf("%.2f", Fins)`</span>.</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>Solution</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">========</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>The test statistic, t, is calculated by dividing the mean of differences by the standard</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>error of differences (t = -7/2.8311 = -2.47). ... When the same participants have been</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>used, the degrees of freedom are the sample size minus 1 (df = N - 1 = 11).</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>DSUJ §9.9, p. 384.</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>Meta-information</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="fu">================</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>exname: dsj-09-spider-c-t</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>extype: cloze</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>exsolution: -2.47|11</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>exclozetype: num|num</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>extol: 0.01|0</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>expoints: 0.5</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>exextra<span class="co">[</span><span class="ot">alt</span><span class="co">]</span>: 2.47|</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>exextra<span class="co">[</span><span class="ot">exercise</span><span class="co">]</span>: dsj-09-spider</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>exextra<span class="co">[</span><span class="ot">anstitle</span><span class="co">]</span>: discoverjasp Smart Alex 9.1-9.2 - spider anxiety (paired t-test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>Lecture 17, slide 25 (Using mean squares to compute *F*).</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>Meta-information</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">================</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>exname: ssr-furniture-c-main-effect</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>extype: num</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>exsolution: <span class="in">`r sprintf("%.2f", Fins)`</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>extol: 0.01</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>expoints: 1</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>exextra<span class="co">[</span><span class="ot">exercise</span><span class="co">]</span>: ssr-furniture</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>exextra<span class="co">[</span><span class="ot">anstitle</span><span class="co">]</span>: SSR - furniture assembly (factorial ANOVA in JASP)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Question</strong> is what students see. Its <strong>Answerlist</strong> holds the options of a choice question, or one empty line per gap. <strong>Solution</strong> becomes the model answer, and in a choice question a second Answerlist marks the options, with one <code>* True.</code> or <code>* False.</code> line per option in the same order. <strong>Meta-information</strong> says what kind of question it is and what the key is.</p>
 <table class="table">
 <colgroup>
@@ -404,7 +396,7 @@ Tip
 </tr>
 </tbody>
 </table>
-<p>In an open question, a <strong>Criteria</strong> list at the end of the solution becomes the grading criteria in ANS (see <code>examples/3-darklord-b-essay.qmd</code>). The <a href="https://www.r-exams.org">R/exams website</a> documents the format in full, including questions that draw new numbers every time they are built.</p>
+<p>In an open question, a <strong>Criteria</strong> list at the end of the solution becomes the grading criteria in ANS (see <code>examples/1-furniture-a-interaction.qmd</code>). The <a href="https://www.r-exams.org">R/exams website</a> documents the format in full, including questions that draw new numbers every time they are built.</p>
 </section>
 <section id="what-the-builder-checks-for-you" class="level2">
 <h2 class="anchored" data-anchor-id="what-the-builder-checks-for-you">What the builder checks for you</h2>
@@ -446,9 +438,7 @@ Tip
 <section id="credits" class="level2">
 <h2 class="anchored" data-anchor-id="credits">Credits</h2>
 <ul>
-<li>Field, A., van Doorn, J., &amp; Wagenmakers, E.-J. (2025). <em>Discovering statistics using JASP</em>. Sage. Smart Alex tasks, answers and data at <a href="https://discoverjasp.com">discoverjasp.com</a>.</li>
 <li>Zeileis, A., Umlauf, N., &amp; Leisch, F. (2014). Flexible generation of e-learning exams in R: Moodle quizzes, OLAT assessments, and beyond. <em>Journal of Statistical Software, 58</em>(1), 1-36. <a href="https://doi.org/10.18637/jss.v058.i01" class="uri">https://doi.org/10.18637/jss.v058.i01</a></li>
-<li>The questions link to the <a href="https://jasp-stats.github.io/jasp-video-library/">JASP video library</a> for how to run each analysis.</li>
 <li>The tools are free software under this repository’s GPL-3 license.</li>
 </ul>
 </section>

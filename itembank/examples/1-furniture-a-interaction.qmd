@@ -1,0 +1,63 @@
+```{r}
+#| include: false
+# Exercise 1, part a: a multi-part exercise starts (exextra[exercise]). This part carries the
+# shared scenario and ships the data file (include_supplement plus the link in the text).
+# It is an open question (extype: string plus exstringtype: essay); the **Criteria** list at
+# the end of the solution becomes ANS's grading criteria, and the points must add up to
+# expoints, or the builder stops.
+```
+
+```{r data, echo = FALSE, results = "hide"}
+include_supplement("ssr-furniture.csv")
+d <- read.csv("ssr-furniture.csv")
+suppressMessages(library(car))
+options(contrasts = c("contr.sum", "contr.poly"))
+d$instruction <- factor(d$instruction); d$age <- factor(d$age)
+fp <- function(p) if (p < .001) "< .001" else paste("=", sub("^0", "", sprintf("%.3f", p)))
+full  <- Anova(lm(minutes ~ instruction * age, d), type = 3)
+msRes <- full["Residuals", "Sum Sq"] / full["Residuals", "Df"]; dfRes <- full["Residuals", "Df"]
+cellM <- tapply(d$minutes, list(d$instruction, d$age), mean)
+# JASP's simple main effects: SS within each age group, tested against the full model's residual
+simple <- do.call(rbind, lapply(levels(d$age), function(a) {
+  ms <- anova(lm(minutes ~ instruction, d[d$age == a, ]))["instruction", "Mean Sq"]
+  data.frame(age = a, F = ms / msRes, p = pf(ms / msRes, 1, dfRes, lower.tail = FALSE))
+}))
+sOf <- function(a, col) simple[simple$age == a, col]
+Fint <- full["instruction:age", "F value"]; pInt <- full["instruction:age", "Pr(>F)"]
+stopifnot(pInt < .001, full["instruction", "Pr(>F)"] < .001, sOf("18-35", "p") > .3,
+          sOf("36-60", "p") < .001, sOf("61-80", "p") < .001)
+```
+
+Question
+========
+A furniture company wants to know whether video instructions help people assemble a bookcase faster than written instructions, and whether that depends on age. In total 120 participants, 40 in each age group (18-35, 36-60 and 61-80 years), are randomly assigned to written or video instructions (**instruction**; age group is **age**). The dependent variable is the time needed to assemble the bookcase, in minutes (**minutes**). Use $\alpha = .01$ throughout this question.
+
+The data are available as [.csv file](ssr-furniture.csv).
+
+Does the effect of the type of instruction on assembly time depend on the age group? Say which result in the output you base this on. *(1 point)*
+
+Solution
+========
+Yes. The interaction between instruction and age is significant, *F*(`r full["instruction:age", "Df"]`, `r dfRes`) = `r sprintf("%.2f", Fint)`, *p* `r fp(pInt)`. The descriptives plot shows how. With written instructions assembly takes longer the older the participants are (`r paste(sprintf("%.2f", cellM["written", ]), collapse = ", ")` minutes), with video instructions it hardly changes (`r paste(sprintf("%.2f", cellM["video", ]), collapse = ", ")` minutes). So the time that video saves grows with age.
+
+Other output elements count as well, when used correctly. The descriptives plot (the lines are not parallel), the simple main effects or the conditional post hoc tests can show that the effect of instruction differs between the age groups, with video saving `r paste(sprintf("%.2f", cellM["written", ] - cellM["video", ]), collapse = ", ")` minutes for the three age groups. A significant effect in some age groups and a non-significant one in another does not by itself show that the effect depends on age; that needs the effects to differ.
+
+Lecture 17, slides 26 (Interaction), 27 (*P*-value), 32 (Post-Hoc) and 37 (Recap).
+
+**Criteria**
+
+- 0.5 pt: yes, based on the interaction term instruction * age, *F*(`r full["instruction:age", "Df"]`, `r dfRes`) = `r sprintf("%.2f", Fint)`, *p* `r fp(pInt)` (not a main effect), or on the descriptives plot, simple main effects or conditional post hoc tests, used correctly (showing that the effect of instruction differs between age groups, not only that it is significant in some and not in another).
+- 0.5 pt: describes how, for instance that the difference between video and written instructions is larger for older participants, or that written instructions take longer with age and video instructions do not.
+
+Meta-information
+================
+exname: ssr-furniture-a-interaction
+extype: string
+exstringtype: essay
+exsolution: nil
+expoints: 1
+exextra[essay,logical]: TRUE
+exextra[essay_format,character]: editor
+exextra[essay_fieldlines,numeric]: 6
+exextra[exercise]: ssr-furniture
+exextra[anstitle]: SSR - furniture assembly (factorial ANOVA in JASP)

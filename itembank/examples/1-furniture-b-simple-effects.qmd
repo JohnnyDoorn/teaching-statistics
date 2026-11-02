@@ -1,0 +1,69 @@
+```{r}
+#| include: false
+# Exercise 1, part b: tick-all (extype: mchoice). The stem must say that at least one
+# statement is true; the second Answerlist in the Solution marks each statement True. or
+# False., in the same order. The data are read from the file part a ships.
+```
+
+```{r data, echo = FALSE, results = "hide"}
+f <- "ssr-furniture.csv"
+d <- read.csv(if (file.exists(f)) f else file.path(exams:::.exams_get_internal("xexams_dir_exercises"), f))
+suppressMessages(library(car))
+options(contrasts = c("contr.sum", "contr.poly"))
+d$instruction <- factor(d$instruction); d$age <- factor(d$age)
+fp <- function(p) if (p < .001) "< .001" else paste("=", sub("^0", "", sprintf("%.3f", p)))
+full  <- Anova(lm(minutes ~ instruction * age, d), type = 3)
+msRes <- full["Residuals", "Sum Sq"] / full["Residuals", "Df"]; dfRes <- full["Residuals", "Df"]
+cellM <- tapply(d$minutes, list(d$instruction, d$age), mean)
+# JASP's simple main effects: SS within each age group, tested against the full model's residual
+simple <- do.call(rbind, lapply(levels(d$age), function(a) {
+  ms <- anova(lm(minutes ~ instruction, d[d$age == a, ]))["instruction", "Mean Sq"]
+  data.frame(age = a, F = ms / msRes, p = pf(ms / msRes, 1, dfRes, lower.tail = FALSE))
+}))
+sOf <- function(a, col) simple[simple$age == a, col]
+Fint <- full["instruction:age", "F value"]; pInt <- full["instruction:age", "Pr(>F)"]
+stopifnot(pInt < .001, full["instruction", "Pr(>F)"] < .001, sOf("18-35", "p") > .3,
+          sOf("36-60", "p") < .001, sOf("61-80", "p") < .001)
+```
+
+Question
+========
+Run simple main effects of the type of instruction, for each age group.
+
+Check the statement(s) that is/are true; at least one statement is true.
+
+Answerlist
+----------
+* For participants aged 61-80, the type of instruction makes a significant difference in assembly time.
+* For participants aged 36-60, the type of instruction makes a significant difference in assembly time.
+* For participants aged 18-35, the type of instruction makes a significant difference in assembly time.
+
+Solution
+========
+In JASP, Simple Main Effects with instruction as the simple effect factor and age as the moderator. Each test uses the residual mean square of the full model (`r sprintf("%.2f", msRes)` on `r dfRes` df).
+
+```{r, echo = FALSE, comment = ""}
+cat(paste(sprintf("age %s : F(1, %d) = %8.4f, p %s  %s", simple$age, dfRes, simple$F,
+                  ifelse(simple$p < .0001, "< .0001", sprintf("= %.4f", simple$p)),
+                  ifelse(simple$p < .01, "significant", "not significant")), collapse = "\n"))
+```
+
+For 61-80 and 36-60 year olds the type of instruction makes a significant difference, for 18-35 year olds it does not (*p* `r fp(sOf("18-35", "p"))`).
+
+Lecture 17, slide 37 (Recap: simple main effects).
+
+Answerlist
+----------
+* True.
+* True.
+* False.
+
+Meta-information
+================
+exname: ssr-furniture-b-simple-effects
+extype: mchoice
+exsolution: 110
+exshuffle: TRUE
+expoints: 1
+exextra[exercise]: ssr-furniture
+exextra[anstitle]: SSR - furniture assembly (factorial ANOVA in JASP)

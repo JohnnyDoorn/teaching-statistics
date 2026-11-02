@@ -2,7 +2,7 @@
 title: "Writing ANS questions as text files"
 subtitle: "Examples and tools for building an ANS question bank with R/exams"
 author: "Johnny van Doorn"
-date: "22 October 2026"
+date: "29 October 2026"
 # One source, two outputs. README.html is the page on GitHub Pages; README.md is what GitHub shows
 # in the folder view (it prefers README.md over README.html). The source is not called README.qmd
 # because Quarto 1.3 then deletes README.md as its intermediate file when it renders the html.
@@ -22,7 +22,7 @@ already in place, such as **model answers**, **grading criteria** for open quest
 fill-in gaps with a margin, multi-part exercises, data files and maths.
 
 Why files instead of the ANS editor? Questions in files can be searched, reused, compared across
-years and checked. Every key in the examples below was recomputed from the data, and a coding
+years and checked. Every key in the example below is computed from the data, and a coding
 agent can read and write the files too. Everything here was settled by test imports into ANS in
 September and October 2026. Where something is only partly tested, the agent instructions say so.
 
@@ -105,8 +105,8 @@ settings.
 
    > Download only the itembank folder from https://github.com/JohnnyDoorn/teaching-statistics
    > into this folder (the full repository is large, so do not clone all of it). Check that R
-   > with the packages exams and jsonlite, pandoc and Python 3 are installed, and install what is
-   > missing. Then build itembank/examples with itembank/tools/build-ans.R and tell me what you did.
+   > with the packages exams, jsonlite and car, pandoc and Python 3 are installed, and install what
+   > is missing. Then build itembank/examples with itembank/tools/build-ans.R and tell me what you did.
 
 6. Give the agent its standing instructions. Your agent reads one file in your folder at the
    start of each conversation, `CLAUDE.md` for Claude Code and `AGENTS.md` for Codex, GitHub
@@ -117,7 +117,7 @@ settings.
    > reading, writing or building any ANS question, and that I review every question before it
    > goes into ANS.
 
-When it is done, open `itembank/examples/EXAMPLES.html` in your browser. If you see the twelve
+When it is done, open `itembank/examples/EXAMPLES.html` in your browser. If you see the four
 example questions with their answers, everything works.
 
 ### What I use it for
@@ -145,8 +145,8 @@ request to the agent.
 A few habits help. Ask for one thing at a time and read each change before you accept it. The
 agent forgets everything between conversations except what is in that instruction file, so when you
 settle a convention (say, final answers in two decimals), ask it to add that to the file. And keep exam
-questions out of public places; this page lives in a public repository, which is why it holds only
-practice questions whose answers are already online.
+questions out of public places; this page lives in a public repository, which is why its example
+is an exercise I cut from an exam before any student saw it.
 
 ## What is in this folder
 
@@ -154,22 +154,23 @@ practice questions whose answers are already online.
 |----------------|--------|----------------------------|
 | `README.md` (this page) | you | how it works, how to try it, how to write your own questions |
 | [`ans-agent-instructions.qmd`](https://johnnydoorn.github.io/teaching-statistics/itembank/ans-agent-instructions.html) | your coding agent | the question format, what ANS accepts and drops, and what is verified |
-| `examples/` | both | 12 example questions in 3 exercises, the built package and a preview |
+| `examples/` | both | an example exercise of 4 questions with its data file, the built package and a preview |
 | `tools/` | both | the builder (R), the packaging step it calls (Python) and an import checker |
 
-## The examples
+## The example
 
-Three exercises built on Smart Alex tasks from Chapter 9 (comparing two means) of *Discovering
-Statistics Using JASP* (Field, van Doorn & Wagenmakers, 2025). The scenarios and model answers
-follow the [Smart Alex answers on discoverjasp.com](https://discoverjasp.com/pages/smart_alex.html),
-and the questions link to the data files there rather than shipping copies. Every key was
-recomputed in R from those data files.
+The example is one exercise from my second-year statistics course, on factorial ANOVA in JASP. I
+wrote it for an exam and cut it before any student saw it, so it can be public. The data are
+simulated and ship with the questions (`examples/ssr-furniture.csv`), and every key is computed in
+R from that file each time the package is built. Three parts are the exam questions as I wrote
+them; the numeric part was added for this page, to show a numeric gap.
 
-| Exercise | Smart Alex | Questions | What it shows |
-|-----------|------|-----:|---------------------------|
-| Spider anxiety (paired t-test) | 9.1-9.2 | 5 | a multi-part exercise with a shared scenario; single choice; tick-all; two numeric gaps in one question, accepting either sign of t |
-| Pets and life satisfaction (t-test and linear model) | 9.5-9.6 | 5 | numeric gaps with a margin; a single fill-in gap with its explanation as feedback; tick-all with symbols |
-| Backward messages (paired t-test) | 9.9 | 2 | single choice whose wrong options are named mistakes; an open question with grading criteria |
+| Part | Asks | What it shows |
+|------|------|---------------|
+| a | Does the effect of the instructions depend on age? | a multi-part exercise with a shared scenario and an attached data file; an open question with grading criteria |
+| b | Simple main effects per age group | tick-all |
+| c | The *F*-value of the main effect | one numeric gap with a margin, with its explanation as feedback |
+| d | A colleague's conclusion from the main effect | an open question with grading criteria and a note for the grader |
 
 [Preview every question with its answer](https://johnnydoorn.github.io/teaching-statistics/itembank/examples/EXAMPLES.html), or
 [download the package](https://johnnydoorn.github.io/teaching-statistics/itembank/examples/EXAMPLES.zip) and try it in ANS.
@@ -179,52 +180,47 @@ recomputed in R from those data files.
 1. Download [`EXAMPLES.zip`](https://johnnydoorn.github.io/teaching-statistics/itembank/examples/EXAMPLES.zip).
 2. In ANS, open a question bank (a scratch bank is safest), go to **Settings > Import** and
    choose **QTI 2.X package (Legacy)**. Not *QTI 3.0*, and not *Respondus*.
-3. Three exercises appear outside any folder, with titles that start with "EXAMPLE". Move them to
-   a folder if you like.
-4. Open them and look at what normally takes hand work. The choice and open questions have their
-   model answers, the open question has its grading criteria, some questions hold two gaps (each
-   with a margin), and the fill-in questions carry their explanation as feedback.
+3. One exercise of four questions appears outside any folder, with a title that starts with
+   "EXAMPLE". Move it to a folder if you like.
+4. Open it and look at what normally takes hand work. The data file is attached to the first
+   question, the tick-all and open questions have their model answers, both open questions have
+   their grading criteria, and the numeric question has its margin and carries its explanation as
+   feedback.
 
 ## Anatomy of a question file
 
 A question file is plain text in the R/exams format, saved as `.qmd` (or `.Rmd`). Here is the
-part of the spider exercise with two gaps, `examples/1-spider-c-t.qmd`, slightly shortened:
+numeric part of the example, `examples/1-furniture-c-main-effect.qmd`. An R chunk at the top of
+the file, left out here, reads the data file and computes the values that the inline R code
+fills in, the key included.
 
 ````markdown
 Question
 ========
-Test in JASP whether there is a difference between the mean anxiety for the picture and
-the mean anxiety for the real spider. What is the calculated t-value? Round to two
-decimal places.
-
-t-value: ##ANSWER1##
-
-Degrees of freedom: ##ANSWER2##
+What is the *F*-value of the main effect of the type of instruction? Use 2 decimals.
 
 Answerlist
 ----------
-*
-*
+* *F*-value:
 
 Solution
 ========
-The test statistic, t, is calculated by dividing the mean of differences by the standard
-error of differences (t = -7/2.8311 = -2.47). ... When the same participants have been
-used, the degrees of freedom are the sample size minus 1 (df = N - 1 = 11).
+In the ANOVA table in JASP, the row for instruction gives *F*(`r full["instruction", "Df"]`, `r dfRes`)
+= `r sprintf("%.2f", Fins)`, *p* `r fp(pIns)`. The *F*-value is the mean square of instruction
+divided by the residual mean square, `r sprintf("%.4f", msIns)` / `r sprintf("%.4f", msRes)`
+= `r sprintf("%.2f", Fins)`.
 
-DSUJ §9.9, p. 384.
+Lecture 17, slide 25 (Using mean squares to compute *F*).
 
 Meta-information
 ================
-exname: dsj-09-spider-c-t
-extype: cloze
-exsolution: -2.47|11
-exclozetype: num|num
-extol: 0.01|0
-expoints: 0.5
-exextra[alt]: 2.47|
-exextra[exercise]: dsj-09-spider
-exextra[anstitle]: discoverjasp Smart Alex 9.1-9.2 - spider anxiety (paired t-test)
+exname: ssr-furniture-c-main-effect
+extype: num
+exsolution: `r sprintf("%.2f", Fins)`
+extol: 0.01
+expoints: 1
+exextra[exercise]: ssr-furniture
+exextra[anstitle]: SSR - furniture assembly (factorial ANOVA in JASP)
 ````
 
 **Question** is what students see. Its **Answerlist** holds the options of a choice question, or
@@ -245,7 +241,7 @@ Answerlist marks the options, with one `* True.` or `* False.` line per option i
 | `exstringtype: essay` | with `exextra[essay,logical]: TRUE`, turns a `string` question into an open question with an essay field |
 
 In an open question, a **Criteria** list at the end of the solution becomes the grading criteria
-in ANS (see `examples/3-darklord-b-essay.qmd`). The [R/exams website](https://www.r-exams.org)
+in ANS (see `examples/1-furniture-a-interaction.qmd`). The [R/exams website](https://www.r-exams.org)
 documents the format in full, including questions that draw new numbers every time they are built.
 
 ## What the builder checks for you
@@ -296,11 +292,7 @@ answer ended up in the text students see.
 
 ## Credits
 
-- Field, A., van Doorn, J., & Wagenmakers, E.-J. (2025). *Discovering statistics using JASP*.
-  Sage. Smart Alex tasks, answers and data at [discoverjasp.com](https://discoverjasp.com).
 - Zeileis, A., Umlauf, N., & Leisch, F. (2014). Flexible generation of e-learning exams in R:
   Moodle quizzes, OLAT assessments, and beyond. *Journal of Statistical Software, 58*(1), 1-36.
   <https://doi.org/10.18637/jss.v058.i01>
-- The questions link to the [JASP video library](https://jasp-stats.github.io/jasp-video-library/)
-  for how to run each analysis.
 - The tools are free software under this repository's GPL-3 license.

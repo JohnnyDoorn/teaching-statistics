@@ -1,0 +1,44 @@
+```{r}
+#| include: false
+# Exercise 1, part c: one numeric gap (extype: num) with a margin of 0.01; its label is the
+# one-line Answerlist. ANS imports no model answer for a fill-in question, so the builder puts
+# the solution in as feedback. The key is computed from the data, never typed in.
+```
+
+```{r data, echo = FALSE, results = "hide"}
+f <- "ssr-furniture.csv"
+d <- read.csv(if (file.exists(f)) f else file.path(exams:::.exams_get_internal("xexams_dir_exercises"), f))
+suppressMessages(library(car))
+options(contrasts = c("contr.sum", "contr.poly"))
+d$instruction <- factor(d$instruction); d$age <- factor(d$age)
+fp <- function(p) if (p < .001) "< .001" else paste("=", sub("^0", "", sprintf("%.3f", p)))
+full  <- Anova(lm(minutes ~ instruction * age, d), type = 3)
+msRes <- full["Residuals", "Sum Sq"] / full["Residuals", "Df"]; dfRes <- full["Residuals", "Df"]
+msIns <- full["instruction", "Sum Sq"] / full["instruction", "Df"]
+Fins  <- full["instruction", "F value"]; pIns <- full["instruction", "Pr(>F)"]
+stopifnot(pIns < .001, isTRUE(all.equal(Fins, msIns / msRes)))
+```
+
+Question
+========
+What is the *F*-value of the main effect of the type of instruction? Use 2 decimals.
+
+Answerlist
+----------
+* *F*-value:
+
+Solution
+========
+In the ANOVA table in JASP, the row for instruction gives *F*(`r full["instruction", "Df"]`, `r dfRes`) = `r sprintf("%.2f", Fins)`, *p* `r fp(pIns)`. The *F*-value is the mean square of instruction divided by the residual mean square, `r sprintf("%.4f", msIns)` / `r sprintf("%.4f", msRes)` = `r sprintf("%.2f", Fins)`.
+
+Lecture 17, slide 25 (Using mean squares to compute *F*).
+
+Meta-information
+================
+exname: ssr-furniture-c-main-effect
+extype: num
+exsolution: `r sprintf("%.2f", Fins)`
+extol: 0.01
+expoints: 1
+exextra[exercise]: ssr-furniture
+exextra[anstitle]: SSR - furniture assembly (factorial ANOVA in JASP)

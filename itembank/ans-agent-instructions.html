@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-10-27">
+<meta name="dcterms.date" content="2026-10-29">
 
 <title>Instructions for coding agents working with ANS question banks</title>
 <style>
@@ -129,7 +129,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 27, 2026</p>
+      <p class="date">October 29, 2026</p>
     </div>
   </div>
   
@@ -141,7 +141,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p><em>People, read <a href="README.html">README</a> first. This file is written for a coding agent (Claude Code or similar) and is meant to be read in full before any ANS work.</em></p>
 <p>You are helping a teacher write, convert, clean up, build or check questions for <strong>ANS</strong> (ans.app), a digital assessment platform. Questions are written as text files in the R/exams format and built into a QTI 2.1 package with <code>tools/build-ans.R</code>, which ANS imports. Read this file completely before you read, convert or build any ANS question. Section 11 says what is verified and what is not; when something is untested, say so to the teacher instead of assuming it works.</p>
-<p>The folder <code>examples/</code> holds 12 working questions (3 exercises). When in doubt about the format, copy the example that looks most like what you need.</p>
+<p>The folder <code>examples/</code> holds one working exercise of 4 questions (an open question, a tick-all, a numeric gap and a second open question) with its data file. When in doubt about the format, copy the part that looks most like what you need; section 2 has a template for every question type.</p>
 <section id="rules-that-matter-most" class="level2">
 <h2 class="anchored" data-anchor-id="rules-that-matter-most">1. Rules that matter most</h2>
 <ol type="1">
@@ -157,7 +157,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="the-question-format" class="level2">
 <h2 class="anchored" data-anchor-id="the-question-format">2. The question format</h2>
-<p>One file per question, <code>.qmd</code> or <code>.Rmd</code>, in R/exams markdown. Number the files, because the build order is the sorted file order (<code>1-spider-a-test.qmd</code>, <code>1-spider-b-hypotheses.qmd</code>, …). Every file has these sections, in this order.</p>
+<p>One file per question, <code>.qmd</code> or <code>.Rmd</code>, in R/exams markdown. Number the files, because the build order is the sorted file order (<code>1-furniture-a-interaction.qmd</code>, <code>1-furniture-b-simple-effects.qmd</code>, …). Every file has these sections, in this order.</p>
 <ul>
 <li><code>Question</code> (what students see), with an <code>Answerlist</code> for the options or one empty line per gap;</li>
 <li><code>Solution</code> (the model answer), with an <code>Answerlist</code> of <code>True.</code> / <code>False.</code> per option in choice questions;</li>
@@ -180,7 +180,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">========</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>Why the first option is right, then one line per wrong option naming its mistake.</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>Source line, for example: DSUJ §9.9, p. 384.</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>Source line, for example: Lecture 17, slide 26 (Interaction).</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>Answerlist</span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>----------</span>
@@ -206,11 +206,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>One gap is <code>extype: num</code> with <code>exsolution</code> and <code>extol</code> (the margin). The gap’s label is a one-line <code>Answerlist</code> in the question; the builder stops on a gap without a label.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Question</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">========</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>What does the model predict for a cat owner? Use two decimals.</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>What is the *F*-value of the main effect of the type of instruction? Use 2 decimals.</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>Answerlist</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>----------</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Predicted life satisfaction:</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>*F*-value:</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>Solution</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">========</span></span>
@@ -220,10 +220,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">================</span></span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>exname: short-unique-id</span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>extype: num</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>exsolution: 60.13</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>exsolution: 54.87</span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>extol: 0.01</span>
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>exextra<span class="co">[</span><span class="ot">anstitle</span><span class="co">]</span>: Title shown in ANS</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Several gaps in one question use <code>extype: cloze</code> with <code>##ANSWER1##</code>, <code>##ANSWER2##</code>, … in the text. The text right before each placeholder is its label. Give one empty <code>Answerlist</code> line per gap, <code>exclozetype: num|num</code>, <code>exsolution: -2.47|11</code>, <code>extol: 0.01|0</code>, and <code>expoints</code> <strong>per gap</strong> (two gaps worth 1 point together need <code>expoints: 0.5</code>). <code>exextra[alt]: 2.47|</code> adds accepted answers per gap (spaces between answers, <code>|</code> between gaps), for example the other sign of t where the sign only reflects the order of the variables.</p>
+<p>Several gaps in one question use <code>extype: cloze</code> with <code>##ANSWER1##</code>, <code>##ANSWER2##</code>, … in the text. The text right before each placeholder is its label. Give one empty <code>Answerlist</code> line per gap, <code>exclozetype: num|num</code>, <code>exsolution: -2.47|11</code>, <code>extol: 0.01|0</code>, and <code>expoints</code> <strong>per gap</strong> (two gaps worth 1 point together need <code>expoints: 0.5</code>). <code>exextra[alt]: 2.47|</code> adds accepted answers per gap (spaces between answers, <code>|</code> between gaps, <code>_</code> for a space inside an answer as in <code>Is_not</code>), for example the other sign of t where the sign only reflects the order of the variables.</p>
 <p>In a <code>cloze</code>, the builder also adds the obvious variants of each numeric key (a comma decimal, no leading zero) and writes the margin as a <code>low;high</code> range, as ANS’s own exports do. A single <code>num</code> gap stays a float with a tolerance, which ANS imports as its numeric gap with that margin; no variants are added there.</p>
 <p><strong>Caution, seen on import in October 2026:</strong> ANS imports the gaps of a multi-gap question as alphanumeric gaps, not as numeric gaps with the margin. They then accept only the exact keys, and a key such as <code>-3.10</code> is stored as <code>-3.1</code>, so a student who types <code>-3.10</code> is marked wrong. For numeric answers, give each gap its own question (one <code>num</code> gap each, parts of one exercise), or set the gaps to <em>Numeric</em> with a margin by hand after import.</p>
 </section>
@@ -254,7 +254,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="data-files-figures-and-maths" class="level3">
 <h3 class="anchored" data-anchor-id="data-files-figures-and-maths">2.6 Data files, figures and maths</h3>
 <ul>
-<li><strong>Data files</strong> either sit next to the question file and are shipped with a chunk <code>include_supplement("data.csv")</code> plus a link <code>[data](data.csv)</code> in the text, or are linked from a stable website, as the examples link discoverjasp.com.</li>
+<li><strong>Data files</strong> either sit next to the question file and are shipped with a chunk <code>include_supplement("data.csv")</code> plus a link <code>[data](data.csv)</code> in the text, as the example ships <code>ssr-furniture.csv</code>, or are linked from a stable website.</li>
 <li><strong>A static image</strong> (<code>![](figure.png)</code>) is only shipped if it is also listed in <code>include_supplement()</code>. Figures drawn by an R chunk are shipped automatically.</li>
 <li><strong>Maths</strong> goes in as <code>$...$</code> or <code>$$...$$</code>; the builder turns it into ANS’s equation component. Plain Unicode symbols (μ, ≠, χ²) also work.</li>
 <li><strong>Tables</strong> as markdown pipe tables. From data, use <code>knitr::kable()</code> with <code>results = "asis"</code> and set the column names; printing a data frame gives console lines starting with <code>##</code>.</li>

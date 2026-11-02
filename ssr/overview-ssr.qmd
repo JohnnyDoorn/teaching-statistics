@@ -189,8 +189,9 @@ externalSets <- list(
     HTML    = "https://discoverjasp.com/repository/dsj1_data/html/diet.html"
   )
   # Lecture 22's presumed-media-influence (Tal-Or et al., 2010, from the JASP Data Library) has no
-  # entry, so its row shows the csv only until the Data Library's worked example is updated
-  # (2026-10-27). Its Results and HTML links went to that example.
+  # entry: since 2026-10-28 its Results and HTML are our own files (the Process analysis as
+  # demonstrated in the lecture, with notes from it; the numbers on the slides), not the Data
+  # Library's worked example, which is not linked until it is fixed (2026-10-27).
 )
 
 dataRows <- data.frame(Topic   = stems,

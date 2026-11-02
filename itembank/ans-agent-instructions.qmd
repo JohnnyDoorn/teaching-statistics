@@ -1,7 +1,7 @@
 ---
 title: "Instructions for coding agents working with ANS question banks"
 subtitle: "Format, build, import and checks, as settled by test imports (University of Amsterdam, September and October 2026)"
-date: "27 October 2026"
+date: "29 October 2026"
 ---
 
 *People, read [README](README.html) first. This file is written for a coding agent (Claude Code
@@ -13,8 +13,9 @@ into a QTI 2.1 package with `tools/build-ans.R`, which ANS imports. Read this fi
 before you read, convert or build any ANS question. Section 11 says what is verified and what is
 not; when something is untested, say so to the teacher instead of assuming it works.
 
-The folder `examples/` holds 12 working questions (3 exercises). When in doubt about the format,
-copy the example that looks most like what you need.
+The folder `examples/` holds one working exercise of 4 questions (an open question, a tick-all, a
+numeric gap and a second open question) with its data file. When in doubt about the format, copy
+the part that looks most like what you need; section 2 has a template for every question type.
 
 ## 1. Rules that matter most
 
@@ -47,7 +48,7 @@ copy the example that looks most like what you need.
 ## 2. The question format
 
 One file per question, `.qmd` or `.Rmd`, in R/exams markdown. Number the files, because the build
-order is the sorted file order (`1-spider-a-test.qmd`, `1-spider-b-hypotheses.qmd`, ...).
+order is the sorted file order (`1-furniture-a-interaction.qmd`, `1-furniture-b-simple-effects.qmd`, ...).
 Every file has these sections, in this order.
 
 - `Question` (what students see), with an `Answerlist` for the options or one empty line per gap;
@@ -75,7 +76,7 @@ Solution
 ========
 Why the first option is right, then one line per wrong option naming its mistake.
 
-Source line, for example: DSUJ §9.9, p. 384.
+Source line, for example: Lecture 17, slide 26 (Interaction).
 
 Answerlist
 ----------
@@ -109,11 +110,11 @@ one-line `Answerlist` in the question; the builder stops on a gap without a labe
 ```markdown
 Question
 ========
-What does the model predict for a cat owner? Use two decimals.
+What is the *F*-value of the main effect of the type of instruction? Use 2 decimals.
 
 Answerlist
 ----------
-* Predicted life satisfaction:
+* *F*-value:
 
 Solution
 ========
@@ -123,7 +124,7 @@ Meta-information
 ================
 exname: short-unique-id
 extype: num
-exsolution: 60.13
+exsolution: 54.87
 extol: 0.01
 exextra[anstitle]: Title shown in ANS
 ```
@@ -132,7 +133,8 @@ Several gaps in one question use `extype: cloze` with `##ANSWER1##`, `##ANSWER2#
 text. The text right before each placeholder is its label. Give one empty `Answerlist` line per
 gap, `exclozetype: num|num`, `exsolution: -2.47|11`, `extol: 0.01|0`, and `expoints` **per gap**
 (two gaps worth 1 point together need `expoints: 0.5`). `exextra[alt]: 2.47|` adds accepted
-answers per gap (spaces between answers, `|` between gaps), for example the other sign of t
+answers per gap (spaces between answers, `|` between gaps, `_` for a space inside an answer as in
+`Is_not`), for example the other sign of t
 where the sign only reflects the order of the variables.
 
 In a `cloze`, the builder also adds the obvious variants of each numeric key (a comma decimal,
@@ -187,8 +189,8 @@ question.
 ### 2.6 Data files, figures and maths
 
 - **Data files** either sit next to the question file and are shipped with a chunk
-  `include_supplement("data.csv")` plus a link `[data](data.csv)` in the text, or are linked from
-  a stable website, as the examples link discoverjasp.com.
+  `include_supplement("data.csv")` plus a link `[data](data.csv)` in the text, as the example
+  ships `ssr-furniture.csv`, or are linked from a stable website.
 - **A static image** (`![](figure.png)`) is only shipped if it is also listed in
   `include_supplement()`. Figures drawn by an R chunk are shipped automatically.
 - **Maths** goes in as `$...$` or `$$...$$`; the builder turns it into ANS's equation component.

@@ -472,14 +472,14 @@ Johnny van Doorn
 <h2>Experiment</h2>
 
 <img src="../../images/qr_hngxh.png" alt="edu.nl/hngxh" class="r-stretch"></section>
-<section id="data" class="slide level2 smaller">
+<section id="data" class="slide level2 smaller scrollable">
 <h2>Data</h2>
 <p><small></small></p><small>
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-6062fe6bef212d8cd2d1" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-6062fe6bef212d8cd2d1">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["Cats","Dogs","Dogs","Dogs","Dogs","Cats","Dogs","Cats","Cats","Cats","Dogs","Dogs","Cats","Other","Cats","Cats","Dogs","Cats","Cats","Other","Cats","Dogs","Dogs","Cats","Dogs","Dogs","Other","Dogs","Cats","Dogs","Cats","Cats","Dogs","Dogs","Dogs","Other","Other","Cats","Cats","Other","Cats","Cats","Dogs","Dogs","Cats","Cats","Dogs","Dogs","Cats","Dogs","Other","Dogs"],["Live","Live","Live","Live","Live","Live","Live","Live","Digital","Live","Live","Live","Live","Live","Live","Digital","Live","Live","Live","Live","Live","Live","Live","Digital","Live","Digital","Live","Digital","Live","Digital","Digital","Digital","Live","Digital","Digital","Live","Live","Live","Digital","Live","Digital","Digital","Digital","Digital","Digital","Digital","Digital","Digital","Digital","Digital","Digital","Digital"],["Introvert","Extrovert","Extrovert","Introvert","Extrovert","Introvert","Introvert","Introvert","Introvert","Extrovert","Extrovert","Introvert","Extrovert","Extrovert","Introvert","Introvert","Introvert","Introvert","Introvert","Extrovert","Extrovert","Extrovert","Extrovert","Introvert","Introvert","Extrovert","Introvert","Introvert","Introvert","Extrovert","Introvert","Introvert","Extrovert","Introvert","Introvert","Introvert","Extrovert","Introvert","Extrovert","Introvert","Introvert","Introvert","Extrovert","Extrovert","Introvert","Extrovert","Extrovert","Extrovert","Introvert","Extrovert","Introvert","Extrovert"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Animal<\/th>\n      <th>Lecture<\/th>\n      <th>Personality<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":350,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"name":"Animal","targets":0},{"name":"Lecture","targets":1},{"name":"Personality","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-395ea9b6cd8b2347234b" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-395ea9b6cd8b2347234b">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["Cats","Dogs","Dogs","Dogs","Dogs","Cats","Dogs","Cats","Cats","Cats","Dogs","Dogs","Cats","Other","Cats","Cats","Dogs","Cats","Cats","Other","Cats","Dogs","Dogs","Cats","Dogs","Dogs","Other","Dogs","Cats","Dogs","Cats","Cats","Dogs","Dogs","Dogs","Other","Other","Cats","Cats","Other","Cats","Cats","Dogs","Dogs","Cats","Cats","Dogs","Dogs","Cats","Dogs","Other","Dogs"],["Live","Live","Live","Live","Live","Live","Live","Live","Digital","Live","Live","Live","Live","Live","Live","Digital","Live","Live","Live","Live","Live","Live","Live","Digital","Live","Digital","Live","Digital","Live","Digital","Digital","Digital","Live","Digital","Digital","Live","Live","Live","Digital","Live","Digital","Digital","Digital","Digital","Digital","Digital","Digital","Digital","Digital","Digital","Digital","Digital"],["Introvert","Extrovert","Extrovert","Introvert","Extrovert","Introvert","Introvert","Introvert","Introvert","Extrovert","Extrovert","Introvert","Extrovert","Extrovert","Introvert","Introvert","Introvert","Introvert","Introvert","Extrovert","Extrovert","Extrovert","Extrovert","Introvert","Introvert","Extrovert","Introvert","Introvert","Introvert","Extrovert","Introvert","Introvert","Extrovert","Introvert","Introvert","Introvert","Extrovert","Introvert","Extrovert","Introvert","Introvert","Introvert","Extrovert","Extrovert","Introvert","Extrovert","Extrovert","Extrovert","Introvert","Extrovert","Introvert","Extrovert"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Animal<\/th>\n      <th>Lecture<\/th>\n      <th>Personality<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":350,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"name":"Animal","targets":0},{"name":"Lecture","targets":1},{"name":"Personality","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </small><p><small></small></p>
@@ -518,7 +518,7 @@ Lecture   Extrovert Introvert Sum
 </div>
 </div>
 </section>
-<section id="calculating-the-model-1" class="slide level2">
+<section id="calculating-the-model-1" class="slide level2 smaller">
 <h2>Calculating the model</h2>
 <p><span class="math inline">\(\text{model}_{ij} = E_{ij} = \frac{\text{row total}_i \times \text{column total}_j}{n }\)</span></p>
 <div class="cell">
@@ -539,7 +539,7 @@ Lecture   Extrovert Introvert
 </div>
 <p><span class="math inline">\(\text{model}_{ij} = \begin{pmatrix} 10.1730769 &amp; 12.8269231 \\ 12.8269231 &amp; 16.1730769 \\ \end{pmatrix}\)</span></p>
 </section>
-<section id="error-observed---model" class="slide level2 subsection">
+<section id="error-observed---model" class="slide level2 subsection smaller">
 <h2>Error = Observed - Model</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>observed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -641,7 +641,7 @@ Lecture   Extrovert Introvert
 <p><span class="math inline">\(\begin{pmatrix} a &amp; b \\ c &amp; d \\ \end{pmatrix}\)</span></p>
 <p><span class="math inline">\(OR = \frac{a \times d}{b \times c} = \frac{10 \times 16}{13 \times 13} = 0.9467456\)</span></p>
 </section>
-<section id="odds" class="slide level2">
+<section id="odds" class="slide level2 smaller">
 <h2>Odds</h2>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -658,7 +658,7 @@ Lecture   Extrovert Introvert
 </ul>
 <p>In the digital responses, there are +- 0.77 times as many extroverts than introverts. In the live responses, there are +- 0.81 times as many extroverts than introverts.</p>
 </section>
-<section id="odds-1" class="slide level2">
+<section id="odds-1" class="slide level2 smaller">
 <h2>Odds</h2>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
