@@ -107,6 +107,33 @@ ssrTable(round(data,2),
                          buttons = c('csv')))
 ```
 
+## Model {.subsection .flexbox .vcenter}
+
+$$\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
+\begin{aligned}
+\color{black}\text{wakefulness}_i = {} & b_0 + b_1\,\text{hours.awake}_i + b_2\,\text{ml.coffee}_i \\
+& + \color{red}b_3\,\text{hours.awake}_i \times \text{ml.coffee}_i \color{black}+ \epsilon_i
+\end{aligned}$$
+
+```{r mod-model-coffee, echo=FALSE, fig.width=9, fig.height=2.8, fig.align='center'}
+# The first Model slide's conceptual diagram with the variables filled in, drawn like L22's
+# "Equivalent models" (grey boxes of equal size, black arrows = the causal claim); the moderator's
+# arrow points at the predictor-outcome path, as in images/moderation.png.
+pos   <- list(hours.awake = c(2, 1), wakefulness = c(10, 1), ml.coffee = c(6, 3.4))
+box.h <- 0.5
+par(mar = c(0.3, 0.3, 0.3, 0.3))
+plot.new()
+plot.window(xlim = c(0, 12), ylim = c(0.3, 4.1))
+box.w <- max(strwidth(names(pos), cex = 1.6)) / 2 + 0.4
+arrows(pos$hours.awake[1] + box.w, 1, pos$wakefulness[1] - box.w, 1, lwd = 2, length = 0.12)
+arrows(pos$ml.coffee[1], pos$ml.coffee[2] - box.h, pos$ml.coffee[1], 1, lwd = 2, length = 0.12)
+for (v in names(pos)) {
+  rect(pos[[v]][1] - box.w, pos[[v]][2] - box.h, pos[[v]][1] + box.w, pos[[v]][2] + box.h,
+       col = "grey90", border = "grey20", lwd = 2)
+  text(pos[[v]][1], pos[[v]][2], v, cex = 1.6)
+}
+```
+
 ## Correlations
 
 ```{r mod-correlations, echo=TRUE}

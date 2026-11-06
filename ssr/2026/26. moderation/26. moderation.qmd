@@ -2,6 +2,7 @@
 title: "26. Moderation"
 author: "Johnny van Doorn"
 date: "6 November 2026"
+view: "https://teams.microsoft.com/meet/3900644644890894?p=1TFhG4SdfS74eRtKa6"
 footer: "Scientific & Statistical Reasoning"
 format:
   revealjs:

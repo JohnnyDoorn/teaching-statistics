@@ -80,5 +80,4 @@ knitr::kable(summaryTable, format = "html", escape = FALSE, align = "lrrrrrrr",
 | Also gives | $R^2$ change, assumption checks | Simple slopes |
 :::
 
-- Same estimates after unticking *Mean-centered moderation*
-- Moderator is just a label, no causal claim (Jane Superbrain 10.1)
+- Same estimates after unticking *Mean-centered moderation* in Process
