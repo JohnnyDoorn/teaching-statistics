@@ -28,6 +28,26 @@ $\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
 
 ![](../../images/moderationplane.png)
 
+<!-- Copied verbatim from lecture 21 (regression_multiple_predictors.qmd, "Assumptions"), 2026-11-05.
+     Where to check each one in JASP: L21's "Checking the assumptions", linked from the exam note. -->
+
+## Assumptions {.subsection .smaller}
+
+A selection from Field (8.3 Bias in linear models):
+
+For simple regression
+
+* Sensitivity
+* Homoscedasticity
+  * See [here](https://johnnydoorn.github.io/teaching-statistics/extra-texts/heteroscedasticity.html) for further illustration
+* Linearity
+* Normality
+
+
+Additionally, for multiple regression
+
+* Multicollinearity (Section 8.9)
+
 <!-- ## Example {.smaller} -->
 
 <!-- Video games are among the favorite online activities for young people: two-thirds of 5–16-year-olds have their own video games console, and 88% of boys aged 8–15 own at least one games console. Although playing violent video games can enhance visuospatial acuity, visual memory, probabilistic inference, and mental rotation, compared to games such as Tetris, these games have also been linked to increased aggression in youths Another predictor of aggression and conduct problems is callous-unemotional traits such as lack of guilt, lack of empathy, and callous use of others for personal gain.  -->
@@ -61,6 +81,7 @@ wakefulness <- intercept + -3 * hours.awake +
                          0.1 * hours.awake * ml.coffee + 
                          error
 # wakefulness <- 50 + scale(wakefulness)*(10)
+wakefulness <- round(wakefulness, 2)   # as in datasets/2026/moderation-coffee.csv, so slides and JASP agree
 ```
 
 
@@ -102,55 +123,71 @@ attach(data)
 ## 3D plot
 
 ```{r mod-3d-plot, echo=FALSE, warning=FALSE, message=FALSE}
-## 3d plot package rgl
-## install.packages('rgl')
-library(rgl)
-
-par3d(mouseMode = "trackball")
-
-plot3d(hours.awake, ml.coffee, wakefulness,
-       #col  = rainbow(100),
-       col  = "red",
-       size = 8) -> my.plot
-
-my.plot
-rglwidget()
+# Same look as the 3D tab of the MultiRegression applet and the L21 "Visual" slide: plot3D() from
+# ../../plotFunctionsSSR.r (sourced by _setup.R). Data only here; planes and surface come later.
+d3     <- data.frame(hours.awake, ml.coffee, wakefulness)
+vars3d <- c(y = "wakefulness", x1 = "hours.awake", x2 = "ml.coffee")
+p3d <- plot3D(d3, model = "none", vars = vars3d, pointName = "Participants")
+p3d$width  <- 900
+p3d$height <- 480
+p3d
 ```
 
-Take it for a spin (does not work on tablet)
+Take it for a spin
 
-## 1 SD planes
+## Descriptives plot
 
-```{r mod-sd-and-quantile-planes, echo=TRUE}
+```{r mod-descriptives-plot, echo=FALSE, warning=FALSE, message=FALSE, fig.width=7, fig.height=4, fig.align='center'}
+# As JASP 0.98.8 draws it: Linear Regression > Descriptives Plots, hours.awake on the horizontal axis,
+# ml.coffee as separate lines, default settings. A scale variable on the horizontal axis gives
+# jaspGraphs::JASPScatterPlot() (palette colorblind3, linear fit + 95% CI per group). The separate-lines
+# variable is binned as jaspRegression 0.96.5 .linregBinScaleVariable() does by default (method "sd",
+# 3 groups): breaks at mean -/+ 0.5 SD, labels Low / Medium / High. coffeeBreaks and coffeeGroup are
+# reused by the coffee-groups 3D slide below.
+coffeeBreaks <- mean(ml.coffee) + c(-0.5, 0.5) * sd(ml.coffee)
+coffeeGroup  <- cut(ml.coffee, breaks = c(-Inf, coffeeBreaks, Inf), labels = c("Low", "Medium", "High"),
+                    include.lowest = TRUE)
+oldPalette <- jaspGraphs::getGraphOption("palette")
+jaspGraphs::setGraphOption("palette", "colorblind3")
+suppressWarnings(print(jaspGraphs::JASPScatterPlot(
+  x = hours.awake, y = wakefulness, group = coffeeGroup, xName = "hours.awake", yName = "wakefulness",
+  showLegend = TRUE, addSmooth = TRUE, addSmoothCI = TRUE, smoothCIValue = 0.95, forceLinearSmooth = TRUE,
+  plotAbove = "none", plotRight = "none", legendTitle = "ml.coffee")))
+jaspGraphs::setGraphOption("palette", oldPalette)
+```
+
+## Coffee groups
+
+```{r mod-coffee-groups, echo=TRUE}
+## Where JASP's descriptives plot splits ml.coffee (default, 3 groups)
+round(mean(ml.coffee) + c(-0.5, 0.5) * sd(ml.coffee), 1)
+```
+
+```{r mod-sd-and-quantile-planes, echo=FALSE}
+# No longer on a slide (the planes now follow the descriptives plot's groups); kept because
+# mod-prediction-surface saves sds and quantiles to moderation.rdata
 sds       <- c(mean(ml.coffee)+(sd(ml.coffee)*c(-1,0,1)))
 quantiles <- as.vector(quantile(ml.coffee,seq(.1,.9,.1)))
 ```
 
 ##
 
-```{r mod-sd-planes-3d-plot, eval=TRUE, echo=FALSE, warning=FALSE, message=FALSE, rgl.useNULL=TRUE}
-my.plot
-
-par3d(mouseMode = "zAxis")
-
-planes3d(a = 0,
-         b = 1,
-         c = 0,
-         d = -sds,
-         #d = -quantiles,
-         alpha=0.7,
-         color = c("blue"))
-
-# rglwidget()
-
-M <- r3dDefaults$userMatrix
-fn <- par3dinterp(time = (0:2)*0.75, userMatrix = list(M, rotate3d(M, pi/2, 0, 0, 1),
-                                                          rotate3d(M, pi/2, 0, 0, 1)) )
-
-rglwidget()
-# %>%
-# playwidget(par3dinterpControl(fn, 0, 3, steps=15),
-#        step = 0.01, loop = TRUE, rate = 0.5)
+```{r mod-coffee-groups-3d-plot, echo=FALSE, warning=FALSE, message=FALSE}
+# The descriptives plot's coffee groups in 3D: points in its colours (colorblind3 for 3 groups: Low,
+# Medium, High) and grey planes at its two cut points (coffeeBreaks, mod-descriptives-plot chunk)
+pPlanes <- plot3D(d3, model = "none", vars = vars3d, pointName = "Participants")
+for (k in seq_along(coffeeBreaks)) {
+  pPlanes <- plotly::add_surface(pPlanes, x = matrix(range(hours.awake), 2, 2), y = matrix(coffeeBreaks[k], 2, 2),
+                                 z = matrix(range(wakefulness), 2, 2, byrow = TRUE), opacity = 0.35,
+                                 showscale = FALSE, hoverinfo = "skip",
+                                 colorscale = list(c(0, 1), rep("grey", 2)))   # CSS name: plotly.js has no grey50
+}
+groupCols <- jaspGraphs::JASPcolors("colorblind3", asFunction = TRUE)(nlevels(coffeeGroup))
+pPlanes <- plotly::style(pPlanes, traces = 1,
+                         marker = list(size = 3, color = groupCols[coffeeGroup], line = list(color = "black", width = 1)))
+pPlanes$width  <- 900
+pPlanes$height <- 520
+pPlanes
 ```
 
 ## Fit model { .subsection}
@@ -200,17 +237,12 @@ save(data, x.pre, y.mod, z.pre, quantiles, sds, file="moderation.rdata")
 
 ## Expected surface
 
-```{r mod-expected-surface, eval=TRUE, echo=FALSE, warning=FALSE, message=FALSE, rgl.useNULL=TRUE}
-my.plot
-
-surface3d(x.pre,y.mod,z.pre, color = c("green"))
-
-aspect3d(1,1,1)
-
-subid <- currentSubscene3d()
-rglwidget(elementId="plot3drgl2", reuse = FALSE)
-
-# rglwidget()
+```{r mod-expected-surface, echo=FALSE, warning=FALSE, message=FALSE}
+# Twisted plane of wakefulness ~ hours.awake * ml.coffee (the fit above), as in the applet's 3D tab
+pSurface <- plot3D(d3, model = "full", vars = vars3d, pointName = "Participants")
+pSurface$width  <- 900
+pSurface$height <- 520
+pSurface
 ```
 
 
@@ -276,16 +308,21 @@ $r^2$ is the proportion of <span style="color: blue;">blue</span> to <span style
 
 ```
   
-## Turn quantitative into categorical?!
+## Turn quantitative into ordinal?!
 
-```{r mod-turn-quantitative-into-categorical}
+```{r mod-turn-quantitative-into-ordinal}
 ## Round to number of cups of coffee, always rounding down
 data$cups.coffee <- data$ml.coffee %/% 150
 ```
 
 ```{r mod-round-to-cups, echo=FALSE}
-write.csv(data, "moderation-coffee.csv", row.names = FALSE)
-ssrTable(round(data,2)[, c(2, 5)], 
+# The overview's copy of the data, for the JASP demo (cups.coffee as continuous, then as categorical):
+# no prediction column; cups.coffee holds 3 integers (0, 1, 2), which JASP imports as ordinal. Rows
+# stable-sorted by cups.coffee, so its levels come in as 0, 1, 2 even with JASP's "Order labels by
+# value" off (Johnny's setting), and 0 is the reference level for everyone.
+coffeeCsv <- data[order(data$cups.coffee), c("hours.awake", "ml.coffee", "wakefulness", "cups.coffee")]
+write.csv(coffeeCsv, datasetsPath("2026", "moderation-coffee.csv"), row.names = FALSE)
+ssrTable(round(data,2)[, c(2, 5)],
           rownames   = FALSE, 
           height     = 350)
 ```

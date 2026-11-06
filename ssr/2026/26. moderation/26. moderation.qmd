@@ -26,6 +26,9 @@ Chapter 10 (§10.1–10.3)
 ```{r child="moderationNames.qmd"}
 ```
 
+```{r child="moderation-regression.qmd"}
+```
+
 
 ## JASP
 
@@ -40,6 +43,19 @@ Chapter 10 (§10.1–10.3)
 - Continuous interactions can be assessed with:
   - Linear regression
   - Process module
+
+## Exam note {.smaller}
+
+- Keep the default settings of each analysis, no need to center by hand
+  - Process module centers for you (*Mean-centered moderation*)
+  - Linear regression does not center
+- So $b_1$ and $b_2$ differ between the two analyses
+  - Process gives the effect at the mean of the other predictor
+  - Linear regression gives the effect when the other predictor is 0
+- The interaction $b_3$ is the same in both
+- Check the assumptions in Linear Regression, not in the Process module
+  - VIF in the model without the interaction
+  - [Checking the assumptions](https://johnnydoorn.github.io/teaching-statistics/ssr/2026/21.%20multiple_regression/21.%20multiple_regression.slide.html#/checking-the-assumptions) (lecture 21)
 
 ## Next Time
 

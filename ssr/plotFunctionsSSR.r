@@ -866,21 +866,26 @@ tCurve <- function(df, alpha = .05, sided = "two", observed = NULL, main = NULL,
 
 # ---- plot3D: identical to plot3D() in ShinyApps/MultiRegression/helpers.R (L21 "Visual" slide and the
 # applet's 3D tab look the same). Edit one, copy to the other, check with diff.
-# The data in 3D with the regression plane of M2 (flat) or M3 (twisted when there is an
-# interaction). plotly rather than rgl (as on the L21 slide), because rgl needs OpenGL
-# libraries on the server.
-plot3D <- function(data, model = "full") {
-  fit <- if (model == "full") lm(Sales ~ Adverts * Airplay, data = data) else lm(Sales ~ Adverts + Airplay, data = data)
-  g1  <- seq(min(data$Adverts), max(data$Adverts), length.out = 30)
-  g2  <- seq(min(data$Airplay), max(data$Airplay), length.out = 30)
-  z   <- outer(g1, g2, function(a, b) predict(fit, newdata = data.frame(Adverts = a, Airplay = b)))
+# The data in 3D with the regression plane of M2 (flat), M3 (twisted when there is an
+# interaction) or no plane (model = "none"). plotly rather than rgl (as on the L21 slide),
+# because rgl needs OpenGL libraries on the server. `vars` names the outcome and the two
+# predictors (also the axis titles); the defaults are the applet's album sales names.
+plot3D <- function(data, model = "full", vars = c(y = "Sales", x1 = "Adverts", x2 = "Airplay"),
+                   pointName = "Albums") {
+  d <- data.frame(y = data[[vars[["y"]]]], x1 = data[[vars[["x1"]]]], x2 = data[[vars[["x2"]]]])
   p <- plotly::plot_ly()
-  p <- plotly::add_markers(p, x = data$Adverts, y = data$Airplay, z = data$Sales, name = "Albums",
+  p <- plotly::add_markers(p, x = d$x1, y = d$x2, z = d$y, name = pointName,
                            marker = list(size = 3, color = "grey", line = list(color = "black", width = 1)))
-  p <- plotly::add_surface(p, x = g1, y = g2, z = t(z), opacity = 0.7, showscale = FALSE, name = "Model",
-                           colorscale = list(c(0, 1), c("darkgreen", "darkgreen")))
+  if (model != "none") {
+    fit <- if (model == "full") lm(y ~ x1 * x2, data = d) else lm(y ~ x1 + x2, data = d)
+    g1  <- seq(min(d$x1), max(d$x1), length.out = 30)
+    g2  <- seq(min(d$x2), max(d$x2), length.out = 30)
+    z   <- outer(g1, g2, function(a, b) predict(fit, newdata = data.frame(x1 = a, x2 = b)))
+    p <- plotly::add_surface(p, x = g1, y = g2, z = t(z), opacity = 0.7, showscale = FALSE, name = "Model",
+                             colorscale = list(c(0, 1), c("darkgreen", "darkgreen")))
+  }
   plotly::layout(p, showlegend = FALSE, margin = list(l = 0, r = 0, b = 0, t = 0),
-                 scene = list(xaxis = list(title = "Adverts"), yaxis = list(title = "Airplay"),
-                              zaxis = list(title = "Sales"), aspectmode = "cube",
+                 scene = list(xaxis = list(title = vars[["x1"]]), yaxis = list(title = vars[["x2"]]),
+                              zaxis = list(title = vars[["y"]]), aspectmode = "cube",
                               camera = list(eye = list(x = -1.3, y = -1.45, z = 0.6))))
 }

@@ -1,0 +1,84 @@
+<!-- Interaction in hierarchical regression, centering (DSUJ 10.3.3) and Process vs. linear regression,
+     added 2026-11-05 on Johnny's request. Refits the coffee data from the raw vectors made in the
+     mod-model chunk of moderationNames.qmd, which runs first (wrapper order); `fit` and `data` are
+     overwritten there, so they are not reused here. Process numbers: the Process module (JASP 0.98.8)
+     centers the continuous variables in an interaction by default (Mean-centered moderation) and fits
+     with lavaan ML, so its b's equal the centered lm() fit and its SEs are sqrt((n - k - 1) / n) times
+     the regression's (checked with lavaan::sem on 2026-11-05). -->
+
+```{r modreg-setup, echo=FALSE}
+dMod  <- data.frame(hours.awake, ml.coffee, wakefulness)
+dCen  <- data.frame(hours.awake = hours.awake - mean(hours.awake),
+                    ml.coffee   = ml.coffee - mean(ml.coffee), wakefulness)
+mMain <- lm(wakefulness ~ hours.awake + ml.coffee, data = dMod)
+mInt  <- lm(wakefulness ~ hours.awake * ml.coffee, data = dMod)
+mCen  <- lm(wakefulness ~ hours.awake * ml.coffee, data = dCen)
+bRaw  <- unname(coef(mInt))
+bCen  <- unname(coef(mCen))
+nMod  <- nrow(dMod)
+r2Mod <- c(0, summary(mMain)$r.squared, summary(mInt)$r.squared)
+kMod  <- c(0, 2, 3)
+df1Mod <- c(NA, diff(kMod))
+df2Mod <- nMod - kMod - 1
+FcMod <- c(NA, (diff(r2Mod) / diff(kMod)) / ((1 - r2Mod[-1]) / df2Mod[-1]))
+pcMod <- c(NA, pf(FcMod[-1], df1Mod[-1], df2Mod[-1], lower.tail = FALSE))
+seRatio <- sqrt((nMod - 3 - 1) / nMod)   # ML (Process) SE / OLS (regression) SE
+f2 <- function(x) formatC(x, format = "f", digits = 2)
+f3 <- function(x) formatC(x, format = "f", digits = 3)
+fp <- function(p) ifelse(is.na(p), "", ifelse(p < .001, "< .001", f3(p)))
+```
+
+# Interaction in hierarchical regression {.section}
+
+## Does the interaction add anything? {.smaller}
+
+```{r modreg-model-summary, echo=FALSE}
+summaryTable <- data.frame(Model = c("M<sub>0</sub>", "M<sub>1</sub>", "M<sub>2</sub>"),
+                           R2 = f3(r2Mod),
+                           adjR2 = f3(c(0, summary(mMain)$adj.r.squared, summary(mInt)$adj.r.squared)),
+                           R2change = f3(c(0, diff(r2Mod))),
+                           Fchange = c("", f3(FcMod[-1])),
+                           df1 = c(0, df1Mod[-1]), df2 = df2Mod, p = fp(pcMod))
+knitr::kable(summaryTable, format = "html", escape = FALSE, align = "lrrrrrrr",
+             col.names = c("Model", "R<sup>2</sup>", "Adjusted R<sup>2</sup>", "R<sup>2</sup> change",
+                           "F change", "df1", "df2", "p"))
+```
+
+<!-- Notes worded as JASP's Model Summary footnotes (jaspRegression 0.96.5 in JASP 0.98.8 joins an
+     interaction's variables with ":" there) -->
+::: {style="font-size: 70%;"}
+*Note.* M~1~ includes hours.awake, ml.coffee\
+*Note.* M~2~ includes hours.awake, ml.coffee, hours.awake:ml.coffee
+:::
+
+## Centering {.smaller}
+
+- With an interaction, $b_1$ and $b_2$ are effects when the other predictor is 0
+- Grand mean centering subtracts the mean from every score, so 0 now means average
+- Leaves $b_3$ alone, but changes interpretation of $b_1$ and $b_2$
+
+::: {style="font-size: 75%;"}
+|   | Not centered | Centered |
+|--------------|---------------|---------------|
+| $b_1$ (hours.awake) | `r f3(bRaw[2])`, at 0 ml coffee | `r f3(bCen[2])`, at the mean (`r round(mean(ml.coffee))` ml) |
+| $b_2$ (ml.coffee) | `r f3(bRaw[3])`, at 0 hours awake | `r f3(bCen[3])`, at the mean (`r round(mean(hours.awake), 1)` hours) |
+| $b_3$ (interaction) | `r f3(bRaw[4])` | `r f3(bCen[4])` |
+:::
+
+<!-- Centered b1 = uncentered b1 + b3 x mean(ml.coffee), and likewise for b2 with mean(hours.awake), so the
+     shift grows with the interaction (and with how far the other predictor's mean is from 0). -->
+- Impact of centering grows as the interaction effect grows
+
+## Process module or linear regression? {.smaller}
+
+::: {style="font-size: 75%;"}
+|   | Linear regression | Process module |
+|--------------|---------------|---------------|
+| $b_3$ (interaction) | `r f3(bRaw[4])` | `r f3(bCen[4])` |
+| $b_1$, $b_2$ | `r f3(bRaw[2])`, `r f3(bRaw[3])` (not centered) | `r f3(bCen[2])`, `r f3(bCen[3])` (centered by default) |
+| Test | $t$ | $z$, SEs slightly smaller ($\times$ `r f2(seRatio)` here) |
+| Also gives | $R^2$ change, assumption checks | Simple slopes |
+:::
+
+- Same estimates after unticking *Mean-centered moderation*
+- Moderator is just a label, no causal claim (Jane Superbrain 10.1)
