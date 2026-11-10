@@ -387,6 +387,11 @@
       margin-right: 0; 
     }
   </style>
+  <!-- MathJax 2.7 (Quarto 1.3's revealjs) prefers the system STIX fonts, which on macOS lack the
+       \mathcal glyphs, so M_0 showed as a box. Use MathJax's own web fonts instead. -->
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"HTML-CSS": {availableFonts: [], preferredFont: null, webFont: "TeX"}});
+  </script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -677,7 +682,7 @@ Johnny van Doorn
 <p><img src="../../images/ANOVA_BeerType.png" alt="Bayes factor table" width="550"></p>
 </div>
 </section>
-<section id="single-model-inference-posteriors-for-correctidentify" class="slide level2">
+<section id="single-model-inference-posteriors-for-correctidentify" class="slide level2 smaller scrollable">
 <h2>Single model inference: Posteriors for CorrectIdentify</h2>
 <div style="text-align: center;">
 <p><img src="../../images/ANOVA_CorrectIdentify.png" alt="Bayes factor table" width="450"></p>
@@ -711,6 +716,38 @@ Johnny van Doorn
 <li>Need to specify prior distributions</li>
 </ul></li>
 </ul>
+<!-- Block 3 exam-note recap (last lecture before DT3, as L20 did for block 2): the L22 and L26
+     notes, read from their lectures' own files so the text lives in one place. L21 has no exam
+     note (his call, 2026-10-25); L28 and L29 have none yet. -->
+</section>
+<section id="exam-note-mediation-lecture-22" class="slide level2 smaller">
+<h2>Exam note: mediation (lecture 22)</h2>
+<ul>
+<li>For the exam, max 1 mediator</li>
+<li>Read paths <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span> and <span class="math inline">\(c\)</span> from the <em>Path coefficients</em> table</li>
+<li>Test mediation with the <span class="math inline">\(p\)</span>-value of the indirect effect <span class="math inline">\(a \times b\)</span></li>
+</ul>
+</section>
+<section id="exam-note-moderation-lecture-26" class="slide level2 smaller">
+<h2>Exam note: moderation (lecture 26)</h2>
+<ul>
+<li>Keep the default settings of each analysis, no need to center by hand
+<ul>
+<li>Process module centers for you (<em>Mean-centered moderation</em>)</li>
+<li>Linear regression does not center</li>
+</ul></li>
+<li>So <span class="math inline">\(b_1\)</span> and <span class="math inline">\(b_2\)</span> differ between the two analyses
+<ul>
+<li>Process gives the effect at the mean of the other predictor</li>
+<li>Linear regression gives the effect when the other predictor is 0</li>
+</ul></li>
+<li>The interaction <span class="math inline">\(b_3\)</span> is the same in both</li>
+<li>Check the assumptions in Linear Regression, not in the Process module
+<ul>
+<li>VIF in the model without the interaction</li>
+<li><a href="https://johnnydoorn.github.io/teaching-statistics/ssr/2026/21.%20multiple_regression/21.%20multiple_regression.slide.html#/checking-the-assumptions">Checking the assumptions</a> (lecture 21)</li>
+</ul></li>
+</ul>
 </section>
 <section id="recommended-exercises" class="slide level2">
 <h2>Recommended Exercises</h2>
@@ -720,6 +757,11 @@ Johnny van Doorn
 <li><a href="https://discoverjasp.com/pages/labcoat_leni#chapter-9">Chapter 9 - T-test</a></li>
 <li><a href="https://discoverjasp.com/pages/labcoat_leni#chapter-11">Chapter 11 - ANOVA</a></li>
 <li><a href="https://discoverjasp.com/pages/labcoat_leni#chapter-13">Chapter 13 - Factorial ANOVA</a></li>
+</ul></li>
+<li>Exercises in the reading, Chapter 7
+<ul>
+<li><a href="https://johnnydoorn.github.io/IntroductionBayesianInference/07-anova.html#even-more-beer-analyses---interaction-effect">Beer tasting interaction</a></li>
+<li><a href="https://johnnydoorn.github.io/IntroductionBayesianInference/07-anova.html#mais-study-drug">Mai’s study drug</a></li>
 </ul></li>
 </ul>
 </section>

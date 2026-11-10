@@ -75,7 +75,7 @@ legend("topright", legend = paste("k =",df), col = mycols, lty = 1, bty = "n")
 
 ## Experiment {.flexbox .vcenter}
 
-<a href=""><img src="../../images/qr_hngxh.png" alt="edu.nl/hngxh" /></a>
+<a href="https://edu.nl/hngxh"><img src="../../images/qr_hngxh.png" alt="edu.nl/hngxh" /></a>
 
 
 ## Data {.smaller .scrollable}
@@ -214,7 +214,7 @@ Calculates exact $\chi^2$ for small samples (at least one cell of the table has 
 
 Calculate all possible permutations.
 
-* Exptected cell size < 5
+* Expected cell size < 5
 
 ## Yates's correction {.smaller}
 
@@ -280,8 +280,8 @@ The extrovert/introvert ratio for digital and live audiences:
 * Digital $\text{Odds}_{EI} = \frac{ `r odds[1,1]` }{ `r odds[1,2]` }$ = `r odds[1,1] / odds[1,2]`
 * Live $\text{Odds}_{EI} = \frac{ `r odds[2,1]` }{ `r odds[2,2]` }$ = `r odds[2,1] / odds[2,2]`
 
-In the digital responses, there are +- `r round(odds[1,1] / odds[1,2], 2)` times as many extroverts than introverts.
-In the live responses, there  are +- `r round(odds[2,1] / odds[2,2], 2)` times as many extroverts than introverts.
+In the digital responses, there are +- `r round(odds[1,1] / odds[1,2], 2)` times as many extroverts as introverts.
+In the live responses, there  are +- `r round(odds[2,1] / odds[2,2], 2)` times as many extroverts as introverts.
 
 ## Odds {.smaller}
 
@@ -289,13 +289,13 @@ In the live responses, there  are +- `r round(odds[2,1] / odds[2,2], 2)` times a
 odds
 ```
 
-Alternatively, we can look at the ratio's of digital/live for extroverts and introverts:
+Alternatively, we can look at the ratios of digital/live for extroverts and introverts:
 
 * Extrovert $\text{Odds}_{DL} = \frac{ `r odds[1,1]` }{ `r odds[2,1]` }$ = `r odds[1,1] / odds[2,1]`
 * Introvert $\text{Odds}_{DL} = \frac{ `r odds[1,2]` }{ `r odds[2,2]` }$ = `r odds[1,2] / odds[2,2]`
 
-For the extroverts, there are +- `r round(odds[1,1] / odds[2,1], 2)` times as many digital viewers than live viewers.
-For the introverts, there are +- `r round(odds[1,2] / odds[2,2], 2)` times as many digital viewers than live viewers.
+For the extroverts, there are +- `r round(odds[1,1] / odds[2,1], 2)` times as many digital viewers as live viewers.
+For the introverts, there are +- `r round(odds[1,2] / odds[2,2], 2)` times as many digital viewers as live viewers.
 
 ## Odds ratio
 

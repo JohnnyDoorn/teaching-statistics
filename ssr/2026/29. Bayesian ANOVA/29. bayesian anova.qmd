@@ -8,6 +8,7 @@ format:
   revealjs:
     output-ext: slide.html
     css: ../../ajohnson.css
+    include-in-header: ../../mathjax-webfonts.html
   html: default
 css: ../../ajohnson.css
 ---
@@ -46,12 +47,29 @@ A Brief Introduction to Bayesian Inference
   - Gradual assessment of evidence
   - Need to specify prior distributions
 
+<!-- Block 3 exam-note recap (last lecture before DT3, as L20 did for block 2): the L22 and L26
+     notes, read from their lectures' own files so the text lives in one place. L21 has no exam
+     note (his call, 2026-10-25); L28 and L29 have none yet. -->
+
+## Exam note: mediation (lecture 22) {.smaller}
+
+```{r child="../22. mediation/exam-note.qmd"}
+```
+
+## Exam note: moderation (lecture 26) {.smaller}
+
+```{r child="../26. moderation/exam-note.qmd"}
+```
+
 ## Recommended Exercises
 
 - Revisit Labcoat Leni's and do a Bayesian analysis
   - [Chapter 9 - T-test](https://discoverjasp.com/pages/labcoat_leni#chapter-9)
   - [Chapter 11 - ANOVA](https://discoverjasp.com/pages/labcoat_leni#chapter-11)
   - [Chapter 13 - Factorial ANOVA](https://discoverjasp.com/pages/labcoat_leni#chapter-13)
+- Exercises in the reading, Chapter 7
+  - [Beer tasting interaction](https://johnnydoorn.github.io/IntroductionBayesianInference/07-anova.html#even-more-beer-analyses---interaction-effect)
+  - [Mai's study drug](https://johnnydoorn.github.io/IntroductionBayesianInference/07-anova.html#mais-study-drug)
 
 ```{r child="../../footer.qmd"}
 ```

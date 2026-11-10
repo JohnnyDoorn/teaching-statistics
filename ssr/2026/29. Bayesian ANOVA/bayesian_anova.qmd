@@ -189,7 +189,7 @@ curve(myCauchy(x, scale = 0.707), from = -3, to = 3, n = 1e3, col = cols[3], lwd
 <img src="../../images/ANOVA_BeerType.png" alt="Bayes factor table" width="550"/>
 </div>
 
-## Single model inference: Posteriors for CorrectIdentify
+## Single model inference: Posteriors for CorrectIdentify {.smaller .scrollable}
 <div style="text-align: center;">
 <img src="../../images/ANOVA_CorrectIdentify.png" alt="Bayes factor table" width="450"/>
 </div>

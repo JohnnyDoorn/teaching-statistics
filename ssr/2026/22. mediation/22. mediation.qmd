@@ -44,9 +44,8 @@ Chapter 10 (§10.2, §10.4–10.7)
 
 ## Exam note {.smaller}
 
-- For the exam, max 1 mediator 
-- Read paths $a$, $b$ and $c$ from the *Path coefficients* table
-- Test mediation with the $p$-value of the indirect effect $a \times b$
+```{r child="exam-note.qmd"}
+```
 
 ## Next Time
 
