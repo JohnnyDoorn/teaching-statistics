@@ -3,7 +3,7 @@ title: "28. Chi-squared test"
 subtitle: "Contingency Tables"
 author: "Johnny van Doorn"
 date: "11 November 2026"
-view: "https://teams.microsoft.com/meet/3879269995522814?p=lvW11f9UCQLg60HCKZ"
+view: "https://amsuni-my.sharepoint.com/:v:/g/personal/j_b_vandoorn_uva_nl/IQBKusJAosgVSq7mlGLC48BXAc8htHSElCZoZ6zz9B9cICE?e=eTSA3H&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D"
 footer: "Scientific & Statistical Reasoning"
 format:
   revealjs:
@@ -24,6 +24,11 @@ In this lecture we aim to:
 Chapter 16 (§16.1–16.10)
 </div>
 
+
+<!-- Next year (his call, 2026-11-11): run the lecture on the book's cats data (DSUJ §16.3.1,
+     Training x Dance) instead of the live class answers, which is cleaner. That touches the
+     Experiment and Data slides, the year switch in the data chunk, and the More examples
+     section, which already has the cats example. -->
 
 ```{r child="chi_square_test.qmd"}
 ```
