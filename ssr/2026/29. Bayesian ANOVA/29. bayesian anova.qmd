@@ -3,6 +3,7 @@ title: "29. Bayesian ANOVA"
 subtitle: "Parameter estimation & hypothesis testing"
 author: "Johnny van Doorn"
 date: "13 November 2026"
+view: "https://teams.microsoft.com/meet/3118441585744989?p=878mfhx1HSaMCUw4OS"
 footer: "Scientific & Statistical Reasoning"
 format:
   revealjs:
@@ -49,7 +50,8 @@ A Brief Introduction to Bayesian Inference
 
 <!-- Block 3 exam-note recap (last lecture before DT3, as L20 did for block 2): the L22 and L26
      notes, read from their lectures' own files so the text lives in one place. L21 has no exam
-     note (his call, 2026-10-25); L28 and L29 have none yet. -->
+     note (his call, 2026-10-25). L28's and L29's notes were added 2026-11-10 (his yes); L28's
+     own deck leaves its note out, so nothing reached students before he had checked the text. -->
 
 ## Exam note: mediation (lecture 22) {.smaller}
 
@@ -60,6 +62,20 @@ A Brief Introduction to Bayesian Inference
 
 ```{r child="../26. moderation/exam-note.qmd"}
 ```
+
+## Exam note: chi-squared test (lecture 28) {.smaller}
+
+```{r child="../28. chi_squared_test/exam-note.qmd"}
+```
+
+## Exam note: Bayesian ANOVA (lecture 29) {.smaller}
+
+```{r child="exam-note.qmd"}
+```
+
+## Next Time
+
+- Interim exam 3 (Thu 19 Nov)
 
 ## Recommended Exercises
 

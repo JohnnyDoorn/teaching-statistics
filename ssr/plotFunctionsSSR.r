@@ -129,8 +129,10 @@ visualize_chisq_base <- function(H, df, section = "upper", col = "skyblue", myLi
   # Add text showing p-value
   if (section == "upper") {
     pval <- pchisq(H, df, lower.tail = FALSE)
+    # A p that rounds to 0 would print as "= 0", so say "< 0.0001" instead.
+    pText <- if (round(pval, 4) == 0) "< 0.0001" else paste("=", round(pval, 4))
     legend("topright",
-           legend = bquote("P(" * chi^2 >= .(round(H, 3)) * ") = " * .(round(pval, 4))),
+           legend = bquote("P(" * chi^2 >= .(round(H, 3)) * ") " * .(pText)),
            bty = "n")
   } else if (section == "lower") {
     pval <- pchisq(H, df)

@@ -27,11 +27,11 @@ barplot(rep(1/11, 11), names.arg = 0:10, xlab = "Number of heads", ylab = "Likel
         main = "Likely Outcomes under Alex's Model", col = cols[4], ylim = c(0,0.32))
 barplot(c(rep(0, 8), 1/11), add = TRUE, col = cols[6])
 ```
-- Sarah's model has a marginal likelihood of `r round(dbinom(8, 10, 0.5), 2)` for 8 heads
-- Alex's model has a marginal likelihood of `r round((1/11), 2)` for 8 heads
-- $\text{BF}_{SA} =$  `r round(dbinom(8, 10, 0.5), 2)` / `r round(1/11, 2)` =  `r round(round(dbinom(8, 10, 0.5), 2) / round(1/11, 2), 2)`
-- The data are `r round(round(dbinom(8, 10, 0.5), 2) / round(1/11, 2), 2)` times more likely under Sarah's model than under Alex's model
-- The data are `r round( round(1/11, 2) / round(dbinom(8, 10, 0.5), 2), 2)` times more likely under Alex's model than under Sarah's model
+- Sarah's model has a marginal likelihood of `r round(dbinom(8, 10, 0.5), 4)` for 8 heads
+- Alex's model has a marginal likelihood of `r round((1/11), 4)` for 8 heads
+- $\text{BF}_{SA} =$  `r round(dbinom(8, 10, 0.5), 4)` / `r round(1/11, 4)` =  `r round(round(dbinom(8, 10, 0.5), 4) / round(1/11, 4), 2)`
+- The data are `r round(round(dbinom(8, 10, 0.5), 4) / round(1/11, 4), 2)` times more likely under Sarah's model than under Alex's model
+- The data are `r round( round(1/11, 4) / round(dbinom(8, 10, 0.5), 4), 2)` times more likely under Alex's model than under Sarah's model
 
 ## Heuristics for BF {.subsection}
 

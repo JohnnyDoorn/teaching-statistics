@@ -1,0 +1,5 @@
+- Keep the default settings of each analysis
+- Label the evidence with the *Heuristics for BF* table (anecdotal to extreme)
+- *Model Comparison* puts the best model on top
+  - $\text{BF}_{10}$ compares each model with that best model
+- *Analysis of Effects* gives the evidence for each effect ($\text{BF}_{\text{incl}}$)

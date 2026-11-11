@@ -3,6 +3,7 @@ title: "28. Chi-squared test"
 subtitle: "Contingency Tables"
 author: "Johnny van Doorn"
 date: "11 November 2026"
+view: "https://teams.microsoft.com/meet/3879269995522814?p=lvW11f9UCQLg60HCKZ"
 footer: "Scientific & Statistical Reasoning"
 format:
   revealjs:

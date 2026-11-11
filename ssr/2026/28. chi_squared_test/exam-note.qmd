@@ -1,0 +1,6 @@
+- Fisher's exact test when an expected count is below 5 (*Cells* → *Expected*)
+  - In JASP via *Statistics* → *Odds ratio (2x2 only)*
+- No Yates's correction (*χ² continuity correction*)
+- Odds ratio from the observed counts
+  - The question tells you which odds go on top
+  - JASP gives the log odds ratio by default (*Log Odds Ratio*)

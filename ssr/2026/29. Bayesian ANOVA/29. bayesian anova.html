@@ -139,6 +139,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#recap" id="toc-recap" class="nav-link" data-scroll-target="#recap">Recap</a></li>
   <li><a href="#exam-note-mediation-lecture-22" id="toc-exam-note-mediation-lecture-22" class="nav-link" data-scroll-target="#exam-note-mediation-lecture-22">Exam note: mediation (lecture 22)</a></li>
   <li><a href="#exam-note-moderation-lecture-26" id="toc-exam-note-moderation-lecture-26" class="nav-link" data-scroll-target="#exam-note-moderation-lecture-26">Exam note: moderation (lecture 26)</a></li>
+  <li><a href="#exam-note-chi-squared-test-lecture-28" id="toc-exam-note-chi-squared-test-lecture-28" class="nav-link" data-scroll-target="#exam-note-chi-squared-test-lecture-28">Exam note: chi-squared test (lecture 28)</a></li>
+  <li><a href="#exam-note-bayesian-anova-lecture-29" id="toc-exam-note-bayesian-anova-lecture-29" class="nav-link" data-scroll-target="#exam-note-bayesian-anova-lecture-29">Exam note: Bayesian ANOVA (lecture 29)</a></li>
+  <li><a href="#next-time" id="toc-next-time" class="nav-link" data-scroll-target="#next-time">Next Time</a></li>
   <li><a href="#recommended-exercises" id="toc-recommended-exercises" class="nav-link" data-scroll-target="#recommended-exercises">Recommended Exercises</a></li>
   <li><a href="#contact" id="toc-contact" class="nav-link" data-scroll-target="#contact">Contact</a></li>
   </ul></li>
@@ -365,11 +368,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <ul>
-<li>Sarah’s model has a marginal likelihood of 0.04 for 8 heads</li>
-<li>Alex’s model has a marginal likelihood of 0.09 for 8 heads</li>
-<li><span class="math inline">\(\text{BF}_{SA} =\)</span> 0.04 / 0.09 = 0.44</li>
-<li>The data are 0.44 times more likely under Sarah’s model than under Alex’s model</li>
-<li>The data are 2.25 times more likely under Alex’s model than under Sarah’s model</li>
+<li>Sarah’s model has a marginal likelihood of 0.0439 for 8 heads</li>
+<li>Alex’s model has a marginal likelihood of 0.0909 for 8 heads</li>
+<li><span class="math inline">\(\text{BF}_{SA} =\)</span> 0.0439 / 0.0909 = 0.48</li>
+<li>The data are 0.48 times more likely under Sarah’s model than under Alex’s model</li>
+<li>The data are 2.07 times more likely under Alex’s model than under Sarah’s model</li>
 </ul>
 </section>
 <section id="heuristics-for-bf" class="level2 subsection">
@@ -597,7 +600,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <!-- Block 3 exam-note recap (last lecture before DT3, as L20 did for block 2): the L22 and L26
      notes, read from their lectures' own files so the text lives in one place. L21 has no exam
-     note (his call, 2026-10-25); L28 and L29 have none yet. -->
+     note (his call, 2026-10-25). L28's and L29's notes were added 2026-11-10 (his yes); L28's
+     own deck leaves its note out, so nothing reached students before he had checked the text. -->
 </section>
 <section id="exam-note-mediation-lecture-22" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="exam-note-mediation-lecture-22">Exam note: mediation (lecture 22)</h2>
@@ -626,6 +630,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>VIF in the model without the interaction</li>
 <li><a href="https://johnnydoorn.github.io/teaching-statistics/ssr/2026/21.%20multiple_regression/21.%20multiple_regression.slide.html#/checking-the-assumptions">Checking the assumptions</a> (lecture 21)</li>
 </ul></li>
+</ul>
+</section>
+<section id="exam-note-chi-squared-test-lecture-28" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="exam-note-chi-squared-test-lecture-28">Exam note: chi-squared test (lecture 28)</h2>
+<ul>
+<li>Fisher’s exact test when an expected count is below 5 (<em>Cells</em> → <em>Expected</em>)
+<ul>
+<li>In JASP via <em>Statistics</em> → <em>Odds ratio (2x2 only)</em></li>
+</ul></li>
+<li>No Yates’s correction (<em>χ² continuity correction</em>)</li>
+<li>Odds ratio from the observed counts
+<ul>
+<li>The question tells you which odds go on top</li>
+<li>JASP gives the log odds ratio by default (<em>Log Odds Ratio</em>)</li>
+</ul></li>
+</ul>
+</section>
+<section id="exam-note-bayesian-anova-lecture-29" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="exam-note-bayesian-anova-lecture-29">Exam note: Bayesian ANOVA (lecture 29)</h2>
+<ul>
+<li>Keep the default settings of each analysis</li>
+<li>Label the evidence with the <em>Heuristics for BF</em> table (anecdotal to extreme)</li>
+<li><em>Model Comparison</em> puts the best model on top
+<ul>
+<li><span class="math inline">\(\text{BF}_{10}\)</span> compares each model with that best model</li>
+</ul></li>
+<li><em>Analysis of Effects</em> gives the evidence for each effect (<span class="math inline">\(\text{BF}_{\text{incl}}\)</span>)</li>
+</ul>
+</section>
+<section id="next-time" class="level2">
+<h2 class="anchored" data-anchor-id="next-time">Next Time</h2>
+<ul>
+<li>Interim exam 3 (Thu 19 Nov)</li>
 </ul>
 </section>
 <section id="recommended-exercises" class="level2">

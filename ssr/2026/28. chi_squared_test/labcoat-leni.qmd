@@ -30,5 +30,5 @@ Do yes/no answers differ between professions? One test for each of the three que
 [Data (.jasp)](https://discoverjasp.com/repository/dsj1_data/data/beckham_1929.jasp) · [Results (.jasp)](https://discoverjasp.com/repository/dsj1_leni/leni_16b.jasp) · [Results (.html)](https://discoverjasp.com/repository/dsj1_leni/leni_16b.html)
 
 ::: {.callout-note}
-The 1929 phrasing may read as controversial today, but the study is a landmark. With just three simple questions, pioneering school psychologist [Albert Sidney Beckham](https://en.wikipedia.org/wiki/Albert_Sidney_Beckham) (1897–1964) illuminated big real-world issues for a marginalized group, issues that mattered to hundreds of thousands of people.
+This study asked three simple questions, yet the data are fascinating. Pioneering school psychologist [Albert Sidney Beckham](https://en.wikipedia.org/wiki/Albert_Sidney_Beckham) (1897–1964) raised further hypotheses that could be tested, it unearthed very different views in different professions, and it illuminated very important social and psychological issues. 
 :::
