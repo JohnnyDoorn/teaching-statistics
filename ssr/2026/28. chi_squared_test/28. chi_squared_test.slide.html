@@ -492,8 +492,8 @@ Johnny van Doorn
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-cd3b7b0c60a750089e6f" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-cd3b7b0c60a750089e6f">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["Cats","Dogs","Dogs","Dogs","Dogs","Cats","Dogs","Cats","Cats","Cats","Dogs","Dogs","Cats","Other","Cats","Cats","Dogs","Cats","Cats","Other","Cats","Dogs","Dogs","Cats","Dogs","Dogs","Other","Dogs","Cats","Dogs","Cats","Cats","Dogs","Dogs","Dogs","Other","Other","Cats","Cats","Other","Cats","Cats","Dogs","Dogs","Cats","Cats","Dogs","Dogs","Cats","Dogs","Other","Dogs"],["Live","Live","Live","Live","Live","Live","Live","Live","Digital","Live","Live","Live","Live","Live","Live","Digital","Live","Live","Live","Live","Live","Live","Live","Digital","Live","Digital","Live","Digital","Live","Digital","Digital","Digital","Live","Digital","Digital","Live","Live","Live","Digital","Live","Digital","Digital","Digital","Digital","Digital","Digital","Digital","Digital","Digital","Digital","Digital","Digital"],["Introvert","Extrovert","Extrovert","Introvert","Extrovert","Introvert","Introvert","Introvert","Introvert","Extrovert","Extrovert","Introvert","Extrovert","Extrovert","Introvert","Introvert","Introvert","Introvert","Introvert","Extrovert","Extrovert","Extrovert","Extrovert","Introvert","Introvert","Extrovert","Introvert","Introvert","Introvert","Extrovert","Introvert","Introvert","Extrovert","Introvert","Introvert","Introvert","Extrovert","Introvert","Extrovert","Introvert","Introvert","Introvert","Extrovert","Extrovert","Introvert","Extrovert","Extrovert","Extrovert","Introvert","Extrovert","Introvert","Extrovert"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Animal<\/th>\n      <th>Lecture<\/th>\n      <th>Personality<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":350,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"name":"Animal","targets":0},{"name":"Lecture","targets":1},{"name":"Personality","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-d414785f3ce774ef8e5d" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-d414785f3ce774ef8e5d">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["Dogs","Cats","Dogs","Other","Dogs","Cats","Dogs","Dogs","Cats","Cats","Cats","Cats","Dogs","Dogs","Dogs","Dogs","Cats","Cats","Dogs","Other","Dogs","Cats","Dogs","Cats","Other","Dogs","Cats","Other","Dogs","Dogs","Cats","Dogs","Cats","Cats","Cats","Dogs","Cats","Dogs","Cats","Cats","Dogs","Cats","Cats","Dogs","Cats","Cats","Dogs","Dogs","Cats","Cats","Dogs","Dogs","Cats","Cats","Dogs","Dogs","Dogs","Dogs","Cats","Cats","Dogs","Dogs","Dogs","Cats"],["Live","Live","Live","Live","Digital","Live","Live","Live","Live","Live","Live","Live","Live","Live","Live","Live","Live","Live","Live","Live","Live","Live","Live","Live","Digital","Digital","Live","Live","Live","Live","Digital","Live","Digital","Live","Live","Digital","Live","Digital","Digital","Live","Digital","Digital","Live","Digital","Live","Digital","Live","Live","Digital","Digital","Digital","Live","Digital","Live","Digital","Live","Live","Digital","Digital","Digital","Digital","Live","Digital","Digital"],["Introvert","Introvert","Introvert","Extrovert","Introvert","Introvert","Introvert","Introvert","Extrovert","Introvert","Introvert","Introvert","Extrovert","Introvert","Introvert","Introvert","Extrovert","Introvert","Extrovert","Introvert","Extrovert","Extrovert","Introvert","Introvert","Introvert","Introvert","Extrovert","Extrovert","Extrovert","Extrovert","Extrovert","Introvert","Extrovert","Introvert","Introvert","Extrovert","Introvert","Extrovert","Extrovert","Extrovert","Introvert","Introvert","Introvert","Extrovert","Introvert","Extrovert","Introvert","Extrovert","Extrovert","Extrovert","Introvert","Introvert","Introvert","Extrovert","Extrovert","Introvert","Extrovert","Extrovert","Introvert","Extrovert","Introvert","Introvert","Extrovert","Introvert"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Animal<\/th>\n      <th>Lecture<\/th>\n      <th>Personality<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":350,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"name":"Animal","targets":0},{"name":"Lecture","targets":1},{"name":"Personality","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </small><p><small></small></p>
@@ -506,11 +506,11 @@ Johnny van Doorn
 <div class="cell-output cell-output-stdout">
 <pre><code>         Personality
 Lecture   Extrovert Introvert
-  Digital        10        13
-  Live           13        16</code></pre>
+  Digital        13        10
+  Live           15        26</code></pre>
 </div>
 </div>
-<p><span class="math inline">\(\text{observed}_{ij} = \begin{pmatrix} 10 &amp; 13 \\ 13 &amp; 16 \\ \end{pmatrix}\)</span></p>
+<p><span class="math inline">\(\text{observed}_{ij} = \begin{pmatrix} 13 &amp; 10 \\ 15 &amp; 26 \\ \end{pmatrix}\)</span></p>
 </section>
 <section id="calculating-the-model-predictions" class="slide level2 subsection">
 <h2>Calculating the model predictions</h2>
@@ -526,9 +526,9 @@ Lecture   Extrovert Introvert
 <div class="cell-output cell-output-stdout">
 <pre><code>         Personality
 Lecture   Extrovert Introvert Sum
-  Digital        10        13  23
-  Live           13        16  29
-  Sum            23        29  52</code></pre>
+  Digital        13        10  23
+  Live           15        26  41
+  Sum            28        36  64</code></pre>
 </div>
 </div>
 </section>
@@ -546,11 +546,11 @@ Lecture   Extrovert Introvert Sum
 <span id="cb5-2"><a href="#cb5-2"></a>pExtrovert <span class="ot">&lt;-</span> totExt <span class="sc">/</span> n    <span class="co"># P(extrovert), column total / n</span></span>
 <span id="cb5-3"><a href="#cb5-3"></a>pDigital <span class="sc">*</span> pExtrovert <span class="sc">*</span> n   <span class="co"># predicted number of digital extroverts</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> Digital 
-10.17308 </code></pre>
+<pre><code>Digital 
+10.0625 </code></pre>
 </div>
 </div>
-<p><span class="math inline">\(\small \text{prediction}_{\text{digital, extrovert}} = \underbrace{\dfrac{23}{52}}_{P(\text{digital})} \times \underbrace{\dfrac{23}{52}}_{P(\text{extrovert})} \times \underbrace{\;52\;}_{n} = \dfrac{\text{row total} \times \text{column total}}{n} = 10.17\)</span></p>
+<p><span class="math inline">\(\small \text{prediction}_{\text{digital, extrovert}} = \underbrace{\dfrac{23}{64}}_{P(\text{digital})} \times \underbrace{\dfrac{28}{64}}_{P(\text{extrovert})} \times \underbrace{\;64\;}_{n} = \dfrac{\text{row total} \times \text{column total}}{n} = 10.06\)</span></p>
 </section>
 <section id="calculating-the-model" class="slide level2 smaller">
 <h2>Calculating the model</h2>
@@ -559,11 +559,11 @@ Lecture   Extrovert Introvert Sum
 <div class="cell-output cell-output-stdout">
 <pre><code>         Personality
 Lecture   Extrovert Introvert
-  Digital  10.17308  12.82692
-  Live     12.82692  16.17308</code></pre>
+  Digital   10.0625   12.9375
+  Live      17.9375   23.0625</code></pre>
 </div>
 </div>
-<p><span class="math inline">\(\text{prediction}_{ij} = \begin{pmatrix} 10.1730769 &amp; 12.8269231 \\ 12.8269231 &amp; 16.1730769 \\ \end{pmatrix}\)</span></p>
+<p><span class="math inline">\(\text{prediction}_{ij} = \begin{pmatrix} 10.0625 &amp; 12.9375 \\ 17.9375 &amp; 23.0625 \\ \end{pmatrix}\)</span></p>
 </section>
 <section id="error-observed---model" class="slide level2 subsection smaller">
 <h2>Error = Observed - Model</h2>
@@ -572,22 +572,22 @@ Lecture   Extrovert Introvert
 <div class="cell-output cell-output-stdout">
 <pre><code>         Personality
 Lecture   Extrovert Introvert
-  Digital        10        13
-  Live           13        16</code></pre>
+  Digital        13        10
+  Live           15        26</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>modelPredictions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         Personality
 Lecture   Extrovert Introvert
-  Digital  10.17308  12.82692
-  Live     12.82692  16.17308</code></pre>
+  Digital   10.0625   12.9375
+  Live      17.9375   23.0625</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>observed <span class="sc">-</span> modelPredictions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         Personality
-Lecture    Extrovert  Introvert
-  Digital -0.1730769  0.1730769
-  Live     0.1730769 -0.1730769</code></pre>
+Lecture   Extrovert Introvert
+  Digital    2.9375   -2.9375
+  Live      -2.9375    2.9375</code></pre>
 </div>
 </div>
 </section>
@@ -599,7 +599,7 @@ Lecture    Extrovert  Introvert
 <span id="cb14-2"><a href="#cb14-2"></a>chi.squared <span class="ot">&lt;-</span> <span class="fu">sum</span>((observed <span class="sc">-</span> modelPredictions)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> modelPredictions)</span>
 <span id="cb14-3"><a href="#cb14-3"></a>chi.squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.00946753</code></pre>
+<pre><code>[1] 2.379707</code></pre>
 </div>
 </div>
 </section>
@@ -626,12 +626,12 @@ Lecture    Extrovert  Introvert
 <div class="cell-output cell-output-stdout">
 <pre><code>         Personality
 Lecture   Extrovert Introvert
-  Digital  10.17308  12.82692
-  Live     12.82692  16.17308</code></pre>
+  Digital   10.0625   12.9375
+  Live      17.9375   23.0625</code></pre>
 </div>
 </div>
 <ul>
-<li>Smallest expected count is 10.17, so Pearson’s <span class="math inline">\(\chi^2\)</span> holds</li>
+<li>Smallest expected count is 10.06, so Pearson’s <span class="math inline">\(\chi^2\)</span> holds</li>
 <li>In JASP via Cells → Counts → <em>Expected</em></li>
 </ul>
 </section>
@@ -659,9 +659,9 @@ Lecture   Extrovert Introvert
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>(observed <span class="sc">-</span> modelPredictions) <span class="sc">/</span> <span class="fu">sqrt</span>(modelPredictions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         Personality
-Lecture     Extrovert   Introvert
-  Digital -0.05426415  0.04832567
-  Live     0.04832567 -0.04303708</code></pre>
+Lecture    Extrovert  Introvert
+  Digital  0.9260297 -0.8166815
+  Live    -0.6935806  0.6116806</code></pre>
 </div>
 </div>
 </section>
@@ -673,8 +673,8 @@ Lecture     Extrovert   Introvert
 <div class="cell-output cell-output-stdout">
 <pre><code>         Personality
 Lecture   Extrovert Introvert
-  Digital        10        13
-  Live           13        16</code></pre>
+  Digital        13        10
+  Live           15        26</code></pre>
 </div>
 </div>
 
@@ -686,7 +686,7 @@ Lecture   Extrovert Introvert
 
 <img data-src="28.-chi_squared_test_files/figure-revealjs/chisq-odds-visualized-1.png" width="960" class="r-stretch"><ul>
 <li>Bar height is <span class="math inline">\(P(\text{extrovert} \mid \text{lecture})\)</span>, bar width the group size</li>
-<li><span class="math inline">\(\text{odds}_{\text{digital}} = \dfrac{P(\text{extrovert} \mid \text{digital})}{P(\text{introvert} \mid \text{digital})} = \dfrac{10 / 23}{13 / 23} = \dfrac{10}{13}\)</span></li>
+<li><span class="math inline">\(\text{odds}_{\text{digital}} = \dfrac{P(\text{extrovert} \mid \text{digital})}{P(\text{introvert} \mid \text{digital})} = \dfrac{13 / 23}{10 / 23} = \dfrac{13}{10}\)</span></li>
 <li>Under <span class="math inline">\(H_0\)</span> both bars split at the dashed line, <span class="math inline">\(P(\text{extrovert})\)</span>, so <span class="math inline">\(OR = 1\)</span></li>
 </ul>
 </section>
@@ -696,21 +696,21 @@ Lecture   Extrovert Introvert
 <div class="cell-output cell-output-stdout">
 <pre><code>         Personality
 Lecture   Extrovert Introvert
-  Digital        10        13
-  Live           13        16</code></pre>
+  Digital        13        10
+  Live           15        26</code></pre>
 </div>
 </div>
 <p>The extrovert/introvert ratio for digital and live audiences:</p>
 <ul>
-<li><span class="math inline">\(\text{odds}_{\text{digital}} = \frac{\text{extrovert}}{\text{introvert}} = \frac{ 10 }{ 13 } = 0.77\)</span></li>
-<li><span class="math inline">\(\text{odds}_{\text{live}} = \frac{\text{extrovert}}{\text{introvert}} = \frac{ 13 }{ 16 } = 0.81\)</span></li>
+<li><span class="math inline">\(\text{odds}_{\text{digital}} = \frac{\text{extrovert}}{\text{introvert}} = \frac{ 13 }{ 10 } = 1.30\)</span></li>
+<li><span class="math inline">\(\text{odds}_{\text{live}} = \frac{\text{extrovert}}{\text{introvert}} = \frac{ 15 }{ 26 } = 0.58\)</span></li>
 </ul>
-<p>In the digital responses, there are +- 0.77 times as many extroverts as introverts. In the live responses, there are +- 0.81 times as many extroverts as introverts.</p>
+<p>In the digital responses, there are +- 1.30 times as many extroverts as introverts. In the live responses, there are +- 0.58 times as many extroverts as introverts.</p>
 </section>
 <section id="odds-ratio" class="slide level2">
 <h2>Odds ratio</h2>
 <p>Is the ratio of these odds.</p>
-<p><span class="math inline">\(OR = \dfrac{\text{odds}_{\text{digital}}}{\text{odds}_{\text{live}}} = \dfrac{10 / 13}{13 / 16} = \dfrac{0.77}{0.81} = 0.95\)</span></p>
+<p><span class="math inline">\(OR = \dfrac{\text{odds}_{\text{digital}}}{\text{odds}_{\text{live}}} = \dfrac{13 / 10}{15 / 26} = \dfrac{1.30}{0.58} = 2.25\)</span></p>
 <ul>
 <li><span class="math inline">\(OR = 1\)</span> means the same odds in both groups (no association)</li>
 </ul>
@@ -721,30 +721,30 @@ Lecture   Extrovert Introvert
 <div class="cell-output cell-output-stdout">
 <pre><code>         Personality
 Lecture   Extrovert Introvert
-  Digital        10        13
-  Live           13        16</code></pre>
+  Digital        13        10
+  Live           15        26</code></pre>
 </div>
 </div>
 <p>Alternatively, we can look at the ratios of digital/live for extroverts and introverts:</p>
 <ul>
-<li><span class="math inline">\(\text{odds}_{\text{extrovert}} = \frac{\text{digital}}{\text{live}} = \frac{ 10 }{ 13 } = 0.77\)</span></li>
-<li><span class="math inline">\(\text{odds}_{\text{introvert}} = \frac{\text{digital}}{\text{live}} = \frac{ 13 }{ 16 } = 0.81\)</span></li>
+<li><span class="math inline">\(\text{odds}_{\text{extrovert}} = \frac{\text{digital}}{\text{live}} = \frac{ 13 }{ 15 } = 0.87\)</span></li>
+<li><span class="math inline">\(\text{odds}_{\text{introvert}} = \frac{\text{digital}}{\text{live}} = \frac{ 10 }{ 26 } = 0.38\)</span></li>
 </ul>
-<p>For the extroverts, there are +- 0.77 times as many digital viewers as live viewers. For the introverts, there are +- 0.81 times as many digital viewers as live viewers.</p>
+<p>For the extroverts, there are +- 0.87 times as many digital viewers as live viewers. For the introverts, there are +- 0.38 times as many digital viewers as live viewers.</p>
 </section>
 <section id="odds-ratio-the-other-way-around" class="slide level2 smaller">
 <h2>Odds ratio, the other way around</h2>
-<p><span class="math inline">\(OR = \dfrac{\text{odds}_{\text{extrovert}}}{\text{odds}_{\text{introvert}}} = \dfrac{10 / 13}{13 / 16} = \dfrac{0.77}{0.81} = 0.95\)</span></p>
-<p><span class="math inline">\(\dfrac{\text{odds}_{\text{digital}}}{\text{odds}_{\text{live}}} = \dfrac{\text{odds}_{\text{extrovert}}}{\text{odds}_{\text{introvert}}} = 0.95\)</span></p>
+<p><span class="math inline">\(OR = \dfrac{\text{odds}_{\text{extrovert}}}{\text{odds}_{\text{introvert}}} = \dfrac{13 / 15}{10 / 26} = \dfrac{0.87}{0.38} = 2.25\)</span></p>
+<p><span class="math inline">\(\dfrac{\text{odds}_{\text{digital}}}{\text{odds}_{\text{live}}} = \dfrac{\text{odds}_{\text{extrovert}}}{\text{odds}_{\text{introvert}}} = 2.25\)</span></p>
 <ul>
 <li>Same OR, whichever way you read the table</li>
 </ul>
-<p>For these data, the odds of watching digitally were approximately 0.95 times higher for extroverts than for introverts. The odds ratio also accounts for the scores in both conditions—watching digitally and watching live—by comparing the odds of watching digitally to live viewing across both personality types.</p>
+<p>For these data, the odds of watching digitally were approximately 2.25 times higher for extroverts than for introverts. The odds ratio also accounts for the scores in both conditions—watching digitally and watching live—by comparing the odds of watching digitally to live viewing across both personality types.</p>
 </section>
 <section id="odds-ratio-shortcut" class="slide level2">
 <h2>Odds ratio shortcut</h2>
-<p><span class="math inline">\(\begin{pmatrix} a &amp; b \\ c &amp; d \\ \end{pmatrix} = \begin{pmatrix} 10 &amp; 13 \\ 13 &amp; 16 \\ \end{pmatrix}\)</span></p>
-<p><span class="math inline">\(OR = \dfrac{a / b}{c / d} = \dfrac{a / c}{b / d} = \dfrac{a \times d}{b \times c} = \dfrac{10 \times 16}{13 \times 13} = 0.95\)</span></p>
+<p><span class="math inline">\(\begin{pmatrix} a &amp; b \\ c &amp; d \\ \end{pmatrix} = \begin{pmatrix} 13 &amp; 10 \\ 15 &amp; 26 \\ \end{pmatrix}\)</span></p>
+<p><span class="math inline">\(OR = \dfrac{a / b}{c / d} = \dfrac{a / c}{b / d} = \dfrac{a \times d}{b \times c} = \dfrac{13 \times 26}{10 \times 15} = 2.25\)</span></p>
 <ul>
 <li>JASP shows the log odds ratio by default, where <span class="math inline">\(\log(OR) = 0\)</span> means no association</li>
 </ul>
