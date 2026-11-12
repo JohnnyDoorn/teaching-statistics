@@ -716,6 +716,149 @@ Johnny van Doorn
 <li>Need to specify prior distributions</li>
 </ul></li>
 </ul>
+<!-- Close of the last SSR lecture (2026-11-12, his flow): Bayes -> Bayes and open science in the
+     wild (Pfadt et al. figures) -> the three SSR themes, which stand on their own and are not tied
+     to the figures. Figures are cropped from the preprint PDF in statbooks/articles/ (Figs 1, 2, 3,
+     6, 5; Fig 4 estimation focus is unused). Slide text is a draft awaiting his OK. -->
+</section>
+<section id="bayes-and-open-science-in-the-wild" class="slide level2">
+<h2>Bayes and open science in the wild</h2>
+<p><a href="https://osf.io/preprints/psyarxiv/ck3js_v3">Pfadt et al.&nbsp;(2026)</a>: <em>The prevalence of Bayesian inference, preregistration, and open data in psychology, 2004–2024</em>, 45 authors</p>
+</section>
+<section id="bayesian-analyses" class="slide level2">
+<h2>Bayesian analyses</h2>
+<div style="text-align: center;">
+<p><img src="../../images/pfadt-2026-bayesian-articles.png" alt="Articles with a Bayesian analysis, 2004-2044" width="900"></p>
+</div>
+<p>Source: <a href="https://osf.io/preprints/psyarxiv/ck3js_v3">Pfadt et al.&nbsp;(2026)</a>, Fig. 1</p>
+</section>
+<section id="preregistration" class="slide level2">
+<h2>Preregistration</h2>
+<div style="text-align: center;">
+<p><img src="../../images/pfadt-2026-preregistration.png" alt="Preregistered articles, 2004-2044" width="900"></p>
+</div>
+<p>Source: <a href="https://osf.io/preprints/psyarxiv/ck3js_v3">Pfadt et al.&nbsp;(2026)</a>, Fig. 2</p>
+</section>
+<section id="open-data" class="slide level2">
+<h2>Open data</h2>
+<div style="text-align: center;">
+<p><img src="../../images/pfadt-2026-open-data.png" alt="Articles with open data, 2004-2044" width="900"></p>
+</div>
+<p>Source: <a href="https://osf.io/preprints/psyarxiv/ck3js_v3">Pfadt et al.&nbsp;(2026)</a>, Fig. 3</p>
+</section>
+<section id="software-reporting" class="slide level2">
+<h2>Software reporting</h2>
+<div style="text-align: center;">
+<p><img src="../../images/pfadt-2026-software.png" alt="Software mentions in psychology articles, 2004-2024" width="850"></p>
+</div>
+<p>Source: <a href="https://osf.io/preprints/psyarxiv/ck3js_v3">Pfadt et al.&nbsp;(2026)</a>, Fig. 6</p>
+</section>
+<section id="analysis-types" class="slide level2">
+<h2>Analysis types</h2>
+<div style="text-align: center;">
+<p><img src="../../images/pfadt-2026-analysis-types.png" alt="Analysis types in psychology articles, 2004-2024" width="850"></p>
+</div>
+<p>Source: <a href="https://osf.io/preprints/psyarxiv/ck3js_v3">Pfadt et al.&nbsp;(2026)</a>, Fig. 5</p>
+</section>
+<section id="looking-back-on-ssr" class="slide level2">
+<h2>Looking back on SSR</h2>
+<ol type="1">
+<li>Proper reporting</li>
+<li>Threats to statistical validity</li>
+<li>Statistics is relative</li>
+</ol>
+</section>
+<section id="proper-reporting" class="slide level2">
+<h2>1. Proper reporting</h2>
+<ul>
+<li>Complete</li>
+<li>Numbers and graphs</li>
+</ul>
+</section>
+<section id="threats-to-statistical-validity" class="slide level2">
+<h2>2. Threats to statistical validity</h2>
+<ul>
+<li>Assumptions
+<ul>
+<li>Especially with multiple predictors</li>
+</ul></li>
+<li>Get a grip on these</li>
+</ul>
+</section>
+<section id="statistics-is-relative" class="slide level2">
+<h2>3. Statistics is relative</h2>
+<ul>
+<li>Many tests compare two models
+<ul>
+<li>Interaction model vs main-effects model (lecture 26)</li>
+<li><span class="math inline">\(\mathcal{M}_1\)</span> vs <span class="math inline">\(\mathcal{M}_0\)</span> (today)</li>
+</ul></li>
+<li>Bayes factor makes the comparison explicit</li>
+</ul>
+
+<!-- Metrics as taught: d (L11, L12, L17), r (L6), R2 (L9, L21), omega2 (L12, L13, L17),
+     rank-biserial (L20), odds ratio (L28), R2/F change + adjusted R2 (L21, L26 model summary
+     tables), posterior + credible interval, BF10 and BFincl (L29). -->
+</section>
+<section id="metrics-we-have-used" class="slide level2 smaller">
+<h2>Metrics we have used</h2>
+<table>
+<colgroup>
+<col style="width: 30%">
+<col style="width: 39%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Question</th>
+<th>Frequentist</th>
+<th>Bayesian</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Is there an effect?</td>
+<td><span class="math inline">\(p\)</span>-value (<span class="math inline">\(t\)</span>, <span class="math inline">\(F\)</span>, <span class="math inline">\(\chi^2\)</span>)</td>
+<td><span class="math inline">\(\text{BF}_{10}\)</span></td>
+</tr>
+<tr class="even">
+<td>How big is it?</td>
+<td><span class="math inline">\(d\)</span>, <span class="math inline">\(r\)</span>, <span class="math inline">\(R^2\)</span>, <span class="math inline">\(\omega^2\)</span>, rank-biserial <span class="math inline">\(r\)</span>, odds ratio</td>
+<td>Posterior distribution</td>
+</tr>
+<tr class="odd">
+<td>How precise?</td>
+<td>Standard error, 95% CI</td>
+<td>95% credible interval</td>
+</tr>
+<tr class="even">
+<td>Which model?</td>
+<td><span class="math inline">\(R^2\)</span> change, <span class="math inline">\(F\)</span> change + <span class="math inline">\(p\)</span>, adjusted <span class="math inline">\(R^2\)</span></td>
+<td><span class="math inline">\(\text{BF}_{10}\)</span>, <span class="math inline">\(\text{BF}_{\text{incl}}\)</span></td>
+</tr>
+</tbody>
+</table>
+<!-- Fisher's evidential p-value is the L3 callback (Fisher, 1956 quote in NHST_3.qmd). BIC
+     approximates the BF: BF01 ~ exp((BIC1 - BIC0) / 2) (Wagenmakers, 2007). -->
+</section>
+<section id="alternatives-we-have-not-discussed" class="slide level2 smaller">
+<h2>Alternatives we have not discussed</h2>
+<ul>
+<li>Equivalence testing
+<ul>
+<li>Is the effect small enough to ignore?</li>
+</ul></li>
+<li><span class="math inline">\(p\)</span>-value as evidence, without <span class="math inline">\(\alpha\)</span> (Fisher, lecture 3)
+<ul>
+<li>Smaller <span class="math inline">\(p\)</span>, stronger evidence against <span class="math inline">\(H_0\)</span></li>
+<li>Most common in practice</li>
+</ul></li>
+<li>AIC / BIC
+<ul>
+<li>Model fit with a penalty for complexity</li>
+<li>BIC approximates the Bayes factor</li>
+</ul></li>
+</ul>
 <!-- Block 3 exam-note recap (last lecture before DT3, as L20 did for block 2): the L22 and L26
      notes, read from their lectures' own files so the text lives in one place. L21 has no exam
      note (his call, 2026-10-25). L28's and L29's notes were added 2026-11-10 (his yes); L28's

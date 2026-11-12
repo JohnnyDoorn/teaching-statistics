@@ -48,6 +48,9 @@ A Brief Introduction to Bayesian Inference
   - Gradual assessment of evidence
   - Need to specify prior distributions
 
+```{r child="ssr-recap.qmd"}
+```
+
 <!-- Block 3 exam-note recap (last lecture before DT3, as L20 did for block 2): the L22 and L26
      notes, read from their lectures' own files so the text lives in one place. L21 has no exam
      note (his call, 2026-10-25). L28's and L29's notes were added 2026-11-10 (his yes); L28's
