@@ -4,6 +4,30 @@
 
 <!-- > Posterior $\propto$ Likelihood $\times$ Prior -->
 
+<!-- Beer tasting replaces the coin (his call, 2026-11-13). The data stay k = 8 of n = 10, so every
+     number matches the coin example in the reading (booklet ch2-3). In beerTastingData.csv that is
+     a subset of the 57 tasters (e.g., participants 3-12), not the first 10 (those got 7 correct). -->
+
+## Beer tasting
+
+- Can people taste the difference between alcoholic and non-alcoholic beer?
+- $\theta$ is the probability of a correct identification
+
+<!-- Updating before the formula, the formula right before the slides that unpack it term by term
+     (his call, 2026-11-13). Cycle artwork by Viktor Beekman (credit inside the image), from the
+     booklet's preface. Formula and brace labels from booklet ch3; notation follows this lecture's
+     slide titles (P, data). -->
+
+## Bayesian updating
+
+<div style="text-align: center;">
+<img src="../../images/bayesian-learning-cycle.jpg" alt="Bayesian learning cycle with prior knowledge, prediction, data, prediction error and knowledge update" width="520"/>
+</div>
+
+## Bayes' rule for knowledge updating
+
+$$\large \underbrace{P(\theta \mid data)}_{\text{Posterior beliefs}} = \underbrace{P(\theta)}_{\text{Prior beliefs}} \times \overbrace{\underbrace{\frac{P(data \mid \theta)}{P(data)}}_{\substack{\text{Average prediction} \\ \text{across all } \theta\text{'s}}}}^{\text{Prediction for specific } \theta}$$
+
 ## What is a model?
 
 ```{r bpe-what-is-a-model, fig.align='center', out.width='90%', echo = FALSE, cache=FALSE}
@@ -35,12 +59,12 @@ arrows(x0 = 0.8, x1 = 0.8, y0 = 0, y1 = 4.0, lwd = 4, col = cols[3])
 ```{r bpe-what-does-a-model-predict, fig.align='center', out.width='90%', echo = FALSE}
 par(mfrow = c(1, 2), cex.main = 0.95)
 cols <- viridis::viridis(6)
-barplot(dbinom(0:10, 10, 0.5), names.arg = 0:10, xlab = "Number of heads", ylab = "Likelihood",
-        main = "Sampling Distribution under Sarah's Model", col = cols[1], ylim = c(0,0.32))
+barplot(dbinom(0:10, 10, 0.5), names.arg = 0:10, xlab = "Number of correct identifications", ylab = "Likelihood",
+        main = "Sampling Distribution\nunder Sarah's Model", col = cols[1], ylim = c(0,0.32))
 barplot(c(rep(0, 8), dbinom(8, 10, 0.5)), add = TRUE, col = cols[6])
 
-barplot(dbinom(0:10, 10, 0.8), names.arg = 0:10, xlab = "Number of heads", ylab = "Likelihood",
-        main = "Sampling Distribution under Paul's Model", col = cols[3], ylim = c(0,0.32))
+barplot(dbinom(0:10, 10, 0.8), names.arg = 0:10, xlab = "Number of correct identifications", ylab = "Likelihood",
+        main = "Sampling Distribution\nunder Paul's Model", col = cols[3], ylim = c(0,0.32))
 barplot(c(rep(0, 8), dbinom(8, 10, 0.8)), add = TRUE, col = cols[6])
 ```
 
@@ -54,8 +78,8 @@ plot(1, 1, type ="n", xlim = c(0,1), ylim = c(0,4), bty = "n", main = "Alex's Mo
 mySeq <- seq(0, 1, length.out = 1e3)
 polygon(x =  c(mySeq, rev(mySeq)), y = c(rep(0, 1e3), tBetFun(mySeq, 1, 1, side = "neutral")), col = cols[4]) 
 
-barplot(rep(1/11, 11), names.arg = 0:10, xlab = "Number of heads", ylab = "Likelihood",
-        main = "Average Sampling Distribution under Alex's Model", col = cols[4], ylim = c(0,0.32))
+barplot(rep(1/11, 11), names.arg = 0:10, xlab = "Number of correct identifications", ylab = "Likelihood",
+        main = "Average Sampling Distribution\nunder Alex's Model", col = cols[4], ylim = c(0,0.32))
 barplot(c(rep(0, 8), 1/11), add = TRUE, col = cols[6])
 ```
 
@@ -71,8 +95,8 @@ mySeq <- seq(0.5, 1, length.out = 1e3)
 polygon(x =  c(mySeq, rev(mySeq)), y = c(rep(0, 1e3), tBetFun(mySeq, 1, 1)), col = cols[2]) 
 set.seed(123) # Monte Carlo: without a seed the bars shift on every render
 sampsU <- c(0:5, rbinom(1e5, 10, runif(1e5, 0.5, 1)))
-barplot(table(sampsU)/1e5, names.arg = 0:10, xlab = "Number of heads", ylab = "Likelihood",
-        main = "Average Sampling Distribution under Betty's Model", col = cols[2], ylim = c(0,0.32))
+barplot(table(sampsU)/1e5, names.arg = 0:10, xlab = "Number of correct identifications", ylab = "Likelihood",
+        main = "Average Sampling Distribution\nunder Betty's Model", col = cols[2], ylim = c(0,0.32))
 barplot(c(rep(0, 8), (table(sampsU)/1e5)[9]), add = TRUE, col = cols[6])
 theta <- seq(0,1,length.out = 1e3)
 ```
@@ -84,14 +108,14 @@ Each model has assigned a prior probability distribution to the parameter $\thet
 
 ## Now what is the data saying
 
-### Ten coin tosses
+### Ten tasters
 
 $\begin{aligned}
   k &= 8 \\
   n &= 10
   \end{aligned}$
 
-```{r bpe-ten-coin-tosses, echo=TRUE}
+```{r bpe-ten-tasters, echo=TRUE}
 k = 8
 n = 10
 ```
@@ -134,7 +158,7 @@ abline(h = margLik, lwd = 4, col = "purple")
 
 ## Posterior
 
-Now we can update Alex' belief about the possible values of theta based on the data (the likelihood function) we found. Values with a likelihood higher than the average likelihood receive a boost, and others receive a penalty, in plausibility.
+Now we can update Alex's belief about the possible values of theta based on the data (the likelihood function) we found. Values with a likelihood higher than the average likelihood receive a boost, and others receive a penalty, in plausibility.
 
 ## Updating beliefs
 ```{r bpe-updating-beliefs, fig.align='center', out.width='90%', echo = FALSE}

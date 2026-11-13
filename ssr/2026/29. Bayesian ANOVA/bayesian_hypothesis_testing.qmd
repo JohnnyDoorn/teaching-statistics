@@ -19,16 +19,16 @@ A Bayes factor of ${BF}_{10} = 3$, means that the data are 3 times more likely u
 ```{r bht-bayes-factor, fig.align='center', out.width='90%', echo = FALSE}
 par(mfrow = c(1, 2), cex.main = 0.95)
 cols <- viridis::viridis(6)
-barplot(dbinom(0:10, 10, 0.5), names.arg = 0:10, xlab = "Number of heads", ylab = "Likelihood",
-        main = "Sampling Distribution under Sarah's Model", col = cols[1], ylim = c(0,0.32))
+barplot(dbinom(0:10, 10, 0.5), names.arg = 0:10, xlab = "Number of correct identifications", ylab = "Likelihood",
+        main = "Sampling Distribution\nunder Sarah's Model", col = cols[1], ylim = c(0,0.32))
 barplot(c(rep(0, 8), dbinom(8, 10, 0.5)), add = TRUE, col = cols[6])
 
-barplot(rep(1/11, 11), names.arg = 0:10, xlab = "Number of heads", ylab = "Likelihood",
-        main = "Average Sampling Distribution under Alex's Model", col = cols[4], ylim = c(0,0.32))
+barplot(rep(1/11, 11), names.arg = 0:10, xlab = "Number of correct identifications", ylab = "Likelihood",
+        main = "Average Sampling Distribution\nunder Alex's Model", col = cols[4], ylim = c(0,0.32))
 barplot(c(rep(0, 8), 1/11), add = TRUE, col = cols[6])
 ```
-- Sarah's model has a marginal likelihood of `r round(dbinom(8, 10, 0.5), 4)` for 8 heads
-- Alex's model has a marginal likelihood of `r round((1/11), 4)` for 8 heads
+- Sarah's model has a marginal likelihood of `r round(dbinom(8, 10, 0.5), 4)` for 8 correct identifications
+- Alex's model has a marginal likelihood of `r round((1/11), 4)` for 8 correct identifications
 - $\text{BF}_{SA} =$  `r round(dbinom(8, 10, 0.5), 4)` / `r round(1/11, 4)` =  `r round(round(dbinom(8, 10, 0.5), 4) / round(1/11, 4), 2)`
 - The data are `r round(round(dbinom(8, 10, 0.5), 4) / round(1/11, 4), 2)` times more likely under Sarah's model than under Alex's model
 - The data are `r round( round(1/11, 4) / round(dbinom(8, 10, 0.5), 4), 2)` times more likely under Alex's model than under Sarah's model

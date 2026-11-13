@@ -431,6 +431,30 @@ Johnny van Doorn
 <h1>Bayesian parameter estimation</h1>
 <!-- ## Updating belief -->
 <!-- > Posterior $\propto$ Likelihood $\times$ Prior -->
+<!-- Beer tasting replaces the coin (his call, 2026-11-13). The data stay k = 8 of n = 10, so every
+     number matches the coin example in the reading (booklet ch2-3). In beerTastingData.csv that is
+     a subset of the 57 tasters (e.g., participants 3-12), not the first 10 (those got 7 correct). -->
+</section>
+<section id="beer-tasting" class="slide level2">
+<h2>Beer tasting</h2>
+<ul>
+<li>Can people taste the difference between alcoholic and non-alcoholic beer?</li>
+<li><span class="math inline">\(\theta\)</span> is the probability of a correct identification</li>
+</ul>
+<!-- Updating before the formula, the formula right before the slides that unpack it term by term
+     (his call, 2026-11-13). Cycle artwork by Viktor Beekman (credit inside the image), from the
+     booklet's preface. Formula and brace labels from booklet ch3; notation follows this lecture's
+     slide titles (P, data). -->
+</section>
+<section id="bayesian-updating" class="slide level2">
+<h2>Bayesian updating</h2>
+<div style="text-align: center;">
+<p><img src="../../images/bayesian-learning-cycle.jpg" alt="Bayesian learning cycle with prior knowledge, prediction, data, prediction error and knowledge update" width="520"></p>
+</div>
+</section>
+<section id="bayes-rule-for-knowledge-updating" class="slide level2">
+<h2>Bayes’ rule for knowledge updating</h2>
+<p><span class="math display">\[\large \underbrace{P(\theta \mid data)}_{\text{Posterior beliefs}} = \underbrace{P(\theta)}_{\text{Prior beliefs}} \times \overbrace{\underbrace{\frac{P(data \mid \theta)}{P(data)}}_{\substack{\text{Average prediction} \\ \text{across all } \theta\text{'s}}}}^{\text{Prediction for specific } \theta}\]</span></p>
 </section>
 <section id="what-is-a-model" class="slide level2">
 <h2>What is a model?</h2>
@@ -454,7 +478,7 @@ Johnny van Doorn
 </section>
 <section id="now-what-is-the-data-saying" class="slide level2">
 <h2>Now what is the data saying</h2>
-<h3 id="ten-coin-tosses">Ten coin tosses</h3>
+<h3 id="ten-tasters">Ten tasters</h3>
 <p><span class="math inline">\(\begin{aligned}  k &amp;= 8 \\  n &amp;= 10  \end{aligned}\)</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>k <span class="ot">=</span> <span class="dv">8</span></span>
@@ -476,7 +500,7 @@ Johnny van Doorn
 <img data-src="29.-bayesian-anova_files/figure-revealjs/bpe-marginal-likelihood-1.png" style="width:90.0%" class="r-stretch quarto-figure-center"></section>
 <section id="posterior" class="slide level2">
 <h2>Posterior</h2>
-<p>Now we can update Alex’ belief about the possible values of theta based on the data (the likelihood function) we found. Values with a likelihood higher than the average likelihood receive a boost, and others receive a penalty, in plausibility.</p>
+<p>Now we can update Alex’s belief about the possible values of theta based on the data (the likelihood function) we found. Values with a likelihood higher than the average likelihood receive a boost, and others receive a penalty, in plausibility.</p>
 </section>
 <section id="updating-beliefs" class="slide level2">
 <h2>Updating beliefs</h2>
@@ -526,8 +550,8 @@ Johnny van Doorn
 <h2>Bayes Factor</h2>
 
 <img data-src="29.-bayesian-anova_files/figure-revealjs/bht-bayes-factor-1.png" style="width:90.0%" class="r-stretch quarto-figure-center"><ul>
-<li>Sarah’s model has a marginal likelihood of 0.0439 for 8 heads</li>
-<li>Alex’s model has a marginal likelihood of 0.0909 for 8 heads</li>
+<li>Sarah’s model has a marginal likelihood of 0.0439 for 8 correct identifications</li>
+<li>Alex’s model has a marginal likelihood of 0.0909 for 8 correct identifications</li>
 <li><span class="math inline">\(\text{BF}_{SA} =\)</span> 0.0439 / 0.0909 = 0.48</li>
 <li>The data are 0.48 times more likely under Sarah’s model than under Alex’s model</li>
 <li>The data are 2.07 times more likely under Alex’s model than under Sarah’s model</li>

@@ -86,6 +86,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#bayesian-parameter-estimation" id="toc-bayesian-parameter-estimation" class="nav-link active" data-scroll-target="#bayesian-parameter-estimation">Bayesian parameter estimation</a>
   <ul class="collapse">
+  <li><a href="#beer-tasting" id="toc-beer-tasting" class="nav-link" data-scroll-target="#beer-tasting">Beer tasting</a></li>
+  <li><a href="#bayesian-updating" id="toc-bayesian-updating" class="nav-link" data-scroll-target="#bayesian-updating">Bayesian updating</a></li>
+  <li><a href="#bayes-rule-for-knowledge-updating" id="toc-bayes-rule-for-knowledge-updating" class="nav-link" data-scroll-target="#bayes-rule-for-knowledge-updating">Bayes’ rule for knowledge updating</a></li>
   <li><a href="#what-is-a-model" id="toc-what-is-a-model" class="nav-link" data-scroll-target="#what-is-a-model">What is a model?</a></li>
   <li><a href="#what-does-a-model-predict" id="toc-what-does-a-model-predict" class="nav-link" data-scroll-target="#what-does-a-model-predict">What does a model predict?</a></li>
   <li><a href="#model-with-multiple-values" id="toc-model-with-multiple-values" class="nav-link" data-scroll-target="#model-with-multiple-values">Model with multiple values</a></li>
@@ -210,6 +213,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1 class="section">Bayesian parameter estimation</h1>
 <!-- ## Updating belief -->
 <!-- > Posterior $\propto$ Likelihood $\times$ Prior -->
+<!-- Beer tasting replaces the coin (his call, 2026-11-13). The data stay k = 8 of n = 10, so every
+     number matches the coin example in the reading (booklet ch2-3). In beerTastingData.csv that is
+     a subset of the 57 tasters (e.g., participants 3-12), not the first 10 (those got 7 correct). -->
+<section id="beer-tasting" class="level2">
+<h2 class="anchored" data-anchor-id="beer-tasting">Beer tasting</h2>
+<ul>
+<li>Can people taste the difference between alcoholic and non-alcoholic beer?</li>
+<li><span class="math inline">\(\theta\)</span> is the probability of a correct identification</li>
+</ul>
+<!-- Updating before the formula, the formula right before the slides that unpack it term by term
+     (his call, 2026-11-13). Cycle artwork by Viktor Beekman (credit inside the image), from the
+     booklet's preface. Formula and brace labels from booklet ch3; notation follows this lecture's
+     slide titles (P, data). -->
+</section>
+<section id="bayesian-updating" class="level2">
+<h2 class="anchored" data-anchor-id="bayesian-updating">Bayesian updating</h2>
+<div style="text-align: center;">
+<p><img src="../../images/bayesian-learning-cycle.jpg" alt="Bayesian learning cycle with prior knowledge, prediction, data, prediction error and knowledge update" width="520"></p>
+</div>
+</section>
+<section id="bayes-rule-for-knowledge-updating" class="level2">
+<h2 class="anchored" data-anchor-id="bayes-rule-for-knowledge-updating">Bayes’ rule for knowledge updating</h2>
+<p><span class="math display">\[\large \underbrace{P(\theta \mid data)}_{\text{Posterior beliefs}} = \underbrace{P(\theta)}_{\text{Prior beliefs}} \times \overbrace{\underbrace{\frac{P(data \mid \theta)}{P(data)}}_{\substack{\text{Average prediction} \\ \text{across all } \theta\text{'s}}}}^{\text{Prediction for specific } \theta}\]</span></p>
+</section>
 <section id="what-is-a-model" class="level2">
 <h2 class="anchored" data-anchor-id="what-is-a-model">What is a model?</h2>
 <div class="cell" data-layout-align="center">
@@ -264,8 +291,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="now-what-is-the-data-saying" class="level2">
 <h2 class="anchored" data-anchor-id="now-what-is-the-data-saying">Now what is the data saying</h2>
-<section id="ten-coin-tosses" class="level3">
-<h3 class="anchored" data-anchor-id="ten-coin-tosses">Ten coin tosses</h3>
+<section id="ten-tasters" class="level3">
+<h3 class="anchored" data-anchor-id="ten-tasters">Ten tasters</h3>
 <p><span class="math inline">\(\begin{aligned}  k &amp;= 8 \\  n &amp;= 10  \end{aligned}\)</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">=</span> <span class="dv">8</span></span>
@@ -304,7 +331,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="posterior" class="level2">
 <h2 class="anchored" data-anchor-id="posterior">Posterior</h2>
-<p>Now we can update Alex’ belief about the possible values of theta based on the data (the likelihood function) we found. Values with a likelihood higher than the average likelihood receive a boost, and others receive a penalty, in plausibility.</p>
+<p>Now we can update Alex’s belief about the possible values of theta based on the data (the likelihood function) we found. Values with a likelihood higher than the average likelihood receive a boost, and others receive a penalty, in plausibility.</p>
 </section>
 <section id="updating-beliefs" class="level2">
 <h2 class="anchored" data-anchor-id="updating-beliefs">Updating beliefs</h2>
@@ -376,8 +403,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <ul>
-<li>Sarah’s model has a marginal likelihood of 0.0439 for 8 heads</li>
-<li>Alex’s model has a marginal likelihood of 0.0909 for 8 heads</li>
+<li>Sarah’s model has a marginal likelihood of 0.0439 for 8 correct identifications</li>
+<li>Alex’s model has a marginal likelihood of 0.0909 for 8 correct identifications</li>
 <li><span class="math inline">\(\text{BF}_{SA} =\)</span> 0.0439 / 0.0909 = 0.48</li>
 <li>The data are 0.48 times more likely under Sarah’s model than under Alex’s model</li>
 <li>The data are 2.07 times more likely under Alex’s model than under Sarah’s model</li>

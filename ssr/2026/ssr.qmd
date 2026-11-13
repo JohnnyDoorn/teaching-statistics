@@ -16,7 +16,7 @@ year_dir    <- "2026"
 # - links_up_to: lectures whose Handout / Slides / Watch / Chapters links are shown; later
 #                rows get a dash. Bump it to the next lecture as each one is given.
 list_up_to  <- 29
-links_up_to <- 28
+links_up_to <- 29
 course.path <- paste0("ssr/", year_dir, "/")
 
 # Resolve the lecture folder whether this file is knit standalone (wd is already
