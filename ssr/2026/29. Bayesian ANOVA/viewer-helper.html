@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.340">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Johnny van Doorn">
+
+<title>29. Bayesian ANOVA</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="viewer-helper_files/libs/clipboard/clipboard.min.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/quarto.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/popper.min.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/anchor.min.js"></script>
+<link href="viewer-helper_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="viewer-helper_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="viewer-helper_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="viewer-helper_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="viewer-helper_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+<link rel="stylesheet" href="../../ajohnson.css">
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">29. Bayesian ANOVA</h1>
+<p class="subtitle lead">Summary and chapters of the recording</p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Johnny van Doorn </p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Amsterdam
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+</header>
+
+<style>
+.chapters th:first-child, .chapters td:first-child { width: 6em; white-space: nowrap; }
+.chapters .chapter-summary { display: block; margin-top: 0.2em; font-size: 0.9em; color: #555; }
+</style>
+<p>13 November 2026 · <a href="https://amsuni-my.sharepoint.com/:v:/g/personal/j_b_vandoorn_uva_nl/IQDkEXIW9DVnSJA1GNvHQz70AQc0AevUVGI64W9KB9eB8Oc?e=s1Uv1y&amp;nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D" target="_blank">Recording</a> · <a href="29.%20bayesian%20anova.slide.html" target="_blank">Slides</a> · <a href="29.%20bayesian%20anova.html" target="_blank">Handout</a></p>
+<p>In the final statistics lecture of SSR we repeat the core Bayesian concepts with a subset of the beer tasting data, in which 8 out of 10 tasters identified the alcoholic beer. Different models (Sarah, Paul, Alex and Betty) make different statements about θ, the probability of a correct response, and we update these prior distributions with the data into posterior distributions, based on how well each value of θ predicted the data. After the break we compare models with the Bayes factor, the ratio of their marginal likelihoods, and apply all of this to ANOVA, with a spike at 0 for the null model and a Cauchy prior for the alternative. In JASP we run a Bayesian ANOVA, where the BF10 column of the model comparison table and the inclusion Bayes factor of the effects table are the two outputs to understand for the exam. We close with Bayes and open science in the wild and a look back on SSR.</p>
+<p>Open the recording and skip to the chapter you need. The chapters come from the lecture transcript, so one may start a few seconds early or late.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm chapters table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Time</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Chapter</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">17:23</td>
+<td style="text-align: left;">Welcome<span class="chapter-summary">For the final statistics lecture of SSR, today's topic is Bayesian ANOVA. Throughout the course we got very close to how statistics is being done in the real world, talking about assumptions, interactions and dependence between predictors.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">19:17</td>
+<td style="text-align: left;">Frequentist and Bayesian frameworks<span class="chapter-summary">The frequentist framework is all about asking what happens in the long run to my statistical test, in terms of type 1 and type 2 error rates. If you want to do a hypothesis test or parameter estimation, you are not limited to this framework, and the Bayesian framework also allows you to do inferential statistics, with some different metrics.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">22:08</td>
+<td style="text-align: left;">Goals and reading<span class="chapter-summary">We repeat the core Bayesian concepts, apply these to ANOVA, and do a Bayesian ANOVA in JASP, which is the analysis that you need to know for the exam. Chapters one through six of the booklet reintroduce the core concepts, and the new chapter for today is chapter 7 about ANOVA.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">23:09</td>
+<td style="text-align: left;">Beer tasting<span class="chapter-summary">Many years ago we did a beer tasting test in our lab, where people tasted 2 unmarked cups of beer and had to say which of the two was the alcoholic one. If people cannot taste the difference, they are guessing, and θ, the probability of a correct response, is 0.5.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">25:55</td>
+<td style="text-align: left;">Bayesian updating<span class="chapter-summary">The Bayesian framework is all based on this continuous updating of knowledge. We start with prior knowledge, derive predictions, test those against the observed data, and use the prediction error to update our knowledge, so what we end up with today is our starting knowledge of tomorrow.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">28:45</td>
+<td style="text-align: left;">Bayes' rule for knowledge updating<span class="chapter-summary">We start with some prior beliefs and update them with the data, and that updating step is completely based on how well every individual value of the parameter predicted the data. Together they form our posterior beliefs, what we have learned after observing the data.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">30:33</td>
+<td style="text-align: left;">What is a model?<span class="chapter-summary">In the Bayesian framework we look at different models, and each model reflects its beliefs about the parameter by a probability distribution. Sarah believes θ is exactly 0.5 and Paul is really sure it is 0.8, and because they go all in on a single value we call these point models.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">32:48</td>
+<td style="text-align: left;">What does a model predict?<span class="chapter-summary">Based on what a model says about the parameter, we can derive the likely outcomes of an experiment with 10 tasters, which is no different from the sampling distribution. Asking each model how likely our observed 8 out of 10 is (the yellow bar) and taking the ratio of the two yellow bars gives exactly the Bayes factor.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">38:09</td>
+<td style="text-align: left;">Model with multiple values<span class="chapter-summary">Models can also state multiple values, like Alex's open-minded model, which believes that every value of the proportion correct is equally likely before seeing the data. Any model that makes a statement about the parameter gives a sampling distribution, which shows what outcomes to expect if this model is the true model.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">40:10</td>
+<td style="text-align: left;">One-sided model<span class="chapter-summary">Betty's model puts probability mass on all values between 0.5 and 1 and none on values lower than 0.5, so it claims that people can distinguish between the alcoholic and non-alcoholic beers. Averaging the sampling distributions of all values Betty claims gives the average sampling distribution, and its yellow bar shows how likely 8 out of 10 is under her model.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">43:27</td>
+<td style="text-align: left;">Prior distribution<span class="chapter-summary">These statements of the models are prior distributions, and prior distributions are always probability distributions. A prior for a proportion needs the domain zero to one, and one convenient distribution that follows those criteria is the beta distribution.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">45:02</td>
+<td style="text-align: left;">The data<span class="chapter-summary">Let's say we observe 8 successes out of 10. To update the prior distributions with this data, we look at the likelihood of the observed data for every value in the model.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">45:40</td>
+<td style="text-align: left;">Likelihood function<span class="chapter-summary">The likelihood function is not a probability distribution, it maps every value of θ onto the likelihood of the observed data, around 0.3 for θ = 0.8. It is always the same, whichever model you are updating, because it only depends on the type of data, here the binomial likelihood.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">47:48</td>
+<td style="text-align: left;">Marginal likelihood<span class="chapter-summary">The marginal likelihood is the average likelihood of the observed data for all values in the model, so unlike the likelihood it depends on the model. For Alex's model it is around 0.09, and it quite literally sets the bar for what we consider better than average predictions.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">52:50</td>
+<td style="text-align: left;">Updating beliefs<span class="chapter-summary">The likelihood divided by the marginal likelihood is the predictive updating factor, which is greater than one exactly when that value of the parameter predicted the data better than average. Those values see a boost in plausibility, and values of 0.55 and lower and 0.95 and higher, which predicted the data worse than average, suffer a penalty.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">55:50</td>
+<td style="text-align: left;">Posterior distribution<span class="chapter-summary">Compared to Alex's prior distribution, the posterior density has increased for all values that had a higher than average likelihood. Models with a single value, like Sarah's, don't learn from the data, because no amount of data is going to change their beliefs.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:01:09</td>
+<td style="text-align: left;">Bayesian estimation<span class="chapter-summary">A point estimate such as the posterior median is our best guess, but an interval estimate also reflects uncertainty, and the Bayesian version is the credible interval. If Alex's model is the true model, there is a 95% probability that the true value of the proportion is between 0.48 and 0.94.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:04:41</td>
+<td style="text-align: left;"><em>Break</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:17:42</td>
+<td style="text-align: left;">Marginal likelihood, revisited<span class="chapter-summary">The marginal likelihood for Alex's model, 0.09, is exactly the height of the yellow bar in Alex's sampling distribution, how likely 8 out of 10 is on average under that model. It differs for the different models (around 0.17 for Betty), and we use exactly those numbers to do model comparison.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:20:46</td>
+<td style="text-align: left;">Bayesian hypothesis testing<span class="chapter-summary">Hypothesis testing compares different models to each other, and null and alternative are really just labels. It is more important to pay attention to how you translate your research question into a statistical statement, such as θ = 0.5 if people cannot taste the difference between the beers.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:21:59</td>
+<td style="text-align: left;">Prior and posterior odds<span class="chapter-summary">In the same way that we update beliefs about parameter values, we can update beliefs about which of two models did a better job in predicting the data. The prior odds tell you how many times more likely one model is than the other before seeing the data, and updating them with the data gives the posterior odds.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:23:18</td>
+<td style="text-align: left;">Bayes factor<span class="chapter-summary">The updating factor from prior odds to posterior odds is the Bayes factor, the ratio of the marginal likelihoods of two models. A BF10 of 3 means that the data are three times more likely under the alternative hypothesis than under the null hypothesis, and a BF01 flips that interpretation, so always report the subscript.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:27:01</td>
+<td style="text-align: left;">Sarah versus Alex<span class="chapter-summary">The marginal likelihood of 8 out of 10 is 0.04 under Sarah's model and 0.09 under Alex's model. Their ratio, the Bayes factor comparing Sarah to Alex, is 0.48, which means the data are about twice as likely (2.07 times) under Alex's model as under Sarah's model.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:29:16</td>
+<td style="text-align: left;">Heuristics for BF<span class="chapter-summary">There exist certain words you can associate with values of the Bayes factor, for instance a Bayes factor between 1 and 3 is anecdotal evidence. You don't need to memorize these labels, but you do need to know the definition of the Bayes factor, and an exam question that asks for a decision will tell you which Bayes factor threshold to use.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:30:56</td>
+<td style="text-align: left;">BF pizza<span class="chapter-summary">In JASP we represent Bayes factors with pizza plots, where the proportion of mozzarella and tomato sauce shows the evidence for each of the two hypotheses. A Bayes factor of 1 means the data are as likely under both models, and we can even get evidence in favor of the null hypothesis, which is not possible with p-values.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:33:24</td>
+<td style="text-align: left;">Advantages of the Bayes factor<span class="chapter-summary">The Bayes factor assesses a model's performance in a continuous way, you can look at the data as you are gathering it and stop when you have decisive evidence, and it distinguishes evidence of absence from absence of evidence. A Bayes factor of 1.5, for instance, is not very decisive, which means the data are not informative enough to decide between the two models.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:36:39</td>
+<td style="text-align: left;">ANOVA in regression formula<span class="chapter-summary">ANOVA is just a regression, also in Bayesian ANOVA, so we still represent the model with dummy variables. The regression slope b1 indicates the group difference between our two groups, and if b1 equals 0, there is no difference between the groups.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:38:17</td>
+<td style="text-align: left;">Two models<span class="chapter-summary">The null model states that the regression coefficient is 0, a single spike at 0, while the alternative model puts a Cauchy distribution on it, with most mass around 0 but also quite some mass on other values. In the Bayesian framework we need to make explicit what the alternative predicts, more than just the direction, by choosing its prior distribution.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:42:29</td>
+<td style="text-align: left;">Marginal likelihoods and the Bayes factor<span class="chapter-summary">For both models we can ask how well they predicted the data on average, and the data are very unlikely under the null model that states the coefficient equals 0. The ratio of the two marginal likelihoods, the Bayes factor, is around 10,000, so the data are 10,000 times more likely under the alternative model than under the null model.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:44:30</td>
+<td style="text-align: left;">Bayesian ANOVA in JASP<span class="chapter-summary">The Bayesian ANOVA sits under ANOVA in JASP, and here we predict people's confidence rating from whether they correctly identified the alcoholic beer. By default, the BF10 column compares every model to the best model at the top, and the inclusion Bayes factor (here 1.3) compares the models with a predictor to the models without it.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:54:13</td>
+<td style="text-align: left;">Two predictors in JASP<span class="chapter-summary">With a second predictor, whether people tasted the alcoholic beer first, JASP lists five models, up to the full model with both main effects and their interaction. The two main outputs to focus on for the exam are the BF10 column in the model comparison table and the inclusion Bayes factor from the effects table.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:58:19</td>
+<td style="text-align: left;">Recap<span class="chapter-summary">Bayesian statistics is still a thing, and you can do Bayesian versions of all the analyses we've seen in SSR. I would like you to primarily understand the Bayesian ANOVA, which is explained in the booklet.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:58:50</td>
+<td style="text-align: left;">Bayes and open science in the wild<span class="chapter-summary">A large-scale investigation of the psychology literature over the past 20 years shows a nice increase in how many articles use Bayesian statistics. Open data, preregistration and reporting the statistical software have also improved, making for a little more robust science.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2:01:31</td>
+<td style="text-align: left;">Looking back on SSR<span class="chapter-summary">Our central SSR formula, outcome equals model plus error, holds three things we are now getting a grip on. Statistics is a very relative endeavor, the assumptions are a very important part of robust statistics, and complete reporting means a number for accuracy and graphs for some vibes.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2:02:52</td>
+<td style="text-align: left;">Metrics and alternatives<span class="chapter-summary">Different metrics answer different research questions, such as whether we have evidence for an effect (a p-value or a Bayes factor) or which model predicted the best. Multiverse analysis, which is not part of the exam, helps you get a grip on sometimes arbitrary choices.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2:03:39</td>
+<td style="text-align: left;">Closing<span class="chapter-summary">The exam notes from the previous lectures of block 3 are at the end of the slides. Thank you for all your energy, I wish you all the best in your future studies, and see you next week at the exam.</span></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

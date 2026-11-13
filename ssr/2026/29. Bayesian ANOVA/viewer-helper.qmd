@@ -1,0 +1,28 @@
+---
+title: "29. Bayesian ANOVA"
+subtitle: "Summary and chapters of the recording"
+format:
+  html:
+    toc: false
+css: ../../ajohnson.css
+---
+
+<style>
+.chapters th:first-child, .chapters td:first-child { width: 6em; white-space: nowrap; }
+.chapters .chapter-summary { display: block; margin-top: 0.2em; font-size: 0.9em; color: #555; }
+</style>
+
+```{r viewer-helper-setup, echo=FALSE}
+# Chapters and the shared helpers live in ../viewer-helper/ (see viewer-helper.R).
+source("../viewer-helper/viewer-helper.R")
+```
+
+`r lectureLine(29)`
+
+In the final statistics lecture of SSR we repeat the core Bayesian concepts with a subset of the beer tasting data, in which 8 out of 10 tasters identified the alcoholic beer. Different models (Sarah, Paul, Alex and Betty) make different statements about θ, the probability of a correct response, and we update these prior distributions with the data into posterior distributions, based on how well each value of θ predicted the data. After the break we compare models with the Bayes factor, the ratio of their marginal likelihoods, and apply all of this to ANOVA, with a spike at 0 for the null model and a Cauchy prior for the alternative. In JASP we run a Bayesian ANOVA, where the BF10 column of the model comparison table and the inclusion Bayes factor of the effects table are the two outputs to understand for the exam. We close with Bayes and open science in the wild and a look back on SSR.
+
+Open the recording and skip to the chapter you need. The chapters come from the lecture transcript, so one may start a few seconds early or late.
+
+```{r chapters-29, echo=FALSE}
+chapterTable(29)
+```

@@ -187,6 +187,15 @@ externalSets <- list(
     Data    = "https://discoverjasp.com/repository/dsj1_data/data/diet.jasp",
     Results = "https://discoverjasp.com/repository/dsj1_data/results/diet.jasp",
     HTML    = "https://discoverjasp.com/repository/dsj1_data/html/diet.html"
+  ),
+  # Lecture 29: the beer tasting data (2017, n = 57). The one copy lives in bayesian-exercises/,
+  # where the Bayes booklet links it, with the booklet's ch7 results (Bayesian RM ANOVA, BeerType
+  # x CorrectIdentify, as on the slides). The in-class demo (ConfidenceRating ~ CorrectIdentify +
+  # AlcBeerFirst) has no results file.
+  "beer-tasting" = c(
+    Data    = "https://johnnydoorn.github.io/teaching-statistics/bayesian-exercises/BeerTasting_Data.csv",
+    Results = "https://johnnydoorn.github.io/teaching-statistics/bayesian-exercises/BeerTasting_ANOVAResults.jasp",
+    HTML    = "https://johnnydoorn.github.io/teaching-statistics/bayesian-exercises/BeerTasting_ANOVAResults.html"
   )
   # Lecture 22's presumed-media-influence (Tal-Or et al., 2010, from the JASP Data Library) has no
   # entry: since 2026-10-28 its Results and HTML are our own files (the Process analysis as

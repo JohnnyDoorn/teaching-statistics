@@ -3,7 +3,7 @@ title: "29. Bayesian ANOVA"
 subtitle: "Parameter estimation & hypothesis testing"
 author: "Johnny van Doorn"
 date: "13 November 2026"
-view: "https://teams.microsoft.com/meet/3118441585744989?p=878mfhx1HSaMCUw4OS"
+view: "https://amsuni-my.sharepoint.com/:v:/g/personal/j_b_vandoorn_uva_nl/IQDkEXIW9DVnSJA1GNvHQz70AQc0AevUVGI64W9KB9eB8Oc?e=s1Uv1y&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D"
 footer: "Scientific & Statistical Reasoning"
 format:
   revealjs:
@@ -25,6 +25,17 @@ In this lecture we aim to:
 [A Brief Introduction to Bayesian Inference](https://johnnydoorn.github.io/IntroductionBayesianInference/)<br>
 (chapters 1–6 repeat RMS, chapter 7 on ANOVA is new)
 </div>
+
+<!-- 2027, from the 2026-11-13 transcript (timestamps and detail in ssr/_lecture-notes-2026.md, L29):
+     - Time ran out before Four Models ... Single model inference, the slides that explain the two
+       exam outputs (BF10 column, inclusion BF); JASP started at 1:44. Trim the estimation part or
+       the four BF pizza slides.
+     - One ANOVA story for slides and demo: the slides' tastiness example is within-subject (Bayesian
+       RM ANOVA, booklet ch7), so in class the demo switched to ConfidenceRating ~ CorrectIdentify
+       (+ AlcBeerFirst, which has 9 missing values, so n drops from 57 to 48).
+     - Repeat the Bayes' rule slide before "Posterior" ("I should have had the formula here"), draw
+       the 95% credible interval on the posterior, and consider a slide on Sarah's (non-)learning
+       (booklet ch3), which a student asked about. -->
 
 
 ```{r child="bayesian_parameter_estimation.qmd"}
