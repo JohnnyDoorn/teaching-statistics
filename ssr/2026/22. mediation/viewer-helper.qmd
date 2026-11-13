@@ -1,0 +1,28 @@
+---
+title: "22. Mediation"
+subtitle: "Summary and chapters of the recording"
+format:
+  html:
+    toc: false
+css: ../../ajohnson.css
+---
+
+<style>
+.chapters th:first-child, .chapters td:first-child { width: 6em; white-space: nowrap; }
+.chapters .chapter-summary { display: block; margin-top: 0.2em; font-size: 0.9em; color: #555; }
+</style>
+
+```{r viewer-helper-setup, echo=FALSE}
+# Chapters and the shared helpers live in ../viewer-helper/ (see viewer-helper.R).
+source("../viewer-helper/viewer-helper.R")
+```
+
+`r lectureLine(22)`
+
+This lecture is about mediation, where the association between a predictor and an outcome runs (partly) through a third variable, the mediator. We start from multiple regression drawn as a path model, split the shared variance into a direct and an indirect part, and work through the presumed media influence example (does a front-page article change people's intention to buy sugar, through how much media influence they perceive?). We fit the three regressions ourselves, combine the a and b paths into the indirect effect (a × b), and test it. After the break we discuss why a mediation model needs an experimental design before it supports causal claims (equivalent models), run the analysis in JASP's Process module, and return to the applet to separate associated predictors from an interaction.
+
+Open the recording and skip to the chapter you need. The chapters come from the lecture transcript, so one may start a few seconds early or late.
+
+```{r chapters-22, echo=FALSE}
+chapterTable(22)
+```

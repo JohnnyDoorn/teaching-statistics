@@ -22,7 +22,8 @@ In this lecture we aim to:
 - Show Bayesian ANOVA in JASP
     
 <strong>Reading:</strong>
-A Brief Introduction to Bayesian Inference
+[A Brief Introduction to Bayesian Inference](https://johnnydoorn.github.io/IntroductionBayesianInference/)<br>
+(chapters 1–6 repeat RMS, chapter 7 on ANOVA is new)
 </div>
 
 
@@ -53,8 +54,10 @@ A Brief Introduction to Bayesian Inference
 
 <!-- Block 3 exam-note recap (last lecture before DT3, as L20 did for block 2): the L22 and L26
      notes, read from their lectures' own files so the text lives in one place. L21 has no exam
-     note (his call, 2026-10-25). L28's and L29's notes were added 2026-11-10 (his yes); L28's
-     own deck leaves its note out, so nothing reached students before he had checked the text. -->
+     note (his call, 2026-10-25). L28's note was added 2026-11-10 (his yes); L28's own deck leaves
+     its note out, so nothing reached students before he had checked the text. L29 has no exam
+     note (his call, 2026-11-12): the BF heuristics table need not be learned, and "keep the default
+     settings" was too vague; the rest only recapped the lecture. -->
 
 ## Exam note: mediation (lecture 22) {.smaller}
 
@@ -69,11 +72,6 @@ A Brief Introduction to Bayesian Inference
 ## Exam note: chi-squared test (lecture 28) {.smaller}
 
 ```{r child="../28. chi_squared_test/exam-note.qmd"}
-```
-
-## Exam note: Bayesian ANOVA (lecture 29) {.smaller}
-
-```{r child="exam-note.qmd"}
 ```
 
 ## Next Time

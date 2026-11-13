@@ -144,15 +144,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#software-reporting" id="toc-software-reporting" class="nav-link" data-scroll-target="#software-reporting">Software reporting</a></li>
   <li><a href="#analysis-types" id="toc-analysis-types" class="nav-link" data-scroll-target="#analysis-types">Analysis types</a></li>
   <li><a href="#looking-back-on-ssr" id="toc-looking-back-on-ssr" class="nav-link" data-scroll-target="#looking-back-on-ssr">Looking back on SSR</a></li>
-  <li><a href="#proper-reporting" id="toc-proper-reporting" class="nav-link" data-scroll-target="#proper-reporting">1. Proper reporting</a></li>
-  <li><a href="#threats-to-statistical-validity" id="toc-threats-to-statistical-validity" class="nav-link" data-scroll-target="#threats-to-statistical-validity">2. Threats to statistical validity</a></li>
-  <li><a href="#statistics-is-relative" id="toc-statistics-is-relative" class="nav-link" data-scroll-target="#statistics-is-relative">3. Statistics is relative</a></li>
   <li><a href="#metrics-we-have-used" id="toc-metrics-we-have-used" class="nav-link" data-scroll-target="#metrics-we-have-used">Metrics we have used</a></li>
-  <li><a href="#alternatives-we-have-not-discussed" id="toc-alternatives-we-have-not-discussed" class="nav-link" data-scroll-target="#alternatives-we-have-not-discussed">Alternatives we have not discussed</a></li>
+  <li><a href="#alternatives-we-have-not-discussed-not-exam-material" id="toc-alternatives-we-have-not-discussed-not-exam-material" class="nav-link" data-scroll-target="#alternatives-we-have-not-discussed-not-exam-material">Alternatives we have not discussed (not exam material)</a></li>
   <li><a href="#exam-note-mediation-lecture-22" id="toc-exam-note-mediation-lecture-22" class="nav-link" data-scroll-target="#exam-note-mediation-lecture-22">Exam note: mediation (lecture 22)</a></li>
   <li><a href="#exam-note-moderation-lecture-26" id="toc-exam-note-moderation-lecture-26" class="nav-link" data-scroll-target="#exam-note-moderation-lecture-26">Exam note: moderation (lecture 26)</a></li>
   <li><a href="#exam-note-chi-squared-test-lecture-28" id="toc-exam-note-chi-squared-test-lecture-28" class="nav-link" data-scroll-target="#exam-note-chi-squared-test-lecture-28">Exam note: chi-squared test (lecture 28)</a></li>
-  <li><a href="#exam-note-bayesian-anova-lecture-29" id="toc-exam-note-bayesian-anova-lecture-29" class="nav-link" data-scroll-target="#exam-note-bayesian-anova-lecture-29">Exam note: Bayesian ANOVA (lecture 29)</a></li>
   <li><a href="#next-time" id="toc-next-time" class="nav-link" data-scroll-target="#next-time">Next Time</a></li>
   <li><a href="#recommended-exercises" id="toc-recommended-exercises" class="nav-link" data-scroll-target="#recommended-exercises">Recommended Exercises</a></li>
   <li><a href="#contact" id="toc-contact" class="nav-link" data-scroll-target="#contact">Contact</a></li>
@@ -208,7 +204,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Apply these to ANOVA</li>
 <li>Show Bayesian ANOVA in JASP</li>
 </ul>
-<p><strong>Reading:</strong> A Brief Introduction to Bayesian Inference</p>
+<p><strong>Reading:</strong> <a href="https://johnnydoorn.github.io/IntroductionBayesianInference/">A Brief Introduction to Bayesian Inference</a><br> (chapters 1–6 repeat RMS, chapter 7 on ANOVA is new)</p>
 </div>
 <section id="bayesian-parameter-estimation" class="level1 section">
 <h1 class="section">Bayesian parameter estimation</h1>
@@ -653,42 +649,46 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="../../images/pfadt-2026-analysis-types.png" alt="Analysis types in psychology articles, 2004-2024" width="850"></p>
 </div>
 <p>Source: <a href="https://osf.io/preprints/psyarxiv/ck3js_v3">Pfadt et al.&nbsp;(2026)</a>, Fig. 5</p>
+
+<!-- The three themes hang on the course's own formula (L12 "DV = Model + Error", L21
+     "Outcome = Model Prediction + Error", L28 "Error = Observed - Model"): model -> relative,
+     error -> assumptions, the whole thing -> reporting (his yes, 2026-11-12). One table instead
+     of three thin numbered slides (his call, 11-12). Metrics are named in the next table. -->
 </section>
-<section id="looking-back-on-ssr" class="level2">
-<h2 class="anchored" data-anchor-id="looking-back-on-ssr">Looking back on SSR</h2>
-<ol type="1">
-<li>Proper reporting</li>
-<li>Threats to statistical validity</li>
-<li>Statistics is relative</li>
-</ol>
-</section>
-<section id="proper-reporting" class="level2">
-<h2 class="anchored" data-anchor-id="proper-reporting">1. Proper reporting</h2>
-<ul>
-<li>Complete</li>
-<li>Numbers and graphs</li>
-</ul>
-</section>
-<section id="threats-to-statistical-validity" class="level2">
-<h2 class="anchored" data-anchor-id="threats-to-statistical-validity">2. Threats to statistical validity</h2>
-<ul>
-<li>Assumptions
-<ul>
-<li>Especially with multiple predictors</li>
-</ul></li>
-<li>Get a grip on these</li>
-</ul>
-</section>
-<section id="statistics-is-relative" class="level2">
-<h2 class="anchored" data-anchor-id="statistics-is-relative">3. Statistics is relative</h2>
-<ul>
-<li>Many tests compare two models
-<ul>
-<li>Interaction model vs main-effects model (lecture 26)</li>
-<li><span class="math inline">\(\mathcal{M}_1\)</span> vs <span class="math inline">\(\mathcal{M}_0\)</span> (today)</li>
-</ul></li>
-<li>Bayes factor makes the comparison explicit</li>
-</ul>
+<section id="looking-back-on-ssr" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="looking-back-on-ssr">Looking back on SSR</h2>
+<p><span class="math display">\[\text{Outcome} = \text{Model} + \text{Error}\]</span></p>
+<table class="table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 24%">
+<col style="width: 62%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Theme</th>
+<th>In SSR</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Model</td>
+<td>Statistics is relative</td>
+<td>Many tests compare the predictions of two models<br>(interaction vs main effects, <span class="math inline">\(\mathcal{M}_1\)</span> vs <span class="math inline">\(\mathcal{M}_0\)</span>)<br>Bayes makes the comparison explicit</td>
+</tr>
+<tr class="even">
+<td>Error</td>
+<td>Threats to statistical validity</td>
+<td>Most assumptions are about the residuals, get a grip on these<br>Robust alternatives exist, but are usually less powerful<br>Many choices along the way</td>
+</tr>
+<tr class="odd">
+<td>All of it</td>
+<td>Complete reporting</td>
+<td>Numbers for accuracy (effect size, hypothesis test)<br>Graphs for vibes</td>
+</tr>
+</tbody>
+</table>
 
 <!-- Metrics as taught: d (L11, L12, L17), r (L6), R2 (L9, L21), omega2 (L12, L13, L17),
      rank-biserial (L20), odds ratio (L28), R2/F change + adjusted R2 (L21, L26 model summary
@@ -698,65 +698,66 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="smaller anchored" data-anchor-id="metrics-we-have-used">Metrics we have used</h2>
 <table class="table">
 <colgroup>
-<col style="width: 30%">
-<col style="width: 39%">
-<col style="width: 30%">
+<col style="width: 52%">
+<col style="width: 47%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>Question</th>
-<th>Frequentist</th>
-<th>Bayesian</th>
+<th>Metrics</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Is there an effect?</td>
-<td><span class="math inline">\(p\)</span>-value (<span class="math inline">\(t\)</span>, <span class="math inline">\(F\)</span>, <span class="math inline">\(\chi^2\)</span>)</td>
-<td><span class="math inline">\(\text{BF}_{10}\)</span></td>
+<td>Do we have evidence for an effect?</td>
+<td><span class="math inline">\(p\)</span>-value (<span class="math inline">\(t\)</span>, <span class="math inline">\(F\)</span>, <span class="math inline">\(\chi^2\)</span>), <span class="math inline">\(\text{BF}_{10}\)</span></td>
 </tr>
 <tr class="even">
-<td>How big is it?</td>
-<td><span class="math inline">\(d\)</span>, <span class="math inline">\(r\)</span>, <span class="math inline">\(R^2\)</span>, <span class="math inline">\(\omega^2\)</span>, rank-biserial <span class="math inline">\(r\)</span>, odds ratio</td>
-<td>Posterior distribution</td>
+<td>Which model predicted the data the best?</td>
+<td><span class="math inline">\(R^2\)</span>/<span class="math inline">\(F\)</span> change + <span class="math inline">\(p\)</span>, adjusted <span class="math inline">\(R^2\)</span>, <span class="math inline">\(\text{BF}_{10}\)</span>, <span class="math inline">\(\text{BF}_{\text{incl}}\)</span></td>
 </tr>
 <tr class="odd">
-<td>How precise?</td>
-<td>Standard error, 95% CI</td>
-<td>95% credible interval</td>
+<td>How big is the effect?</td>
+<td><span class="math inline">\(d\)</span>, <span class="math inline">\(r\)</span>, <span class="math inline">\(R^2\)</span>, <span class="math inline">\(\omega^2\)</span>, rank-biserial <span class="math inline">\(r\)</span>, odds ratio</td>
 </tr>
 <tr class="even">
-<td>Which model?</td>
-<td><span class="math inline">\(R^2\)</span> change, <span class="math inline">\(F\)</span> change + <span class="math inline">\(p\)</span>, adjusted <span class="math inline">\(R^2\)</span></td>
-<td><span class="math inline">\(\text{BF}_{10}\)</span>, <span class="math inline">\(\text{BF}_{\text{incl}}\)</span></td>
+<td>How precise is this effect estimate?</td>
+<td>Standard error, 95% CI, 95% credible interval</td>
 </tr>
 </tbody>
 </table>
 <!-- Fisher's evidential p-value is the L3 callback (Fisher, 1956 quote in NHST_3.qmd). BIC
      approximates the BF: BF01 ~ exp((BIC1 - BIC0) / 2) (Wagenmakers, 2007). -->
 </section>
-<section id="alternatives-we-have-not-discussed" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="alternatives-we-have-not-discussed">Alternatives we have not discussed</h2>
+<section id="alternatives-we-have-not-discussed-not-exam-material" class="level2 smaller scrollable">
+<h2 class="smaller scrollable anchored" data-anchor-id="alternatives-we-have-not-discussed-not-exam-material">Alternatives we have not discussed (not exam material)</h2>
 <ul>
 <li>Equivalence testing
 <ul>
-<li>Is the effect small enough to ignore?</li>
+<li>Is the effect small enough to ignore? (<a href="https://doi.org/10.1177/2515245918770963">Lakens et al., 2018</a>)</li>
 </ul></li>
-<li><span class="math inline">\(p\)</span>-value as evidence, without <span class="math inline">\(\alpha\)</span> (Fisher, lecture 3)
+<li><span class="math inline">\(p\)</span>-value as evidence, without <span class="math inline">\(\alpha\)</span> (Fisher’s original idea)
 <ul>
 <li>Smaller <span class="math inline">\(p\)</span>, stronger evidence against <span class="math inline">\(H_0\)</span></li>
-<li>Most common in practice</li>
+<li>Common in practice</li>
 </ul></li>
 <li>AIC / BIC
 <ul>
 <li>Model fit with a penalty for complexity</li>
 <li>BIC approximates the Bayes factor</li>
 </ul></li>
+<li>Multiverse analysis
+<ul>
+<li>What if we had made other choices? (<a href="https://doi.org/10.1177/1745691616658637">Steegen et al., 2016</a>)</li>
+</ul></li>
 </ul>
+
 <!-- Block 3 exam-note recap (last lecture before DT3, as L20 did for block 2): the L22 and L26
      notes, read from their lectures' own files so the text lives in one place. L21 has no exam
-     note (his call, 2026-10-25). L28's and L29's notes were added 2026-11-10 (his yes); L28's
-     own deck leaves its note out, so nothing reached students before he had checked the text. -->
+     note (his call, 2026-10-25). L28's note was added 2026-11-10 (his yes); L28's own deck leaves
+     its note out, so nothing reached students before he had checked the text. L29 has no exam
+     note (his call, 2026-11-12): the BF heuristics table need not be learned, and "keep the default
+     settings" was too vague; the rest only recapped the lecture. -->
 </section>
 <section id="exam-note-mediation-lecture-22" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="exam-note-mediation-lecture-22">Exam note: mediation (lecture 22)</h2>
@@ -800,18 +801,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>The question tells you which odds go on top</li>
 <li>JASP gives the log odds ratio by default (<em>Log Odds Ratio</em>)</li>
 </ul></li>
-</ul>
-</section>
-<section id="exam-note-bayesian-anova-lecture-29" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="exam-note-bayesian-anova-lecture-29">Exam note: Bayesian ANOVA (lecture 29)</h2>
-<ul>
-<li>Keep the default settings of each analysis</li>
-<li>Label the evidence with the <em>Heuristics for BF</em> table (anecdotal to extreme)</li>
-<li><em>Model Comparison</em> puts the best model on top
-<ul>
-<li><span class="math inline">\(\text{BF}_{10}\)</span> compares each model with that best model</li>
-</ul></li>
-<li><em>Analysis of Effects</em> gives the evidence for each effect (<span class="math inline">\(\text{BF}_{\text{incl}}\)</span>)</li>
 </ul>
 </section>
 <section id="next-time" class="level2">

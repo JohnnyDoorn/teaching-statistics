@@ -1,0 +1,28 @@
+---
+title: "26. Moderation"
+subtitle: "Summary and chapters of the recording"
+format:
+  html:
+    toc: false
+css: ../../ajohnson.css
+---
+
+<style>
+.chapters th:first-child, .chapters td:first-child { width: 6em; white-space: nowrap; }
+.chapters .chapter-summary { display: block; margin-top: 0.2em; font-size: 0.9em; color: #555; }
+</style>
+
+```{r viewer-helper-setup, echo=FALSE}
+# Chapters and the shared helpers live in ../viewer-helper/ (see viewer-helper.R).
+source("../viewer-helper/viewer-helper.R")
+```
+
+`r lectureLine(26)`
+
+Moderation is an interaction between continuous predictors, where the effect of one predictor depends on the value of another. With the coffee example (wakefulness predicted from hours awake and milliliters of coffee) we look at the regression equation with an interaction term, at the model in three dimensions and in a descriptives plot with separate lines, and at the predictions the model makes. We run the analysis in the Process module, including the conditional effects for three values of the moderator. After the break we test the interaction with hierarchical regression (does it add explained variance?), look at centering and at how Process and linear regression differ, check the assumptions in JASP, and use the applet to tell associated predictors apart from an interaction.
+
+Open the recording and skip to the chapter you need. The chapters come from the lecture transcript, so one may start a few seconds early or late.
+
+```{r chapters-26, echo=FALSE}
+chapterTable(26)
+```

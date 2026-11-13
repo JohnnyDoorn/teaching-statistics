@@ -1,0 +1,28 @@
+---
+title: "28. Chi-squared test"
+subtitle: "Summary and chapters of the recording"
+format:
+  html:
+    toc: false
+css: ../../ajohnson.css
+---
+
+<style>
+.chapters th:first-child, .chapters td:first-child { width: 6em; white-space: nowrap; }
+.chapters .chapter-summary { display: block; margin-top: 0.2em; font-size: 0.9em; color: #555; }
+</style>
+
+```{r viewer-helper-setup, echo=FALSE}
+# Chapters and the shared helpers live in ../viewer-helper/ (see viewer-helper.R).
+source("../viewer-helper/viewer-helper.R")
+```
+
+`r lectureLine(28)`
+
+The chi-squared test is about the association between two categorical variables, so we work with counts. With this year's class data (preferred way of watching the lecture, and personality) we predict the count in every cell under the null hypothesis of independence, compare those predictions with the observed counts, and add everything up into the χ² statistic and its p-value. We check the expected counts (with Fisher's exact test as the alternative when they are small) and use the standardized residuals to see where the null model is most wrong. The effect size is the odds ratio, which we build up from conditional probabilities and odds. After the break we run the analysis in JASP, add a third variable as a layer, use the test to check whether predictors are independent, and redo the book's dancing cats example.
+
+Open the recording and skip to the chapter you need. The chapters come from the lecture transcript, so one may start a few seconds early or late.
+
+```{r chapters-28, echo=FALSE}
+chapterTable(28)
+```

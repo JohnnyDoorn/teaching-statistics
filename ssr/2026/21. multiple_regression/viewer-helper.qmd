@@ -1,0 +1,28 @@
+---
+title: "21. Multiple regression"
+subtitle: "Summary and chapters of the recording"
+format:
+  html:
+    toc: false
+css: ../../ajohnson.css
+---
+
+<style>
+.chapters th:first-child, .chapters td:first-child { width: 6em; white-space: nowrap; }
+.chapters .chapter-summary { display: block; margin-top: 0.2em; font-size: 0.9em; color: #555; }
+</style>
+
+```{r viewer-helper-setup, echo=FALSE}
+# Chapters and the shared helpers live in ../viewer-helper/ (see viewer-helper.R).
+source("../viewer-helper/viewer-helper.R")
+```
+
+`r lectureLine(21)`
+
+We open block 3 (life is continuous) with multiple regression, predicting album sales from two continuous predictors, advertisement budget and airplay. In the applet we see how every predictor we add changes the model predictions and the explained variance (R²), and how the regression coefficients are tested. Then we go through the assumptions, with extra attention to multicollinearity and the VIF, and meet the bootstrap as a robust alternative. After the break we picture the model as a plane in three dimensions, compute its predictions and errors, and use hierarchical regression to isolate what a single predictor adds (the R² change). We finish with the full analysis in JASP, assumption checks included.
+
+Open the recording and skip to the chapter you need. The chapters come from the lecture transcript, so one may start a few seconds early or late.
+
+```{r chapters-21, echo=FALSE}
+chapterTable(21)
+```

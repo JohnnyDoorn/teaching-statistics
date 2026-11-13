@@ -4,7 +4,7 @@ author: "Johnny van Doorn"
 date: today
 ---
 
-The handouts are 1 continuous page, while the slides are spread across multiple pages (navigate with the arrow keys). To get a pdf, I recommend you use the print option in your browser to print the handout to pdf (open the handout and press `ctrl + p` (Windows) or `cmd + p` (MacOS)). 
+The handouts are 1 continuous page, while the slides are spread across multiple pages (navigate with the arrow keys). To get a pdf, I recommend you use the print option in your browser to print the handout to pdf (open the handout and press `ctrl + p` (Windows) or `cmd + p` (MacOS)). The chapters page lists the topics of each recording with their start times, so you can skip to the part you need. It is based on the lecture transcript, and the sentences under each chapter come directly from there.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # One knob per academic year: bump this and everything below follows.
@@ -13,7 +13,7 @@ year_dir    <- "2026"
 # Two knobs, both lecture numbers (the leading number of the wrapper file):
 # - list_up_to:  lectures listed in the table, so students see the layout of the
 #                block ahead. Set it to Inf to list the whole year.
-# - links_up_to: lectures whose Handout / Slides / Watch links are shown; later
+# - links_up_to: lectures whose Handout / Slides / Watch / Chapters links are shown; later
 #                rows get a dash. Bump it to the next lecture as each one is given.
 list_up_to  <- 29
 links_up_to <- 28
@@ -50,6 +50,11 @@ for (i in 1:n) {
   # Optional per-lecture "view" link in the front matter: the Teams link while the
   # lecture is live, the recording afterwards. Absent -> a dash in the table.
   lectures[i , 'view'] = if (is.null(yaml$view)) NA_character_ else yaml$view
+  # Optional viewer-helper.qmd next to the wrapper: summary + chapters of the
+  # recording (code and chapters.csv in viewer-helper/). Test the qmd, not the html:
+  # the CI checkout only holds the qmds.
+  helper <- file.path(dirname(files[i]), "viewer-helper.qmd")
+  lectures[i , 'chapters'] = if (file.exists(helper)) paste0(course.path, sub("qmd$", "html", helper)) else NA_character_
 
 }
 
@@ -57,6 +62,8 @@ handoutLinks <- sprintf('<a href="https://JohnnyDoorn.github.io/teaching-statist
 slideLinks <- sprintf('<a href="https://JohnnyDoorn.github.io/teaching-statistics/%s" target="_blank" class="external">link</a>', gsub("qmd", "slide.html", lectures$url))
 viewLinks <- sprintf('<a href="%s" target="_blank" class="external">link</a>', lectures$view)
 viewLinks[is.na(lectures$view)] <- "-"
+chapterLinks <- sprintf('<a href="https://JohnnyDoorn.github.io/teaching-statistics/%s" target="_blank" class="external">link</a>', lectures$chapters)
+chapterLinks[is.na(lectures$chapters)] <- "-"
 
 # handoutLinks[grepl(lectures$date, pattern = "2025")] <- slideLinks[grepl(lectures$date, pattern = "2025")] <- "-"
 
@@ -64,7 +71,8 @@ data.frame(Date    = lectures$date,
            Lecture = lectures$title,
            Handout = handoutLinks,
            Slides  = slideLinks,
-           Watch   = viewLinks
+           Watch   = viewLinks,
+           Chapters = chapterLinks
           ) -> lecture.list
 
 # Sort on date
@@ -78,7 +86,7 @@ lecture.list$LectureNumber <- as.numeric(sub("^([0-9]+).*", "\\1", lecture.list$
 lecture.list <- lecture.list[order(lecture.list$LectureNumber), ]
 lecture.list <- lecture.list[lecture.list$LectureNumber <= list_up_to, ]
 noLinks <- lecture.list$LectureNumber > links_up_to
-lecture.list[noLinks, c("Handout", "Slides", "Watch")] <- "-"
+lecture.list[noLinks, c("Handout", "Slides", "Watch", "Chapters")] <- "-"
 # lecture.list$Date <- lubridate::dmy(lecture.list$Date)
 # lubridate::mdy(lecture.list$Date)
 lecture.list <- lecture.list[, -(ncol(lecture.list))]

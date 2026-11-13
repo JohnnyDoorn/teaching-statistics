@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.340">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Johnny van Doorn">
+
+<title>26. Moderation</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="viewer-helper_files/libs/clipboard/clipboard.min.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/quarto.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/popper.min.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/anchor.min.js"></script>
+<link href="viewer-helper_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="viewer-helper_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="viewer-helper_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="viewer-helper_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="viewer-helper_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+<link rel="stylesheet" href="../../ajohnson.css">
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">26. Moderation</h1>
+<p class="subtitle lead">Summary and chapters of the recording</p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Johnny van Doorn </p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Amsterdam
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+</header>
+
+<style>
+.chapters th:first-child, .chapters td:first-child { width: 6em; white-space: nowrap; }
+.chapters .chapter-summary { display: block; margin-top: 0.2em; font-size: 0.9em; color: #555; }
+</style>
+<p>6 November 2026 · <a href="https://amsuni-my.sharepoint.com/:v:/g/personal/j_b_vandoorn_uva_nl/IQAPsjnCH0eNTbfl0KC-8Xf5AfqegZQ5b-XIEjK2PhJQQlA?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&amp;e=cgamN8" target="_blank">Recording</a> · <a href="26.%20moderation.slide.html" target="_blank">Slides</a> · <a href="26.%20moderation.html" target="_blank">Handout</a></p>
+<p>Moderation is an interaction between continuous predictors, where the effect of one predictor depends on the value of another. With the coffee example (wakefulness predicted from hours awake and milliliters of coffee) we look at the regression equation with an interaction term, at the model in three dimensions and in a descriptives plot with separate lines, and at the predictions the model makes. We run the analysis in the Process module, including the conditional effects for three values of the moderator. After the break we test the interaction with hierarchical regression (does it add explained variance?), look at centering and at how Process and linear regression differ, check the assumptions in JASP, and use the applet to tell associated predictors apart from an interaction.</p>
+<p>Open the recording and skip to the chapter you need. The chapters come from the lecture transcript, so one may start a few seconds early or late.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm chapters table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Time</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Chapter</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">8:08</td>
+<td style="text-align: left;">Welcome and recap<span class="chapter-summary">Moderation analysis is nothing more than looking at interactions between variables, but now with continuous predictors, because in block 3 life is continuous. Mediation is about one variable affecting the value of another variable, while an interaction is about one predictor influencing the effect of the other.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">12:24</td>
+<td style="text-align: left;">Moderation as a path model<span class="chapter-summary">When we add a moderator, it has an arrow pointing at the association between predictor and outcome. One arrow pointing at another arrow indicates that the moderator is influencing the effect of the predictor on the outcome variable.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">14:05</td>
+<td style="text-align: left;">The model<span class="chapter-summary">The regression formula has the main effect of the predictor, the main effect of the moderator, and a last term, the interaction term. For every coefficient we get a hypothesis test of whether it significantly differs from zero, and that is how we test the interaction effect.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">16:38</td>
+<td style="text-align: left;">Main effects versus interaction in 3D<span class="chapter-summary">With two predictors, the model predictions are shown by a two-dimensional plane. The model with just the two main effects is a flat square, while with an interaction there is a bend in it, and that bend is exactly what an interaction effect tells you.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">18:25</td>
+<td style="text-align: left;">Assumptions<span class="chapter-summary">The assumptions are the same as for linear regression, because process models are basically collections of linear regressions. The Process module has no assumption checks, so on the exam you assess the assumptions using multiple regression.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">20:07</td>
+<td style="text-align: left;">Example (coffee and wakefulness)<span class="chapter-summary">Our outcome is wakefulness, how awake people are, with two predictors, how long somebody has been awake and how much coffee they have consumed. An interaction would mean that the effect of coffee depends on how long somebody has been awake.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">23:25</td>
+<td style="text-align: left;">Correlations and scatterplots<span class="chapter-summary">The observed correlations give a first idea of how strongly the variables are correlated, but they do not say anything about interaction effects. A matrix scatter plot is more informative, because we are looking at the raw data and can see, for instance, problems with linear associations.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">25:55</td>
+<td style="text-align: left;">3D plot<span class="chapter-summary">With a 3D scatter plot, we fit a square into the points in such a way that all the distances are as small as possible. A much better way to visualize two predictors is the descriptives plot in linear regression.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">26:46</td>
+<td style="text-align: left;">Descriptives plot<span class="chapter-summary">Just as in the ANOVA descriptives plots, you put the second predictor in separate lines, and JASP groups it into, for instance, low, medium and high. If these lines are parallel there is no interaction effect, but we always follow up with a more formal test with a p-value.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">31:01</td>
+<td style="text-align: left;">Fitting the model<span class="chapter-summary">We get estimates for the two main effects and the interaction effect, each with a standard error, a t-value and a p-value. For our alpha of 0.005 we reject the null hypothesis for all three coefficients.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">33:27</td>
+<td style="text-align: left;">Regression equation and predictions<span class="chapter-summary">Based on the regression coefficients we can predict wakefulness for every participant, for instance someone who was 15 hours awake and drank 213 milliliters of coffee. The values on the predictors are featured twice in this calculation, once for the main effects and once for the interaction effect.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">35:58</td>
+<td style="text-align: left;">Expected vs. observed<span class="chapter-summary">The fitted plane is not a flat surface, there is a curvature to it, and that signals an interaction effect. R-squared is the sum of the blue lines divided by the sum of the orange lines, and here we explain almost 99% of the variance.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">40:12</td>
+<td style="text-align: left;">Turn quantitative into ordinal?!<span class="chapter-summary">What if we didn't measure milliliters of coffee, but cups of coffee instead? Milliliters is the more fine-grained way of measuring coffee consumption, but cups are a lot easier to visualize as separate lines.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">41:56</td>
+<td style="text-align: left;">Moderation in JASP (Process module)<span class="chapter-summary">In the Process module the Models tab needs a model number, 4 for mediation and 1 for moderation, where the arrow points at the other arrow. The path coefficients table gives the two main effects and the interaction, and with a significant interaction you always interpret the main effects in its context.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">48:50</td>
+<td style="text-align: left;">Conditional effects<span class="chapter-summary">By default, JASP shows the conditional effects of your predictor on your outcome for three values of the moderator (the 16th, 50th and 84th percentiles). For the hypothesis test of the interaction, look at the p-value in the third row of the path coefficients table.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">57:21</td>
+<td style="text-align: left;"><em>Break</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:07:17</td>
+<td style="text-align: left;">Interaction in hierarchical regression<span class="chapter-summary">In hierarchical regression, model 2 differs from model 1 only by the interaction effect, so we look at the increase in R-squared and its p-value. The R-squared change is sort of the effect size, and a small increase can still be significant for a high enough sample size.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:13:14</td>
+<td style="text-align: left;">Centering<span class="chapter-summary">Process centers the predictors by default, which means you subtract the mean, so a main-effect coefficient becomes the effect of that predictor when somebody scores equal to the mean on the other variable. Centering changes the main-effect coefficients, but not the interaction coefficient or its significance.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:16:37</td>
+<td style="text-align: left;">Process module or linear regression?<span class="chapter-summary">Process uses the structural equation modeling approach, so it gives a z statistic where linear regression gives a t statistic. They are extremely similar, and on the exam you'll be pointed to the right analysis.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:18:21</td>
+<td style="text-align: left;">Hierarchical regression in JASP<span class="chapter-summary">We add the interaction effect as a new model in the Model tab, by Command or Control clicking both predictors. The p-value of the R-squared change and the p-value of the interaction coefficient are the same, because both tell you whether there is a significant interaction effect.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:25:03</td>
+<td style="text-align: left;">Checking the assumptions in JASP<span class="chapter-summary">Assess multicollinearity with the VIF of the main-effects-only model, because the VIF will always look problematic in the full model with the interaction. Without the interaction, the residuals versus predicted plot shows a parabola, because there is a strong effect in the data that we are not modeling.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:32:50</td>
+<td style="text-align: left;">Associated predictors versus interaction (applet)<span class="chapter-summary">In the applet you can induce multicollinearity and an interaction effect separately. Multicollinearity is about the values of your predictors being associated, while an interaction is about the effect of one variable being influenced by another variable.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:46:23</td>
+<td style="text-align: left;">Cups of coffee as a categorical predictor<span class="chapter-summary">In regression you can treat cups of coffee as a scale variable (the covariates box) or as a categorical variable (the factors box). Treated as categorical, we throw away information about the order and magnitude of coffee consumption.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:51:30</td>
+<td style="text-align: left;">Recap<span class="chapter-summary">We can assess an interaction effect in linear regression, with a hierarchical setup and the assumption checks, or in the Process module, and the interaction coefficient is the same in both. Centering only changes the main-effect coefficients.</span></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -20,11 +20,11 @@ A Bayes factor of ${BF}_{10} = 3$, means that the data are 3 times more likely u
 par(mfrow = c(1, 2), cex.main = 0.95)
 cols <- viridis::viridis(6)
 barplot(dbinom(0:10, 10, 0.5), names.arg = 0:10, xlab = "Number of heads", ylab = "Likelihood",
-        main = "Likely Outcomes under Sarah's Model", col = cols[1], ylim = c(0,0.32))
+        main = "Sampling Distribution under Sarah's Model", col = cols[1], ylim = c(0,0.32))
 barplot(c(rep(0, 8), dbinom(8, 10, 0.5)), add = TRUE, col = cols[6])
 
 barplot(rep(1/11, 11), names.arg = 0:10, xlab = "Number of heads", ylab = "Likelihood",
-        main = "Likely Outcomes under Alex's Model", col = cols[4], ylim = c(0,0.32))
+        main = "Average Sampling Distribution under Alex's Model", col = cols[4], ylim = c(0,0.32))
 barplot(c(rep(0, 8), 1/11), add = TRUE, col = cols[6])
 ```
 - Sarah's model has a marginal likelihood of `r round(dbinom(8, 10, 0.5), 4)` for 8 heads

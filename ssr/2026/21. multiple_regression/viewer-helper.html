@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.340">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Johnny van Doorn">
+
+<title>21. Multiple regression</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="viewer-helper_files/libs/clipboard/clipboard.min.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/quarto.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/popper.min.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/anchor.min.js"></script>
+<link href="viewer-helper_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="viewer-helper_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="viewer-helper_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="viewer-helper_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="viewer-helper_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+<link rel="stylesheet" href="../../ajohnson.css">
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">21. Multiple regression</h1>
+<p class="subtitle lead">Summary and chapters of the recording</p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Johnny van Doorn </p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Amsterdam
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+</header>
+
+<style>
+.chapters th:first-child, .chapters td:first-child { width: 6em; white-space: nowrap; }
+.chapters .chapter-summary { display: block; margin-top: 0.2em; font-size: 0.9em; color: #555; }
+</style>
+<p>27 October 2026 · <a href="https://amsuni-my.sharepoint.com/:v:/g/personal/j_b_vandoorn_uva_nl/IQBJRqxPN0fRR43aLLX3Z6pmAfROHkn1Ei7E1qcZ3ONxAe0?e=L8kLF5&amp;nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D" target="_blank">Recording</a> · <a href="21.%20multiple_regression.slide.html" target="_blank">Slides</a> · <a href="21.%20multiple_regression.html" target="_blank">Handout</a></p>
+<p>We open block 3 (life is continuous) with multiple regression, predicting album sales from two continuous predictors, advertisement budget and airplay. In the applet we see how every predictor we add changes the model predictions and the explained variance (R²), and how the regression coefficients are tested. Then we go through the assumptions, with extra attention to multicollinearity and the VIF, and meet the bootstrap as a robust alternative. After the break we picture the model as a plane in three dimensions, compute its predictions and errors, and use hierarchical regression to isolate what a single predictor adds (the R² change). We finish with the full analysis in JASP, assumption checks included.</p>
+<p>Open the recording and skip to the chapter you need. The chapters come from the lecture transcript, so one may start a few seconds early or late.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm chapters table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Time</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Chapter</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">16:20</td>
+<td style="text-align: left;">Welcome to block 3<span class="chapter-summary">We are returning to our old friend, our first friend in SSR, the regression module. In block 3 we're not going to be looking at categorical predictors, but at continuous predictors, so the theme of block 3 is life is also continuous.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">21:22</td>
+<td style="text-align: left;">Multiple regression<span class="chapter-summary">We are still in the business of trying to predict an outcome variable as best as possible by looking at one or more predictor variables. With continuous predictors, every continuous predictor gets a single regression weight.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">23:58</td>
+<td style="text-align: left;">Outcome vs model prediction<span class="chapter-summary">These scatter plots between prediction and outcome visualize exactly the proportion of explained variance, which we denote with r-squared. The higher the r-squared, the better the model predicted.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">27:26</td>
+<td style="text-align: left;">Plotting the data (applet)<span class="chapter-summary">Always plot your data, because plots are a great way already to assess various assumptions. We predict how well an album sells from two predictor variables, advertisement budget and airplay, and a matrix scatter plot gives a first idea of how they are associated.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">32:45</td>
+<td style="text-align: left;">Explained variance with one predictor (applet)<span class="chapter-summary">The explained variance is an effect size, a proportion between zero and one. An F statistic is a test statistic for hypothesis testing, and you can turn your R-squared into an F statistic to test whether the increase in explained variance is significant.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">39:32</td>
+<td style="text-align: left;">Two predictors and an interaction (applet)<span class="chapter-summary">The moment your predictors are associated, the unique contribution of a predictor is harder to quantify. Now we incorporate both advertisement budget and airplay in predicting album sales, and we can even include the interaction effect.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">42:52</td>
+<td style="text-align: left;">Testing the regression coefficients<span class="chapter-summary">Just as with regression with a single predictor, we can still test whether the regression coefficients are equal to 0 or not. If a coefficient equals 0, it has no predictive value for predicting the outcome variable.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">47:12</td>
+<td style="text-align: left;">Assumptions<span class="chapter-summary">We are still working with the linear model, and if its assumptions are violated, you cannot rely so much anymore on your inferential statistics. Homoscedasticity, the regression equivalent of equal variances, becomes more and more important as you add more predictors to your model.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">53:10</td>
+<td style="text-align: left;">Multicollinearity and the VIF<span class="chapter-summary">Multicollinearity means very strongly associated predictor variables, and if all your predictors look the same, you cannot attribute the explained variance to one specific variable anymore. You assess it with the VIF, and only for the main effects, not for the interaction effect.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">59:01</td>
+<td style="text-align: left;">The bootstrap as a robust alternative<span class="chapter-summary">If you have one of these assumption problems, you can also choose to use what's called the bootstrap. It is a way to have more robust confidence intervals when you have such assumption violations.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">59:54</td>
+<td style="text-align: left;">The album sales example<span class="chapter-summary">The actual example predicts album sales from two predictor variables, airplay and advertisement budget. We have 200 observations, so the normality assumption is not going to be so important anymore.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:01:30</td>
+<td style="text-align: left;"><em>Break</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:12:47</td>
+<td style="text-align: left;">From a regression line to a regression plane<span class="chapter-summary">With one predictor, a line gives the predictions of the model. With two predictors, we visualize our model predictions with a plane, chosen in such a way that it's as close to all the points as possible.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:18:44</td>
+<td style="text-align: left;">Predicted values from the model<span class="chapter-summary">Based on the regression weights, we can calculate the predictions that our model makes. You can also plug new values of airplay and advertisement budget into the regression formula to make predictions for new data.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:21:16</td>
+<td style="text-align: left;">How far are we off?<span class="chapter-summary">We take the difference between observed and predicted, and that is our model error, our model residuals. R-squared is the squared correlation between observed and predicted, but you can also see it as the model sums of squares divided by the total sums of squares.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:28:55</td>
+<td style="text-align: left;">Hierarchical regression<span class="chapter-summary">Hierarchical regression allows you to get a better idea of an individual predictor's contribution, where the next model builds upon the previous one. We look at the R-squared change, and this R-squared change also has a corresponding F statistic that you can use to do hypothesis testing.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:31:34</td>
+<td style="text-align: left;">Multiple regression in JASP<span class="chapter-summary">The model summary table tells something about each model as a whole, and the coefficients table lists the regression coefficients corresponding to each predictor. On open questions, always be more specific about what p-value you refer to.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:41:45</td>
+<td style="text-align: left;">Checking the assumptions in JASP<span class="chapter-summary">For influential cases you tick Case-wise diagnostics, and a Cook's distance close to one tells you that you have an influential case. The residuals versus predicted plot assesses homoscedasticity, and the tolerance and VIF box checks multicollinearity.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:48:25</td>
+<td style="text-align: left;">Hierarchical regression in JASP<span class="chapter-summary">In the Model tab we make multiple models, and we control for a variable by adding it to all the models. Adding airplay gives a significant increase in R-squared, but adding the interaction effect gives barely any increase.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:57:32</td>
+<td style="text-align: left;">Recap<span class="chapter-summary">We've seen how to say something about overall model performance with the r-squared, and how to make more specific model comparisons where the only difference between two models is a single predictor. Tomorrow is mediation analysis, explicitly modeling dependence between predictors.</span></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
