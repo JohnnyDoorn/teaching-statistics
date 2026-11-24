@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.340">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Johnny van Doorn">
+
+<title>17. Factorial ANOVA</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="viewer-helper_files/libs/clipboard/clipboard.min.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/quarto.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/popper.min.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/anchor.min.js"></script>
+<link href="viewer-helper_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="viewer-helper_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="viewer-helper_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="viewer-helper_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="viewer-helper_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+<link rel="stylesheet" href="../../ajohnson.css">
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">17. Factorial ANOVA</h1>
+<p class="subtitle lead">Summary and chapters of the recording</p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Johnny van Doorn </p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Amsterdam
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+</header>
+
+<style>
+.chapters th:first-child, .chapters td:first-child { width: 6em; white-space: nowrap; }
+.chapters .chapter-summary { display: block; margin-top: 0.2em; font-size: 0.9em; color: #555; }
+</style>
+<p>13 October 2026 · <a href="https://amsuni-my.sharepoint.com/:v:/g/personal/j_b_vandoorn_uva_nl/IQC7z3vjgVadToodmShWVxiAAbmrIunXfEjimMdB0YDVdOA?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&amp;e=zb639s" target="_blank">Recording</a> · <a href="17.%20ANOVA_independent_factorial.slide.html" target="_blank">Slides</a> · <a href="17.%20ANOVA_independent_factorial.html" target="_blank">Handout</a></p>
+<p>We have covered so far in block two all sorts of things that we use to compare means, and what is on the menu for today is an ANOVA when you have two categorical predictors. We are still just explaining variance in a dependent variable as best as possible by looking at one or more predictor variables, and by adding predictors to our model, we are explaining more and more variance, which is good news for our F statistic. We’re going to discuss more specifically what is this interaction effect, because interaction effects are one of the most interesting but also dangerous effects that you can encounter in your data. And of course, we’ll round off with a demonstration in JASP.</p>
+<p>Open the recording and skip to the chapter you need. The chapters come from the lecture transcript, so one may start a few seconds early or late.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm chapters table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Time</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Chapter</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">8:21</td>
+<td style="text-align: left;">Welcome<span class="chapter-summary">As you have seen in the overview page, we have covered so far in block two all sorts of things that we use to compare means, and the main program for today is ANOVA with two categorical predictors. We're going to discuss more specifically what is this interaction effect, because interaction effects are one of the most interesting but also dangerous effects that you can encounter in your data.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">15:08</td>
+<td style="text-align: left;">Associated predictors<span class="chapter-summary">The two things to pay very close attention to with multiple predictors are, on the one hand, associated predictors, and this is all due to how your predictors are correlated with each other. In the puppy case, we had a suppression case, where one predictor variable is suppressing the effect of another variable.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">18:36</td>
+<td style="text-align: left;">Practice module in ANS<span class="chapter-summary">I took all of the exercises and data sets from Discovering Statistics Using JASP and turned it into an ANS practice module, and I inserted all my old exam questions. You will now have available on ANS different DSUJ tests that contain all the exercises from the book, and these are very much non-mandatory.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">21:18</td>
+<td style="text-align: left;">Independent factorial ANOVA<span class="chapter-summary">The independent here refers to the fact that we are measuring between subjects, and we still just have one outcome variable, and then two or more independent categorical variables. In the one-way ANOVA, we could always rely on the Brown-Forsythe ANOVA, which is able to handle unequal variances, but this correction only exists for a one-way ANOVA.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">24:24</td>
+<td style="text-align: left;">Applet<span class="chapter-summary">We have 3 doses of alcohol that we give our participants and three doses of speed, and a single dependent variable, the number of accidents on average caused in a driving simulator. Instead of predicting for everybody the grand mean, we take into account the drugs that they've been given, so does that meaningfully increase our model predictions?</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">29:29</td>
+<td style="text-align: left;">One predictor at a time<span class="chapter-summary">We are now predicting using group means of the alcohol groups, and then we still have model error. With the two predictors, we just have the residual sum of squares of this model with two predictors, and we just have the model sum of squares of those two predictors.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">37:19</td>
+<td style="text-align: left;">Formulas<span class="chapter-summary">We calculate this F statistic based on the full model that has all the predictors in there. That is why we start to add more of these predictors, to try to get that residual mean square as small as possible, because that is then going to improve our F statistic.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">39:02</td>
+<td style="text-align: left;">Interaction<span class="chapter-summary">An interaction effect in this case, when we have alcohol and speed, means that the effect of speed differs based on which dose of alcohol, or exactly the other way around. The other way around would be that the effect of alcohol differs based on how much speed you've taken.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">41:53</td>
+<td style="text-align: left;">Example<span class="chapter-summary">Let's set alpha to 0.005, and let's see, are we going to find a boost in our whole prediction by looking at one or more of these predictor variables? We have several categorical predictors, the daytime in which people were driving, how much alcohol and speed they got, and also, just for fun, a continuous variable.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">44:00</td>
+<td style="text-align: left;">Sums of squares per predictor<span class="chapter-summary">We make a model with just a single predictor, alcohol, and see how much that single predictor boosts our model predictions. To get an idea of the little chunk that is only due to the interaction effect, we subtract the sums of squares of the speed model and the sums of squares of the alcohol model.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">49:10</td>
+<td style="text-align: left;">F for every predictor<span class="chapter-summary">We're also going to have multiple F statistics that tell us how significant the boost in model improvement has been by considering that predictor variable. The mean square residual is based on the full model, which is why people add more predictors to their model.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">51:01</td>
+<td style="text-align: left;"><em>Break</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:04:05</td>
+<td style="text-align: left;">Variance in the accidents data<span class="chapter-summary">We have the total variability, how much people just differ in how many accidents they cause. We have the sums of squares of the full model, we subtract the sums of squares of the single predictor models, and the sum of squares for the interaction we turn into an F statistic to see, do we have evidence to reject the null hypothesis that says there is no interaction effect?</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:07:33</td>
+<td style="text-align: left;">Balanced by design<span class="chapter-summary">I opened the lecture with this suppression effect and redundancy effect, and that is all because you might have associated predictors, so you want to design your experiment in such a way that you minimize associations between your predictors. This is also why psychologists love ANOVA so much, because with categorical predictors it is a lot more easy to have a balanced design, with as many people in every cell of your design.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:12:53</td>
+<td style="text-align: left;">P-value<span class="chapter-summary">This F statistic is a test statistic, which means it has a nice sampling distribution under the null hypothesis, which means we can calculate a p-value, the probability of observing the F statistic we have observed or more extreme, which in the F distribution is only to the right. Here the null means that in reality there is no interaction effect between speed and alcohol usage in accidents.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:15:36</td>
+<td style="text-align: left;">Partition the explained variance (BONUS)<span class="chapter-summary">Each of the models that we can make has a certain degree of variance that it explains, and we want to decompose the variance explained by the full model back into unique contributions for our first predictor and our second predictor. The safest way to not have to worry about this is to have a balanced design without correlated predictor variables.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:18:32</td>
+<td style="text-align: left;">Contrasts and post-hoc tests<span class="chapter-summary">Planned contrasts are based on theory, specifically that you want to test for a specific group difference, and with post-hoc tests we basically make all possible pairwise comparisons. If you don't correct your p-values, the probability of making no error in five tests is only 77% rather than 95%.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:22:33</td>
+<td style="text-align: left;">Effect size in ANOVA<span class="chapter-summary">When you have multiple predictors, always make sure to work with the partial effect sizes, and it's also a proportion, just as with explained variance, so 0 is the lowest you can have. You do need to know where to find omega squared in JASP, to use partial when you have multiple predictors, and that it is a measure of explained variance.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:24:08</td>
+<td style="text-align: left;">JASP<span class="chapter-summary">How do we do a factorial ANOVA in JASP? When we have multiple predictors, it's better to use partial omega squared, and you have descriptive statistics, where you have your observed standard deviations, and the Q-Q plot of the residuals for assessing our normality assumption.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:31:00</td>
+<td style="text-align: left;">Contrasts in JASP<span class="chapter-summary">Do we want to make a pairwise comparison between our no condition and our some and much conditions combined? This answers a slightly different research question than just the F statistic and its p-value for a main effect, which tells us that there are significant group differences somewhere between the three groups.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:34:20</td>
+<td style="text-align: left;">Descriptive plots and the interaction<span class="chapter-summary">The awesome stuff arises when we add a second categorical predictor in separate lines, because then we look at both predictors at the same time. In our results here, we see pretty much parallel lines, which tells the same story as our non-significant F statistic for the interaction.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:41:06</td>
+<td style="text-align: left;">Post-hoc tests in JASP<span class="chapter-summary">We have 3 levels for speed and three levels for alcohol, which means we can make nine different combinations, and post-hoc tests give all 36 possible pairwise combinations. But you can also make these post-hoc tests conditional on your second predictor variable.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:46:11</td>
+<td style="text-align: left;">Raincloud plots and marginal means<span class="chapter-summary">Raincloud plots show the raw data points, and if you see that the green points are a little more scattered along the y-axis than the blue points, it can indicate that you might have an unequal variances problem. The marginal means will only differ from your observed means if you have correlated predictors.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:47:50</td>
+<td style="text-align: left;">Simple main effects<span class="chapter-summary">A final tool for diving deeper into an interaction effect is called simple main effects. What simple main effects do is run conditional ANOVAs for different levels of what you call the moderator variable.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:50:26</td>
+<td style="text-align: left;">Closing<span class="chapter-summary">We need to talk about interactions and associations between your predictors, and that's not going to go away for a while, because that's also going to be relevant with repeated measures ANOVA and with multiple predictors in regression. So tomorrow we will dive into repeated measures ANOVA.</span></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.340">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Johnny van Doorn">
+
+<title>5. JASP &amp; Visualization</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="viewer-helper_files/libs/clipboard/clipboard.min.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/quarto.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/popper.min.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/anchor.min.js"></script>
+<link href="viewer-helper_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="viewer-helper_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="viewer-helper_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="viewer-helper_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="viewer-helper_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+<link rel="stylesheet" href="../../ajohnson.css">
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">5. JASP &amp; Visualization</h1>
+<p class="subtitle lead">Summary and chapters of the recording</p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Johnny van Doorn </p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Amsterdam
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+</header>
+
+<style>
+.chapters th:first-child, .chapters td:first-child { width: 6em; white-space: nowrap; }
+.chapters .chapter-summary { display: block; margin-top: 0.2em; font-size: 0.9em; color: #555; }
+</style>
+<p>9 September 2026 · <a href="https://amsuni-my.sharepoint.com/:v:/g/personal/j_b_vandoorn_uva_nl/IQDaPkBoQ_zPS4_dOuu2SBRtAc1rvdfbynvEMivsu7bgLrY?e=saUTQ9&amp;nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D" target="_blank">Recording</a> · <a href="5.%20jasp_visualization.slide.html" target="_blank">Slides</a> · <a href="5.%20jasp_visualization.html" target="_blank">Handout</a></p>
+<p>Today, we’ll take a step back and take a look at the main tool that we’ll be using throughout SSR for statistics. We’ll be using JASP for all the analyses in this course, and I’ll be introducing it today, paying some attention specifically to how to do descriptive statistics and how to make certain visualizations, and this corresponds roughly to chapters 4 and 5 in the book. The first part will be JASP, and the second part will be visualization, because people will prefer looking at plots rather than reading words or even numbers. I close off with the Challenger example, so don’t just mindlessly throw out any outlier, because outliers are super informative.</p>
+<p>Open the recording and skip to the chapter you need. The chapters come from the lecture transcript, so one may start a few seconds early or late.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm chapters table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Time</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Chapter</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">21:10</td>
+<td style="text-align: left;">Welcome<span class="chapter-summary">Today, we'll take a step back and take a look at the main tool that we'll be using throughout SSR for statistics, so that we don't have to keep computing those nasty t statistics ourselves. We'll be using JASP for all the analyses in this course, paying some attention specifically to how to do descriptive statistics and how to make certain visualizations.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">25:09</td>
+<td style="text-align: left;">Why JASP?<span class="chapter-summary">This course used to use something called SPSS, which is a closed source statistics program. The moment students graduate, you end up paying thousands of euros a year for a single license of SPSS, and that's really unethical, I think, as a university to teach students in a software that they need to pay that much money for after they graduate.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">26:00</td>
+<td style="text-align: left;">Origin<span class="chapter-summary">JASP has been developed at the UvA here at the Methods Department, and anybody that has some coding affinity could take that code and add an analysis, add a module, for instance. If I do an SPSS analysis and I want to share it with a colleague, they need to have an SPSS license to see anything that I've done.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">31:13</td>
+<td style="text-align: left;">Getting started with JASP<span class="chapter-summary">By default, none of the analyses in the top bar are available to you, because we haven't loaded any data yet. In the hamburger menu you can either start a new data set or, most importantly, open an existing data set.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">33:35</td>
+<td style="text-align: left;">Preferences and AI<span class="chapter-summary">In the preferences you might find some useful things, like turning on dark mode, or how to present p-values, if you want them exact or rounded. With the optional AI in JASP, it's really a big risk that you just mindlessly copy-paste and just stop thinking, but you can use it, for instance, to write an interpretation of an analysis you did and then ask it to critique your analysis.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">37:32</td>
+<td style="text-align: left;">Modules<span class="chapter-summary">You can load additional modules, which are the analyses in the top ribbon bar, by clicking on this plus, and we will use one module later in the course in block 3, the Process module. This is also our philosophy of JASP, we try to not bombard the user with all sorts of stuff.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">38:27</td>
+<td style="text-align: left;">Loading data in JASP<span class="chapter-summary">I'll make a start with the exam anxiety data set, which is the one I'll be using also for next lecture about correlations. It's good to pay attention to these variable types, because JASP makes an initial best guess for what sort of variable type this is.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">40:19</td>
+<td style="text-align: left;">Variable settings<span class="chapter-summary">We can access what we call variable settings by double clicking a column name. One way to filter data is in these variable settings, where you can go to the filter column and click these check marks, and then you turn off that group.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">42:22</td>
+<td style="text-align: left;">Computing a new variable<span class="chapter-summary">We might want to take the anxiety variable, which is continuous, and turn it into a categorical variable by, for instance, saying anybody who scores 70 or lower, we call that low anxiety and higher is high anxiety. You're throwing away information by only looking at two groups, and you can use what we call the drag and drop constructor, or you can use R mode.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">53:26</td>
+<td style="text-align: left;">Filtering your data<span class="chapter-summary">Instead of computing a new column, we can give it some logical test that JASP uses to filter out the data. When you use filtering for a variable, a filter icon will also show up next to that column name to indicate, hey, you're using this variable to filter your data.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">59:29</td>
+<td style="text-align: left;">Descriptive statistics in JASP<span class="chapter-summary">The descriptive module is used to do a first exploration of the data that you have observed. The moment you add a variable, it immediately gets added to the table on the right, because JASP updates the results in real time.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:03:57</td>
+<td style="text-align: left;">Split and variable types<span class="chapter-summary">If there is a nominal icon in a box, the moment you drag any variable in there, JASP will treat it as if it is nominal, and the asterisk tells you that anxiety is originally not a nominal variable. There are so many observations of anxiety that turning it into a categorical variable is really meaningless, so this would be a case where we want to stratify anxiety.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:06:42</td>
+<td style="text-align: left;">Help files and the output window<span class="chapter-summary">If you feel lost in JASP, there is always this little blue i button for information, and all of the different options and the different output elements are described in the help file. The help files are available to you on the exam because they are just a part of JASP.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:08:43</td>
+<td style="text-align: left;"><em>Break</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:20:49</td>
+<td style="text-align: left;">How widely is JASP used?<span class="chapter-summary">Most psychology bachelor programs in the Netherlands use JASP by now, and we are averaging between 80 and 100,000 downloads every month. In the end, it doesn't really matter that much if you're using JASP or SPSS, it's all about being able to interpret the output in a proper way.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:23:25</td>
+<td style="text-align: left;">Two file formats<span class="chapter-summary">CSV is what we sometimes use to share data, but we also have a slightly fancier format, the .jasp file. The .jasp file contains the original data, it contains the settings that were used to create the results, it contains the results, and it contains annotations of the results.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:26:01</td>
+<td style="text-align: left;">Missing values<span class="chapter-summary">If I write NA here, JASP will immediately recognize it as NA and turn it into a little heart to indicate it's missing. You can have your own missingness code, like 666, so then make sure you don't actually measure 666 as an actual observation.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:27:47</td>
+<td style="text-align: left;">Plots in JASP<span class="chapter-summary">Plots help the reader reach a conclusion, but also give you a first idea of what your data looks like. Don't just look at the observed mean and standard deviation, because there can be so many patterns in the data that have the exact same mean and standard deviation, but a completely different scatter plot.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:29:49</td>
+<td style="text-align: left;">Outliers<span class="chapter-summary">Being an outlier is not a black and white binary kind of thing, and there's not one criterion for saying this is an outlier, so remove it, or this is not an outlier, let's keep it. Ideally, you decide before your data collection how you classify outliers.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:33:01</td>
+<td style="text-align: left;">Scatter plots<span class="chapter-summary">Regression lines give a first indication for the association between 2 variables, and we dive more into them in lecture nine. We get different regression lines for the two genders, because we use that as the split variable.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:34:38</td>
+<td style="text-align: left;">Raincloud plots<span class="chapter-summary">Raincloud plots are one of my favorite plots, because you have all sorts of different options, and they tell a really complete story of the data. So always take a look at the individual data points, with either a raincloud plot, a scatter plot, or a box plot with those jittered data points.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:38:54</td>
+<td style="text-align: left;">Annotated output and sharing<span class="chapter-summary">If you click Add Notes, a little window pops up, and you can start typing stuff, including your interpretation of the results. If you want to share a more informative file, you can take the JASP file, which has all the settings and already some results in there.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:42:14</td>
+<td style="text-align: left;">Getting help<span class="chapter-summary">The smaller features are in the Getting Started page, so if you want to know where to click to load data, you just play this video and it shows you where to click.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:43:03</td>
+<td style="text-align: left;">Why visualize data?<span class="chapter-summary">This corresponds to chapter 5 of the book, and you can make a quick overview of the data to detect some patterns. This is why you should plot your data, because these data have a correlation, a mean and a standard deviation that look completely normal that you could put in a report.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:43:58</td>
+<td style="text-align: left;">Scutari, 1854<span class="chapter-summary">Florence Nightingale worked in a military hospital during the Crimean War in the 19th century, and she noticed that there were a lot of deaths that were not caused by the enemy soldiers. So she did what any awesome nerd would do, and she started recording the data, and her plot is one of the first instances of statistical plots.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:47:22</td>
+<td style="text-align: left;">Boxplots and raincloud plots<span class="chapter-summary">Here's some more explanations of what box plots actually represent, what the whiskers and the middle line mean. These raincloud plots are a great way to assess group differences, but as a first indication, we would need to carry out a formal statistical test to really quantify some evidence.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:48:12</td>
+<td style="text-align: left;">Critically assess graphs<span class="chapter-summary">If you get presented with a graph, one of the things to pay attention to is what the axes look like, are they labeled and are the units provided? Some best practices, use informative axis labels and titles, and don't unnecessarily clutter your graph with all sorts of useless elements.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:50:34</td>
+<td style="text-align: left;">Scale matters<span class="chapter-summary">One group I teach in SPSS, and the other group I teach statistics in JASP, but here we applied a break in the y-axis, which is a very sneaky trick that is happening quite often to either inflate or deflate an effect. There's only a 1.5 point difference on a 100 point scale between JASP and SPSS.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:53:09</td>
+<td style="text-align: left;">Error bars<span class="chapter-summary">But even having just the axis is not telling the full statistical story, because we are still trying to conclude something about the whole population based on the sample that we measure. The higher your sample size, the lower your standard error, and the lower your standard error, the more narrow those error bars.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:56:26</td>
+<td style="text-align: left;">Using plots to predict<span class="chapter-summary">Based on what we've observed so far, we want to make predictions for future observations, and there was at some point the Challenger launch, which was a space shuttle. They plotted the observed temperature at launch and whether there was damage to the O-rings for 7 flights, and just those seven flights doesn't have a lot of certainty in it.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2:01:27</td>
+<td style="text-align: left;">Closing<span class="chapter-summary">Don't just mindlessly throw out any outlier that satisfied a certain criterion, but try to investigate why those outliers were there, because outliers are super informative. So on Friday, we will go back to variance and z-scores, and then we make the step to doing correlation.</span></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

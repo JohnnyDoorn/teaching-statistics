@@ -1,0 +1,28 @@
+---
+title: "12. ANOVA"
+subtitle: "Summary and chapters of the recording"
+format:
+  html:
+    toc: false
+css: ../../ajohnson.css
+---
+
+<style>
+.chapters th:first-child, .chapters td:first-child { width: 6em; white-space: nowrap; }
+.chapters .chapter-summary { display: block; margin-top: 0.2em; font-size: 0.9em; color: #555; }
+</style>
+
+```{r viewer-helper-setup, echo=FALSE}
+# Chapters and the shared helpers live in ../viewer-helper/ (see viewer-helper.R).
+source("../viewer-helper/viewer-helper.R")
+```
+
+`r lectureLine(12)`
+
+Today we're going to talk about something called ANOVA, a method for comparing means, because block 2 is all about comparing means to each other. ANOVA is more flexible and also allows you to compare more than two means to each other, and we're going to look at specifically one-way ANOVA, which means using a single categorical predictor variable. ANOVA stands for analysis of variance, so we're going to look at variance in our dependent variable and whether we can explain this by looking at a categorical predictor variable. After that main analysis, you can do follow-up tests, contrasts and post-hoc tests, and of course, I'll show how to do that in JASP.
+
+Open the recording and skip to the chapter you need. The chapters come from the lecture transcript, so one may start a few seconds early or late.
+
+```{r chapters-12, echo=FALSE}
+chapterTable(12)
+```

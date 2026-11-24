@@ -19,7 +19,7 @@ source("../viewer-helper/viewer-helper.R")
 
 `r lectureLine(26)`
 
-Moderation is an interaction between continuous predictors, where the effect of one predictor depends on the value of another. With the coffee example (wakefulness predicted from hours awake and milliliters of coffee) we look at the regression equation with an interaction term, at the model in three dimensions and in a descriptives plot with separate lines, and at the predictions the model makes. We run the analysis in the Process module, including the conditional effects for three values of the moderator. After the break we test the interaction with hierarchical regression (does it add explained variance?), look at centering and at how Process and linear regression differ, check the assumptions in JASP, and use the applet to tell associated predictors apart from an interaction.
+We're going to be talking about something called moderation analysis, and moderation analysis is nothing more than looking at interactions between variables. If there is an interaction effect, you should always interpret your predictor's main effects in the context of that interaction, but the difference now is that we're going to be looking at continuous predictors, because in block 3, life is continuous. We're going to look at interactions from the regression module, but we're also going to look at how to analyze moderation effects using the Process module. Mediation is about your predictors being associated with each other, and that is a different thing from your predictors having an interaction with each other.
 
 Open the recording and skip to the chapter you need. The chapters come from the lecture transcript, so one may start a few seconds early or late.
 

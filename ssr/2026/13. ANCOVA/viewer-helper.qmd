@@ -1,0 +1,28 @@
+---
+title: "13. ANCOVA"
+subtitle: "Summary and chapters of the recording"
+format:
+  html:
+    toc: false
+css: ../../ajohnson.css
+---
+
+<style>
+.chapters th:first-child, .chapters td:first-child { width: 6em; white-space: nowrap; }
+.chapters .chapter-summary { display: block; margin-top: 0.2em; font-size: 0.9em; color: #555; }
+</style>
+
+```{r viewer-helper-setup, echo=FALSE}
+# Chapters and the shared helpers live in ../viewer-helper/ (see viewer-helper.R).
+source("../viewer-helper/viewer-helper.R")
+```
+
+`r lectureLine(13)`
+
+We're going to dive into something called ANCOVA, and where ANOVA stands for analysis of variance, ANCOVA stands for analysis of covariance. We're still going to try to predict as best as possible variability in some variable of interest, but we're going to add a second predictor variable, a continuous predictor variable, so it has a covariance with our continuous outcome variable. There's a couple of caveats to watch out for when we are working with these multiple predictors, some things that can go wrong, but also some things that you gain, and we talk about something called interaction effects. And of course, I'll close off with showing ANCOVA in JASP and with some notes for checking assumptions on the exam.
+
+Open the recording and skip to the chapter you need. The chapters come from the lecture transcript, so one may start a few seconds early or late.
+
+```{r chapters-13, echo=FALSE}
+chapterTable(13)
+```

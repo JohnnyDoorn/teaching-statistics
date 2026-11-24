@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.340">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Johnny van Doorn">
+
+<title>12. ANOVA</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="viewer-helper_files/libs/clipboard/clipboard.min.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/quarto.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/popper.min.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/anchor.min.js"></script>
+<link href="viewer-helper_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="viewer-helper_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="viewer-helper_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="viewer-helper_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="viewer-helper_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+<link rel="stylesheet" href="../../ajohnson.css">
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">12. ANOVA</h1>
+<p class="subtitle lead">Summary and chapters of the recording</p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Johnny van Doorn </p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Amsterdam
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+</header>
+
+<style>
+.chapters th:first-child, .chapters td:first-child { width: 6em; white-space: nowrap; }
+.chapters .chapter-summary { display: block; margin-top: 0.2em; font-size: 0.9em; color: #555; }
+</style>
+<p>30 September 2026 · <a href="https://amsuni-my.sharepoint.com/:v:/g/personal/j_b_vandoorn_uva_nl/IQC8RXesSo_eRLK6yZYzsKzeAcJ292GAFFhQjhUF9Erj2Gk?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&amp;e=wbfOC9" target="_blank">Recording</a> · <a href="12.%20f_distribution_ANOVA_one_way_independent.slide.html" target="_blank">Slides</a> · <a href="12.%20f_distribution_ANOVA_one_way_independent.html" target="_blank">Handout</a></p>
+<p>Today we’re going to talk about something called ANOVA, a method for comparing means, because block 2 is all about comparing means to each other. ANOVA is more flexible and also allows you to compare more than two means to each other, and we’re going to look at specifically one-way ANOVA, which means using a single categorical predictor variable. ANOVA stands for analysis of variance, so we’re going to look at variance in our dependent variable and whether we can explain this by looking at a categorical predictor variable. After that main analysis, you can do follow-up tests, contrasts and post-hoc tests, and of course, I’ll show how to do that in JASP.</p>
+<p>Open the recording and skip to the chapter you need. The chapters come from the lecture transcript, so one may start a few seconds early or late.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm chapters table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Time</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Chapter</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">13:11</td>
+<td style="text-align: left;">Welcome<span class="chapter-summary">ANOVA is a very fundamental analysis, especially in psychology, and we've been building towards this moment for quite a while. We're going to look at specifically one-way ANOVA, which means using a single categorical predictor variable, and later in the block we're going to add multiple predictors.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">16:30</td>
+<td style="text-align: left;">Applet<span class="chapter-summary">The null model is a model that makes a prediction, it just guesses the grand mean, around 5.5 for all 10 participants. How much closer are the group means to those individual data points compared to just using the grand mean, because the closer those means are to the points, the better my alternative model is performing.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">23:31</td>
+<td style="text-align: left;">Sums of squares in the applet<span class="chapter-summary">The total variability is the distance between every data point and the grand mean, and total variability is decomposed into model error and model improvement. What we would like to see is that our model sum of squares is relatively bigger than our error sum of squares.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">28:16</td>
+<td style="text-align: left;">The F statistic<span class="chapter-summary">The F-statistic is basically taking the average of the model error and the average of the model improvement, and it takes the ratio of those, and it's very closely related to the t-statistic. The only extreme values for an F statistic are in the right side of the sampling distribution.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">32:41</td>
+<td style="text-align: left;">Assumptions<span class="chapter-summary">All of these analyses are the linear model, and the linear model has these assumptions that if they are violated, you have to take your inferential statistics with a grain of salt, and the size of that grain of salt depends on the degree of assumption violation. We still require our groups to be independent from each other, and equal variances you can assess by looking at the observed variances or standard deviations.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">35:09</td>
+<td style="text-align: left;">Puppies!<span class="chapter-summary">We expose them to different levels of puppies and we want to measure their happiness. Is there a meaningful difference in how happy people are after their puppy therapy?</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">37:49</td>
+<td style="text-align: left;">Define the model<span class="chapter-summary">Even if we have not a continuous predictor, but a categorical one, we can still write an ANOVA as a linear regression. We need to create as many dummy variables as the number of groups minus 1, because one group is the reference group, and the other dummy variables encode which other group people belong to.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">42:50</td>
+<td style="text-align: left;">Model predictions<span class="chapter-summary">Combined with our dummy variables, these will be our predictions, so we observed a mean of 3.2 in the 15 minutes condition, and we predict 3.2 for those people. The big question is, are those predictions a meaningful addition to our model, or is it just better to use the grand mean to predict?</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">43:43</td>
+<td style="text-align: left;">Variance components<span class="chapter-summary">We have total variance, and the total variance is decomposed between residual variance and model variance, model improvement. Each of these have a corresponding number of degrees of freedom that we use to convert those sums of squares to what we call the mean square.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">47:22</td>
+<td style="text-align: left;">Total, model and residual variance<span class="chapter-summary">The total sum of squares is the total sum of the differences between what we observe and the grand mean. The model improvement shows exactly how much closer the group means are to the data points compared to the grand mean.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">51:37</td>
+<td style="text-align: left;">F-ratio<span class="chapter-summary">We can calculate this F statistic that is sort of quantifying how much better our predictions with the group means are compared to using the grand mean, and the bigger our observed group differences, the stronger the signal compared to the noise. We would rather look it up in its corresponding sampling distribution, so that we can compute a p-value.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">55:03</td>
+<td style="text-align: left;">Reject H0?<span class="chapter-summary">How safe do you want to play it before you would conclude that puppy therapy works? If we decide to reject the null hypothesis based on these data, and we had used alpha of 0.05, we would have played it a little risky.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">56:41</td>
+<td style="text-align: left;">Contrasts<span class="chapter-summary">If your F statistic is significant, it only tells you that there are some group differences somewhere, so to investigate a significant main effect of our categorical predictor, we can use what's called follow-up tests. Importantly, the contrasts are decided upon before doing the data analysis.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:01:25</td>
+<td style="text-align: left;"><em>Break</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:14:51</td>
+<td style="text-align: left;">Post-hoc tests<span class="chapter-summary">In post-hoc tests, you look at all possible pairwise differences between your different groups, and if you have five groups or two categorical predictors, this number blows up really, really fast. The probability of making a type 1 error in one of these tests is not 5%, but it's quite a bit higher, so we correct the p-values that come out of those pairwise comparisons.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:19:33</td>
+<td style="text-align: left;">Effect size ω²<span class="chapter-summary">We have effect size in ANOVA which reflects the degree of explained variance by looking at your categorical predictor, and omega squared is the least biased way of estimating it. The further away this value is from zero, the better your model is doing its job at predicting the data.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:21:40</td>
+<td style="text-align: left;">JASP<span class="chapter-summary">We start by assigning our dependent variable and we assign a fixed factor, which is our categorical predictor. Let's say you are a complete fanatic about puppy therapy and you want to publish your results, it does show, always work with confidence intervals, because confidence intervals reflect the uncertainty.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:26:45</td>
+<td style="text-align: left;">Welch ANOVA<span class="chapter-summary">Those two versions of the ANOVA don't assume equal variances. Choosing a Welch ANOVA over the regular ANOVA all of a sudden brings you to non-significance, so these types of choices shouldn't be made after the fact, because you can sort of massage your results into significance.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:29:30</td>
+<td style="text-align: left;">Contrasts in JASP<span class="chapter-summary">Try to click any contrast type here, see what the output looks like, and then try to reason for yourself, and always look at the comparison column because that tells you exactly what is being compared against what. The most useful one is called custom contrast, because there you are in control of the types of contrast that you are asking JASP to compute.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:36:12</td>
+<td style="text-align: left;">Post-hoc tests in JASP<span class="chapter-summary">We are basically running individual t-tests for every possible comparison, and the p-value for the post-hoc test gets a subscript that mentions what correction is being applied. Generally we want to include confidence intervals to reflect some uncertainty with which we are doing our statistics.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:40:56</td>
+<td style="text-align: left;">t-test = ANOVA = regression<span class="chapter-summary">The ANOVA reports an F-statistic and the t-test and contrast report a t-statistic, but the p-value is exactly the same, so an F statistic is nothing more than the t statistic squared. In the linear regression, the unstandardized coefficient here is exactly the difference in means between the two years.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:48:03</td>
+<td style="text-align: left;">Dummy coding in regression<span class="chapter-summary">Because we have three groups, we have two dummy variables, and each of those regression weights encodes the difference between the reference group, the control group, and the 15 minutes and 30 minute condition. All those three things, t-test, linear regression, ANOVA, are all the linear model.</span></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

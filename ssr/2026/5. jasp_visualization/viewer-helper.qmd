@@ -1,0 +1,28 @@
+---
+title: "5. JASP & Visualization"
+subtitle: "Summary and chapters of the recording"
+format:
+  html:
+    toc: false
+css: ../../ajohnson.css
+---
+
+<style>
+.chapters th:first-child, .chapters td:first-child { width: 6em; white-space: nowrap; }
+.chapters .chapter-summary { display: block; margin-top: 0.2em; font-size: 0.9em; color: #555; }
+</style>
+
+```{r viewer-helper-setup, echo=FALSE}
+# Chapters and the shared helpers live in ../viewer-helper/ (see viewer-helper.R).
+source("../viewer-helper/viewer-helper.R")
+```
+
+`r lectureLine(5)`
+
+Today, we'll take a step back and take a look at the main tool that we'll be using throughout SSR for statistics. We'll be using JASP for all the analyses in this course, and I'll be introducing it today, paying some attention specifically to how to do descriptive statistics and how to make certain visualizations, and this corresponds roughly to chapters 4 and 5 in the book. The first part will be JASP, and the second part will be visualization, because people will prefer looking at plots rather than reading words or even numbers. I close off with the Challenger example, so don't just mindlessly throw out any outlier, because outliers are super informative.
+
+Open the recording and skip to the chapter you need. The chapters come from the lecture transcript, so one may start a few seconds early or late.
+
+```{r chapters-5, echo=FALSE}
+chapterTable(5)
+```

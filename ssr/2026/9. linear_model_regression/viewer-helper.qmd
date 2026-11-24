@@ -1,0 +1,28 @@
+---
+title: "9. Linear Model (Regression)"
+subtitle: "Summary and chapters of the recording"
+format:
+  html:
+    toc: false
+css: ../../ajohnson.css
+---
+
+<style>
+.chapters th:first-child, .chapters td:first-child { width: 6em; white-space: nowrap; }
+.chapters .chapter-summary { display: block; margin-top: 0.2em; font-size: 0.9em; color: #555; }
+</style>
+
+```{r viewer-helper-setup, echo=FALSE}
+# Chapters and the shared helpers live in ../viewer-helper/ (see viewer-helper.R).
+source("../viewer-helper/viewer-helper.R")
+```
+
+`r lectureLine(9)`
+
+We'll introduce the linear model, which is all around us, because the main flow of doing statistical modeling is looking at one or more predictor variables to try to predict your dependent variable, your variable of interest. Checking assumptions, being aware of the assumptions that an analysis makes, is a very crucial step, and I'll also close off with a little exam note so that you know exactly what to know for the exam. A very important component of today, and one that is going to stay relevant for the remainder of this course, is what we call prediction, and then we can assess how well our model fits the observed data. And then, of course, we'll do all of this in JASP.
+
+Open the recording and skip to the chapter you need. The chapters come from the lecture transcript, so one may start a few seconds early or late.
+
+```{r chapters-9, echo=FALSE}
+chapterTable(9)
+```

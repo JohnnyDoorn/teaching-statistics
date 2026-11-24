@@ -19,7 +19,7 @@ source("../viewer-helper/viewer-helper.R")
 
 `r lectureLine(22)`
 
-This lecture is about mediation, where the association between a predictor and an outcome runs (partly) through a third variable, the mediator. We start from multiple regression drawn as a path model, split the shared variance into a direct and an indirect part, and work through the presumed media influence example (does a front-page article change people's intention to buy sugar, through how much media influence they perceive?). We fit the three regressions ourselves, combine the a and b paths into the indirect effect (a × b), and test it. After the break we discuss why a mediation model needs an experimental design before it supports causal claims (equivalent models), run the analysis in JASP's Process module, and return to the applet to separate associated predictors from an interaction.
+Today is all about an analysis called mediation analysis, and we're also going to be discovering a new JASP module, the Process module. A mediator comes in between 2 entities, so we're going to be modeling an association between 2 variables, and we're going to see whether this association between our two variables is mediated by a third variable. I'll introduce the concept of mediation analysis, I'll make some links to linear regression, because they are very much related to each other, and then, of course, I'll demonstrate this in JASP. It is going to be very important in block 3 for you to understand the difference between an interaction effect and a mediation effect.
 
 Open the recording and skip to the chapter you need. The chapters come from the lecture transcript, so one may start a few seconds early or late.
 

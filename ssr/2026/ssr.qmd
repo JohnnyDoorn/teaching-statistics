@@ -4,7 +4,7 @@ author: "Johnny van Doorn"
 date: today
 ---
 
-The handouts are 1 continuous page, while the slides are spread across multiple pages (navigate with the arrow keys). To get a pdf, I recommend you use the print option in your browser to print the handout to pdf (open the handout and press `ctrl + p` (Windows) or `cmd + p` (MacOS)). The chapters page lists the topics of each recording with their start times, so you can skip to the part you need. It is based on the lecture transcript, and the sentences under each chapter come directly from there.
+The handouts are 1 continuous page, while the slides are spread across multiple pages (navigate with the arrow keys). To get a pdf, I recommend you use the print option in your browser to print the handout to pdf (open the handout and press `ctrl + p` (Windows) or `cmd + p` (MacOS)). The chapters page lists the topics of each recording with their start times, so you can skip to the part you need. The summary at the top and the sentences under each chapter come directly from the lecture transcript, so they are my own words, only lightly edited (fillers and transcription errors removed).
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # One knob per academic year: bump this and everything below follows.

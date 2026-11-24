@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
 .chapters .chapter-summary { display: block; margin-top: 0.2em; font-size: 0.9em; color: #555; }
 </style>
 <p>28 October 2026 · <a href="https://amsuni-my.sharepoint.com/:v:/g/personal/j_b_vandoorn_uva_nl/IQBQeZ7hOI48S5LYcLN6EMREAf-fkqtz_uW6tVnQV48SPCc?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&amp;e=SKla9H" target="_blank">Recording</a> · <a href="22.%20mediation.slide.html" target="_blank">Slides</a> · <a href="22.%20mediation.html" target="_blank">Handout</a></p>
-<p>This lecture is about mediation, where the association between a predictor and an outcome runs (partly) through a third variable, the mediator. We start from multiple regression drawn as a path model, split the shared variance into a direct and an indirect part, and work through the presumed media influence example (does a front-page article change people’s intention to buy sugar, through how much media influence they perceive?). We fit the three regressions ourselves, combine the a and b paths into the indirect effect (a × b), and test it. After the break we discuss why a mediation model needs an experimental design before it supports causal claims (equivalent models), run the analysis in JASP’s Process module, and return to the applet to separate associated predictors from an interaction.</p>
+<p>Today is all about an analysis called mediation analysis, and we’re also going to be discovering a new JASP module, the Process module. A mediator comes in between 2 entities, so we’re going to be modeling an association between 2 variables, and we’re going to see whether this association between our two variables is mediated by a third variable. I’ll introduce the concept of mediation analysis, I’ll make some links to linear regression, because they are very much related to each other, and then, of course, I’ll demonstrate this in JASP. It is going to be very important in block 3 for you to understand the difference between an interaction effect and a mediation effect.</p>
 <p>Open the recording and skip to the chapter you need. The chapters come from the lecture transcript, so one may start a few seconds early or late.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -95,51 +95,51 @@ ul.task-list li input[type="checkbox"] {
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">9:10</td>
-<td style="text-align: left;">Welcome<span class="chapter-summary">Today is all about an analysis called mediation analysis, and we're also going to be discovering a new JASP module, the Process module. A mediator comes in between two entities, so we see whether the association between two variables is mediated by a third variable.</span></td>
+<td style="text-align: left;">Welcome<span class="chapter-summary">Today's all about an analysis called mediation analysis, and we're also going to be discovering a new JASP module, the Process module. A mediator comes in between 2 entities, so we're going to be modeling an association between 2 variables, and we're going to see whether this association between our two variables is mediated by a third variable.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">13:21</td>
-<td style="text-align: left;">Multiple regression as a path model (applet)<span class="chapter-summary">We can visualize our regression model with a path model, with boxes for the predictors and a box for the outcome, connected with a regular line. Multiple regression is just based on correlations, and a causal interpretation needs to stem from your methodology, where you experimentally manipulate your predictor variable.</span></td>
+<td style="text-align: left;">Multiple regression as a path model (applet)<span class="chapter-summary">We can visualize our regression model with this path model, where we have the different boxes for our predictors. If you want to interpret your linear regression in a causal way, this causal attribution needs to stem from your methodology, because you need to experimentally manipulate your predictor variable, and only then can you make some causal assessments.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">17:33</td>
-<td style="text-align: left;">Mediation<span class="chapter-summary">You start with an association between two variables, and then you ask to what extent this relationship is mediated by a third variable. The predictor can directly influence the outcome (the direct relationship), or influence the mediator, which then influences the outcome (the indirect relationship).</span></td>
+<td style="text-align: left;">Mediation<span class="chapter-summary">You start with an association between 2 variables, and then you ask the analysis, okay, to what extent is this relationship mediated by this third variable? Either our predictor is directly influencing the outcome variable, that is the direct relationship, or the association between predictor and outcome goes indirectly through the mediator.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">20:58</td>
-<td style="text-align: left;">Shared variance<span class="chapter-summary">As in ANCOVA and partial correlations, this is about the overlap between what your predictor variables explain. The overlap between all three variables (box C) is the indirect effect, and mediation separates it from the direct contribution of the predictor (box A).</span></td>
+<td style="text-align: left;">Shared variance<span class="chapter-summary">This is all about getting an idea of the extent of overlap between what your predictor variables explain in terms of the variance. The C box is the indirect effect, because that is the overlap between all three variables, and making this distinction between box A, the direct contribution of our predictor to the outcome, and the indirect contribution, is exactly what mediation allows you to get a grip on.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">25:10</td>
-<td style="text-align: left;">Example (presumed media influence)<span class="chapter-summary">The example is about how likely people are to buy sugar after reading an article about an incoming sugar crisis, placed either on the front page or somewhere in the middle. We ask whether the association between condition and intention is mediated by perceived media influence, how much people think other people will buy sugar after that article.</span></td>
+<td style="text-align: left;">Example (presumed media influence)<span class="chapter-summary">The outcome variable is intention, that is people's intention to buy sugar after reading there's a shortage incoming. Mediation here is all about taking that association between condition and intention, and then seeing if that association is mediated by perceived media influence, where people might think other people are more likely to buy sugar if they see the article on the front page.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">27:47</td>
-<td style="text-align: left;">Total effect<span class="chapter-summary">The total effect is the simple relationship between our one predictor, condition, and our one outcome variable, intention. We are not yet dissecting it into indirect and direct effect, and we could test it with a linear regression (or an ANOVA).</span></td>
+<td style="text-align: left;">Total effect<span class="chapter-summary">We can just look, is there a significant association between our predictor and our outcome variable, and we could do this with a linear regression. We are not dissecting between indirect and direct effect.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">29:32</td>
-<td style="text-align: left;">Mediation paths<span class="chapter-summary">To get an idea of the indirect effect, we also look at the regression of our mediator, media influence, on our predictor, condition. The combined effect models the outcome from the predictor and the mediator at the same time, so that is a multiple regression.</span></td>
+<td style="text-align: left;">Mediation paths<span class="chapter-summary">To get an idea of the indirect effect, we also look at the regression between our mediator, which was media influence, and our predictor, which was condition. Then we can also write the combined effect, where we model the outcome as a combination of the predictor and the mediator at the same time.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">31:14</td>
-<td style="text-align: left;">The data and the three regression models<span class="chapter-summary">We run a series of regressions that reflect the extent to which the predictor is associated with the outcome, but also with the mediator. If your predictor and your mediator are completely uncorrelated, then you will not have any indirect effect.</span></td>
+<td style="text-align: left;">The data and the three regression models<span class="chapter-summary">We run a series of regression equations, and they reflect the extent to which your predictor is associated with the outcome, but also the extent to which your predictor is associated with the mediator. If your predictor and your mediator are completely uncorrelated, then you will not have any indirect effect.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">38:12</td>
-<td style="text-align: left;">Path plot and the indirect effect<span class="chapter-summary">Based on those regression coefficients, we can fill in our path diagram of mediation. The indirect effect is the product of the a and b pathways, and if we add the indirect effect to the direct effect, we get back the total effect.</span></td>
+<td style="text-align: left;">Path plot and the indirect effect<span class="chapter-summary">Based on those regression coefficients, we can fill in our path diagram of mediation, and these a, b, and c pathways quantify the associations between your variables. Here is just a little sanity check, that if we add the indirect effect to the direct effect, we again get back the total effect.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">44:59</td>
-<td style="text-align: left;">Effect sizes of mediation<span class="chapter-summary">The most important effect size is just the indirect effect, reported with a p-value, or a confidence interval if you are more interested in estimating it. To test for mediation, we test the indirect effect a × b itself.</span></td>
+<td style="text-align: left;">Effect sizes of mediation<span class="chapter-summary">It's most important to report the indirect effect, including some hypothesis testing metric like a p-value, or a confidence interval if you're more interested in estimating the indirect effect. We test the indirect effect a × b itself.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">46:43</td>
-<td style="text-align: left;">Checking the assumptions<span class="chapter-summary">The one thing to take away in terms of assumptions for mediation, but also moderation, is the bootstrap. It is a robust tool to get confidence intervals that do not rely on the normality and homoscedasticity assumptions.</span></td>
+<td style="text-align: left;">Checking the assumptions<span class="chapter-summary">The one thing I would like you to take away in terms of assumptions about mediation, but also moderation, is the bootstrap, if assumptions such as normality or homoscedasticity are problematic. It is a robust tool to get more robust confidence intervals that do not rely on these assumptions.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">48:27</td>
-<td style="text-align: left;">Is the indirect effect significant?<span class="chapter-summary">The p-value of the indirect effect answers how likely it is to observe this estimate, or more extreme, if on the population level there is no mediation effect. Now that we have multiple p-values in our output, always be specific about which p-value you are referring to.</span></td>
+<td style="text-align: left;">Is the indirect effect significant?<span class="chapter-summary">If we look at the indirect effect, the p-value is answering the question, how likely is it to observe this estimate for the indirect effect, or more extreme, if on the population level there is no mediation effect? Now that we have multiple p-values in our output, always be sure to be more specific about what p-value you are referring to.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">53:20</td>
@@ -147,39 +147,39 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 <tr class="even">
 <td style="text-align: left;">1:04:41</td>
-<td style="text-align: left;">Caution with Process models<span class="chapter-summary">Process models answer causal questions, but they are very, very often misused (Julia Rohrer's 2022 paper outlines the pitfalls). If you simply throw observational data into a process model you get all sorts of estimates, but numbers alone don't give you enough ground to make causal claims.</span></td>
+<td style="text-align: left;">Caution with Process models<span class="chapter-summary">These process models help you answer very interesting theoretical questions, because they answer causal questions, and one of my favorite papers on the pitfalls is by Julia Rohrer from 2022. If you simply just throw your observational data into a process model, you get all sorts of estimates, but just numbers don't give you enough ground to make these causal claims.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">1:07:14</td>
-<td style="text-align: left;">Equivalent models<span class="chapter-summary">With observational data on three variables, we cannot distinguish between these four models, with arrows pointing in different directions. If there is no temporal precedence, no manipulation, don't use these models, just use regression.</span></td>
+<td style="text-align: left;">Equivalent models<span class="chapter-summary">Each of these four models makes a different causal structure, with the arrows pointing in different directions, and if you are not experimentally manipulating your predictor and your mediator, your observational data cannot distinguish between these four models. If we randomize or experimentally manipulate our X variable, establishing this temporal precedence, and also manipulate our mediator, that is the way to differentiate.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">1:13:11</td>
-<td style="text-align: left;">Mediation in JASP<span class="chapter-summary">On the exam you have a fresh JASP, so click the blue plus and select Process to add it to the top bar. In the Models tab you pick a Hayes model number (mediation is number 4, moderation number 1) and tell JASP which variable is the predictor and which is the mediator.</span></td>
+<td style="text-align: left;">Mediation in JASP<span class="chapter-summary">On the exam, click the blue plus, then select Process, and then Process is added to the top bar. We still need to tell JASP which one is our predictor variable and which one is our mediator variable, and what you should know is mediation number 4, moderation number 1.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">1:20:01</td>
-<td style="text-align: left;">Path coefficients and the effects tables<span class="chapter-summary">The path coefficients table lists the a, b and c paths, the pairwise associations between your variables. The direct and indirect effects table splits the total effect, and here the indirect effect is not significant, so we fail to reject the null hypothesis that there is no indirect effect.</span></td>
+<td style="text-align: left;">Path coefficients and the effects tables<span class="chapter-summary">The path coefficients table lists those a, b, and c that I also showed on the slides, and they summarize the pairwise relationships between your variables. You sum the total indirect and the total direct effects, and then you have the total effect again, and for our pre-specified alpha level, we get no significant indirect effect.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">1:29:32</td>
-<td style="text-align: left;">Building the path model yourself<span class="chapter-summary">There's also the way described in the book, where you build your path model from the bottom up by creating the different pathways yourself. It is a more flexible approach that can better match your theoretical question, so choose your favorite.</span></td>
+<td style="text-align: left;">Building the path model yourself<span class="chapter-summary">There's also the alternative way that is described in the book, where you build your path models more from the bottom up, so rather than specifying numbers, you create these different pathways. This is a more flexible approach that allows you to draw a path diagram that better matches your theoretical questions, so choose your favorite.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">1:31:13</td>
-<td style="text-align: left;">Interpreting the results<span class="chapter-summary">A significant association between mediator and outcome, with no significant association between predictor and outcome, leaves not much to mediate. Always do hypothesis testing with your p-value, because confidence intervals are for estimation.</span></td>
+<td style="text-align: left;">Interpreting the results<span class="chapter-summary">How would we interpret a significant association between our mediator and outcome, but a non-significant relationship between our predictor and our outcome? Always do hypothesis testing with your p-value, and always also look at the p-values and confidence intervals, because those are your inferential statistics and they give you your uncertainty.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">1:38:00</td>
-<td style="text-align: left;">Associated predictors and multicollinearity (applet)<span class="chapter-summary">In the applet you can induce a correlation between the two predictor variables, and that starts to mess up your multiple regression results. A very common pattern is a significant effect in the simple model that disappears the moment you add a second, correlated predictor, because the standard error increases.</span></td>
+<td style="text-align: left;">Associated predictors and multicollinearity (applet)<span class="chapter-summary">You can also induce a correlation between your two predictor variables in the applet, and that will start to mess up your multiple regression results. This is a very common pattern if you are dealing with correlated predictors, where you might find a significant effect in the simple model, but the moment you add a second predictor that is correlated, you will find no significant associations anymore.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">1:43:17</td>
-<td style="text-align: left;">Associated predictors versus interaction<span class="chapter-summary">An association between predictors is about the value of one variable affecting the value of another variable. An interaction effect is about one predictor influencing the effect of another predictor, and you can have either one without the other.</span></td>
+<td style="text-align: left;">Associated predictors versus interaction<span class="chapter-summary">An association is about the value of 1 variable affecting the value of another variable. If there is an interaction effect, it talks about 1 predictor influencing the effect of another predictor, and that's what we will dive into next week.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">1:47:27</td>
-<td style="text-align: left;">Recap<span class="chapter-summary">In mediation analysis we model dependence in a causal way, so be sure that your methodology, your experimental manipulation, allows that. We test mediation by looking at the p-value for the indirect effect, a × b.</span></td>
+<td style="text-align: left;">Recap<span class="chapter-summary">In mediation analysis, we are modeling dependence in a causal way, so be sure that your methodology, your experimental manipulation, allows that. Path plots with the coefficients are very handy, and then we test mediation by looking at the p-value for the indirect effect, a × b.</span></td>
 </tr>
 </tbody>
 </table>

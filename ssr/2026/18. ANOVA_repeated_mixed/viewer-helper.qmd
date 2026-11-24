@@ -1,0 +1,28 @@
+---
+title: "18. RM ANOVA"
+subtitle: "Summary and chapters of the recording"
+format:
+  html:
+    toc: false
+css: ../../ajohnson.css
+---
+
+<style>
+.chapters th:first-child, .chapters td:first-child { width: 6em; white-space: nowrap; }
+.chapters .chapter-summary { display: block; margin-top: 0.2em; font-size: 0.9em; color: #555; }
+</style>
+
+```{r viewer-helper-setup, echo=FALSE}
+# Chapters and the shared helpers live in ../viewer-helper/ (see viewer-helper.R).
+source("../viewer-helper/viewer-helper.R")
+```
+
+`r lectureLine(18)`
+
+It is sort of the capstone on the statistics lectures of block two, and it is the last ANOVA lecture. As the name suggests, repeated measures refers to the fact that you have repeated measures for every participant, so every participant is going to participate in multiple cells of the design. I'm going to introduce the concept of repeated measures ANOVA, and we're going to explore a new analysis in JASP, still the ANOVA module, but now we click repeated measures ANOVA. Once we master repeated measures, we can also do mixed ANOVAs, which simply refer to the fact that we have both within and between subjects.
+
+Open the recording and skip to the chapter you need. The chapters come from the lecture transcript, so one may start a few seconds early or late.
+
+```{r chapters-18, echo=FALSE}
+chapterTable(18)
+```

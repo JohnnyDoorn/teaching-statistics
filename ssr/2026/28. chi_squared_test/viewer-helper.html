@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
 .chapters .chapter-summary { display: block; margin-top: 0.2em; font-size: 0.9em; color: #555; }
 </style>
 <p>11 November 2026 · <a href="https://amsuni-my.sharepoint.com/:v:/g/personal/j_b_vandoorn_uva_nl/IQBKusJAosgVSq7mlGLC48BXAc8htHSElCZoZ6zz9B9cICE?e=eTSA3H&amp;nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D" target="_blank">Recording</a> · <a href="28.%20chi_squared_test.slide.html" target="_blank">Slides</a> · <a href="28.%20chi_squared_test.html" target="_blank">Handout</a></p>
-<p>The chi-squared test is about the association between two categorical variables, so we work with counts. With this year’s class data (preferred way of watching the lecture, and personality) we predict the count in every cell under the null hypothesis of independence, compare those predictions with the observed counts, and add everything up into the χ² statistic and its p-value. We check the expected counts (with Fisher’s exact test as the alternative when they are small) and use the standardized residuals to see where the null model is most wrong. The effect size is the odds ratio, which we build up from conditional probabilities and odds. After the break we run the analysis in JASP, add a third variable as a layer, use the test to check whether predictors are independent, and redo the book’s dancing cats example.</p>
+<p>The topic for today is going to be the chi-squared test, which is all about quantifying an association between two categorical variables, the last combination of types of variables that we’ll see. How can we test the null hypothesis that says there is no association between your categorical variables, and what are some other things we can look at? We can do hypothesis testing to quantify evidence against a null hypothesis by means of a p-value, but we can also look at some effect sizes. And then, of course, I’ll show how to do all of this in JASP.</p>
 <p>Open the recording and skip to the chapter you need. The chapters come from the lecture transcript, so one may start a few seconds early or late.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -95,79 +95,79 @@ ul.task-list li input[type="checkbox"] {
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">15:12</td>
-<td style="text-align: left;">Welcome<span class="chapter-summary">The chi-squared test is all about quantifying an association between two categorical variables, the last combination of types of variables. We can do hypothesis testing with a p-value, but we can also look at an effect size, which tells a different story.</span></td>
+<td style="text-align: left;">Welcome<span class="chapter-summary">The chi-squared test is all about quantifying an association between two categorical variables, and that's the last combination of types of variables that we'll see. Just as with ANOVA and the t-test, we can do hypothesis testing with a p-value, but we can also get a grip on the effect size in the data.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">19:29</td>
-<td style="text-align: left;">χ² test statistic<span class="chapter-summary">We look at what the observed counts are on the one hand, and on the other hand what our null model predicts for these counts. The chi-squared statistic tells you the difference between what you see in the data and what you expect under the null hypothesis, and a big difference is bad news for the null hypothesis.</span></td>
+<td style="text-align: left;">χ² test statistic<span class="chapter-summary">We're going to be looking at what the observed data look like on the one hand, and on the other hand, what our null model predicts in terms of these counts. The chi-squared statistic is just another test statistic, in the sense that it tells you the difference between what you see in the data and what you expect under the null hypothesis.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">22:02</td>
-<td style="text-align: left;">χ² distribution<span class="chapter-summary">Like the t- and F-distributions, the chi-squared distribution is shaped by its degrees of freedom, the number of rows minus 1 times the number of columns minus 1. With two categories in each variable, we get a chi-squared distribution with a single degree of freedom.</span></td>
+<td style="text-align: left;">χ² distribution<span class="chapter-summary">The chi-square distribution is shaped by a degrees of freedom setting, similar to how the t-distribution and the F-distribution have these degrees of freedom. If we have two categorical variables with two categories each, the degrees of freedom becomes 2 minus 1 times 2 minus 1 is 1.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">23:44</td>
-<td style="text-align: left;">Assumptions<span class="chapter-summary">We want independent observations, where every person only influences their own observation, and the expected counts should not be too small. There is no normality assumption to worry about, because we are only working with categorical variables.</span></td>
+<td style="text-align: left;">Assumptions<span class="chapter-summary">We want independent observations, where every person in your design is only influencing their own observation and not those of the others. The second one is specific to the chi-square test, and that is about the expected counts, and we have no normality assumption to worry about, because we are only working with categorical variables.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">24:32</td>
-<td style="text-align: left;">Experiment<span class="chapter-summary">Let's collect some data, with three questions that each have categorical outcomes. Can I predict whether you watch the lectures digitally or live from your self-assessed introversion versus extroversion, and from whether you are a cat, dog, or other animal lover?</span></td>
+<td style="text-align: left;">Experiment<span class="chapter-summary">I have three questions for you, each with categorical outcomes, and then we're going to do some fun analysis. Do you watch the lectures digitally or live, and I would like to predict this based on your self-assessment of your introversion versus extroversion, and whether you are a cat, dog, or other animal lover.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">27:09</td>
-<td style="text-align: left;">The data<span class="chapter-summary">With two categorical variables you can display the full data in such a table, without summarizing the data in any way. Is there an association between the two, a difference between the proportion of introverted people and of extroverted people who watch the lectures live?</span></td>
+<td style="text-align: left;">The data<span class="chapter-summary">If you have two categorical variables, you can display the full data with such a table, and we are not summarizing the data in any way. Is there some difference in the proportion of introverted people who watch the lectures live to the extroverted people who watch the lectures live?</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">28:48</td>
-<td style="text-align: left;">Predictions under H₀<span class="chapter-summary">If personality and lecture style are independent, the probability of somebody being extrovert and watching digitally is the probability of watching digitally times the probability of being extrovert. So we take the row total, multiply it by the column total and divide by n, which gives the expected count for that cell (10.06 extrovert digital viewers).</span></td>
+<td style="text-align: left;">Predictions under H₀<span class="chapter-summary">If personality type and lecture style are independent, the probability of observing somebody who is extrovert and watches the lectures digitally is equal to just the probability of somebody watching the lectures digitally times the probability of somebody being extrovert. So we take the row total, multiply it by the column total, divide it by n, and then we get the expected counts.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">34:38</td>
-<td style="text-align: left;">Error = observed − model<span class="chapter-summary">We take the differences between the observed counts and the counts the null model expects, and a fancy term for these is the residuals. In a two-by-two design they are always flipped, because what we over-predict for one cell we under-predict for the other.</span></td>
+<td style="text-align: left;">Error = observed − model<span class="chapter-summary">We take the differences between observed and predictions, and that summarizes all these differences between observed and expected under the null. In a 2 by 2 case like we have here, it will always be flipped, so that same residual that we are over-predicting for one group, we are under-predicting with for the other group.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">37:03</td>
-<td style="text-align: left;">Calculating χ²<span class="chapter-summary">Putting all those numbers into one formula gives a single value, our chi-squared test statistic of 2.38. Is this high or not? We don't really know until we test its significance.</span></td>
+<td style="text-align: left;">Calculating χ²<span class="chapter-summary">The holy grail of the chi-square test is putting all those numbers into one formula, and then we get a single value, and that is our chi-squared test statistic, 2.38. Is this high or not? Well, we don't really know.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">37:53</td>
-<td style="text-align: left;">Testing for significance<span class="chapter-summary">With a single degree of freedom, the probability of observing this chi-squared statistic, or more extreme, is around 12%, which is not significant for our alpha of 0.005. We fail to reject the null hypothesis, so we cannot conclude that there is an association between personality and preferred lecture viewing style.</span></td>
+<td style="text-align: left;">Testing for significance<span class="chapter-summary">The probability of observing the chi-squared statistic, or more extreme, is around 12%, which is not significant for our default alpha value of 0.005. We fail to reject the null hypothesis, so we cannot conclude that there is an association between somebody's personality traits and their preferred lecture viewing style.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">39:36</td>
-<td style="text-align: left;">Checking expected counts<span class="chapter-summary">The regular chi-squared test assumes that the expected cell counts are sufficiently high. In a two-by-two design none should be below 5, and with more groups no more than 20% of the cells should have an expected count below 5.</span></td>
+<td style="text-align: left;">Checking expected counts<span class="chapter-summary">The regular chi-square test has the assumption that your expected cell counts need to be sufficiently high, so in a two by two design, your expected cell counts should not be below 5. If you have more than two groups in your design, you shouldn't have more than 20% of the cells with an expected cell count lower than five.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">40:27</td>
-<td style="text-align: left;">Fisher's exact test<span class="chapter-summary">Just as we could choose the Welch t-test, here you can choose a more robust version, Fisher's exact test, which does not make the assumption about the expected cell counts. Our lowest expected count is 10.06, so we are fine using the regular chi-squared test.</span></td>
+<td style="text-align: left;">Fisher's exact test<span class="chapter-summary">Just as we could choose the Student t-test or the Welch t-test, here you could also choose the regular chi-squared test or the more robust version, Fisher's exact test, which does not make the assumption about the expected cell counts. None of these cell counts is lower than five, so we are fine using the regular chi-squared test.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">41:17</td>
-<td style="text-align: left;">Standardized residuals<span class="chapter-summary">The residuals tell you for which cell in the design the null model is the most wrong, and the standardized residuals make it possible to compare them between cells. A positive or negative sign does not matter, and here the null model was the most wrong for the extrovert digital viewers.</span></td>
+<td style="text-align: left;">Standardized residuals<span class="chapter-summary">The model residuals tell you what your null model has predicted for every cell in the design, so was our null model more wrong in predicting extrovert digital viewers, or was it more wrong in predicting extrovert live viewers? It's the extrovert digital viewers that were deviating the most from what was expected under the null hypothesis.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">48:10</td>
-<td style="text-align: left;">Effect size<span class="chapter-summary">The effect size for categorical associations is a really cool one, but it does take a moment to wrap your head around. A first step is to remember the probability rules that hold when two events are independent.</span></td>
+<td style="text-align: left;">Effect size<span class="chapter-summary">We get to the effect size for categorical associations, and it is a really cool effect size, but it does take a moment to wrap your head around, I think. There's a couple of probability rules that hold when two events are independent from each other.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">49:54</td>
-<td style="text-align: left;">Independence and conditional probabilities<span class="chapter-summary">If A and B are independent, the probability of A given B is simply the probability of A. If personality and viewing style are independent, the probability of preferring the digital lecture if you are an extrovert is the same as the probability of preferring the digital lecture.</span></td>
+<td style="text-align: left;">Independence and conditional probabilities<span class="chapter-summary">If A and B are independent of each other, then the probability of A given B is simply the probability of A. If personality and viewing style are independent from each other, then the probability of somebody preferring the digital lecture if they are an extrovert is the same as the probability of somebody preferring the digital lecture.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">52:26</td>
-<td style="text-align: left;">Odds visualized<span class="chapter-summary">The bar chart shows the observed proportions, and the dashed line is the probability of somebody being an extrovert in the sample, 0.44. If the two variables are independent, that probability should be 0.44 among the digital viewers and among the live viewers.</span></td>
+<td style="text-align: left;">Odds visualized<span class="chapter-summary">The probability of somebody being an extrovert in the sample, the observed proportion, is 0.44. If the variables are independent, the probability of somebody being extrovert if they prefer the live lectures will then also be 0.44.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">54:58</td>
-<td style="text-align: left;">Odds<span class="chapter-summary">The odds express the counts within one group as a ratio, for instance 1.3 times as many extroverts as introverts among the digital viewers, and 0.58 times as many among the live viewers. If there is an association, we would expect those two odds to be different.</span></td>
+<td style="text-align: left;">Odds<span class="chapter-summary">We have odds of 1.3 in the digital group, and we have 0.58 in the live group. Another way of talking about an association between these two variables is saying that these two odds are different from each other.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">57:32</td>
-<td style="text-align: left;">Odds ratio<span class="chapter-summary">The ratio of those odds is called the odds ratio, and it is the effect size of the chi-squared test. If there is no association the odds ratio is 1, and we observed an odds ratio of 2.25.</span></td>
+<td style="text-align: left;">Odds ratio<span class="chapter-summary">The ratio of those odds is called the odds ratio, and that is the effect size of the chi-square test, and if your events are independent, then your odds ratio will be equal to 1. We have observed an odds ratio of 2.25, so that's a bit different from 1.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">1:02:41</td>
-<td style="text-align: left;">Odds, the other way around<span class="chapter-summary">We can also look at the odds of digital versus live within the extroverts (0.87) and within the introverts (0.38). The ratio of those odds is still exactly that same odds ratio of 2.25.</span></td>
+<td style="text-align: left;">Odds, the other way around<span class="chapter-summary">We can also look at the odds of digital versus live in the extrovert group and then also in the introvert group. If we take the ratio of those odds, we still get exactly that same odds ratio of 2.25.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">1:05:14</td>
@@ -175,27 +175,27 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 <tr class="odd">
 <td style="text-align: left;">1:16:28</td>
-<td style="text-align: left;">Recap of the first part<span class="chapter-summary">We saw two main ways to analyze an association between categorical variables, the chi-squared test with its p-value for hypothesis testing, and the odds ratio as the effect size. JASP by default gives the log of the odds ratio, and because the log of 1 equals 0, the null value of the log odds ratio is 0.</span></td>
+<td style="text-align: left;">Recap of the first part<span class="chapter-summary">We saw two main ways that we can analyze an association between categorical variables, the chi-squared test statistic that gives us a hypothesis test with a p-value, and the odds ratio. By default, JASP gives the log of the odds ratio, and the log of 1 equals 0, so the null value, if you look at the log odds ratio, is 0.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">1:19:05</td>
-<td style="text-align: left;">Contingency tables in JASP<span class="chapter-summary">In the Frequencies module, Contingency Tables gives the observed counts and the chi-squared test with its p-value. In the Statistics tab you add the odds ratio (only for two-by-two designs) and Fisher's exact test, and in the Cells tab the expected counts and the Pearson (standardized) residuals.</span></td>
+<td style="text-align: left;">Contingency tables in JASP<span class="chapter-summary">We go to the Frequencies module this time, because we have observed frequencies, and we get a table that has the chi-squared test statistic and its corresponding p-value. In the Statistics tab we can include the odds ratio, which is only available for two by two designs.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">1:26:42</td>
-<td style="text-align: left;">A third variable as a layer<span class="chapter-summary">Adding a third variable as a layer gives separate contingency tables, and chi-squared tests, for each group of that variable. A significant association for only the dog people would indicate an interaction, but this is more of an exploratory tool than a real test for an interaction effect.</span></td>
+<td style="text-align: left;">A third variable as a layer<span class="chapter-summary">The layers argument is an important tool if you have a third categorical variable and you would like to have conditional contingency tables for each of those groups. If we had observed a significant association between personality and lecture, but only for the dog people, that gives an idea of the different associations, but it is not so much a real hardcore statistical test for an interaction effect.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">1:31:50</td>
-<td style="text-align: left;">Independent predictors<span class="chapter-summary">The chi-squared test is the way to assess independent predictors in factorial ANOVA designs, because those predictors are categorical. The balanced design from lecture 17 gives a chi-squared statistic of exactly 0, with a p-value of 1.</span></td>
+<td style="text-align: left;">Independent predictors<span class="chapter-summary">The chi-square test is the way to assess independent predictors in factorial ANOVA designs. For the counts data of the balanced design, you will find a chi-square statistic of exactly 0, and a p-value of 1.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">1:36:09</td>
-<td style="text-align: left;">Book example (dancing cats)<span class="chapter-summary">The book example is about training cats to dance by offering them food or affection, and it has a fairly strong effect. The chi-squared value of 25.36 has a very low p-value, so we reject the null hypothesis, and in the food group 2.8 times as many cats danced as did not dance.</span></td>
+<td style="text-align: left;">Book example (dancing cats)<span class="chapter-summary">The book example was about training cats to do little dances, and the most efficient way to get them to dance, do you train them by offering them food, or by showing affection? The p-value for that particular chi-squared value of 25.36 is very, very low, and there are 2.8 times more cats that danced in the food group than did not dance.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">1:42:14</td>
-<td style="text-align: left;">Recap<span class="chapter-summary">It's all about quantifying associations between categorical variables, with a hypothesis test (the chi-squared statistic and its p-value) and an effect size (the odds ratio). Effect sizes allow you to interpret your results in a more theoretically interesting way, rather than just saying reject or fail to reject the null.</span></td>
+<td style="text-align: left;">Recap<span class="chapter-summary">It's all about quantifying associations between categorical variables, where we use the chi-squared statistic and its corresponding p-value to reject or fail to reject the null hypothesis. These effect sizes allow you to interpret your results in a more theoretically interesting way, rather than just saying reject or fail to reject the null.</span></td>
 </tr>
 </tbody>
 </table>

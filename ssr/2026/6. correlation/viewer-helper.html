@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.340">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Johnny van Doorn">
+
+<title>6. Correlation</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="viewer-helper_files/libs/clipboard/clipboard.min.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/quarto.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/popper.min.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/anchor.min.js"></script>
+<link href="viewer-helper_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="viewer-helper_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="viewer-helper_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="viewer-helper_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="viewer-helper_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+<link rel="stylesheet" href="../../ajohnson.css">
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">6. Correlation</h1>
+<p class="subtitle lead">Summary and chapters of the recording</p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Johnny van Doorn </p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Amsterdam
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+</header>
+
+<style>
+.chapters th:first-child, .chapters td:first-child { width: 6em; white-space: nowrap; }
+.chapters .chapter-summary { display: block; margin-top: 0.2em; font-size: 0.9em; color: #555; }
+</style>
+<p>11 September 2026 · <a href="https://amsuni-my.sharepoint.com/:v:/g/personal/j_b_vandoorn_uva_nl/IQDrIfwQyyl8TZPGFsiFTp7qAZjx_earKlylnJmV_gSG5eg?e=DYoMrE&amp;nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D" target="_blank">Recording</a> · <a href="6.%20correlation.slide.html" target="_blank">Slides</a> · <a href="6.%20correlation.html" target="_blank">Handout</a></p>
+<p>Some things are, I think, nicely going to come together, because we’re going to be talking about how to do a correlation analysis, and we go from variance and covariance to r. How do we get actually a significance for a correlation value? To get the p for r, we need to go to t, so we pay a visit to the t-distribution, the sampling distribution of various observed statistics. And then we’ll take a look at what it means to do a partial correlation, a first look at how you can work with multiple predictor variables, and at the end, I will let JASP do the heavy lifting for you.</p>
+<p>Open the recording and skip to the chapter you need. The chapters come from the lecture transcript, so one may start a few seconds early or late.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm chapters table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Time</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Chapter</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">10:53</td>
+<td style="text-align: left;">Welcome<span class="chapter-summary">Some things are, I think, nicely going to come together, because we're going to be talking about how to do a correlation analysis. In order to do so, we need to pay a visit to another letter, which is the T, and the t-distribution is the sampling distribution of various observed statistics, such as the t-statistic.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">15:51</td>
+<td style="text-align: left;">Back to the Challenger<span class="chapter-summary">The reading for this lecture is chapter 7, but you don't need to know about the non-parametric correlations, and you can also skip the biserial and point biserial correlations. For the Challenger data, it's not that big of a difference between those two correlations, but if we used an alpha of 0.01, we would have a significant p-value for the twenty-three flights, but a non-significant p-value for the seven damaged flights.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">20:19</td>
+<td style="text-align: left;">Three distributions<span class="chapter-summary">There are three types of distributions in terms of what we use them for or what they represent, we have the population distribution, we have the sample distribution, and the sampling distribution. The sample is what we draw from the population, the thing we concretely measure, and we can calculate some statistics over it, such as a mean or a correlation.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">23:27</td>
+<td style="text-align: left;">Gosset<span class="chapter-summary">He was always dealing with low sample sizes, and this is where the t-distribution comes in as a very convenient sampling distribution for a continuous variable. In the continuous case, we generally have those two parameters, which brings us some extra uncertainty, because we need to estimate two things rather than one.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">24:50</td>
+<td style="text-align: left;">Population distribution and a sample<span class="chapter-summary">The distribution of all IQ scores on the population level has a certain mean and standard deviation. Each time we draw people from the population, we measure their IQ scores, and we make a histogram of those IQ scores.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">26:53</td>
+<td style="text-align: left;">Sampling distribution<span class="chapter-summary">This little bit of code repeats this sampling process 1000 times, each time sampling new IQ scores, computing a new mean, and storing all of those mean values. We can ask the sampling distribution, what can I expect if this is the true value of the population parameter?</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">29:28</td>
+<td style="text-align: left;">Back to the binomial applet<span class="chapter-summary">This population proportion setting allows you to create different sampling distributions, in other words, under different values of the population proportion. If you want to use an alpha of 0.00001 with a test of 10 items, you will never reach significance, because your test is just not powerful enough to get you that level of certainty.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">35:52</td>
+<td style="text-align: left;">Standard error and confidence intervals<span class="chapter-summary">The other use case is estimation of a population parameter, and that's when you would work with what we call confidence intervals, answering the question, what is your best guess for the population parameter? That standard deviation of the sampling distribution, we call this the standard error, and it's an extremely useful measure for estimation purposes.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">38:15</td>
+<td style="text-align: left;">Standard error and sample size<span class="chapter-summary">It's one of the first steps in explaining why for the Challenger data, we first got a very non-significant correlation, but by adding some more observations, even though the correlation stays pretty much the same, we dove into that significance region. The standard error will be lower, which will then mean that the confidence interval will be more narrow.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">42:23</td>
+<td style="text-align: left;">Confidence intervals in the long run<span class="chapter-summary">This whole frequentist framework is all built on this notion of what happens in the long run, and the probability of 95% for confidence intervals only says something about the long-term probability. If we imagine doing our experiments over and over, each time we have a new mean, but also a new standard error, and some of those intervals don't have any overlap with the population mean.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">48:53</td>
+<td style="text-align: left;">Degrees of freedom<span class="chapter-summary">The t-distribution is governed by what we call degrees of freedom, and degrees of freedom are linked to the observed sample size. Compared to the normal distribution, it gives you slightly wider confidence intervals, and you generally need a slightly more extreme test statistic to reach the same significance.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">51:25</td>
+<td style="text-align: left;"><em>Break</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:03:50</td>
+<td style="text-align: left;">The continuous applet<span class="chapter-summary">The applet simply describes how t statistics are distributed if the null hypothesis is true, because we center the t-distribution on 0. Because we now have a continuous outcome space, we can mark exactly 5% of the distribution.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:10:12</td>
+<td style="text-align: left;">Sample size and decision regions<span class="chapter-summary">If we increase the sample size, the t-distribution will now have more degrees of freedom, so it will move a bit more to the center. So the tails will shrink a little bit, which again means that the thresholds will be a bit closer to 0.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:12:43</td>
+<td style="text-align: left;">Two-sided and one-sided p-values<span class="chapter-summary">The p-value is always talking about the probability of the observed t-statistic or more extreme under the null, and or more extreme means which values of t would provide even more evidence against the null than the currently observed value of 1.5. If we do a two-sided test, we look at the right side, but also the left side of the t-distribution.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:21:58</td>
+<td style="text-align: left;">Power<span class="chapter-summary">We look under the alternative hypothesis, and for instance, shift the distribution to 0.8, an imaginary effect size, and look at the probability of rejecting the null hypothesis. We usually strive for 80% power, and this is by cranking up your sample size.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:27:15</td>
+<td style="text-align: left;">Pearson correlation<span class="chapter-summary">It's called Pearson's correlation coefficient, which is standardized, so you know that it's always between minus 1 and 1. If two variables covary, if you score a little bit higher on one variable, maybe you're also more likely to score a little higher on the other, and that still does not imply any causal connection, it's just association.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:28:58</td>
+<td style="text-align: left;">Covariance<span class="chapter-summary">It looks very much like the variance formula, where we look at the distances between observed values and their respective means, and if you divide the covariance by the two standard deviations of the two variables, you get exactly the correlation. You don't need to apply this yourself, but do know the link between covariance and correlation, and which one is standardized and which one is not.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:29:38</td>
+<td style="text-align: left;">Plot correlation<span class="chapter-summary">If a data point scored higher than average on anxiety and higher than average on exam performance, it contributes to a positive association. The values in the green quadrants all contribute to a positive correlation because we got a positive difference times a positive difference, and here we get a correlation of minus 0.44.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:36:04</td>
+<td style="text-align: left;">Significance testing using t<span class="chapter-summary">We don't just want to say something about those 100 students in the data set, but we want to say something maybe about the entire student population. Let's say we set alpha to 0.01, because this type 1 error rate only works if you set it before you're making your decision.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:38:21</td>
+<td style="text-align: left;">r to t<span class="chapter-summary">The raw correlation doesn't have a nice sampling distribution, because it has this very hard interval, minus 1 and 1, so converting it to a t-statistic is basically a trick to have a well-defined sampling distribution for the correlation. Specifically, it will be a t-statistic with, again, a certain degrees of freedom.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:43:24</td>
+<td style="text-align: left;">One-sided vs two-sided<span class="chapter-summary">With a one-sided alternative hypothesis in the observed direction, our p-value would be divided in half, but if your alternative hypothesis says those two variables are positively associated, we look at all the values to the right of minus 4.9. We took quite a detour to arrive at how we can quantify evidence against a null hypothesis based on the correlation, but it will pay off, because we will use the t-distribution many times over in SSR.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:45:07</td>
+<td style="text-align: left;">Explained variance<span class="chapter-summary">The higher a correlation or association between variables, the more variability 1 variable explains in the other. When we do statistical modeling, we start to look at one or more variables that might help us explain variability in exam performance, our dependent variable.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:47:46</td>
+<td style="text-align: left;">A third variable<span class="chapter-summary">We also had a third variable, revision time, and revision is also apparently correlated quite a bit with those other variables. A question you might want to ask yourself is to what extent the association between performance and anxiety is unique to those variables, a first step in getting a grip on a possible confounding variable.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:52:05</td>
+<td style="text-align: left;">Partial correlation<span class="chapter-summary">The partial correlation quantifies the association between 2 variables while controlling for a third variable, and keeping revision constant, our new correlation would be minus 0.24. If we were to magically force everybody to spend exactly 20 hours on the exam preparation, how much of the association between anxiety and performance will still be there?</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:53:58</td>
+<td style="text-align: left;">JASP<span class="chapter-summary">If you open Correlation, you can drag variables to be correlated, and you can ask for confidence intervals, include the sample size, or make a scatter plot with a regression line. If you want to partial out a variable, you take that third variable and you drag it to the partial out box, and then the table changes to partial correlations.</span></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

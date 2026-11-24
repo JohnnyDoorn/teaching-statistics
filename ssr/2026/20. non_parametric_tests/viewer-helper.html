@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.340">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Johnny van Doorn">
+
+<title>20. Non-parametric tests</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="viewer-helper_files/libs/clipboard/clipboard.min.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/quarto.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/popper.min.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/anchor.min.js"></script>
+<link href="viewer-helper_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="viewer-helper_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="viewer-helper_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="viewer-helper_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="viewer-helper_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+<link rel="stylesheet" href="../../ajohnson.css">
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">20. Non-parametric tests</h1>
+<p class="subtitle lead">Summary and chapters of the recording</p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Johnny van Doorn </p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Amsterdam
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+</header>
+
+<style>
+.chapters th:first-child, .chapters td:first-child { width: 6em; white-space: nowrap; }
+.chapters .chapter-summary { display: block; margin-top: 0.2em; font-size: 0.9em; color: #555; }
+</style>
+<p>20 October 2026 · <a href="https://amsuni-my.sharepoint.com/:v:/g/personal/j_b_vandoorn_uva_nl/IQCAQHKOlJdBTIqWpvsb9xgeAUBdsroBugRZL3EzhXbNLfM?e=1z1SYW&amp;nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D" target="_blank">Recording</a> · <a href="20.%20non_parametric_tests.slide.html" target="_blank">Slides</a> · <a href="20.%20non_parametric_tests.html" target="_blank">Handout</a></p>
+<p>Before we are completely ready for Thursday, we have one more lecture to go, something called non-parametric tests. The normality assumption is mostly important with low sample sizes, when we cannot rely on the central limit theorem anymore, and non-parametric tests differ from their parametric equivalents in that they don’t assume the residuals to be normally distributed. I’m going to repeat all of the assumptions we’ve covered in block 2, and we’re going to revisit all the friends we’ve made along the way in block 2 and visit their non-parametric equivalents, which are based on the ranks of the observed data. And then, of course, I’m going to show how to do these in JASP.</p>
+<p>Open the recording and skip to the chapter you need. The chapters come from the lecture transcript, so one may start a few seconds early or late.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm chapters table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Time</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Chapter</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">18:09</td>
+<td style="text-align: left;">Welcome<span class="chapter-summary">This is the final lecture before the exam, and before we are completely ready for Thursday, we have one more lecture to go, something called non-parametric tests. We're going to revisit all the friends we've made along the way in block 2, and we visit their non-parametric equivalents.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">19:47</td>
+<td style="text-align: left;">Assumptions recap<span class="chapter-summary">This normality assumption is mostly important with low sample sizes, when we cannot rely on the central limit theorem anymore. Non-parametric tests differ from their parametric equivalents in that they don't assume the residuals to be normally distributed.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">24:53</td>
+<td style="text-align: left;">Nonparametric tests<span class="chapter-summary">When you're playing Mario Kart with your friend, and you're noting down your respective end positions in each race, you have rank data, and generally, those types of data are not normally distributed. All of these tests are not based on the direct observations, but on the ranks of the data, and another very useful reason why we use these non-parametric tests is that they are robust to outliers.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">27:25</td>
+<td style="text-align: left;">Parametric vs nonparametric<span class="chapter-summary">Non-parametric tests still have your methodological assumptions, for instance, that your observations need to be independent from each other. If you're all talking to each other about your previous IQ results, you're influencing each other's observations, and that's still a problem in non-parametric tests.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">29:09</td>
+<td style="text-align: left;">Ranking<span class="chapter-summary">The one difference between data set A and B is that in data set A, we've observed a value of 9, and in data set B, we've observed a value of 39. But even though the observed values differ for groups A and B, the ranks are exactly the same, because the highest value simply gets rank 6.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">32:40</td>
+<td style="text-align: left;">Ties<span class="chapter-summary">The second and third observation are the values 42, and if we rank those observations, then we take the average of the ranks they would have gotten. You don't need to rank yourself, but ties have some repercussions later, especially for non-parametric methods.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">34:18</td>
+<td style="text-align: left;">Procedure and H0<span class="chapter-summary">The general procedure of these non-parametric tests is more or less the same as before. For non-parametric tests, the null hypothesis, rather than saying something about the population means being equal, like in the t-test, says that on the population level, the distributions are the same.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">39:26</td>
+<td style="text-align: left;">Wilcoxon rank-sum test<span class="chapter-summary">We have one group of people that took ecstasy in the weekend and one group of people that took alcohol in the weekend, and our dependent variable is a BDI score, which is a depression score. That's a perfect case for the between subjects t-test, but today is non-parametric, so we look at the Wilcoxon rank-sum test, aka the Mann-Whitney U test.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">41:46</td>
+<td style="text-align: left;">Q-Q plot of the residuals<span class="chapter-summary">We could say, okay, we're going to use a non-parametric test the moment at least one point falls outside the confidence band of the Q-Q plot. If you get a research vignette on the exam, it will be like, a researcher is investigating such and so, they want to be robust against unequal variances, do the appropriate test.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">45:55</td>
+<td style="text-align: left;">Test statistic W<span class="chapter-summary">All the observations of both groups are thrown onto a big pile, and we rank all of them together. It doesn't matter if you look at the alcohol rank sum or the ecstasy rank sum.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">50:13</td>
+<td style="text-align: left;">Subtracting the minimum score<span class="chapter-summary">If you have 10 people in every group, you always have a minimum possible W of 55, and we subtract it from our observed rank sum W to get the U test statistic. If you define the test statistic in terms of U, you will have a zero point, which happens if all observations in one group are higher than in the other group.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">56:37</td>
+<td style="text-align: left;">Normal approximation for W<span class="chapter-summary">If the null hypothesis is true, the center point of the sampling distribution of W is 105. And then the next fun part is to calculate the standard error.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:04:31</td>
+<td style="text-align: left;">Calculate Z<span class="chapter-summary">As with any test statistic, we can now quantify the difference between what we observe, our observed W, and the value that we expect under the null. The test statistic we are working with, is it z, W, or U? We turn those rank sums into a z statistic, because that one has this nicely defined normal distribution, and this p-value is not significant at that pre-specified alpha.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:09:45</td>
+<td style="text-align: left;"><em>Break</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:22:05</td>
+<td style="text-align: left;">Questions from the break<span class="chapter-summary">Why we do this whole z story is just a way to get your p-value from a nicely defined sampling distribution. Just as with other t-tests, we can also do a one-sided test if you have a more specific research question, where you specifically want to test that the BDI score is lower in the ecstasy group than in the alcohol group.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:27:11</td>
+<td style="text-align: left;">Effect size rank-biserial correlation<span class="chapter-summary">A significant p-value is driven by both sample size and effect size, and the effect size differs from the p-value because it only looks at the effect size. This rank-biserial correlation is the effect size for the non-parametric test.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:29:44</td>
+<td style="text-align: left;">Robustness under monotonic transformations<span class="chapter-summary">If we were to now square all the values of the outcome variable, the t statistic is influenced by this, but the ranks don't care about this, and our W is still exactly the same. A very fancy way of saying that is that your non-parametric tests are robust under monotonic transformations.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:31:31</td>
+<td style="text-align: left;">Wilcoxon signed-rank test<span class="chapter-summary">The way that it works for the signed rank test is that you take the difference between the two time points, Sunday and Wednesday, and then you have a set of differences. It's a wide data format because we have a within subjects design, with multiple observations per participant per row.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:36:35</td>
+<td style="text-align: left;">Calculate T+<span class="chapter-summary">This is why the test is called signed rank test, because we do the ranks and then we do the sign, so we put the signs in front of the ranks, and then we sum all the positive ranks. With our alpha of 0.005, we do not reject the null hypothesis, but if we would have used alpha of 0.05, we would have concluded there is a difference.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:39:53</td>
+<td style="text-align: left;">Effect size<span class="chapter-summary">If I tell you I have a T+ statistic of 36, that's really not so informative as the corresponding effect size, the matched rank-biserial correlation. A correlation has this universal interpretation.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:46:52</td>
+<td style="text-align: left;">JASP<span class="chapter-summary">In the independent samples t-test, we toggle the Mann-Whitney test, and the footnote says the effect size for the Mann-Whitney test is the rank-biserial correlation. Showing the tests side by side shows you whether your conclusion is robust to the choice of that test.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:49:31</td>
+<td style="text-align: left;">Signed-rank test in JASP<span class="chapter-summary">In the paired samples t-test, we also toggle the Wilcoxon signed-rank test, and then you get all of those results, including the z statistic. With an alpha of 0.005, we would have rejected the null hypothesis with a Student test, but if we used the Wilcoxon test, our p-value is 0.014, which would not be significant.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:53:40</td>
+<td style="text-align: left;">Kruskal–Wallis test<span class="chapter-summary">The one-way ANOVA and repeated measures ANOVA have a non-parametric test, but it only exists for a one-way ANOVA, so if you have a factorial design, you don't have non-parametric methods to bail you out. It's about the soy diet and how it affects testosterone levels, with people receiving no soy meal, one soy meal, four and seven.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:58:43</td>
+<td style="text-align: left;">Test for significance and follow-up<span class="chapter-summary">We fail to reject the null hypothesis, so based on these data, we cannot conclude that there are meaningful differences in testosterone levels between different doses of a soy diet. With post hoc tests, even if they are non-parametric, we still need to correct our p-values.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2:00:28</td>
+<td style="text-align: left;">Friedman's ANOVA<span class="chapter-summary">We have three time points at which we are measuring participants, so we have again the wide data format. Every participant has three ranks, and we use exactly those within subject ranks to calculate our test statistic, and we fail to reject the null hypothesis.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2:03:13</td>
+<td style="text-align: left;">Closing<span class="chapter-summary">I do want to cover the couple of things in the closing slides, because that is important exam information, and the trial exams will also give you an idea of how to work with assumptions on the exam. I wish you all the best on Thursday for the second exam.</span></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

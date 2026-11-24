@@ -1,0 +1,28 @@
+---
+title: "11. T-tests"
+subtitle: "Summary and chapters of the recording"
+format:
+  html:
+    toc: false
+css: ../../ajohnson.css
+---
+
+<style>
+.chapters th:first-child, .chapters td:first-child { width: 6em; white-space: nowrap; }
+.chapters .chapter-summary { display: block; margin-top: 0.2em; font-size: 0.9em; color: #555; }
+</style>
+
+```{r viewer-helper-setup, echo=FALSE}
+# Chapters and the shared helpers live in ../viewer-helper/ (see viewer-helper.R).
+source("../viewer-helper/viewer-helper.R")
+```
+
+`r lectureLine(11)`
+
+Block 2 is all about using categorical predictors to explain variability in a dependent variable, and the most basic way to do that is comparing two groups to each other, and that is called a t-test. Our life is all about comparing means, so life is going to be very mean in block two, and we're going to start off a little slow and look at t-tests from some different angles. We can analyze a single mean and test whether that value is equal to some hypothesized value, or compare 2 means in a between subjects design or a within subjects design. Even the t-test, just to prime you already a little bit, is an instance of the linear model.
+
+Open the recording and skip to the chapter you need. The chapters come from the lecture transcript, so one may start a few seconds early or late.
+
+```{r chapters-11, echo=FALSE}
+chapterTable(11)
+```

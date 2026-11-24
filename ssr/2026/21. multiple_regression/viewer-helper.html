@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
 .chapters .chapter-summary { display: block; margin-top: 0.2em; font-size: 0.9em; color: #555; }
 </style>
 <p>27 October 2026 · <a href="https://amsuni-my.sharepoint.com/:v:/g/personal/j_b_vandoorn_uva_nl/IQBJRqxPN0fRR43aLLX3Z6pmAfROHkn1Ei7E1qcZ3ONxAe0?e=L8kLF5&amp;nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D" target="_blank">Recording</a> · <a href="21.%20multiple_regression.slide.html" target="_blank">Slides</a> · <a href="21.%20multiple_regression.html" target="_blank">Handout</a></p>
-<p>We open block 3 (life is continuous) with multiple regression, predicting album sales from two continuous predictors, advertisement budget and airplay. In the applet we see how every predictor we add changes the model predictions and the explained variance (R²), and how the regression coefficients are tested. Then we go through the assumptions, with extra attention to multicollinearity and the VIF, and meet the bootstrap as a robust alternative. After the break we picture the model as a plane in three dimensions, compute its predictions and errors, and use hierarchical regression to isolate what a single predictor adds (the R² change). We finish with the full analysis in JASP, assumption checks included.</p>
+<p>Block 3 is really all about returning to our old friend, our first friend in SSR, the regression module, because now we are armed with a lot of extra knowledge. The theme of block two was life is mean, but in block 3 we’re not going to be looking at categorical predictors, we’re going to be looking at continuous predictors, so the theme of block 3 is life is also continuous. We’re still going to look at different models that make predictions based on one or more predictor variables, and we still have assumptions to check, because we are still very much going to be working with the linear model. When we have multiple predictor variables, you always need to test for an interaction effect, and hierarchical regression allows you to get a better idea of an individual predictor’s contribution.</p>
 <p>Open the recording and skip to the chapter you need. The chapters come from the lecture transcript, so one may start a few seconds early or late.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -95,47 +95,47 @@ ul.task-list li input[type="checkbox"] {
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">16:20</td>
-<td style="text-align: left;">Welcome to block 3<span class="chapter-summary">We are returning to our old friend, our first friend in SSR, the regression module. In block 3 we're not going to be looking at categorical predictors, but at continuous predictors, so the theme of block 3 is life is also continuous.</span></td>
+<td style="text-align: left;">Welcome to block 3<span class="chapter-summary">We are returning to our old friend, our first friend in SSR, the regression module, because now we are armed with a lot of extra knowledge. The theme of block two was life is mean, but in block 3 we're not going to be looking at categorical predictors, but we're going to be looking at continuous predictors, so the theme of block 3 is life is also continuous.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">21:22</td>
-<td style="text-align: left;">Multiple regression<span class="chapter-summary">We are still in the business of trying to predict an outcome variable as best as possible by looking at one or more predictor variables. With continuous predictors, every continuous predictor gets a single regression weight.</span></td>
+<td style="text-align: left;">Multiple regression<span class="chapter-summary">In regression, we try to predict that outcome variable as best as possible by looking at one or more predictor variables. Now we have continuous variables, and with a continuous predictor, every continuous predictor gets a single regression weight.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">23:58</td>
-<td style="text-align: left;">Outcome vs model prediction<span class="chapter-summary">These scatter plots between prediction and outcome visualize exactly the proportion of explained variance, which we denote with r-squared. The higher the r-squared, the better the model predicted.</span></td>
+<td style="text-align: left;">Outcome vs model prediction<span class="chapter-summary">These scatter plots visualize exactly the proportion of explained variance in regression, and we denote this with this r-squared. The higher the r-squared, the better the model predicted.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">27:26</td>
-<td style="text-align: left;">Plotting the data (applet)<span class="chapter-summary">Always plot your data, because plots are a great way already to assess various assumptions. We predict how well an album sells from two predictor variables, advertisement budget and airplay, and a matrix scatter plot gives a first idea of how they are associated.</span></td>
+<td style="text-align: left;">Plotting the data (applet)<span class="chapter-summary">Always plot your data, whether that's scatter plots or raincloud plots, because plots are a great way already to assess various assumptions. Those are our two predictor variables, and then we can make a matrix scatter plot like this, which gives a first idea.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">32:45</td>
-<td style="text-align: left;">Explained variance with one predictor (applet)<span class="chapter-summary">The explained variance is an effect size, a proportion between zero and one. An F statistic is a test statistic for hypothesis testing, and you can turn your R-squared into an F statistic to test whether the increase in explained variance is significant.</span></td>
+<td style="text-align: left;">Explained variance with one predictor (applet)<span class="chapter-summary">The explained variance is an effect size. You can turn your R-squared into an F-statistic to do a hypothesis test, and that you then use to test whether the increase in explained variance is significant.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">39:32</td>
-<td style="text-align: left;">Two predictors and an interaction (applet)<span class="chapter-summary">The moment your predictors are associated, the unique contribution of a predictor is harder to quantify. Now we incorporate both advertisement budget and airplay in predicting album sales, and we can even include the interaction effect.</span></td>
+<td style="text-align: left;">Two predictors and an interaction (applet)<span class="chapter-summary">Now, we incorporate both advertisement budget and airplay in predicting album sales. The moment your predictors are associated, the unique contribution of a predictor is harder to quantify, because they will explain parts of the same variance.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">42:52</td>
-<td style="text-align: left;">Testing the regression coefficients<span class="chapter-summary">Just as with regression with a single predictor, we can still test whether the regression coefficients are equal to 0 or not. If a coefficient equals 0, it has no predictive value for predicting the outcome variable.</span></td>
+<td style="text-align: left;">Testing the regression coefficients<span class="chapter-summary">Just as with regression with a single predictor, we can still test whether those regression coefficients are equal to 0 or not. If it equals 0, that means it has no predictive value for predicting the outcome variable.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">47:12</td>
-<td style="text-align: left;">Assumptions<span class="chapter-summary">We are still working with the linear model, and if its assumptions are violated, you cannot rely so much anymore on your inferential statistics. Homoscedasticity, the regression equivalent of equal variances, becomes more and more important as you add more predictors to your model.</span></td>
+<td style="text-align: left;">Assumptions<span class="chapter-summary">We are still working with the linear model, and the linear model has all of these assumptions that if they are violated, you cannot rely so much anymore on your inferential statistics. Then we have the lovely assumption of homoscedasticity, which is the regression equivalent of equal variances, and it is becoming more and more important as you are adding more and more predictors to your model.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">53:10</td>
-<td style="text-align: left;">Multicollinearity and the VIF<span class="chapter-summary">Multicollinearity means very strongly associated predictor variables, and if all your predictors look the same, you cannot attribute the explained variance to one specific variable anymore. You assess it with the VIF, and only for the main effects, not for the interaction effect.</span></td>
+<td style="text-align: left;">Multicollinearity and the VIF<span class="chapter-summary">Multicollinearity means very strongly associated predictor variables, so if all your predictors look the same, you cannot attribute the explained variance to one specific variable anymore. Importantly, multicollinearity is assessed only for the main effects, not for the interaction effect, because an interaction effect inherently depends on its main effects.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">59:01</td>
-<td style="text-align: left;">The bootstrap as a robust alternative<span class="chapter-summary">If you have one of these assumption problems, you can also choose to use what's called the bootstrap. It is a way to have more robust confidence intervals when you have such assumption violations.</span></td>
+<td style="text-align: left;">The bootstrap as a robust alternative<span class="chapter-summary">If you have one of these problems, you can also choose to use what's called the bootstrap, a way to have more robust confidence intervals when you have such assumption violations. You should know what the bootstrap is and that it is robust against these assumption violations.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">59:54</td>
-<td style="text-align: left;">The album sales example<span class="chapter-summary">The actual example predicts album sales from two predictor variables, airplay and advertisement budget. We have 200 observations, so the normality assumption is not going to be so important anymore.</span></td>
+<td style="text-align: left;">The album sales example<span class="chapter-summary">We try to predict album sales based on two predictor variables, airplay and the advertisement budget. The normality assumption is not going to be so important anymore, because we have 200 observations.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">1:01:30</td>
@@ -143,35 +143,35 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 <tr class="odd">
 <td style="text-align: left;">1:12:47</td>
-<td style="text-align: left;">From a regression line to a regression plane<span class="chapter-summary">With one predictor, a line gives the predictions of the model. With two predictors, we visualize our model predictions with a plane, chosen in such a way that it's as close to all the points as possible.</span></td>
+<td style="text-align: left;">From a regression line to a regression plane<span class="chapter-summary">With one predictor, a line gives the predictions of the model, but our model predictions are now no longer a single line. We now visualize our model predictions with this plane, and just as the line, this plane is chosen in such a way that it's as close to all the points as possible.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">1:18:44</td>
-<td style="text-align: left;">Predicted values from the model<span class="chapter-summary">Based on the regression weights, we can calculate the predictions that our model makes. You can also plug new values of airplay and advertisement budget into the regression formula to make predictions for new data.</span></td>
+<td style="text-align: left;">Predicted values from the model<span class="chapter-summary">Based on those regression weights, we can calculate the predictions that our model makes. You can also use this regression formula to plug in new values of airplay and advertisement budget, and then you can make predictions also for new data.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">1:21:16</td>
-<td style="text-align: left;">How far are we off?<span class="chapter-summary">We take the difference between observed and predicted, and that is our model error, our model residuals. R-squared is the squared correlation between observed and predicted, but you can also see it as the model sums of squares divided by the total sums of squares.</span></td>
+<td style="text-align: left;">How far are we off?<span class="chapter-summary">This is observed, this is predicted, and we can take the difference between observed and predicted, and that is our model error, our model residuals. The R-squared is the squared correlation between observed and predicted, the proportion of explained variance of the total model.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">1:28:55</td>
-<td style="text-align: left;">Hierarchical regression<span class="chapter-summary">Hierarchical regression allows you to get a better idea of an individual predictor's contribution, where the next model builds upon the previous one. We look at the R-squared change, and this R-squared change also has a corresponding F statistic that you can use to do hypothesis testing.</span></td>
+<td style="text-align: left;">Hierarchical regression<span class="chapter-summary">The tool I'll go into now is called hierarchical regression, and it allows you to get a better idea of an individual predictor's contribution, where the next model builds upon the previous one. This R-squared change also has a corresponding F statistic that you can then use to do hypothesis testing.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">1:31:34</td>
-<td style="text-align: left;">Multiple regression in JASP<span class="chapter-summary">The model summary table tells something about each model as a whole, and the coefficients table lists the regression coefficients corresponding to each predictor. On open questions, always be more specific about what p-value you refer to.</span></td>
+<td style="text-align: left;">Multiple regression in JASP<span class="chapter-summary">The first table says something about each model as a whole, and the coefficients table lists for each model the individual regression coefficients corresponding to each predictor. On open questions, always be more specific about what p-value you refer to.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">1:41:45</td>
-<td style="text-align: left;">Checking the assumptions in JASP<span class="chapter-summary">For influential cases you tick Case-wise diagnostics, and a Cook's distance close to one tells you that you have an influential case. The residuals versus predicted plot assesses homoscedasticity, and the tolerance and VIF box checks multicollinearity.</span></td>
+<td style="text-align: left;">Checking the assumptions in JASP<span class="chapter-summary">To get an idea of influential outliers, you tick the box Case-wise Diagnostics, and you can choose what criteria to use. We assess the homoscedasticity assumption by plotting the residuals versus the predicted values, and the multicollinearity checks you do by ticking the tolerance and VIF box.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">1:48:25</td>
-<td style="text-align: left;">Hierarchical regression in JASP<span class="chapter-summary">In the Model tab we make multiple models, and we control for a variable by adding it to all the models. Adding airplay gives a significant increase in R-squared, but adding the interaction effect gives barely any increase.</span></td>
+<td style="text-align: left;">Hierarchical regression in JASP<span class="chapter-summary">In the Model tab we can make multiple models, and you want to start with one variable that you control for, that you add to all the models, so that any increase in model performance is due to other predictor variables. We see a significant increase in r-squared, explained variance, by going from model 0 to model 1, so any increase is due to airplay.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">1:57:32</td>
-<td style="text-align: left;">Recap<span class="chapter-summary">We've seen how to say something about overall model performance with the r-squared, and how to make more specific model comparisons where the only difference between two models is a single predictor. Tomorrow is mediation analysis, explicitly modeling dependence between predictors.</span></td>
+<td style="text-align: left;">Recap<span class="chapter-summary">We've seen how we can say something about overall model performance by looking at the r-squared, and how we can make more specific model comparisons where the only difference between 2 models is a single predictor. Tomorrow, mediation analysis, explicitly modeling dependence between predictors.</span></td>
 </tr>
 </tbody>
 </table>

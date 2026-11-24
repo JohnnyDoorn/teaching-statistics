@@ -1,0 +1,28 @@
+---
+title: "17. Factorial ANOVA"
+subtitle: "Summary and chapters of the recording"
+format:
+  html:
+    toc: false
+css: ../../ajohnson.css
+---
+
+<style>
+.chapters th:first-child, .chapters td:first-child { width: 6em; white-space: nowrap; }
+.chapters .chapter-summary { display: block; margin-top: 0.2em; font-size: 0.9em; color: #555; }
+</style>
+
+```{r viewer-helper-setup, echo=FALSE}
+# Chapters and the shared helpers live in ../viewer-helper/ (see viewer-helper.R).
+source("../viewer-helper/viewer-helper.R")
+```
+
+`r lectureLine(17)`
+
+We have covered so far in block two all sorts of things that we use to compare means, and what is on the menu for today is an ANOVA when you have two categorical predictors. We are still just explaining variance in a dependent variable as best as possible by looking at one or more predictor variables, and by adding predictors to our model, we are explaining more and more variance, which is good news for our F statistic. We're going to discuss more specifically what is this interaction effect, because interaction effects are one of the most interesting but also dangerous effects that you can encounter in your data. And of course, we'll round off with a demonstration in JASP.
+
+Open the recording and skip to the chapter you need. The chapters come from the lecture transcript, so one may start a few seconds early or late.
+
+```{r chapters-17, echo=FALSE}
+chapterTable(17)
+```

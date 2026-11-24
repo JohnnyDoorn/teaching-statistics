@@ -1,0 +1,28 @@
+---
+title: "3. Statistical Reasoning"
+subtitle: "Summary and chapters of the recording"
+format:
+  html:
+    toc: false
+css: ../../ajohnson.css
+---
+
+<style>
+.chapters th:first-child, .chapters td:first-child { width: 6em; white-space: nowrap; }
+.chapters .chapter-summary { display: block; margin-top: 0.2em; font-size: 0.9em; color: #555; }
+</style>
+
+```{r viewer-helper-setup, echo=FALSE}
+# Chapters and the shared helpers live in ../viewer-helper/ (see viewer-helper.R).
+source("../viewer-helper/viewer-helper.R")
+```
+
+`r lectureLine(3)`
+
+At the start of the week, we already introduced the general course and the reasoning parts of SSR, but there is one more S in SSR than just scientific reasoning, because we're also going to do statistical reasoning. I'll introduce a bit the statistics in SSR first, and then we refresh some concepts from last year, with a physics quiz of 10 questions and the sampling distribution, which tells us how likely all the outcomes are of our experiment under a certain hypothesis. Then we set the boundary for what constitutes a surprising result, and we do statistical hypothesis testing by computing how likely it is to observe our observed results under the null or more extreme. We close with the question, if we do this over and over and over again, how often do I make the wrong decision?
+
+Open the recording and skip to the chapter you need. The chapters come from the lecture transcript, so one may start a few seconds early or late.
+
+```{r chapters-3, echo=FALSE}
+chapterTable(3)
+```

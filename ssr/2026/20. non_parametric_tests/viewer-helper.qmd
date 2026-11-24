@@ -1,0 +1,28 @@
+---
+title: "20. Non-parametric tests"
+subtitle: "Summary and chapters of the recording"
+format:
+  html:
+    toc: false
+css: ../../ajohnson.css
+---
+
+<style>
+.chapters th:first-child, .chapters td:first-child { width: 6em; white-space: nowrap; }
+.chapters .chapter-summary { display: block; margin-top: 0.2em; font-size: 0.9em; color: #555; }
+</style>
+
+```{r viewer-helper-setup, echo=FALSE}
+# Chapters and the shared helpers live in ../viewer-helper/ (see viewer-helper.R).
+source("../viewer-helper/viewer-helper.R")
+```
+
+`r lectureLine(20)`
+
+Before we are completely ready for Thursday, we have one more lecture to go, something called non-parametric tests. The normality assumption is mostly important with low sample sizes, when we cannot rely on the central limit theorem anymore, and non-parametric tests differ from their parametric equivalents in that they don't assume the residuals to be normally distributed. I'm going to repeat all of the assumptions we've covered in block 2, and we're going to revisit all the friends we've made along the way in block 2 and visit their non-parametric equivalents, which are based on the ranks of the observed data. And then, of course, I'm going to show how to do these in JASP.
+
+Open the recording and skip to the chapter you need. The chapters come from the lecture transcript, so one may start a few seconds early or late.
+
+```{r chapters-20, echo=FALSE}
+chapterTable(20)
+```

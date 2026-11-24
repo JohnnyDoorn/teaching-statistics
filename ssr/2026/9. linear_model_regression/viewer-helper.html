@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.340">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Johnny van Doorn">
+
+<title>9. Linear Model (Regression)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="viewer-helper_files/libs/clipboard/clipboard.min.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/quarto.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/popper.min.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/anchor.min.js"></script>
+<link href="viewer-helper_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="viewer-helper_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="viewer-helper_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="viewer-helper_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="viewer-helper_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+<link rel="stylesheet" href="../../ajohnson.css">
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">9. Linear Model (Regression)</h1>
+<p class="subtitle lead">Summary and chapters of the recording</p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Johnny van Doorn </p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Amsterdam
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+</header>
+
+<style>
+.chapters th:first-child, .chapters td:first-child { width: 6em; white-space: nowrap; }
+.chapters .chapter-summary { display: block; margin-top: 0.2em; font-size: 0.9em; color: #555; }
+</style>
+<p>18 September 2026 · <a href="https://amsuni-my.sharepoint.com/:v:/g/personal/j_b_vandoorn_uva_nl/IQDOc-9BNhxWTa5sgatDPFlbAXDW9pv9SQ0IByvQRPH5OaE?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&amp;e=oozIXI" target="_blank">Recording</a> · <a href="9.%20linear_model_regression.slide.html" target="_blank">Slides</a> · <a href="9.%20linear_model_regression.html" target="_blank">Handout</a></p>
+<p>We’ll introduce the linear model, which is all around us, because the main flow of doing statistical modeling is looking at one or more predictor variables to try to predict your dependent variable, your variable of interest. Checking assumptions, being aware of the assumptions that an analysis makes, is a very crucial step, and I’ll also close off with a little exam note so that you know exactly what to know for the exam. A very important component of today, and one that is going to stay relevant for the remainder of this course, is what we call prediction, and then we can assess how well our model fits the observed data. And then, of course, we’ll do all of this in JASP.</p>
+<p>Open the recording and skip to the chapter you need. The chapters come from the lecture transcript, so one may start a few seconds early or late.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm chapters table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Time</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Chapter</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">9:50</td>
+<td style="text-align: left;">Welcome<span class="chapter-summary">The main flow of doing statistical modeling is looking at one or more predictor variables to try to predict your dependent variable, your variable of interest. If your assumptions are violated, it invalidates your statistical framework and your p-values, your confidence intervals, all that inferential statistics, and I'll close off with a little exam note so that you know exactly what to know for the exam.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">14:56</td>
+<td style="text-align: left;">Last week: correlation and NHST<span class="chapter-summary">The t-statistic is a test statistic that is useful for very many statistical tests, because it simply quantifies that difference between what the null says and what we observe. That can be a correlation, but it can be a mean difference or a regression coefficient, because the t-statistic is also going to feature today.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">18:34</td>
+<td style="text-align: left;">Power<span class="chapter-summary">Important to unpack here is knowing the definition of power, which is if the null hypothesis is false, so then we are looking under the alternative hypothesis, the probability of in fact rejecting the null hypothesis. If we have a higher sample size, our standard error grows smaller because we have more certainty in our sample, which increases your power while at the same time keeping your alpha constant.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">28:41</td>
+<td style="text-align: left;">One-sided vs two-sided testing<span class="chapter-summary">Choosing a one-sided test increases your power because you are making a more specific prediction for the effect, but the two-sided case is a safer choice because you'll be able to reject the null hypothesis if you find an extreme positive or negative effect. It's a very cheap trick, if you don't care so much about science ethics, to observe your results, see that your p-value is just over alpha, and then change your alternative hypothesis to be one-sided.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">33:47</td>
+<td style="text-align: left;">The data<span class="chapter-summary">I might think maybe advertisement budget is a useful predictor in predicting album sales. This is the first step that we are taking to adopting this mindset of, okay, we have one dependent variable, and we are trying to predict this as best as possible with one or more other variables.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">37:19</td>
+<td style="text-align: left;">Two different units<span class="chapter-summary">These two variables were measured in different units, and a z-score of two on album sales indicates the same as a z-score of two on advertisement budget. When we standardize and look at the correlation, the original measurement scale is completely gone, and if you convert your variables to z-scores and then calculate the covariance, it will be exactly the correlation.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">42:13</td>
+<td style="text-align: left;">Three levels of standardization<span class="chapter-summary">There's a third way of standardizing that sits a little bit in between the covariance and the correlation, and it is the regression coefficient. We take the covariance between the variables and we only standardize based on the predictor variable, so we can still interpret our results on the level of our outcome variable.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">44:51</td>
+<td style="text-align: left;">Regression<span class="chapter-summary">If you have to choose any formula to understand, take the top one, outcome = model + error, because this is very generally put, what we do in statistical modeling. This is the regression equation for one predictor variable, where the intercept is sort of the starting point for our regression line, and we multiply the slope with our predictor variable.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">48:19</td>
+<td style="text-align: left;">Assumptions of the linear model<span class="chapter-summary">Assumption checks are different steps or different features of the data to pay attention to that could tell a very interesting story. Chapter 6 is not part of the exam material, but you should know these assumptions, and the greater the assumption violation, the bigger the grain of salt that you should take your results with.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">51:10</td>
+<td style="text-align: left;"><em>Break</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:02:13</td>
+<td style="text-align: left;">Sensitivity<span class="chapter-summary">Sensitivity is a slightly fancier word for are there any outliers in the data, and case-wise diagnostics provide statistics such as the residual and something called Cook's distance. If I can conclude the same about an association with and without the outlier, I might include it to give the reader also the choice to make that same consideration.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:07:06</td>
+<td style="text-align: left;">Normality<span class="chapter-summary">Residuals are the prediction errors of our model, and we can make a histogram of those, and that histogram should more or less follow the normal distribution. In the Q-Q plot, the more that those dots lie on that red line, the more normal your residuals are distributed.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:11:55</td>
+<td style="text-align: left;">Linearity<span class="chapter-summary">A linear association means that we draw a regression line, which is a straight line, and that the points are equally scattered around that line, more or less. Probably if you compute the correlation for curved data, you will find a correlation coefficient around 0, which gives a very misleading story and is another reason why you should always plot your data.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:13:56</td>
+<td style="text-align: left;">Homoscedasticity<span class="chapter-summary">It is a very fancy sounding term for equal variances, and the t-test is also a linear model, spoiler alert, because also the t-test has this assumption. Homoscedasticity is about that there should be no association between the value that we predict and the error that we make.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:16:00</td>
+<td style="text-align: left;">Calculate b1 and b0<span class="chapter-summary">You don't need to calculate these yourself on the exam, but just to show you where that standardization happens, we take the fully standardized correlation and we sort of undo the dividing by the standard deviation of the outcome variable. Here we have a value for the intercept, 134, and the value of the intercept already tells you what your model predicts, in case your predictor variable is 0.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:19:59</td>
+<td style="text-align: left;">The slope<span class="chapter-summary">The regression coefficient we computed was 0.096, so if we increase our advertisement budget by 1 unit, how much can we expect to see our album sales increase? For every thousand that we increase our advertisement budget, we will apparently increase our album sales by 96.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:21:35</td>
+<td style="text-align: left;">Predicted values<span class="chapter-summary">You can tell me now any number you want to invest in an album in terms of advertising it, and I can run it through my statistical model and give you a prediction for how well that album will sell. It will probably make bad predictions, but it is a model that makes predictions.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:25:21</td>
+<td style="text-align: left;">Error<span class="chapter-summary">Now we can look at the model error, which is the difference between observed and predicted. The residuals were the model error, and only now do we have model error after we have a formal model that makes predictions, so this is a first step before we interpret our hypothesis testing metrics.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:27:06</td>
+<td style="text-align: left;">Model fit<span class="chapter-summary">The higher that correlation between what we predict and what we observe, the better news that is for our model. Squaring it gives the proportion of variance in the outcome variable that we can explain by looking at our regression model.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:29:44</td>
+<td style="text-align: left;">Explained variance<span class="chapter-summary">How much closer are we to the data points than just using the grand mean for everything? By making predictions, we can decompose that total variance between explained variance and unexplained variance, and then we can express the explained variance as a proportion of the total variance.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:34:37</td>
+<td style="text-align: left;">Converting b to t<span class="chapter-summary">As always, the t-statistic tells you the standardized difference between what the null hypothesis says and what you observe, because we divide by the standard error. We convert our observed slope to the t-statistic so that we can locate it in the sampling distribution, to say how likely is it to observe this t-statistic or more extreme, that is the p-value, and here it is, ridiculously tiny.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:37:30</td>
+<td style="text-align: left;">How many ways to assess an association?<span class="chapter-summary">The main player is a correlation, fully standardized, always between minus 1 and 1, and we can go completely the opposite way and look at the covariance, which is fully unstandardized, which by itself doesn't mean much, but it forms the basis for the other statistics we compute. If you square this correlation, you get the proportion of explained variance.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:40:09</td>
+<td style="text-align: left;">JASP<span class="chapter-summary">If we want to do a linear regression, we go to the regression module. The null model always predicts the mean, no matter what value we have for advertisement budget, and we want to see, does adding a predictor variable lead to a significant change in explained variance?</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:46:43</td>
+<td style="text-align: left;">Assumption checks in JASP<span class="chapter-summary">You can ask JASP for only those observations where the standardized residual is, for instance, greater than three, which we could consider an outlier, but again, it's a choice, so don't go fishing for outliers after the data are in. Your model errors should be random or uncorrelated, unsystematic, and the way to assess that is by going into the plots tab and taking the residuals versus predicted plot.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:51:49</td>
+<td style="text-align: left;">Exam note<span class="chapter-summary">I know the applets are not on the exam, but you do need to know the difference between one-sided testing and two-sided testing, and I could give you a binomial sampling distribution and then ask you for the p-value that corresponds with the researcher's hypothesis. You need to know sensitivity, normality, and linearity, and homoscedasticity will only come back to haunt you in block 3.</span></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
 .chapters .chapter-summary { display: block; margin-top: 0.2em; font-size: 0.9em; color: #555; }
 </style>
 <p>13 November 2026 · <a href="https://amsuni-my.sharepoint.com/:v:/g/personal/j_b_vandoorn_uva_nl/IQDkEXIW9DVnSJA1GNvHQz70AQc0AevUVGI64W9KB9eB8Oc?e=s1Uv1y&amp;nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D" target="_blank">Recording</a> · <a href="29.%20bayesian%20anova.slide.html" target="_blank">Slides</a> · <a href="29.%20bayesian%20anova.html" target="_blank">Handout</a></p>
-<p>In the final statistics lecture of SSR we repeat the core Bayesian concepts with a subset of the beer tasting data, in which 8 out of 10 tasters identified the alcoholic beer. Different models (Sarah, Paul, Alex and Betty) make different statements about θ, the probability of a correct response, and we update these prior distributions with the data into posterior distributions, based on how well each value of θ predicted the data. After the break we compare models with the Bayes factor, the ratio of their marginal likelihoods, and apply all of this to ANOVA, with a spike at 0 for the null model and a Cauchy prior for the alternative. In JASP we run a Bayesian ANOVA, where the BF10 column of the model comparison table and the inclusion Bayes factor of the effects table are the two outputs to understand for the exam. We close with Bayes and open science in the wild and a look back on SSR.</p>
+<p>For the final statistics lecture of SSR, today’s topic is going to be Bayesian ANOVA. We’re going to repeat some of the core Bayesian concepts that we need to do inferential statistics, and then apply these to ANOVA, and then of course, I’ll show you how to do a Bayesian ANOVA in JASP. We’re going to start with Bayesian parameter estimation, by the example that I actually started out RMS with, our beer tasting example. We’re going to focus mainly on the Bayesian ANOVA, so that’s the analysis that you need to know for the exam.</p>
 <p>Open the recording and skip to the chapter you need. The chapters come from the lecture transcript, so one may start a few seconds early or late.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -95,71 +95,71 @@ ul.task-list li input[type="checkbox"] {
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">17:23</td>
-<td style="text-align: left;">Welcome<span class="chapter-summary">For the final statistics lecture of SSR, today's topic is Bayesian ANOVA. Throughout the course we got very close to how statistics is being done in the real world, talking about assumptions, interactions and dependence between predictors.</span></td>
+<td style="text-align: left;">Welcome<span class="chapter-summary">For the final statistics lecture of SSR, today's topic is going to be Bayesian ANOVA. Especially compared to RMS, we really got very close to how statistics is being done in the real world, we're talking about assumptions, interactions, dependence between predictors, all that sort of stuff.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">19:17</td>
-<td style="text-align: left;">Frequentist and Bayesian frameworks<span class="chapter-summary">The frequentist framework is all about asking what happens in the long run to my statistical test, in terms of type 1 and type 2 error rates. If you want to do a hypothesis test or parameter estimation, you are not limited to this framework, and the Bayesian framework also allows you to do inferential statistics, with some different metrics.</span></td>
+<td style="text-align: left;">Frequentist and Bayesian frameworks<span class="chapter-summary">We've seen the frequentist framework, which is all about asking the question, what happens in the long run to my statistical test, focusing on those type 1 and type 2 error rates. The Bayesian framework also allows you to do inferential statistics, but it uses some different metrics for doing hypothesis testing and for parameter estimation.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">22:08</td>
-<td style="text-align: left;">Goals and reading<span class="chapter-summary">We repeat the core Bayesian concepts, apply these to ANOVA, and do a Bayesian ANOVA in JASP, which is the analysis that you need to know for the exam. Chapters one through six of the booklet reintroduce the core concepts, and the new chapter for today is chapter 7 about ANOVA.</span></td>
+<td style="text-align: left;">Goals and reading<span class="chapter-summary">We're going to repeat some of the core Bayesian concepts that we need to do inferential statistics, and then apply these to ANOVA, and then of course, I'll show you how to do a Bayesian ANOVA in JASP. Chapters one through six you sort of maybe know from a distant past, and the new chapter for today is chapter 7 about ANOVA.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">23:09</td>
-<td style="text-align: left;">Beer tasting<span class="chapter-summary">Many years ago we did a beer tasting test in our lab, where people tasted 2 unmarked cups of beer and had to say which of the two was the alcoholic one. If people cannot taste the difference, they are guessing, and θ, the probability of a correct response, is 0.5.</span></td>
+<td style="text-align: left;">Beer tasting<span class="chapter-summary">Many years ago, we did this beer tasting test in our lab, where we gave people 2 cups of beer and they had to say which of the two beers was the alcoholic one. If people are guessing, in other words, they cannot taste the difference between the two beers, we would observe a proportion correct equal to 0.5.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">25:55</td>
-<td style="text-align: left;">Bayesian updating<span class="chapter-summary">The Bayesian framework is all based on this continuous updating of knowledge. We start with prior knowledge, derive predictions, test those against the observed data, and use the prediction error to update our knowledge, so what we end up with today is our starting knowledge of tomorrow.</span></td>
+<td style="text-align: left;">Bayesian updating<span class="chapter-summary">The Bayesian framework is all based on this continuous updating of knowledge, where we start with some prior knowledge. We update our knowledge based on that prediction error, and then tomorrow, if we are ready to learn again, we use our knowledge that we end up today with as our starting knowledge of tomorrow.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">28:45</td>
-<td style="text-align: left;">Bayes' rule for knowledge updating<span class="chapter-summary">We start with some prior beliefs and update them with the data, and that updating step is completely based on how well every individual value of the parameter predicted the data. Together they form our posterior beliefs, what we have learned after observing the data.</span></td>
+<td style="text-align: left;">Bayes' rule for knowledge updating<span class="chapter-summary">We update our model beliefs based on the observed data, and that updating step is completely based on how well every individual value of the parameter predicted the data. Taken together, the prior beliefs with our updated knowledge form our posterior beliefs.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">30:33</td>
-<td style="text-align: left;">What is a model?<span class="chapter-summary">In the Bayesian framework we look at different models, and each model reflects its beliefs about the parameter by a probability distribution. Sarah believes θ is exactly 0.5 and Paul is really sure it is 0.8, and because they go all in on a single value we call these point models.</span></td>
+<td style="text-align: left;">What is a model?<span class="chapter-summary">As we see in the Bayesian framework, the labels null model and alternative model are not such a useful distinction, because the Bayesian framework doesn't really distinguish between them. Sarah believes that theta is exactly equal to 0.5, and Paul believes it's really 0.8, and they both go all in on a single value, so we call these point models.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">32:48</td>
-<td style="text-align: left;">What does a model predict?<span class="chapter-summary">Based on what a model says about the parameter, we can derive the likely outcomes of an experiment with 10 tasters, which is no different from the sampling distribution. Asking each model how likely our observed 8 out of 10 is (the yellow bar) and taking the ratio of the two yellow bars gives exactly the Bayes factor.</span></td>
+<td style="text-align: left;">What does a model predict?<span class="chapter-summary">Based on what that model says about the parameter, for instance Sarah claiming that theta equals 0.5, we can use some statistics knowledge to reflect what are going to be likely outcomes if Sarah is the true model. You could even just take the ratio of those two yellow bars, and that ratio of these two yellow bars is exactly the Bayes factor.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">38:09</td>
-<td style="text-align: left;">Model with multiple values<span class="chapter-summary">Models can also state multiple values, like Alex's open-minded model, which believes that every value of the proportion correct is equally likely before seeing the data. Any model that makes a statement about the parameter gives a sampling distribution, which shows what outcomes to expect if this model is the true model.</span></td>
+<td style="text-align: left;">Model with multiple values<span class="chapter-summary">Instead of claiming a single value for the parameter, we can also consider models that state multiple values, like Alex's model, which believes that every value of the proportion correct is equally likely. Any model that makes a statement about the parameter value, you can derive a sampling distribution from.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">40:10</td>
-<td style="text-align: left;">One-sided model<span class="chapter-summary">Betty's model puts probability mass on all values between 0.5 and 1 and none on values lower than 0.5, so it claims that people can distinguish between the alcoholic and non-alcoholic beers. Averaging the sampling distributions of all values Betty claims gives the average sampling distribution, and its yellow bar shows how likely 8 out of 10 is under her model.</span></td>
+<td style="text-align: left;">One-sided model<span class="chapter-summary">Betty's model puts probability mass on all values between 0.5 and 1, so it is claiming that people do have the ability to distinguish between the alcoholic and non-alcoholic beers. We can still ask this sampling distribution how likely the observed data of eight out of 10 was under this model.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">43:27</td>
-<td style="text-align: left;">Prior distribution<span class="chapter-summary">These statements of the models are prior distributions, and prior distributions are always probability distributions. A prior for a proportion needs the domain zero to one, and one convenient distribution that follows those criteria is the beta distribution.</span></td>
+<td style="text-align: left;">Prior distribution<span class="chapter-summary">These statements of the models, we can also call these prior distributions, and prior distributions are always probability distributions. The prior distribution needs to match the domain of the parameter, and for a proportion, there's one convenient distribution that follows those criteria, and that's called the beta distribution.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">45:02</td>
-<td style="text-align: left;">The data<span class="chapter-summary">Let's say we observe 8 successes out of 10. To update the prior distributions with this data, we look at the likelihood of the observed data for every value in the model.</span></td>
+<td style="text-align: left;">The data<span class="chapter-summary">So let's say we observe 8 successes out of 10. We're going to look at the likelihood of the observed data for every value in the model.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">45:40</td>
-<td style="text-align: left;">Likelihood function<span class="chapter-summary">The likelihood function is not a probability distribution, it maps every value of θ onto the likelihood of the observed data, around 0.3 for θ = 0.8. It is always the same, whichever model you are updating, because it only depends on the type of data, here the binomial likelihood.</span></td>
+<td style="text-align: left;">Likelihood function<span class="chapter-summary">The likelihood function is not a probability distribution, that's important for you to know, it maps every value of theta onto a value for the likelihood. The likelihood is just a result of the type of data you are working with, it doesn't depend on what model you are updating with.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">47:48</td>
-<td style="text-align: left;">Marginal likelihood<span class="chapter-summary">The marginal likelihood is the average likelihood of the observed data for all values in the model, so unlike the likelihood it depends on the model. For Alex's model it is around 0.09, and it quite literally sets the bar for what we consider better than average predictions.</span></td>
+<td style="text-align: left;">Marginal likelihood<span class="chapter-summary">The marginal likelihood is a more technical way of saying the average likelihood of the observed data for all values in the model, so the marginal likelihood is influenced by the model. We get a marginal likelihood for Alex of around 0.09, and it quite literally sets the bar for what we consider to be better than average predictions from all the values in the model.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">52:50</td>
-<td style="text-align: left;">Updating beliefs<span class="chapter-summary">The likelihood divided by the marginal likelihood is the predictive updating factor, which is greater than one exactly when that value of the parameter predicted the data better than average. Those values see a boost in plausibility, and values of 0.55 and lower and 0.95 and higher, which predicted the data worse than average, suffer a penalty.</span></td>
+<td style="text-align: left;">Updating beliefs<span class="chapter-summary">The predictive updating factor that we use from going from prior to posterior is that ratio for every value of theta of the likelihood by the marginal likelihood, and whether it's greater than one is exactly based on whether that value predicted the data better than average. Those values will see a boost in plausibility, and the values that did a worse than average job, 0.55 and lower and 0.95 and higher, will suffer a penalty in plausibility.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">55:50</td>
-<td style="text-align: left;">Posterior distribution<span class="chapter-summary">Compared to Alex's prior distribution, the posterior density has increased for all values that had a higher than average likelihood. Models with a single value, like Sarah's, don't learn from the data, because no amount of data is going to change their beliefs.</span></td>
+<td style="text-align: left;">Posterior distribution<span class="chapter-summary">You can see that the posterior density is exactly increased for all those values that had a higher than average likelihood. Models that only have a single value don't learn from the data, they're so hyper-convinced that theta is 0.5 that no amount of data is going to change their beliefs.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">1:01:09</td>
-<td style="text-align: left;">Bayesian estimation<span class="chapter-summary">A point estimate such as the posterior median is our best guess, but an interval estimate also reflects uncertainty, and the Bayesian version is the credible interval. If Alex's model is the true model, there is a 95% probability that the true value of the proportion is between 0.48 and 0.94.</span></td>
+<td style="text-align: left;">Bayesian estimation<span class="chapter-summary">It's a lot more informative to give interval estimates, because they also reflect some uncertainty, and the credible interval is the Bayesian equivalent of an interval estimate. If Alex's model is the true model, there is a 95% probability that the true value of the proportion is between 0.48 and 0.94.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">1:04:41</td>
@@ -167,75 +167,75 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 <tr class="odd">
 <td style="text-align: left;">1:17:42</td>
-<td style="text-align: left;">Marginal likelihood, revisited<span class="chapter-summary">The marginal likelihood for Alex's model, 0.09, is exactly the height of the yellow bar in Alex's sampling distribution, how likely 8 out of 10 is on average under that model. It differs for the different models (around 0.17 for Betty), and we use exactly those numbers to do model comparison.</span></td>
+<td style="text-align: left;">Marginal likelihood, revisited<span class="chapter-summary">The marginal likelihood for Alex's model was 0.09, and that's how likely 8 out of 10 is on average under Alex's model, the height of the bar in its sampling distribution. For Betty, the marginal likelihood is around 0.17, and we use exactly those numbers to do model comparison.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">1:20:46</td>
-<td style="text-align: left;">Bayesian hypothesis testing<span class="chapter-summary">Hypothesis testing compares different models to each other, and null and alternative are really just labels. It is more important to pay attention to how you translate your research question into a statistical statement, such as θ = 0.5 if people cannot taste the difference between the beers.</span></td>
+<td style="text-align: left;">Bayesian hypothesis testing<span class="chapter-summary">We are talking about comparing different models to each other, and you could call one of the models the null model and maybe the other model the alternative model. It's more important to pay some attention to how you translate your research questions into some statistical statement, what would theta be equal to if people cannot taste the difference between the beers?</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">1:21:59</td>
-<td style="text-align: left;">Prior and posterior odds<span class="chapter-summary">In the same way that we update beliefs about parameter values, we can update beliefs about which of two models did a better job in predicting the data. The prior odds tell you how many times more likely one model is than the other before seeing the data, and updating them with the data gives the posterior odds.</span></td>
+<td style="text-align: left;">Prior and posterior odds<span class="chapter-summary">In that same way that we are updating beliefs about parameter values, we can also update beliefs about which of the two models did a better job in predicting the data. The prior odds tell you how many times more likely your one model is compared to the other model before seeing the data.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">1:23:18</td>
-<td style="text-align: left;">Bayes factor<span class="chapter-summary">The updating factor from prior odds to posterior odds is the Bayes factor, the ratio of the marginal likelihoods of two models. A BF10 of 3 means that the data are three times more likely under the alternative hypothesis than under the null hypothesis, and a BF01 flips that interpretation, so always report the subscript.</span></td>
+<td style="text-align: left;">Bayes factor<span class="chapter-summary">The updating factor from prior odds to posterior odds is what we call the Bayes factor, and the Bayes factor is nothing more than the ratio of marginal likelihoods of two models. If we get a BF10 of three, it means that the data are three times more likely under the alternative hypothesis compared to the null hypothesis, and if BF01 is 3, the data are three times more likely under the null.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">1:27:01</td>
-<td style="text-align: left;">Sarah versus Alex<span class="chapter-summary">The marginal likelihood of 8 out of 10 is 0.04 under Sarah's model and 0.09 under Alex's model. Their ratio, the Bayes factor comparing Sarah to Alex, is 0.48, which means the data are about twice as likely (2.07 times) under Alex's model as under Sarah's model.</span></td>
+<td style="text-align: left;">Sarah versus Alex<span class="chapter-summary">The marginal likelihood of Sarah's model is 0.04, which by itself is not doing much, and for Alex's model, the marginal likelihood is 0.09. The data are 0.48 times more likely under Sarah's model than under Alex's model, or you can take 1 divided by that, 2.07, and say the data are twice as likely under Alex's model than under Sarah's model.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">1:29:16</td>
-<td style="text-align: left;">Heuristics for BF<span class="chapter-summary">There exist certain words you can associate with values of the Bayes factor, for instance a Bayes factor between 1 and 3 is anecdotal evidence. You don't need to memorize these labels, but you do need to know the definition of the Bayes factor, and an exam question that asks for a decision will tell you which Bayes factor threshold to use.</span></td>
+<td style="text-align: left;">Heuristics for BF<span class="chapter-summary">There exist certain human words you can associate with certain values of the Bayes factor, for instance a Bayes factor between 1 and 3 we consider anecdotal evidence. You don't need to memorize these labels, and if you need to do a Bayes factor hypothesis test, the exam question will tell you which threshold to use.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">1:30:56</td>
-<td style="text-align: left;">BF pizza<span class="chapter-summary">In JASP we represent Bayes factors with pizza plots, where the proportion of mozzarella and tomato sauce shows the evidence for each of the two hypotheses. A Bayes factor of 1 means the data are as likely under both models, and we can even get evidence in favor of the null hypothesis, which is not possible with p-values.</span></td>
+<td style="text-align: left;">BF pizza<span class="chapter-summary">This lovely representation is the way we represent Bayes factors in JASP, and the extent to which you have evidence in favor of one of the two hypotheses determines the proportion of either tomato sauce or mozzarella. A Bayes factor of 1 means the data are as likely under both models, and with a Bayes factor, you can actually get evidence in favor of the null hypothesis.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">1:33:24</td>
-<td style="text-align: left;">Advantages of the Bayes factor<span class="chapter-summary">The Bayes factor assesses a model's performance in a continuous way, you can look at the data as you are gathering it and stop when you have decisive evidence, and it distinguishes evidence of absence from absence of evidence. A Bayes factor of 1.5, for instance, is not very decisive, which means the data are not informative enough to decide between the two models.</span></td>
+<td style="text-align: left;">Advantages of the Bayes factor<span class="chapter-summary">The Bayes factor has this more continuous way of assessing a model's performance, rather than adopting this binary view of significance, non-significance. If we have absence of evidence, it means a Bayes factor that is not able to decide between the two models, for instance a Bayes factor of 1.5, that's not very decisive.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">1:36:39</td>
-<td style="text-align: left;">ANOVA in regression formula<span class="chapter-summary">ANOVA is just a regression, also in Bayesian ANOVA, so we still represent the model with dummy variables. The regression slope b1 indicates the group difference between our two groups, and if b1 equals 0, there is no difference between the groups.</span></td>
+<td style="text-align: left;">ANOVA in regression formula<span class="chapter-summary">Good news for people that like the dummy variables, because they are also used in Bayesian ANOVA, so we can still represent our ANOVA model by means of a regression model. The b1 regression slope indicates the group difference between our two groups, and if b1 equals 0, it indicates no difference between the groups.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">1:38:17</td>
-<td style="text-align: left;">Two models<span class="chapter-summary">The null model states that the regression coefficient is 0, a single spike at 0, while the alternative model puts a Cauchy distribution on it, with most mass around 0 but also quite some mass on other values. In the Bayesian framework we need to make explicit what the alternative predicts, more than just the direction, by choosing its prior distribution.</span></td>
+<td style="text-align: left;">Two models<span class="chapter-summary">We have our null model that has a single spike at 0, because this model is really convinced that the regression coefficient equals 0. In the Bayesian framework, we need to choose prior distributions for our alternative models, so we need to make extra explicit what it predicts, and this is also where it differs from the frequentist framework.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">1:42:29</td>
-<td style="text-align: left;">Marginal likelihoods and the Bayes factor<span class="chapter-summary">For both models we can ask how well they predicted the data on average, and the data are very unlikely under the null model that states the coefficient equals 0. The ratio of the two marginal likelihoods, the Bayes factor, is around 10,000, so the data are 10,000 times more likely under the alternative model than under the null model.</span></td>
+<td style="text-align: left;">Marginal likelihoods and the Bayes factor<span class="chapter-summary">We have the likelihood, that's just a function of the data, not the model, and then we can ask, from all the values in the model, what is the average value of the likelihoods? The data are very unlikely under the null model that states our b coefficient equals 0, and the data are 10,000 times more likely under the alternative model compared to the null model.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">1:44:30</td>
-<td style="text-align: left;">Bayesian ANOVA in JASP<span class="chapter-summary">The Bayesian ANOVA sits under ANOVA in JASP, and here we predict people's confidence rating from whether they correctly identified the alcoholic beer. By default, the BF10 column compares every model to the best model at the top, and the inclusion Bayes factor (here 1.3) compares the models with a predictor to the models without it.</span></td>
+<td style="text-align: left;">Bayesian ANOVA in JASP<span class="chapter-summary">If we want to do a Bayesian ANOVA with a single categorical predictor, we return to our old friend ANOVA, and we can ask, can we meaningfully predict somebody's confidence based on whether they correctly identified the alcoholic beer? By default, JASP compares all the different models in the output to the best fitting model, and with only two models, the inclusion Bayes factor, 1.3, is just the comparison between the null model and the CorrectIdentify model.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">1:54:13</td>
-<td style="text-align: left;">Two predictors in JASP<span class="chapter-summary">With a second predictor, whether people tasted the alcoholic beer first, JASP lists five models, up to the full model with both main effects and their interaction. The two main outputs to focus on for the exam are the BF10 column in the model comparison table and the inclusion Bayes factor from the effects table.</span></td>
+<td style="text-align: left;">Two predictors in JASP<span class="chapter-summary">We can add a second predictor that lists whether people tasted the alcoholic beer first or not, and then we get the model with two main effects and the full model with the two main effects and the interaction. To recap, the BF10 column in the model comparison table and the inclusion Bayes factor from the effects table are the two main outputs to focus on.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">1:58:19</td>
-<td style="text-align: left;">Recap<span class="chapter-summary">Bayesian statistics is still a thing, and you can do Bayesian versions of all the analyses we've seen in SSR. I would like you to primarily understand the Bayesian ANOVA, which is explained in the booklet.</span></td>
+<td style="text-align: left;">Recap<span class="chapter-summary">Bayesian statistics, it's still a thing. You can do Bayesian versions of all the analyses that we've seen in SSR, but I would like you to primarily understand the Bayesian ANOVA, and it's explained in the booklet.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">1:58:50</td>
-<td style="text-align: left;">Bayes and open science in the wild<span class="chapter-summary">A large-scale investigation of the psychology literature over the past 20 years shows a nice increase in how many articles use Bayesian statistics. Open data, preregistration and reporting the statistical software have also improved, making for a little more robust science.</span></td>
+<td style="text-align: left;">Bayes and open science in the wild<span class="chapter-summary">It was a very large-scale investigation where we assessed the literature in psychology over the past 20 years, and you can actually see how there is a nice increase in how many articles use Bayesian statistics. People share their data, they pre-register their designs, making for a little more robust science.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2:01:31</td>
-<td style="text-align: left;">Looking back on SSR<span class="chapter-summary">Our central SSR formula, outcome equals model plus error, holds three things we are now getting a grip on. Statistics is a very relative endeavor, the assumptions are a very important part of robust statistics, and complete reporting means a number for accuracy and graphs for some vibes.</span></td>
+<td style="text-align: left;">Looking back on SSR<span class="chapter-summary">Our lovely central SSR formula, outcome equals model plus error, holds three very distinct things that we are now getting a grip on. The model comes from the part that statistics is a very relative endeavor, and assumptions are a very important thing of doing robust statistics, because if those assumptions are violated, it just invalidates a lot of your results.</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">2:02:52</td>
-<td style="text-align: left;">Metrics and alternatives<span class="chapter-summary">Different metrics answer different research questions, such as whether we have evidence for an effect (a p-value or a Bayes factor) or which model predicted the best. Multiverse analysis, which is not part of the exam, helps you get a grip on sometimes arbitrary choices.</span></td>
+<td style="text-align: left;">Metrics and alternatives<span class="chapter-summary">These different metrics answer different questions, because you can ask different research questions. One alternative I really like is this multiverse analysis, which allows you to get a grip on these sometimes arbitrary choices, and it is absolutely no part of the exam.</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2:03:39</td>
-<td style="text-align: left;">Closing<span class="chapter-summary">The exam notes from the previous lectures of block 3 are at the end of the slides. Thank you for all your energy, I wish you all the best in your future studies, and see you next week at the exam.</span></td>
+<td style="text-align: left;">Closing<span class="chapter-summary">I really want to thank you for all your energy. I wish you all the best in your future studies, and see you next week at the exam.</span></td>
 </tr>
 </tbody>
 </table>

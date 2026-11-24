@@ -197,7 +197,7 @@ def ans_multigap(root, inter, points, where, alt=None):
                 keys.append(v)              # a text answer
                 continue
             d = max(len(v.split(".")[1]) if "." in v else 0, 1)
-            ts = f"{t:.10g}"                # keys like 0.70 arrive as "0.7": keep the
+            ts = format(Decimal(f"{t:.10g}"), "f")   # keys like 0.70 arrive as "0.7": keep the
             if "." in ts and "e" not in ts:  # tolerance's decimals so the range survives
                 d = max(d, len(ts.split(".")[1]))
             for k in key_variants(v.replace(",", ".")):

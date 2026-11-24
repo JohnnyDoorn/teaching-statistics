@@ -19,7 +19,7 @@ source("../viewer-helper/viewer-helper.R")
 
 `r lectureLine(21)`
 
-We open block 3 (life is continuous) with multiple regression, predicting album sales from two continuous predictors, advertisement budget and airplay. In the applet we see how every predictor we add changes the model predictions and the explained variance (R²), and how the regression coefficients are tested. Then we go through the assumptions, with extra attention to multicollinearity and the VIF, and meet the bootstrap as a robust alternative. After the break we picture the model as a plane in three dimensions, compute its predictions and errors, and use hierarchical regression to isolate what a single predictor adds (the R² change). We finish with the full analysis in JASP, assumption checks included.
+Block 3 is really all about returning to our old friend, our first friend in SSR, the regression module, because now we are armed with a lot of extra knowledge. The theme of block two was life is mean, but in block 3 we're not going to be looking at categorical predictors, we're going to be looking at continuous predictors, so the theme of block 3 is life is also continuous. We're still going to look at different models that make predictions based on one or more predictor variables, and we still have assumptions to check, because we are still very much going to be working with the linear model. When we have multiple predictor variables, you always need to test for an interaction effect, and hierarchical regression allows you to get a better idea of an individual predictor's contribution.
 
 Open the recording and skip to the chapter you need. The chapters come from the lecture transcript, so one may start a few seconds early or late.
 

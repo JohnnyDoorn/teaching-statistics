@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.340">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Johnny van Doorn">
+
+<title>3. Statistical Reasoning</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="viewer-helper_files/libs/clipboard/clipboard.min.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/quarto.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/popper.min.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="viewer-helper_files/libs/quarto-html/anchor.min.js"></script>
+<link href="viewer-helper_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="viewer-helper_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="viewer-helper_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="viewer-helper_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="viewer-helper_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+<link rel="stylesheet" href="../../ajohnson.css">
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">3. Statistical Reasoning</h1>
+<p class="subtitle lead">Summary and chapters of the recording</p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Johnny van Doorn </p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Amsterdam
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+</header>
+
+<style>
+.chapters th:first-child, .chapters td:first-child { width: 6em; white-space: nowrap; }
+.chapters .chapter-summary { display: block; margin-top: 0.2em; font-size: 0.9em; color: #555; }
+</style>
+<p>4 September 2026 · <a href="https://amsuni-my.sharepoint.com/:v:/g/personal/j_b_vandoorn_uva_nl/IQA_GS9r9axwT7gDtDgvIoLxAR2fPa9kkI88Tpdg5JfyHMk?e=KV1BIX&amp;nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D" target="_blank">Recording</a> · <a href="3.%20reasoning_nhst.slide.html" target="_blank">Slides</a> · <a href="3.%20reasoning_nhst.html" target="_blank">Handout</a></p>
+<p>At the start of the week, we already introduced the general course and the reasoning parts of SSR, but there is one more S in SSR than just scientific reasoning, because we’re also going to do statistical reasoning. I’ll introduce a bit the statistics in SSR first, and then we refresh some concepts from last year, with a physics quiz of 10 questions and the sampling distribution, which tells us how likely all the outcomes are of our experiment under a certain hypothesis. Then we set the boundary for what constitutes a surprising result, and we do statistical hypothesis testing by computing how likely it is to observe our observed results under the null or more extreme. We close with the question, if we do this over and over and over again, how often do I make the wrong decision?</p>
+<p>Open the recording and skip to the chapter you need. The chapters come from the lecture transcript, so one may start a few seconds early or late.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm chapters table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Time</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Chapter</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">13:57</td>
+<td style="text-align: left;">Welcome<span class="chapter-summary">At the start of the week, we already introduced the general course and the reasoning parts of SSR. But there is one more S in SSR than just scientific reasoning, because we're also going to do statistical reasoning.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">17:25</td>
+<td style="text-align: left;">The stats half of SSR<span class="chapter-summary">In block one, we aim to refresh a lot of these sort of dubious NHST concepts, as we call it, null hypothesis significance testing. In block 2, we are going to be looking at comparing means, and then in block 3, we're going to be looking at multiple continuous predictors.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">22:27</td>
+<td style="text-align: left;">What will you learn?<span class="chapter-summary">I'll take my time and refresh some of the core concepts from year one, specifically the sampling distributions and that sort of stuff. But what we will be doing new this year is try to bridge the gap from textbook to practice, because in reality, data can be very messy.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">25:26</td>
+<td style="text-align: left;">Book<span class="chapter-summary">The book is called Discovering Statistics Using JASP. Importantly, you have the book available to you during the exam, it's going to be an open book exam, so don't memorize the book, but know your way around it.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">28:41</td>
+<td style="text-align: left;">Sections A to D<span class="chapter-summary">Importantly, the book has various letters for each of the sections that indicate its difficulty. The C sections are already on the edge, so I would focus most importantly on the A and the B sections.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">29:39</td>
+<td style="text-align: left;">Characters<span class="chapter-summary">There are also characters in the book that also help you make sense of some of the things in the book. Smart Alex tasks are just exercises at the end of each chapter that allow you to practice, and Labcoat Leni is, for every chapter, a data set actually corresponding to a real piece of research.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">31:31</td>
+<td style="text-align: left;">Software<span class="chapter-summary">Please make sure to use the latest version of JASP, which is also available at every UvA library computer and the virtual UvA desktop. The second piece of software that I will be using sometimes in SSR is called R, but you do not need to learn R.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">33:49</td>
+<td style="text-align: left;">Study tips<span class="chapter-summary">Ideally, you read the book before the lecture, because statistics is maybe still a process of stumbling through multiple stages of confusion, and reading the book is something you can do multiple times. We have the weekly assignments, we have the Smart Alex tasks and the Labcoat Leni's, and for a deeper dive, you can play around with some of the applets.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">35:31</td>
+<td style="text-align: left;">Exam<span class="chapter-summary">The statistics questions will be proportional to how many statistics lectures we have, so that will be 40% in block one, 60% in block 2 and then 50% in block 3. The question formats will be a bit more varied than for RMS, so we will use some multiple choice, some open-ended questions, but also fill in the blanks.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">38:39</td>
+<td style="text-align: left;">Null hypothesis significance testing<span class="chapter-summary">So, what do we know about statistics? You want to quantify how likely the data are under the null hypothesis, and a depressingly high percentage of practitioners give wrong interpretations to these metrics, so that's why we take our time and rehash some of those concepts.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">40:58</td>
+<td style="text-align: left;">Measurement tool<span class="chapter-summary">So let's say we are in dire need of a physics expert, and we come up with a whopping 10 true or false questions that measure somebody's physics knowledge. This is a classic case of a binomial setup, because if you're guessing, there is a 50% probability of the correct answer for every question.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">42:34</td>
+<td style="text-align: left;">Two hypotheses<span class="chapter-summary">If the null hypothesis is true, we can expect 5 correct answers out of 10, so let's say they score 8 items out of 10 correct, what do we conclude? Our null hypothesis is that theta, the probability of being correct, is 50%, and then we can have an alternative hypothesis that says, no, they are an expert.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">46:43</td>
+<td style="text-align: left;">What if they were just guessing?<span class="chapter-summary">We know we have 10 questions, and if they are guessing, we know that there is a probability of 50%. So if the null hypothesis is true, if they are guessing, how likely is it to have three out of 10 and five out of 10 and eight out of 10 correct?</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">47:34</td>
+<td style="text-align: left;">Binomial distribution<span class="chapter-summary">It's this formula that allows you to just really straight up calculate how likely it is that if somebody is guessing that they score 8 out of 10 correct on our test. Even if somebody is guessing, they can still just get lucky and score 8 out of 10 with a certain probability.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">49:23</td>
+<td style="text-align: left;">The sampling distribution<span class="chapter-summary">This is the sampling distribution that we all know and love, and it tells us how likely all the outcomes are of our experiment under a certain hypothesis. Our test statistic, the thing we measure in a participant, in this case is the number of correct answers out of 10.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">52:54</td>
+<td style="text-align: left;"><em>Break</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:03:13</td>
+<td style="text-align: left;">How surprising is the data?<span class="chapter-summary">The first tool that we can rely on is the sampling distribution, because it tells us how likely any of the possible outcomes of giving somebody a 10 item test is. And so the height of each bar tells you how likely it is to observe that outcome if the null is true.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:05:58</td>
+<td style="text-align: left;">Making the decision<span class="chapter-summary">This brings us to the next step when we want to do statistical inference, and that is setting the boundary for what constitutes a surprising result. Or in other words, how strict do we want to be before rejecting the null hypothesis?</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:10:36</td>
+<td style="text-align: left;">P-value<span class="chapter-summary">The way we will do statistical hypothesis testing is by computing how likely it is to observe our observed results under the null or more extreme. So that's the bar at 8, but we also consider the bar at 9 and 10, because those are also more extreme.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:13:36</td>
+<td style="text-align: left;">P-value and α<span class="chapter-summary">When you've chosen alpha and you've gone through the steps to calculate your p-value, then you can do the final step, and that is seeing whether your p-value is significant. Significance is another way of saying that our result is so surprising under the null that then the null must be rejected, and please don't always use 5% alpha.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:16:02</td>
+<td style="text-align: left;">α dictates the rejection region<span class="chapter-summary">In the applet, those purple regions tell you what constitutes a surprising enough result under the null to reject the null. If we increase alpha, we require less surprising evidence before rejecting the null hypothesis.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:20:38</td>
+<td style="text-align: left;">Misconceptions about the p-value<span class="chapter-summary">Very importantly, alpha is chosen before you do your analysis, it is not based on your data, and alpha is not the p-value. Sometimes you can have a significant result, but you have such a large sample size that even the tiniest effect will be detected, and it might not be a relevant enough effect size.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:25:52</td>
+<td style="text-align: left;">What can go wrong?<span class="chapter-summary">The p-value was invented by Ronald Fisher, and this was only a way to quantify evidence against a null hypothesis. Then Neyman and Pearson introduced the idea of making errors, a very frequentist notion, because it asks the question, if we do this over and over and over again, making this decision in this way, how often do I make the wrong decision?</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:27:37</td>
+<td style="text-align: left;">Alternative distribution<span class="chapter-summary">It's a little tricky here, though, because the null hypothesis has a very clear null value, but what sort of theta corresponds to being an expert? You can set a different value for the population parameter, and you create an alternative sampling distribution that shows you how likely the outcomes are if the true rate parameter theta is 0.75.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:32:55</td>
+<td style="text-align: left;">Decision table<span class="chapter-summary">This little table gives the four possibilities when we make a decision about whether to reject the null or not, and the two columns are the true state of the world. Alpha is the probability of making a type one error, rejecting the null if the null is true, and beta is a type 2 error, when we decide not to reject the null hypothesis, even though it's false.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:41:02</td>
+<td style="text-align: left;">Power and type 2 errors<span class="chapter-summary">If the null hypothesis is false, we can look at the sampling distribution under the alternative, and the probability of rejecting the null if the null is false is the power. Generally, if you decrease one error rate, the other one will increase, and the best way to keep both of them low is by having high sample size.</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1:45:02</td>
+<td style="text-align: left;">Decision regions come from the null<span class="chapter-summary">It's very important to remember that those decision regions are always based on the null distribution. And again, that whole story is exactly the same in regression, t-test, ANOVA, so if you understand it today, then it's going to be a really fun course for you.</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1:58:23</td>
+<td style="text-align: left;">Next Time<span class="chapter-summary">On Tuesday, we're going to dive into JASP, and I'm going to show some data wrangling features, the descriptive statistics module, and some ways to visualize data. As we will see in this course, visualizations are your most powerful tool, because everybody likes looking at pictures rather than numbers.</span></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

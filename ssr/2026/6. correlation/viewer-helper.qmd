@@ -1,0 +1,28 @@
+---
+title: "6. Correlation"
+subtitle: "Summary and chapters of the recording"
+format:
+  html:
+    toc: false
+css: ../../ajohnson.css
+---
+
+<style>
+.chapters th:first-child, .chapters td:first-child { width: 6em; white-space: nowrap; }
+.chapters .chapter-summary { display: block; margin-top: 0.2em; font-size: 0.9em; color: #555; }
+</style>
+
+```{r viewer-helper-setup, echo=FALSE}
+# Chapters and the shared helpers live in ../viewer-helper/ (see viewer-helper.R).
+source("../viewer-helper/viewer-helper.R")
+```
+
+`r lectureLine(6)`
+
+Some things are, I think, nicely going to come together, because we're going to be talking about how to do a correlation analysis, and we go from variance and covariance to r. How do we get actually a significance for a correlation value? To get the p for r, we need to go to t, so we pay a visit to the t-distribution, the sampling distribution of various observed statistics. And then we'll take a look at what it means to do a partial correlation, a first look at how you can work with multiple predictor variables, and at the end, I will let JASP do the heavy lifting for you.
+
+Open the recording and skip to the chapter you need. The chapters come from the lecture transcript, so one may start a few seconds early or late.
+
+```{r chapters-6, echo=FALSE}
+chapterTable(6)
+```
