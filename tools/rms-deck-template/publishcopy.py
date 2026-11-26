@@ -33,6 +33,24 @@ BLOCKED = {
     "76162f56": "Harry Potter film still (Pomona Sprout) - Warner Bros.",
     "78a0b4ed": "Harry Potter film still (Sybill Trelawney) - Warner Bros.",
     "4a46e64f": "Harry Potter film still (Trelawney reaction) - Warner Bros.",
+    # L20 (2026-11-26, his call: "no small sample size pictures and tyler pics (or other
+    # unsourced pics)" in the GitHub upload). Slide 8 "n is often small": web photos
+    # plus the frames around them; slide 30 Kruskal-Wallis: Tyler only. Bach and the
+    # 'silence' photo stay: the slide credits them ("Sources: Wikipedia & Pixabay"; a
+    # public-domain painting and a Pixabay-licence photo).
+    "80ab02ea": "L20 small-n collage: brain-stimulation illustration (unsourced)",
+    "c1ce6c96": "L20 small-n collage: MRI scanner photo (unsourced)",
+    "c384af3f": "L20 small-n collage: fMRI lie/truth brain image (unsourced)",
+    "de49096c": "L20 small-n collage: baby in EEG cap photo (unsourced)",
+    "ec333624": "L20 small-n collage: chimpanzee at touchscreen photo (unsourced)",
+    "16c6ff1d": "L20 small-n collage: rat with optogenetics implant photo (unsourced)",
+    "82c93246": "L20 small-n collage: photo frame",
+    "0501c7b2": "L20 small-n collage: photo frame",
+    "e2993d84": "L20 small-n collage: photo frame",
+    "c6987a38": "L20 small-n collage: photo frame",
+    "29134dc7": "L20 small-n collage: photo frame",
+    "fd2d07f2": "L20 small-n collage: photo frame",
+    "376c5bd6": "L20 Kruskal-Wallis: Tyler, the Creator photo (his call: not published)",
 }
 
 # A slide that carries nothing but a title and a source line once its blocked
